@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.tracom.brt.domain.AL0303.AL0303Mapper">
+
+	<select id="AL0303G0R0" resultType="Map" parameterType="Map">
+		SELECT
+			a.RPC_ID
+			,DATE_FORMAT(a.OCR_DTM, '%Y-%m-%d %H:%i:%s') AS OCR_DTM
+			,DATE_FORMAT(a.OPER_DT, '%Y-%m-%d') AS OPER_DT
+			,a.RPC_VHC_ID						
+			,a.REP_ROUT_ID
+			,a.ALLOC_NO
+			,a.COR_ID
+			,a.INCDNT_ID
+			,a.GRP_VHC_ID
+			,a.GRP_VHC_NO
+			,a.GRP_DRV_ID
+			,a.GRP_DRV_NM
+			,a.RPC_VHC_NO
+			,a.RPC_DRV_ID
+			,a.RPC_DRV_NM
+			,DATE_FORMAT(a.RPC_DTM, '%Y-%m-%d %H:%i:%s') AS RPC_DTM
+			,a.GPS_X
+			,a.GPS_Y
+			,a.TM_X
+			,a.TM_Y
+			,a.DETAILS
+			,a.ROUT_ID
+			,b.INCDNT_TYPE
+			,c.REP_ROUT_NM
+			,d.ROUT_NM
+		FROM
+			BRT_RPC_VHC_INFO a 
+			LEFT JOIN BRT_INCDNT_INFO b 
+			ON a.OPER_DT = b.OPER_DT AND a.GRP_VHC_ID = b.VHC_ID
+			LEFT OUTER JOIN BMS_REP_ROUT_MST c
+			ON a.REP_ROUT_ID = c.REP_ROUT_ID
+			LEFT OUTER JOIN BMS_ROUT_MST d
+			ON a.ROUT_ID = d.ROUT_ID
+		<where>
+			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
+				AND OCR_DTM LIKE CONCAT('%',#{CONTENT},'%') || RPC_VHC_ID LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+			<if test="TYPE == 'OCR_DTM'">
+				AND OCR_DTM LIKE CONCAT('%',#{CONTENT},'%')
+			</if>
+			<if test="TYPE == 'RPC_VHC_ID'">
+				AND RPC_VHC_ID LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+		</where>
+		ORDER BY
+			OCR_DTM
+	</select>
+	
+	<select id="AL0303G0K0" resultType="Map">
+		SELECT CONCAT('RI', LPAD(NEXTVAL(SEQ_BRT_RPC_VHC_INFO_0), 8, '0')) AS 'SEQ'
+	</select>
+	
+
+	<select id="AL0303SHI0" resultType="Map" parameterType="Map">
+		select  DATE_FORMAT(OCR_DTM, '%Y-%m-%d') AS OCR_DTM, RPC_VHC_ID
+		from 	BRT_RPC_VHC_INFO
+	</select>
+	
+	<select id="AL0303SHI1" resultType="Map" parameterType="Map">
+		select  DATE_FORMAT(OPER_DT, '%Y-%m-%d') AS OPER_DT, GRP_VHC_ID
+		from 	BRT_RPC_VHC_INFO
+	</select>
+	
+	<insert id="AL0303G0I0" parameterType="Map">
+		INSERT INTO
+			BRT_RPC_VHC_INFO(
+				RPC_ID
+				,INCDNT_ID
+				,OCR_DTM
+				,OPER_DT
+				,REP_ROUT_ID
+				,ALLOC_NO
+				,GRP_VHC_ID
+				,GRP_VHC_NO
+				,GRP_DRV_ID
+				,GRP_DRV_NM
+				,RPC_VHC_ID
+				,RPC_VHC_NO
+				,RPC_DRV_ID
+				,RPC_DRV_NM
+				,RPC_DTM
+				<if test="@kr.tracom.util.CommonUtil@notEmpty(GPS_X)">	
+				,GPS_X
+				</if>
+				<if test="@kr.tracom.util.CommonUtil@notEmpty(GPS_Y)">	
+				,GPS_Y
+				</if>
+				,DETAILS
+				,ROUT_ID
+			)
+			VALUES(
+				#{RPC_ID}
+				,#{INCDNT_ID}
+				,#{OCR_DTM}
+				,#{OPER_DT}
+				,#{REP_ROUT_ID}
+				,#{ALLOC_NO}
+				,#{GRP_VHC_ID}
+				,#{GRP_VHC_NO}
+				,#{GRP_DRV_ID}
+				,#{GRP_DRV_NM}
+				,#{RPC_VHC_ID}
+				,#{RPC_VHC_NO}
+				,#{RPC_DRV_ID}
+				,#{RPC_DRV_NM}
+				,#{RPC_DTM}
+				<if test="@kr.tracom.util.CommonUtil@notEmpty(GPS_X)">	
+				,#{GPS_X}
+				</if>
+				<if test="@kr.tracom.util.CommonUtil@notEmpty(GPS_Y)">	
+				,#{GPS_Y}
+				</if>
+				,#{DETAILS}
+				,#{ROUT_ID}
+			)
+	</insert>
+	
+	<update id="AL0303G0U0" parameterType="Map">
+		UPDATE 
+			BRT_RPC_VHC_INFO
+		SET 
+			INCDNT_ID = #{INCDNT_ID}
+			,GRP_VHC_NO = #{GRP_VHC_NO}
+			,RPC_VHC_NO = #{RPC_VHC_NO}
+			,RPC_DRV_NM = #{RPC_DRV_NM}
+			,RPC_DRV_ID = #{RPC_DRV_ID}
+			,RPC_DTM = #{RPC_DTM}
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(GPS_X)">			
+			,GPS_X = #{GPS_X}
+			</if>
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(GPS_Y)">			
+			,GPS_Y = #{GPS_Y}
+			</if>
+			,DETAILS = #{DETAILS}
+			,GRP_VHC_ID = #{GRP_VHC_ID}
+			,RPC_VHC_ID = #{RPC_VHC_ID}
+			,ROUT_ID = #{ROUT_ID}
+			,REP_ROUT_ID = #{REP_ROUT_ID}
+			,ALLOC_NO = #{ALLOC_NO}
+		WHERE 
+			RPC_ID = #{RPC_ID}
+	</update>
+	
+	<delete id="AL0303G0D0" parameterType="Map">
+		DELETE FROM BRT_RPC_VHC_INFO WHERE RPC_ID = #{RPC_ID}
+	</delete>
+
+
+	<select id="AL0303P1R0" resultType="Map">
+		SELECT 
+			A.VHC_ID
+			,A.VHC_NO
+			,A.DRV_ID
+			,A.ALLOC_NO
+			,A.GPS_X
+			,A.GPS_Y
+			,B.DRV_NM
+		FROM 
+			BRT_CUR_OPER_INFO A
+			LEFT OUTER JOIN BMS_DRV_MST B
+			ON A.DRV_ID = B.DRV_ID
+		<where>
+			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
+				AND VHC_ID LIKE CONCAT('%',#{CONTENT},'%') || VHC_NO LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+			<if test="TYPE == 'VHC_ID'">
+				AND VHC_ID LIKE CONCAT('%',#{CONTENT},'%')
+			</if>
+			<if test="TYPE == 'VHC_NO'">
+				AND VHC_NO LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+		</where>
+		ORDER BY
+			A.VHC_ID
+	</select>
+	
+	<select id="AL0303P2R0" resultType="Map">
+		SELECT 
+			DRV_ID
+			,DRV_NM
+		FROM
+			BMS_DRV_MST
+		<where>
+			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
+				AND DRV_ID LIKE CONCAT('%',#{CONTENT},'%') || DRV_NM LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+			<if test="TYPE == 'DRV_ID'">
+				AND DRV_ID LIKE CONCAT('%',#{CONTENT},'%')
+			</if>
+			<if test="TYPE == 'DRV_NM'">
+				AND DRV_NM LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+		</where>
+		ORDER BY
+			DRV_ID
+	</select>
+	
+	<select id="AL0303P3R0" resultType="Map">
+		SELECT 
+			VHC_ID
+			,VHC_NO
+		FROM 
+			BMS_VHC_MST
+		<where>
+			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
+				AND VHC_ID LIKE CONCAT('%',#{CONTENT},'%') || VHC_NO LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+			<if test="TYPE == 'VHC_ID'">
+				AND VHC_ID LIKE CONCAT('%',#{CONTENT},'%')
+			</if>
+			<if test="TYPE == 'VHC_NO'">
+				AND VHC_NO LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+		</where>
+		ORDER BY
+			VHC_ID
+	</select>
+	
+	<select id="AL0303P4R0" resultType="Map">
+		SELECT 
+			A.INCDNT_ID
+			,DATE_FORMAT(A.OCR_DTM, '%Y-%m-%d %H:%i:%s') AS OCR_DTM
+			,DATE_FORMAT(A.OPER_DT, '%Y-%m-%d') AS OPER_DT
+			,A.REP_ROUT_ID
+			,A.REP_ROUT_NM
+			,A.VHC_ID
+			,A.DRV_ID
+			,A.INCDNT_TYPE
+			,A.ROUT_ID
+			,A.ROUT_NM
+			,A.ALLOC_NO
+			,A.VHC_NO
+			,A.GPS_X
+			,A.GPS_Y
+			,B.DRV_NM
+		FROM 
+			BRT_INCDNT_INFO A
+			LEFT OUTER JOIN BMS_DRV_MST B
+			ON A.DRV_ID = B.DRV_ID
+		<where>
+			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
+				AND VHC_ID LIKE CONCAT('%',#{CONTENT},'%') || VHC_NO LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+			<if test="TYPE == 'VHC_ID'">
+				AND VHC_ID LIKE CONCAT('%',#{CONTENT},'%')
+			</if>
+			<if test="TYPE == 'VHC_NO'">
+				AND VHC_NO LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+		</where>
+		ORDER BY
+			INCDNT_ID DESC
+	</select>
+
+
+
+<!--
+
+	  <select id="PI0205G0R0" resultType="Map" parameterType="Map">
+		SELECT
+			R.ROUT_ID
+		    , R.ROUT_NM
+		    , R.WAY_DIV
+		    , DATE_FORMAT(R.UPD_DTM, '%Y-%m-%d') AS UPD_DTM
+		    , V.VOC_ID
+		    , V.PLAY_TYPE
+		    , V.KR_TTS
+		    , V.VOC_DIV
+		    , V.REMARK
+		    , V.PLAY_TM
+		FROM
+			BMS_ROUT_MST R
+		    LEFT OUTER JOIN BMS_VOC_INFO V
+		    ON R.ROUT_ID = V.ROUT_ID
+		<where>
+			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
+				AND R.ROUT_ID LIKE CONCAT('%',#{CONTENT},'%') || R.ROUT_NM LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+			<if test="TYPE == 'ROUT_ID'">
+				AND R.ROUT_ID LIKE CONCAT('%',#{CONTENT},'%')
+			</if>
+			<if test="TYPE == 'ROUT_NM'">
+				AND R.ROUT_NM LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+		</where>
+		ORDER BY
+			R.ROUT_ID
+	</select>
+	
+	<insert id="PI0205G0I0" parameterType="Map">
+		<selectKey keyProperty="VOC_ID" resultType="String" order="BEFORE">
+	    		SELECT CONCAT('RV', LPAD(NEXTVAL(SEQ_BMS_VOC_INFO_2), 8, '0'))
+	    </selectKey>
+	
+		INSERT INTO BMS_VOC_INFO(
+			VOC_ID
+			,ROUT_ID
+			,PLAY_TYPE
+			,KR_TTS
+			,REMARK
+			,PLAY_TM
+			,VOC_DIV
+			,UPD_DTM
+			,UPD_ID
+			) 
+		VALUES (
+			#{VOC_ID}
+			,#{ROUT_ID}
+			,#{PLAY_TYPE}
+			,#{KR_TTS}
+			,#{REMARK}
+			,#{PLAY_TM}
+			,'VD004'
+			,#{UPD_DTM}
+			,#{UPD_ID}
+			)
+	</insert>
+
+	<delete id="PI0205G0D0" parameterType="Map">
+		DELETE FROM BMS_VOC_INFO 
+		WHERE VOC_ID = #{VOC_ID};
+	</delete>
+	
+	<update id="PI0205G0U0" parameterType="Map">
+		UPDATE 
+			BMS_VOC_INFO 
+		SET 
+			PLAY_TYPE = #{PLAY_TYPE}
+			,KR_TTS = #{KR_TTS}
+			,REMARK = #{REMARK}
+			,PLAY_TM = #{PLAY_TM}
+			,UPD_DTM = #{UPD_DTM}
+			,UPD_ID = #{UPD_ID} 
+		WHERE 
+			ROUT_ID = #{ROUT_ID}
+			AND VOC_ID = #{VOC_ID}
+	</update>
+	
+	
+	-->
+	
+	<!--  <select id="PI0205G0K0" resultType="Map">
+		SELECT CONCAT('RV', LPAD(NEXTVAL(SEQ_BMS_VOC_INFO_2), 8, '0')) AS 'SEQ'
+	</select>	-->
+	
+</mapper>

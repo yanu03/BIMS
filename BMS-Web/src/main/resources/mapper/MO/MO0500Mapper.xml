@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.tracom.brt.domain.MO0500.MO0500Mapper">
+
+	  <select id="MO0500G0R0" resultType="Map">
+		SELECT
+			DATE_FORMAT(A.OCR_DTM, '%Y-%m-%d %H:%i:%s') AS OCR_DTM
+			,A.VHC_ID
+			,A.ROUT_ID
+			,A.OPER_APPR_ID
+			,D.ROUT_NM
+			,A.VHC_NO
+			,A.VHC_TYPE
+			,B.STTN_NM
+			,C.CRS_NM
+			,A.GPS_X
+			,A.GPS_Y
+			,A.OPER_APPR_STS
+			,A.OPER_APPR_DIV
+			,E.COMP_NM
+		FROM
+			BRT_OPER_APPR_INFO A
+			LEFT JOIN BMS_STTN_MST B
+			ON A.ADJ_STTN_ID = B.STTN_ID AND B.DEL_YN!='Y'
+			LEFT JOIN BMS_CRS_MST C
+			ON A.ADJ_CRS_ID = C.CRS_ID AND C.DEL_YN!='Y'
+			LEFT JOIN BMS_ROUT_MST D
+			ON A.ROUT_ID = D.ROUT_ID
+			LEFT JOIN BMS_TRANSCOMP_MST E
+			ON A.COMP_NM = E.COMP_ID
+		<where>
+			<if test="TYPE == 'ALL' and CONTENT != NULL and CONTENT != ''">
+				AND E.COMP_NM LIKE CONCAT('%',#{CONTENT},'%') ||  D.ROUT_NM LIKE CONCAT('%',#{CONTENT},'%') <!-- || A.VHC_TYPE LIKE CONCAT('%',#{CONTENT},'%') --> 
+			</if>
+			<if test="TYPE == 'COMP_NM'">
+				AND E.COMP_NM LIKE CONCAT('%',#{CONTENT},'%')
+			</if>
+			<if test="TYPE == 'VHC_TYPE'">
+				AND A.VHC_TYPE LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+			<if test="TYPE == 'ROUT_NM'">
+				AND D.ROUT_NM LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+			<if test="OCR_DTM != NULL and OCR_DTM != ''">
+				AND A.OCR_DTM BETWEEN DATE_FORMAT(#{OCR_DTM}, '%Y-%m-%d 0:0:0') AND DATE_FORMAT(#{OCR_DTM}, '%Y-%m-%d 23:59:59')
+			</if>
+		</where>	
+		ORDER BY
+			A.OCR_DTM
+	</select>
+
+	<select id="MO0500SHI0" resultType="Map" parameterType="Map">
+		SELECT  
+			a.COMP_NM
+			,a.VHC_TYPE
+			,b.ROUT_NM
+		FROM 	
+			BRT_OPER_APPR_INFO a
+			LEFT JOIN BMS_ROUT_MST b
+			ON a.ROUT_ID = b.ROUT_ID
+	</select>
+	
+	<update id="MO0500G0U0" parameterType="Map">
+		UPDATE 
+			BRT_OPER_APPR_INFO
+		SET
+			OPER_APPR_DIV = #{OPER_APPR_DIV}
+		WHERE
+			OPER_APPR_ID = #{OPER_APPR_ID}
+	</update>
+	
+	<!--
+	<select id="MO0500G0K0" resultType="Map">
+		SELECT CONCAT('CI', LPAD(NEXTVAL(SEQ_BRT_CPLNT_HIS_0), 8, '0')) AS 'SEQ'
+	</select>
+	
+	<insert id="MO0500G0I0" parameterType="Map">
+	
+		<selectKey keyProperty="CPLNT_ID" resultType="String" order="BEFORE">
+    		SELECT CONCAT('CI', LPAD(NEXTVAL(SEQ_BRT_CPLNT_HIS_0), 8, '0')) AS CPLNT_ID
+    	</selectKey>
+		
+		INSERT INTO BRT_CPLNT_HIS 
+			(
+				CPLNT_ID
+				,OCR_DTM
+				,ROUT_NM
+				,VHC_NO
+				,CPLNT_TYPE
+				,GPS_X
+				,GPS_Y
+				,CPLNT_CONTS
+				,JUDGE
+				,JUDG_ORG
+				,JUDG_TYPE
+				,JUDG_DESC	
+				,UPD_DTM	
+			)
+		VALUES
+			(
+				#{CPLNT_ID}
+				,#{OCR_DTM}
+				,#{ROUT_NM}
+				,#{VHC_NO}
+				,#{CPLNT_TYPE}
+				,#{GPS_X}
+				,#{GPS_Y}
+				,#{CPLNT_CONTS}
+				,#{JUDGE}
+				,#{JUDG_ORG}
+				,#{JUDG_TYPE}
+				,#{JUDG_DESC}
+				,#{UPD_DTM}
+			)
+	</insert>
+	
+	
+	
+	<delete id="MO0500G0D0" parameterType="Map">
+		DELETE FROM BRT_CPLNT_HIS WHERE CPLNT_ID = #{CPLNT_ID}
+	</delete>-->
+	
+	
+
+</mapper>

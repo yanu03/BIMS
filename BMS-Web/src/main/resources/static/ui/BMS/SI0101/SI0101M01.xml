@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+	
+	<head meta_vertical_guides="" meta_horizontal_guides="">	  
+<!-- 	<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=31aa62fb189294413e43c24caeb82419"></script>
+	<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?autoload=false"></script>
+	<script type="text/javascript">
+	kakao.maps.load(function() {
+		// v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
+		var map = new kakao.maps.Map(node, options);
+	});
+	</script>  -->	   
+		<w2:type>DEFAULT</w2:type>
+		<w2:buildDate/>
+		<xf:model>
+			<xf:instance>
+				<data xmlns="" />
+			</xf:instance>
+			<w2:dataCollection baseNode="map">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_GRG_MST" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="GRG_ID" name="차고지ID" dataType="text"></w2:column>
+						<w2:column id="GRG_NM" name="차고지명" dataType="text"></w2:column>
+						<w2:column id="OWNER_TYPE" name="소유형태" dataType="text"></w2:column>
+						<w2:column id="ADDR" name="주소" dataType="text"></w2:column>
+						<w2:column id="PHONE" name="전화번호" dataType="text"></w2:column>
+						<w2:column id="FAX" name="팩스" dataType="text"></w2:column>
+						<w2:column id="EMAIL" name="이메일" dataType="text"></w2:column>
+						<w2:column id="CNG_YN" name="CNG 충전 여부" dataType="text"></w2:column>
+						<w2:column id="ELEC_YN" name="전기 충전 여부" dataType="text"></w2:column>
+						<w2:column id="LEGAL_AREA" name="법적면적" dataType="text"></w2:column>
+						<w2:column id="SECURE_AREA" name="확보면적" dataType="text"></w2:column>
+						<!-- <w2:column id="APPL_ST_DT" name="적용시작일" dataType="text"></w2:column>
+						<w2:column id="APPL_ED_DT" name="적용종료일" dataType="text"></w2:column> -->
+						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
+						<w2:column id="GPS_X" name="GPS_X" dataType="text"></w2:column>
+						<w2:column id="GPS_Y" name="GPS_Y" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataMap baseNode="map" id="dma_result">
+					<w2:keyInfo>
+						<w2:key id="STATUS" name="STATUS" dataType="text"></w2:key>
+						<w2:key id="ICNT" name="입력건수" dataType="text"></w2:key>
+						<w2:key id="UCNT" name="수정건수" dataType="text"></w2:key>
+						<w2:key id="DCNT" name="삭제건수" dataType="text"></w2:key>
+						<w2:key id="TYPE" name="TYPE" dataType="text"></w2:key>
+					</w2:keyInfo>
+					<w2:data></w2:data>
+				</w2:dataMap>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_GRG_RDS_INFO" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="GRG_ID" name="차고지ID" dataType="text"></w2:column>
+						<w2:column id="GPS_X" name="GPS_X" dataType="text"></w2:column>
+						<w2:column id="GPS_Y" name="GPS_Y" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataMap baseNode="map" id="dma_search">
+					<w2:keyInfo>
+						<w2:key id="TYPE" name="name1" dataType="text"></w2:key>
+						<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
+						<w2:key id="USE_YN" name="name3" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+				<w2:dataMap baseNode="map" id="dma_SEQ_BMS_GRG_MST_0">
+					<w2:keyInfo>
+						<w2:key id="SEQ" name="SEQ" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_grgSearchItem" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="GRG_ID" name="차고지ID" dataType="text"></w2:column>
+						<w2:column id="GRG_NM" name="차고지명" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+
+				<w2:dataMap baseNode="map" id="dma_sub_search">
+					<w2:keyInfo>
+						<w2:key id="GRG_ID" name="차고지ID" dataType="text"></w2:key>
+						<w2:key id="GRG_NM" name="차고지명" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>				
+				
+			</w2:dataCollection>
+			<w2:workflowCollection></w2:workflowCollection>
+			<xf:submission id="sub_SI0101G0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_GRG_MST" action='/si/SI0101G0R0' method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="조회 중입니다..." ev:submit="" ev:submitdone="scwin.sub_SI0101G0R0_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_SI0101G0S0" ref='data:json,{"action":"modified","id":"dlt_BMS_GRG_MST"}' target="data:json,dma_result" action="/si/SI0101G0S0" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="저장 중입니다.." ev:submit="" ev:submitdone="scwin.sub_SI0101G0S0_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_SI0101G0K0" ref="" target="data:json,dma_SEQ_BMS_GRG_MST_0" action="/si/SI0101G0K0" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="" ev:submit="" ev:submitdone="scwin.sub_SI0101G0K0_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_SI0101SHI0" ref="" target="data:json,dlt_grgSearchItem" action="/si/SI0101SHI0" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+		</xf:model>
+
+		<script type="text/javascript"><![CDATA[
+	scwin.onpageload = function() {
+		var autoOptions = {
+			Main : { grid : SI0101G0, srchSbm : sub_SI0101G0R0, savSbm : sub_SI0101G0S0, keySbm : sub_SI0101G0K0 
+					,srchGrp : pgm_header, keyColumn : "GRG_ID", focusColumn : "GRG_NM", name :  "차고지 목록"}
+		};
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions);
+		
+		var codeOptions = [ {code : "OWNER_TYPE", compID : "SI0101G0:OWNER_TYPE" } ];
+		
+		com.setCommonDtl(codeOptions, function(){
+			com.searchGrid(SI0101G0, sub_SI0101G0R0);
+		});			
+		
+		$p.executeSubmission(sub_SI0101SHI0);
+
+	};
+
+	scwin.onpageunload = function() {
+
+	};
+
+	//validation 처리를 위한 옵션
+	//mandatory : 필수 체크, valFunc : 콜백 함수
+	//var valInfo = [ { id : "GRG_NM", mandatory : true},
+	//				{ id : "OWNER_TYPE", mandatory : true}
+	//			  ];
+					
+	
+	scwin.sub_SI0101G0R0_submitdone = function(e) {
+		var sCode = com.getResultCode(e);
+		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
+			com.setFocusedCell(SI0101G0, "GRG_NM");
+		}
+	};
+	
+	/**
+	 * 프로그램관리 저장 버튼의 콜백메소드
+	 */
+	scwin.sub_SI0101G0S0_submitdone = function(e) {
+		var sCode = com.getResultCode(e);
+		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
+			com.saveDone(SI0101G0,sub_SI0101G0R0);
+		}
+	};
+
+	scwin.btn_add_onclick = function() {
+		$p.executeSubmission(sub_SI0101G0K0);
+	};
+
+	scwin.sub_SI0101G0K0_submitdone = function(e) {
+		var insertIndex = com.addGrid(SI0101G0,dma_SEQ_BMS_GRG_MST_0,"GRG_ID","GRG_NM");
+	};
+
+	scwin.btn_del_onclick = function() {
+		com.delGrid(SI0101G0);
+	};
+	
+	scwin.btn_cancel_onclick = function() {
+		com.cancelGrid(SI0101G0);
+	};
+	
+	scwin.btn_excel_onclick = function() {
+		com.exlGrid(SI0101G0);
+	};
+
+	/**	 
+	 * 엑셀의 데이터를 그리드뷰로 업로드 한다.
+	 * 필요한 옵션이 있다면 options배열에 옵션을 넣는다.
+	 */
+	scwin.btn_uploadExcel_onclick = function() {
+		com.exlUploadGrid(SI0101G0);
+	};
+	
+	
+	/**
+	 * 그리드 Excel 포맷을 다운로드 하는 기능 ( 업로드용  Excel 포맷 )
+	 */
+	scwin.btn_excelForm_onclick = function() {
+		com.exlFrmGrid(SI0101G0);	
+	};
+	
+	scwin.btn_close_onclick = function() {
+		com.closeTab(SI0101G0);
+	};
+
+	
+	scwin.SI0101G0_oncellclick = function(row, col, colId) {
+	
+		var gridColumn = SI0101G0.getColumnID(col);
+		
+		if (gridColumn == "LOCATION") {
+				var param = SI0101G0.getDataRow(row).GRG_ID;
+				if (param != "") {
+					dma_sub_search.set("GRG_ID", param);
+					dma_sub_search.set("GRG_NM",SI0101G0.getDataRow(row).GRG_NM);
+					
+					
+					var data = { data : dma_sub_search.getJSON(), callbackFn : scwin.insertPopupData };
+					
+					var options = {
+						id : "SI0101P01",
+						popupName : "위치 지도",
+						modal : true
+					};
+					com.openPopup(("/ui/BMS/SI0101/SI0101P01.xml"), options, data);
+			}
+		}
+	};
+	
+	scwin.sbx_ChoiceBox_onviewchange = function(info) {		
+		if (info.newValue == "ALL") {
+			acb_autoChoiceBox.hide();
+			search_input.setValue("");
+			search_input.show("");
+		} else if (info.newValue == "GRG_ID") {
+			search_input.hide();
+			acb_autoChoiceBox.setNodeSet("data:dlt_grgSearchItem", "GRG_ID", "GRG_ID");
+			acb_autoChoiceBox.show("");
+		} else if (info.newValue == "GRG_NM") {
+			search_input.hide();
+			acb_autoChoiceBox.setNodeSet("data:dlt_grgSearchItem", "GRG_NM", "GRG_NM");
+			acb_autoChoiceBox.show("");
+		}
+	};
+	
+	scwin.SI0101G0_onrowindexchange = function(row, oldRow) {
+		com.changeSingleGrid(SI0101G0, row, oldRow);
+	};
+]]></script>
+	</head>
+	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
+		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
+			<xf:group id="pgm_navi" class="pgm_navi" style="">
+				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
+			</xf:group>
+			<xf:group id="pgm_header" class="pgm_header" style="">
+				<xf:group id="" style="" class="gr_search">
+					<xf:group id="" style="" class="label">
+							<w2:span id="" class="" label="검색 항목"></w2:span>
+					</xf:group>
+					<xf:group id="" style="" class="search">
+						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="sbx_ChoiceBox"
+							optionOrder="false" ref="data:dma_search.TYPE" style="" class="search_type" submenuSize="auto"
+							textAlign="left">
+							<xf:choices>
+								<xf:item>
+									<xf:label><![CDATA[전체]]></xf:label>
+									<xf:value><![CDATA[ALL]]></xf:value>
+								</xf:item>
+								<xf:item>
+									<xf:label><![CDATA[차고지ID]]></xf:label>
+									<xf:value><![CDATA[GRG_ID]]></xf:value>
+								</xf:item>
+								<xf:item>
+									<xf:label><![CDATA[차고지명]]></xf:label>
+									<xf:value><![CDATA[GRG_NM]]></xf:value>
+								</xf:item>
+							</xf:choices>
+						</xf:select1>
+						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="차고지 ID 또는 차고지 명"></xf:input>
+						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
+							chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange="" ev:onviewchange=""
+							id="acb_autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start" selectedData=""
+							style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false"
+							visibleRowNum="">
+							<w2:choices>
+								<w2:itemset nodeset="data:dlt_grgSearchItem">
+									<w2:label ref="GRG_ID"></w2:label>
+									<w2:value ref="GRG_ID"></w2:value>
+								</w2:itemset>
+							</w2:choices>
+						</w2:autoComplete>
+					</xf:group>
+					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+				</xf:group>
+			</xf:group>
+			<xf:group id="pgm_content" class="pgm_content grdc_a" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
+					<xf:group id="" class="" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl" id="" label="차고지 목록" style=""></w2:textbox>
+						</xf:group>
+					</xf:group>
+					<xf:group></xf:group>
+					<xf:group id="" class="" style="">							
+						<w2:gridView id="SI0101G0" rowNumVisible="true"
+							useShiftKey="true" scrollByColumn="false" owNumHeaderValue="순번" sortable="true" 
+							rowStatusHeaderValue="상태" overflowX="scroll" overflowY="scroll" rowStatusVisible="false"
+							 fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_BMS_GRG_MST" class="cm_grid left" autoFit="lastColumn" 
+							ev:oncellclick="scwin.SI0101G0_oncellclick"  ev:onrowindexchange="scwin.SI0101G0_onrowindexchange" rowNumHeaderValue="순번">
+							<w2:header style="" id="header1">
+								<w2:row style="" id="row1">
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:22px;" id="column16" value="차고지ID"
+										blockSelect="false" displayMode="label" class="req">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:22px;" id="column15" value="차고지명"
+										blockSelect="false" displayMode="label" class="req">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:22px;" id="column14" value="소유형태"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="380" inputType="text" style="height:22px;" id="column13" value="주소"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:22px;" id="column49" value="위치"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:22px;" id="column12" value="전화번호"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:22px;" id="column11" value="팩스"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:22px;" id="column10" value="이메일"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:22px;" id="column9" value="CNG 충전"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:22px;" id="column8" value="전기 충전"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:22px;" id="column7" value="법적면적"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:22px;" id="column6" value="확보면적"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column5" value="적용시작일"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column4" value="적용종료일"
+										blockSelect="false" displayMode="label">
+									</w2:column> -->
+									<w2:column removeBorderStyle="false" width="380" inputType="text" style="height:22px;" id="column3" value="비고"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+								</w2:row>
+							</w2:header>
+							<w2:gBody style="" id="gBody1">
+								<w2:row style="" id="row2">
+									<w2:column removeBorderStyle="false" width="136" inputType="text" style="height:20px" id="GRG_ID" value=""
+										blockSelect="false" displayMode="label" userData1="M" class="req">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="186" inputType="text" style="height:20px" id="GRG_NM" value=""
+										blockSelect="false" displayMode="label" userData1="M" textAlign="left" class="req">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="64" inputType="select" style="height:20px" id="OWNER_TYPE" value=""
+										blockSelect="false" displayMode="label" userData1="M">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="230" inputType="text" style="height:20px" id="ADDR" value=""
+										blockSelect="false" displayMode="label" textAlign="left">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="button" style="height:20px" id="LOCATION" value="보기"
+										blockSelect="false" displayMode="label" dataType="" class="" calendarClass="" autocomplete="">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="103" inputType="text" style="height:20px" id="PHONE" value=""
+										blockSelect="false" displayMode="label"  allowChar="0-9-" maxLength="13" customFormatter='com.transPhone' >
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="104" inputType="text" style="height:20px" id="FAX" value=""
+										blockSelect="false" displayMode="label" allowChar="0-9-" maxLength="14">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="144" inputType="text" style="height:20px" id="EMAIL" value=""
+										blockSelect="false" displayMode="label" userData2="com.checkEmail" textAlign="left">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="checkbox" style="height:20px" id="CNG_YN" value=""
+										blockSelect="false" displayMode="label" valueType="other" falseValue="N" trueValue="Y">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="checkbox" style="height:20px" id="ELEC_YN" value=""
+										blockSelect="false" displayMode="label" valueType="other" falseValue="N" trueValue="Y">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="LEGAL_AREA" value=""
+										blockSelect="false" displayMode="label" textAlign="right" allowChar="0-9." maxLength="10">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="SECURE_AREA" value=""
+										blockSelect="false" displayMode="label" textAlign="right" allowChar="0-9." maxLength="10">
+									</w2:column>
+									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="APPL_ST_DT" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="APPL_ED_DT" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column> -->
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK" value=""
+										blockSelect="false" displayMode="label" textAlign="left">
+									</w2:column>
+								</w2:row>
+							</w2:gBody>
+							<w2:footer style="" id="footer1">
+								<w2:row style="" id="row3">
+									<w2:column removeBorderStyle="false" width="" inputType="expression" style="height:20px;" id="column48" value=""
+										blockSelect="false" displayMode="label" colSpan="13" rowSpan="" expression="&quot;데이터 개수 : &quot; + COUNT('GRG_ID')"
+										textAlign="left">
+									</w2:column>
+								</w2:row>
+							</w2:footer>
+						</w2:gridView>
+					</xf:group>
+				</xf:group>
+			</xf:group>
+		</xf:group>
+	</body>
+</html>

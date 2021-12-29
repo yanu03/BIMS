@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.tracom.bms.domain.SI0502.SI0502Mapper">
+
+<select id="SI0502G0R0" resultType="Map">
+	SELECT  A.STTN_ID,
+			A.NODE_ID,
+			A.STTN_NM,
+			A.STTN_ENM,
+			A.AREA,
+			A.STTN_NO,
+			A.CENTER_YN,
+			A.STTN_FCLT_TYPE,
+			A.VHC_DOOR_DIR_TYPE,
+			A.GPS_X,
+			A.GPS_Y,
+			A.APPL_RDS,
+			A.BAY_TYPE,
+			A.BAY_LEN,
+			A.LINE_CNT,
+			A.USE_YN,
+			A.REMARK
+			
+	FROM BMS_STTN_MST A <!-- LEFT OUTER JOIN BMS_NODE_MST B ON A.NODE_ID = B.NODE_ID -->
+	<where>
+		A.USE_YN = 'Y' AND A.DEL_YN!='Y'
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT)">
+			<if test="TYPE == 'ALL'">
+				AND (A.STTN_ID LIKE CONCAT('%',#{CONTENT},'%') || A.STTN_NM LIKE CONCAT('%',#{CONTENT},'%') || A.STTN_NO LIKE CONCAT('%',#{CONTENT},'%'))
+			</if>
+			<if test="TYPE == 'STTN_ID'">
+				AND A.STTN_ID LIKE CONCAT('%',#{CONTENT},'%')
+			</if>
+			<if test="TYPE == 'STTN_NM'">
+				AND A.STTN_NM LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+			<if test="TYPE == 'STTN_NO'">
+				AND A.STTN_NO LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+		</if>
+
+	</where>
+</select>
+
+<select id="SI0502SHI0" resultType="Map">
+	SELECT STTN_ID, STTN_NM, STTN_NO
+	FROM BMS_STTN_MST WHERE DEL_YN!='Y'
+	ORDER BY STTN_ID
+</select>
+	
+<select id="SI0502G1R0" resultType="Map">
+	select  STTN_ID,
+			TRNS_ID,
+			TRNS_DIV,
+			TRNS_NM,
+			GPS_X,
+			GPS_Y,
+			TM_Y,
+			TM_X,
+			USE_YN,
+			REMARK
+	from 	BMS_TRANSFER_INFO
+	where 	STTN_ID = #{STTN_ID}
+	
+</select>
+
+<select id="SI0502G1K0" resultType="Map">
+	SELECT CONCAT('TR', LPAD(NEXTVAL(SEQ_BMS_STTN_MST_0), 8, '0')) AS 'SEQ'
+</select>
+
+<insert id="SI0502G1I0" parameterType="Map">
+	insert into BMS_TRANSFER_INFO
+			(STTN_ID,
+			TRNS_ID,
+			TRNS_DIV,
+			TRNS_NM,
+			GPS_X,
+			GPS_Y,
+			TM_Y,
+			TM_X,
+			USE_YN,
+			REMARK,
+			UPD_DTM,
+			UPD_ID
+			)
+	values (#{STTN_ID},
+			#{TRNS_ID},
+			#{TRNS_DIV},
+			#{TRNS_NM},
+			#{GPS_X},
+			#{GPS_Y},
+			0,
+			0,
+			#{USE_YN},
+			#{REMARK},
+			#{UPD_DTM},
+			#{SSN_USER_ID}
+			)		
+
+</insert>
+
+<update id="SI0502G1U0" parameterType="Map">
+	update BMS_TRANSFER_INFO
+	set		STTN_ID = #{STTN_ID},
+			TRNS_DIV = #{TRNS_DIV},
+			TRNS_NM = #{TRNS_NM},
+			GPS_X = #{GPS_X},
+			GPS_Y = #{GPS_Y},
+			USE_YN = #{USE_YN},
+			REMARK = #{REMARK}
+	where	TRNS_ID = #{TRNS_ID}		
+</update>
+
+<delete id="SI0502G1D0" parameterType="Map">
+	delete from BMS_TRANSFER_INFO
+	where TRNS_ID = #{TRNS_ID}
+</delete>
+
+</mapper>

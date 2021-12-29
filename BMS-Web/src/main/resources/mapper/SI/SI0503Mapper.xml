@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.tracom.bms.domain.SI0503.SI0503Mapper">
+
+<select id="SI0503G0R0" resultType="Map">
+	SELECT  CRS_ID,
+			CRS_NM,
+			CRS_ENM,
+			GPS_X,
+			GPS_Y,
+			CRS_KIND,
+			SIG_CTR_TYPE,
+			MAIN_PHASE,
+			PHASE_CNT,
+			PERIOD_LEN,
+			PERIOD_CNT,
+			USE_YN,
+			IMP_YN,
+			REMARK
+			
+	FROM BMS_CRS_MST
+	WHERE DEL_YN != 'Y'
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT)">
+			<if test="TYPE == 'ALL'">
+				AND (CRS_ID LIKE CONCAT('%',#{CONTENT},'%') || CRS_NM LIKE CONCAT('%',#{CONTENT},'%'))
+			</if>
+			<if test="TYPE == 'CRS_ID'">
+				AND CRS_ID LIKE CONCAT('%',#{CONTENT},'%')
+			</if>
+			<if test="TYPE == 'CRS_NM'">
+				AND CRS_NM LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+		</if>
+</select>
+
+<select id="SI0503G0K0" resultType="Map">
+	SELECT CONCAT('CR', LPAD(NEXTVAL(SEQ_BMS_CRS_MST_0), 8, '0')) AS 'SEQ'
+</select>
+
+<select id="SI0503SHI0" resultType="Map">
+	SELECT CRS_ID, CRS_NM
+	FROM BMS_CRS_MST WHERE DEL_YN!='Y'
+	ORDER BY CRS_ID
+</select>
+
+<insert id="SI0503G0I0" parameterType="Map">	
+	insert into BMS_CRS_MST
+			(
+				CRS_ID,
+				CRS_NM,
+				CRS_KIND,
+				SIG_CTR_TYPE,
+				USE_YN,
+				REMARK,
+				UPD_DTM,
+				UPD_ID,
+				IMP_YN
+			)
+	
+	values		
+			(
+				#{CRS_ID},
+				#{CRS_NM},
+				#{CRS_KIND},
+				#{SIG_CTR_TYPE},
+				#{USE_YN},
+				#{REMARK},
+				#{UPD_DTM},
+				#{SSN_USER_ID},		
+				#{IMP_YN}		
+			);
+</insert>
+
+<update id="SI0503G0U0" parameterType="Map">
+	update BMS_CRS_MST
+	set		CRS_NM = #{CRS_NM},
+			CRS_KIND = #{CRS_KIND},
+			SIG_CTR_TYPE = #{SIG_CTR_TYPE},
+			USE_YN = #{USE_YN},
+			REMARK = #{REMARK},
+			UPD_DTM = #{UPD_DTM},
+			UPD_ID = #{SSN_USER_ID},
+			IMP_YN = #{IMP_YN}
+
+	where CRS_ID = #{CRS_ID};
+	
+	update BMS_NODE_MST
+	set		NODE_NM = #{CRS_NM},
+			USE_YN = #{USE_YN},
+			UPD_DTM = #{UPD_DTM},
+			UPD_ID = #{SSN_USER_ID}
+	where NODE_ID = #{CRS_ID}			  
+</update>
+
+<delete id="SI0503G0D0" parameterType="Map">
+	UPDATE BMS_CRS_MST
+	SET	DEL_YN = 'Y', USE_YN = 'N'
+	WHERE CRS_ID = #{CRS_ID};
+	
+	UPDATE BMS_ROUT_NODE_CMPSTN
+		SET CRS_ID='', NODE_TYPE = 'NT003'
+	WHERE NODE_ID = #{CRS_ID};
+	
+	UPDATE BMS_NODE_MST
+		SET NODE_TYPE = 'NT003'
+	WHERE NODE_ID = #{CRS_ID};
+	
+	<!-- delete
+	from BMS_CRS_MST
+	where CRS_ID = #{CRS_ID};
+	
+	delete
+	from BMS_NODE_MST
+	where NODE_ID = #{NODE_ID} -->
+</delete>
+
+
+<select id="SI0503G1R0" resultType="Map">
+	SELECT A.ROUT_ID, A.ROUT_NM, A.ROUT_TYPE, A.STTN_CNT, A.ROUT_LEN, A.CURVATURE, A.REMARK, B.CRS_ID
+	FROM BMS_ROUT_MST A INNER JOIN BMS_ROUT_NODE_CMPSTN B ON A.ROUT_ID = B.ROUT_ID AND A.DEL_YN !='Y' AND B.NODE_TYPE != 'NT006'
+	WHERE B.CRS_ID = #{CRS_ID}
+	
+	
+</select>
+
+
+</mapper>

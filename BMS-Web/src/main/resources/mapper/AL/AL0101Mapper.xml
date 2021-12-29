@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.tracom.brt.domain.AL0101.AL0101Mapper">
+
+<select id="AL0101G1R0" resultType="Map">
+	SELECT A.ROUT_ID,
+		A.NODE_ID,
+		A.NODE_SN,
+		A.NODE_TYPE,
+		A.NODE_NM,
+		A.NODE_ENM,
+		A.STTN_ID,
+		A.STTN_NO,
+		A.CRS_ID,
+		A.GPS_X,
+		A.GPS_Y,
+		A.TM_X,
+		A.TM_Y,
+		A.ACCRU_LEN,
+		A.UPD_DTM,
+		A.UPD_ID
+	FROM BRT_MAIN_ROUT_NODE_INFO A INNER JOIN BMS_ROUT_MST R ON R.DEL_YN !='Y' AND A.ROUT_ID = R.ROUT_ID 
+	WHERE A.ROUT_ID = #{ROUT_ID}
+	<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT)">
+		<!-- <if test="TYPE == 'ALL'"> -->
+			AND (NODE_ID LIKE CONCAT('%',#{CONTENT},'%') || NODE_NM LIKE CONCAT('%',#{CONTENT},'%'))
+		<!-- </if>
+		<if test="TYPE == 'NODE_ID'">
+			AND NODE_ID LIKE CONCAT('%',#{CONTENT},'%')
+		</if>
+		<if test="TYPE == 'NODE_NM'">
+			AND NODE_NM LIKE CONCAT('%',#{CONTENT},'%') 
+		</if> -->
+	</if>
+	 ORDER BY A.NODE_SN ASC
+</select>
+
+<insert id="AL0101G1I0" parameterType="Map">
+INSERT INTO BRT_MAIN_ROUT_NODE_INFO( ROUT_ID,NODE_ID,NODE_SN,NODE_TYPE,NODE_NM,STTN_ID,STTN_NO,CRS_ID,GPS_X,GPS_Y,ACCRU_LEN,UPD_DTM,UPD_ID )
+VALUES(#{ROUT_ID} ,#{NODE_ID} ,#{NODE_SN} ,#{NODE_TYPE} ,#{NODE_NM} ,#{STTN_ID} ,#{STTN_NO} ,#{CRS_ID} ,#{GPS_X} ,#{GPS_Y} ,#{ACCRU_LEN} ,#{UPD_DTM}, #{SSN_USER_ID} )
+</insert>
+
+<delete id="AL0101G1D0" parameterType="Map">
+	DELETE FROM BRT_MAIN_ROUT_NODE_INFO
+	WHERE ROUT_ID = #{ROUT_ID}
+	AND NODE_ID = #{NODE_ID}
+	AND NODE_SN = #{NODE_SN}
+</delete>
+
+<select id="AL0101P0R0" resultType="Map">
+	SELECT A.ROUT_ID, A.NODE_ID, A.NODE_NM, A.NODE_TYPE, A.NODE_SN, A.GPS_X, A.GPS_Y, A.STTN_ID, A.STTN_NO, A.CRS_ID, A.ACCRU_LEN
+	FROM BMS_ROUT_NODE_CMPSTN A
+		INNER JOIN BMS_ROUT_MST R
+			ON A.ROUT_ID = R.ROUT_ID AND R.DEL_YN !='Y' 
+	WHERE A.ROUT_ID = #{ROUT_ID}
+	<choose>
+		<when  test="NODE_TYPE != 'ALL' and @kr.tracom.util.CommonUtil@notEmpty(NODE_TYPE)">
+		AND A.NODE_TYPE =#{NODE_TYPE}
+		</when>
+		<otherwise>
+		AND (A.NODE_TYPE = 'NT001' || A.NODE_TYPE = 'NT002')
+		</otherwise>
+	</choose>
+	
+	<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT)">
+		AND (A.NODE_ID LIKE CONCAT('%',#{CONTENT},'%') || A.NODE_NM LIKE CONCAT('%',#{CONTENT},'%'))
+	</if>
+	 ORDER BY A.NODE_SN ASC
+</select>
+
+</mapper>

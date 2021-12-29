@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.tracom.bms.domain.PI0400.PI0400Mapper">
+
+	<select id="PI0400G0R0" resultType="Map" parameterType="Map">
+		SELECT DATE_FORMAT(NOTI_DT, '%Y-%m-%d %H:%i') NOTI_DT, SKY_COND, TEMPC, TEMP_MINI,TEMP_HIGH, HUMI, 
+		RAIN_PRO, RAINFALL, DATE_FORMAT(UPD_DTM, '%Y-%m-%d %H:%i') UPD_DTM 
+		FROM BMS_WEAT_INFO
+		<where>
+				<if test="CONTENT != ''">
+					DATE_FORMAT(NOTI_DT,'%Y%m') = #{CONTENT}
+				</if>
+		</where>
+		ORDER BY NOTI_DT DESC
+	</select>
+	
+	<select id="PI0400G1R0" resultType="Map" parameterType="Map">
+		SELECT DATE_FORMAT(MEAS_DT, '%Y-%m-%d %H:%i') MEAS_DT, DUSTC, SDUSTC, SDC, CMC, 
+		OZONEC, NDC, DATE_FORMAT(UPD_DTM, '%Y-%m-%d %H:%i') UPD_DTM 
+		FROM BMS_ATMO_INFO
+		<where>
+			<if test="CONTENT != ''">
+				DATE_FORMAT(MEAS_DT,'%Y%m') = #{CONTENT}
+			</if>
+		</where>
+		ORDER BY MEAS_DT DESC
+	</select>
+	
+<select id="PI0400G2R0" resultType="Map" parameterType="Map">
+      SELECT 
+      	V.VHC_ID
+      	,V.VHC_NO
+      	,V.VHC_ID
+      	,V.AREA
+      	,V.MAKER
+      	,V.VHC_STS
+      	,V.VHC_TYPE
+      	,DATE_FORMAT(LIV.SEND_DT, '%Y-%m-%d %H:%i') SEND_DT
+      	,LIV.MNG_ID  
+      FROM 
+      	BMS_LIVING_LOG LIV 
+      LEFT OUTER JOIN BMS_DVC_INFO DV 
+      ON LIV.MNG_ID = DV.MNG_ID 
+      LEFT OUTER JOIN BMS_VHC_MST V 
+      ON DV.VHC_ID = V.VHC_ID
+     ORDER BY
+     	 LIV.SEND_DT
+	</select>
+</mapper>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.tracom.cm.domain.Menu.MenuMapper">
+
+	<select id="selectMenu" resultType="Map" parameterType="Map">
+		SELECT M.MENU_CD, M.SYSTEM_BIT, M.MENU_NM
+			 , M.LEVEL, M.SORT, M.PROG_CD, C.DL_CD_NM AS PROGRAM_GROUP_NM
+			 , P.PROG_CD, P.PROG_NM, M.USE_YN, M.REMARK, M.PARENT_MENU_CD, M.MENU_CD AS OLD_MENU_CD
+			 , COALESCE((SELECT S.MENU_NM from BMS_MENU_MST S WHERE S.MENU_CD = M.PARENT_MENU_CD), 'Parent Category') AS PARENT_MENU_NM
+		  FROM BMS_MENU_MST M LEFT OUTER JOIN BMS_PROG_MST P ON M.PROG_CD = P.PROG_CD
+			   LEFT OUTER JOIN BMS_DL_CD_INFO C ON C.DL_CD = P.PROG_GRP_CD AND C.CO_CD = 'PROG_GRP_CD'
+		<where>
+			<if test="TYPE == 'MENU_CD'">
+				AND M.MENU_CD LIKE CONCAT('%', #{CONTENT}, '%')
+			</if>
+			<if test="TYPE == 'MENU_NM'">
+				AND M.MENU_NM LIKE CONCAT('%', #{CONTENT}, '%')
+			</if>
+			<if test="TYPE == 'PARENT_MENU_CD'">
+				AND M.PARENT_MENU_CD LIKE CONCAT('%', #{CONTENT}, '%')
+			</if>
+			<if test="TYPE == 'LEVEL'">
+				<if test="CONTENT == ''">
+					AND M.LEVEL IS NOT NULL
+				</if>
+				<if test="CONTENT != ''">
+					AND M.LEVEL = #{CONTENT}
+				</if>
+			</if>
+		</where>
+		ORDER BY M.MENU_CD, M.SORT
+	</select>
+
+
+	<select id="searchMenuItem" resultType="Map">
+		SELECT M.MENU_CD, M.SYSTEM_BIT, M.MENU_NM, M.LEVEL, M.PARENT_MENU_CD
+			 , COALESCE((SELECT S.MENU_NM from BMS_MENU_MST S WHERE S.MENU_CD = M.PARENT_MENU_CD), 'Parent Category') AS PARENT_MENU_NM
+		  FROM BMS_MENU_MST M LEFT OUTER JOIN BMS_PROG_MST P ON M.PROG_CD = P.PROG_CD
+			   LEFT OUTER JOIN BMS_DL_CD_INFO C ON C.DL_CD = P.PROG_GRP_CD AND C.CO_CD = 'PROG_GRP_CD'
+	</select>
+
+	<insert id="insertMenu" parameterType="Map">
+		INSERT INTO BMS_MENU_MST(MENU_CD, MENU_NM, SYSTEM_BIT, PARENT_MENU_CD, LEVEL, SORT, PROG_CD, USE_YN, REMARK, UPD_DTM, UPD_ID)
+		VALUES (#{MENU_CD}, #{MENU_NM}, #{SYSTEM_BIT}, #{PARENT_MENU_CD}, #{LEVEL}, #{SORT},
+			 <if test="PROG_NM != ''">
+			 #{PROG_CD}, 
+			 </if>
+			 <if test="PROG_NM == ''">
+			 '', 
+			 </if>
+			 
+			 #{USE_YN}, #{REMARK}, #{UPD_DTM}, #{SSN_USER_ID})
+	</insert>
+
+	<update id="updateMenu" parameterType="Map">
+		UPDATE BMS_MENU_MST
+		   SET MENU_CD = #{MENU_CD}, MENU_NM = #{MENU_NM}, SYSTEM_BIT = #{SYSTEM_BIT}, PARENT_MENU_CD = #{PARENT_MENU_CD}, LEVEL = #{LEVEL}
+			 , SORT = #{SORT} 
+			 <if test="PROG_NM != ''">
+			 ,PROG_CD = #{PROG_CD} 
+			 </if>
+			 <if test="PROG_NM == ''">
+			 ,PROG_CD = ''
+			 </if>
+			 ,USE_YN = #{USE_YN}, REMARK = #{REMARK}, UPD_DTM = #{UPD_DTM}, UPD_ID = #{SSN_USER_ID}
+		 WHERE MENU_CD = #{OLD_MENU_CD}
+	</update>
+
+	<delete id="deleteMenu" parameterType="Map">
+		DELETE FROM BMS_MENU_MST WHERE MENU_CD = #{MENU_CD}
+	</delete>
+	
+</mapper>

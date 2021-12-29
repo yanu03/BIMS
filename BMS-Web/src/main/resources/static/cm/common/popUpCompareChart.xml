@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+	 <head>
+	<w2:type>DEFAULT</w2:type>
+	<w2:buildDate/>
+	<xf:model>
+		<xf:instance>
+			<data xmlns="" />
+		</xf:instance>
+		<w2:dataCollection baseNode="map">
+			<w2:dataList baseNode="list" repeatNode="map" id="dlt_BRT_CHART_INFO" saveRemovedData="true">
+				<w2:columnInfo>
+					<w2:column id="INDEX" name="순서" dataType="text"></w2:column>
+					<w2:column id="ACCRU_LEN" name="누적길이" dataType="text"></w2:column>
+					<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
+					<w2:column id="ARRV_TM" name="도착시간" dataType="text"></w2:column>
+					<w2:column id="DPRT_TM" name="출발시간" dataType="text"></w2:column>
+				</w2:columnInfo>
+			</w2:dataList>	
+			<w2:dataList baseNode="list" repeatNode="map" id="dlt_BRT_OPER_ALLOC_PL_NODE_CNT" saveRemovedData="true">
+				<w2:columnInfo>
+					<w2:column id="CNT" name="개수" dataType="number" defaultValue="0"></w2:column>
+				</w2:columnInfo>
+			</w2:dataList>
+			<w2:dataList baseNode="list" repeatNode="map" id="dlt_BRT_OPER_ALLOC_PL_NODE_INFO" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="REP_ROUT_ID" name="대표노선아이디" dataType="text"></w2:column>
+						<w2:column id="DAY_DIV" name="요일구분" dataType="text"></w2:column>
+						<w2:column id="WAY_DIV" name="상하행구분" dataType="text"></w2:column>
+						<w2:column id="OPER_SN" name="운행순번" dataType="text"></w2:column>
+						<w2:column id="NODE_ID" name="노드아이디" dataType="text"></w2:column>
+						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
+						<w2:column id="NODE_SN" name="노드순번" dataType="text"></w2:column>
+						<w2:column id="ALLOC_NO" name="배차번호" dataType="text"></w2:column>
+						<w2:column id="ROUT_ID" name="노선아이디" dataType="text"></w2:column>
+						<w2:column id="COR_ID" name="코스아이디" dataType="text"></w2:column>
+						<w2:column id="NODE_TYPE" name="노드유형" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM" name="도착시간" dataType="text"></w2:column>
+						<w2:column id="DPRT_TM" name="출발시간" dataType="text"></w2:column>
+						<w2:column id="UPD_DTM" name="갱신일시" dataType="date"></w2:column>
+						<w2:column id="UPD_ID" name="갱신아이디" dataType="text"></w2:column>
+						<w2:column id="REP_ROUT_NM" name="대표노선명" dataType="text"></w2:column>
+						<w2:column id="WAY_ASC_NM" name="상행명" dataType="text"></w2:column>
+						<w2:column id="WAY_DESC_NM" name="하행명" dataType="text"></w2:column>
+						<w2:column id="ACCRU_LEN" name="누적길이" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataMap baseNode="map" id="dma_sub_search">
+					<w2:keyInfo>
+						<w2:key id="DAY_DIV" name="요일구분" dataType="text"></w2:key>
+						<w2:key id="ROUT_ID" name="노선ID" dataType="text"></w2:key>
+						<w2:key id="ROUT_NM" name="노선명" dataType="text"></w2:key>
+						<w2:key id="OPER_SN" name="운행회차" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>			
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BRT_OPER_ALLOC_RL_NODE_INFO" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="REP_ROUT_ID" name="대표노선아이디" dataType="text"></w2:column>
+						<w2:column id="DAY_DIV" name="요일구분" dataType="text"></w2:column>
+						<w2:column id="WAY_DIV" name="상하행구분" dataType="text"></w2:column>
+						<w2:column id="OPER_SN" name="운행순번" dataType="text"></w2:column>
+						<w2:column id="NODE_ID" name="노드아이디" dataType="text"></w2:column>
+						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
+						<w2:column id="NODE_SN" name="노드순번" dataType="text"></w2:column>
+						<w2:column id="ALLOC_NO" name="배차번호" dataType="text"></w2:column>
+						<w2:column id="ROUT_ID" name="노선아이디" dataType="text"></w2:column>
+						<w2:column id="COR_ID" name="코스아이디" dataType="text"></w2:column>
+						<w2:column id="NODE_TYPE" name="노드유형" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM" name="도착시간" dataType="text"></w2:column>
+						<w2:column id="DPRT_TM" name="출발시간" dataType="text"></w2:column>
+						<w2:column id="REAL_ARRV_TM" name="결과출발시간" dataType="text"></w2:column>
+						<w2:column id="REAL_DPRT_TM" name="결과출발시간" dataType="text"></w2:column>
+						<w2:column id="UPD_DTM" name="갱신일시" dataType="date"></w2:column>
+						<w2:column id="UPD_ID" name="갱신아이디" dataType="text"></w2:column>
+						<w2:column id="REP_ROUT_NM" name="대표노선명" dataType="text"></w2:column>
+						<w2:column id="WAY_ASC_NM" name="상행명" dataType="text"></w2:column>
+						<w2:column id="WAY_DESC_NM" name="하행명" dataType="text"></w2:column>
+						<w2:column id="ACCRU_LEN" name="누적길이" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+		</w2:dataCollection>
+		<w2:workflowCollection></w2:workflowCollection>
+			<xf:submission id="sub_AL0203G1R0" ref="data:json,dma_sub_search" target='data:json,dlt_BRT_OPER_ALLOC_PL_NODE_CNT'
+				action="/al/AL0203G0P1" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
+				customHandler="" mode="asynchronous" processMsg="조회 중입니다..." ev:submit="" ev:submitdone="scwin.sub_AL0203G1R0_submitdone" ev:submiterror=""
+				abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_AL0203G0P0" ref="data:json,dma_sub_search" target='data:json,dlt_BRT_OPER_ALLOC_PL_NODE_INFO'
+				action="/operPlan/selectOperAllocPlanNode" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
+				customHandler="" mode="asynchronous" processMsg="조회 중입니다..." ev:submit="" ev:submitdone="scwin.sub_AL0203G0P0_submitdone" ev:submiterror=""
+				abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_OPER_ALL_REAL_NODE" ref="data:json,dma_sub_search" target="data:json,dlt_BRT_OPER_ALLOC_RL_NODE_INFO"
+				action="/operPlan/selectOperAllocRealNode" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+				errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_OPER_ALL_REAL_NODE_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+	</xf:model>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
+	<script src='https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js'></script>
+	<script type="text/javascript" lazy="false"><![CDATA[
+
+	scwin.onpageload = function() {
+		
+		scwin.param = com.getParameter();
+		scwin.closeCallbackFncName = scwin.param.callbackFn;
+		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
+		
+		dlt_BRT_OPER_ALLOC_PL_NODE_INFO.setJSON(scwin.param.data5, true);
+		dlt_BRT_OPER_ALLOC_RL_NODE_INFO.setJSON(scwin.param.data6, true);
+		
+		dma_sub_search.set("ROUT_ID", scwin.param.data);
+		dma_sub_search.set("DAY_DIV", scwin.param.data2);
+		dma_sub_search.set("ROUT_NM", scwin.param.data3);
+		dma_sub_search.set("OPER_SN", scwin.param.data4);
+		
+		//com.executeSubmission(sub_AL0203G1R0);		
+		//com.executeSubmission(sub_AL0203G0P0);
+		//com.executeSubmission(sub_OPER_ALL_REAL_NODE);
+		
+		dma_sub_search.set("OPER_SN", dma_sub_search.get("OPER_SN")+'회차');		
+		//scwin.drawChart();
+		scwin.testDrawChart2();		
+	};
+	
+	scwin.onpageunload = function() {
+		
+	};
+	
+	
+	
+	scwin.sub_AL0203G0P0_submitdone = function(e) {
+	
+	};
+	
+	scwin.sub_OPER_ALL_REAL_NODE_submitdone = function(e) {
+	
+	};
+	
+	
+	
+	function date_ascending(a, b) {
+       return a - b;
+    };
+	
+
+	var CharData = function(){
+		this.seriesname = {};
+		this.fill = {};
+		this.backgroundColor = {};
+		this.borderColor = {};
+		this.data = [];
+		this.borderWidth = {}; //선 width
+		this.pointBorderWidth = {}; //포인터 width
+		this.tension = {};	//곡선 or 직선
+		this.pointRadius = {};	//포인트 반지름 0일 경우 포인트 안그려짐
+	}
+
+	scwin.testDrawChart2 = function(){
+		
+		var datasets = new Array();
+		var transData = new Array();
+		var i = 0;
+		var j = 0;
+		var num = 0;
+
+		var rowCount = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getRowCount();
+		var jsonData = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getAllJSON();
+		var rlAllJson = dlt_BRT_OPER_ALLOC_RL_NODE_INFO.getAllJSON();
+		
+		var data = new Array();
+		for(var y = 0; y < jsonData.length; y++){
+			var label = jsonData[y].OPER_SN + "회차";
+			//var updDtm = jsonData[y].UPD_DTM;
+			var updDtm = util.getCurrentDate3();
+			var operSn = jsonData[y].OPER_SN;
+			var arrvTm = jsonData[y].ARRV_TM;
+			var dprtTm = jsonData[y].DPRT_TM;
+			var accruLen = jsonData[y].ACCRU_LEN;
+			var nodeType = jsonData[y].NODE_TYPE;
+			
+			if(nodeType=='NT002'){
+				var categoryJson = new Object();
+				
+				categoryJson.x = new Date(updDtm+' '+arrvTm);
+				categoryJson.y = accruLen;
+				data.push(categoryJson);
+				
+			}
+			
+			if((nodeType=='NT002')&&(arrvTm!=dprtTm)){
+				var categoryJson = new Object();
+			
+				categoryJson.x = new Date(updDtm+' '+dprtTm);
+				categoryJson.y = accruLen;
+				data.push(categoryJson);
+			}
+			
+		};
+
+		var charData = new CharData();
+		
+		charData.data = data;
+		charData.label = label+" 운행계획";
+		
+		charData.backgroundColor = 'rgba(0, 0, 255, 0.5)';
+		charData.borderColor = 'rgba(0, 0, 255, 0.5)';
+		charData.borderWidth = 1;
+		charData.pointBorderWidth = 1;
+		charData.tension = 0;
+		charData.pointRadius = 1;
+		
+		datasets.push(charData);
+		
+		var data = new Array();
+		for(var y = 0; y < rlAllJson.length; y++){
+			var label = rlAllJson[y].OPER_SN + "회차";
+			//var updDtm = rlAllJson[y].UPD_DTM;
+			var updDtm = util.getCurrentDate3();
+			var operSn = rlAllJson[y].OPER_SN;
+			var arrvTm = rlAllJson[y].REAL_ARRV_TM;
+			var dprtTm = rlAllJson[y].REAL_DPRT_TM;
+			var accruLen = rlAllJson[y].ACCRU_LEN;
+			var nodeType = rlAllJson[y].NODE_TYPE;
+			
+			if(nodeType=='NT002'){
+				var categoryJson = new Object();
+				
+				categoryJson.x = new Date(updDtm+' '+arrvTm);
+				categoryJson.y = accruLen;
+				data.push(categoryJson);
+				
+			}
+			
+			if((nodeType=='NT002')&&(arrvTm!=dprtTm)){
+				var categoryJson = new Object();
+			
+				categoryJson.x = new Date(updDtm+' '+dprtTm);
+				categoryJson.y = accruLen;
+				data.push(categoryJson);
+			}
+			
+		};
+		
+		var charData = new CharData();
+		
+		charData.data = data;
+		charData.label = label+" 실제운행";
+		
+		charData.backgroundColor = 'rgba(255, 99, 132, 1)';
+		charData.borderColor = 'rgba(255, 99, 132, 1)';
+		charData.borderWidth = 1;
+		charData.pointBorderWidth = 1;
+		charData.tension = 0;
+		charData.pointRadius = 1;
+		
+		datasets.push(charData);
+	
+		
+		var ctx = document.getElementById('myChart');
+		var myChart = new Chart(ctx, {
+			    type: 'line',
+				data: {
+					datasets
+				    /*datasets: [{
+					      label: '운행계획',
+					      data: [{
+					        x: new Date(2021, 10, 19, 03, 24, 20),
+					        y: 1
+					      }, {
+					        x: new Date(2021, 10, 19, 4, 24, 0),
+					        y: 10
+					      }
+					      ]
+					    },
+					    {
+					      label: '실제운행',
+					      data: [{
+					        x: new Date(2021, 10, 19, 3, 28, 0),
+					        y: 2
+					      }, {
+					        x: new Date(2021, 10, 19, 4, 24, 0),
+					        y: 11
+					      }]
+					    }
+					    ]*/
+				  },
+			    options: {
+			        scales: {
+			           xAxes: [{
+				        type: 'time',
+				        time: {
+				          unit: 'minute'
+				        }
+				      }]
+			        }
+			        
+			    }
+			});
+	}
+	
+	]]></script>
+	</head>
+	 <body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
+	 	<xf:group class="popup_container grdr_20_a" id="popup_container" style="">
+	 		<xf:group id="popup_header" style="" class="popup_header">
+	 			<xf:group class="gr_search" id="" style="">
+	 				<xf:group class="label" id="" style="">
+	 					<w2:span class="" id="" label="" ref="data:dma_sub_search.ROUT_NM"></w2:span>
+	 					<w2:span class="" id="" label="" ref="data:dma_sub_search.OPER_SN"></w2:span>
+	 				</xf:group>
+	 			</xf:group>
+	 		</xf:group>
+	 		<xf:group style="" id="" class="popup_content">
+	 				<!--  <w2:fusionchart accessibility="false" drawType="javascript" runflashAt="IE6,IE7,IE8" seriesType="simple" chartType="MSLine"
+		 				style="width: auto; height: 100%;" id="CHART" ref="" labelNode="" valueNode="" seriesNode="" dataList="" dataTypeFormatter="">
+		 			</w2:fusionchart>-->
+		 			<canvas id="myChart"></canvas>
+	 		</xf:group>
+	 	</xf:group>
+	 </body>
+</html>

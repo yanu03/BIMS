@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+	<head>
+		<w2:type>DEFAULT</w2:type>
+		<w2:buildDate />
+		<xf:model>
+			<xf:instance>
+				<data xmlns="" />
+			</xf:instance>
+			<w2:dataCollection baseNode="map">
+				<w2:dataMap baseNode="map" id="dma_systemChange">
+					<w2:keyInfo>
+						<w2:key id="SYSTEM_BIT" name="시스템비트" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+
+				<w2:dataList id="dlt_menu" baseNode="list" saveRemovedData="true" repeatNode="map"
+					ev:ondataload="scwin.dlt_menu_ondataload">
+					<w2:columnInfo>
+						<w2:column id="MENU_CD" name="메뉴코드" dataType="text"></w2:column>
+						<w2:column id="MENU_NM" name="메뉴명" dataType="text"></w2:column>
+						<w2:column id="USE_YN" name="사용여부" dataType="text"></w2:column>
+						<w2:column id="PROG_PH" name="메뉴경로" dataType="text"></w2:column>
+						<w2:column id="PARENT_MENU_CD" name="부모메뉴코드" dataType="text"></w2:column>
+						<w2:column id="LEVEL" name="메뉴레벨" dataType="text"></w2:column>
+						<w2:column id="SORT" name="정렬순서" dataType="text"></w2:column>
+						<w2:column id="PROG_CD" name="프로그램코드" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataMap baseNode="map" id="dma_result">
+					<w2:keyInfo>
+						<w2:key id="STATUS" name="name1" dataType="text"></w2:key>
+						<w2:key id="ICNT" name="name2" dataType="text"></w2:key>
+						<w2:key id="UCNT" name="name3" dataType="text"></w2:key>
+						<w2:key id="DCNT" name="name4" dataType="text"></w2:key>
+						<w2:key id="TYPE" name="name5" dataType="text"></w2:key>
+						<w2:key id="USER_ID" name="USER_ID" dataType="text"></w2:key>
+						<w2:key id="SBRT_URL" name="SBRT_URL" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+				<w2:dataMap baseNode="map" id="dma_defInfo">
+					<w2:keyInfo>
+						<w2:key id="SSN_USER_ID" name="사용자ID" dataType="text"></w2:key>
+						<w2:key id="SSN_USER_NM" name="사용자명" dataType="text"></w2:key>
+						<w2:key id="SSN_CUR_SYSTEM" name="현재시스템" dataType="text"></w2:key>
+						<w2:key id="SSN_SYSTEM_BIT" name="시스템비트" dataType="text"></w2:key> 현재 계정이 접속할수 있는 시스템
+						<w2:key id="SSN_IS_ADMIN" name="관리자여부" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_programAuthority" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="PROG_CD" name="프로그램코드" dataType="text"></w2:column>
+						<w2:column id="AUTH_CHECK" name="권한체크여부" dataType="text"></w2:column>
+						<w2:column id="SCH_AH" name="조회권한여부" dataType="text"></w2:column>
+						<w2:column id="SAV_AH" name="저장권한여부" dataType="text"></w2:column>
+						<w2:column id="EXL_AH" name="엑셀권한여부" dataType="text"></w2:column>
+						<w2:column id="GEX_AH" name="엑셀폼다운권한여부" dataType="text"></w2:column>
+						<w2:column id="IEX_AH" name="엑셀입력권한여부" dataType="text"></w2:column>
+						<w2:column id="EXL_AH" name="엑셀권한권한여부" dataType="text"></w2:column>
+						<!-- <w2:column id="DEL_AH" name="삭제권한여부" dataType="text"></w2:column>
+						<w2:column id="FN1_AH" name="추가권한여부" dataType="text"></w2:column>
+						<w2:column id="FN2_AH" name="닫기권한여부" dataType="text"></w2:column> -->
+						<w2:column id="FN3_AH" name="예약권한여부" dataType="text"></w2:column>
+						<w2:column id="FN4_AH" name="실행권한여부" dataType="text"></w2:column>
+						<w2:column id="FN5_AH" name="확정권한여부" dataType="text"></w2:column>
+						<w2:column id="FN6_AH" name="설정권한여부" dataType="text"></w2:column>
+						<w2:column id="FN7_AH" name="초기화권한여부" dataType="text"></w2:column>
+						<w2:column id="FN8_AH" name="기능키8권한여부" dataType="text"></w2:column>
+						<w2:column id="HELP_AH" name="도움말권한여부" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+			</w2:dataCollection>
+			
+			<w2:workflowCollection></w2:workflowCollection>
+			<xf:submission id="sbm_systemChange" ref="data:json,dma_systemChange" target="data:json,dma_result" action="/main/systemChange" method="post" mediatype="application/json"
+				encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
+				ev:submit="" ev:submitdone="scwin.sbm_systemChange_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+		</xf:model>
+		<script	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>	
+
+		<script type="text/javascript" lazy="false"><![CDATA[
+	scwin.onpageload = function() {
+
+	};
+	
+	scwin.onpageunload = function() {
+	
+	};
+	
+	/** 
+	 * 좌측 메뉴를 생성한다.
+	 */
+	scwin.setGenerator = function() {
+		gen_firstGenerator.removeAll();
+		var tmpDataArr = dlt_menu.getAllJSON();
+		var tmpParentIdx = 0;
+		var thirdIndex = 0;
+
+	
+		//첫번째 메뉴 세팅
+		for (var i = 0; i < tmpDataArr.length; i++) {
+			var headerData_obj = tmpDataArr[i];
+			var menuDepth = headerData_obj.LEVEL;
+			var parentKey = headerData_obj.PARENT_MENU_CD; // m1, m2, m3
+			var tmpIdx = 0, tmpIdx2 = 0;
+	
+			if (menuDepth == "1") {
+				tmpParentIdx = gen_firstGenerator.insertChild();
+				var firstMenuLabel = gen_firstGenerator.getChild(tmpParentIdx, "btn_menu1_Label");
+				firstMenuLabel.setValue(headerData_obj.MENU_NM);
+				firstMenuLabel.setUserData("ins_webPath", headerData_obj.PROG_PH);
+				firstMenuLabel.setUserData("ins_key", headerData_obj.PARENT_MENU_CD);
+				firstMenuLabel.setUserData("ins_label", headerData_obj.MENU_NM);
+				firstMenuLabel.setUserData("ins_code", headerData_obj.MENU_CD);
+			} else if (menuDepth == "2") {
+				var secondGene = gen_firstGenerator.getChild(tmpParentIdx, "gen_SecondGenerator");
+				tmpIdx = secondGene.insertChild();
+				var secondMenuLabel = secondGene.getChild(tmpIdx, "btn_menu2_Label");
+				secondMenuLabel.setValue(headerData_obj.MENU_NM);
+				secondMenuLabel.setUserData("ins_webPath", headerData_obj.PROG_PH);
+				secondMenuLabel.setUserData("ins_key", headerData_obj.PARENT_MENU_CD);
+				secondMenuLabel.setUserData("ins_label", headerData_obj.MENU_NM);
+				secondMenuLabel.setUserData("ins_code", headerData_obj.MENU_CD);
+				thirdIndex = tmpIdx;
+			} else if (menuDepth == "3") {
+				var thirdGene = secondGene.getChild(thirdIndex, "gen_thirdGenerator");
+				tmpIdx2 = thirdGene.insertChild();
+				var thirdMenuLabel = thirdGene.getChild(tmpIdx2, "btn_menu3_Label");
+				thirdMenuLabel.setValue(headerData_obj.MENU_NM);
+				thirdMenuLabel.setUserData("ins_webPath", headerData_obj.PROG_PH);
+				thirdMenuLabel.setUserData("ins_key", headerData_obj.PARENT_MENU_CD);
+				thirdMenuLabel.setUserData("ins_label", headerData_obj.MENU_NM);
+				thirdMenuLabel.setUserData("ins_code", headerData_obj.MENU_CD);
+			}
+		}
+	};
+	
+	/** 
+	 * 생성된 메뉴의 css 적용한다.
+	 */
+	scwin.setMenuCss = function() {
+		$(".nav > li > a").click(function() {
+			$(this).parent().parent().find("li a").removeClass("on");
+			$(this).addClass("on");
+	
+			if (!$(this).parent().find(".submenu").hasClass("on")) {
+				$(".nav").find(".submenu").removeClass("on");
+				$(".submenu").find(".depth3").removeClass("on");
+				$(this).parent().find(".submenu").addClass("on");
+			} else {
+				$(this).removeClass("on");
+				$(this).parent().find(".submenu").removeClass("on");
+				$(".nav").find("a").removeClass("on");
+			}
+		});
+	
+		$(".submenu > li > a").mouseover(function() {
+			$(".nav").find(".submenu").removeClass("on");
+			$(this).parent().parent().find("a").removeClass("on");
+			$(this).addClass("on");
+			$(".submenu").find(".depth3").removeClass("on");
+			if($(this).parent().find(".depth3")[0].innerHTML.length > 0)
+				$(this).parent().find(".depth3").addClass("on");
+			$(this).parent().parent().addClass("on");
+		}).mouseleave(function() {
+			$(this).find(".depth3").removeClass("on");
+			$(this).parent().parent().children("a").removeClass("on");
+			$(this).parent().removeClass("on");
+			$(this).children("a").removeClass("on");
+		});
+		
+		$(".submenu").on({
+			mouseleave:function(){
+				$(this).removeClass("on");
+				$(this).prev().removeClass("on");
+			}
+		});
+	};
+	
+
+	scwin.btn_NotiClose_onclick = function() {
+		gcm.isSavePoup = false;
+		if (txa_messageDetail.hasClass("show")) {
+			$(".notice").animate({ "bottom" : "-300px", "opacity" : "0" }, 700);
+		} else {
+			$(".notice").animate({ "bottom" : "-42px", "opacity" : "0" }, 1000);
+		}
+	};
+	
+	scwin.btn_notiMore_onclick = function() {
+		txa_messageDetail.toggleClass("show");
+	}; 
+	
+	scwin.openMenu = function(menuNm, url, menuCode, paramObj, menuType) {
+
+		// client에서 url 숨기기 메뉴일 경우에는 새 창으로 띄우기 적용 
+		if (url == "/") {
+			var url = document.location.href + "/";
+			window.open(url, "", "width=1200, height=700, left=450, top=100");
+		} else {
+			menuCode = menuCode || "";
+			var layout = $p.top().scwin.getLayoutId();
+			var tmpUrl;
+			var menuCodeParm = menuCode;
+			var frameMode;	// "wframe", "iframe"
+			var favStatus;
+			var data;
+
+			if (url.indexOf("/") !== 0) {
+				url = "/" + url;
+			}
+			url = gcm.CONTEXT_PATH + url;
+
+			//즐겨찾기가 추가 여부 확인하여 flag 붙임.
+			if (scwin.hasFavCode(menuCode) == 0) {
+				favStatus = "F";
+			} else {
+				favStatus = "T";
+			}
+			
+			if ((typeof paramObj !== "undefined") && (paramObj !== null)) {
+				data = paramObj;
+			} else {
+				data = {};
+			}
+			
+			data.menuNm = menuNm;
+			data.menuCode = menuCode;
+			data.favStatus = favStatus;
+			data.menuType = menuType;
+			
+			var _closable = true;
+			var curSystem = dma_defInfo.get("SSN_CUR_SYSTEM");
+			if(curSystem==1 && url == "/cm/common/bmsMain.xml"){
+				_closable = false;
+			}
+			else if(curSystem==2 && url == "/cm/common/brtMain.xml"){
+				_closable = false;
+			}
+			
+			var frameMode = "";
+			if (layout == "T") {
+				var tabObj = { closable : _closable, //main 페이지를 제외하고 탭 닫기 기능 제공
+							   openAction : "select", // exist 는 기존 탭을 갱신, new 는 항상 새로, select는 동일 id 가 존재하면 선택, last: 기존 tab을 마지막 tab으로 이동후 선택
+							   label : menuNm };
+				
+				if (com.getFrameMode()  === "wframe") {
+					frameMode = "wframePreload";
+				} else {
+					frameMode = "iframe";
+				}
+				
+				var contObj = {
+					frameMode : frameMode,
+					scope : true,
+					src : url,
+					alwaysDraw : false,
+					title : menuNm,
+					dataObject : {
+						type : "json", 
+						name : "param", 
+						data : data
+					}
+				};
+				var tabComp = $w.getComponentById("mf_tac_layout");
+				tabComp.addTab(menuCode, tabObj, contObj);
+
+				// tabObj의 openAction의 last값의 동작 특이 사항으로 선택이 되지 않은 경우 선택하는 로직 추가
+				if (tabComp.getSelectedTabID() !== menuCode) {
+					var tabIndex = tabComp.getTabIndex(menuCode);
+					if (tabIndex) {
+						tabComp.setSelectedTabIndex(tabIndex);
+					}
+				}
+			} else if (layout == "M") {
+				if (com.getFrameMode() === "wframe") {
+					frameMode = "wframe";
+				} else {
+					frameMode = "iframe";
+				}
+				
+				var options = {
+					title : menuNm,
+					src : url,
+					windowTitle : menuNm,
+					windowId : menuCode,
+					openAction : "existWindow",
+					frameMode : frameMode,
+					dataObject : { 
+						type : "json", 
+						name : "param", 
+						data : data
+					}
+				}
+				var wdcComp = $w.getComponentById("mf_wdc_main");
+				wdcComp.createWindow(options);
+			}
+		}
+	};
+	
+	/**
+	 * header에 속한 메뉴 클릭 이벤트
+	 */
+	scwin.btn_topMenu_onclick = function() {
+		var urlPath = this.getUserData("ins_webPath");
+		var label = this.getUserData("ins_label");
+		var pageCode = this.getUserData("ins_code");
+	
+		scwin.openMenu(label, urlPath, pageCode);
+		
+		//setMenuRelation(label, urlPath, pageCode);
+	
+		$(".submenu").removeClass('on');
+		$(".search_box").removeClass('hid');
+		$(".nav").removeClass('show');
+		$p.parent().wrap.setStyle('overflow', 'visible');
+	};
+	
+	/**
+	 * header에 속한 메뉴 클릭 이벤트 1depth
+	 */
+	scwin.btn_menu1_Label_onclick = function() {
+		var urlPath = this.getUserData("ins_webPath");
+		if(urlPath != ""){
+			var label = this.getUserData("ins_label");
+			var pageCode = this.getUserData("ins_code");
+			scwin.openMenu(label, urlPath, pageCode);;
+			//setMenuRelation(label, urlPath, pageCode);
+			
+			$(".submenu").removeClass('on');
+			$(".search_box").removeClass('hid');
+			$(".nav").removeClass('show');
+			$p.parent().wrap.setStyle('overflow', 'visible');
+		}
+	};
+	
+	
+	scwin.btn_toggle_onclick = function() {
+		scwin.toggleMenu();
+	};
+	
+	scwin.toggleMenu = function() {
+		$(".main_container").toggleClass("sd_slide");
+		$(".dim").toggleClass("hide");
+	}
+	
+	scwin.btn_logout_onclick = function(e) {
+		com.logout();
+	};
+
+	/**
+	 * bms로 이동
+	 */
+	/*scwin.btn_bms_onclick = function(e) {
+		var systemBit = dma_defInfo.get("SSN_SYSTEM_BIT");
+		if(systemBit!="1" && systemBit!="3"){
+			com.alert("통합운영관리시스템의 대한 접근 권한이 없습니다. 시스템 관리자에게 문의하시기 바랍니다.");
+			return;
+		}
+		dma_systemChange.set("SYSTEM_BIT",1); 
+		com.executeSubmission(sbm_systemChange);
+	};*/
+	
+	/**
+	 * brs로 이동
+	 */
+	scwin.btn_brt_onclick = function(e) {
+		var systemBit = dma_defInfo.get("SSN_SYSTEM_BIT");
+		if(systemBit!="2" && systemBit!="3"){
+			com.alert("차량운행관리시스템의 대한 접근 권한이 없습니다. 시스템 관리자에게 문의하시기 바랍니다.");
+			return;
+		}
+		dma_systemChange.set("SYSTEM_BIT",2); 	
+		com.executeSubmission(sbm_systemChange);
+	};
+
+	scwin.sbm_systemChange_submitdone = function(e) {
+		var resultData = e.responseJSON;
+
+		var result = resultData.rsMsg;
+		try {
+			if (result.statusCode == "S") {
+				//com.goHome();
+				top.window.location.href = dma_result.get("SBRT_URL")+"?ID="+dma_result.get("USER_ID");
+			} else {
+				com.alert(result.message);
+			}
+		} catch (ex) {
+			com.alert("서버 통신 도중 오류가 발생하였습니다. 잠시후 다시 시도해주시기 바랍니다.");
+		}
+	};
+	
+scwin.fn_getInitData = function() {
+		var searchCodeCoOption = { id : "sbm_InitCont", action : "/main/init", 
+									target : 'data:json, ["dlt_menu", "dma_defInfo", "dlt_programAuthority"]', method : "post",
+									mediatype : "application/json", mode : "asynchronous", isShowMeg : false,
+									submitDoneHandler : scwin.initDataCallback };
+		com.executeSubmission_dynamic(searchCodeCoOption);
+	};
+
+	scwin.initDataCallback = function() {
+		scwin.openMenu("메인","/cm/common/bmsMain.xml","MAIN");
+	};
+	
+	scwin.dlt_menu_ondataload = function() {
+		$p.top().scwin.setHeaderMenu();
+	};
+
+
+	/**
+	 * 파라메터를 참조하여 화면을 연다. 
+	 * 메뉴를 최근 작업 항목에 추가하거나 메뉴 트리를 선택하게 하려면 scwin.setMenuRelation를 사용한다.
+	 * @lastUpdate 2018.04.10
+	 * @param <String> menuNm 메뉴명 - 단위화면에서 해당 값으로 title을 설정한다.
+	 * @param <String> url 화면 파일 경로
+	 * @param <String> menuCode 메뉴코드 - DB에 저장되어있는 메뉴 코드
+	 * @author InswaveSystems
+	 * @since 2016.08.28
+	 * @example
+	 * scwin.openMenu("인사조회","/tmp/tmp01.xml","010001");
+	 */
+	scwin.openMenu = function(menuNm, url, menuCode, paramObj, menuType) {
+
+		// client에서 url 숨기기 메뉴일 경우에는 새 창으로 띄우기 적용 
+		if (url == "/") {
+			var url = document.location.href + "/";
+			window.open(url, "", "width=1200, height=700, left=450, top=100");
+		} else {
+			menuCode = menuCode || "";
+			var layout = $p.top().scwin.getLayoutId();
+			var tmpUrl;
+			var menuCodeParm = menuCode;
+			var frameMode;	// "wframe", "iframe"
+			var favStatus;
+			var data;
+
+			if (url.indexOf("/") !== 0) {
+				url = "/" + url;
+			}
+			url = gcm.CONTEXT_PATH + url;
+			
+			if ((typeof paramObj !== "undefined") && (paramObj !== null)) {
+				data = paramObj;
+			} else {
+				data = {};
+			}
+			
+			data.menuNm = menuNm;
+			data.menuCode = menuCode;
+			data.favStatus = favStatus;
+			data.menuType = menuType;
+			
+			var _closable = true;
+			var curSystem = dma_defInfo.get("SSN_CUR_SYSTEM");
+			if(curSystem==1 && url == "/cm/common/bmsMain.xml"){
+				_closable = false;
+			}
+			else if(curSystem==2 && url == "/cm/common/brtMain.xml"){
+				_closable = false;
+			}
+			
+			var frameMode = "";
+			if (layout == "T") {
+				var tabObj = { closable : _closable, //main 페이지를 제외하고 탭 닫기 기능 제공
+							   openAction : "select", // exist 는 기존 탭을 갱신, new 는 항상 새로, select는 동일 id 가 존재하면 선택, last: 기존 tab을 마지막 tab으로 이동후 선택
+							   label : menuNm };
+				
+				if (com.getFrameMode()  === "wframe") {
+					frameMode = "wframePreload";
+				} else {
+					frameMode = "iframe";
+				}
+				
+				var contObj = {
+					frameMode : frameMode,
+					scope : true,
+					src : url,
+					alwaysDraw : false,
+					title : menuNm,
+					dataObject : {
+						type : "json", 
+						name : "param", 
+						data : data
+					}
+				};
+				var tabComp = $w.getComponentById("mf_tac_layout");
+				tabComp.addTab(menuCode, tabObj, contObj);
+
+				// tabObj의 openAction의 last값의 동작 특이 사항으로 선택이 되지 않은 경우 선택하는 로직 추가
+				if (tabComp.getSelectedTabID() !== menuCode) {
+					var tabIndex = tabComp.getTabIndex(menuCode);
+					if (tabIndex) {
+						tabComp.setSelectedTabIndex(tabIndex);
+					}
+				}
+			} else if (layout == "M") {
+				if (com.getFrameMode() === "wframe") {
+					frameMode = "wframe";
+				} else {
+					frameMode = "iframe";
+				}
+				
+				var options = {
+					title : menuNm,
+					src : url,
+					windowTitle : menuNm,
+					windowId : menuCode,
+					openAction : "existWindow",
+					frameMode : frameMode,
+					dataObject : { 
+						type : "json", 
+						name : "param", 
+						data : data
+					}
+				}
+				var wdcComp = $w.getComponentById("mf_wdc_main");
+				wdcComp.createWindow(options);
+			}
+		}
+	};
+	
+	scwin.getMenuNavigation = function(menuCode, rsStr) {
+		var naviStr;
+		if (rsStr) {
+			naviStr = rsStr;
+		} else {
+			naviStr = "";
+		}
+		var menuJSON = dlt_menu.getMatchedJSON("MENU_CD", menuCode, true)[0];
+
+		naviStr += menuJSON.MENU_NM + "%|%" + menuCode + "%|%";
+
+		if (menuJSON) {
+			if (menuJSON.PARENT_MENU_CD != "MN00000000") {
+				return this.getMenuNavigation(menuJSON.PARENT_MENU_CD, naviStr);
+			}
+		}
+		return naviStr;
+	};
+	
+	/**
+	 * 로그인된 사용자의 비밀번호를 변경한다.
+	 */
+	scwin.btn_changePassword_onclick = function(e) {
+		var popupHeight = "202";
+		if (com.isAdmin()) {
+			popupHeight -= 30;
+		}
+	
+		var data = { "USER_ID" : dma_defInfo.get("SSN_USER_ID") };
+		var options = { id : "settingPassword", popupName : "비밀번호 변경", width : "402", height : popupHeight};
+		com.openPopup("/cm/common/settingPassword.xml", options, data);
+	};
+]]></script>
+	</head>
+	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
+		<xf:group id="" style="" class="head_top">
+			<xf:group id="logo" style="" class="logo" tagname="a">
+				<w2:attributes>
+					<w2:href>javascript:com.goHome()</w2:href>
+				</w2:attributes>
+				<!-- <xf:image id="" style="" alt="tracom" src="/cm/images/inc/tracom_trans_log.png" ev:onclick=""></xf:image> -->
+			</xf:group>
+			<xf:group id="logo_brt" style="" class="logo_brt" tagname="a">
+				<w2:attributes>
+					<w2:href>javascript:com.goHome()</w2:href>
+				</w2:attributes>
+				<!-- <xf:image id="" style="" alt="tracom" src="/cm/images/inc/tracom_trans_log.png" ev:onclick=""></xf:image> -->
+			</xf:group>
+			<xf:group class="sysbtnbox" id="" style="">
+				<!-- <xf:trigger id="btn_bms" class="bms" style="" type="button" ev:onclick="scwin.btn_bms_onclick">
+					<xf:label><![CDATA[통합운영관리]]></xf:label>
+				</xf:trigger> -->
+				<xf:trigger id="btn_brt" class="brt" style="" type="button" ev:onclick="scwin.btn_brt_onclick">
+					<xf:label><![CDATA[차량운행관리]]></xf:label>
+				</xf:trigger>
+			</xf:group>
+		</xf:group>
+		<xf:group id="" style="" class="head_box">
+			<!-- <w2:anchor id="btn_toggle" outerDiv="false" class="btn_aside" ev:onclick="scwin.btn_toggle_onclick">
+				<xf:label><![CDATA[사이드메뉴 열기/닫기]]></xf:label>
+			</w2:anchor> -->
+			<!-- <xf:group class="sysbox" id="" style="">
+				<w2:textbox class="info_tit system_tit" id="txt_systemNm" label="" style=""></w2:textbox>
+			</xf:group> -->
+			<w2:generator style="" id="gen_firstGenerator" tagname="ul" class="nav">
+				<xf:group style="" id="" class="" tagname="li">
+					<w2:anchor outerDiv="false" style="" id="btn_menu1_Label" ev:onclick="scwin.btn_menu1_Label_onclick">
+						<xf:label><![CDATA[MenuList]]></xf:label>
+					</w2:anchor>
+					<w2:generator style="" id="gen_SecondGenerator" tagname="ul" class="submenu">
+						<xf:group style="" id="" class="" tagname="li">
+							<w2:anchor outerDiv="false" style="" id="btn_menu2_Label" ev:onclick="scwin.btn_menu1_Label_onclick">
+								<xf:label><![CDATA[Insert Text]]></xf:label>
+							</w2:anchor>
+							<w2:generator style="width: 100%;" id="gen_thirdGenerator" tagname="ul" class="depth3">
+								<xf:group style="" id="" class="" tagname="li">
+									<w2:anchor outerDiv="false" style="" id="btn_menu3_Label" ev:onclick="scwin.btn_topMenu_onclick">
+										<xf:label><![CDATA[Insert Text]]></xf:label>
+									</w2:anchor>
+								</xf:group>
+							</w2:generator>
+						</xf:group>
+					</w2:generator>
+				</xf:group>
+			</w2:generator>
+			<xf:group class="infobox" id="" style="">
+				<w2:textbox class="info_tit name_tit" id="txt_userNm" label="" style=""></w2:textbox>
+				<xf:trigger class="changePassword" ev:onclick="scwin.btn_changePassword_onclick" id="btn_changePassword" style="" type="button">
+					<xf:label><![CDATA[비밀번호변경]]></xf:label>
+				</xf:trigger>
+				<xf:trigger class="logout" id="btn_logout" style="" type="button" ev:onclick="scwin.btn_logout_onclick">
+					<xf:label><![CDATA[로그아웃]]></xf:label>
+				</xf:trigger>
+			</xf:group>
+		</xf:group>
+		<!-- <xf:group id="grp_Notice" style="" class="notice">
+			<xf:group id="notice_Info" style="" class="info">
+				<w2:span id="tbx_status" style="font-weight: bold;text-transform: uppercase;" label="ERROR"></w2:span>
+				<w2:textbox id="tbx_message" style="display:inline;" label="메뉴정보 조회도중 오류가 발생하였습니다."></w2:textbox>
+				<w2:anchor id="btn_NotiClose" style="position:absolute; right:10px; top:10px; font-size: 15px;	font-weight: bold;	text-shadow: 0 1px 0 #fff;	opacity: .3;line-height: 15px;" outerDiv="false"
+					ev:onclick="scwin.btn_NotiClose_onclick">
+					<xf:label><![CDATA[x]]></xf:label>
+				</w2:anchor>
+				<w2:anchor id="btn_notiMore" outerDiv="false"
+					style="position:absolute; right:23px; top:12px; font-size: 15px;	font-weight: bold;	text-shadow: 0 1px 0 #fff;	opacity: .3;	font-family: inherit;line-height: 15px;" ev:onclick="scwin.btn_notiMore_onclick">
+					<xf:label><![CDATA[+]]></xf:label>
+				</w2:anchor>
+				<xf:textarea id="txa_messageDetail" style="width: 99%;height:200px;margin:10px 0;color:red;display:none;"></xf:textarea>
+			</xf:group>
+		</xf:group> -->
+	</body>
+</html>
