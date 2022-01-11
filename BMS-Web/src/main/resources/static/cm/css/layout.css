@@ -94,6 +94,7 @@
 .grdc_500_20_900_20_a {display:grid; grid-template-columns:500px 20px 900px 20px auto;}
 .grdc_500_20_600_20_a {display:grid; grid-template-columns:500px 20px 600px 20px auto;}
 .grdc_500_50_a {display:grid; grid-template-columns:500px 50px auto;}
+.grdc_380_50_a {display:grid; grid-template-columns:380px 50px auto;}
 
 .grdc_a_20_a {display:grid; grid-template-columns:auto 20px auto;}
 
@@ -115,6 +116,7 @@
 .grdr_20_a {display:grid; grid-template-rows: minmax(20px, max-content) auto;}
 .grdr_41_36_a {display:grid; grid-template-rows: minmax(41px, max-content) minmax(36px, max-content) auto;}
 .grdr_36_a_40 {display:grid; grid-template-rows: minmax(36px, max-content) auto minmax(40px, max-content); }
+.grdr_36_a_100_40 {display:grid; grid-template-rows: minmax(36px, max-content) auto minmax(100px, max-content) minmax(40px, max-content); }
 .grdr_25_a_40 {display:grid; grid-template-rows: minmax(25px, max-content) auto minmax(40px, max-content); }
 .grdr_36_a {display:grid; grid-template-rows: minmax(36px, max-content) auto; }
 .grdr_a_40 {display:grid; grid-template-rows: auto minmax(40px, max-content); }
@@ -125,16 +127,19 @@
 .grdr_20_2_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px auto;}
 .grdr_25_2_a {display:grid; grid-template-rows: minmax(25px, max-content) 2px auto;}
 .grdr_20_2_187_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 187px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
+.grdr_20_2_187_2_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 187px 2px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
 .grdr_20_2_200_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 200px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
 .grdr_20_2_212_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 212px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
-.grdr_20_2_288_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 288px minmax(20px, max-content) auto;} 
+.grdr_20_2_250_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 250px minmax(20px, max-content) auto;} 
 .grdr_20_2_290_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 288px minmax(20px, max-content) auto;} 
 .grdr_20_2_350_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 350px minmax(20px, max-content) auto;} 
 .grdr_20_2_400_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 400px minmax(20px, max-content) auto;} 
 .grdr_20_36_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(36px, max-content) auto;} /* 왼쪽그리드 하단 */
 .grdr_20_36_250_20_20_36_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(36px, max-content) minmax(250px, max-content) minmax(20px, max-content) minmax(20px, max-content) minmax(36px, max-content) auto;} /* 왼쪽그리드 하단 */
 .grdr_20_2_250_20_20_36_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(250px, max-content) minmax(20px, max-content) minmax(20px, max-content) minmax(36px, max-content) auto;} /* 왼쪽그리드 하단 */
+.grdr_20_2_230_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(230px, max-content) minmax(20px, max-content) minmax(20px, max-content) auto;} /* 왼쪽그리드 하단 */
 .grdr_20_2_250_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(250px, max-content) minmax(20px, max-content) minmax(20px, max-content) auto;} /* 왼쪽그리드 하단 */
+.grdr_20_2_1f_20_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_280_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(280px, max-content) minmax(20px, max-content) minmax(20px, max-content) auto;} /* 왼쪽그리드 하단 */
 .grdr_20_2_170_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(170px, max-content) minmax(20px, max-content) minmax(20px, max-content) auto;}
 

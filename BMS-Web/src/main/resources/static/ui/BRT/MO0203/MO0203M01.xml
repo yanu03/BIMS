@@ -181,7 +181,7 @@
 	};	
 	
 	scwin.btn_sub_move = function(){
-		com.gridMove(MO0203G0,"NODE_ID,NODE_NM", dma_search.get("CONTENT2"), MO0203G0.getFocusedRowIndex());
+		com.gridMove(MO0203G0,"NODE_ID", dma_search.get("CONTENT2"), MO0203G0.getFocusedRowIndex());
 	}
 	
 	scwin.MO0203SCK = function () {

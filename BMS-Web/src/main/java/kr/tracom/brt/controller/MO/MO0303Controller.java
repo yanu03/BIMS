@@ -63,7 +63,7 @@ public class MO0303Controller extends ControllerSupport{
 	}
 	
 	@RequestMapping("/mo/MO0303P2R0")
-	public @ResponseBody Map<String, Object> MO0303P0R0() throws Exception {
+	public @ResponseBody Map<String, Object> MO0303P2R0() throws Exception {
 		result.setData("dlt_BRT_INCDNT_SCNRO_MST", mo0303Service.MO0303P2R0());
 		return result.getResult();
 	}
@@ -71,6 +71,37 @@ public class MO0303Controller extends ControllerSupport{
 	@RequestMapping("/mo/MO0303SHI1")
 	public @ResponseBody Map<String, Object> MO0303SHI1() throws Exception {
 		result.setData("dlt_searchitem", mo0303Service.MO0303SHI1());
+		return result.getResult();
+	}
+	
+	@RequestMapping("/mo/MO0303P3R1")
+	public @ResponseBody Map<String, Object> MO0303P3R1() throws Exception {
+		result.setData("dlt_BRT_CUR_OPER_INFO", mo0303Service.MO0303P3R1());
+		result.setData("dlt_SEND_MESSAGE_LIST", mo0303Service.MO0303P3R1());
+		return result.getResult();
+	}
+	
+	@RequestMapping("/mo/allocVhcList")
+	public @ResponseBody Map<String, Object> allocVhcList() throws Exception {
+		result.setData("dlt_BRT_CUR_ALLOC_PL_INFO", mo0303Service.allocVhcList());
+		return result.getResult();
+	}
+	
+	@RequestMapping("/mo/MO0303SCK0")
+	public @ResponseBody Map<String, Object> MO0303SCK0() throws Exception {		
+		result.setData("", mo0303Service.MO0303SCK0());
+		return result.getResult();
+	}
+	
+	@RequestMapping("/mo/MO0303SCK1")
+	public @ResponseBody Map<String, Object> MO0303SCK1() throws Exception {		
+		result.setData("", mo0303Service.MO0303SCK1());
+		return result.getResult();
+	}	
+	
+	@RequestMapping("/mo/sttnList")
+	public @ResponseBody Map<String, Object> sttnList() throws Exception {		
+		result.setData("dlt_BMS_STTN_MST", mo0303Service.sttnList());
 		return result.getResult();
 	}	
 }

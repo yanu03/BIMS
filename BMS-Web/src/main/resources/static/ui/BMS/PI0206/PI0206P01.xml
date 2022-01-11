@@ -57,12 +57,12 @@
 ]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group class="popup_container grdr_36_a_40" id="popup_container" style="">
-			<xf:group id="popup_header" style="" class="popup_header">
-			</xf:group>
+		<xf:group class="popup_container grdr_a_40" id="popup_container" style="">
+			<!--  <xf:group id="popup_header" style="" class="popup_header">
+			</xf:group>-->
 
 			<xf:group style="" id="" class="popup_content">
-				<w2:calendar footerDiv="false" id="PI0206C0" style="width: auto;height: auto;" useYearSelect=""></w2:calendar>
+				<w2:calendar footerDiv="false" id="PI0206C0" style="width: auto;height: auto; margin-top:25px" useYearSelect=""></w2:calendar>
 			</xf:group>
 			<xf:group id="" style="" class="popup_bottom">
 				<w2:anchor id="btn_confirm" style="" ev:onclick="scwin.btn_confirm_onclick" class="btn_cm">

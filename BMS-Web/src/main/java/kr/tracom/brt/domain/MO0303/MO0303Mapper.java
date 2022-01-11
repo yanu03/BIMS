@@ -34,4 +34,9 @@ public interface MO0303Mapper {
 	
 	public List MO0303SHI1();
 	
+	public List MO0303P3R1(Map param);
+	
+	public List allocVhcList(Map param);
+	
+	public List sttnList(Map param);
 }

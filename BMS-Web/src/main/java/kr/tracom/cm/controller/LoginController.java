@@ -107,7 +107,7 @@ public class LoginController extends ControllerSupport {
 			
 			if(systemBit==Constants.SYSTEM_ALL) {
 				session.setAttribute(Constants.SSN_CUR_SYSTEM, loginSystemBit);
-				if(loginSystemBit==Constants.SYSTEM_BRT) {
+				if(loginSystemBit==Constants.SYSTEM_SBRT) {
 					String ssoId = SsoCrypto.encrypt((String) loginParam.get("USER_ID"), ip);
 					Map resultData = new HashMap();
 					resultData.put("USER_ID", ssoId);
@@ -179,7 +179,7 @@ public class LoginController extends ControllerSupport {
 			String id = SsoCrypto.decrypt(ssoCryptoId, CommonUtil.getIpAddress(request));
 			Map loginParam = new HashMap();
 			loginParam.put("USER_ID", id);
-			loginParam.put("SYSTEM_BIT", Constants.SYSTEM_BRT);
+			loginParam.put("SYSTEM_BIT", Constants.SYSTEM_SBRT);
 			Map memberMap = null;
 			String status = null;
 			memberMap = loginService.selectMemberInfoByOnlyId(loginParam);

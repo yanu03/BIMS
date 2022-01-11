@@ -5,8 +5,9 @@ var routMap = {
 		CROSS : "NT001",
 		BUSSTOP : "NT002",
 		NORMAL : "NT003",
+		GARAGE : "NT004",
 		VERTEX : "NT005",
-		SOUND : "NT006"
+		SOUND : "NT006",
 	},
 	MAX_NODE_CNT : 800,
 	LIMIT_SPEED : 50
@@ -1009,9 +1010,9 @@ routMap.showBusMarkerClickOverlay = function(mapId, data, idx, focusIdx, busGrid
 	
 		rightClickMsg += '<div class="rightclickoverlay" style="cursor: default;">'
 		rightClickMsg += '<div class="contextWrap">'
-		rightClickMsg += '    <a data-id="here" href="javascript:void(0)" class="busInfo" onclick="">'
+		/*rightClickMsg += '    <a data-id="here" href="javascript:void(0)" class="busInfo" onclick="">'
 		rightClickMsg += '	            <span class="text">버스 상세정보</span>'
-		rightClickMsg += '     </a>'
+		rightClickMsg += '     </a>'*/
 		rightClickMsg += '      <a data-id="newplace" href="javascript:void(0)" class="dispatchMessage">'
 		rightClickMsg += '         <span class="text">메시지 전송</span>'
 		rightClickMsg += '      </a>'
@@ -1439,14 +1440,23 @@ routMap.showDsptchOverlay = function(mapId, data, idx, focusIdx, marker) {
 			showMessage = data.MESSAGE;
 		}	
 		else if (routMap.mapInfo[mapId].divDsptch == "DP002") {
-			
-			if(parseInt(data.MESSAGE) > 0) {
+/*			if(parseInt(data.MESSAGE) > 0) {
 				showMessage = min+ sec+ "느립니다.";
 			} else if(parseInt(data.MESSAGE) < 0){
 				showMessage = min+ sec +"빠릅니다.";
 			} else if(parseInt(data.MESSAGE) == 0) {
 				showMessage = "정상 운행중입니다.";
+			}*/
+			var dsptchKind = data.DSPTCH_KIND;
+			if(dsptchKind == "DK001") {
+				showMessage = "정상 운행중입니다.";
 			}
+			else if(dsptchKind == "DK002") {
+				showMessage = min + sec + "느립니다."; 
+			}
+			else if(dsptchKind == "DK003") {
+				showMessage = min + sec + "빠릅니다."; 
+			}			
 			
 		}	
 		var dsptchMsg = "";
@@ -3119,6 +3129,64 @@ routMap.addSoundByClick = function(mapId,grid,routeId,e){
 		//routeData = com.getGridDispJsonData(grid);
 		//routMap.drawRoute(mapId, grid, idx);
 	}
+	return idx;
+}
+
+routMap.addGrgByClick = function(mapId,grid,routeId,e){
+	var idx = -1;
+	var routeData = com.getGridDispJsonData(grid);
+	if(routeData.length >= routMap.MAX_NODE_CNT){
+		//com.alert ("더이상 추가할 수 없습니다.");
+		return idx;
+	}
+	
+	var lonlat = e.latLng;
+	var min = 10000000;
+/*	var minIndex = null;
+
+	for(var i = 0; i < routeData.length - 1; i++) {
+		var result = getDistanceToLine(
+			lonlat.Ma,
+			lonlat.La,
+			routeData[i].GPS_Y,
+			routeData[i].GPS_X,
+			routeData[i + 1].GPS_Y,
+			routeData[i + 1].GPS_X
+		)
+		
+		if(result.distance) {
+			if(min > result.distance) {
+				min = result.distance;
+				minIndex = i;
+			}
+		}
+	}
+	
+	if(minIndex == null) {
+		com.alert("선택할 수 없는 좌표입니다. 경로를 먼저 입력하세요");
+	} */
+//	else {
+	//	idx = minIndex + 1;
+		idx = grid.getFocusedRowIndex();
+		idx = com.getGridViewDataList(grid).insertRow(idx);
+	debugger;
+		var today = new Date();
+		var data = {
+		
+				ROUT_ID: routeId,
+				NODE_SN: idx,
+				NODE_NM: /*routNm + */"차고지_" + util.getCurrentDate().substring(4),
+				NODE_TYPE: routMap.NODE_TYPE.GARAGE,
+				GPS_Y: util.getDispGps(lonlat.Ma,7),
+				GPS_X: util.getDispGps(lonlat.La,7),
+				draggable:routMap.mapInfo[mapId].draggable
+				};
+	
+		com.getGridViewDataList(grid).setRowJSON(idx, data, true);
+		grid.setFocusedCell(idx,"NODE_ID");
+		//routeData = com.getGridDispJsonData(grid);
+		//routMap.drawRoute(mapId, grid, idx);
+//	}
 	return idx;
 }
 

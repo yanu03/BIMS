@@ -137,7 +137,7 @@ DELIMITER ;;
 
 DELIMITER $$
 CREATE OR REPLACE PROCEDURE `sbrt`.`PROC_MAKE_LINK_AVG_SPD`()
-    COMMENT 'BMS 링크 평균속도 생성(최근5분)'
+    COMMENT 'SBRT 링크 평균속도 생성(최근5분)'
 BEGIN
 
 	-- 이전데이터 clear
@@ -145,7 +145,7 @@ BEGIN
 	SET AVRG_SPD = NULL
 		,UPD_DTM = NOW()
 	WHERE 
-		USE_YN = 'Y' AND BMS_YN = 'Y';
+		USE_YN = 'Y' AND SBRT_YN = 'Y';
 
 
 	-- 데이터 갱신

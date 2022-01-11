@@ -1,5 +1,6 @@
 package kr.tracom.brt.domain.AL0302;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -9,11 +10,13 @@ import org.springframework.stereotype.Service;
 
 import kr.tracom.cm.support.ServiceSupport;
 import kr.tracom.cm.support.exception.MessageException;
+import kr.tracom.util.Constants;
 import kr.tracom.util.Result;
 
 @Service
 public class AL0302Service extends ServiceSupport {
 
+	
 	@Autowired
 	private AL0302Mapper al0302Mapper;
 	
@@ -85,32 +88,90 @@ public class AL0302Service extends ServiceSupport {
 		List<Map<String, Object>> param = getSimpleList("dlt_BRT_ALLOC_PL_MST");
 		Map<String, Object> map = getSimpleDataMap("dma_param_AL0302G1");
 		String temp[] = map.get("relDt").toString().replace("[","").replace("]","").replace(" ","").split(",");
+		String rel_way = (String) map.get("REL_WAY");
 		
-		for(int i=0; i<temp.length; i++) {
-			try {
-				for (int j = 0; j < param.size(); j++) {
-					Map data = (Map) param.get(j);
-					String rowStatus = (String) data.get("rowStatus");
-					if (rowStatus.equals("U") || rowStatus.equals("R")) {
-						data.put("OPER_DT", temp[i]);
-						uCnt += al0302Mapper.AL0302G1I0(data);
-						uCnt += al0302Mapper.AL0302G1I1(data);
+		//고정배포
+		if(rel_way.equals(Constants.VhcDistType.FIX)){
+			for(int i=0; i<temp.length; i++) {
+				try {
+					for (int j = 0; j < param.size(); j++) {
+						Map data = (Map) param.get(j);
+						String rowStatus = (String) data.get("rowStatus");
+						if (rowStatus.equals("U") || rowStatus.equals("R")) {
+							data.put("OPER_DT", temp[i]);
+							uCnt += al0302Mapper.AL0302G1I0(data);
+							uCnt += al0302Mapper.AL0302G1I1(data);
+						}
+					}			
+				} catch(Exception e) {
+					if (e instanceof DuplicateKeyException)
+					{
+						throw new MessageException(Result.ERR_KEY, "중복된 키값의 데이터가 존재합니다.");
 					}
-				}			
-			} catch(Exception e) {
-				if (e instanceof DuplicateKeyException)
-				{
-					throw new MessageException(Result.ERR_KEY, "중복된 키값의 데이터가 존재합니다.");
+					else
+					{
+						throw e;
+					}		
 				}
-				else
-				{
-					throw e;
-				}		
+				
 			}
-
 		}
-		
-		
+		//순환배포(내림)
+		else if(rel_way.equals(Constants.VhcDistType.DESC)) {
+			for(int i=0; i<temp.length; i++) {
+				try {
+					for (int j = 0; j < param.size(); j++) {
+						Map data = (Map) param.get(j);
+						String rowStatus = (String) data.get("rowStatus");
+						if (rowStatus.equals("U") || rowStatus.equals("R")) {
+							data.put("OPER_DT", temp[i]);
+							data.put("ALLOC_NO", j+1);
+							uCnt += al0302Mapper.AL0302G1I0(data);
+							uCnt += al0302Mapper.AL0302G1I1(data);
+						}
+					}			
+					Collections.rotate(param, 1);
+				} catch(Exception e) {
+					if (e instanceof DuplicateKeyException)
+					{
+						throw new MessageException(Result.ERR_KEY, "중복된 키값의 데이터가 존재합니다.");
+					}
+					else
+					{
+						throw e;
+					}		
+				}
+				
+			}
+		}
+		//순환배포(오름)
+		else if(rel_way.equals(Constants.VhcDistType.ASC)) {
+			for(int i=0; i<temp.length; i++) {
+				try {
+					for (int j = 0; j < param.size(); j++) {
+						Map data = (Map) param.get(j);
+						String rowStatus = (String) data.get("rowStatus");
+						if (rowStatus.equals("U") || rowStatus.equals("R")) {
+							data.put("OPER_DT", temp[i]);
+							data.put("ALLOC_NO", j+1);
+							uCnt += al0302Mapper.AL0302G1I0(data);
+							uCnt += al0302Mapper.AL0302G1I1(data);
+						}
+					}			
+					Collections.rotate(param, -1);
+				} catch(Exception e) {
+					if (e instanceof DuplicateKeyException)
+					{
+						throw new MessageException(Result.ERR_KEY, "중복된 키값의 데이터가 존재합니다.");
+					}
+					else
+					{
+						throw e;
+					}		
+				}
+				
+			}
+		}
 		
 		Map result = saveResult(iCnt, uCnt, dCnt);
 		

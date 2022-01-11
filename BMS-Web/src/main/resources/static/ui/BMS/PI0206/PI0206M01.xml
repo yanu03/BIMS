@@ -218,12 +218,13 @@
 	};
 
 	scwin.sub_PI0206G0R0_submitdone = function(e) {
-		com.setFocusedCell(PI0206G0, "REP_ROUT_NM");			
+		com.setFocusedCell(PI0206G0, "REP_ROUT_NM");
+		com.executeSubmission(sub_PI0206G1R0);			
 	};
 	
 	scwin.PI0206G0_onrowindexchange = function(row,oldRow) {
-		var focusOption = {keyMap : dma_subsearch};
-		com.changeDualGrid(PI0206G0, PI0206G1, sub_PI0206G1S0, sub_PI0206G1R0, focusOption, row, oldRow);		
+		//var focusOption = {keyMap : dma_subsearch};
+		//com.changeDualGrid(PI0206G0, PI0206G1, sub_PI0206G1S0, sub_PI0206G1R0, focusOption, row, oldRow);		
 	};
 	
 	scwin.sub_PI0206G1S0_submitdone = function(e) {
@@ -236,8 +237,11 @@
 		if(jsondata.length > 0){
 			var options = { id : "PI0206P01",
 							popupName : "예약 날짜",
-							modal : true};
-			com.openPopup("/ui/BMS/PI0206/PI0206P01.xml", options, data);
+							modal : true,
+							width : 220, height: 350};
+			com.openPopup("/cm/common/popUpReserve.xml", options, data);
+		}else{
+			com.alert('예약할 차량을 선택해 주세요.');
 		}
 
 	};

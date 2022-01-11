@@ -34,27 +34,42 @@
 						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
 						<w2:column id="UPD_DTM" name="갱신일시" dataType="text"></w2:column>
 						<w2:column id="UPD_ID" name="갱신ID" dataType="text"></w2:column>
-
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_DVC_INFO" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="chk" name="chk" dataType="text"></w2:column>
+						<w2:column id="VHC_ID" name="차량아이디" dataType="text"></w2:column>
+						<w2:column id="DVC_ID" name="장치아이디" dataType="text"></w2:column>
+						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
+						<w2:column id="MNG_ID" name="관리아이디" dataType="text"></w2:column>
+						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_search">
 					<w2:keyInfo>
 						<w2:key id="STTN_ECPT_IDS" name="정류소제외ID" dataType="text"></w2:key>
+						<w2:key id="VHC_ID" name="차량ID" dataType="text"></w2:key>
 						<w2:key id="TYPE" name="TYPE" dataType="text"></w2:key>
 						<w2:key id="CONTENT" name="CONTENT" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
-			<xf:submission id="sub_PI1001P1R0" ref='data:json,dma_search' target='data:json,dlt_BMS_STTN_MST'
-				action="/pi/PI1001P1R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
-				errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI1001P1R0_submitdone" ev:submiterror="" abortTrigger="">
+			<xf:submission id="sub_PI1001P1R0" ref='data:json,dma_search' target='data:json,dlt_BMS_STTN_MST' action="/pi/PI1001P1R0"
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI1001P1R0_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_PI1001P2R0" ref="data:json,dma_search" target="data:json,dlt_BMS_DVC_INFO" action="/pi/PI1001P2R0"
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 		</xf:model>
 		<script type="text/javascript" lazy="false"><![CDATA[
 	scwin.onpageload = function() {
 		scwin.param = com.getParameter();
 		dma_search.set("STTN_ECPT_IDS" , scwin.param.data.STTN_IDS);
+		dma_search.set("VHC_ID" , scwin.param.data.VHC_ID);
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
 		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
 		
@@ -63,7 +78,11 @@
 			{userStr:"조회", auth: gcm.BTN.SEARCH, cbFnc: scwin.btn_search_onclick},
 		];
 		com.setMainBtn3(wfm_mainBtn, btnOptions);
-		com.executeSubmission(sub_PI1001P1R0);
+		//com.executeSubmission(sub_PI1001P1R0);
+		com.executeSubmission(sub_PI1001P2R0);
+		
+		var codeOptions = [{code : "DVC_KIND", compID : "PI1001P1:DVC_KIND"}];
+		com.setCommonDtl(codeOptions);
 	};
 				
 	scwin.btn_search_onclick = function() {
@@ -142,20 +161,16 @@
 			</xf:group>
 			
 			<xf:group style="" id="" class="popup_content">
-				<w2:gridView  fixedColumnWithHidden="true" dataList="data:dlt_BMS_STTN_MST" useShiftKey="false" readOnly="true"
+				<w2:gridView  fixedColumnWithHidden="true" dataList="data:dlt_BMS_DVC_INFO" useShiftKey="false" readOnly="true"
 					style="" scrollByColumn="false" id="PI1001P1" autoFit="allColumn" class="cm_grid popup" ev:onrowindexchange="scwin.PI1001P1_onrowindexchange">
 					<w2:header style="" id="header1">
 						<w2:row style="" id="row1">
 							<w2:column width="39" style="height:20px" inputType="checkbox" id="chkHeader" value="선택" blockSelect="false"></w2:column>
-							<w2:column removeBorderStyle="false" width="93" inputType="text" style="height:20px" id="column8" value="정류소ID"
+							<w2:column removeBorderStyle="false" width="93" inputType="text" style="height:20px" id="column8" value="장치ID"
 								blockSelect="false" displayMode="label">
 							</w2:column>
-							<w2:column width="101" style="height:20px" inputType="text" id="column7" value="정류소명" blockSelect="false"></w2:column>
-							<w2:column width="90" style="height:20px" inputType="text" id="column5" value="정류소번호" blockSelect="false"></w2:column>
-							<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column9" value="위도"
-								blockSelect="false" displayMode="label">
-							</w2:column>
-							<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column11" value="경도"
+							<w2:column width="101" style="height:20px" inputType="text" id="column7" value="장치유형" blockSelect="false"></w2:column>
+							<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column9" value="관리ID"
 								blockSelect="false" displayMode="label">
 							</w2:column>
 							<w2:column width="123" style="height:20px" inputType="text" id="column3" value="비고" blockSelect="false"></w2:column>
@@ -166,15 +181,11 @@
 							<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px" inputType="checkbox"
 								id="chk" blockSelect="false">
 							</w2:column>
-							<w2:column removeBorderStyle="false" width="93" inputType="text" style="height:20px" id="STTN_ID" value=""
+							<w2:column removeBorderStyle="false" width="93" inputType="text" style="height:20px" id="DVC_ID" value=""
 								blockSelect="false" displayMode="label">
 							</w2:column>
-							<w2:column width="101" style="height:20px" inputType="text" id="STTN_NM" blockSelect="false"></w2:column>
-							<w2:column width="90" style="height:20px" inputType="text" id="STTN_NO" blockSelect="false"></w2:column>
-							<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="GPS_X" value=""
-								blockSelect="false" displayMode="label">
-							</w2:column>
-							<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="GPS_Y" value=""
+							<w2:column width="101" style="height:20px" inputType="select" id="DVC_KIND" blockSelect="false"></w2:column>
+							<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="MNG_ID" value=""
 								blockSelect="false" displayMode="label">
 							</w2:column>
 							<w2:column width="123" style="height:20px" inputType="text" id="REMARK" blockSelect="false"></w2:column>
