@@ -28,7 +28,7 @@
   - C:\WS5_SAMPLE\RESOURCE\websquare_home\config\websqaure.xml 파일에서 아래의 i18n 설정을 추가한다.
   - websqaure.xml 파일 변경 후 반드시 was를 리부팅한다.
   &lt;i18n&gt;
-	&lt;baseDir value="C:\sbrt-web\workspace\BMS-Web\src\main\webapp\WEB-INF\lang"/&gt;
+	&lt;baseDir value="C:\sbrt-web\workspace\BIMS\BMS-Web\src\main\webapp\WEB-INF\lang"/&gt;
 	&lt;defaultLocale value="ko"&gt;
 		&lt;domain name="localhost" locale="en"/&gt;
 		&lt;domain name="ko.inswave.co.kr" locale="ko"/&gt;
@@ -36,7 +36,7 @@
 		&lt;domain name="jp.inswave.co.kr" locale="jp"/&gt;
 	&lt;/defaultLocale&gt;
 	&lt;localeParam value="locale"/&gt;
-	&lt;xmlInfo baseDir="C:\sbrt-web\workspace\BMS-Web\src\main\webapp" cache="false"/&gt;
+	&lt;xmlInfo baseDir="C:\sbrt-web\workspace\BIMS\BMS-Webb\src\main\webapp" cache="false"/&gt;
   &lt;/i18n&gt;
 <div class="etc_tit">2. 다국어 처리함수(com.getI18NUrl) </div>
   - 공통함수 선언부에서 getI18NUrl 함수를 확인한다.
