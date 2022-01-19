@@ -4123,15 +4123,15 @@ routMap.showVehicleClickOverlay = function(mapId, list, vhc_id, grid) {
 }
 
 routMap.addPolygonByClick = function(mapId, data, grgId, grgNm, e){
-	
 	var lonlat = e.latLng;
 	
 	var idx = data.insertRow();
+	
 
 	var today = new Date();
 	var tmp = {
 			GRG_ID: grgId,
-			SN: idx,
+			SN: idx+1,
 			GPS_Y: util.getDispGps(lonlat.Ma,7),
 			GPS_X: util.getDispGps(lonlat.La,7)
 			};
