@@ -6264,7 +6264,7 @@ com.saveGridForm = function(grid,form,sbmObj,searchSbmObj,yesno_str,str){
 }
 
 //엑셀 다운로드
-com.exlGrid = function(grid,str){
+com.exlGrid = function(grid, str, codeOption){
 	if(	(typeof str == "undefined") || (str.trim() == ""))
 		str = com.getParameter().menuNm;
 
@@ -6273,7 +6273,16 @@ com.exlGrid = function(grid,str){
 		fileName : str+".xls", //[defalut: excel.xlsx] 다운로드하려는 파일의 이름으로 필수 입력 값 (지원하는 타입 => xls, xlsx, csv)
 		fileType : "xls"
 	};
-
+	
+	if(codeOption != undefined && codeOption != null) {
+		if(codeOption == "data") {
+			options.type = "0"
+		}
+		if(codeOption == "code") {
+			options.type = "1"
+		}
+	}
+	
 	var infoArr = {};
 	com.gridDataDownLoad(grid,options, infoArr);
 }
@@ -6282,8 +6291,18 @@ com.exlGrid = function(grid,str){
  * 엑셀의 데이터를 그리드뷰로 업로드 한다.
  * 필요한 옵션이 있다면 options배열에 옵션을 넣는다.
  */
-com.exlUploadGrid = function(grid){
+com.exlUploadGrid = function(grid, codeOption){
 	var options = {};
+	
+	if(codeOption != undefined && codeOption != null) {
+		if(codeOption == "data") {
+			options.type = "0"
+		}
+		if(codeOption == "code") {
+			options.type = "1"
+		}
+	}	
+	
 	com.gridDataUpload(grid, "xls", options);
 }
 
@@ -6291,8 +6310,18 @@ com.exlUploadGrid = function(grid){
 /**
  * 그리드 Excel 포맷을 다운로드 하는 기능 ( 업로드용  Excel 포맷 )
  */
-com.exlFrmGrid = function(grid){
+com.exlFrmGrid = function(grid, codeOption){
 	var options = {};
+	
+	if(codeOption != undefined && codeOption != null) {
+		if(codeOption == "data") {
+			options.type = "0"
+		}
+		if(codeOption == "code") {
+			options.type = "1"
+		}	
+	}
+	
 	options.fileName = "header.xls";
 	options.dataProvider = "com.inswave.template.provider.ExcelDownHeader";
 	var infoArr = {};
