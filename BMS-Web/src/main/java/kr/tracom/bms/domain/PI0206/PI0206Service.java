@@ -334,7 +334,7 @@ public class PI0206Service extends ServiceSupport {
 		String result = "";
 
 		//좌표로 동네이름 가져오기 (api gateway 로 요청)
-		String api = apiGatewayUrl + "/getLocation?x=" + x + "&y=" + y + "&authKey=" + authKey.replace(" ", "%20");
+		String api = apiGatewayUrl + "/local/getLocation?x=" + x + "&y=" + y + "&authKey=" + authKey.replace(" ", "%20");
 
 		try {
 			URL url = new URL(api);
