@@ -237,13 +237,7 @@
 		var jsonObj = dlt_BRT_OPER_APPR_INFO.getRowJSON(curIndex);
 		routMap.showVehicle2("map_MO0500", jsonObj, rowData, MO0500G0, 0, 0);
 	};
-	
-	
-	
-	
-	
-	
-	]]></script>
+]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">

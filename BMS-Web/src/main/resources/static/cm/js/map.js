@@ -4337,6 +4337,73 @@ routMap.showCommuMap = function(mapId, list) {
 		
 	}
 }
+
+routMap.showLink = function(mapId, list) {
+	//routMap.initDisplay(mapId);
+	debugger;
+	if(list != null && list.length != 0) {
+		for(var i = 0; i < list.length; i++) {
+			list[i].index = i;
+			
+			if(i < list.length -1){
+				//원활
+				//var color = "#4CAF50";
+				var color = "#F44336";
+				
+//				if(list[i].AVRG_SPD > 15 && list[i].AVRG_SPD < 25){
+//					color = "#FFC107";
+//				}
+//				
+//				else if(list[i].AVRG_SPD <= 15){
+//					color = "#F44336";
+//				}
+				
+				var path = [];
+				path.push(new kakao.maps.LatLng(list[i].F_GPS_Y, list[i].F_GPS_X));
+				path.push(new kakao.maps.LatLng(list[i].T_GPS_Y, list[i].T_GPS_X));
+				
+				var polyline = new kakao.maps.Polyline({
+					path: path,
+					strokeColor: color, // 라인 색상
+					strokeWeight: 5, // 라인 두께
+					strokeStyle:'solid',
+					strokeOpacity: 0.8
+				});
+
+				
+			    kakao.maps.event.addListener(polyline, 'mouseover', function(mouseEvent) {
+			    	
+			    });
+			    
+			    kakao.maps.event.addListener(polyline, 'mouseout', function(mouseEvent) {
+			    	
+			    });
+			    
+			    kakao.maps.event.addListener(polyline, 'mousemove', function(mouseEvent) {
+			    	
+			    });
+			    
+//			    kakao.maps.event.addListener(polyline, 'mousedown', function(mouseEvent) {
+//			    	
+//			    });
+			    
+			    kakao.maps.event.addListener(polyline, 'click', function(mouseEvent) {
+			    	debugger;
+			    	var aa = mouseEvent;
+			    	
+			    	
+			    });
+				
+				polyline.setMap(routMap.mapInfo[mapId].map);
+				
+				routMap.mapInfo[mapId].polylines.push(polyline);
+			}
+			
+		}
+		
+	}
+}
+
 /**두 지점간의 거리 계산 **/
 function getDistanceBetween(x1, y1, x2, y2) {
 	let kEarthRadiusKms = 6376.5;

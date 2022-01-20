@@ -43,6 +43,11 @@
 				,	A.REST_H
 				,	A.LENGTH
 				,	A.REMARK
+				,	B.GPS_X AS F_GPS_X
+				,	B.GPS_Y	AS F_GPS_Y
+				,	C.GPS_X AS T_GPS_X
+				,	C.GPS_Y AS T_GPS_Y
+				
 	FROM 			BMS_MOCK_LINK A
 	LEFT JOIN		BMS_MOCK_NODE B
 		ON			A.F_NODE = B.MOCK_NODE_ID

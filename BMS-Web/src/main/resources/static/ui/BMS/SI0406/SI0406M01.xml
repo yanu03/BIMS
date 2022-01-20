@@ -105,6 +105,10 @@
 						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
 						<w2:column id="F_NODE_NAME" name="시작노드명" dataType="text"></w2:column>
 						<w2:column id="T_NODE_NAME" name="종료노드명" dataType="text"></w2:column>
+						<w2:column id="F_GPS_X" name="시작GPS_X좌표" dataType="text"></w2:column>
+						<w2:column id="F_GPS_Y" name="시작GPS_Y좌표" dataType="text"></w2:column>
+						<w2:column id="T_GPS_X" name="종료GPS_X좌표" dataType="text"></w2:column>
+						<w2:column id="T_GPS_Y" name="종료GPS_Y좌표" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 			</w2:dataCollection>
@@ -129,7 +133,7 @@
 			</xf:submission>
 			<xf:submission id="sub_SI0406G2R0" ref="" target="data:json,dlt_BMS_MOCK_LINK" action="/si/SI0406G2R0" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
-				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				ev:submit="" ev:submitdone="scwin.sub_SI0406G2R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 		</xf:model>
 
@@ -165,13 +169,15 @@
 		};
 		
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);
-		var subOptions2 = {
-			SAVE: [{cbFnc:scwin.btn_sub2_link, nm:"표준링크", class:"share"}, {cbFnc:scwin.btn_sub2_node, nm:"표준노드", class:"share"}]
-		};
+		
+//		var subOptions2 = {
+//			SAVE: [{cbFnc:scwin.btn_sub2_link, nm:"표준링크", class:"share"}, {cbFnc:scwin.btn_sub2_node, nm:"표준노드", class:"share"}]
+//		};
+//		com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions2);
+		
+		com.setSubBtn2(wfm_subBtn2, autoOptions);
 		
 		//com.setEnterKeyEvent(pgm_subList, scwin.btn_sub_search_onclick);
-		
-		com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions2);
 				
 		SI0406G0.mergeCells("byrestriccol");
 		
@@ -183,7 +189,7 @@
 
 		scwin.disp_check_all();
 		
-		com.executeSubmission(sub_SI0406G2R0);
+
 	};
 
 	
@@ -194,6 +200,7 @@
 
 	scwin.sub_SI0406G0R0_submitdone = function(e) {
 		com.setFocusedCell(SI0406G0, "ROUT_ID");	
+		com.executeSubmission(sub_SI0406G2R0);
 	};
 	
 	scwin.sbx_ChoiceBox_onviewchange = function(info) {
@@ -374,23 +381,25 @@
 		routMap.setDispCheck("map_SI0406", disp_check.getValue());
 	}
 	
-	scwin.btn_sub2_link = function() {
-		
-		var data = { callbackFn : "scwin.insertMockLink" };
-		var options = { id : "SI0406P01",
-						popupName : "표준링크 목록",
-						width : 600,
-						height : 500,
-						modal : true };
-		com.openPopup("/ui/BMS/SI0406/SI0406P01.xml", options, data);	
-	}	
-	
-	scwin.btn_sub2_node = function() {
+//	scwin.btn_sub2_link = function() {
+//		
+//		var data = { callbackFn : "scwin.insertMockLink" };
+//		var options = { id : "SI0406P01",
+//						popupName : "표준링크 목록",
+//						width : 600,
+//						height : 500,
+//						modal : true };
+//		com.openPopup("/ui/BMS/SI0406/SI0406P01.xml", options, data);	
+//	}	
+//	
+//	scwin.btn_sub2_node = function() {
+//
+//	}
 
-		
-	}
-
-]]></script>
+	scwin.sub_SI0406G2R0_submitdone = function(e) {
+		routMap.showLink("map_SI0406", dlt_BMS_MOCK_LINK.getAllJSON());
+	};
+	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
