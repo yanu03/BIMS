@@ -5,6 +5,7 @@
 
 <select id="SI0407G0R0" resultType="Map">
 	SELECT 			MOCK_NODE_ID
+				,	MOCK_NODE_TYPE
 				,	NODE_TYPE
 				,	NODE_NAME
 				,	TURN_P
@@ -60,7 +61,7 @@
 	INSERT INTO BMS_MOCK_NODE
 			(
 				MOCK_NODE_ID
-			,	NODE_TYPE
+			,	MOCK_NODE_TYPE
 			,	NODE_NAME
 			,	TURN_P
 			,	GPS_X
@@ -76,7 +77,7 @@
 	VALUES		
 			(
 				#{MOCK_NODE_ID}
-			,	#{NODE_TYPE}
+			,	#{MOCK_NODE_TYPE}
 			,	#{NODE_NAME}
 			,	#{TURN_P}
 			,	#{GPS_X}
@@ -94,7 +95,7 @@
 <update id="SI0407G0U0" parameterType="Map">
 	UPDATE		BMS_MOCK_NODE
 	SET			MOCK_NODE_ID = #{MOCK_NODE_ID}
-			,	NODE_TYPE = #{NODE_TYPE}
+			,	MOCK_NODE_TYPE = #{MOCK_NODE_TYPE}
 			,	NODE_NAME = #{NODE_NAME}
 			,	TURN_P = #{TURN_P}
 			,	GPS_X = #{GPS_X}
@@ -166,7 +167,7 @@
 	INSERT INTO BMS_MOCK_NODE
 			(
 				MOCK_NODE_ID
-			,	NODE_TYPE
+			,	MOCK_NODE_TYPE
 			,	NODE_NAME
 			,	TURN_P
 			,	GPS_X
@@ -178,7 +179,7 @@
 	VALUES		
 			(
 				#{MOCK_NODE_ID}
-			,	#{NODE_TYPE}
+			,	#{MOCK_NODE_TYPE}
 			,	#{NODE_NAME}
 			,	#{TURN_P}
 			,	#{GPS_X}

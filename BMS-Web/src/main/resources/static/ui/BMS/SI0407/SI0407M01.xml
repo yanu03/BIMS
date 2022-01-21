@@ -69,7 +69,8 @@
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_MOCK_NODE" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="MOCK_NODE_ID" name="노드ID" dataType="text"></w2:column>
-						<w2:column id="NODE_TYPE" name="노드유형" dataType="text"></w2:column>
+						<w2:column id="MOCK_NODE_TYPE" name="노드유형" dataType="text"></w2:column>
+						<w2:column id="NODE_TYPE" name="매핑노드유형" dataType="text"></w2:column>
 						<w2:column id="NODE_NAME" name="교차로명칭" dataType="text"></w2:column>
 						<w2:column id="TURN_P" name="회전제한유무" dataType="text"></w2:column>
 						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
@@ -529,13 +530,13 @@
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
 											id="MOCK_NODE_ID" value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="NODE_TYPE"
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="MOCK_NODE_TYPE"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="NODE_NAME"
 											value="" blockSelect="false" displayMode="label" textAlign="left">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="TURN_P"
+										<!-- <w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="TURN_P"
 											value="" blockSelect="false" displayMode="label">
 											<w2:choices>
 												<w2:itemset nodeset="data:dlt_searchitem2">
@@ -543,6 +544,9 @@
 													<w2:value ref="MOCK_LINK_ID"></w2:value>
 												</w2:itemset>
 											</w2:choices>											
+										</w2:column> -->
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="TURN_P"
+											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="GPS_X"
 											value="" blockSelect="false" displayMode="label">

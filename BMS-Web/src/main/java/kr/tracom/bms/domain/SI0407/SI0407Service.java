@@ -106,10 +106,28 @@ public class SI0407Service extends ServiceSupport {
 				Map data = (Map) param.get(i);
 				String rowStatus = (String) data.get("rowStatus");
 				if (rowStatus.equals("C")) {
+					if(data.get("MOCK_NODE_TYPE").equals(Constants.MOCK_NODE_TYPE_CROSS)) {
+						data.put("NODE_TYPE", Constants.NODE_TYPE_CROSS);
+					}
+					else {
+						data.put("NODE_TYPE", Constants.NODE_TYPE_NORMAL);
+					}
 					iCnt += si0407Mapper.SI0407G1I0(data);
 				} else if (rowStatus.equals("U")) {
+					if(data.get("MOCK_NODE_TYPE").equals(Constants.MOCK_NODE_TYPE_CROSS)) {
+						data.put("NODE_TYPE", Constants.NODE_TYPE_CROSS);
+					}
+					else {
+						data.put("NODE_TYPE", Constants.NODE_TYPE_NORMAL);
+					}					
 					uCnt += si0407Mapper.SI0407G1U0(data);
 				} else if (rowStatus.equals("D")) {
+					if(data.get("MOCK_NODE_TYPE").equals(Constants.MOCK_NODE_TYPE_CROSS)) {
+						data.put("NODE_TYPE", Constants.NODE_TYPE_CROSS);
+					}
+					else {
+						data.put("NODE_TYPE", Constants.NODE_TYPE_NORMAL);
+					}					
 					dCnt += si0407Mapper.SI0407G1D0(data);
 				} 
 			}			
