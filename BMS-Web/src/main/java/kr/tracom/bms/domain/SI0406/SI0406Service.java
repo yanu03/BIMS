@@ -42,85 +42,26 @@ public class SI0406Service extends ServiceSupport {
 		int dCnt = 0;
 		Map<String, Object> map = getSimpleDataMap("dma_sub_search");
 		
-		List<Map<String, Object>> soundList = null;
-		List<Map<String, Object>> param = getSimpleList("dlt_BMS_ROUT_NODE_CMPSTN");
+		List<Map<String, Object>> param = getSimpleList("dlt_BMS_ROUT_MOCK_LINK_CMPSTN");
 		try {
 			
 			//기존 노선노드테이블, 노선링크테이블 삭제
-			if(param.size()>0) {
-				si0406Mapper.SI0406G1DA0(map);
-				si0406Mapper.SI0406G1DA1(map);
-			}
+//			if(param.size()>0) {
+//				si0406Mapper.SI0406G1DA0(map);
+//				si0406Mapper.SI0406G1DA1(map);
+//			}
 			
-			for (int i = 0; i < param.size(); i++) { //노드 생성
-				Map data = (Map) param.get(i);
-				String rowStatus = (String) data.get("rowStatus");
-				String rowStatus2 = "";
-				if(i<param.size()-1) {
-					rowStatus2 = (String) param.get(i+1).get("rowStatus");
-				}
-				if (rowStatus.equals("C")) {
-					
-					if(data.get("NODE_ID")==null||((String)data.get("NODE_ID")).isEmpty()) {
-						Map key = si0406Mapper.SI0406G1K0();
-						data.put("NODE_ID",key.get("SEQ"));
-					}
-					
-					if((i<param.size()-1)&&rowStatus2.equals("C"))
-					{
-						
-						if(data.get("LINK_ID")==null||((String)data.get("LINK_ID")).isEmpty()) {//라우트와누드 구성에 링크 ID를 넣기 위해 미리 생성함
-							Map key = si0406Mapper.SI0406G1K1();
-							data.put("LINK_ID",key.get("SEQ"));
-						}
-					}
-					data.put("NODE_SN",(i+1));
-					data.put("WAY_DIV",map.get("WAY_DIV"));
-					iCnt += si0406Mapper.SI0406G1I0(data);
-					
-				} 
-			}
-			int sttnCnt = 0;
-			double routLen = 0;
-			for (int i = 0; i < param.size(); i++) { //링크 생성
-				Map data = (Map) param.get(i);
-				String rowStatus = (String) data.get("rowStatus");
-				String rowStatus2 = "";
-				if(i<param.size()-1) {
-					rowStatus2 = (String) param.get(i+1).get("rowStatus");
-				}
-				if (rowStatus.equals("C")) {
-					if(Constants.NODE_TYPE_BUSSTOP.equals((String) data.get("NODE_TYPE"))){
-						sttnCnt++;
-					}
-					
-					if((i<param.size()-1)&&rowStatus2.equals("C")) {
-							data.put("LINK_SN",(i+1));
-							data.put("ST_NODE_ID",param.get(i).get("NODE_ID"));
-							data.put("ED_NODE_ID",param.get(i+1).get("NODE_ID"));
-							String linkNm = param.get(i).get("NODE_NM") + "-" + param.get(i+1).get("NODE_NM");
-							data.put("LINK_NM",linkNm);
-							
-							double len = DataInterface.getDistanceBetween(Double.parseDouble((String)param.get(i).get("GPS_X")), Double.parseDouble((String)param.get(i).get("GPS_Y")), 
-									Double.parseDouble((String)param.get(i+1).get("GPS_X")), Double.parseDouble((String)param.get(i+1).get("GPS_Y")));
-							
-							data.put("LEN",CommonUtil.pointRound(len,3));
-							routLen += len;
-							si0406Mapper.SI0406G1I1(data);
-					}
-				}
-			}
-			if(param.size()>0) {
-				Map routMap = new HashMap();
-				double routStrtLen = DataInterface.getDistanceBetween(Double.parseDouble((String)param.get(0).get("GPS_X")), Double.parseDouble((String)param.get(0).get("GPS_Y")), 
-						Double.parseDouble((String)param.get(param.size()-1).get("GPS_X")), Double.parseDouble((String)param.get(param.size()-1).get("GPS_Y")));
-						
-				routMap.put("ROUT_ID", (String)param.get(0).get("ROUT_ID"));
+			for (int i = 0; i < param.size(); i++) { 
 				
-				routMap.put("ROUT_LEN", CommonUtil.pointRound(routLen,3));
-				routMap.put("ROUT_STRT_LEN", CommonUtil.pointRound(routStrtLen,3));
-				routMap.put("STTN_CNT", sttnCnt);
-				routMapper.updateRout(routMap);
+				Map data = (Map) param.get(i);
+				String rowStatus = (String) data.get("rowStatus");
+				if (rowStatus.equals("C")) {
+					iCnt += si0406Mapper.SI0406G1I0(data);
+				} else if (rowStatus.equals("U")) {
+					uCnt += si0406Mapper.SI0406G1U0(data);
+				} else if (rowStatus.equals("D")) {
+					dCnt += si0406Mapper.SI0406G1D0(data);
+				}				
 			}
 		} catch(Exception e) {
 			if (e instanceof DuplicateKeyException)
@@ -153,7 +94,6 @@ public class SI0406Service extends ServiceSupport {
 	}
 	
 
-	
 	public List SI0406P0R0() throws Exception {
 		// TODO Auto-generated method stub
 		return si0406Mapper.SI0406P0R0();		
@@ -171,13 +111,14 @@ public class SI0406Service extends ServiceSupport {
 				Map data = (Map) param.get(i);
 				String rowStatus = (String) data.get("rowStatus");
 				if (rowStatus.equals("C")) {
-					iCnt += si0406Mapper.SI0406P0I0(data);
+					iCnt += si0406Mapper.SI0406G1I0(data);
 				} else if (rowStatus.equals("U")) {
-					uCnt += si0406Mapper.SI0406P0U0(data);
+					uCnt += si0406Mapper.SI0406G1U0(data);
 				} else if (rowStatus.equals("D")) {
-					dCnt += si0406Mapper.SI0406P0D0(data);
+					dCnt += si0406Mapper.SI0406G1D0(data);
 				} 
 			}			
+			
 		} catch(Exception e) {
 			if (e instanceof DuplicateKeyException)
 			{

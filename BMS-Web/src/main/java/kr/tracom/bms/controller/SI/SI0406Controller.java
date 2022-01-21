@@ -21,7 +21,7 @@ public class SI0406Controller extends ControllerSupport {
 	
 	@RequestMapping("/si/SI0406G1R0")
 	public @ResponseBody Map<String, Object> SI0406G1R0() throws Exception {
-		result.setData("dlt_BMS_ROUT_NODE_CMPSTN", si0406Service.SI0406G1R0());
+		result.setData("dlt_BMS_ROUT_MOCK_LINK_CMPSTN", si0406Service.SI0406G1R0());
 		return result.getResult();
 	}
 	
