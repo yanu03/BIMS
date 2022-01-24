@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.tracom.bms.domain.SI0406.SI0406Mapper">
+
+<select id="SI0406G1R0" resultType="Map">
+	SELECT 			A.ROUT_ID
+					,	A.MOCK_LINK_ID
+					,	C.NODE_NAME AS F_NODE_NAME
+					,	D.NODE_NAME AS T_NODE_NAME
+					,	A.LINK_SN
+					,	A.UPD_DTM
+					,	A.UPD_ID
+					
+	FROM				BMS_ROUT_MOCK_LINK_CMPSTN A
+	LEFT JOIN		BMS_MOCK_LINK B
+		ON				A.MOCK_LINK_ID = B.MOCK_LINK_ID
+	LEFT JOIN		BMS_MOCK_NODE C
+		ON				B.F_NODE = C.MOCK_NODE_ID
+	LEFT JOIN		BMS_MOCK_NODE D
+		ON				B.T_NODE = D.MOCK_NODE_ID		
+	WHERE 			A.ROUT_ID = #{ROUT_ID}
+	<!-- <if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT)">	
+		<if test="TYPE == 'ALL'||TYPE == ''">
+			AND (A.NODE_ID LIKE CONCAT('%',#{CONTENT},'%') || A.NODE_NM LIKE CONCAT('%',#{CONTENT},'%'))
+		</if>
+		<if test="TYPE == 'NODE_ID'">
+			A.NODE_ID LIKE CONCAT('%',#{CONTENT},'%')
+		</if>
+		<if test="TYPE == 'NODE_NM'">
+			A.NODE_NM LIKE CONCAT('%',#{CONTENT},'%') 
+		</if>
+	</if> -->
+	 ORDER BY		 LINK_SN
+</select>
+
+<select id="SI0406G2R0" resultType="Map">
+	SELECT 			A.MOCK_LINK_ID
+				,	A.F_NODE
+				,	A.T_NODE
+				,	B.NODE_NAME AS F_NODE_NAME
+				,	C.NODE_NAME AS T_NODE_NAME
+				,	B.MOCK_NODE_TYPE AS F_MOCK_NODE_TYPE
+				,	C.MOCK_NODE_TYPE AS T_MOCK_NODE_TYPE
+				,	B.NODE_TYPE AS F_NODE_TYPE
+				,	C.NODE_TYPE AS T_NODE_TYPE
+				,	A.LANES
+				,	A.ROAD_RANK
+				,	A.ROAD_TYPE
+				,	A.ROAD_NO
+				,	A.ROAD_NAME
+				,	A.ROAD_USE
+				,	A.MULTI_LINK
+				,	A.CONNECT
+				,	A.MAX_SPD
+				,	A.REST_VEH
+				,	A.REST_W
+				,	A.REST_H
+				,	A.LENGTH
+				,	A.REMARK
+				,	B.GPS_X AS F_GPS_X
+				,	B.GPS_Y	AS F_GPS_Y
+				,	C.GPS_X AS T_GPS_X
+				,	C.GPS_Y AS T_GPS_Y
+				<!-- 이하 공통 코드를 사용하기 위한 별칭 중복 데이터 -->
+				,	B.MOCK_NODE_ID AS NODE_ID
+				,	B.NODE_NAME AS	NODE_NM
+				,	B.NODE_TYPE AS	NODE_TYPE
+				,	B.GPS_X AS GPS_X
+				,	B.GPS_Y AS GPS_Y
+				
+	FROM 			BMS_MOCK_LINK A
+	LEFT JOIN		BMS_MOCK_NODE B
+		ON			A.F_NODE = B.MOCK_NODE_ID
+	LEFT JOIN		BMS_MOCK_NODE C
+		ON			A.T_NODE = C.MOCK_NODE_ID	
+</select>
+
+<insert id="SI0406G1I0" parameterType="Map">
+	INSERT INTO		BMS_ROUT_MOCK_LINK_CMPSTN
+	
+				(
+					ROUT_ID
+				,	MOCK_LINK_ID
+				,	LINK_SN
+				,	UPD_DTM
+				,	UPD_ID	
+				
+				)
+				
+	VALUES		(
+					#{ROUT_ID}
+				,	#{MOCK_LINK_ID}
+				,	#{LINK_SN}
+				,	#{UPD_DTM}
+				,	#{SSN_USER_ID}		
+	
+				)
+	
+				
+</insert>
+
+<delete id="SI0406G1D0" parameterType="Map">
+	DELETE
+	FROM			BMS_ROUT_MOCK_LINK_CMPSTN
+	WHERE			ROUT_ID = #{ROUT_ID}
+	AND				MOCK_LINK_ID = #{MOCK_LINK_ID}	
+</delete>
+
+<update id="SI0406G1U0" parameterType="Map">
+	UPDATE			BMS_ROUT_MOCK_LINK_CMPSTN
+	
+	SET				(
+					ROUT_ID = #{ROUT_ID}
+				,	MOCK_LINK_ID = #{MOCK_LINK_ID}
+				,	LINK_SN = #{LINK_SN}
+				,	UPD_DTM = #{UPD_DTM}
+				,	UPD_ID = #{SSN_USER_ID}	
+					)		
+
+</update>
+
+<delete id="SI0406G1DA0" parameterType="Map">
+
+</delete>
+
+<delete id="SI0406G1DA1" parameterType="Map">
+
+</delete>
+
+<select id="SI0406P0R0" resultType="Map">
+	SELECT 			A.MOCK_LINK_ID
+				,	A.F_NODE
+				,	A.T_NODE
+				,	B.NODE_NAME AS F_NODE_NAME
+				,	C.NODE_NAME AS T_NODE_NAME
+				,	A.LANES
+				,	A.ROAD_RANK
+				,	A.ROAD_TYPE
+				,	A.ROAD_NO
+				,	A.ROAD_NAME
+				,	A.ROAD_USE
+				,	A.MULTI_LINK
+				,	A.CONNECT
+				,	A.MAX_SPD
+				,	A.REST_VEH
+				,	A.REST_W
+				,	A.REST_H
+				,	A.LENGTH
+				,	A.REMARK
+	FROM 			BMS_MOCK_LINK A
+	LEFT JOIN		BMS_MOCK_NODE B
+		ON			A.F_NODE = B.MOCK_NODE_ID
+	LEFT JOIN		BMS_MOCK_NODE C
+		ON			A.T_NODE = C.MOCK_NODE_ID
+</select>
+
+</mapper>

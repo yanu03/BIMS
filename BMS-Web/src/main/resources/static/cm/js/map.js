@@ -39,6 +39,7 @@ var RoutMAP = function(){
 	this.selectedIndex = -1;
 	this.oldSelectedIndex = -1;
 	this.linkMode = false;
+	this.mockLinkMode = false;
 	this.busMarkers = [];
 	this.busOverlay = null;
 	this.busOverArr = [];
@@ -99,6 +100,7 @@ routMap.initMap = function(mapId,options) {
 	routMap.mapInfo[mapId].nodeChangeCb = options.nodeChangeCb;
 	routMap.mapInfo[mapId].draggable=options.draggable;
 	routMap.mapInfo[mapId].linkMode=options.linkMode;
+	routMap.mapInfo[mapId].mockLinkMode=options.mockLinkMode;
 	routMap.mapInfo[mapId].isSound=options.isSound;
 	routMap.mapInfo[mapId].onMarkerClick=options.onMarkerClick;
 	
@@ -264,10 +266,18 @@ routMap.drawLineArr = function(mapId, lat_arr, lng_arr, color){
 }
 
 /**선그리기**/
-routMap.drawLine = function(mapId, first, last, color){
+routMap.drawLine = function(mapId, first, last, color, eventKinds, clickEvent, rowIndex, dataCheckFunc){
 	var path = [];
 	path.push(new kakao.maps.LatLng(first.GPS_Y, first.GPS_X));
 	path.push(new kakao.maps.LatLng(last.GPS_Y, last.GPS_X));
+	
+	var dataCheck = false;
+	if(typeof dataCheckFunc != "undefined") {
+		dataCheck = dataCheckFunc(dataCheck, rowIndex);
+		if(dataCheck && color != "#1e90ff") {
+			color = "#FF005E";
+		}
+	}
 	
 	var polyline = new kakao.maps.Polyline({
 		path: path,
@@ -276,7 +286,42 @@ routMap.drawLine = function(mapId, first, last, color){
 		strokeStyle:'solid',
 		strokeOpacity: 0.8
 	});
-	
+
+	if(typeof eventKinds != "undefined") {
+		
+		kakao.maps.event.addListener(polyline, 'mouseover', function(mouseEvent) {
+			if(eventKinds == "addSubGrid") {
+				polyline.setOptions({
+					strokeColor : "#cd6c15"
+				});
+			}			
+		});
+		
+		kakao.maps.event.addListener(polyline, 'mouseout', function(mouseEvent) {
+			
+			if(eventKinds == "addSubGrid") {
+				polyline.setOptions({
+					strokeColor : color
+				});
+			}
+			
+		});
+		
+		kakao.maps.event.addListener(polyline, 'mousemove', function(mouseEvent) {
+			
+		});
+		
+	    kakao.maps.event.addListener(polyline, 'mousedown', function(mouseEvent) {
+	    	
+	    });
+		
+		kakao.maps.event.addListener(polyline, 'click', function(mouseEvent) {
+			if(!dataCheck) {
+				clickEvent(rowIndex);
+			}
+		});	
+		
+	}
 	polyline.setMap(routMap.mapInfo[mapId].map);
 	
 	routMap.mapInfo[mapId].polylines.push(polyline);
@@ -389,7 +434,9 @@ routMap.addMarkerInter = function(mapId, data, grid, idx, focusIdx, isOverLayHid
 		
 	var overlay = null;
 	if(data.NODE_TYPE != routMap.NODE_TYPE.BUSSTOP&&data.NODE_TYPE != routMap.NODE_TYPE.CROSS){
-		var msg = "<div class = 'customoverlay'>"
+//		normal 노드 오버레이 수정하였습니다. (0121 양현우)
+//		var msg = "<div class = 'customoverlay'>"
+			var msg = "<div class = 'customoverlay normal'>"
 					+ "<span class = 'map_title' style=''>" + data.NODE_NM + "</span>" 
 					+ "</div>";	
 					//+  "<span class = '' style='font-size: 12px; margin-left:2px; margin-bottom:2px; display:block;'>"+ data.GPS_Y + "," + data.GPS_X +"</span>"
@@ -505,6 +552,7 @@ routMap.addMarkerInter = function(mapId, data, grid, idx, focusIdx, isOverLayHid
 	});
 	
 	if((data.NODE_TYPE != routMap.NODE_TYPE.CROSS)&&(data.NODE_TYPE != routMap.NODE_TYPE.BUSSTOP)||isOverLayHidden){
+		overlay.setMap(null);
 		kakao.maps.event.addListener(marker, 'mouseover', routMap.makeOverListener(routMap.mapInfo[mapId].map, marker, overlay));
 		kakao.maps.event.addListener(marker, 'mouseout', routMap.makeOutListener(routMap.mapInfo[mapId],marker,overlay,markerImage));
 	}
@@ -3169,7 +3217,6 @@ routMap.addGrgByClick = function(mapId,grid,routeId,e){
 	//	idx = minIndex + 1;
 		idx = grid.getFocusedRowIndex();
 		idx = com.getGridViewDataList(grid).insertRow(idx);
-	debugger;
 		var today = new Date();
 		var data = {
 		
@@ -3482,7 +3529,6 @@ routMap.moveRoute = function(mapId, grid, e){
 }
 
 routMap.drawRoute = function(mapId, grid, focusIdx) {
-	
 	var list = com.getGridDispJsonData(grid);
 
 	if(routMap.mapInfo[mapId].linkMode){
@@ -3647,6 +3693,93 @@ routMap.drawRoute2 = function(mapId, list, focusIdx) {
 				routMap.moveMap(mapId, list[parseInt(list.length/2)].GPS_Y, list[parseInt(list.length/2)].GPS_X);
 			}
 		}
+	}
+}
+
+routMap.drawMockLink = function(mapId, grid, focusIdx, clickEvent, dataCheckFunc) {
+	var list = com.getGridDispJsonData(grid);
+
+	/*if(list.length>0){
+		var data = list[list.length-1];
+		var temp = {
+			NODE_ID: data.T_NODE,
+			GPS_Y: data.T_GPS_Y,
+			GPS_X: data.T_GPS_X,
+			NODE_NM: data.T_NODE_NAME,
+			NODE_TYPE: data.T_NODE_TYPE
+		};
+		list.push(temp);
+	}*/
+	routMap.initDisplay(mapId);
+	
+	if(list != null && list.length != 0) {
+		var oldMornStd = "";
+		for(var i = 0; i < list.length; i++) {
+			
+			/**드래그이벤트**/
+			if(routMap.mapInfo[mapId].draggable){
+				list[i].click = function(e) {
+					routMap.mapInfo[mapId].dragging = false;
+					routMap.moveRoute(mapId,grid,e);
+				};
+			}
+			
+			list[i].index = i;
+			
+			/**드래그이벤트**/
+			list[i].draggable = routMap.mapInfo[mapId].draggable;
+			
+//			if(list[i].NODE_TYPE == routMap.NODE_TYPE.BUSSTOP && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.BUSSTOP)>=0) {
+//				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
+//			}
+			routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, true);
+			
+			if(i < list.length -1){
+				
+				var color = "#5b5b5b";
+//				if(mornStd=='MS002'){
+//					color = "#cd6c15";
+//				}
+//				else if(mornStd=='MS003'){
+//					color = "#FF005E";
+//				}
+				var data = list[i];
+				
+				var start = {
+						NODE_ID: data.F_NODE,
+						GPS_Y: data.F_GPS_Y,
+						GPS_X: data.F_GPS_X,
+						NODE_NM: data.F_NODE_NAME,
+						NODE_TYPE: data.F_NODE_TYPE
+					};
+				
+				var end = {
+					NODE_ID: data.T_NODE,
+					GPS_Y: data.T_GPS_Y,
+					GPS_X: data.T_GPS_X,
+					NODE_NM: data.T_NODE_NAME,
+					NODE_TYPE: data.T_NODE_TYPE
+				};
+				
+				//focus와 같으면 파란색으로
+				if(focusIdx == i) {
+					debugger;
+					color = "#1e90ff";
+				}
+				routMap.drawLine(mapId, start, end, color, "addSubGrid", clickEvent, i, dataCheckFunc);
+			}
+		}
+		routMap.mapInfo[mapId].dragging = false;
+
+		
+//		if(list.length>0){
+//			if(focusIdx!=-1){
+//				routMap.moveMap(mapId, list[focusIdx].GPS_Y, list[focusIdx].GPS_X);
+//			}
+//			else {
+//				routMap.moveMap(mapId, list[parseInt(list.length/2)].GPS_Y, list[parseInt(list.length/2)].GPS_X);
+//			}
+//		}
 	}
 }
 
@@ -4123,15 +4256,15 @@ routMap.showVehicleClickOverlay = function(mapId, list, vhc_id, grid) {
 }
 
 routMap.addPolygonByClick = function(mapId, data, grgId, grgNm, e){
-	
 	var lonlat = e.latLng;
 	
 	var idx = data.insertRow();
+	
 
 	var today = new Date();
 	var tmp = {
 			GRG_ID: grgId,
-			SN: idx,
+			SN: idx+1,
 			GPS_Y: util.getDispGps(lonlat.Ma,7),
 			GPS_X: util.getDispGps(lonlat.La,7)
 			};
@@ -4337,6 +4470,71 @@ routMap.showCommuMap = function(mapId, list) {
 		
 	}
 }
+/*
+routMap.showLink = function(mapId, list) {
+	//routMap.initDisplay(mapId);
+	if(list != null && list.length != 0) {
+		for(var i = 0; i < list.length; i++) {
+			list[i].index = i;
+			
+			if(i < list.length -1){
+				//원활
+				//var color = "#4CAF50";
+				var color = "#F44336";
+				
+//				if(list[i].AVRG_SPD > 15 && list[i].AVRG_SPD < 25){
+//					color = "#FFC107";
+//				}
+//				
+//				else if(list[i].AVRG_SPD <= 15){
+//					color = "#F44336";
+//				}
+				
+				var path = [];
+				path.push(new kakao.maps.LatLng(list[i].F_GPS_Y, list[i].F_GPS_X));
+				path.push(new kakao.maps.LatLng(list[i].T_GPS_Y, list[i].T_GPS_X));
+				
+				var polyline = new kakao.maps.Polyline({
+					path: path,
+					strokeColor: color, // 라인 색상
+					strokeWeight: 5, // 라인 두께
+					strokeStyle:'solid',
+					strokeOpacity: 0.8
+				});
+
+				
+			    kakao.maps.event.addListener(polyline, 'mouseover', function(mouseEvent) {
+			    	
+			    });
+			    
+			    kakao.maps.event.addListener(polyline, 'mouseout', function(mouseEvent) {
+			    	
+			    });
+			    
+			    kakao.maps.event.addListener(polyline, 'mousemove', function(mouseEvent) {
+			    	
+			    });
+			    
+//			    kakao.maps.event.addListener(polyline, 'mousedown', function(mouseEvent) {
+//			    	
+//			    });
+			    
+			    kakao.maps.event.addListener(polyline, 'click', function(mouseEvent) {
+			    	var aa = mouseEvent;
+			    	
+			    	
+			    });
+				
+				polyline.setMap(routMap.mapInfo[mapId].map);
+				
+				routMap.mapInfo[mapId].polylines.push(polyline);
+			}
+			
+		}
+		
+	}
+}*/
+
 /**두 지점간의 거리 계산 **/
 function getDistanceBetween(x1, y1, x2, y2) {
 	let kEarthRadiusKms = 6376.5;
