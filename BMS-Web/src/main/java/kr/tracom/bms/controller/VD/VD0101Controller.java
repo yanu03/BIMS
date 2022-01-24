@@ -8,63 +8,41 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.tracom.bms.domain.VD0101.VD0101Service;
+import kr.tracom.bms.domain.PI0100.PI0100Service;
 import kr.tracom.cm.support.ControllerSupport;
+
 
 @Controller
 @Scope("request")
 public class VD0101Controller extends ControllerSupport {
 
 	@Autowired
-	private VD0101Service vd0101Service;
-	
-	@RequestMapping("/vd/VD0101G0R0")
-	public @ResponseBody Map<String, Object> VD0101G0R0() throws Exception {
-		result.setData("dlt_BMS_VHC_MST", vd0101Service.VD0101G0R0());
+	private PI0100Service pI0100Service;
+
+	/*@RequestMapping("/pi/PI0100G0R0")
+	public @ResponseBody Map<String, Object> PI0100G0R0() throws Exception {
+		result.setData("dlt_BMS_USER_NEWS_CFG_INFO", pI0100Service.PI0100G0R0());
 		return result.getResult();
 	}
 	
-	@RequestMapping("/vd/VD0101SHI0")
-	public @ResponseBody Map<String, Object> VD0101SHI0() throws Exception {
-		result.setData("dlt_searchitem", vd0101Service.VD0101SHI0());
+	@RequestMapping("/pi/PI0100SHI0")
+	public @ResponseBody Map<String, Object> PI0100SHI0() throws Exception {
+		result.setData("dlt_searchitem", pI0100Service.PI0100SHI0());
 		return result.getResult();
 	}
 	
-	@RequestMapping("/vd/VD0101SHI1")
-	public @ResponseBody Map<String, Object> VD0101SHI1() throws Exception {
-		result.setData("dlt_searchitem2", vd0101Service.VD0101SHI1());
-		return result.getResult();
-	}
-	
-	@RequestMapping("/vd/VD0101G1R0")
-	public @ResponseBody Map<String, Object> VD0101G1R0() throws Exception {
-		result.setData("dlt_BMS_DVC_INFO", vd0101Service.VD0101G1R0());
-		return result.getResult();
-	}
-	
-	@RequestMapping("/vd/VD0101G2R0")
-	public @ResponseBody Map<String, Object> VD0101G2R0() throws Exception {
-		result.setData("dlt_BMS_DVC_PARAM_CFG_INFO", vd0101Service.VD0101G2R0());
-		return result.getResult();
-	}
-	
-	@RequestMapping("/vd/VD0101G2S0")
-	public @ResponseBody Map<String, Object> VD0101G2S0() throws Exception {
-		Map map = vd0101Service.VD0101G2S0();
+	@RequestMapping("/pi/PI0100G0S0")
+	public @ResponseBody Map<String, Object> PI0100G0S0() throws Exception{
+		Map map = pI0100Service.PI0100G0S0();
 		result.setData("dma_result", map);
 		return result.getResultSave();
 	}
 	
-	@RequestMapping("/vd/VD0101P0R0")
-	public @ResponseBody Map<String, Object> VD0101P0R0() throws Exception {
-		result.setData("dlt_BMS_DVC_PARAM_CFG_INFO", vd0101Service.VD0101P0R0());
+	@RequestMapping("/pi/PI0100G0K0")
+	public @ResponseBody Map<String, Object> PI0100G0K0() throws Exception{
+		Map map = pI0100Service.PI0100G0K0();
+		result.setData("dma_SEQ_BMS_USER_NEWS_CFG_INFO_0", map);
 		return result.getResult();
-	}
-	
-	@RequestMapping("/vd/VD0101P0SH")
-	public @ResponseBody Map<String, Object> VD0101P0SH() throws Exception {
-		result.setData("dlt_searchitem", vd0101Service.VD0101P0SH());
-		return result.getResult();
-	}
+	}	*/
 	
 }

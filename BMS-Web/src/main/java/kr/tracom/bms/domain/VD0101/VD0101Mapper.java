@@ -7,32 +7,10 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface VD0101Mapper {
-
-	public List VD0101G0R0(Map param);
-	
-	public List VD0101SHI0();
-	
-	public List VD0101SHI1();
-	
-	public List VD0101G1R0(Map param);
-	
-	public List VD0101G2R0(Map param);
-	
-	public int VD0101G2I0(Map param);
-	
-	public int VD0101G2U0(Map param);
-	
-	public int VD0101G2D0(Map param);
-	
-	public List VD0101P0SH();
-	
-	/** PLF 테이블 관련 20211018 jh **/
-	public int VD0101G1I2(Map param);
-	
-	public int VD0101G1U2(Map param);
-	
-	public int VD0101G1D2(Map param);
-	
-	public List<Map> VD0101P0R0(Map param);
-	
+	/*public List<Map> PI0100G0R0(Map param);
+	public Map PI0100G0K0();
+	public List PI0100SHI0();
+	public int PI0100G0I0(Map param);
+	public int PI0100G0D0(Map param);
+	public int PI0100G0U0(Map param);*/
 }
