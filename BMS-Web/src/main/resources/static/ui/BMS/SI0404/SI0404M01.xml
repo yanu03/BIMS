@@ -127,8 +127,9 @@
 		 };
 		 
 		var mainOptions = {
-			ADD:{cbFnc:scwin.btn_integration_onclick, nm:"연계",class:"Intg"},
-			DEL:{disp:"hide"},
+			ADD:{cbFnc:scwin.btn_integration_onclick, nm:"세종 연계",class:"Intg"},
+			//기존에 삭제버튼을 사용하지 않아 '공공데이터 연계' 버튼으로 대체 사용하였습니다. 
+			DEL:{cbFnc:scwin.btn_integration_onclick2, nm:"공공데이터 연계",class:"Intg"},
 			CNL:scwin.btn_cancel_onclick
 		};
 		
@@ -233,6 +234,43 @@
 	}
 	
 	scwin.btn_integration_onclick = function() {
+		if(dlt_BMS_ROUT_NODE_CMPSTN.getTotalRow()>0){
+			var str = "갱신 후에는 되돌릴수 없습니다. 정말 갱신하시겠습니까?";
+			com.confirm(str, function(rtn) {
+				if (rtn) {
+					var val_NODE_ID = dlt_BMS_ROUT_NODE_CMPSTN.getColData("NODE_ID");
+					//dma_sub_search.set("NODE_IDS", val_NODE_ID);
+					dma_sub_search.set("ROUT_ID", dlt_BMS_ROUT_MST.getCellData(SI0404G0.getFocusedRowIndex(), "ROUT_ID"));
+					dma_sub_search.set("INT_ROUT_ID", dlt_BMS_ROUT_MST.getCellData(SI0404G0.getFocusedRowIndex(), "INT_ROUT_ID"));
+					dma_sub_search.set("AREA", dlt_BMS_ROUT_MST.getCellData(SI0404G0.getFocusedRowIndex(), "AREA"));
+					var param = dma_sub_search.get("ROUT_ID");
+					if (param != "") {
+						var data = { data : dma_sub_search.getJSON(), callbackFn : "scwin.insertNode" };
+						var options = { id : "SI0404P01",
+										popupName : "노드연계", 
+										modal : true};
+						com.openPopup("/ui/BMS/SI0404/SI0404P01.xml", options, data);
+					}
+				}
+			});
+		}
+		else {
+			var val_NODE_ID = dlt_BMS_ROUT_NODE_CMPSTN.getColData("NODE_ID");
+			//dma_sub_search.set("NODE_IDS", val_NODE_ID);
+			dma_sub_search.set("INT_ROUT_ID", dlt_BMS_ROUT_MST.getCellData(SI0404G0.getFocusedRowIndex(), "INT_ROUT_ID"));
+					
+			var param = dma_sub_search.get("ROUT_ID");
+			if (param != "") {
+				var data = { data : dma_sub_search.getJSON(), callbackFn : "scwin.insertNode" };
+				var options = { id : "SI0404P01",
+								popupName : "노드연계", 
+								modal : true};
+				com.openPopup("/ui/BMS/SI0404/SI0404P01.xml", options, data);
+			}
+		}
+	}
+	
+	scwin.btn_integration_onclick2 = function() {
 		if(dlt_BMS_ROUT_NODE_CMPSTN.getTotalRow()>0){
 			var str = "갱신 후에는 되돌릴수 없습니다. 정말 갱신하시겠습니까?";
 			com.confirm(str, function(rtn) {
