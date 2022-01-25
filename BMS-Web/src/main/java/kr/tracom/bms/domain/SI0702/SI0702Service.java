@@ -34,7 +34,7 @@ public class SI0702Service extends ServiceSupport {
 	}
 	
 	public List SI0702P0R0() throws Exception {
-		Map<String, Object> map = getSimpleDataMap("dma_ORG_MST");
+		Map<String, Object> map = getSimpleDataMap("dma_sub_search");
 		return si0702Mapper.SI0702P0R0(map);
 	}
 
@@ -43,7 +43,7 @@ public class SI0702Service extends ServiceSupport {
 		int uCnt = 0;
 		int dCnt = 0;		
 		
-		List<Map<String, Object>> param = getSimpleList("dlt_BMS_EMER_MEMBER_INFO");
+		List<Map<String, Object>> param = getSimpleList("dlt_BMS_PARTNER_MEMBER_INFO");
 		try {
 			for (int i = 0; i < param.size(); i++) {
 				Map data = (Map) param.get(i);
