@@ -91,7 +91,7 @@
 			* 한국어의 경우 baseDir/ko/          아래파일 생성
 			* 영어의 경우   baseDir/en/          아래파일 생성
 		-->		
-		<baseDir value="C:\sbrt-web\workspace\BIMS\BMS-Webb\src\main\resources\static\lang"/>
+		<baseDir value="C:\sbrt-web\workspace\BIMS\BMS-Web\src\main\resources\static\lang"/>
 		<!-- 기본 locale 를 설정한다. 설정이 없는경우en 을사용한다. -->
 		<defaultLocale value="ko">
 			<domain name="localhost" locale="en"/>
