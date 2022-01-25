@@ -103,7 +103,7 @@ public class ActionRequest {
 	            		timeMin = timeMin.substring(11);
 	            		timeMax = timeMax.substring(11);
 	            		
-	            		List<Map<String, Object>> operPlanList = operPlanService.makeChgOperAllocPlNodeInfo(busId, routId, operDt, operSn, stNodeId, stNodeSn, timeDiff, timeMin, timeMax, true);
+	            		//List<Map<String, Object>> operPlanList = operPlanService.makeChgOperAllocPlNodeInfo(busId, routId, operDt, operSn, stNodeId, stNodeSn, timeDiff, timeMin, timeMax, true);
 	            		
             		} else {
             			//변경운행 데이터 오류
