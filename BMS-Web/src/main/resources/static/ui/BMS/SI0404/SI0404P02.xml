@@ -14,9 +14,10 @@
 				<w2:keyInfo>
 					<w2:key id="ROUT_ID" name="노선ID" dataType="text"></w2:key>
 					<w2:key id="INT_ROUT_ID" name="연계노선ID" dataType="text"></w2:key>
-					<w2:key id="NODE_ECPT_ID" name="노드제외ID" dataType="text"></w2:key>
+					<w2:key id="PUB_ROUT_ID" name="세종연계노선ID" dataType="text"></w2:key><w2:key id="NODE_ECPT_ID" name="노드제외ID" dataType="text"></w2:key>
 					<w2:key id="NODE_TYPE" name="name2" dataType="text"></w2:key>
 					<w2:key id="CONTENT" name="name3" dataType="text"></w2:key>
+					
 				</w2:keyInfo>
 			</w2:dataMap>
 			<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_NODE_MST" saveRemovedData="true">
@@ -47,8 +48,8 @@
 		isConfirmBtnClick = false;
 		scwin.param = com.getParameter();
 		dma_search.set("ROUT_ID" , scwin.param.data.ROUT_ID);
-		dma_search.set("INT_ROUT_ID" , scwin.param.data.INT_ROUT_ID);
-		dma_search.set("NODE_ECPT_ID" , scwin.param.data.NODE_IDS);
+		dma_search.set("PUB_ROUT_ID" , scwin.param.data.PUB_ROUT_ID);
+		//dma_search.set("NODE_ECPT_ID" , scwin.param.data.NODE_IDS);
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
 		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
 		var btnOptions = 
@@ -57,12 +58,13 @@
 		];
 		com.setMainBtn3(wfm_mainBtn, btnOptions);
 
-		var codeOptions = [{ code : "NODE_TYPE", compID : "sbx_NodeType, SI0404P1:NODE_TYPE"}];
+		var codeOptions = [{ code : "NODE_TYPE", compID : "SI0404P1:NODE_TYPE"}];
 
 		com.setCommonDtl(codeOptions, function() {
 			scwin.btn_search_onclick();
 		});
-						
+			
+		com.executeSubmission(sub_SI0404P1R0);				
 	};
 	
 	scwin.onpageunload = function() {
@@ -141,10 +143,10 @@
 						<w2:row style="" id="row1">
 							<w2:column width="39" inputType="checkbox" style="height:20px" id="chkHeader" value="선택" blockSelect="false"></w2:column>
 							<w2:column width="90" inputType="text" style="height:20px" id="column5" value="노드명" blockSelect="false"></w2:column>
-							<w2:column width="90" inputType="text" style="height:20px" id="column5" value="정류장번호" blockSelect="false"></w2:column>
-							<w2:column width="90" inputType="text" style="height:20px" id="column5" value="노드유형" blockSelect="false"></w2:column>
-							<w2:column width="90" inputType="text" style="height:20px" id="column5" value="경도" blockSelect="false"></w2:column>
-							<w2:column width="90" inputType="text" style="height:20px" id="column5" value="위도" blockSelect="false"></w2:column>
+							<w2:column width="90" inputType="text" style="height:20px" id="column6" value="정류장번호" blockSelect="false"></w2:column>
+							<w2:column width="90" inputType="text" style="height:20px" id="column7" value="노드유형" blockSelect="false"></w2:column>
+							<w2:column width="90" inputType="text" style="height:20px" id="column8" value="경도" blockSelect="false"></w2:column>
+							<w2:column width="90" inputType="text" style="height:20px" id="column9" value="위도" blockSelect="false"></w2:column>
 						</w2:row>
 						</w2:header>
 						<w2:gBody id="gBody1" style="">

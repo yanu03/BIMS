@@ -14,9 +14,10 @@
 				<w2:keyInfo>
 					<w2:key id="ROUT_ID" name="노선ID" dataType="text"></w2:key>
 					<w2:key id="INT_ROUT_ID" name="연계노선ID" dataType="text"></w2:key>
-					<w2:key id="NODE_ECPT_ID" name="노드제외ID" dataType="text"></w2:key>
+					<w2:key id="PUB_ROUT_ID" name="세종연계노선ID" dataType="text"></w2:key><w2:key id="NODE_ECPT_ID" name="노드제외ID" dataType="text"></w2:key>
 					<w2:key id="NODE_TYPE" name="name2" dataType="text"></w2:key>
 					<w2:key id="CONTENT" name="name3" dataType="text"></w2:key>
+					
 				</w2:keyInfo>
 			</w2:dataMap>
 			<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_NODE_MST" saveRemovedData="true">

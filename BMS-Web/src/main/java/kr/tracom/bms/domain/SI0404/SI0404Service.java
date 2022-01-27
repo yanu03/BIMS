@@ -159,10 +159,16 @@ public class SI0404Service extends ServiceSupport {
 		if(map.get("NODE_TYPE") == null || ((String)map.get("NODE_TYPE")).isEmpty() 
 				|| Constants.NODE_TYPE_NORMAL.equals(map.get("NODE_TYPE"))){
 			//일반 노드 처리
-			param.put("CO_CD", Constants.INTG_URL);
-			param.put("DL_CD", Constants.URL_CODE_SEJONG_ROUT);
-			List<Map<String, Object>> list = commonMapper.selectCommonDtlList(param);
-			String baseUrl = (String) list.get(0).get("REMARK");
+			
+//			param.put("CO_CD", Constants.INTG_URL);
+//			param.put("DL_CD", Constants.URL_CODE_SEJONG_ROUT);
+//			List<Map<String, Object>> list = commonMapper.selectCommonDtlList(param);
+//			String baseUrl = (String) list.get(0).get("REMARK");
+			
+			param.put("INTG_ID", Constants.SEJONG_ROUT_ID);
+			List<Map<String, Object>> list = si0404Mapper.selectIntg(param);
+			String baseUrl = (String) list.get(0).get("INTG_URL");
+			
 			String json = DataInterface.interface_URL("POST", baseUrl + map.get("INT_ROUT_ID")); 
 			nodeList = DataInterface.parseJsonRouteNode(json);
 		}
@@ -170,17 +176,24 @@ public class SI0404Service extends ServiceSupport {
 		if(map.get("NODE_TYPE") == null || ((String)map.get("NODE_TYPE")).isEmpty() 
 				|| Constants.NODE_TYPE_BUSSTOP.equals(map.get("NODE_TYPE"))){
 			//공공데이터 정류소 처리
-			String routId = "SJB" +  map.get("INT_ROUT_ID");
+//			String routId = "SJB" +  map.get("INT_ROUT_ID");
+			String routId = (String) map.get("PUB_ROUT_ID");
 			
-			param.put("CO_CD", Constants.INTG_URL);
-			param.put("DL_CD", Constants.URL_CODE_OPENAPI_ROUT_STA );
-			List<Map<String, Object>>  list = commonMapper.selectCommonDtlList(param);
-			String baseUrl = baseUrl = (String) list.get(0).get("REMARK");
+//			param.put("CO_CD", Constants.INTG_URL);
+//			param.put("DL_CD", Constants.URL_CODE_OPENAPI_ROUT_STA );
+//			List<Map<String, Object>>  list = commonMapper.selectCommonDtlList(param);
+//			String baseUrl = baseUrl = (String) list.get(0).get("REMARK");
 			
-			param.put("CO_CD", Constants.API_KEY);
-			param.put("DL_CD", Constants.KEY_CODE_OPENAPI_ROUT );
-			list = commonMapper.selectCommonDtlList(param);
-			String apiKey = (String) list.get(0).get("REMARK");
+//			param.put("CO_CD", Constants.API_KEY);
+//			param.put("DL_CD", Constants.KEY_CODE_OPENAPI_ROUT );
+//			list = commonMapper.selectCommonDtlList(param);
+//			String apiKey = (String) list.get(0).get("REMARK");
+			
+			
+			param.put("INTG_ID", Constants.OPENAPI_ROUT_STA_ID);
+			List<Map<String, Object>> list = si0404Mapper.selectIntg(param);
+			String baseUrl = (String) list.get(0).get("INTG_URL");
+			String apiKey = (String) list.get(0).get("INTG_API_KEY");
 			
 			String url = baseUrl + "serviceKey=" + apiKey + "&cityCode=12&routeId="+ routId;
 			
@@ -259,62 +272,43 @@ public class SI0404Service extends ServiceSupport {
 		List<Map<String, Object>> nodeList = null;
 		List<Map<String, Object>> staList = null;
 		
-		if(map.get("NODE_TYPE") == null || ((String)map.get("NODE_TYPE")).isEmpty() 
-				|| Constants.NODE_TYPE_NORMAL.equals(map.get("NODE_TYPE"))){
-			//일반 노드 처리
-			param.put("CO_CD", Constants.INTG_URL);
-			param.put("DL_CD", Constants.URL_CODE_OPENAPI_ROUT);
-			List<Map<String, Object>> list = commonMapper.selectCommonDtlList(param);
-			String baseUrl = (String) list.get(0).get("REMARK");
-			String json = DataInterface.interface_URL("POST", baseUrl + map.get("INT_ROUT_ID")); 
-			nodeList = DataInterface.parseJsonRouteNode(json);
-		}
+		param.put("INTG_ID", Constants.OPENAPI_ROUT_STA_ID);
+		List<Map<String, Object>> list = si0404Mapper.selectIntg(param);
+		String baseUrl = (String) list.get(0).get("INTG_URL");
+		String apiKey = (String) list.get(0).get("INTG_API_KEY");
 		
-		if(map.get("NODE_TYPE") == null || ((String)map.get("NODE_TYPE")).isEmpty() 
-				|| Constants.NODE_TYPE_BUSSTOP.equals(map.get("NODE_TYPE"))){
-			//공공데이터 정류소 처리
-			String routId = "SJB" +  map.get("INT_ROUT_ID");
-			
-			param.put("CO_CD", Constants.INTG_URL);
-			param.put("DL_CD", Constants.URL_CODE_OPENAPI_ROUT_STA );
-			List<Map<String, Object>>  list = commonMapper.selectCommonDtlList(param);
-			String baseUrl = baseUrl = (String) list.get(0).get("REMARK");
-			
-			param.put("CO_CD", Constants.API_KEY);
-			param.put("DL_CD", Constants.KEY_CODE_OPENAPI_ROUT );
-			list = commonMapper.selectCommonDtlList(param);
-			String apiKey = (String) list.get(0).get("REMARK");
-			
-			String url = baseUrl + "serviceKey=" + apiKey + "&cityCode=12&routeId="+ routId;
-			
-			staList = new ArrayList<>();
-			NodeList tempList = DataInterface.interface_XML(url);
-			
-			
-			for(int i = 0; i < tempList.getLength(); i++) { //노선별 정류장에 걸리는 for문
-				Map<String, Object> tmp = new HashMap<String, Object>();
-				Node child = tempList.item(i);
+		//공공데이터 정류소 처리
+		String routId = (String) map.get("PUB_ROUT_ID");
+		
+		String url = baseUrl + "serviceKey=" + apiKey + "&cityCode=12&routeId="+ routId;
+		
+		staList = new ArrayList<>();
+		NodeList tempList = DataInterface.interface_XML(url);
+		
+		
+		for(int i = 0; i < tempList.getLength(); i++) { //노선별 정류장에 걸리는 for문
+			Map<String, Object> tmp = new HashMap<String, Object>();
+			Node child = tempList.item(i);
+			System.out.println(child);
+			//한 노선의 정류장 parse
+			if(child.getNodeType() == Node.ELEMENT_NODE) {
+				Element eElement = (Element)child;
+				tmp.put("STTN_ID",DataInterface.getTagValue("nodeid", eElement).substring(3));
+				tmp.put("NODE_ID",DataInterface.getTagValue("nodeid", eElement).substring(3));
+				tmp.put("NODE_NM",DataInterface.getTagValue("nodenm", eElement));
+				tmp.put("STTN_NO",DataInterface.getTagValue("nodeno", eElement));
+				tmp.put("GPS_Y",DataInterface.getTagValue("gpslati", eElement));
+				tmp.put("GPS_X",DataInterface.getTagValue("gpslong", eElement));
+				tmp.put("NODE_TYPE",Constants.NODE_TYPE_BUSSTOP);
 				
-				//한 노선의 정류장 parse
-				if(child.getNodeType() == Node.ELEMENT_NODE) {
-					Element eElement = (Element)child;
-					tmp.put("STTN_ID",DataInterface.getTagValue("nodeid", eElement).substring(3));
-					tmp.put("NODE_ID",DataInterface.getTagValue("nodeid", eElement).substring(3));
-					tmp.put("NODE_NM",DataInterface.getTagValue("nodenm", eElement));
-					tmp.put("STTN_NO",DataInterface.getTagValue("nodeno", eElement));
-					tmp.put("GPS_Y",DataInterface.getTagValue("gpslati", eElement));
-					tmp.put("GPS_X",DataInterface.getTagValue("gpslong", eElement));
-					tmp.put("NODE_TYPE",Constants.NODE_TYPE_BUSSTOP);
-					
-					staList.add(tmp);
-				}
+				staList.add(tmp);
 			}
-			//첫번째 정류장과 마지막 정류장이 같은 경우 (순환노선)
-			//첫번째 정류장 삭제
-			if(staList.size() > 0) {
-				if(staList.get(0).get("STTN_ID").equals(staList.get(staList.size()-1).get("STTN_ID"))) {
-					staList.remove(0);
-				}
+		}
+		//첫번째 정류장과 마지막 정류장이 같은 경우 (순환노선)
+		//첫번째 정류장 삭제
+		if(staList.size() > 0) {
+			if(staList.get(0).get("STTN_ID").equals(staList.get(staList.size()-1).get("STTN_ID"))) {
+				staList.remove(0);
 			}
 		}
 		
