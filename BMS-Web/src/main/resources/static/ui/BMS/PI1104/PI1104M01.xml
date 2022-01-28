@@ -126,7 +126,7 @@
 			</xf:submission>
 			<xf:submission id="sub_PI1104G1R0" ref="data:json,dma_subsearch" target="data:json,dlt_VHC_MST" action="/pi/PI1104G1R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI1104G1R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI1104G1U0" ref='data:json,{"action":"modified","id":"dlt_VHC_MST"}' target="data:json,dma_result"
 				action="/pi/PI1104G1U0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
@@ -135,7 +135,7 @@
 			</xf:submission>
 			<xf:submission id="sub_PI1104G2R0" ref="data:json,dma_subsearch2" target="data:json,dlt_BMS_ED_RSV_RST_INFO"
 				action="/pi/PI1104G2R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
-				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI1104G2R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI1104G1R1" ref="" target="data:json,dlt_VHC_MST_MNG_LIST" action="/pi/PI1104G1R1" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
@@ -210,8 +210,9 @@
 //		dma_BMS_ED_INFO.set("CATEGORY", dlt_BMS_ED_INFO.getCellData(row, "CATEGORY"));
 //		dma_BMS_ED_INFO.set("FRAME", dlt_BMS_ED_INFO.getCellData(row, "FRAME"));
 //		dma_BMS_ED_INFO.set("FONT", dlt_BMS_ED_INFO.getCellData(row, "FONT"));
-//		dma_BMS_ED_INFO.set("REMARK", dlt_BMS_ED_INFO.getCellData(row, "REMARK"));		
+//		dma_BMS_ED_INFO.set("REMARK", dlt_BMS_ED_INFO.getCellData(row, "REMARK"));
 		
+		debugger;
 		var jsonData = dlt_BMS_ED_INFO.getAllJSON()[row];
 		dma_BMS_ED_INFO.setJSON(jsonData);
 		
@@ -330,6 +331,14 @@
 	scwin.RSV_DT_onchange = function() {
 		com.executeSubmission(sub_PI1104G2R0);		
 	};
+	
+	scwin.sub_PI1104G1R0_submitdone = function(e) {
+		com.setFocusedCell(PI1104G1, "VHC_ID");
+	};
+	
+	scwin.sub_PI1104G2R0_submitdone = function(e) {
+		com.setFocusedCell(PI1104G2, "VHC_NO");
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -388,7 +397,7 @@
 					<xf:group></xf:group> <!-- margin-->
 					<xf:group id="" class="" style="">
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
-								dataList="data:dlt_BMS_ED_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.PI1104G0_oncellclick" ev:oneditkeyup=""
+								dataList="data:dlt_BMS_ED_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup=""
 								ev:onkeyup="" ev:onrowindexchange="scwin.PI1104G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange=""
 								fixedColumnWithHidden="true" id="PI1104G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true"
 								rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true"
