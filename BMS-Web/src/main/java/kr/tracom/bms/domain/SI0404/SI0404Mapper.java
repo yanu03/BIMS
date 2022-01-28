@@ -17,6 +17,8 @@ public interface SI0404Mapper {
 	
 	public List SI0404P0R0(Map param);
 	
+	public List selectIntg(Map param);
+	
 	public Map SI0404G1K0();
 	public Map SI0404G1K1();
 	

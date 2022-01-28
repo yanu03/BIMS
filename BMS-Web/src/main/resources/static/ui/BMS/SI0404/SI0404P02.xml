@@ -36,9 +36,9 @@
 			</w2:dataList>
 		</w2:dataCollection>
 		<w2:workflowCollection></w2:workflowCollection>
-		<xf:submission id="sub_SI0404P0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_NODE_MST" action="/si/SI0404P0R0"
+		<xf:submission id="sub_SI0404P1R0" ref="data:json,dma_search" target="data:json,dlt_BMS_NODE_MST" action="/si/SI0404P1R0"
 			method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-			processMsg="" ev:submit="" ev:submitdone="scwin.sub_SI0404P0R0_submitdone" ev:submiterror="" abortTrigger="">
+			processMsg="" ev:submit="" ev:submitdone="scwin.sub_SI0404P1R0_submitdone" ev:submiterror="" abortTrigger="">
 		</xf:submission>
 	</xf:model>
 	<script type="text/javascript" lazy="false"><![CDATA[
@@ -48,8 +48,8 @@
 		isConfirmBtnClick = false;
 		scwin.param = com.getParameter();
 		dma_search.set("ROUT_ID" , scwin.param.data.ROUT_ID);
-		dma_search.set("INT_ROUT_ID" , scwin.param.data.INT_ROUT_ID);
-		dma_search.set("NODE_ECPT_ID" , scwin.param.data.NODE_IDS);
+		dma_search.set("PUB_ROUT_ID" , scwin.param.data.PUB_ROUT_ID);
+		//dma_search.set("NODE_ECPT_ID" , scwin.param.data.NODE_IDS);
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
 		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
 		var btnOptions = 
@@ -58,12 +58,13 @@
 		];
 		com.setMainBtn3(wfm_mainBtn, btnOptions);
 
-		var codeOptions = [{ code : "NODE_TYPE", compID : "sbx_NodeType, SI0404P0:NODE_TYPE"}];
+		var codeOptions = [{ code : "NODE_TYPE", compID : "SI0404P1:NODE_TYPE"}];
 
 		com.setCommonDtl(codeOptions, function() {
 			scwin.btn_search_onclick();
 		});
-						
+			
+		com.executeSubmission(sub_SI0404P1R0);				
 	};
 	
 	scwin.onpageunload = function() {
@@ -72,14 +73,14 @@
 	
 	
 	scwin.btn_search_onclick = function() {
-		com.executeSubmission(sub_SI0404P0R0);
+		com.executeSubmission(sub_SI0404P1R0);
 	};
 	
 	scwin.btn_confirm_onclick = function() {
 		console.log("btn_confirm_onclick isConfirmBtnClick="+isConfirmBtnClick);
 		if(isConfirmBtnClick==false){
 			isConfirmBtnClick = true;
-			var data = SI0404P0.getCheckedJSON("chk");
+			var data = SI0404P1.getCheckedJSON("chk");
 			com.closePopup(scwin.closeCallbackFncName, data);
 		}	
 	};
@@ -87,26 +88,26 @@
 	scwin.btn_cancel_onclick = function() {
 		com.closePopup();		
 	};
-	scwin.SI0404P0_oncellclick = function(row,col) {
+	scwin.SI0404P1_oncellclick = function(row,col) {
 		if(col==0)return;
-		if(SI0404P0.getCellChecked(row,"chk")){
-			SI0404P0.setCellChecked(row,"chk",false)
+		if(SI0404P1.getCellChecked(row,"chk")){
+			SI0404P1.setCellChecked(row,"chk",false)
 		}
 		else {
-			SI0404P0.setCellChecked(row,"chk",true)
+			SI0404P1.setCellChecked(row,"chk",true)
 		}
 	};
 	
-	scwin.sub_SI0404P0R0_submitdone = function(e) {
+	scwin.sub_SI0404P1R0_submitdone = function(e) {
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
 		
 			var ids=dma_search.get("NODE_ECPT_ID");
-			com.excludeItemsByGrid(SI0404P0, ids, "NODE_ID");
+			com.excludeItemsByGrid(SI0404P1, ids, "NODE_ID");
 			
 			var rowData = dlt_BMS_NODE_MST.getAllJSON();
 			for(var i = 0; i < rowData.length; i++) { //노선의 노드 순번을 그리드 순서대로 재 할당함.
-				SI0404P0.setCellChecked(i,"chk", true);
+				SI0404P1.setCellChecked(i,"chk", true);
 			}
 		}
 	};
@@ -136,16 +137,16 @@
 			</xf:group>
 			<xf:group style="" id="" class="popup_content">
 				<w2:gridView  fixedColumnWithHidden="true" dataList="data:dlt_BMS_NODE_MST" useShiftKey="false" readOnly="true"
-					style="width:775px" scrollByColumn="false" id="SI0404P0" autoFit="allColumn" class="cm_grid popup"
-					ev:oncellclick="scwin.SI0404P0_oncellclick">
+					style="width:775px" scrollByColumn="false" id="SI0404P1" autoFit="allColumn" class="cm_grid popup"
+					ev:oncellclick="scwin.SI0404P1_oncellclick">
 					<w2:header style="" id="header1">
 						<w2:row style="" id="row1">
 							<w2:column width="39" inputType="checkbox" style="height:20px" id="chkHeader" value="선택" blockSelect="false"></w2:column>
 							<w2:column width="90" inputType="text" style="height:20px" id="column5" value="노드명" blockSelect="false"></w2:column>
-							<w2:column width="90" inputType="text" style="height:20px" id="column5" value="정류장번호" blockSelect="false"></w2:column>
-							<w2:column width="90" inputType="text" style="height:20px" id="column5" value="노드유형" blockSelect="false"></w2:column>
-							<w2:column width="90" inputType="text" style="height:20px" id="column5" value="경도" blockSelect="false"></w2:column>
-							<w2:column width="90" inputType="text" style="height:20px" id="column5" value="위도" blockSelect="false"></w2:column>
+							<w2:column width="90" inputType="text" style="height:20px" id="column6" value="정류장번호" blockSelect="false"></w2:column>
+							<w2:column width="90" inputType="text" style="height:20px" id="column7" value="노드유형" blockSelect="false"></w2:column>
+							<w2:column width="90" inputType="text" style="height:20px" id="column8" value="경도" blockSelect="false"></w2:column>
+							<w2:column width="90" inputType="text" style="height:20px" id="column9" value="위도" blockSelect="false"></w2:column>
 						</w2:row>
 						</w2:header>
 						<w2:gBody id="gBody1" style="">

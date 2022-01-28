@@ -167,6 +167,7 @@
 				REP_ROUT_ID,
 				REP_ROUT_NM,
 				INT_ROUT_ID,
+				PUB_ROUT_ID,
 				ROUT_NM,
 				ROUT_TYPE,
 				ST_STTN_ID,

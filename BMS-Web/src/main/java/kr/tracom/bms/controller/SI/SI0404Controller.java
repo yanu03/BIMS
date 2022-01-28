@@ -38,5 +38,11 @@ public class SI0404Controller extends ControllerSupport {
 		return result.getResult();
 	}
 	
+	@RequestMapping("/si/SI0404P1R0")
+	public @ResponseBody Map<String, Object> SI0404P1R0() throws Exception {
+		result.setData("dlt_BMS_NODE_MST", si0404Service.SI0404P1R0());
+		return result.getResult();
+	}
+	
 
 }

@@ -1,5 +1,6 @@
-package kr.tracom.bms.domain.SI0702;
+package kr.tracom.bms.domain.SI0601;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,53 +8,46 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+import kr.tracom.bms.domain.SI0101.SI0101Mapper;
 import kr.tracom.cm.support.ServiceSupport;
 import kr.tracom.cm.support.exception.MessageException;
 import kr.tracom.util.Result;
 
 @Service
-public class SI0702Service extends ServiceSupport {
-
+public class SI0601Service extends ServiceSupport {
+	
 	@Autowired
-	private SI0702Mapper si0702Mapper;
+	private SI0601Mapper si0601Mapper;
 	
-
-	
-	public List SI0702G0R0() throws Exception {
+	public List SI0601G0R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
-		return si0702Mapper.SI0702G0R0(map);
-	}
-	
-	public List SI0702SHI0() throws Exception {
-		return si0702Mapper.SI0702SHI0();
-	}
-	
-	
-	public Map SI0702G0K0() throws Exception {
-		return si0702Mapper.SI0702G0K0(); 
-	}
-	
-	public List SI0702P0R0() throws Exception {
-		Map<String, Object> map = getSimpleDataMap("dma_sub_search");
-		return si0702Mapper.SI0702P0R0(map);
+		return si0601Mapper.SI0601G0R0(map);
 	}
 
-	public Map SI0702G0S0() throws Exception {
+	public Map SI0601G0K0() throws Exception {
+		return si0601Mapper.SI0601G0K0(); 
+	}
+	
+	public List SI0601SHI0() throws Exception {
+		return si0601Mapper.SI0601SHI0();
+	}	
+	
+	public Map SI0601G0S0() throws Exception {
 		int iCnt = 0;
 		int uCnt = 0;
 		int dCnt = 0;		
 		
-		List<Map<String, Object>> param = getSimpleList("dlt_BMS_PARTNER_MEMBER_INFO");
+		List<Map<String, Object>> param = getSimpleList("dlt_BMS_PARTNER_MST");
 		try {
 			for (int i = 0; i < param.size(); i++) {
 				Map data = (Map) param.get(i);
 				String rowStatus = (String) data.get("rowStatus");
 				if (rowStatus.equals("C")) {
-					iCnt += si0702Mapper.SI0702G0I0(data);
+					iCnt += si0601Mapper.SI0601G0I0(data);
 				} else if (rowStatus.equals("U")) {
-					uCnt += si0702Mapper.SI0702G0U0(data);
+					uCnt += si0601Mapper.SI0601G0U0(data);
 				} else if (rowStatus.equals("D")) {
-					dCnt += si0702Mapper.SI0702G0D0(data);
+					dCnt += si0601Mapper.SI0601G0D0(data);
 				} 
 			}			
 		} catch(Exception e) {
@@ -66,8 +60,13 @@ public class SI0702Service extends ServiceSupport {
 				throw e;
 			}		
 		}
+
+		
 		Map result = saveResult(iCnt, uCnt, dCnt);
 		
 		return result;		
+		
 	}
+	
+
 }

@@ -20,7 +20,7 @@ public class SI0702Controller extends ControllerSupport {
 	
 	@RequestMapping("/si/SI0702G0R0")
 	public @ResponseBody Map<String, Object> SI0702G0R0() throws Exception {
-		result.setData("dlt_BMS_EMER_MEMBER_INFO", si0702Service.SI0702G0R0());
+		result.setData("dlt_BMS_PARTNER_MEMBER_INFO", si0702Service.SI0702G0R0());
 		return result.getResult();
 	}
 
@@ -31,14 +31,14 @@ public class SI0702Controller extends ControllerSupport {
 	}	
 
 	@RequestMapping("/si/SI0702G0K0")
-	public @ResponseBody Map<String, Object> SI0405G0K0() throws Exception {
-		result.setData("dlt_SEQ_BMS_EMER_MEMBER_INFO_0", si0702Service.SI0702G0K0());
+	public @ResponseBody Map<String, Object> SI0702G0K0() throws Exception {
+		result.setData("dlt_SEQ_BMS_PARTNER_MEMBER_INFO_0", si0702Service.SI0702G0K0());
 		return result.getResult();
 	}
 	
 	@RequestMapping("/si/SI0702P0R0")
-	public @ResponseBody Map<String, Object> SI0600P0R0() throws Exception {
-		result.setData("dlt_ORG_INFO", si0702Service.SI0702P0R0());
+	public @ResponseBody Map<String, Object> SI0702P0R0() throws Exception {
+		result.setData("dlt_BMS_PARTNER_MST", si0702Service.SI0702P0R0());
 		return result.getResult();
 	}
 	
