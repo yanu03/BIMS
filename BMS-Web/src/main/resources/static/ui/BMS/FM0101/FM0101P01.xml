@@ -9,12 +9,12 @@
 				<data xmlns="" />
 			</xf:instance>
 			<w2:dataCollection baseNode="map">
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_DVC_PARAM_CFG_INFO" saveRemovedData="true">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_FCLT_PARAM_CFG_INFO" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="chk" name="chk" dataType="text"></w2:column>
-						<w2:column id="VHC_ID" name="차량아이디" dataType="text"></w2:column>
-						<w2:column id="DVC_ID" name="장치아이디" dataType="text"></w2:column>
-						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
+						<w2:column id="NODE_ID" name="차량아이디" dataType="text"></w2:column>
+						<w2:column id="FCLT_ID" name="장치아이디" dataType="text"></w2:column>
+						<w2:column id="FCLT_KIND" name="장치종류" dataType="text"></w2:column>
 						<w2:column id="PARAM_DIV" name="매개변수구분" dataType="text"></w2:column>
 						<w2:column id="PARAM_KIND" name="매개변수종류" dataType="text"></w2:column>
 						<w2:column id="DATA_TYPE" name="데이터유형" dataType="text"></w2:column>
@@ -34,32 +34,32 @@
 				<w2:dataMap baseNode="map" id="dma_search">
 					<w2:keyInfo>
 						<w2:key id="PARAM_ECPT_IDS" name="제외파라미터" dataType="text"></w2:key>
-						<w2:key id="DVC_KIND" name="장치종류" dataType="text"></w2:key>
+						<w2:key id="FCLT_KIND" name="장치종류" dataType="text"></w2:key>
 						<w2:key id="TYPE" name="TYPE" dataType="text"></w2:key>
 						<w2:key id="CONTENT" name="CONTENT" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_searchitem" saveRemovedData="true">
 					<w2:columnInfo>
-						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
+						<w2:column id="FCLT_KIND" name="장치종류" dataType="text"></w2:column>
 						<w2:column id="PARAM_DIV" name="매개변수구분" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
-			<xf:submission id="sub_VD0101P0R0" ref='data:json,dma_search' target='data:json,dlt_BMS_DVC_PARAM_CFG_INFO'
-				action="/vd/VD0101P0R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
-				errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_VD0101P0R0_submitdone" ev:submiterror="" abortTrigger="">
+			<xf:submission id="sub_FM0101P0R0" ref='data:json,dma_search' target='data:json,dlt_BMS_FCLT_PARAM_CFG_INFO'
+				action="/fm/FM0101P0R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+				errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_FM0101P0R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_VD0101P0SH" ref="" target="data:json,dlt_searchitem" action="/vd/VD0101P0SH" method="post"
+			<xf:submission id="sub_FM0101P0SH" ref="" target="data:json,dlt_searchitem" action="/fm/FM0101P0SH" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
-				ev:submit="" ev:submitdone="scwin.sub_VD0101P0SH_submitdone" ev:submiterror="" abortTrigger="">
+				ev:submit="" ev:submitdone="scwin.sub_FM0101P0SH_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 		</xf:model>
 		<script type="text/javascript" lazy="false"><![CDATA[
 	scwin.onpageload = function() {
 		scwin.param = com.getParameter();
-		dma_search.set("DVC_KIND" , scwin.param.data.DVC_KIND);
+		dma_search.set("FCLT_KIND" , scwin.param.data.FCLT_KIND);
 		dma_search.set("PARAM_ECPT_IDS" , scwin.param.data.PARAM_ECPT_IDS);
 		
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
@@ -70,24 +70,24 @@
 		];
 		com.setMainBtn3(wfm_mainBtn, btnOptions);
 
-		var codeOptions = [ {code : "DVC_KIND", compID : "VD0101P0:DVC_KIND" }
-							,{code : "PARAM_DIV", compID : "VD0101P0:PARAM_DIV" }
-							,{code : "PARAM_KIND", compID : "VD0101P0:PARAM_KIND" }
-							,{code : "DATA_TYPE", compID : "VD0101P0:DATA_TYPE" }
+		var codeOptions = [ {code : "FCLT_KIND", compID : "FM0101P0:FCLT_KIND" }
+							,{code : "PARAM_DIV", compID : "FM0101P0:PARAM_DIV" }
+							,{code : "PARAM_KIND", compID : "FM0101P0:PARAM_KIND" }
+							,{code : "DATA_TYPE", compID : "FM0101P0:DATA_TYPE" }
 						];
 
 		com.setCommonDtl(codeOptions, function() {
-			com.executeSubmission(sub_VD0101P0R0);
+			com.executeSubmission(sub_FM0101P0R0);
 		});	
 		
 	};
 					
 	scwin.btn_search_onclick = function() {
-		com.executeSubmission(sub_VD0101P0R0);
+		com.executeSubmission(sub_FM0101P0R0);
 	};
 		
 	scwin.btn_confirm_onclick = function() {
-		var data = VD0101P0.getCheckedJSON( "chk" );
+		var data = FM0101P0.getCheckedJSON( "chk" );
 		com.closePopup(scwin.closeCallbackFncName, data);
 	};
 		
@@ -95,19 +95,19 @@
 		com.closePopup();
 	};
 	
-	scwin.VD0101P0_onrowindexchange = function(row,oldRow) {
-		VD0101P0.setCellChecked(row,"chk",true);
+	scwin.FM0101P0_onrowindexchange = function(row,oldRow) {
+		FM0101P0.setCellChecked(row,"chk",true);
 	}
 	
-	scwin.sub_VD0101P0R0_submitdone = function(e) {
+	scwin.sub_FM0101P0R0_submitdone = function(e) {
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
 		
 			//파라미터 종류로 제외(ID필요?)
 			var ids = dma_search.get("PARAM_ECPT_IDS");
-			com.excludeItemsByGrid(VD0101P0, ids, "PARAM_KIND");
+			com.excludeItemsByGrid(FM0101P0, ids, "PARAM_KIND");
 		}
-		com.setFocusedCell(VD0101P0, "DVC_KIND");
+		com.setFocusedCell(FM0101P0, "FCLT_KIND");
 		
 	};
 	
@@ -116,11 +116,11 @@
 			autoChoiceBox.hide();
 			search_input.setValue("");
 			search_input.show("");
-		} else if (info.newValue == "DVC_KIND") {
+		} else if (info.newValue == "FCLT_KIND") {
 			search_input.hide();
-			autoChoiceBox.setNodeSet("data:dlt_searchitem", "DVC_KIND", "DVC_KIND");
+			autoChoiceBox.setNodeSet("data:dlt_searchitem", "FCLT_KIND", "FCLT_KIND");
 			//검색부분 코드값 변경
-			var codeOptions = [ {code : "DVC_KIND", compID : "autoChoiceBox" } ];
+			var codeOptions = [ {code : "FCLT_KIND", compID : "autoChoiceBox" } ];
 			com.setCommonDtl(codeOptions);
 			autoChoiceBox.show("");
 		} else if (info.newValue == "PARAM_DIV") {
@@ -185,7 +185,7 @@
 								</xf:item>
 								<xf:item>
 									<xf:label><![CDATA[장치종류]]></xf:label>
-									<xf:value><![CDATA[DVC_KIND]]></xf:value>
+									<xf:value><![CDATA[FCLT_KIND]]></xf:value>
 								</xf:item>
 								<xf:item>
 									<xf:label><![CDATA[파라미터구분]]></xf:label>
@@ -201,7 +201,7 @@
 							<w2:choices>
 								<w2:itemset nodeset="data:dlt_searchitem">
 									<w2:label ref="VHC_NO"></w2:label>
-									<w2:value ref="VHC_ID"></w2:value>
+									<w2:value ref="NODE_ID"></w2:value>
 								</w2:itemset>
 							</w2:choices>
 						</w2:autoComplete>
@@ -213,15 +213,15 @@
 				<w2:gridView sortEvent="onclick" ev:oncellclick=""
 							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순서"
 							sortable="true" rowStatusHeaderValue="상태"  overflowX="auto" overflowY="scroll" rowStatusVisible="false"
-							fixedColumnWithHidden="true" dataList="data:dlt_BMS_DVC_PARAM_CFG_INFO" ignoreCellClick="false" style=""
-							autoFit="lastColumn" visibleRowNum="10" id="VD0101P0" class="cm_grid right" tooltipPositionY="" checkReadOnlyOnPasteEnable="" 
-							focusFlow="" focusMove="" keyMoveEditMode="" focusDefaultColumn="" focusMode="row" userData1="" ev:onrowindexchange="scwin.VD0101P0_onrowindexchange">
+							fixedColumnWithHidden="true" dataList="data:dlt_BMS_FCLT_PARAM_CFG_INFO" ignoreCellClick="false" style=""
+							autoFit="lastColumn" visibleRowNum="10" id="FM0101P0" class="cm_grid right" tooltipPositionY="" checkReadOnlyOnPasteEnable="" 
+							focusFlow="" focusMove="" keyMoveEditMode="" focusDefaultColumn="" focusMode="row" userData1="" ev:onrowindexchange="scwin.FM0101P0_onrowindexchange">
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row2">
 									<w2:column width="39" style="height:20px" inputType="checkbox" id="chkHeader" value="선택" 
 										blockSelect="false">
 									</w2:column>
-									<w2:column width="100" style="height:20px;" inputType="text" id="column9" value="장치종류"
+									<w2:column width="120" style="height:20px;" inputType="text" id="column9" value="시설물종류"
 										blockSelect="false" displayMode="label" userData1="M" userData2="" class="req">
 									</w2:column>
 									<w2:column width="100" style="height:20px;" inputType="text" id="column17" value="파라미터 구분"
@@ -235,15 +235,6 @@
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column31"
 										value="데이터길이" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column32"
-										value="설정값" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column33"
-										value="속성1" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column34"
-										value="속성2" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column width="100" style="height:20px;" inputType="text" id="column28" value="사용여부"
 										blockSelect="false">
@@ -264,7 +255,7 @@
 									<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px" inputType="checkbox"
 										id="chk" blockSelect="false">
 									</w2:column>
-									<w2:column width="134" style="height:20px;" inputType="select" id="DVC_KIND" blockSelect="false"
+									<w2:column width="134" style="height:20px;" inputType="select" id="FCLT_KIND" blockSelect="false"
 										displayMode="label" readOnly="true" userData1="M">
 									</w2:column>
 									<w2:column width="159" style="height:20px;" inputType="select" id="PARAM_DIV" blockSelect="false"
@@ -277,15 +268,6 @@
 										value="" blockSelect="false" displayMode="label" readOnly="true" valueType="other">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_LENGTH"
-										value="" blockSelect="false" displayMode="label" readOnly="true">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_VAL"
-										value="" blockSelect="false" displayMode="label" readOnly="true">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ATTR1_VAL"
-										value="" blockSelect="false" displayMode="label" readOnly="true">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ATTR2_VAL"
 										value="" blockSelect="false" displayMode="label" readOnly="true">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="USE_YN"
