@@ -86,7 +86,7 @@ public class SI0600Service extends ServiceSupport {
 		int uCnt = 0;
 		int dCnt = 0;		
 		
-		List<Map<String, Object>> param = getSimpleList("dlt_EMER_MEMBER_INFO");
+		List<Map<String, Object>> param = getSimpleList("dlt_BMS_EMER_MEMBER_CMPSTN");
 		try {
 			for (int i = 0; i < param.size(); i++) {
 				Map data = (Map) param.get(i);
