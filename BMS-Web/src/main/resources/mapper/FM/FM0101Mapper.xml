@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.tracom.bms.domain.FM0101.FM0101Mapper">
+
+	
+<select id="FM0101SHI1" resultType="Map">
+	SELECT			ORG_ID
+					,ORG_NM
+	FROM	  		BMS_ORG_MST
+	WHERE			ORG_DIV = 'OD008'
+</select>	
+
+<select id="FM0101SHI2" resultType="Map">
+	SELECT			CLSFCTN_ID
+					,CLSFCTN_NM
+	FROM	  		BMS_EMER_CLSFCTN_MST
+</select>	
+	
+<select id="FM0101G1R0" resultType="Map">
+	SELECT 
+			A.FCLT_ID
+			,A.MAKER
+			,A.FCLT_KIND
+			,A.CLSFCTN_ID
+			,A.INST_LOC
+			,A.MODEL_NM
+			,DATE_FORMAT(A.BUY_DT, '%Y%m%d') BUY_DT
+			,DATE_FORMAT(A.INST_DT, '%Y%m%d') INST_DT
+			,A.FCLT_COORDS
+			,A.USE_YN
+			,A.CTR_YN
+			,A.REMARK
+			,A.NODE_ID
+			,A.MNG_ID
+			,A.FCLT_IP
+			,B.CLSFCTN_NM
+	FROM
+		BMS_FCLT_INFO A
+		LEFT OUTER JOIN BMS_EMER_CLSFCTN_MST B
+		ON A.CLSFCTN_ID = B.CLSFCTN_ID
+	WHERE
+		A.NODE_ID = 	#{NODE_ID}
+</select>
+
+<select id="FM0101G2R0" resultType="Map">
+	SELECT 			NODE_ID
+					,FCLT_ID
+					,FCLT_KIND
+					,PARAM_DIV
+					,PARAM_KIND
+					,DATA_TYPE
+					,DATA_LENGTH
+					,DATA_VAL
+					,ATTR1_VAL
+					,ATTR2_VAL
+					,SCHEDULE_YN
+					,USE_YN
+					,AUTO_YN
+					,REMARK
+	FROM			BMS_FCLT_PARAM_INFO	
+	
+	WHERE			NODE_ID = #{NODE_ID} AND FCLT_ID = #{FCLT_ID}
+</select>
+
+<select id="FM0101G3R0" resultType="Map" parameterType="Map">
+	SELECT 
+		SN
+		,FCLT_KIND
+		,PARAM_DIV
+		,PARAM_KIND
+		,ST_TIME
+		,ED_TIME
+		,DATA_VAL
+		,REMARK
+		,DATE_FORMAT(UPD_DTM, '%Y-%m-%d') UPD_DTM
+		,UPD_ID
+	FROM 
+		BMS_FCLT_SCH_INFO
+	WHERE
+		FCLT_KIND = #{FCLT_KIND} 
+		AND PARAM_DIV = #{PARAM_DIV} 
+		AND PARAM_KIND = #{PARAM_KIND}
+	ORDER BY
+		SN
+</select>
+
+<insert id="FM0101G2I0" parameterType="Map">
+	INSERT INTO		BMS_FCLT_PARAM_INFO	
+					(
+						NODE_ID
+						,FCLT_ID
+						,FCLT_KIND
+						,PARAM_DIV
+						,PARAM_KIND
+						,DATA_TYPE
+						,DATA_LENGTH
+						,DATA_VAL
+						,ATTR1_VAL
+						,ATTR2_VAL
+						,SCHEDULE_YN
+						,USE_YN
+						,AUTO_YN
+						,REMARK
+						,UPD_DTM
+						,UPD_ID						
+					)
+	VALUES			(
+						#{NODE_ID}
+						,#{FCLT_ID}
+						,#{FCLT_KIND}
+						,#{PARAM_DIV}
+						,#{PARAM_KIND}
+						,#{DATA_TYPE}
+						,#{DATA_LENGTH}
+						,#{DATA_VAL}
+						,#{ATTR1_VAL}
+						,#{ATTR2_VAL}
+						,#{SCHEDULE_YN}
+						,#{USE_YN}
+						,#{AUTO_YN}
+						,#{REMARK}
+						,#{UPD_DTM}
+						,#{SSN_UPD_ID}				
+					)
+	
+	
+						
+</insert>
+
+<update id="FM0101G2U0" parameterType="Map">
+	UPDATE			BMS_FCLT_PARAM_INFO
+	SET				NODE_ID = #{NODE_ID}
+					,FCLT_ID = #{FCLT_ID}
+					,FCLT_KIND = #{FCLT_KIND}
+					,PARAM_DIV = #{PARAM_DIV}
+					,PARAM_KIND = #{PARAM_KIND}
+					,DATA_TYPE = #{DATA_TYPE}
+					,DATA_LENGTH = #{DATA_LENGTH}
+					,DATA_VAL = #{DATA_VAL}
+					,ATTR1_VAL = #{ATTR1_VAL}
+					,ATTR2_VAL = #{ATTR2_VAL}
+					,SCHEDULE_YN = #{SCHEDULE_YN}
+					,USE_YN = #{USE_YN}
+					,AUTO_YN = #{AUTO_YN}
+					,REMARK = #{REMARK}
+					,UPD_DTM = #{UPD_DTM}
+					,UPD_ID = #{SSN_UPD_ID}
+					
+	WHERE			NODE_ID = #{NODE_ID} AND FCLT_ID = #{FCLT_ID} AND FCLT_KIND = #{FCLT_KIND} AND PARAM_DIV = #{PARAM_DIV} AND PARAM_KIND = #{PARAM_KIND}
+</update>
+
+<delete id="FM0101G2D0" parameterType="Map">
+	DELETE FROM 	BMS_FCLT_PARAM_INFO
+	WHERE			NODE_ID = #{NODE_ID} AND FCLT_ID = #{FCLT_ID} AND FCLT_KIND = #{FCLT_KIND} AND PARAM_DIV = #{PARAM_DIV} AND PARAM_KIND = #{PARAM_KIND}
+</delete>
+
+<select id="FM0101P0R0" resultType="Map" parameterType="Map">
+	SELECT 
+		FCLT_KIND
+		,PARAM_DIV
+		,PARAM_KIND
+		,DATA_TYPE
+		,DATA_LENGTH
+		,DATA_VAL
+		,ATTR1_VAL
+		,ATTR2_VAL
+		,SCHEDULE_YN
+		,USE_YN
+		,AUTO_YN
+		,REMARK
+		,DATE_FORMAT(UPD_DTM, '%Y-%m-%d') UPD_DTM
+		,UPD_ID
+	FROM 
+		BMS_FCLT_PARAM_CFG_INFO
+	<where>
+		FCLT_KIND = #{FCLT_KIND}
+			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
+				AND (FCLT_KIND LIKE CONCAT('%',#{CONTENT},'%') || PARAM_DIV LIKE CONCAT('%',#{CONTENT},'%'))
+			</if>
+			<if test="TYPE == 'FCLT_KIND'">
+				AND FCLT_KIND LIKE CONCAT('%',#{CONTENT},'%')
+			</if>
+			<if test="TYPE == 'PARAM_DIV'">
+				AND PARAM_DIV LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+	</where>
+	ORDER BY
+		FCLT_KIND
+</select>
+
+<select id="FM0101P0SH" resultType="Map">
+	SELECT			FCLT_KIND
+					,PARAM_DIV	
+	FROM			BMS_FCLT_PARAM_CFG_INFO
+</select>
+
+
+<!-- plf 테이블에 삽입 20211018 jh -->
+<insert id="FM0101G1I2" parameterType="Map">
+	INSERT INTO PLF_IMP_DEV_MST (
+								  IMP_ID
+								, IMP_NM
+								, IMP_TYPE
+								, VHC_ID
+								, VHC_NO
+								, USE_YN
+								)
+	VALUES (
+			  #{MNG_ID}
+			, (SELECT VHC_NO FROM BMS_VHC_MST WHERE VHC_ID = #{VHC_ID})
+			, ''
+			, #{VHC_ID}
+			, (SELECT VHC_NO FROM BMS_VHC_MST WHERE VHC_ID = #{VHC_ID})
+			, 'Y'
+	);
+	
+	INSERT INTO PLF_IMP_SESS_INFO (
+								  PLF_ID
+								, SESS_ID
+                                , SESS_NM
+                                , SESS_IP
+                                , REMOTE_TYPE
+                                , ELAPSED_TIME
+                                , IN_PACKET
+                                , OUT_PACKET
+                                )
+	VALUES(
+			  'SB-2021-01'
+			, #{MNG_ID}
+			, (SELECT VHC_NO FROM BMS_VHC_MST WHERE VHC_ID = #{VHC_ID})
+			, '-'
+			, ''
+			, '0'
+			, '0'
+			, '0'
+		);
+</insert>
+
+<!-- plf 테이블 업데이트 20211018 jh -->
+<update id="FM0101G1U2" parameterType="Map">
+	UPDATE
+		PLF_IMP_DEV_MST
+	SET
+		  IMP_ID = #{MNG_ID}
+		, IMP_TYPE = ''
+	WHERE
+		IMP_NM = (SELECT VHC_NO FROM BMS_VHC_MST WHERE VHC_ID = #{VHC_ID});
+		
+	UPDATE
+		PLF_IMP_SESS_INFO
+	SET
+		  SESS_ID = #{MNG_ID}
+		, REMOTE_TYPE = ''
+	WHERE
+		SESS_NM = (SELECT VHC_NO FROM BMS_VHC_MST WHERE VHC_ID = #{VHC_ID});
+</update>
+
+<!-- plf 테이블 삭제 20211018 jh -->
+<delete id="FM0101G1D2" parameterType="Map">
+	DELETE FROM PLF_IMP_DEV_MST
+	WHERE IMP_ID = #{MNG_ID};
+	
+	DELETE FROM PLF_IMP_SESS_INFO
+	WHERE SESS_ID = #{MNG_ID};
+</delete>
+
+</mapper>

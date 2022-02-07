@@ -64,6 +64,8 @@
 					,A.DVC_KIND
 					,A.DVC_COORDS
 					,A.INST_LOC
+					,A.LEVEL
+					,A.PARENT_ID
 					,A.DVC_IP
 					,A.MNG_ID	
 <!-- 					,A.DVC_TYPE
@@ -75,12 +77,16 @@
 					,A.REMARK
 					,B.ORG_NM
 					,C.CLSFCTN_NM
+					,D.DL_CD_NM AS DVC_KIND_NM
 					
 	FROM			BMS_DVC_INFO A	
 	LEFT JOIN	  	BMS_ORG_MST	B
 	ON				A.ORG_ID = B.ORG_ID
 	LEFT JOIN		BMS_EMER_CLSFCTN_MST C
 	ON				A.CLSFCTN_ID = C.CLSFCTN_ID
+	LEFT JOIN		BMS_DL_CD_INFO D
+	ON				A.DVC_KIND = D.DL_CD
+	AND				D.CO_CD = 'DVC_KIND'
 	
 	WHERE			A.VHC_ID = #{VHC_ID}
 </select>
@@ -132,7 +138,7 @@
 						,#{PARAM_DIV}
 						,#{PARAM_KIND}
 						,#{DATA_TYPE}
-						,#{DATA_LENGTH}
+						,NULLIF(#{DATA_LENGTH}, '')
 						,#{DATA_VAL}
 						,#{ATTR1_VAL}
 						,#{ATTR2_VAL}
@@ -156,7 +162,7 @@
 					,PARAM_DIV = #{PARAM_DIV}
 					,PARAM_KIND = #{PARAM_KIND}
 					,DATA_TYPE = #{DATA_TYPE}
-					,DATA_LENGTH = #{DATA_LENGTH}
+					,DATA_LENGTH = NULLIF(#{DATA_LENGTH}, '')
 					,DATA_VAL = #{DATA_VAL}
 					,ATTR1_VAL = #{ATTR1_VAL}
 					,ATTR2_VAL = #{ATTR2_VAL}
@@ -167,12 +173,12 @@
 					,UPD_DTM = #{UPD_DTM}
 					,UPD_ID = #{SSN_UPD_ID}
 					
-	WHERE			VHC_ID = #{VHC_ID} AND DVC_ID = #{DVC_ID}
-</update>
+	WHERE			VHC_ID = #{VHC_ID} AND DVC_ID = #{DVC_ID} AND DVC_KIND = #{DVC_KIND} AND PARAM_DIV = #{PARAM_DIV} AND PARAM_KIND = #{PARAM_KIND}
+</update> 
 
 <delete id="VD0101G2D0" parameterType="Map">
 	DELETE FROM 	BMS_DVC_PARAM_INFO
-	WHERE			VHC_ID = #{VHC_ID} AND DVC_ID = #{DVC_ID}
+	WHERE			VHC_ID = #{VHC_ID} AND DVC_ID = #{DVC_ID} AND DVC_KIND = #{DVC_KIND} AND PARAM_DIV = #{PARAM_DIV} AND PARAM_KIND = #{PARAM_KIND}
 </delete>
 
 <select id="VD0101P0R0" resultType="Map" parameterType="Map">

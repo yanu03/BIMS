@@ -230,11 +230,20 @@
 									<w2:column width="150" style="height:20px;" inputType="text" id="column30" value="파라미터 종류"
 										blockSelect="false" userData1="M" userData2="" class="req">
 									</w2:column>
-									<w2:column width="100" inputType="text" style="height:20px" id="column31" 
+									<w2:column width="100" inputType="text" style="height:20px" id="column32" 
 										value="데이터유형" blockSelect="false" sortable="false">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column31"
 										value="데이터길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column32"
+										value="설정값" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column33"
+										value="속성1" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column34"
+										value="속성2" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column width="100" style="height:20px;" inputType="text" id="column28" value="사용여부"
 										blockSelect="false">
@@ -268,6 +277,15 @@
 										value="" blockSelect="false" displayMode="label" readOnly="true" valueType="other">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_LENGTH"
+										value="" blockSelect="false" displayMode="label" readOnly="true">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_VAL"
+										value="" blockSelect="false" displayMode="label" readOnly="true">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ATTR1_VAL"
+										value="" blockSelect="false" displayMode="label" readOnly="true">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ATTR2_VAL"
 										value="" blockSelect="false" displayMode="label" readOnly="true">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="USE_YN"

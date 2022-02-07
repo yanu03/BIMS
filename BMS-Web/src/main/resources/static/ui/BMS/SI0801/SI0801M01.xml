@@ -144,58 +144,71 @@
 	
 	//스케쥴 유무 업데이트를 위한 저장 함수
 	scwin.saveGrid = function() {
+		debugger;
 		var str;
 		var yesno_str;
-		var idx = SI0801G1.getModifiedIndex().length;
+		var idx_G0 = SI0801G0.getModifiedIndex().length;
+		var idx_G1 = SI0801G1.getModifiedIndex().length;
 		var rowStatus = [];
 		var schYn = true;
 		var curStatus;
 		
-		if (idx == 0) {
+		if(idx_G0 > 0){
+			com.saveGrid(SI0801G0, sub_SI0801G0S0);
+		}else if(idx_G1 > 0){
+			if (idx_G1 == 0) {
+				if(	(typeof str == "undefined") || (str.trim() == ""))
+					str = "저장할 데이터가 없습니다";
+				com.alert(str);
+				return false;
+			}
+			
+			if (com.validateGridView(SI0801G1)) {
+				var rowCount = dlt_BMS_FCLT_SCH_INFO.getRowCount();
+				
+				for(var i = 0; i < rowCount; i++){
+					rowStatus[i] = dlt_BMS_FCLT_SCH_INFO.getRowStatus(i);
+				}
+				
+				for(var j = 0; j < rowStatus.length; j++){
+					curStatus = rowStatus[j].toString();
+					
+					if(curStatus != "D"){
+						schYn = false;
+						dma_sub_search.set("SCHEDULE_YN", "Y");
+						break;
+					}else if(curStatus == "D"){
+						continue;
+					}
+					
+				}
+				
+				if(schYn){
+					dma_sub_search.set("SCHEDULE_YN", "N");
+				}
+				
+				if (idx_G1 > 0) {
+					if(	(typeof yesno_str == "undefined") || (yesno_str.trim() == "")){
+						yesno_str = com.strModifiedCnt(SI0801G1) + "의 데이터가 저장됩니다. \n 진행하시겠습니까?";
+					}
+					else {
+						yesno_str = idx_G1 + yesno_str;
+					}
+					com.confirm(yesno_str, function(rtn) {
+						if (rtn) {
+							com.saveData(SI0801G1,null,sub_SI0801G1S0);
+						}
+					});
+				}
+			}
+		}else if(idx_G0 == 0 && idx_G1 == 0){
 			if(	(typeof str == "undefined") || (str.trim() == ""))
-				str = "저장할 데이터가 없습니다";
-			com.alert(str);
-			return false;
+					str = "저장할 데이터가 없습니다";
+				com.alert(str);
+				return false;
 		}
 		
-		if (com.validateGridView(SI0801G1)) {
-			var rowCount = dlt_BMS_FCLT_SCH_INFO.getRowCount();
-			
-			for(var i = 0; i < rowCount; i++){
-				rowStatus[i] = dlt_BMS_FCLT_SCH_INFO.getRowStatus(i);
-			}
-			
-			for(var j = 0; j < rowStatus.length; j++){
-				curStatus = rowStatus[j].toString();
-				
-				if(curStatus != "D"){
-					schYn = false;
-					dma_sub_search.set("SCHEDULE_YN", "Y");
-					break;
-				}else if(curStatus == "D"){
-					continue;
-				}
-				
-			}
-			
-			if(schYn){
-				dma_sub_search.set("SCHEDULE_YN", "N");
-			}
-			
-			if (idx > 0) {
-				if(	(typeof yesno_str == "undefined") || (yesno_str.trim() == "")){
-					yesno_str = com.strModifiedCnt(SI0801G1) + "의 데이터가 저장됩니다. \n 진행하시겠습니까?";
-				}
-				else {
-					yesno_str = idx + yesno_str;
-				}
-				com.confirm(yesno_str, function(rtn) {
-					if (rtn) {
-						com.saveData(SI0801G1,null,sub_SI0801G1S0);
-					}
-				});
-			}
-		}
+		
 	}
 	
 	/**
