@@ -15,10 +15,6 @@
             </w2:workflowCollection>
         </xf:model>
          <script type="text/javascript" lazy="false"><![CDATA[
-           
-                
-            
-            
 	scwin.onpageload = function() {
 	var geocoder = new daum.maps.services.Geocoder();
 	scwin.param = com.getParameter();
