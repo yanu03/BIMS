@@ -18,6 +18,12 @@ public class VD0204Controller extends ControllerSupport {
 	@Autowired
 	private VD0204Service vd0204Service;
 	
+	@RequestMapping("/vd/test")
+	public @ResponseBody Map<String, Object> test() throws Exception {
+		result.setData("dlt_BMS_DVC_COND_PARAM_INFO", vd0204Service.test());
+		return result.getResult();
+	}
+	
 	@RequestMapping("/vd/VD0204G0R0")
 	public @ResponseBody Map<String, Object> VD0204G0R0() throws Exception {
 		result.setData("dlt_BMS_VHC_MST", vd0204Service.VD0204G0R0());

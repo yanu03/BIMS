@@ -20,6 +20,10 @@ public class VD0204Service extends ServiceSupport {
 	@Autowired
 	private VD0204Mapper vd0204Mapper;
 	
+	public List test() throws Exception {
+		return vd0204Mapper.test();
+	}
+	
 	public List VD0204G0R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
 		return vd0204Mapper.VD0204G0R0(map);

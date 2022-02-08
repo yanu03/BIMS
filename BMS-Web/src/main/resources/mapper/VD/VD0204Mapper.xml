@@ -3,6 +3,10 @@
 
 <mapper namespace="kr.tracom.bms.domain.VD0204.VD0204Mapper">
 
+<select id="test" resultType="Map">
+	CALL PROC_DVC_STAT()
+</select>
+
 <select id="VD0204G0R0" resultType="Map">
 	SELECT 			A.VHC_ID
 					,A.COMP_ID

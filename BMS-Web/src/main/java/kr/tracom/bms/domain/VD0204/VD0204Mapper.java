@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface VD0204Mapper {
 
+	public List test();
+	
 	public List VD0204G0R0(Map param);
 	
 	public List VD0204SHI0();
