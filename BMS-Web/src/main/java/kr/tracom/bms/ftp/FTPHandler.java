@@ -115,6 +115,9 @@ public class FTPHandler {
 	@Value("${sftp.device.elecrouter.directory}")
 	private String DEVICE_ELECROUTER_PATH;
 	
+	@Value("${sftp.device.transdisplay.directory}")
+	private String DEVICE_TRDISPLAY_PATH;
+	
 	@Value("${sftp.device.log.directory}")
 	private String DEVICE_LOG_PATH;
 	
@@ -289,6 +292,14 @@ public class FTPHandler {
 		
 		String fPath = getRootServerPath() + "/vehicle/" + impId + "/device/passenger";
 		String vfPath = getRootServerPath() + "/vehicle/" + impId + "/device/" + dvcId + "/playlist";
+		
+
+		if(dvcId.substring(0, 2).equals("TD")) { //투명디스플레이 //bhmin
+			fPath = getRootServerPath() + "/vehicle/" + impId + "/device" + getDeviceTransDisplayPath();
+			toPath = Paths.get(getRootLocalPath(), "/vehicle", "/", impId, "/device" + getDeviceTransDisplayPath()).toString();
+		}
+		
+		
 		
 		File dir = new File(toPath);
 		File listDir = new File(path);
@@ -611,7 +622,16 @@ public class FTPHandler {
 				 + rpData.get("FRAME_VAL") + Constants.CSVForms.COMMA
 				 + rpData.get("FONT_VAL");
 		
-		File file = new File(localPath + "/config.csv");
+		//File file = new File(localPath + "/config.csv");
+		File file = null;
+		
+		
+		if(dvcId.substring(0, 2).equals("TD")) { //투명디스플레이 //bhmin
+			file = new File(localPath + "/config_e.csv"); //투명디스플레이용 전자노선도
+		} else {
+			file = new File(localPath + "/config.csv");
+		}
+		
 		
 		try {
 			createCSV(file, header + row);
@@ -1344,6 +1364,13 @@ public class FTPHandler {
 		String toPath = Paths.get(getRootLocalPath(), "/vehicle", "/", impId, "/device/passenger").toString();
 		String fPath = getRootServerPath() + "/vehicle/" + impId + "/device/passenger";
 		
+		
+		if(dvcId.substring(0, 2).equals("TD")) { //투명디스플레이 //bhmin
+			toPath = Paths.get(getRootLocalPath(), "/vehicle", "/", impId, "/device" + getDeviceTransDisplayPath()).toString();
+			fPath = getRootServerPath() + "/vehicle/" + impId + "/device" + getDeviceTransDisplayPath();
+		} 
+		
+		
 		String vfPath = getRootServerPath() + "/vehicle/" + impId + "/device/" + dvcId + "/playlist";
 		
 		processSynchronize(toPath, fPath);
@@ -1744,6 +1771,13 @@ public class FTPHandler {
 	public String getDeviceElecRouterPath() {
 		return DEVICE_ELECROUTER_PATH;
 	}
+	
+	
+	//투명디스플레이 //bhmin
+	public String getDeviceTransDisplayPath() {
+		return DEVICE_TRDISPLAY_PATH;
+	}
+	
 	
 	public String getDeviceLogPath() {
 		return DEVICE_LOG_PATH;

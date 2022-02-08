@@ -204,6 +204,8 @@
 				dlt_DVC_INFO.setCellData(rows[i], "RSV_DT", obj.data[i].RSV_DT);
 			}
 		}
+		
+		dma_subsearch.set("ORGA_ID", dlt_VDO_ORGA_INFO.getCellData(PI1102G0.getFocusedRowIndex(), "ORGA_ID"));
 		com.saveGrid(PI1102G1, sub_PI1102G1S0);	
 	}
 	
