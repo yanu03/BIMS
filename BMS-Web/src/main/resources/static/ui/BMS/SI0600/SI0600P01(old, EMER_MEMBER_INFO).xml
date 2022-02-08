@@ -12,30 +12,29 @@
 		<w2:dataCollection baseNode="map">
 			<w2:dataMap baseNode="map" id="dma_MEMBER_MST">
 				<w2:keyInfo>
-					<w2:key id="PARTNER_ID" name="협력업체ID" dataType="text"></w2:key>
-					<w2:key id="MEMBER_ID" name="구성원ID" dataType="text"></w2:key>
+					<w2:key id="MEMER_ID" name="구성원ID" dataType="text"></w2:key>
 					<w2:key id="TYPE" name="name2" dataType="text"></w2:key>
 					<w2:key id="CONTENT" name="name3" dataType="text"></w2:key>
 				</w2:keyInfo>
 			</w2:dataMap>
-			<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_PARTNER_MEMBER_INFO" saveRemovedData="true">
+			<w2:dataList baseNode="list" repeatNode="map" id="dlt_MEMBER_INFO" saveRemovedData="true">
 				<w2:columnInfo>
 					<w2:column id="chk" name="선택" dataType="text"></w2:column>
-					<w2:column id="PARTNER_ID" name="협력업체ID" dataType="text"></w2:column>
-					<w2:column id="MEMBER_ID" name="구성원ID" dataType="text"></w2:column>
-
-					<w2:column id="PARTNER_NM" name="협력업체명" dataType="text"></w2:column><w2:column id="MEMBER_NM" name="구성원명" dataType="text"></w2:column>
-					<w2:column id="MEMBER_DIV" name="구성원구분" dataType="text"></w2:column>
+					<w2:column id="MEMER_ID" name="구성원ID" dataType="text"></w2:column>
+					<w2:column id="ORG_ID" name="기관ID" dataType="text"></w2:column>
+					<w2:column id="MEMER_NM" name="구성원명" dataType="text"></w2:column>
+					<w2:column id="MEMER_DIV" name="구성원구분" dataType="text"></w2:column>
 					<w2:column id="PHONE" name="전화번호" dataType="text"></w2:column>
 					<w2:column id="FAX" name="팩스" dataType="text"></w2:column>
 					<w2:column id="EMAIL" name="메일" dataType="text"></w2:column>
 					<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
-					
+					<w2:column id="ORG_NM" name="기관명" dataType="text"></w2:column>
+					<w2:column id="CLSFCTN_ID" name="분류ID" dataType="text"></w2:column>
 				</w2:columnInfo>
 			</w2:dataList>
 		</w2:dataCollection>
 		<w2:workflowCollection></w2:workflowCollection>
-		<xf:submission id="sub_SI0600P0R0" ref="data:json,dma_MEMBER_MST" target="data:json,dlt_BMS_PARTNER_MEMBER_INFO" action="/si/SI0600P0R0"
+		<xf:submission id="sub_SI0600P0R0" ref="data:json,dma_MEMBER_MST" target="data:json,dlt_MEMBER_INFO" action="/si/SI0600P0R0"
 			method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 			processMsg="" ev:submit="" ev:submitdone="scwin.sub_SI0600P0R0_submitdone" ev:submiterror="" abortTrigger="">
 		</xf:submission>
@@ -44,8 +43,7 @@
 
 	scwin.onpageload = function() {
 		scwin.param = com.getParameter();
-		dma_MEMBER_MST.set("MEMBER_ID" , scwin.param.data.MEMBER_IDS);
-		dma_MEMBER_MST.set("PARTNER_ID" , scwin.param.PARTNER_ID);
+		dma_MEMBER_MST.set("MEMER_ID" , scwin.param.data.MEMER_IDS);
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
 		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
 		var btnOptions = 
@@ -87,17 +85,17 @@
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
 		
-			var ids = dma_MEMBER_MST.get("MEMBER_ID");
-			com.excludeItemsByGrid(SI0600P0, ids, "MEMBER_ID");
+			var ids = dma_MEMBER_MST.get("MEMER_ID");
+			com.excludeItemsByGrid(SI0600P0, ids, "MEMER_ID");
 		}
 	};
 	
 	scwin.sbx_ChoiceBox_onviewchange = function(info) {		
 		if (info.newValue == "ALL") {
 			search_input.setPlaceholder("구성원ID 또는 구성원명");
-		} else if (info.newValue == "MEMBER_ID") {
+		} else if (info.newValue == "MEMER_ID") {
 			search_input.setPlaceholder("구성원ID");
-		} else if (info.newValue == "MEMBER_NM") {
+		} else if (info.newValue == "MEMER_NM") {
 			search_input.setPlaceholder("구성원명");
 		}
 	};
@@ -121,11 +119,11 @@
 								</xf:item>
 								<xf:item>
 									<xf:label><![CDATA[구성원ID]]></xf:label>
-									<xf:value><![CDATA[MEMBER_ID]]></xf:value>
+									<xf:value><![CDATA[MEMER_ID]]></xf:value>
 								</xf:item>
 								<xf:item>
 									<xf:label><![CDATA[구성원명]]></xf:label>
-									<xf:value><![CDATA[MEMBER_NM]]></xf:value>
+									<xf:value><![CDATA[MEMER_NM]]></xf:value>
 								</xf:item>
 							</xf:choices>
 						</xf:select1>
@@ -136,7 +134,7 @@
 			</xf:group>
 			
 			<xf:group style="" id="" class="popup_content">
-				<w2:gridView fixedColumnWithHidden="true" dataList="data:dlt_BMS_PARTNER_MEMBER_INFO" useShiftKey="false" readOnly="true"
+				<w2:gridView fixedColumnWithHidden="true" dataList="data:dlt_MEMBER_INFO" useShiftKey="false" readOnly="true"
 					style="width:775px" scrollByColumn="false" id="SI0600P0" autoFit="lastColumn" class="cm_grid popup"
 					ev:oncellclick="scwin.SI0600P0_oncellclick" applyAllColumnStyle="">
 					<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
@@ -151,7 +149,7 @@
 							<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="column6" value="구성원명"
 								blockSelect="false" displayMode="label">
 							</w2:column>
-							<w2:column removeBorderStyle="false" width="143" inputType="text" style="height:20px" id="column7" value="협력업체명"
+							<w2:column removeBorderStyle="false" width="143" inputType="text" style="height:20px" id="column7" value="기관명"
 								blockSelect="false" displayMode="label">
 							</w2:column>
 							<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column1" value="비고"
@@ -164,13 +162,13 @@
 							<w2:column removeBorderStyle="false" width="70" inputType="checkbox" style="height:20px" id="chk" value=""
 								blockSelect="false" displayMode="label" radioLabelColumn="" readOnly="false">
 							</w2:column>
-							<w2:column removeBorderStyle="false" width="136" inputType="text" style="height:20px" id="MEMBER_ID" value=""
+							<w2:column removeBorderStyle="false" width="136" inputType="text" style="height:20px" id="MEMER_ID" value=""
 								blockSelect="false" displayMode="label">
 							</w2:column>
-							<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="MEMBER_NM" value=""
+							<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="MEMER_NM" value=""
 								blockSelect="false" displayMode="label">
 							</w2:column>
-							<w2:column removeBorderStyle="false" width="143" inputType="text" style="height:20px" id="PARTNER_NM" value=""
+							<w2:column removeBorderStyle="false" width="143" inputType="text" style="height:20px" id="ORG_NM" value=""
 								blockSelect="false" displayMode="label">
 							</w2:column>
 							<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK" value=""

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.tracom.cm.domain.Partner.PartnerMapper">
+	<select id="selectPartnerList" resultType="Map">
+		SELECT				PARTNER_ID
+						,	PARTNER_DIV
+						,	SORT
+						,	PARTNER_NM
+						,	PARTNER_ENM
+						,	REP_NM
+						,	COMP_REG_NO
+						,	ADDR
+						,	PHONE
+						,	FAX
+						,	EMAIL
+						,	REMARK
+						,	UPD_DTM
+						,	UPD_ID
+						
+		FROM				BMS_PARTNER_MST
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT)">
+			<if test="TYPE == 'ALL'">
+				AND PARTNER_ID LIKE CONCAT('%',#{CONTENT},'%') || PARTNER_NM LIKE CONCAT('%',#{CONTENT},'%')
+			</if>
+			<if test="TYPE == 'PARTNER_ID'">
+				AND PARTNER_ID LIKE CONCAT('%',#{CONTENT},'%')
+			</if>
+			<if test="TYPE == 'PARTNER_NM'">
+				AND PARTNER_NM LIKE CONCAT('%',#{CONTENT},'%')
+			</if>
+		</if>
+		ORDER BY			 PARTNER_ID
+	</select>
+	
+	<select id="selectPartnerItem" resultType="Map">
+		SELECT 				PARTNER_ID, PARTNER_NM
+		FROM 				BMS_PARTNER_MST
+		ORDER BY 			PARTNER_ID
+	</select>
+	
+</mapper>

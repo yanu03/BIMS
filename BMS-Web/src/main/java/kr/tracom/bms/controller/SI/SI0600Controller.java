@@ -43,15 +43,29 @@ public class SI0600Controller extends ControllerSupport {
 		return result.getResultSave();
 	}		
 	
+//	수정전 담당자 READ 
+//	@RequestMapping("/si/SI0600G0R0")
+//	public @ResponseBody Map<String, Object> SI0600G0R0() throws Exception {
+//		result.setData("dlt_EMER_MEMBER_INFO", si0600Service.SI0600G0R0());
+//		return result.getResult();
+//	}
+	
 	@RequestMapping("/si/SI0600G0R0")
 	public @ResponseBody Map<String, Object> SI0600G0R0() throws Exception {
-		result.setData("dlt_EMER_MEMBER_INFO", si0600Service.SI0600G0R0());
+		result.setData("dlt_BMS_EMER_MEMBER_CMPSTN", si0600Service.SI0600G0R0());
 		return result.getResult();
 	}
 	
+// 	수정전 구성원 Read	
+//	@RequestMapping("/si/SI0600P0R0")
+//	public @ResponseBody Map<String, Object> SI0600P0R0() throws Exception {
+//		result.setData("dlt_MEMBER_INFO", si0600Service.SI0600P0R0());
+//		return result.getResult();
+//	}
+	
 	@RequestMapping("/si/SI0600P0R0")
 	public @ResponseBody Map<String, Object> SI0600P0R0() throws Exception {
-		result.setData("dlt_MEMBER_INFO", si0600Service.SI0600P0R0());
+		result.setData("dlt_BMS_PARTNER_MEMBER_INFO", si0600Service.SI0600P0R0());
 		return result.getResult();
 	}
 	

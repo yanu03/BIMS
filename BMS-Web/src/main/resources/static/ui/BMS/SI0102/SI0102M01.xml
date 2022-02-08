@@ -132,7 +132,7 @@
 			Sub1 : { grid : SI0102G1, srchSbm : sub_SI0102G1R0, savSbm : sub_SI0102G1S0, name :  "관련차고지"}
 		 };
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID_FORM, autoOptions);
-		
+		scwin.param = com.getParameter();
 		var subOptions = {
 			ADD: scwin.btn_add2_onclick, DEL:{}, CNL:{}
 		};
@@ -252,7 +252,8 @@
 		};
 		var data = {
 					ROW_INDEX : row,
-					callbackFn : "scwin.insertCool"
+					callbackFn : "scwin.insertCool",
+					menuCode : scwin.param.menuCode
 		};
 		
 		com.openPopup(("/ui/BMS/SI0102/SI0102P04.xml"), options, data);
