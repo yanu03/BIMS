@@ -472,6 +472,14 @@ height: 24px;
 .btn_gcm.oldNode a{display:inline-block; width:100%;box-sizing:border-box;}
 .btn_gcm.oldNode a:before { content:"\f041";}
 
+.btn_gcm.send {margin-left:3px;  }
+.btn_gcm.send a{display:inline-block; width:100%;box-sizing:border-box;}
+.btn_gcm.send a:before {content: "\f064"; margin-right: 0.5px;}
+
+.btn_gcm.reset {margin-left:3px;  }
+.btn_gcm.reset a{display:inline-block; width:100%;box-sizing:border-box;}
+.btn_gcm.reset a:before {content: "\f2f1"; margin-right: 0.5px;}
+
 .btn_gcm.addGrg {margin-left:3px;  }
 .btn_gcm.addGrg a{display:inline-block; width:100%;box-sizing:border-box;}
 .btn_gcm.addGrg a:before {content: "\f494"; margin-right: 0.5px;}
