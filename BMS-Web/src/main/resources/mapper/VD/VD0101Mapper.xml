@@ -124,6 +124,7 @@
 						,DATA_VAL
 						,ATTR1_VAL
 						,ATTR2_VAL
+						,MNG_ID
 						,SCHEDULE_YN
 						,USE_YN
 						,AUTO_YN
@@ -142,6 +143,7 @@
 						,#{DATA_VAL}
 						,#{ATTR1_VAL}
 						,#{ATTR2_VAL}
+						,#{MNG_ID}
 						,#{SCHEDULE_YN}
 						,#{USE_YN}
 						,#{AUTO_YN}
@@ -173,12 +175,20 @@
 					,UPD_DTM = #{UPD_DTM}
 					,UPD_ID = #{SSN_UPD_ID}
 					
-	WHERE			VHC_ID = #{VHC_ID} AND DVC_ID = #{DVC_ID} AND DVC_KIND = #{DVC_KIND} AND PARAM_DIV = #{PARAM_DIV} AND PARAM_KIND = #{PARAM_KIND}
+	WHERE			VHC_ID = #{VHC_ID} 
+					AND DVC_ID = #{DVC_ID} 
+					AND DVC_KIND = #{DVC_KIND} 
+					AND PARAM_DIV = #{PARAM_DIV} 
+					AND PARAM_KIND = #{PARAM_KIND}
 </update> 
 
 <delete id="VD0101G2D0" parameterType="Map">
 	DELETE FROM 	BMS_DVC_PARAM_INFO
-	WHERE			VHC_ID = #{VHC_ID} AND DVC_ID = #{DVC_ID} AND DVC_KIND = #{DVC_KIND} AND PARAM_DIV = #{PARAM_DIV} AND PARAM_KIND = #{PARAM_KIND}
+	WHERE			VHC_ID = #{VHC_ID} 
+					AND DVC_ID = #{DVC_ID} 
+					AND DVC_KIND = #{DVC_KIND} 
+					AND PARAM_DIV = #{PARAM_DIV} 
+					AND PARAM_KIND = #{PARAM_KIND}
 </delete>
 
 <select id="VD0101P0R0" resultType="Map" parameterType="Map">

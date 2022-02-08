@@ -17,6 +17,9 @@
 						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
 						<w2:column id="PARAM_DIV" name="매개변수구분" dataType="text"></w2:column>
 						<w2:column id="PARAM_KIND" name="매개변수종류" dataType="text"></w2:column>
+						<w2:column id="OLD_DVC_KIND" name="전장치종류" dataType="text"></w2:column>
+						<w2:column id="OLD_PARAM_DIV" name="전매개변수구분" dataType="text"></w2:column>
+						<w2:column id="OLD_PARAM_KIND" name="전매개변수종류" dataType="text"></w2:column>
 						<w2:column id="DATA_TYPE" name="데이터유형" dataType="text"></w2:column>
 						<w2:column id="DATA_LENGTH" name="데이터길이" dataType="text"></w2:column>
 						<w2:column id="DATA_VAL" name="데이터값" dataType="text"></w2:column>
@@ -79,10 +82,10 @@
 		
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions);
 		
-		var codeOptions = [ {code : "DVC_KIND", compID : "SI0800G0:DVC_KIND" }
-							,{code : "PARAM_DIV", compID : "SI0800G0:PARAM_DIV" }
-							,{code : "PARAM_KIND", compID : "SI0800G0:PARAM_KIND" }
-							,{code : "DATA_TYPE", compID : "SI0800G0:DATA_TYPE" }
+		var codeOptions = [ {code : "DVC_KIND", compID : "SI0800G0:DVC_KIND, DVC_KIND" }
+							,{code : "PARAM_DIV", compID : "SI0800G0:PARAM_DIV, PARAM_DIV" }
+							,{code : "PARAM_KIND", compID : "SI0800G0:PARAM_KIND, PARAM_KIND" }
+							,{code : "DATA_TYPE", compID : "SI0800G0:DATA_TYPE, DATA_TYPE" }
 						];
 		
 		//com.executeSubmission(sub_SI0800G0R0);
@@ -232,11 +235,11 @@
 							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순서"
 							sortable="true" rowStatusHeaderValue="상태"  overflowX="auto" overflowY="scroll" rowStatusVisible="false"
 							fixedColumnWithHidden="true" dataList="data:dlt_BMS_DVC_PARAM_CFG_INFO" ignoreCellClick="false" style=""
-							autoFit="lastColumn" visibleRowNum="10" id="SI0800G0" class="cm_grid right" tooltipPositionY="" checkReadOnlyOnPasteEnable="" 
+							autoFit="lastColumn" visibleRowNum="" id="SI0800G0" class="cm_grid right" tooltipPositionY="" checkReadOnlyOnPasteEnable="" 
 							focusFlow="" focusMove="" keyMoveEditMode="" focusDefaultColumn="" focusMode="row" userData1="" ev:onrowindexchange="scwin.SI0800G0_onrowindexchange">
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row2">
-									<w2:column width="100" style="height:20px;" inputType="text" id="column9" value="장치종류"
+									<w2:column width="180" style="height:20px;" inputType="text" id="column9" value="장치종류"
 										blockSelect="false" displayMode="label" userData1="M" userData2="" class="req">
 									</w2:column>
 									<w2:column width="100" style="height:20px;" inputType="text" id="column17" value="파라미터 구분"
@@ -337,63 +340,10 @@
 								</w2:attributes>
 							</xf:group>
 							<xf:group tagname="td" style="" class="w2tb_td">
-								<xf:select1 id="" chooseOption="" style="width: 148px;height: 21px;" submenuSize="auto" allOption=""
+								<xf:select1 id="DVC_KIND" chooseOption="" style="width:148px;height:21px;" submenuSize="auto" allOption=""
 									disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled"
 									ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DVC_KIND">
-									<xf:choices>
-										<xf:item>
-											<xf:label><![CDATA[OBE]]></xf:label>
-											<xf:value><![CDATA[DK001]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[운전자단말기]]></xf:label>
-											<xf:value><![CDATA[DK002]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[승객용안내기]]></xf:label>
-											<xf:value><![CDATA[DK003]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[전자노선도]]></xf:label>
-											<xf:value><![CDATA[DK004]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[행선지키패드]]></xf:label>
-											<xf:value><![CDATA[DK005]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[행선지안내기X정면 12열(싸인)]]></xf:label>
-											<xf:value><![CDATA[DK006]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[행선지안내기X정면 11열(애드앤텍)]]></xf:label>
-											<xf:value><![CDATA[DK007]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[행선지안내기X측면(싸인)]]></xf:label>
-											<xf:value><![CDATA[DK008]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[행선지안내기X측면2(싸인)]]></xf:label>
-											<xf:value><![CDATA[DK009]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[투명디스플레이]]></xf:label>
-											<xf:value><![CDATA[DK010]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[태그리스]]></xf:label>
-											<xf:value><![CDATA[DK011]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[행선지안내기X측면(애드앤텍)]]></xf:label>
-											<xf:value><![CDATA[DK012]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[행선지안내기X후면]]></xf:label>
-											<xf:value><![CDATA[DK013]]></xf:value>
-										</xf:item>
-									</xf:choices>
+									<xf:choices></xf:choices>
 								</xf:select1>
 							</xf:group>
 							<xf:group tagname="th" style="" class="w2tb_th req">
@@ -404,18 +354,9 @@
 							</xf:group>
 							<xf:group tagname="td" style="" class="w2tb_td">
 								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-									disabledClass="w2selectbox_disabled" id="" style="width: 148px;height: 21px;" submenuSize="auto"
+									disabledClass="w2selectbox_disabled" id="PARAM_DIV" style="width: 148px;height: 21px;" submenuSize="auto"
 									ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.PARAM_DIV">
-									<xf:choices>
-										<xf:item>
-											<xf:label><![CDATA[설정]]></xf:label>
-											<xf:value><![CDATA[PD001]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[제어]]></xf:label>
-											<xf:value><![CDATA[PD002]]></xf:value>
-										</xf:item>
-									</xf:choices>
+									<xf:choices></xf:choices>
 								</xf:select1>
 							</xf:group>
 						</xf:group>
@@ -428,58 +369,9 @@
 							</xf:group>
 							<xf:group tagname="td" style="" class="w2tb_td">
 								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-									disabledClass="w2selectbox_disabled" id="" style="width: 148px;height: 21px;" submenuSize="auto"
+									disabledClass="w2selectbox_disabled" id="PARAM_KIND" style="width: 148px;height: 21px;" submenuSize="auto"
 									ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.PARAM_KIND">
-									<xf:choices>
-										<xf:item>
-											<xf:label><![CDATA[리셋]]></xf:label>
-											<xf:value><![CDATA[PK001]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[전원(ON/OFF)]]></xf:label>
-											<xf:value><![CDATA[PK002]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[화면(ON/OFF)]]></xf:label>
-											<xf:value><![CDATA[PK003]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[사운드 음량]]></xf:label>
-											<xf:value><![CDATA[PK004]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[LCD 휘도]]></xf:label>
-											<xf:value><![CDATA[PK005]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[히터(ON/OFF)]]></xf:label>
-											<xf:value><![CDATA[PK006]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[FAN(ON/OFF)]]></xf:label>
-											<xf:value><![CDATA[PK007]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[커맨드]]></xf:label>
-											<xf:value><![CDATA[PK008]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[BIT 캡쳐]]></xf:label>
-											<xf:value><![CDATA[PK009]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[BIT 영상 녹화]]></xf:label>
-											<xf:value><![CDATA[PK010]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[로그레벨]]></xf:label>
-											<xf:value><![CDATA[PK011]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[IP/PORT]]></xf:label>
-											<xf:value><![CDATA[PK012]]></xf:value>
-										</xf:item>
-									</xf:choices>
+									<xf:choices></xf:choices>
 								</xf:select1>
 							</xf:group>
 							<xf:group tagname="th" style="" class="w2tb_th">
@@ -490,38 +382,9 @@
 							</xf:group>
 							<xf:group tagname="td" style="" class="w2tb_td">
 								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-									disabledClass="w2selectbox_disabled" id="" style="width: 148px;height: 21px;" submenuSize="auto"
+									disabledClass="w2selectbox_disabled" id="DATA_TYPE" style="width: 148px;height: 21px;" submenuSize="auto"
 									ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_TYPE">
-									<xf:choices>
-										<xf:item>
-											<xf:label><![CDATA[INTEGER]]></xf:label>
-											<xf:value><![CDATA[DT001]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[STRING]]></xf:label>
-											<xf:value><![CDATA[DT002]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[FLOAT]]></xf:label>
-											<xf:value><![CDATA[DT003]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[BOOLEAN]]></xf:label>
-											<xf:value><![CDATA[DT004]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[SHORT]]></xf:label>
-											<xf:value><![CDATA[DT005]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[LONG]]></xf:label>
-											<xf:value><![CDATA[DT006]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[DOUBLE]]></xf:label>
-											<xf:value><![CDATA[DT007]]></xf:value>
-										</xf:item>
-									</xf:choices>
+									<xf:choices></xf:choices>
 								</xf:select1>
 							</xf:group>
 						</xf:group>

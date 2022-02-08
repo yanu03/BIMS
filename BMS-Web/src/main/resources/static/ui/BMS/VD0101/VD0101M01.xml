@@ -72,6 +72,7 @@
 						<w2:column id="DATA_VAL" name="데이터값" dataType="text"></w2:column>
 						<w2:column id="ATTR1_VAL" name="속성1값" dataType="text"></w2:column>
 						<w2:column id="ATTR2_VAL" name="속성2값" dataType="text"></w2:column>
+						<w2:column id="MNG_ID" name="관리아이디" dataType="text"></w2:column>
 						<w2:column id="SCHEDULE_YN" name="스케쥴유무" dataType="text" defaultValue="Y"></w2:column>
 						<w2:column id="USE_YN" name="사용유무" dataType="text" defaultValue="Y"></w2:column>
 						<w2:column id="AUTO_YN" name="자동여부" dataType="text" defaultValue="Y"></w2:column>
@@ -222,6 +223,7 @@
 			var data = dlt_BMS_DVC_INFO.getMatchedIndex("DVC_KIND", obj[i].DVC_KIND, true);
 			obj[i].DVC_ID = dma_subsearch.get("DVC_ID");
 			obj[i].VHC_ID = dma_subsearch.get("VHC_ID");
+			obj[i].MNG_ID = dlt_BMS_DVC_INFO.getCellData(VD0101G1.getFocusedRowIndex(), "MNG_ID");
 			obj[i].chk = "0";
 			var idx = dlt_BMS_DVC_PARAM_CFG_INFO.insertRow();
 			dlt_BMS_DVC_PARAM_CFG_INFO.setRowJSON(idx, obj[i], true);
@@ -585,7 +587,7 @@
 							ev:onrowindexchange="scwin.SI0800G0_onrowindexchange">
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row2">
-									<w2:column width="100" style="height:20px;" inputType="text" id="column9" value="장치종류"
+									<w2:column width="180" style="height:20px;" inputType="text" id="column9" value="장치종류"
 										blockSelect="false" displayMode="label" userData1="M" userData2="" class="req">
 									</w2:column>
 									<w2:column width="100" style="height:20px;" inputType="text" id="column17" value="파라미터 구분"
