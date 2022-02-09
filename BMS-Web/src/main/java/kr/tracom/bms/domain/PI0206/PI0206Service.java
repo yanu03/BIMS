@@ -188,6 +188,9 @@ public class PI0206Service extends ServiceSupport {
 		//station맵에 지역정보 추가
 		List<Map<String, Object>> stnAndLocList = stnPlusLocation(stationList);
 		
+		//차고지 리스트 //bhmin 220119
+		List<Map<String, Object>> garageList = pi0206Mapper.selectAllGarageList();
+		
 		
 		//busstop.csv 파일 생성
 		try {
@@ -204,6 +207,16 @@ public class PI0206Service extends ServiceSupport {
 			logger.error("[PI0206Service] IOException in uploadNodeList");
 			return false;
 		}
+		
+		
+		//차고지 정보 파일(garagelist.csv) 생성 //bhmin 220119
+		try {
+			ftpHandler.uploadGarageList(garageList, "garagelist.csv", "00000000");
+		} catch (IOException e) {
+			logger.error("[PI0206Service] IOException in uploadGarageList");
+			return false;
+		}
+		
 		
 		return true;
 	}
