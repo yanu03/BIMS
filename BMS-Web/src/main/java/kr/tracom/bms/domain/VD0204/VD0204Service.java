@@ -20,13 +20,17 @@ public class VD0204Service extends ServiceSupport {
 	@Autowired
 	private VD0204Mapper vd0204Mapper;
 	
-	public List test() throws Exception {
-		return vd0204Mapper.test();
+	public List VD0204G0R0() throws Exception {
+		return vd0204Mapper.VD0204G0R0();
 	}
 	
-	public List VD0204G0R0() throws Exception {
-		Map<String, Object> map = getSimpleDataMap("dma_search");
-		return vd0204Mapper.VD0204G0R0(map);
+	public List VD0204G0R1() throws Exception {
+		return vd0204Mapper.VD0204G0R1();
+	}
+	
+	public List VD0204G0R2() throws Exception {
+		Map param = getSimpleDataMap("dma_subsearch");
+		return vd0204Mapper.VD0204G0R2(param);
 	}
 
 	public List VD0204SHI0() throws Exception {
@@ -44,9 +48,11 @@ public class VD0204Service extends ServiceSupport {
 	}
 	
 	public List VD0204G2R0() throws Exception {
-		// TODO Auto-generated method stub
-		Map param = getSimpleDataMap("dma_subsearch");
-		return vd0204Mapper.VD0204G2R0(param);
+		return vd0204Mapper.VD0204G2R0();
+	}
+	
+	public List VD0204G2R1() throws Exception {
+		return vd0204Mapper.VD0204G2R1();
 	}
 	
 	public Map VD0204G2S0() throws Exception {
@@ -86,15 +92,6 @@ public class VD0204Service extends ServiceSupport {
 		
 	}
 	
-	public List<Map> VD0204P0R0() throws Exception{
-		Map param = getSimpleDataMap("dma_search");
-		return vd0204Mapper.VD0204P0R0(param);
-	}
-	
-	public List VD0204P0SH() throws Exception {
-		return vd0204Mapper.VD0204P0SH();
-	}
-
 	
 
 }
