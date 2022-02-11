@@ -370,6 +370,7 @@ height: 24px;
 .btn_sh.init a:before { content: "\f1ce";}
 .btn_sh.help a:before { content: "\f256";}
 .btn_sh.clr a:before { content:"\f00d";}
+.btn_sh.reset a:before {content: "\f2f1";}
 
 
 /* tcm */
