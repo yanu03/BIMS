@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.tracom.bms.domain.FM0204.FM0204Mapper">
+
+<select id="FM0204G0R0" resultType="Map">
+	CALL PROC_DVC_STAT()
+</select>
+
+<select id="FM0204G2R0" resultType="Map">
+	CALL PROC_DVC_TAG_STAT()
+</select>
+
+<select id="FM0204G0R1" resultType="Map">
+	SELECT 
+		A.PARAM_KIND
+	FROM 
+		BMS_DVC_PARAM_CFG_INFO A
+	WHERE 
+		A.DVC_KIND != 'DK011' AND A.PARAM_DIV = 'PD003'
+	GROUP BY
+		PARAM_KIND
+</select>
+
+<select id="FM0204G2R1" resultType="Map">
+	SELECT 
+		A.PARAM_KIND
+	FROM 
+		BMS_DVC_PARAM_CFG_INFO A
+	WHERE 
+		A.DVC_KIND = 'DK011' AND A.PARAM_DIV = 'PD003'
+	GROUP BY
+		PARAM_KIND
+</select>
+
+<select id="FM0204G0R2" resultType="Map">
+	SELECT 
+		A.PARAM_KIND
+	FROM 
+		BMS_DVC_PARAM_INFO A
+	WHERE 
+		A.DVC_ID = #{DVC_ID} 
+		AND A.DVC_KIND != 'DK011' 
+		AND A.PARAM_DIV = 'PD002'
+	GROUP BY 
+		PARAM_KIND
+</select>
+	
+<select id="FM0204SHI0" resultType="Map">
+	SELECT			VHC_ID
+					,VHC_NO	
+	FROM			BMS_VHC_MST
+</select>
+	
+<select id="FM0204SHI1" resultType="Map">
+	SELECT			ORG_ID
+					,ORG_NM
+	FROM	  		BMS_ORG_MST
+	WHERE			ORG_DIV = 'OD008'
+</select>	
+	
+<select id="FM0204G1R0" resultType="Map">
+	SELECT 			DATE_FORMAT(LAST_DTM, '%Y-%m-%d %H:%i:%s') LAST_DTM
+					,DATE_FORMAT(REG_DTM, '%Y-%m-%d %H:%i:%s') REG_DTM
+					,IMP_ID
+					,PROC_NAME
+					,PROC_INDEX
+					,CONCAT(VER_HIGH, '.', VER_MID, '.', VER_LOW) AS VER_TOTAL
+					,VER_HIGH
+					,VER_MID
+					,VER_LOW
+					,CPU_USG
+					,MEM_USG
+					,DATE_FORMAT(START_DTM, '%Y-%m-%d %H:%i:%s') START_DTM
+					,DATE_FORMAT(BUILD_DTM, '%Y-%m-%d %H:%i:%s') BUILD_DTM
+					,DATE_FORMAT(UPDATE_DTM, '%Y-%m-%d %H:%i:%s') UPDATE_DTM
+					
+	FROM			MGR_PROC_HIS
+	
+	WHERE			IMP_ID = #{MNG_ID}
+	GROUP BY		IMP_ID, PROC_NAME
+</select>
+
+
+
+<insert id="FM0204G2I0" parameterType="Map">
+	INSERT INTO		BMS_DVC_PARAM_INFO	
+					(
+						VHC_ID
+						,DVC_ID
+						,DVC_KIND
+						,PARAM_DIV
+						,PARAM_KIND
+						,DATA_TYPE
+						,DATA_LENGTH
+						,DATA_VAL
+						,ATTR1_VAL
+						,ATTR2_VAL
+						,SCHEDULE_YN
+						,USE_YN
+						,AUTO_YN
+						,REMARK
+						,UPD_DTM
+						,UPD_ID						
+					)
+	VALUES			(
+						#{VHC_ID}
+						,#{DVC_ID}
+						,#{DVC_KIND}
+						,#{PARAM_DIV}
+						,#{PARAM_KIND}
+						,#{DATA_TYPE}
+						,#{DATA_LENGTH}
+						,#{DATA_VAL}
+						,#{ATTR1_VAL}
+						,#{ATTR2_VAL}
+						,#{SCHEDULE_YN}
+						,#{USE_YN}
+						,#{AUTO_YN}
+						,#{REMARK}
+						,#{UPD_DTM}
+						,#{SSN_UPD_ID}				
+					)
+	
+	
+						
+</insert>
+
+<update id="FM0204G2U0" parameterType="Map">
+	UPDATE			BMS_DVC_PARAM_INFO
+	SET				VHC_ID = #{VHC_ID}
+					,DVC_ID = #{DVC_ID}
+					,DVC_KIND = #{DVC_KIND}
+					,PARAM_DIV = #{PARAM_DIV}
+					,PARAM_KIND = #{PARAM_KIND}
+					,DATA_TYPE = #{DATA_TYPE}
+					,DATA_LENGTH = #{DATA_LENGTH}
+					,DATA_VAL = #{DATA_VAL}
+					,ATTR1_VAL = #{ATTR1_VAL}
+					,ATTR2_VAL = #{ATTR2_VAL}
+					,SCHEDULE_YN = #{SCHEDULE_YN}
+					,USE_YN = #{USE_YN}
+					,AUTO_YN = #{AUTO_YN}
+					,REMARK = #{REMARK}
+					,UPD_DTM = #{UPD_DTM}
+					,UPD_ID = #{SSN_UPD_ID}
+					
+	WHERE			VHC_ID = #{VHC_ID} AND DVC_ID = #{DVC_ID} AND DVC_KIND = #{DVC_KIND} AND PARAM_DIV = #{PARAM_DIV} AND PARAM_KIND = #{PARAM_KIND}
+</update> 
+
+<delete id="FM0204G2D0" parameterType="Map">
+	DELETE FROM 	BMS_DVC_PARAM_INFO
+	WHERE			VHC_ID = #{VHC_ID} AND DVC_ID = #{DVC_ID} AND DVC_KIND = #{DVC_KIND} AND PARAM_DIV = #{PARAM_DIV} AND PARAM_KIND = #{PARAM_KIND}
+</delete>
+
+<!-- plf 테이블에 삽입 20211018 jh -->
+<insert id="FM0204G1I2" parameterType="Map">
+	INSERT INTO PLF_IMP_DEV_MST (
+								  IMP_ID
+								, IMP_NM
+								, IMP_TYPE
+								, VHC_ID
+								, VHC_NO
+								, USE_YN
+								)
+	VALUES (
+			  #{MNG_ID}
+			, (SELECT VHC_NO FROM BMS_VHC_MST WHERE VHC_ID = #{VHC_ID})
+			, ''
+			, #{VHC_ID}
+			, (SELECT VHC_NO FROM BMS_VHC_MST WHERE VHC_ID = #{VHC_ID})
+			, 'Y'
+	);
+	
+	INSERT INTO PLF_IMP_SESS_INFO (
+								  PLF_ID
+								, SESS_ID
+                                , SESS_NM
+                                , SESS_IP
+                                , REMOTE_TYPE
+                                , ELAPSED_TIME
+                                , IN_PACKET
+                                , OUT_PACKET
+                                )
+	VALUES(
+			  'SB-2021-01'
+			, #{MNG_ID}
+			, (SELECT VHC_NO FROM BMS_VHC_MST WHERE VHC_ID = #{VHC_ID})
+			, '-'
+			, ''
+			, '0'
+			, '0'
+			, '0'
+		);
+</insert>
+
+<!-- plf 테이블 업데이트 20211018 jh -->
+<update id="FM0204G1U2" parameterType="Map">
+	UPDATE
+		PLF_IMP_DEV_MST
+	SET
+		  IMP_ID = #{MNG_ID}
+		, IMP_TYPE = ''
+	WHERE
+		IMP_NM = (SELECT VHC_NO FROM BMS_VHC_MST WHERE VHC_ID = #{VHC_ID});
+		
+	UPDATE
+		PLF_IMP_SESS_INFO
+	SET
+		  SESS_ID = #{MNG_ID}
+		, REMOTE_TYPE = ''
+	WHERE
+		SESS_NM = (SELECT VHC_NO FROM BMS_VHC_MST WHERE VHC_ID = #{VHC_ID});
+</update>
+
+<!-- plf 테이블 삭제 20211018 jh -->
+<delete id="FM0204G1D2" parameterType="Map">
+	DELETE FROM PLF_IMP_DEV_MST
+	WHERE IMP_ID = #{MNG_ID};
+	
+	DELETE FROM PLF_IMP_SESS_INFO
+	WHERE SESS_ID = #{MNG_ID};
+</delete>
+
+</mapper>
