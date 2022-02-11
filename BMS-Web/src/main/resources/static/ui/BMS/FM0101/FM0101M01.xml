@@ -49,6 +49,10 @@
 						<w2:column id="FCLT_KIND" name="시설물종류" dataType="text"></w2:column>
 						<w2:column id="PARAM_DIV" name="매개변수구분" dataType="text"></w2:column>
 						<w2:column id="PARAM_KIND" name="매개변수종류" dataType="text"></w2:column>
+						<w2:column id="OLD_FCLT_KIND" name="전시설물종류" dataType="text"></w2:column>
+						<w2:column id="OLD_PARAM_DIV" name="전매개변수구분" dataType="text"></w2:column>
+						<w2:column id="OLD_PARAM_KIND" name="전매개변수종류" dataType="text"></w2:column>
+						<w2:column id="MNG_ID" name="관리아이디" dataType="text"></w2:column>
 						<w2:column id="DATA_TYPE" name="데이터유형" dataType="text"></w2:column>
 						<w2:column id="DATA_LENGTH" name="데이터길이" dataType="text"></w2:column>
 						<w2:column id="DATA_VAL" name="데이터값" dataType="text"></w2:column>
@@ -231,6 +235,7 @@
 			if (data.length == 1) {
 				obj[i].FCLT_ID = dma_subsearch.get("FCLT_ID");
 				obj[i].NODE_ID = dma_subsearch.get("NODE_ID");
+				obj[i].MNG_ID = dlt_BMS_FCLT_INFO.getCellData(FM0101G1.getFocusedRowIndex(), "MNG_ID");
 				obj[i].chk = "0";
 				var idx = dlt_BMS_FCLT_PARAM_CFG_INFO.insertRow();
 				dlt_BMS_FCLT_PARAM_CFG_INFO.setRowJSON(idx, obj[i], true);
@@ -292,29 +297,29 @@
 		//com.changeDualGrid(FM0101G1, FM0101G2, null, sub_FM0101G2R0, focusOption, row, oldRow);
 	};
 	
-	scwin.FM0101G2_onrowindexchange = function(row,oldRow) {
-		dma_subsearch.set("FCLT_KIND", dlt_BMS_FCLT_PARAM_CFG_INFO.getCellData(row, "FCLT_KIND"))
-		dma_subsearch.set("PARAM_DIV", dlt_BMS_FCLT_PARAM_CFG_INFO.getCellData(row, "PARAM_DIV"))
-		dma_subsearch.set("PARAM_KIND", dlt_BMS_FCLT_PARAM_CFG_INFO.getCellData(row, "PARAM_KIND"))
-		
-		com.executeSubmission(sub_FM0101G3R0);
-	};
-	
 	scwin.sub_FM0101G2R0_submitdone = function(e) {
 		com.setFocusedCell(FM0101G2, "FCLT_KIND");		
 	};
 	
-	scwin.sub_FM0101G2S0_submitdone = function(e) {
-		var sCode = com.getResultCode(e);
-		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
-			com.saveDone(FM0101G2,sub_FM0101G2R0);
-		}
+	scwin.FM0101G2_onrowindexchange = function(row,oldRow) {
+		dma_subsearch.set("FCLT_KIND", dlt_BMS_FCLT_PARAM_CFG_INFO.getCellData(row, "FCLT_KIND"));
+		dma_subsearch.set("PARAM_DIV", dlt_BMS_FCLT_PARAM_CFG_INFO.getCellData(row, "PARAM_DIV"));
+		dma_subsearch.set("PARAM_KIND", dlt_BMS_FCLT_PARAM_CFG_INFO.getCellData(row, "PARAM_KIND"));
+		
+		com.executeSubmission(sub_FM0101G3R0);
 	};
 	
 	scwin.sub_FM0101G3R0_submitdone = function(e) {
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
 			com.setFocusedCell(FM0101G3, "ST_TIME");
+		}
+	};
+	
+	scwin.sub_FM0101G2S0_submitdone = function(e) {
+		var sCode = com.getResultCode(e);
+		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
+			com.saveDone(FM0101G0,sub_FM0101G0R0);
 		}
 	};
 	
@@ -516,7 +521,7 @@
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column12" 
-										sortable="true" value="시설물ID" blockSelect="false" displayMode="label" class="req">
+										sortable="true" value="시설물ID" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column width="100" id="column3" value="제조사">
 									</w2:column>
@@ -715,13 +720,13 @@
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
 										<w2:column removeBorderStyle="false" width="50" inputType="text" style="height:20px" id="column13"
-											value="순번" blockSelect="false" displayMode="label" sortable="true" class="req">
+											value="순번" blockSelect="false" displayMode="label" sortable="true">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column12"
-											value="시작시간" blockSelect="false" displayMode="label" sortable="true" class="req">
+											value="시작시간" blockSelect="false" displayMode="label" sortable="true">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column1"
-											value="종료시간" blockSelect="false" displayMode="label" class="req">
+											value="종료시간" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column10"
 											value="설정값" blockSelect="false" displayMode="label" sortable="true">

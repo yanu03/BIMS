@@ -49,6 +49,9 @@
 					,FCLT_KIND
 					,PARAM_DIV
 					,PARAM_KIND
+					,FCLT_KIND AS OLD_FCLT_KIND
+					,PARAM_DIV AS OLD_PARAM_DIV
+					,PARAM_KIND AS OLD_PARAM_KIND
 					,DATA_TYPE
 					,DATA_LENGTH
 					,DATA_VAL
@@ -93,6 +96,7 @@
 						,FCLT_KIND
 						,PARAM_DIV
 						,PARAM_KIND
+						,MNG_ID
 						,DATA_TYPE
 						,DATA_LENGTH
 						,DATA_VAL
@@ -111,8 +115,9 @@
 						,#{FCLT_KIND}
 						,#{PARAM_DIV}
 						,#{PARAM_KIND}
+						,#{MNG_ID}
 						,#{DATA_TYPE}
-						,#{DATA_LENGTH}
+						,NULLIF(#{DATA_LENGTH}, '')
 						,#{DATA_VAL}
 						,#{ATTR1_VAL}
 						,#{ATTR2_VAL}
@@ -135,8 +140,9 @@
 					,FCLT_KIND = #{FCLT_KIND}
 					,PARAM_DIV = #{PARAM_DIV}
 					,PARAM_KIND = #{PARAM_KIND}
+					,MNG_ID = #{MNG_ID}
 					,DATA_TYPE = #{DATA_TYPE}
-					,DATA_LENGTH = #{DATA_LENGTH}
+					,DATA_LENGTH = NULLIF(#{DATA_LENGTH}, '')
 					,DATA_VAL = #{DATA_VAL}
 					,ATTR1_VAL = #{ATTR1_VAL}
 					,ATTR2_VAL = #{ATTR2_VAL}
@@ -147,7 +153,11 @@
 					,UPD_DTM = #{UPD_DTM}
 					,UPD_ID = #{SSN_UPD_ID}
 					
-	WHERE			NODE_ID = #{NODE_ID} AND FCLT_ID = #{FCLT_ID} AND FCLT_KIND = #{FCLT_KIND} AND PARAM_DIV = #{PARAM_DIV} AND PARAM_KIND = #{PARAM_KIND}
+	WHERE			NODE_ID = #{NODE_ID} 
+					AND FCLT_ID = #{FCLT_ID} 
+					AND FCLT_KIND = #{OLD_FCLT_KIND} 
+					AND PARAM_DIV = #{OLD_PARAM_DIV} 
+					AND PARAM_KIND = #{OLD_PARAM_KIND}
 </update>
 
 <delete id="FM0101G2D0" parameterType="Map">

@@ -67,6 +67,9 @@
 						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
 						<w2:column id="PARAM_DIV" name="매개변수구분" dataType="text"></w2:column>
 						<w2:column id="PARAM_KIND" name="매개변수종류" dataType="text"></w2:column>
+						<w2:column id="OLD_DVC_KIND" name="전장치종류" dataType="text"></w2:column>
+						<w2:column id="OLD_PARAM_DIV" name="전매개변수구분" dataType="text"></w2:column>
+						<w2:column id="OLD_PARAM_KIND" name="전매개변수종류" dataType="text"></w2:column>
 						<w2:column id="DATA_TYPE" name="데이터유형" dataType="text"></w2:column>
 						<w2:column id="DATA_LENGTH" name="데이터길이" dataType="text"></w2:column>
 						<w2:column id="DATA_VAL" name="데이터값" dataType="text"></w2:column>
@@ -196,6 +199,7 @@
 	};
 	
 	scwin.paramPopupOnclick = function(){
+		debugger;
 		var focusRowIdx = scwin.idxRowAuthority;
 		var dvcKind = dlt_BMS_DVC_INFO.getCellData(VD0101G1.getFocusedRowIndex(), "DVC_KIND")
 		dma_subsearch.set("DVC_KIND", dvcKind);
@@ -279,7 +283,7 @@
 	scwin.sub_VD0101G2S0_submitdone = function(e) {
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
-			com.saveDone(VD0101G2,sub_VD0101G2R0);
+			com.saveDone(VD0101G0,sub_VD0101G0R0);
 		}
 	};
 	

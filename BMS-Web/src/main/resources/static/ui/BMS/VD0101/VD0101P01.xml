@@ -105,7 +105,7 @@
 		
 			//파라미터 종류로 제외(ID필요?)
 			var ids = dma_search.get("PARAM_ECPT_IDS");
-			com.excludeItemsByGrid(VD0101P0, ids, "PARAM_KIND");
+			//com.excludeItemsByGrid(VD0101P0, ids, "PARAM_KIND");
 		}
 		com.setFocusedCell(VD0101P0, "DVC_KIND");
 		

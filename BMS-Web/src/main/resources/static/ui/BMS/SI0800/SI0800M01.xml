@@ -301,7 +301,7 @@
 										value="" blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.schYnDisFormatter">
 									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="REMARK"
-										value="" blockSelect="false" displayMode="label" readOnly="true">
+										value="" blockSelect="false" displayMode="label" readOnly="true" textAlign="left">
 									</w2:column>
 								</w2:row>
 							</w2:gBody>
@@ -342,7 +342,7 @@
 							<xf:group tagname="td" style="" class="w2tb_td">
 								<xf:select1 id="DVC_KIND" chooseOption="" style="width:148px;height:21px;" submenuSize="auto" allOption=""
 									disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled"
-									ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DVC_KIND">
+									ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DVC_KIND" labelWidthAuto="">
 									<xf:choices></xf:choices>
 								</xf:select1>
 							</xf:group>

@@ -89,6 +89,7 @@
 	AND				D.CO_CD = 'DVC_KIND'
 	
 	WHERE			A.VHC_ID = #{VHC_ID}
+	ORDER BY		A.DVC_ID, A.LEVEL, A.DVC_KIND
 </select>
 
 <select id="VD0101G2R0" resultType="Map">
@@ -97,6 +98,9 @@
 					,DVC_KIND
 					,PARAM_DIV
 					,PARAM_KIND
+					,DVC_KIND AS OLD_DVC_KIND
+					,PARAM_DIV AS OLD_PARAM_DIV
+					,PARAM_KIND AS OLD_PARAM_KIND
 					,DATA_TYPE
 					,DATA_LENGTH
 					,DATA_VAL
@@ -177,9 +181,9 @@
 					
 	WHERE			VHC_ID = #{VHC_ID} 
 					AND DVC_ID = #{DVC_ID} 
-					AND DVC_KIND = #{DVC_KIND} 
-					AND PARAM_DIV = #{PARAM_DIV} 
-					AND PARAM_KIND = #{PARAM_KIND}
+					AND DVC_KIND = #{OLD_DVC_KIND} 
+					AND PARAM_DIV = #{OLD_PARAM_DIV} 
+					AND PARAM_KIND = #{OLD_PARAM_KIND}
 </update> 
 
 <delete id="VD0101G2D0" parameterType="Map">
