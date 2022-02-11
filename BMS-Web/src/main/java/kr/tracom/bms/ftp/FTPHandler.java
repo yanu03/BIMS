@@ -713,6 +713,39 @@ public class FTPHandler {
 		}
 	}
 	
+	
+	
+	/** 220119 garagelist.csv **/ //bhmin 220119
+	public void uploadGarageList(List<Map<String, Object>> garageList, String fileName, String routVer) throws FileNotFoundException, IOException {
+		
+		String txt = Constants.CSVForms.ROUTE_VERSION + routVer + Constants.CSVForms.ROW_SEPARATOR;
+		txt += Constants.CSVForms.GARAGE_TITLE;
+		
+		for(Map<String, Object> map : garageList) {
+				txt += Constants.CSVForms.ROW_SEPARATOR +
+					checkNull(map.getOrDefault("GRG_ID", 	"")) 	+ Constants.CSVForms.COMMA +
+					checkNull(map.getOrDefault("GRG_NM",	"")) 	+ Constants.CSVForms.COMMA +
+					checkNull(map.getOrDefault("COUNT",	"")) 	+ Constants.CSVForms.COMMA +
+					checkNull(map.getOrDefault("SEQ", 	""))	+ Constants.CSVForms.COMMA +
+					checkNull(map.getOrDefault("X", 		""))	+ Constants.CSVForms.COMMA +
+					checkNull(map.getOrDefault("Y", 		""));
+		}
+		
+		String path = Paths.get(getRootLocalPath(), getRouteMapPath()).toString();
+		File file = new File(path + "/" + fileName);
+		
+		try {
+			createCSV(file, txt);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
 	/** 210824 routelist.csv 파일 read jh **/
 	public List<Map<String, Object>> readRoutList(String fileName) throws IOException {
 		String path = Paths.get(getRootLocalPath(), getRouteMapPath()).toString();

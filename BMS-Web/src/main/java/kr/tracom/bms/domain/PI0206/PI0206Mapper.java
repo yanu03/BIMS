@@ -41,6 +41,10 @@ public interface PI0206Mapper {
 	/** 노드리스트 jh **/
 	public List<Map<String, Object>> selectAllNodeList();
 	
+	/** 차고지리스트 **/ //bhmin 220119
+	public List<Map<String, Object>> selectAllGarageList();
+	
+	
 	/** 정류장 & 음성노드 리스트 JH **/
 	public List<Map<String, Object>> selectStnAudioList();
 	

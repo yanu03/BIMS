@@ -104,6 +104,8 @@ public class Constants {
     	public static final String ROUTE_LINK_TITLE			= "LINK_ID,ST_NODE,ED_NODE,LEN,MAX_SPD,EVENT_MS";
     	public static final String VIDEO_PLAY_LIST			="Seq_No,Video_Type,Video_File,Start_Date,Expire_Date,Runtime";
     	public static final String ELEC_ROUTER				="TIME_KO,TIME_EN,CATEGORY,FRAME,FONT";
+    	
+    	public static final String GARAGE_TITLE		= "GARAGE_ID,GARAGE_NAME,COUNT,SEQ,X,Y"; //차고지 bhmin 220119
     }
 	
     public static class PlayListVoiceTypes {
