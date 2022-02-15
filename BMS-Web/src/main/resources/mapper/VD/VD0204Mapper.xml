@@ -3,14 +3,17 @@
 
 <mapper namespace="kr.tracom.bms.domain.VD0204.VD0204Mapper">
 
+<!-- 차내장치 상태 파라미터 조회 프로시서 -->
 <select id="VD0204G0R0" resultType="Map">
 	CALL PROC_DVC_STAT()
 </select>
 
+<!-- 차내장치(태그리스) 상태 파라미터 조회 프로시서-->
 <select id="VD0204G2R0" resultType="Map">
 	CALL PROC_DVC_TAG_STAT()
 </select>
 
+<!-- 차내장치 파라미터종류 조회-->
 <select id="VD0204G0R1" resultType="Map">
 	SELECT 
 		A.PARAM_KIND
@@ -22,6 +25,7 @@
 		PARAM_KIND
 </select>
 
+<!-- 차내장치(태그리스) 파라미터종류 조회-->
 <select id="VD0204G2R1" resultType="Map">
 	SELECT 
 		A.PARAM_KIND
@@ -33,6 +37,7 @@
 		PARAM_KIND
 </select>
 
+<!-- 차내장치 제어 조회-->
 <select id="VD0204G0R2" resultType="Map">
 	SELECT 
 		A.PARAM_KIND
@@ -58,7 +63,8 @@
 	FROM	  		BMS_ORG_MST
 	WHERE			ORG_DIV = 'OD008'
 </select>	
-	
+
+<!-- 프로세스 조회-->
 <select id="VD0204G1R0" resultType="Map">
 	SELECT 			DATE_FORMAT(LAST_DTM, '%Y-%m-%d %H:%i:%s') LAST_DTM
 					,DATE_FORMAT(REG_DTM, '%Y-%m-%d %H:%i:%s') REG_DTM

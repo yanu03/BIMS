@@ -31,25 +31,31 @@
 						<w2:column id="PK003" name="화면(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK004" name="사운드 음량" dataType="text"></w2:column>
 						<w2:column id="PK005" name="LCD 휘도" dataType="text"></w2:column>
-						<w2:column id="PK006" name="LCD 휘도" dataType="text"></w2:column>
-						<w2:column id="PK007" name="LCD 휘도" dataType="text"></w2:column>
+						<w2:column id="PK006" name="히터(ON/OFF)" dataType="text"></w2:column>
+						<w2:column id="PK007" name="FAN(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK008" name="커맨드" dataType="text"></w2:column>
-						<w2:column id="PK009" name="커맨드" dataType="text"></w2:column>
-						<w2:column id="PK010" name="커맨드" dataType="text"></w2:column>
+						<w2:column id="PK009" name="BIT 캡쳐" dataType="text"></w2:column>
+						<w2:column id="PK010" name="BIT 영상 녹화" dataType="text"></w2:column>
 						<w2:column id="PK011" name="로그레벨" dataType="text"></w2:column>
 						<w2:column id="PK012" name="IP/PORT" dataType="text"></w2:column>
 						<w2:column id="PK013" name="통신" dataType="text"></w2:column>
 						<w2:column id="PK014" name="AP" dataType="text"></w2:column>
 						<w2:column id="PK015" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK016" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK017" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK018" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK019" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK020" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK021" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK022" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK023" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK024" name="GPS" dataType="text"></w2:column>
+						<w2:column id="PK016" name="집중모니터링 여부" dataType="text"></w2:column>
+						<w2:column id="PK017" name="정주기 주기" dataType="text"></w2:column>
+						<w2:column id="PK018" name="배터리" dataType="text"></w2:column>
+						<w2:column id="PK019" name="" dataType="text"></w2:column>
+						<w2:column id="PK020" name="" dataType="text"></w2:column>
+						<w2:column id="PK021" name="" dataType="text"></w2:column>
+						<w2:column id="PK022" name="" dataType="text"></w2:column>
+						<w2:column id="PK023" name="" dataType="text"></w2:column>
+						<w2:column id="PK024" name="" dataType="text"></w2:column>
+						<w2:column id="PK025" name="" dataType="text"></w2:column>
+						<w2:column id="PK026" name="" dataType="text"></w2:column>
+						<w2:column id="PK027" name="" dataType="text"></w2:column>
+						<w2:column id="PK028" name="" dataType="text"></w2:column>
+						<w2:column id="PK029" name="" dataType="text"></w2:column>
+						<w2:column id="PK030" name="" dataType="text"></w2:column>
 					</w2:columnInfo>
 					<w2:data use="false"></w2:data>
 				</w2:dataList>
@@ -70,30 +76,35 @@
 						<w2:column id="DATA_VAL" name="데이터값" dataType="text"></w2:column>
 						<w2:column id="SEND_DTM" name="전송일시" dataType="text"></w2:column>
 						<w2:column id="UPD_DTM" name="갱신일시" dataType="text"></w2:column>
-						<w2:column id="PK001" name="리셋" dataType="text"></w2:column>
 						<w2:column id="PK002" name="전원(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK003" name="화면(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK004" name="사운드 음량" dataType="text"></w2:column>
 						<w2:column id="PK005" name="LCD 휘도" dataType="text"></w2:column>
-						<w2:column id="PK006" name="LCD 휘도" dataType="text"></w2:column>
-						<w2:column id="PK007" name="LCD 휘도" dataType="text"></w2:column>
+						<w2:column id="PK006" name="히터(ON/OFF)" dataType="text"></w2:column>
+						<w2:column id="PK007" name="FAN(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK008" name="커맨드" dataType="text"></w2:column>
-						<w2:column id="PK009" name="커맨드" dataType="text"></w2:column>
-						<w2:column id="PK010" name="커맨드" dataType="text"></w2:column>
+						<w2:column id="PK009" name="BIT 캡쳐" dataType="text"></w2:column>
+						<w2:column id="PK010" name="BIT 영상 녹화" dataType="text"></w2:column>
 						<w2:column id="PK011" name="로그레벨" dataType="text"></w2:column>
 						<w2:column id="PK012" name="IP/PORT" dataType="text"></w2:column>
 						<w2:column id="PK013" name="통신" dataType="text"></w2:column>
 						<w2:column id="PK014" name="AP" dataType="text"></w2:column>
 						<w2:column id="PK015" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK016" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK017" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK018" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK019" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK020" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK021" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK022" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK023" name="GPS" dataType="text"></w2:column>
-						<w2:column id="PK024" name="GPS" dataType="text"></w2:column>
+						<w2:column id="PK016" name="집중모니터링 여부" dataType="text"></w2:column>
+						<w2:column id="PK017" name="정주기 주기" dataType="text"></w2:column>
+						<w2:column id="PK018" name="배터리" dataType="text"></w2:column>
+						<w2:column id="PK019" name="" dataType="text"></w2:column>
+						<w2:column id="PK020" name="" dataType="text"></w2:column>
+						<w2:column id="PK021" name="" dataType="text"></w2:column>
+						<w2:column id="PK022" name="" dataType="text"></w2:column>
+						<w2:column id="PK023" name="" dataType="text"></w2:column>
+						<w2:column id="PK024" name="" dataType="text"></w2:column>
+						<w2:column id="PK025" name="" dataType="text"></w2:column>
+						<w2:column id="PK026" name="" dataType="text"></w2:column>
+						<w2:column id="PK027" name="" dataType="text"></w2:column>
+						<w2:column id="PK028" name="" dataType="text"></w2:column>
+						<w2:column id="PK029" name="" dataType="text"></w2:column>
+						<w2:column id="PK030" name="" dataType="text"></w2:column>
 					</w2:columnInfo>
 					<w2:data use="false"></w2:data>
 				</w2:dataList>

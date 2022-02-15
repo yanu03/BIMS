@@ -540,232 +540,237 @@
 
 				<xf:group id="" style="" class="vertical_line"></xf:group>
 
-				<xf:group class="pgm_detail grdr_20_2_300_20_20_2_a">
+				<xf:group class="pgm_detail grdr_20_2_1f_20_1f">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group id="" style="" class="defaultbox">
 							<w2:textbox id="" style="" class="df_tt fl" label="공지 상세 정보"></w2:textbox>
 						</xf:group>
-							<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
-					</xf:group>
-					<xf:group id="" style="" class=""></xf:group>
-					<xf:group tagname="table" style="width:100%;" id="PI1001F0" class="w2tb tb">
-						<w2:attributes>
-							<w2:summary></w2:summary>
-						</w2:attributes>
-						<xf:group tagname="caption"></xf:group>
-						<xf:group tagname="colgroup">
-							<xf:group tagname="col" style="width:25.00%;"></xf:group>
-							<xf:group tagname="col" style="width:25.00%"></xf:group>
-							<xf:group tagname="col" style="width:25.00%;"></xf:group>
-							<xf:group tagname="col" style="width:25.00%"></xf:group>
-						</xf:group>
-						<xf:group tagname="tr" style="height:10px;">
-							<xf:group tagname="th" style="" class="w2tb_th req">
-								공지&amp;nbsp;ID
-								<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes>
-							</xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<xf:input adjustMaxLength="false" id="" style="width:100px;height:100%;"
-									ref="data:dlt_BMS_NOTICE_MST.NOTICE_ID" placeholder="홍길동" readOnly="true" disabled="true">
-								</xf:input>
-							</xf:group>
-							<xf:group tagname="th" style="" class="w2tb_th req">
-								제&amp;nbsp;목
-								<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes>
-							</xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<xf:input adjustMaxLength="false" id="TITLE" style="height: 21px;" ref="data:dlt_BMS_NOTICE_MST.TITLE"
-									placeholder="업무 협의 요청" maxlength="100">
-								</xf:input>
-							</xf:group>
-						</xf:group>
-						<xf:group tagname="tr" style="">
-							<xf:group tagname="th" style="" class="w2tb_th req">
-								공지유형
-								<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes>
-							</xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<xf:select1 id="NOTICE_TYPE" chooseOption="true" style="width: 148px;height: 21px;" submenuSize="auto" allOption=""
-									disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled"
-									ref="data:dlt_BMS_NOTICE_MST.NOTICE_TYPE" chooseOptionLabel="">
-									<xf:choices></xf:choices>
-								</xf:select1>
-							</xf:group>
-							<xf:group tagname="th" style="" class="w2tb_th">
-								전송일시
-								<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes>
-							</xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<w2:inputCalendar footerDiv="false" id="" style="float:left; width:150px; height:23px;" renderDiv="true"
-									focusOnDateSelect="false" calendarValueType="yearMonthDateTime" rightAlign="false" renderType="component"
-									ref="data:dlt_BMS_NOTICE_MST.SEND_DTM" editType="" displayFormat="" ioFormat="" calendarDisplayFormatFunc="" disabled="true">
-								</w2:inputCalendar>
-							</xf:group>
-						</xf:group>
-						<xf:group tagname="tr" style="">
-							<xf:group tagname="th" style="" class="w2tb_th">
-								발송방법
-								<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes>
-							</xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<xf:select1 id="radio0" selectedIndex="-1" appearance="full"
-									style="width:100%;height:21px;margin-left :20px;" userData1="" cols="2" rows="" ref='data:dlt_BMS_NOTICE_MST.SEND_DIV'
-									useRadioTitle="" ev:onviewchange="scwin.radio0_onviewchange">
-									<xf:choices>
-										<xf:item>
-											<xf:label><![CDATA[즉시 전송]]></xf:label>
-											<xf:value><![CDATA[SD001]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[예약 전송]]></xf:label>
-											<xf:value><![CDATA[SD002]]></xf:value>
-										</xf:item>
-									</xf:choices>
-								</xf:select1>
-							</xf:group>
-							<xf:group tagname="th" style="" class="w2tb_th">
-								예약일시
-								<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes>
-							</xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<w2:inputCalendar footerDiv="false" id="RSV_DTM" style="float:left; width:150px; height:23px;" renderDiv="true"
-									focusOnDateSelect="false" calendarValueType="yearMonthDateTime" rightAlign="false" renderType="component"
-									ref="data:dlt_BMS_NOTICE_MST.RSV_DTM" editType="" displayFormat="" ioFormat="" calendarDisplayFormatFunc="" disabled="">
-								</w2:inputCalendar>
-							</xf:group>
-						</xf:group>
-
-						<xf:group tagname="tr" style="">
-							<xf:group tagname="th" style="vertical-align: top" class="w2tb_th req">
-								본문
-								<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes>
-							</xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<w2:attributes>
-									<w2:colspan>3</w2:colspan>
-									<w2:rowspan>1</w2:rowspan>
-								</w2:attributes>
-								<xf:textarea id="CONTENTS" style="width:100%;height:200px;" ref="data:dlt_BMS_NOTICE_MST.CONTENTS"
-									maxlength="3000">
-								</xf:textarea>
-							</xf:group>
-						</xf:group>
-					</xf:group>
-					<xf:group id="" class="horizontal_line"></xf:group>
-					<xf:group class="gr_sub_header">
-						<xf:group id="" style="" class="defaultbox">
-							<w2:textbox id="" style="" class="df_tt fl" label="전송할 차량"></w2:textbox>
-						</xf:group>
-						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
-					</xf:group>
-					<xf:group id="" style="" class=""></xf:group>
-					<xf:group>
-						<w2:gridView id="PI1001G1" style="width:100%;height:100%;" scrollByColumn="false" defaultCellHeight="20"
-							class="cm_grid" scrollByColumnAdaptive="false" dataList="data:dlt_BMS_VHC_MST" autoFit="lastColumn" readOnly="" overflowX="auto"
-							overflowY="scroll" fixedColumnScrollHidden="" focusMode="row" ev:onrowindexchange="scwin.PI1001G1_onrowindexchange">
-							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
-							<w2:header style="" id="header1">
-								<w2:row style="" id="row1">
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column3"
-										value="차량 ID" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column2"
-										value="차량번호" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="170" inputType="text" style="height:20px" id="column1"
-										value="통합플랫폼ID" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column8"
-										value="운수사" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="50" inputType="text" style="height:20px" id="column10"
-										value="운수사 권역" blockSelect="false" displayMode="label">
-									</w2:column>
-								</w2:row>
-							</w2:header>
-							<w2:gBody style="" id="gBody1">
-								<w2:row style="" id="row2">
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="VHC_ID" value=""
-										blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="VHC_NO" value=""
-										blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DVC_ID" value=""
-										blockSelect="false" displayMode="label" textAlign="">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="COMP_NM" value=""
-										blockSelect="false" displayMode="label" textAlign="left">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="AREA" value=""
-										blockSelect="false" displayMode="label">
-									</w2:column>
-								</w2:row>
-							</w2:gBody>
-						</w2:gridView>
-					</xf:group>
-					<!--  <xf:group id="" class="horizontal_line"></xf:group>
-					<xf:group class="gr_sub_header">
-						<xf:group id="" style="" class="defaultbox">
-							<w2:textbox id="" style="" class="df_tt fl" label="전송할 표출장치"></w2:textbox>
-						</xf:group>
 						<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
 					<xf:group id="" style="" class=""></xf:group>
-					<xf:group>
-						<w2:gridView autoFit="lastColumn" dataList="data:dlt_BMS_DVC_INFO" defaultCellHeight="20" id="PI1001G2" readOnly=""
+					<xf:group style="position:relative;" id="">
+						<xf:group tagname="table" style="width:100%; position:absolute;" id="PI1001F0" class="w2tb tb">
+							<w2:attributes>
+								<w2:summary></w2:summary>
+							</w2:attributes>
+							<xf:group tagname="caption"></xf:group>
+							<xf:group tagname="colgroup">
+								<xf:group tagname="col" style="width:25.00%;"></xf:group>
+								<xf:group tagname="col" style="width:25.00%"></xf:group>
+								<xf:group tagname="col" style="width:25.00%;"></xf:group>
+								<xf:group tagname="col" style="width:25.00%"></xf:group>
+							</xf:group>
+							<xf:group tagname="tr" style="height:10px;">
+								<xf:group tagname="th" style="" class="w2tb_th req">
+									공지&amp;nbsp;ID
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<xf:input adjustMaxLength="false" id="" style="width:100px;height:100%;"
+										ref="data:dlt_BMS_NOTICE_MST.NOTICE_ID" placeholder="홍길동" readOnly="true" disabled="true">
+									</xf:input>
+								</xf:group>
+								<xf:group tagname="th" style="" class="w2tb_th req">
+									제&amp;nbsp;목
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<xf:input adjustMaxLength="false" id="TITLE" style="height: 21px;" ref="data:dlt_BMS_NOTICE_MST.TITLE"
+										placeholder="업무 협의 요청" maxlength="100">
+									</xf:input>
+								</xf:group>
+							</xf:group>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" style="" class="w2tb_th req">
+									공지유형
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<xf:select1 id="NOTICE_TYPE" chooseOption="true" style="width: 148px;height: 21px;" submenuSize="auto"
+										allOption="" disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled"
+										ref="data:dlt_BMS_NOTICE_MST.NOTICE_TYPE" chooseOptionLabel="">
+										<xf:choices></xf:choices>
+									</xf:select1>
+								</xf:group>
+								<xf:group tagname="th" style="" class="w2tb_th">
+									전송일시
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<w2:inputCalendar footerDiv="false" id="" style="float:left; width:150px; height:23px;" renderDiv="true"
+										focusOnDateSelect="false" calendarValueType="yearMonthDateTime" rightAlign="false" renderType="component"
+										ref="data:dlt_BMS_NOTICE_MST.SEND_DTM" editType="" displayFormat="" ioFormat="" calendarDisplayFormatFunc="" disabled="true">
+									</w2:inputCalendar>
+								</xf:group>
+							</xf:group>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" style="" class="w2tb_th">
+									발송방법
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<xf:select1 id="radio0" selectedIndex="-1" appearance="full"
+										style="width:100%;height:21px;margin-left :20px;" userData1="" cols="2" rows="" ref='data:dlt_BMS_NOTICE_MST.SEND_DIV'
+										useRadioTitle="" ev:onviewchange="scwin.radio0_onviewchange">
+										<xf:choices>
+											<xf:item>
+												<xf:label><![CDATA[즉시 전송]]></xf:label>
+												<xf:value><![CDATA[SD001]]></xf:value>
+											</xf:item>
+											<xf:item>
+												<xf:label><![CDATA[예약 전송]]></xf:label>
+												<xf:value><![CDATA[SD002]]></xf:value>
+											</xf:item>
+										</xf:choices>
+									</xf:select1>
+								</xf:group>
+								<xf:group tagname="th" style="" class="w2tb_th">
+									예약일시
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<w2:inputCalendar footerDiv="false" id="RSV_DTM" style="float:left; width:150px; height:23px;"
+										renderDiv="true" focusOnDateSelect="false" calendarValueType="yearMonthDateTime" rightAlign="false" renderType="component"
+										ref="data:dlt_BMS_NOTICE_MST.RSV_DTM" editType="" displayFormat="" ioFormat="" calendarDisplayFormatFunc="" disabled="">
+									</w2:inputCalendar>
+								</xf:group>
+							</xf:group>
+
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" style="vertical-align: top" class="w2tb_th req">
+									본문
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<w2:attributes>
+										<w2:colspan>3</w2:colspan>
+										<w2:rowspan>1</w2:rowspan>
+									</w2:attributes>
+									<xf:textarea id="CONTENTS" style="width:100%;height:190px;" ref="data:dlt_BMS_NOTICE_MST.CONTENTS"
+										maxlength="3000">
+									</xf:textarea>
+								</xf:group>
+							</xf:group>
+						</xf:group>
+					</xf:group>
+					
+					<xf:group id="" class="horizontal_line"></xf:group>
+
+					<xf:group id="" class="pgm_list grdr_20_2_a" style="">
+						<xf:group class="gr_sub_header">
+							<xf:group id="" style="" class="defaultbox">
+								<w2:textbox id="" style="" class="df_tt fl" label="전송할 차량"></w2:textbox>
+							</xf:group>
+							<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
+						</xf:group>
+						<xf:group style="" id=""></xf:group>
+						<xf:group>
+							<w2:gridView id="PI1001G1" style="width:100%;height:100%;" scrollByColumn="false" defaultCellHeight="20"
+								class="cm_grid" scrollByColumnAdaptive="false" dataList="data:dlt_BMS_VHC_MST" autoFit="lastColumn" readOnly="" overflowX="auto"
+								overflowY="scroll" fixedColumnScrollHidden="" focusMode="row" ev:onrowindexchange="scwin.PI1001G1_onrowindexchange">
+								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
+								<w2:header style="" id="header1">
+									<w2:row style="" id="row1">
+										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column3"
+											value="차량 ID" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column2"
+											value="차량번호" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="170" inputType="text" style="height:20px" id="column1"
+											value="통합플랫폼ID" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column8"
+											value="운수사" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="50" inputType="text" style="height:20px" id="column10"
+											value="운수사 권역" blockSelect="false" displayMode="label">
+										</w2:column>
+									</w2:row>
+								</w2:header>
+								<w2:gBody style="" id="gBody1">
+									<w2:row style="" id="row2">
+										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="VHC_ID"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="VHC_NO"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DVC_ID"
+											value="" blockSelect="false" displayMode="label" textAlign="">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="COMP_NM"
+											value="" blockSelect="false" displayMode="label" textAlign="left">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="AREA"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+									</w2:row>
+								</w2:gBody>
+							</w2:gridView>
+						</xf:group>
+						<!--  <xf:group id="" class="horizontal_line"></xf:group>
+							<xf:group class="gr_sub_header">
+							<xf:group id="" style="" class="defaultbox">
+							<w2:textbox id="" style="" class="df_tt fl" label="전송할 표출장치"></w2:textbox>
+							</xf:group>
+							<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
+							</xf:group>
+							<xf:group id="" style="" class=""></xf:group>
+							<xf:group>
+							<w2:gridView autoFit="lastColumn" dataList="data:dlt_BMS_DVC_INFO" defaultCellHeight="20" id="PI1001G2" readOnly=""
 							class="cm_grid" scrollByColumn="false" scrollByColumnAdaptive="false" style="width:100%;height:100%;" overflowY="scroll"
 							overflowX="auto" focusMode="row">
 							<w2:caption id="caption1" style="" value="this is a grid caption."></w2:caption>
 							<w2:header id="header1" style="">
-								<w2:row id="row1" style="">
-									<w2:column blockSelect="false" displayMode="label" id="column3" inputType="text"
-										removeBorderStyle="false" style="height:20px" value="장치ID" width="100">
-									</w2:column>
-									<w2:column blockSelect="false" displayMode="label" id="column2" inputType="text"
-										removeBorderStyle="false" style="height:20px" value="장치종류" width="200">
-									</w2:column>
-									<w2:column blockSelect="false" displayMode="label" id="column1" inputType="text"
-										removeBorderStyle="false" style="height:20px" value="관리ID" width="130">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column6"
-										value="비고" blockSelect="false" displayMode="label">
-									</w2:column>
-								</w2:row>
+							<w2:row id="row1" style="">
+							<w2:column blockSelect="false" displayMode="label" id="column3" inputType="text"
+							removeBorderStyle="false" style="height:20px" value="장치ID" width="100">
+							</w2:column>
+							<w2:column blockSelect="false" displayMode="label" id="column2" inputType="text"
+							removeBorderStyle="false" style="height:20px" value="장치종류" width="200">
+							</w2:column>
+							<w2:column blockSelect="false" displayMode="label" id="column1" inputType="text"
+							removeBorderStyle="false" style="height:20px" value="관리ID" width="130">
+							</w2:column>
+							<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column6"
+							value="비고" blockSelect="false" displayMode="label">
+							</w2:column>
+							</w2:row>
 							</w2:header>
 							<w2:gBody id="gBody1" style="">
-								<w2:row id="row2" style="">
-									<w2:column blockSelect="false" displayMode="label" id="DVC_ID" inputType="text"
-										removeBorderStyle="false" style="height:20px" value="" width="166">
-									</w2:column>
-									<w2:column blockSelect="false" displayMode="label" id="DVC_KIND" inputType="select"
-										removeBorderStyle="false" style="height:20px" value="" width="70" textAlign="">
-									</w2:column>
-									<w2:column blockSelect="false" displayMode="label" id="MNG_ID" inputType="text"
-										removeBorderStyle="false" style="height:20px" value="" width="89">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="97" inputType="text" style="height:20px" id="REMARK"
-										value="" blockSelect="false" displayMode="label" textAlign="left">
-									</w2:column>
-								</w2:row>
+							<w2:row id="row2" style="">
+							<w2:column blockSelect="false" displayMode="label" id="DVC_ID" inputType="text"
+							removeBorderStyle="false" style="height:20px" value="" width="166">
+							</w2:column>
+							<w2:column blockSelect="false" displayMode="label" id="DVC_KIND" inputType="select"
+							removeBorderStyle="false" style="height:20px" value="" width="70" textAlign="">
+							</w2:column>
+							<w2:column blockSelect="false" displayMode="label" id="MNG_ID" inputType="text"
+							removeBorderStyle="false" style="height:20px" value="" width="89">
+							</w2:column>
+							<w2:column removeBorderStyle="false" width="97" inputType="text" style="height:20px" id="REMARK"
+							value="" blockSelect="false" displayMode="label" textAlign="left">
+							</w2:column>
+							</w2:row>
 							</w2:gBody>
-						</w2:gridView>
-					</xf:group>-->
-
+							</w2:gridView>
+							</xf:group>-->
+					</xf:group>
 				</xf:group>
 			</xf:group>
 		</xf:group>
