@@ -33,14 +33,6 @@ public class FM0204Service extends ServiceSupport {
 		return FM0204Mapper.FM0204G0R2(param);
 	}
 
-	public List FM0204SHI0() throws Exception {
-		return FM0204Mapper.FM0204SHI0();
-	}
-	
-	public List FM0204SHI1() throws Exception {
-		return FM0204Mapper.FM0204SHI1();
-	}
-	
 	public List FM0204G1R0() throws Exception {
 		// TODO Auto-generated method stub
 		Map param = getSimpleDataMap("dma_subsearch");
@@ -55,42 +47,11 @@ public class FM0204Service extends ServiceSupport {
 		return FM0204Mapper.FM0204G2R1();
 	}
 	
-	public Map FM0204G2S0() throws Exception {
-		int iCnt = 0;
-		int uCnt = 0;
-		int dCnt = 0;		
-		
-		List<Map<String, Object>> param = getSimpleList("dlt_BMS_DVC_PARAM_CFG_INFO");
-		try {
-			for (int i = 0; i < param.size(); i++) {
-				Map data = (Map) param.get(i);
-				String rowStatus = (String) data.get("rowStatus");
-				if (rowStatus.equals("C")) {
-					iCnt += FM0204Mapper.FM0204G2I0(data);
-				} else if (rowStatus.equals("U")) {
-					uCnt += FM0204Mapper.FM0204G2U0(data);
-				} else if (rowStatus.equals("D")) {
-					dCnt += FM0204Mapper.FM0204G2D0(data);
-				} 
-			}			
-		} catch(Exception e) {
-			if (e instanceof DuplicateKeyException)
-			{
-				throw new MessageException(Result.ERR_KEY, "중복된 키값의 데이터가 존재합니다.");
-			}
-			else
-			{
-				throw e;
-			}		
-		}
-
-		
-		Map result = saveResult(iCnt, uCnt, dCnt);
-		
-		return result;		
-		
-		
+	public List FM0204G2R2() throws Exception {
+		Map param = getSimpleDataMap("dma_subsearch");
+		return FM0204Mapper.FM0204G2R2(param);
 	}
+	
 	
 	
 

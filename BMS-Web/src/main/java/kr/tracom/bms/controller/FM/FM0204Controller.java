@@ -21,7 +21,7 @@ public class FM0204Controller extends ControllerSupport {
 	
 	@RequestMapping("/fm/FM0204G0R0")
 	public @ResponseBody Map<String, Object> FM0204G0R0() throws Exception {
-		result.setData("dlt_BMS_DVC_COND_PARAM_INFO", FM0204Service.FM0204G0R0());
+		result.setData("dlt_BMS_FCLT_COND_PARAM_INFO", FM0204Service.FM0204G0R0());
 		return result.getResult();
 	}
 	
@@ -37,18 +37,6 @@ public class FM0204Controller extends ControllerSupport {
 		return result.getResult();
 	}
 	
-	@RequestMapping("/fm/FM0204SHI0")
-	public @ResponseBody Map<String, Object> FM0204SHI0() throws Exception {
-		result.setData("dlt_searchitem", FM0204Service.FM0204SHI0());
-		return result.getResult();
-	}
-	
-	@RequestMapping("/fm/FM0204SHI1")
-	public @ResponseBody Map<String, Object> FM0204SHI1() throws Exception {
-		result.setData("dlt_searchitem2", FM0204Service.FM0204SHI1());
-		return result.getResult();
-	}
-	
 	@RequestMapping("/fm/FM0204G1R0")
 	public @ResponseBody Map<String, Object> FM0204G1R0() throws Exception {
 		result.setData("dlt_MGR_PROC_HIS", FM0204Service.FM0204G1R0());
@@ -57,21 +45,21 @@ public class FM0204Controller extends ControllerSupport {
 	
 	@RequestMapping("/fm/FM0204G2R0")
 	public @ResponseBody Map<String, Object> FM0204G2R0() throws Exception {
-		result.setData("dlt_BMS_DVC_TAG_COND_PARAM_INFO", FM0204Service.FM0204G2R0());
+		result.setData("dlt_BMS_FCLT_AIR_COND_PARAM_INFO", FM0204Service.FM0204G2R0());
 		return result.getResult();
 	}
 	
 	@RequestMapping("/fm/FM0204G2R1")
 	public @ResponseBody Map<String, Object> FM0204G2R1() throws Exception {
-		result.setData("dlt_TAG_PARAM_KIND", FM0204Service.FM0204G2R1());
+		result.setData("dlt_AIR_PARAM_KIND", FM0204Service.FM0204G2R1());
 		return result.getResult();
 	}
 	
-	@RequestMapping("/fm/FM0204G2S0")
-	public @ResponseBody Map<String, Object> FM0204G2S0() throws Exception {
-		Map map = FM0204Service.FM0204G2S0();
-		result.setData("dma_result", map);
-		return result.getResultSave();
+	@RequestMapping("/fm/FM0204G2R2")
+	public @ResponseBody Map<String, Object> FM0204G2R2() throws Exception {
+		result.setData("dlt_CTL_PARAM_KIND", FM0204Service.FM0204G2R2());
+		return result.getResult();
 	}
+	
 	
 }

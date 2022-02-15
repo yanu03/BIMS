@@ -3,62 +3,71 @@
 
 <mapper namespace="kr.tracom.bms.domain.FM0204.FM0204Mapper">
 
+<!-- 시설물 상태 파라미터 조회 프로시서 -->
 <select id="FM0204G0R0" resultType="Map">
-	CALL PROC_DVC_STAT()
+	CALL PROC_FCLT_STAT()
 </select>
 
+<!-- 시설물(에어튜브) 상태 파라미터 조회 프로시서-->
 <select id="FM0204G2R0" resultType="Map">
-	CALL PROC_DVC_TAG_STAT()
+	CALL PROC_FCLT_AIR_STAT()
 </select>
 
+<!-- 시설물 파라미터종류 조회-->
 <select id="FM0204G0R1" resultType="Map">
 	SELECT 
 		A.PARAM_KIND
 	FROM 
-		BMS_DVC_PARAM_CFG_INFO A
+		BMS_FCLT_PARAM_CFG_INFO A
 	WHERE 
-		A.DVC_KIND != 'DK011' AND A.PARAM_DIV = 'PD003'
+		A.FCLT_KIND != 'FK004' AND A.PARAM_DIV = 'PD003'
 	GROUP BY
 		PARAM_KIND
 </select>
 
+<!-- 시설물(에어튜브) 파라미터종류 조회-->
 <select id="FM0204G2R1" resultType="Map">
 	SELECT 
 		A.PARAM_KIND
 	FROM 
-		BMS_DVC_PARAM_CFG_INFO A
+		BMS_FCLT_PARAM_CFG_INFO A
 	WHERE 
-		A.DVC_KIND = 'DK011' AND A.PARAM_DIV = 'PD003'
+		A.FCLT_KIND = 'FK004' AND A.PARAM_DIV = 'PD003'
 	GROUP BY
 		PARAM_KIND
 </select>
 
+<!-- 시설물 제어 조회-->
 <select id="FM0204G0R2" resultType="Map">
 	SELECT 
 		A.PARAM_KIND
+		,A.AUTO_YN
 	FROM 
-		BMS_DVC_PARAM_INFO A
+		BMS_FCLT_PARAM_INFO A
 	WHERE 
-		A.DVC_ID = #{DVC_ID} 
-		AND A.DVC_KIND != 'DK011' 
+		A.FCLT_ID = #{FCLT_ID} 
+		AND A.FCLT_KIND != 'FK004' 
 		AND A.PARAM_DIV = 'PD002'
 	GROUP BY 
 		PARAM_KIND
 </select>
-	
-<select id="FM0204SHI0" resultType="Map">
-	SELECT			VHC_ID
-					,VHC_NO	
-	FROM			BMS_VHC_MST
+
+<!-- 시설물(에어튜브) 제어 조회-->
+<select id="FM0204G2R2" resultType="Map">
+	SELECT 
+		A.PARAM_KIND
+		,A.AUTO_YN
+	FROM 
+		BMS_FCLT_PARAM_INFO A
+	WHERE 
+		A.FCLT_ID = #{FCLT_ID} 
+		AND A.FCLT_KIND = 'FK004' 
+		AND A.PARAM_DIV = 'PD002'
+	GROUP BY 
+		PARAM_KIND
 </select>
-	
-<select id="FM0204SHI1" resultType="Map">
-	SELECT			ORG_ID
-					,ORG_NM
-	FROM	  		BMS_ORG_MST
-	WHERE			ORG_DIV = 'OD008'
-</select>	
-	
+
+<!-- 프로세스 조회-->
 <select id="FM0204G1R0" resultType="Map">
 	SELECT 			DATE_FORMAT(LAST_DTM, '%Y-%m-%d %H:%i:%s') LAST_DTM
 					,DATE_FORMAT(REG_DTM, '%Y-%m-%d %H:%i:%s') REG_DTM
@@ -81,77 +90,6 @@
 	GROUP BY		IMP_ID, PROC_NAME
 </select>
 
-
-
-<insert id="FM0204G2I0" parameterType="Map">
-	INSERT INTO		BMS_DVC_PARAM_INFO	
-					(
-						VHC_ID
-						,DVC_ID
-						,DVC_KIND
-						,PARAM_DIV
-						,PARAM_KIND
-						,DATA_TYPE
-						,DATA_LENGTH
-						,DATA_VAL
-						,ATTR1_VAL
-						,ATTR2_VAL
-						,SCHEDULE_YN
-						,USE_YN
-						,AUTO_YN
-						,REMARK
-						,UPD_DTM
-						,UPD_ID						
-					)
-	VALUES			(
-						#{VHC_ID}
-						,#{DVC_ID}
-						,#{DVC_KIND}
-						,#{PARAM_DIV}
-						,#{PARAM_KIND}
-						,#{DATA_TYPE}
-						,#{DATA_LENGTH}
-						,#{DATA_VAL}
-						,#{ATTR1_VAL}
-						,#{ATTR2_VAL}
-						,#{SCHEDULE_YN}
-						,#{USE_YN}
-						,#{AUTO_YN}
-						,#{REMARK}
-						,#{UPD_DTM}
-						,#{SSN_UPD_ID}				
-					)
-	
-	
-						
-</insert>
-
-<update id="FM0204G2U0" parameterType="Map">
-	UPDATE			BMS_DVC_PARAM_INFO
-	SET				VHC_ID = #{VHC_ID}
-					,DVC_ID = #{DVC_ID}
-					,DVC_KIND = #{DVC_KIND}
-					,PARAM_DIV = #{PARAM_DIV}
-					,PARAM_KIND = #{PARAM_KIND}
-					,DATA_TYPE = #{DATA_TYPE}
-					,DATA_LENGTH = #{DATA_LENGTH}
-					,DATA_VAL = #{DATA_VAL}
-					,ATTR1_VAL = #{ATTR1_VAL}
-					,ATTR2_VAL = #{ATTR2_VAL}
-					,SCHEDULE_YN = #{SCHEDULE_YN}
-					,USE_YN = #{USE_YN}
-					,AUTO_YN = #{AUTO_YN}
-					,REMARK = #{REMARK}
-					,UPD_DTM = #{UPD_DTM}
-					,UPD_ID = #{SSN_UPD_ID}
-					
-	WHERE			VHC_ID = #{VHC_ID} AND DVC_ID = #{DVC_ID} AND DVC_KIND = #{DVC_KIND} AND PARAM_DIV = #{PARAM_DIV} AND PARAM_KIND = #{PARAM_KIND}
-</update> 
-
-<delete id="FM0204G2D0" parameterType="Map">
-	DELETE FROM 	BMS_DVC_PARAM_INFO
-	WHERE			VHC_ID = #{VHC_ID} AND DVC_ID = #{DVC_ID} AND DVC_KIND = #{DVC_KIND} AND PARAM_DIV = #{PARAM_DIV} AND PARAM_KIND = #{PARAM_KIND}
-</delete>
 
 <!-- plf 테이블에 삽입 20211018 jh -->
 <insert id="FM0204G1I2" parameterType="Map">
