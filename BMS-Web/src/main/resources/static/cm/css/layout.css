@@ -130,6 +130,8 @@
 
 .grdr_20_2_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px auto;}
 .grdr_20_2_110_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 110px auto;}
+.grdr_20_2_140_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 140px auto;}
+.grdr_20_35_2_140_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(35px, max-content) 2px 140px auto;}
 .grdr_20_20_2_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(20px, max-content) 2px auto;}
 .grdr_20_35_2_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(35px, max-content) 2px auto;}
 .grdr_25_2_a {display:grid; grid-template-rows: minmax(25px, max-content) 2px auto;}
@@ -148,6 +150,7 @@
 .grdr_20_2_230_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(230px, max-content) minmax(20px, max-content) minmax(20px, max-content) auto;} /* 왼쪽그리드 하단 */
 .grdr_20_2_250_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(250px, max-content) minmax(20px, max-content) minmax(20px, max-content) auto;} /* 왼쪽그리드 하단 */
 .grdr_20_2_1f_20_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
+.grdr_20_2_1f_20_20_1f_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) minmax(20px, max-content) 1fr auto;} /* 왼쪽그리드 하단 */
 .grdr_20_2_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_20_2_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_280_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(280px, max-content) minmax(20px, max-content) minmax(20px, max-content) auto;} /* 왼쪽그리드 하단 */
