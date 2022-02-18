@@ -205,7 +205,7 @@
 					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group><!-- pgm_header -->
-			<xf:group id="pgm_content" class="pgm_content grdc_a_20_900" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_6f_20_4f" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
@@ -270,7 +270,7 @@
 				</xf:group><!-- pgm_list -->
 
 				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_290_20_a" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="시나리오 정보" style=""></w2:textbox>
@@ -297,8 +297,8 @@
 								</xf:group>
 								<xf:group style="" class="w2tb_th" tagname="th">공지유형</xf:group>
 								<xf:group style="" class="w2tb_td" tagname="td">
-									<xf:select1 id="NOTICE_TYPE" chooseOption="true" style="width: 148px;height: 21px;" submenuSize="auto" allOption=""
-										disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled"
+									<xf:select1 id="NOTICE_TYPE" chooseOption="true" style="height: 21px;" submenuSize="auto"
+										allOption="" disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled"
 										ref="data:dlt_BMS_NOTICE_SCNRO_MST.NOTICE_TYPE" chooseOptionLabel="">
 										<xf:choices></xf:choices>
 									</xf:select1>
@@ -311,8 +311,8 @@
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:input adjustMaxLength="false" id="" style="height:24px;"
-										ref="data:dlt_BMS_NOTICE_SCNRO_MST.TITLE" placeholder="" readOnly="" disabled="">
+									<xf:input adjustMaxLength="false" id="" style="height:24px;" ref="data:dlt_BMS_NOTICE_SCNRO_MST.TITLE"
+										placeholder="" readOnly="" disabled="">
 									</xf:input>
 								</xf:group>
 							</xf:group>
@@ -352,7 +352,10 @@
 							</xf:group>
 						</xf:group>
 					</xf:group>
-					<xf:image src="/cm/images/add/bg_brt.png" style="width: 100%;height: 100%;" id=""></xf:image>
+					<xf:group style="" id=""></xf:group>
+					<xf:group style="position:relative" id="">
+						<xf:image src="/cm/images/add/bg_brt.png" style="width: 100%;height: 100%; position:absolute" id=""></xf:image>
+					</xf:group>
 				</xf:group><!-- pgm_detail -->
 			</xf:group>
 		</xf:group>

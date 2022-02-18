@@ -109,52 +109,36 @@
 			com.searchGrid(PI0400G0, sub_PI0400G0R0);
 		});
 		
-		$p.executeSubmission(sub_PI0400G1R0);
-		$p.executeSubmission(sub_PI0400G2R0);
 		
+		
+		$("#PI0400_TAB").attr("style", "width:200px; height:26px;  float:left");
+		PI0400G1.hide();
+		
+		//탭 목록 클릭 이벤트
+		$(".tab_wet").find("li").click( function() {
+			var li_id = this.id;
+			$(".tab_wet").find("li").removeClass("on");
+			$(".tab_wet").find("#"+li_id).addClass("on");
+			
+			if(li_id == "li_WET") {
+				PI0400G0.show("");
+				PI0400G1.hide();
+			}
+			else if(li_id == "li_ATOM") {
+				PI0400G0.hide();
+				PI0400G1.show("");
+				com.setFocusedCell(PI0400G1, "UPD_DTM");
+			}
+		});
 	};	
 	
 	scwin.sub_PI0400G0R0_submitdone = function(e) {
-		
 		com.setFocusedCell(PI0400G0, "NOTI_DT");
-		
-		/*var dlt0 = dlt_BMS_WEAT_INFO;
-		F_NOTI_DT.setValue(dlt0.getCellData(0, "NOTI_DT"));
-		F_SKY_COND.setValue(dlt0.getCellData(0, "SKY_COND"));
-		F_TEMPC.setValue(dlt0.getCellData(0, "TEMPC"));
-		F_TEMP_MINI.setValue(dlt0.getCellData(0, "TEMP_MINI"));
-		F_TEMP_HIGH.setValue(dlt0.getCellData(0, "TEMP_HIGH"));
-		F_HUMI.setValue(dlt0.getCellData(0, "HUMI"));
-		F_RAIN_PRO.setValue(dlt0.getCellData(0, "RAIN_PRO"));
-		F_RAINFALL.setValue(dlt0.getCellData(0, "RAINFALL"));
-		*/
-		
-	};
-	
-	scwin.PI0400G0_onrowindexchange = function(row,oldRow) {
-	
-		var tPath = "/cm/images/bms/"
-		var fData = dlt_BMS_WEAT_INFO.getCellData(row, "SKY_COND");
-		if (fData == "SC001"){
-			FI0400I0.setSrc(tPath + "SC001.png");	
-		}else if(fData == "SC002"){
-			FI0400I0.setSrc(tPath + "SC002.png");
-		}else if(fData == "SC003"){
-			FI0400I0.setSrc(tPath + "SC003.png");
-		}else if(fData == "SC004"){
-			FI0400I0.setSrc(tPath + "SC004.png");
-		}else if(fData == "SC005"){
-			FI0400I0.setSrc(tPath + "SC005.png");
-		}else if(fData == "SC006"){
-			FI0400I0.setSrc(tPath + "SC006.png");
-		}else if(fData == "SC007"){
-			FI0400I0.setSrc(tPath + "SC007.png");
-		}else if(fData == "SC008"){
-			FI0400I0.setSrc(tPath + "SC008.png");
-		}	
+		com.executeSubmission(sub_PI0400G1R0);
 	};
 	
 	scwin.sub_PI0400G1R0_submitdone = function(e) {
+		var tPath = "/cm/images/bms/"
 		
 		dma_CUR_BMS_WEAT_ATMO_INFO.set("NOTI_DT", dlt_BMS_WEAT_INFO.getCellData(0, "NOTI_DT"));
 		dma_CUR_BMS_WEAT_ATMO_INFO.set("TEMPC", dlt_BMS_WEAT_INFO.getCellData(0, "TEMPC"));
@@ -174,25 +158,32 @@
 		var skyCond = dlt_BMS_WEAT_INFO.getCellData(0, "SKY_COND")
 		if(skyCond == 'SC001'){
 			dma_CUR_BMS_WEAT_ATMO_INFO.set("SKY_COND", "맑음");
+			FI0400I0.setSrc(tPath + "SC001.png");	
 		}else if(skyCond == 'SC002'){
+			FI0400I0.setSrc(tPath + "SC002.png");
 			dma_CUR_BMS_WEAT_ATMO_INFO.set("SKY_COND", "구름조금");
 		}else if(skyCond == 'SC003'){
+			FI0400I0.setSrc(tPath + "SC003.png");
 			dma_CUR_BMS_WEAT_ATMO_INFO.set("SKY_COND", "구름많음");
 		}else if(skyCond == 'SC004'){
+			FI0400I0.setSrc(tPath + "SC004.png");
 			dma_CUR_BMS_WEAT_ATMO_INFO.set("SKY_COND", "흐림");
 		}else if(skyCond == 'SC005'){
+			FI0400I0.setSrc(tPath + "SC005.png");
 			dma_CUR_BMS_WEAT_ATMO_INFO.set("SKY_COND", "비");
 		}else if(skyCond == 'SC006'){
+			FI0400I0.setSrc(tPath + "SC006.png");
 			dma_CUR_BMS_WEAT_ATMO_INFO.set("SKY_COND", "비/눈");
 		}else if(skyCond == 'SC007'){
+			FI0400I0.setSrc(tPath + "SC007.png");
 			dma_CUR_BMS_WEAT_ATMO_INFO.set("SKY_COND", "눈/비");
 		}else if(skyCond == 'SC008'){
+			FI0400I0.setSrc(tPath + "SC008.png");
 			dma_CUR_BMS_WEAT_ATMO_INFO.set("SKY_COND", "눈");
 		}
 		
-		
+		com.executeSubmission(sub_PI0400G2R0);
 	};
-	
 	
 	scwin.tabControl_ontabclick = function(tabID,idx) {
 		if(idx == 1){
@@ -224,7 +215,7 @@
 				</xf:group>
 			</xf:group>
 			
-			<xf:group id="pgm_content" class="pgm_content grdc_500_50_a" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_500_20_a" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
 					<xf:group class="defaultbox" id="" style="">
 						<w2:textbox class="df_tt fl" id="" label="현재 기상/대기 정보" style=""></w2:textbox>
@@ -400,18 +391,177 @@
 						</xf:group>
 					</xf:group>
 				</xf:group>
-				<xf:group id="" style="" class="vertical_line2"></xf:group>
+				<xf:group id="" style="" class="vertical_line"></xf:group>
 				
-				<xf:group class="pgm_list grdr_400_20_a">
-					<xf:group id="" style="position:relative;height: 450px;" class="">
-						<w2:tabControl useTabKeyOnly="true" id="tabControl" useMoveNextTabFocus="false" useConfirmMessage="false"
-							confirmTrueAction="exist" confirmFalseAction="new" alwaysDraw="false" style="width: 100%;" tabScroll="" tableRender="" tabPosition="" ev:ontabclick="scwin.tabControl_ontabclick">
+				<xf:group class="pgm_detail grdr_20_20_2_1f_20_1f" id="pgm_detail">
+					<xf:group id="" class="gr_sub_header" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl" id="" label="기상/대기 이력" style=""></w2:textbox>
+						</xf:group>
+					</xf:group>
+					<ul id="PI0400_TAB" class="tab_wet" style="">
+						<li id="li_WET" class="on">기상</li>
+						<li id="li_ATOM" class="">대기</li>
+					</ul>
+					<xf:group></xf:group>
+					<xf:group id="" class="" style="">
+						<w2:gridView id="PI0400G0" style="" defaultCellHeight="20" rowNumVisible="true" useShiftKey="true"
+							readOnly="true" ev:onrowindexchange="scwin.PI0400G0_onrowindexchange" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true"
+							rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
+							ignoreCellClick="false" dataList="data:dlt_BMS_WEAT_INFO" class="cm_grid tab" autoFit="allColumn" fixedColumnScrollHidden=""
+							sortOrderReverse="true" focusMode="row">
+							<w2:header style="" id="header1">
+								<w2:row style="" id="row1">
+									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+										id="column5" value="업데이트일시" blockSelect="false" displayMode="label" sortLabel="" sortable="">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+										id="column4" value="발표일시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
+										id="column3" value="하늘상태" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
+										id="column2" value="온도(℃)" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
+										id="column1" value="최저기온(℃)" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
+										id="column6" value="최고기온(℃)" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
+										id="column7" value="습도(%)" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
+										id="column8" value="강수확률(%)" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="100%" inputType="text" style="height:20px"
+										id="column9" value="강수량(mm)" blockSelect="false" displayMode="label">
+									</w2:column>
+								</w2:row>
+							</w2:header>
+							<w2:gBody width="40" style="" id="gBody1">
+								<w2:row style="" id="row2">
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="UPD_DTM"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="NOTI_DT"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px"
+										id="SKY_COND" value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="TEMPC"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px"
+										id="TEMP_MINI" value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px"
+										id="TEMP_HIGH" value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="HUMI"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="RAIN_PRO"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="RAINFALL"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+								</w2:row>
+							</w2:gBody>
+							<w2:footer style="" id="footer1">
+								<w2:row style="" id="row3">
+									<w2:column removeBorderStyle="false" width="NaN" inputType="expression"
+										style="height:20px; border-right:5px" id="column48" value="" blockSelect="false" displayMode="label" colSpan="13" rowSpan=""
+										expression="&quot;데이터 개수 : &quot; + COUNT('GRG_ID')" textAlign="left">
+									</w2:column>
+								</w2:row>
+							</w2:footer>
+						</w2:gridView>
+						<w2:gridView id="PI0400G1" style="" defaultCellHeight="20" rowNumVisible="true" useShiftKey="true"
+							readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태" overflowX="auto"
+							overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_BMS_ATMO_INFO"
+							class="cm_grid tab" autoFit="allColumn" fixedColumnScrollHidden="" focusMode="row">
+							<w2:header style="" id="header1">
+								<w2:row style="" id="row1">
+									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+										id="column5" value="업데이트일시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+										id="column4" value="발표일시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+										id="column3" value="초미세먼지농도(㎍/㎥)" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px"
+										id="column2" value="미세먼지농도(㎍/㎥)" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+										id="column1" value="아황산가스농도(ppm)" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+										id="column6" value="일산화탄소농도(ppm)" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px"
+										id="column7" value="오존농도(ppm)" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="100%" inputType="text" style="height:20px"
+										id="column8" value="이산화질소농도(ppm)" blockSelect="false" displayMode="label">
+									</w2:column>
+								</w2:row>
+							</w2:header>
+							<w2:gBody width="40" style="" id="gBody1">
+								<w2:row style="" id="row2">
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="UPD_DTM"
+										blockSelect="false" displayMode="label" displayFormatter="scwin.dateDisFormatter">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="MEAS_DT"
+										blockSelect="false" displayMode="label" displayFormatter="scwin.dateDisFormatter">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DUSTC"
+										value="" blockSelect="false" displayMode="label" hiddenClass="" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="SDUSTC"
+										value="" blockSelect="false" displayMode="label" hiddenClass="" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="SDC"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="CMC"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="OZONEC"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="NDC"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+								</w2:row>
+							</w2:gBody>
+							<w2:footer style="" id="footer1">
+								<w2:row style="" id="row3">
+									<w2:column removeBorderStyle="false" width="NaN" inputType="expression"
+										style="height:20px; border-right:5px" id="column48" value="" blockSelect="false" displayMode="label" colSpan="13" rowSpan=""
+										expression="&quot;데이터 개수 : &quot; + COUNT('GRG_ID')" textAlign="left">
+									</w2:column>
+								</w2:row>
+							</w2:footer>
+						</w2:gridView>
+					</xf:group>
+						
+					<!-- <w2:tabControl useTabKeyOnly="true" id="tabControl" useMoveNextTabFocus="false" useConfirmMessage="false"
+							confirmTrueAction="exist" confirmFalseAction="new" alwaysDraw="false" style="width: 100%;" tabScroll="" tableRender="" tabPosition=""
+							ev:ontabclick="scwin.tabControl_ontabclick">
 							<w2:tabs disabled="false" style="width:70px;height:30px;" id="tabs3" label="기상"></w2:tabs>
 							<w2:content alwaysDraw="false" style="height:100%;" id="content3">
-								<w2:gridView id="PI0400G0" style="" defaultCellHeight="20" rowNumVisible="true"
-									useShiftKey="true" readOnly="true" ev:onrowindexchange="scwin.PI0400G0_onrowindexchange" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
-									 overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
-									ignoreCellClick="false" dataList="data:dlt_BMS_WEAT_INFO" class="cm_grid tab" autoFit="allColumn" fixedColumnScrollHidden="" sortOrderReverse="true" focusMode="row">
+								<w2:gridView id="PI0400G0" style="" defaultCellHeight="20" rowNumVisible="true" useShiftKey="true"
+									readOnly="true" ev:onrowindexchange="scwin.PI0400G0_onrowindexchange" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true"
+									rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
+									ignoreCellClick="false" dataList="data:dlt_BMS_WEAT_INFO" class="cm_grid tab" autoFit="allColumn" fixedColumnScrollHidden=""
+									sortOrderReverse="true" focusMode="row">
 									<w2:header style="" id="header1">
 										<w2:row style="" id="row1">
 											<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
@@ -445,11 +595,11 @@
 									</w2:header>
 									<w2:gBody width="40" style="" id="gBody1">
 										<w2:row style="" id="row2">
-											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px"
-												id="UPD_DTM" blockSelect="false" displayMode="label">
+											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="UPD_DTM"
+												blockSelect="false" displayMode="label">
 											</w2:column>
-											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px"
-												id="NOTI_DT" blockSelect="false" displayMode="label">
+											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="NOTI_DT"
+												blockSelect="false" displayMode="label">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px"
 												id="SKY_COND" value="" blockSelect="false" displayMode="label">
@@ -466,11 +616,11 @@
 											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="HUMI"
 												value="" blockSelect="false" displayMode="label" textAlign="right">
 											</w2:column>
-											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px"
-												id="RAIN_PRO" value="" blockSelect="false" displayMode="label" textAlign="right">
+											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="RAIN_PRO"
+												value="" blockSelect="false" displayMode="label" textAlign="right">
 											</w2:column>
-											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px"
-												id="RAINFALL" value="" blockSelect="false" displayMode="label" textAlign="right">
+											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="RAINFALL"
+												value="" blockSelect="false" displayMode="label" textAlign="right">
 											</w2:column>
 										</w2:row>
 									</w2:gBody>
@@ -486,10 +636,10 @@
 							</w2:content>
 							<w2:tabs disabled="false" style="width:70px;height:30px;" id="tabs4" label="대기"></w2:tabs>
 							<w2:content alwaysDraw="false" style="height:100%" id="content4">
-								<w2:gridView id="PI0400G1" style="" defaultCellHeight="20" rowNumVisible="true"
-									useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
-									 overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
-									ignoreCellClick="false" dataList="data:dlt_BMS_ATMO_INFO" class="cm_grid tab" autoFit="allColumn" fixedColumnScrollHidden="" focusMode="row">
+								<w2:gridView id="PI0400G1" style="" defaultCellHeight="20" rowNumVisible="true" useShiftKey="true"
+									readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태" overflowX="auto"
+									overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_BMS_ATMO_INFO"
+									class="cm_grid tab" autoFit="allColumn" fixedColumnScrollHidden="" focusMode="row">
 									<w2:header style="" id="header1">
 										<w2:row style="" id="row1">
 											<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
@@ -520,26 +670,26 @@
 									</w2:header>
 									<w2:gBody width="40" style="" id="gBody1">
 										<w2:row style="" id="row2">
-											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px"
-												id="UPD_DTM" blockSelect="false" displayMode="label" displayFormatter="scwin.dateDisFormatter">
+											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="UPD_DTM"
+												blockSelect="false" displayMode="label" displayFormatter="scwin.dateDisFormatter">
 											</w2:column>
-											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px"
-												id="MEAS_DT" blockSelect="false" displayMode="label" displayFormatter="scwin.dateDisFormatter">
+											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="MEAS_DT"
+												blockSelect="false" displayMode="label" displayFormatter="scwin.dateDisFormatter">
 											</w2:column>
-											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px"
-												id="DUSTC" value="" blockSelect="false" displayMode="label" hiddenClass="" textAlign="right">
+											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DUSTC"
+												value="" blockSelect="false" displayMode="label" hiddenClass="" textAlign="right">
 											</w2:column>
-											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px"
-												id="SDUSTC" value="" blockSelect="false" displayMode="label" hiddenClass="" textAlign="right">
+											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="SDUSTC"
+												value="" blockSelect="false" displayMode="label" hiddenClass="" textAlign="right">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="SDC"
 												value="" blockSelect="false" displayMode="label" textAlign="right">
 											</w2:column>
-											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px"
-												id="CMC" value="" blockSelect="false" displayMode="label" textAlign="right">
+											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="CMC"
+												value="" blockSelect="false" displayMode="label" textAlign="right">
 											</w2:column>
-											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px"
-												id="OZONEC" value="" blockSelect="false" displayMode="label" textAlign="right">
+											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="OZONEC"
+												value="" blockSelect="false" displayMode="label" textAlign="right">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="NDC"
 												value="" blockSelect="false" displayMode="label" textAlign="right">
@@ -556,21 +706,20 @@
 									</w2:footer>
 								</w2:gridView>
 							</w2:content>
-						</w2:tabControl>
-						
-					</xf:group>
-					<xf:group></xf:group>
+						</w2:tabControl>  -->
+
+					<xf:group id="" class="horizontal_line"></xf:group>
+					
 					<xf:group id="" style="" class="grdr_20_2_a">
 						<xf:group id="" style="" class="defaultbox">
 							<w2:textbox id="" style="" class="df_tt fl" label="기상/대기 최근 전송이력"></w2:textbox>
 						</xf:group>
+						<xf:group id="" style=""></xf:group>
 						<xf:group id="" style="">
-						</xf:group>
-						<xf:group id="" style="">
-							<w2:gridView dataList="data:dlt_BMS_LIVING_LOG" defaultCellHeight="20" id="PI0400G2" rowNumVisible="true" useShiftKey="true" readOnly="true"
-								scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"  overflowX="hidden"
-								overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false" style="width: 100%;height: 100%;"
-								class="cm_grid right" autoFit="allColumn" checkReadOnlyOnCut="" focusMode="row">
+							<w2:gridView dataList="data:dlt_BMS_LIVING_LOG" defaultCellHeight="20" id="PI0400G2" rowNumVisible="true"
+								useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
+								overflowX="hidden" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
+								style="width: 100%;height: 100%;" class="cm_grid right" autoFit="allColumn" checkReadOnlyOnCut="" focusMode="row">
 								<w2:header id="header1" style="">
 									<w2:row id="row1" style="">
 										<w2:column blockSelect="false" displayMode="label" id="column3" inputType="text"

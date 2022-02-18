@@ -198,7 +198,7 @@
 					<xf:group id="">
 						<w2:gridView id="PI0302G0" style="width:100%;height:100%;" defaultCellHeight="20" rowNumVisible="true" 
 							useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" 
-							rowStatusHeaderValue="상태"  overflowX="scroll" overflowY="scroll" rowStatusVisible="false"
+							rowStatusHeaderValue="상태"  overflowX="auto" overflowY="scroll" rowStatusVisible="false"
 							fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_BMS_NEWS_INFO" class="cm_grid left" 
 							autoFit="lastColumn" focusMode="row" >
 							<w2:header style="" id="header1">

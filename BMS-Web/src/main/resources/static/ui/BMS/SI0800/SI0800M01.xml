@@ -225,7 +225,7 @@
 				</xf:group>
 			</xf:group>
 
-			<xf:group id="pgm_content" style="" class="pgm_content grdc_a_20_900">
+			<xf:group id="pgm_content" style="" class="pgm_content grdc_5f_20_5f">
 				<xf:group id="pgm_list" style="" class="pgm_list grdr_20_a">
 					<xf:group id="" style="" class="defaultbox">
 						<w2:textbox id="" style="" class="df_tt fl" label="파라미터 목록"></w2:textbox>

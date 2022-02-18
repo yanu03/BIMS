@@ -476,7 +476,7 @@
 				</xf:group><!-- pgm_list -->
 				<xf:group id="" class="vertical_line">
 				</xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_36_250_20_20_36_a" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_36_1f_20_20_36_1f" style="">
 					<xf:group class="defaultbox" id="" style="">
 						<w2:textbox class="df_tt fl" id="" label="전자노선도 목록" style=""></w2:textbox>
 					</xf:group>

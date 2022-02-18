@@ -448,7 +448,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:group id="preview" style="">
-									    <video controls="" style="width: 320px;height: 240px;" id="video1"></video>
+									    <video controls="" style="width: 320px;" id="video1"></video>
 										<xf:image id="image1" ref="data:dlt_BIT_VDO_INFO.FILE_PATH" src=""
 											style="height:150px;margin-left:2px;margin-bottom:3px;float:left;">
 										</xf:image>									    

@@ -365,7 +365,7 @@
 					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group><!-- pgm_header -->
-			<xf:group id="pgm_content" class="pgm_content grdc_a_20_900" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_2_1f_20_1f" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
@@ -506,19 +506,19 @@
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column12"
-											value="장치ID" blockSelect="false" displayMode="label" sortable="true" class="req">
+											value="장치ID" blockSelect="false" displayMode="label" sortable="true">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column1"
-											value="제조사" blockSelect="false" displayMode="label" class="req">
+											value="제조사" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column10"
-											value="장치종류" blockSelect="false" displayMode="label" sortable="true" class="req">
+											value="장치종류" blockSelect="false" displayMode="label" sortable="true" >
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column8"
-											value="설치위치" blockSelect="false" displayMode="label" class="req">
+											value="설치위치" blockSelect="false" displayMode="label" >
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px" id="column6"
-											value="관리ID" blockSelect="false" displayMode="label" class="req">
+											value="관리ID" blockSelect="false" displayMode="label" >
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column7"
 											value="장치IP" blockSelect="false" displayMode="label">
@@ -562,7 +562,7 @@
 								</w2:gBody>
 								<w2:footer id="footer1" style="">
 									<w2:row id="row3" style="">
-										<w2:column blockSelect="false" colSpan="14" displayMode="label"
+										<w2:column blockSelect="false" colSpan="30" displayMode="label"
 											expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
 											style="height:20px;" textAlign="left" width="2777">
 										</w2:column>
@@ -575,7 +575,7 @@
 				
 				<xf:group id="" class="vertical_line">
 				</xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_290_20_a ">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_1f_20_1f ">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="파라미터 목록" style=""></w2:textbox>

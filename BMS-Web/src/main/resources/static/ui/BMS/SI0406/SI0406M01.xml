@@ -499,7 +499,7 @@
 				</xf:group>
 			</xf:group>
 
-			<xf:group id="pgm_content" class="pgm_content grdc_400_20_900_20_a" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_2f_20_5f_20_3f" style="">
 
 				<xf:group id="pgm_list" class="pgm_list grdr_20_2_187_20_a" style="">
 					<xf:group class="defaultbox" id="" style="">
@@ -580,11 +580,10 @@
 									<w2:span class="" id="" label="검색"></w2:span>
 								</xf:group>
 								<xf:group class="search" id="" style="">
-									<xf:input id="search_sub_input" class="search_input" ref="data:dma_sub_search.CONTENT" placeholder="표준링크ID 또는 노드명"></xf:input>
+									<xf:input id="search_sub_input" class="search_input" style="width:auto;" ref="data:dma_sub_search.CONTENT" placeholder="표준링크ID 또는 노드명"></xf:input>
 								</xf:group>
 								<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 							</xf:group>
-							
 						</xf:group>
 						<xf:group id="" class="" style="">
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="SI0406G1" class="cm_grid leftL"

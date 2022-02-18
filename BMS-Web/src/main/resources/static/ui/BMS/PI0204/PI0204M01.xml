@@ -226,8 +226,8 @@
 					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group><!-- pgm_header -->
-			<xf:group id="pgm_content" class="pgm_content grdc_a_20_900" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_290_20_a" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_2_1f_20_1f" style="overflow:auto">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox id="" style="" class="df_tt fl" label="선택음성 목록"></w2:textbox>
@@ -298,6 +298,7 @@
 								</w2:row>
 							</w2:footer>
 						</w2:gridView>
+					</xf:group>
 						<xf:group id="" class="horizontal_line">
 						</xf:group>
 						<xf:group id="pgm_layout" class="pgm_layout grdr_20_2_a">
@@ -307,8 +308,8 @@
 								</xf:group>
 							</xf:group>
 							<xf:group id="" class="" style=""></xf:group>
-							<xf:group class="" id="" style="">
-								<xf:group tagname="table" style="width:490px;" id="" class="w2tb tb">
+							<xf:group class="" id="" style="position:relative;">
+								<xf:group tagname="table" style="position:absolute" id="" class="w2tb tb">
 									<w2:attributes>
 										<w2:summary></w2:summary>
 									</w2:attributes>
@@ -328,7 +329,7 @@
 								</xf:group>
 							</xf:group>
 						</xf:group>
-					</xf:group>
+					
 				</xf:group><!-- pgm_list -->
 
 

@@ -397,7 +397,7 @@
 				</xf:group><!-- pgm_list -->
 				<xf:group id="" class="vertical_line">
 				</xf:group>
-				<xf:group id="pgm_detail" class="grdr_20_2_250_20_20_36_a pgm_detail" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_1f_20_20_36_1f" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="안내기 목록" style=""></w2:textbox>

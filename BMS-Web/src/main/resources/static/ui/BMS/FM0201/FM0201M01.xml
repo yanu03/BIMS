@@ -383,7 +383,7 @@
 			</xf:group>
 
 			<xf:group id="pgm_content" class="pgm_content grdc_600_20_a" style="" >
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_350_20_a" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_2_1f_20_1f" style="">
 					<xf:group class="defaultbox" id="" style="">
 						<w2:textbox class="df_tt fl" id="" label="정류장 목록" style=""></w2:textbox>
 					</xf:group>

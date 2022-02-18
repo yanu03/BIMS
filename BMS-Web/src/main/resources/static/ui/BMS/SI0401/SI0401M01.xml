@@ -438,7 +438,7 @@
 				</xf:group>
 			</xf:group>
 
-			<xf:group id="pgm_content" class="pgm_content grdc_a_20_900_minmax" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
 
 				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
 					<xf:group class="defaultbox" id="" style="">
@@ -527,7 +527,7 @@
 
 				</xf:group>
 				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_350_20_20_2_a" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_6f_20_20_4f" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="노선  상세정보" style=""></w2:textbox>
@@ -535,8 +535,8 @@
 					</xf:group>
 					<xf:group class="" id="" style="">
 					</xf:group>
-					<xf:group class="" id="" style="">
-						<xf:group class="w2tb tb" id="SI0401F0" style="width:100%;" tagname="table">
+					<xf:group class="" id="" style="position:relative; overflow:auto">
+						<xf:group class="w2tb tb" id="SI0401F0" style="width:100%; position:absolute" tagname="table">
 							<w2:attributes>
 								<w2:summary></w2:summary>
 							</w2:attributes>
@@ -880,8 +880,6 @@
 							<w2:textbox class="df_tt fl" id="" label="관련 운수사" style=""></w2:textbox>
 						</xf:group>
 						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
-					</xf:group>
-					<xf:group class="" id="" style="">
 					</xf:group>
 					<xf:group id="" class="" style="">
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""

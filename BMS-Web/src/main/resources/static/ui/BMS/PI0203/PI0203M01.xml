@@ -334,7 +334,7 @@
 					<w2:wframe class="" id="wfm_mainBtn" scope="true" src="/cm/common/wf_mainBtn.xml" style=""></w2:wframe>
 				</xf:group>
 			</xf:group><!-- pgm_header -->
-			<xf:group id="pgm_content" class="pgm_content grdc_a_20_900" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
@@ -439,8 +439,8 @@
 						</xf:group>
 					</xf:group>
 					<xf:group class="" id="" style=""></xf:group>
-					<xf:group class="" id="" style="">
-						<xf:group id="PI0203F0" style="width:100%;" class="w2tb tb" tagname="table">
+					<xf:group class="" id="" style="overflow:auto; position:relative;">
+						<xf:group id="PI0203F0" style="width:100%; position:absolute" class="w2tb tb" tagname="table">
 							<w2:attributes>
 								<w2:summary></w2:summary>
 							</w2:attributes>

@@ -693,12 +693,12 @@
 					</xf:group>
 				</xf:group><!-- pgm_list end -->
 				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group id="pgm_subList" class="pgm_subList grdr_20_300_20_a" style="">
+				<xf:group id="pgm_subList" class="pgm_subList grdr_20_1f_20_1f" style="">
 					<xf:group class="defaultbox" id="" style="">
 						<w2:textbox class="df_tt fl" id="" label="시설물 모니터링" style=""></w2:textbox>
 					</xf:group>
-					<xf:group style="" id="STTN_IMG" class="">
-					</xf:group>
+						<xf:group style="" id="STTN_IMG" class="">
+						</xf:group>
 					<xf:group class="defaultbox" id="" style="">
 						<w2:textbox class="df_tt fl" id="" label="시설물 상태 및 제어" style=""></w2:textbox>
 					</xf:group>

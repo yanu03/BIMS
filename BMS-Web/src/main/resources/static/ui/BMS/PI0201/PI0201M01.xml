@@ -375,7 +375,7 @@
 					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group><!-- pgm_header -->
-			<xf:group id="pgm_content" class="pgm_content grdc_a_20_900" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
@@ -508,8 +508,8 @@
 						</xf:group>
 					</xf:group>
 					<xf:group></xf:group>
-					<xf:group class="" id="" style="height: 600px; overflow: auto; border-top: 2px solid rgb(51 51 51); border-bottom: 1px solid #b0b2b1;">
-						<xf:group id="PI0201F0" style="width:100%; border-top: 1px solid #b0b2b1; " class="w2tb tb" tagname="table" >
+					<xf:group class="" id="" style="height:100%; overflow: auto; position:relative; border-bottom: 1px solid #b0b2b1;">
+						<xf:group id="PI0201F0" style="width:100%; height:100%; position:absolute; " class="w2tb tb" tagname="table" >
 							<w2:attributes>
 								<w2:summary></w2:summary>
 							</w2:attributes>
@@ -609,7 +609,8 @@
 									<xf:group class="ml5 fr" id="" style=""></xf:group>
 			
 									<xf:textarea id="KR_TTS" style="width: 80%;height: 100px;" ref="data:dlt_BMS_VOC_INFO.KR_TTS" maxlength="200" ev:onviewchange="scwin.KR_TTS_onviewchange" ev:onkeypress="scwin.KR_TTS_onkeypress" ev:onblur="scwin.KR_TTS_onblur"></xf:textarea>
-									<xf:group style="display: inline;position: relative;margin-left: 5px; width: 120px;float:right;"  id="">
+									
+									<xf:group style="display: inline;position: absolute;margin-left: 10px; float:right;"  id="">
 										<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px;" id="playTTS" ev:onclick="scwin.playTTS_onclick">
 											<xf:label><![CDATA[미리듣기]]></xf:label>
 										</xf:trigger>
@@ -634,7 +635,7 @@
 									<xf:group class="ml5 fr" id="" style=""></xf:group>
 			
 									<xf:textarea id="ER_TTS" style="width: 80%;height: 100px;" ref="data:dlt_BMS_VOC_INFO.EN_TTS" maxlength="200" ev:onviewchange="scwin.ER_TTS_onviewchange"></xf:textarea>
-									<xf:group style="display: inline;position: relative;margin-left: 5px; width: 120px;float:right;"  id="">
+									<xf:group style="display: inline;position: absolute;margin-left: 10px; float:right;"  id="">
 										<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px;" id="playTTS2" ev:onclick="scwin.playTTS2_onclick">
 											<xf:label><![CDATA[미리듣기]]></xf:label>
 										</xf:trigger>

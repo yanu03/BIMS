@@ -433,18 +433,16 @@
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="음성 목록" style=""></w2:textbox>
 							<xf:group style="float:right; margin-right:300px" id="">
-								<!-- <xf:trigger type="button" style="width: 100px;height: 25px; margin-bottom:20px; margin-right:10px;" id="playTTS" ev:onclick="scwin.playTTS_onclick">
-									<xf:label><![CDATA[미리듣기]]></xf:label>
-								</xf:trigger> -->
 								<audio controls="" style="width: 250px;height: 25px;" id="audio0" preload="" muted="" loop=""
-								autoplay="" ref="" src=""></audio>
+								autoplay="" ref="" src="">
+								</audio>
 							</xf:group>
 						</xf:group>
 						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
 					<xf:group class="" id="" style="">
 					</xf:group>
-					<xf:group id="" class="pgm_detail2 grdc_a_70_550_minmax" style="">
+					<xf:group id="" class="pgm_detail2 grdc_5f_70_5f" style="">
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
 							checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_VOC_INFO" disabledScrollHidden="" editModeEvent=""
 							editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""

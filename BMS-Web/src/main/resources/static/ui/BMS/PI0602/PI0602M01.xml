@@ -434,7 +434,7 @@
 						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
 					<xf:group></xf:group>	
-					<xf:group id="" class="pgm_detail2 grdc_a_70_550_minmax" style="">
+					<xf:group id="" class="pgm_detail2 grdc_5f_70_5f" style="">
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
 							checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BIT_VDO_INFO" disabledScrollHidden="" editModeEvent=""
 							editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""

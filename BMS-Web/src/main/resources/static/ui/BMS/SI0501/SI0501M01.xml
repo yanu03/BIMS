@@ -273,8 +273,8 @@
 				</xf:group>
 			</xf:group>
 
-			<xf:group id="pgm_content" class="pgm_content grdc_a_20_900_minmax" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_350_20_a" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_2_1f_20_1f" style="">
 					<xf:group class="defaultbox" id="" style="">
 						<w2:textbox class="df_tt fl" id="" label="정류소 목록" style=""></w2:textbox>
 					</xf:group>
@@ -440,7 +440,7 @@
 						</xf:group>
 				</xf:group>
 				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group class="pgm_detail grdr_20_2_200_20_20_2_a">
+				<xf:group class="pgm_detail grdr_20_2_4f_20_20_6f">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="정류소 상세 정보" style=""></w2:textbox>
@@ -448,8 +448,8 @@
 					</xf:group>
 					<xf:group class="" id="" style="">
 					</xf:group>
-					<xf:group class="" id="" style="">
-						<xf:group adaptive="layout" class="w2tb tb" id="SI0501F0" style="" tagname="table">
+					<xf:group class="" id="" style="overflow: auto; position:relative;">
+						<xf:group adaptive="layout" class="w2tb tb" id="SI0501F0" style="position:absolute;" tagname="table">
 							<w2:attributes>
 								<w2:summary></w2:summary>
 							</w2:attributes>
@@ -597,7 +597,7 @@
 										<w2:colspan>1</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:select1 id="" selectedIndex="-1" appearance="full" style="width: 150px;height: 21px;margin-left: 20px;" cols=""
+									<xf:select1 id="" selectedIndex="-1" appearance="full" style="width: 150px;height: 21px;margin-left: 10px;" cols=""
 										rows="1" ref="data:dlt_BMS_STTN_MST.CENTER_YN">
 										<xf:choices>
 											<xf:item>
@@ -616,7 +616,7 @@
 										<w2:colspan>1</w2:colspan>
 										<w2:rowspan>3</w2:rowspan>
 									<xf:select1 appearance="full" cols="" id="" ref="data:dlt_BMS_STTN_MST.USE_YN" rows="1"
-										selectedIndex="-1" style="width: 150px;height: 21px;margin-left: 20px;">
+										selectedIndex="-1" style="height: 21px;margin-left: 10px;">
 										<xf:choices>
 											<xf:item>
 												<xf:label><![CDATA[예]]></xf:label>
@@ -643,7 +643,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:textarea adjustMaxLength="" class="" disabled="" id="REMARK" mandatory="" ref="data:dlt_BMS_STTN_MST.REMARK"
-										style="width:100%;height: 50px;" maxlength="200">
+										style="width:100%;height: 80px;" maxlength="200">
 									</xf:textarea>
 								</xf:group>
 							</xf:group>
@@ -655,8 +655,6 @@
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="지도" style=""></w2:textbox>
 						</xf:group>
-					</xf:group>
-					<xf:group class="" id="" style="">
 					</xf:group>
 					<xf:group id="" class="" style="">
 						<div id="map_SI0501" style="overflow:hidden;"></div>

@@ -486,7 +486,7 @@
 					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group><!-- pgm_header -->
-			<xf:group id="pgm_content" class="pgm_content grdc_a_20_1200_minmax" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_4f_20_6f" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
@@ -570,7 +570,7 @@
 									<w2:attributes></w2:attributes>
 									<xf:input adjustMaxLength="" allowChar="0-9" class="" customModelFormatter="com.transPhone"
 										displayFormatter="com.transPhone" id="PHONE" mandatory="" maxlength="30" ref="data:dlt_EMER_CLSFCTN_MST.PHONE" refSync=""
-										style="width:340px;height:21px;">
+										style="height:21px;">
 									</xf:input>
 								</xf:group></xf:group><xf:group tagname="tr" style=""><xf:group tagname="th" class="w2tb_th">주소<w2:attributes><w2:scope>row</w2:scope></w2:attributes></xf:group>
 								<xf:group tagname="td" class="w2tb_td">
@@ -589,7 +589,7 @@
 	<xf:group tagname="td" class="w2tb_td">
 		<w2:attributes></w2:attributes>
 		<xf:input adjustMaxLength="" allowChar="0-9" class="" customModelFormatter="com.transPhone" displayFormatter="com.transPhone" id="FAX"
-			mandatory="" maxlength="30" ref="data:dlt_EMER_CLSFCTN_MST.FAX" refSync="" style="width:340px;height:21px;" initValue="">
+			mandatory="" maxlength="30" ref="data:dlt_EMER_CLSFCTN_MST.FAX" refSync="" style="height:21px;" initValue="">
 		</xf:input>
 	</xf:group>
 	<xf:group tagname="td" class="w2tb_th">이메일<w2:attributes></w2:attributes></xf:group>

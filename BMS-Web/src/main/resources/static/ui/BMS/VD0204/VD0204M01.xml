@@ -866,8 +866,7 @@
 						</xf:group>
 
 						<xf:group id="" class="vertical_line"></xf:group>
-
-						<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_110_a ">
+						<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a ">
 							<xf:group id="" class="gr_sub_header" style="">
 								<xf:group class="defaultbox" id="" style="">
 									<w2:textbox class="df_tt fl" id="" label="제어" style=""></w2:textbox>
@@ -875,7 +874,8 @@
 								<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 							</xf:group>
 							<xf:group class="" id="" style=""></xf:group>
-							<xf:group tagname="table" style="width:100%;" id="VD0204F0" class="w2tb tb">
+							<xf:group style="overflow:auto; position:relative;" id="">
+							<xf:group tagname="table" style="width:100%; position:absolute" id="VD0204F0" class="w2tb tb">
 								<w2:attributes>
 									<w2:summary></w2:summary>
 								</w2:attributes>
@@ -960,7 +960,7 @@
 									</xf:group>
 								</xf:group>
 							</xf:group>
-							<xf:group style="" id=""></xf:group>
+							</xf:group>
 						</xf:group>
 					</xf:group>
 					

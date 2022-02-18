@@ -446,7 +446,7 @@
 				</xf:group>
 			</xf:group>
 
-			<xf:group id="pgm_content" style="" class="pgm_content grdc_a_20_900">
+			<xf:group id="pgm_content" style="" class="pgm_content grdc_6f_20_4f">
 				<xf:group id="pgm_list" style="" class="pgm_list grdr_20_a">
 					<xf:group id="" style="" class="defaultbox">
 						<w2:textbox id="" style="" class="df_tt fl" label="공지 목록"></w2:textbox>
@@ -542,7 +542,7 @@
 
 				<xf:group id="" style="" class="vertical_line"></xf:group>
 
-				<xf:group class="pgm_detail grdr_20_2_300_20_20_2_a">
+				<xf:group class="pgm_detail grdr_20_2_200_20_a">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group id="" style="" class="defaultbox">
 							<w2:textbox id="" style="" class="df_tt fl" label="공지 상세 정보"></w2:textbox>
@@ -593,7 +593,7 @@
 								</w2:attributes>
 							</xf:group>
 							<xf:group tagname="td" style="" class="w2tb_td">
-								<xf:select1 id="NOTICE_TYPE" chooseOption="true" style="width: 148px;height: 21px;" submenuSize="auto" allOption=""
+								<xf:select1 id="NOTICE_TYPE" chooseOption="true" style="height: 21px;" submenuSize="auto" allOption=""
 									disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled"
 									ref="data:dlt_BMS_NOTICE_MST.NOTICE_TYPE" chooseOptionLabel="">
 									<xf:choices></xf:choices>
@@ -606,7 +606,7 @@
 								</w2:attributes>
 							</xf:group>
 							<xf:group tagname="td" style="" class="w2tb_td">
-								<w2:inputCalendar footerDiv="false" id="" style="float:left; width:150px; height:23px;" renderDiv="true"
+								<w2:inputCalendar footerDiv="false" id="" style="float:left; height:23px;" renderDiv="true"
 									focusOnDateSelect="false" calendarValueType="yearMonthDateTime" rightAlign="false" renderType="component"
 									ref="data:dlt_BMS_NOTICE_MST.SEND_DTM" editType="" displayFormat="" ioFormat="" calendarDisplayFormatFunc="" disabled="true">
 								</w2:inputCalendar>
@@ -621,7 +621,7 @@
 							</xf:group>
 							<xf:group tagname="td" style="" class="w2tb_td">
 								<xf:select1 id="radio0" selectedIndex="-1" appearance="full"
-									style="width:100%;height:21px;margin-left :20px;" userData1="" cols="2" rows="" ref='data:dlt_BMS_NOTICE_MST.SEND_DIV'
+									style="height:21px;margin-left :20px;" userData1="" cols="2" rows="" ref='data:dlt_BMS_NOTICE_MST.SEND_DIV'
 									useRadioTitle="" ev:onviewchange="scwin.radio0_onviewchange">
 									<xf:choices>
 										<xf:item>
@@ -642,7 +642,7 @@
 								</w2:attributes>
 							</xf:group>
 							<xf:group tagname="td" style="" class="w2tb_td">
-								<w2:inputCalendar footerDiv="false" id="RSV_DTM" style="float:left; width:150px; height:23px;" renderDiv="true"
+								<w2:inputCalendar footerDiv="false" id="RSV_DTM" style="float:left; height:23px;" renderDiv="true"
 									focusOnDateSelect="false" calendarValueType="yearMonthDateTime" rightAlign="false" renderType="component"
 									ref="data:dlt_BMS_NOTICE_MST.RSV_DTM" editType="" displayFormat="" ioFormat="" calendarDisplayFormatFunc="" disabled="">
 								</w2:inputCalendar>
@@ -661,20 +661,22 @@
 									<w2:colspan>3</w2:colspan>
 									<w2:rowspan>1</w2:rowspan>
 								</w2:attributes>
-								<xf:textarea id="CONTENTS" style="width:100%;height:200px;" ref="data:dlt_BMS_NOTICE_MST.CONTENTS"
+								<xf:textarea id="CONTENTS" style="width:100%;max-height: 90px; height: 200px;" ref="data:dlt_BMS_NOTICE_MST.CONTENTS"
 									maxlength="3000">
 								</xf:textarea>
 							</xf:group>
 						</xf:group>
 					</xf:group>
 					<xf:group id="" class="horizontal_line"></xf:group>
+					
+				<xf:group id="" class="pgm_list grdr_20_2_a" style="">
 					<xf:group class="gr_sub_header">
 						<xf:group id="" style="" class="defaultbox">
 							<w2:textbox id="" style="" class="df_tt fl" label="전송할 정류소"></w2:textbox>
 						</xf:group>
 						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:group id="" style="" class=""></xf:group>
+					<xf:group style="" id=""></xf:group>
 					<xf:group>
 						<w2:gridView id="PI1002G1" style="width:100%;height:100%;" scrollByColumn="false" defaultCellHeight="20"
 							class="cm_grid" scrollByColumnAdaptive="false" dataList="data:dlt_BMS_STTN_MST" autoFit="lastColumn" readOnly="" overflowX="auto"
@@ -779,7 +781,7 @@
 							</w2:gBody>
 						</w2:gridView>
 					</xf:group>-->
-
+					</xf:group>
 				</xf:group>
 			</xf:group>
 		</xf:group>

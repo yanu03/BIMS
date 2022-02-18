@@ -200,6 +200,26 @@
 		$p.executeSubmission(sub_FM0300SHI0);	
 		$p.executeSubmission(sub_FM0300SHI1);	
 		$p.executeSubmission(sub_FM0300SHI2);	
+		
+		$("#VD0300_TAB").attr("style", "width:200px; height:26px;  float:left");
+		FM0300G3.hide();
+		
+		//탭 목록 클릭 이벤트
+		$(".fclt_his").find("li").click( function() {
+			var li_id = this.id;
+			$(".fclt_his").find("li").removeClass("on");
+			$(".fclt_his").find("#"+li_id).addClass("on");
+			
+			if(li_id == "li_HIS") {
+				FM0300G2.show("");
+				FM0300G3.hide();
+			}
+			else if(li_id == "li_COND") {
+				FM0300G2.hide();
+				FM0300G3.show("");
+				com.setFocusedCell(PI0400G1, "UPD_DTM");
+			}
+		});
 	};
 
 	scwin.onpageunload = function() {
@@ -329,7 +349,7 @@
 					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group><!-- pgm_header -->
-			<xf:group id="pgm_content" class="pgm_content grdc_a_20_900" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
@@ -407,7 +427,7 @@
 				
 				<xf:group id="" class="vertical_line">
 				</xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a_20_300" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_1f_20_1f" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="시설물 목록" style=""></w2:textbox>
@@ -486,116 +506,119 @@
 							</w2:footer>							
 						</w2:gridView>
 					</xf:group>
+					
 					<xf:group id="" class="horizontal_line">
-					</xf:group>						
-					<xf:group id="" style="position:relative;height: 300px;" class="">
-						<w2:tabControl useTabKeyOnly="true" id="FM0300T0" class="FM0300T0" useMoveNextTabFocus="false" useConfirmMessage="false"
-							confirmTrueAction="exist" confirmFalseAction="new" alwaysDraw="false" style="width: 100%;height: 100%;" tabScroll="" tableRender="" tabPosition="" ev:onchange="scwin.FM0300T0_onchange">
-							<w2:tabs disabled="false" style="width:100px;height:30px;" id="tabs3" label="유지보수 이력"></w2:tabs>
-							<w2:content alwaysDraw="false" style="" id="content3">
-								<w2:gridView id="FM0300G2" style="height:98%" defaultCellHeight="20" rowNumVisible="true"
-									useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
-									overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
-									dataList="data:dlt_BMS_FCLT_HIS" class="cm_grid right" autoFit="lastColumn" fixedColumnScrollHidden="">
-									<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
-									<w2:header style="" id="header1">
-										<w2:row style="" id="row1">
-											<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px"
-												id="column4" value="변경일" blockSelect="false" displayMode="label" class="req">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px"
-												id="column3" value="작업 유형" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="126" inputType="text" style="height:20px"
-												id="column5" value="작업비용" blockSelect="false" displayMode="label" >
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
-												id="column1" value="비고" blockSelect="false" displayMode="label">
-											</w2:column>
-										</w2:row>
-									</w2:header>
-									<w2:gBody style="" id="gBody1">
-										<w2:row style="" id="row2">
-											<w2:column removeBorderStyle="false" width="123" inputType="text" style="height:20px"
-												id="APLY_DATE" value="" blockSelect="false" displayMode="label" userData1="M">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="120" inputType="select" style="height:20px"
-												id="WORK_TYPE" value="" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px"
-												id="WORK_AMT" value="" blockSelect="false" displayMode="label" textAlign="right" maxlength="11">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK"
-												value="" blockSelect="false" displayMode="label" textAlign="left" maxlength="200"> 
-											</w2:column>
-										</w2:row>
-									</w2:gBody>
-									<w2:footer id="footer1" style="">
-										<w2:row id="row3" style="">
-											<w2:column blockSelect="false" colSpan="14" displayMode="label"
-												expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
-												style="height:20px;" textAlign="left" width="2936">
-											</w2:column>
-										</w2:row>
-									</w2:footer>
-								</w2:gridView>
-							</w2:content>
-							<w2:tabs disabled="false" style="width:100px;height:30px;" id="tabs4" label="장애발생 이력"></w2:tabs>
-							<w2:content alwaysDraw="false" style="height:170px" id="content4">
-								<w2:gridView id="FM0300G3" style="height:98%;" defaultCellHeight="20" rowNumVisible="true"
-									useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
-									overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
-									dataList="data:dlt_BMS_FCLT_COND_LOG" class="cm_grid" autoFit="lastColumn" fixedColumnScrollHidden="">
-									<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
-									<w2:header style="" id="header1">
-										<w2:row style="" id="row1">
-											<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px"
-												id="column5" value="전송일시" blockSelect="false" displayMode="label" class="req">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
-												id="column4" value="관리ID" blockSelect="false" displayMode="label" class="req">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
-												id="column3" value="장치상태" blockSelect="false" displayMode="label" class="req">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
-												id="column2" value="버전정보" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
-												id="column1" value="비고" blockSelect="false" displayMode="label">
-											</w2:column>
-										</w2:row>
-									</w2:header>
-									<w2:gBody style="" id="gBody1">
-										<w2:row style="" id="row2">
-											<w2:column removeBorderStyle="false" width="129" inputType="text" style="height:20px"
-												id="SEND_DATE" value="" blockSelect="false" displayMode="label" userData1="M">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="107" inputType="text" style="height:20px" 
-												id="MNG_ID" value="" blockSelect="false" displayMode="label" maxlength="10" userData1="M">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="82" inputType="select" style="height:20px"
-												id="FCLT_COND" value="" blockSelect="false" displayMode="label" userData1="M">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:20px"
-												id="VER_INFO" value="" blockSelect="false" displayMode="label" textAlign="right" maxlength="50">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK"
-												value="" blockSelect="false" displayMode="label" textAlign="left" maxlength="200">
-											</w2:column>
-										</w2:row>
-									</w2:gBody>
-									<w2:footer id="footer1" style="">
-										<w2:row id="row3" style="">
-											<w2:column blockSelect="false" colSpan="14" displayMode="label"
-												expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
-												style="height:20px;" textAlign="left" width="2898">
-											</w2:column>
-										</w2:row>
-									</w2:footer>								
-								</w2:gridView>
-							</w2:content>
-						</w2:tabControl>
+					</xf:group>	
+										
+					<xf:group id="" style="" class="pgm_detail grdr_20_20_2_a">
+						<xf:group id="" class="gr_sub_header" style="">
+							<xf:group class="defaultbox" id="" style="">
+								<w2:textbox class="df_tt fl" id="" label="유지보수/장애발생 이력" style=""></w2:textbox>
+							</xf:group>
+						</xf:group>
+						<ul id="VD0300_TAB" class="fclt_his" style="">
+							<li id="li_HIS" class="on">유지보수 이력</li>
+							<li id="li_COND" class="">장애발생 이력</li>
+						</ul>
+						<xf:group></xf:group>
+						<w2:gridView id="FM0300G2" style="height:98%" defaultCellHeight="20" rowNumVisible="true"
+							useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
+							overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
+							dataList="data:dlt_BMS_FCLT_HIS" class="cm_grid right" autoFit="lastColumn" fixedColumnScrollHidden="">
+							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
+							<w2:header style="" id="header1">
+								<w2:row style="" id="row1">
+									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px"
+										id="column4" value="변경일" blockSelect="false" displayMode="label" class="req">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px"
+										id="column3" value="작업 유형" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="126" inputType="text" style="height:20px"
+										id="column5" value="작업비용" blockSelect="false" displayMode="label" >
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
+										id="column1" value="비고" blockSelect="false" displayMode="label">
+									</w2:column>
+								</w2:row>
+							</w2:header>
+							<w2:gBody style="" id="gBody1">
+								<w2:row style="" id="row2">
+									<w2:column removeBorderStyle="false" width="123" inputType="text" style="height:20px"
+										id="APLY_DATE" value="" blockSelect="false" displayMode="label" userData1="M">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="120" inputType="select" style="height:20px"
+										id="WORK_TYPE" value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px"
+										id="WORK_AMT" value="" blockSelect="false" displayMode="label" textAlign="right" maxlength="11">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK"
+										value="" blockSelect="false" displayMode="label" textAlign="left" maxlength="200"> 
+									</w2:column>
+								</w2:row>
+							</w2:gBody>
+							<w2:footer id="footer1" style="">
+								<w2:row id="row3" style="">
+									<w2:column blockSelect="false" colSpan="14" displayMode="label"
+										expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
+										style="height:20px;" textAlign="left" width="2936">
+									</w2:column>
+								</w2:row>
+							</w2:footer>
+						</w2:gridView>
+						<w2:gridView id="FM0300G3" style="height:98%;" defaultCellHeight="20" rowNumVisible="true"
+							useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
+							overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
+							dataList="data:dlt_BMS_FCLT_COND_LOG" class="cm_grid" autoFit="lastColumn" fixedColumnScrollHidden="">
+							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
+							<w2:header style="" id="header1">
+								<w2:row style="" id="row1">
+									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px"
+										id="column5" value="전송일시" blockSelect="false" displayMode="label" class="req">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
+										id="column4" value="관리ID" blockSelect="false" displayMode="label" class="req">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
+										id="column3" value="장치상태" blockSelect="false" displayMode="label" class="req">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
+										id="column2" value="버전정보" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
+										id="column1" value="비고" blockSelect="false" displayMode="label">
+									</w2:column>
+								</w2:row>
+							</w2:header>
+							<w2:gBody style="" id="gBody1">
+								<w2:row style="" id="row2">
+									<w2:column removeBorderStyle="false" width="129" inputType="text" style="height:20px"
+										id="SEND_DATE" value="" blockSelect="false" displayMode="label" userData1="M">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="107" inputType="text" style="height:20px" 
+										id="MNG_ID" value="" blockSelect="false" displayMode="label" maxlength="10" userData1="M">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="82" inputType="select" style="height:20px"
+										id="FCLT_COND" value="" blockSelect="false" displayMode="label" userData1="M">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:20px"
+										id="VER_INFO" value="" blockSelect="false" displayMode="label" textAlign="right" maxlength="50">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK"
+										value="" blockSelect="false" displayMode="label" textAlign="left" maxlength="200">
+									</w2:column>
+								</w2:row>
+							</w2:gBody>
+							<w2:footer id="footer1" style="">
+								<w2:row id="row3" style="">
+									<w2:column blockSelect="false" colSpan="14" displayMode="label"
+										expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
+										style="height:20px;" textAlign="left" width="2898">
+									</w2:column>
+								</w2:row>
+							</w2:footer>								
+						</w2:gridView>
 					</xf:group>					
 				</xf:group> <!-- pgm_detail -->
 			</xf:group>
