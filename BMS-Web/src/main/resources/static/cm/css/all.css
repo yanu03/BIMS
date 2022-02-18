@@ -594,6 +594,7 @@ height: 24px;
 .w2tb_td li.bg{background-color:#f7f7f7; top:0;}
 .w2tb_td textarea{padding: 5px 5px 5px 5px;margin: 3px 0;}
 
+
 .titlelistbox .titlelist_tit{ border-top:2px solid #6d7580;border-bottom:1px solid #b9c0ca;background:url(/cm/images/contents/icon_open.png) no-repeat right 15px;}
 .titlelistbox .btn_titlelist{display: block;font-weight: bold;padding: 10px 0px 10px 6px;}
 .titlelistbox .btn_titlelist:hover{color:#444;text-decoration: underline;}
@@ -1400,6 +1401,75 @@ ul.question li a:hover {font-weight:bold;}
 .ctl_fclt li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
 .ctl_fclt li.on + li {border-left:none;} 
 .ctl_fclt li:first-child {border-left:none;}
+
+/* 시설물 유지보수/장애발생 이력 탭관련 */
+.fclt_his
+{
+    position: relative;
+    /* top: 10px; */
+    /* left: 10px; */
+    width: 302px;
+    border: 1px solid #d9d9d9;
+    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
+    /* background: #eee; */
+    overflow: hidden;
+    z-index: 2;
+    border-radius: 5px;
+    }
+    
+.fclt_his li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
+.fclt_his li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
+.fclt_his li:hover {color: #0475f4;}
+.fclt_his li:last-child{margin-right:0;border-right:0;}
+.fclt_his li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
+.fclt_his li.on + li {border-left:none;} 
+.fclt_his li:first-child {border-left:none;}
+
+/* 차내장치 유지보수/장애발생 이력 탭관련 */
+.dvc_his
+{
+    position: relative;
+    /* top: 10px; */
+    /* left: 10px; */
+    width: 302px;
+    border: 1px solid #d9d9d9;
+    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
+    /* background: #eee; */
+    overflow: hidden;
+    z-index: 2;
+    border-radius: 5px;
+    }
+    
+.tab_his li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
+.tab_his li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
+.tab_his li:hover {color: #0475f4;}
+.tab_his li:last-child{margin-right:0;border-right:0;}
+.tab_his li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
+.tab_his li.on + li {border-left:none;} 
+.tab_his li:first-child {border-left:none;}
+
+/* 기상/대기 탭관련 */
+.tab_wet
+{
+    position: relative;
+    /* top: 10px; */
+    /* left: 10px; */
+    width: 302px;
+    border: 1px solid #d9d9d9;
+    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
+    /* background: #eee; */
+    overflow: hidden;
+    z-index: 2;
+    border-radius: 5px;
+    }
+    
+.tab_wet li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
+.tab_wet li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
+.tab_wet li:hover {color: #0475f4;}
+.tab_wet li:last-child{margin-right:0;border-right:0;}
+.tab_wet li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
+.tab_wet li.on + li {border-left:none;} 
+.tab_wet li:first-child {border-left:none;}
 
 /* 차내장치 상태 및 제어 탭관련 */
 .ctl_dvc
