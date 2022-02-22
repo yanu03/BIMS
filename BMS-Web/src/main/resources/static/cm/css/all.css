@@ -397,6 +397,8 @@ height: 24px;
 .btn_gcm a:before {width: 23px;height: 24px;display: inline-block;    font-family: 'Font Awesome 5 Free';font-size: inherit;text-rendering: auto;-webkit-font-smoothing: antialiased;vertical-align: text-bottom;margin: 0;float: left;line-height: 24px;margin-right: -4px;box-sizing: border-box;display: block;}
 /*.btn_gcm a:disabled{background-color:#e3e3e3; display:inline-block;padding: 0 6px 0 3px;height: 24px;line-height: 24px;font-weight:bold;color: #000;width:auto !important;box-sizing:border-box;background: #f7f7f7;border-radius: 0;border: 1px solid #cecece;margin-left: -1px;min-width: 60px;text-align: center;}*/
 
+/* icon 사이트 fontawsome */
+
 .btn_gcm.end a{background: #44ADF9;color: #fff;border-color: #7e7e7e;}
 .btn_gcm.search {margin-left:3px;  }
 .btn_gcm.search a{display:inline-block; width:100%;box-sizing:border-box;}
@@ -561,6 +563,10 @@ height: 24px;
 .btn_gcm.clr{margin-left:3px;  }
 .btn_gcm.clr a{display:inline-block; width:100%;box-sizing:border-box;}
 .btn_gcm.clr a:before { content:"\f00d";}
+
+.btn_gcm.gear{margin-left:3px;  }
+.btn_gcm.gear a{display:inline-block; width:100%;box-sizing:border-box;}
+.btn_gcm.gear a:before { content:"\f013";}
 
 
 
