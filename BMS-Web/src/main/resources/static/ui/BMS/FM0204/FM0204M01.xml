@@ -347,15 +347,17 @@
 			$(".ctl_fclt").find("#"+li_id).addClass("on");
 			
 			if(li_id == "li_bit") {
-				$(".pgm_list").css("display", "");
+				//$(".pgm_list").css("display", "");
 				//$("#mf_tac_layout_contents_MN00060204_body_pgm_content3").css("display", "none");
+				pgm_list.show("");
 				pgm_content3.hide();
 				pgm_list2.hide();
 			}
 			else if(li_id == "li_airtube") {
 				$("#FM0204_TAB2").attr("style", "width:200px; height:26px; margin-left: 10px; float:left");
-				$(".pgm_list").css("display", "none");
+				//$(".pgm_list").css("display", "none");
 				//$("#mf_tac_layout_contents_MN00060204_body_pgm_content3").css("display", "");
+				pgm_list.hide();
 				pgm_content3.show("");
 				pgm_list2.show("");
 				com.executeSubmission(sub_FM0204G2R0);
@@ -546,6 +548,11 @@
 				T0_PK009_CAP.setDisabled(false);
 				T0_PK009_DIS.setOpacity(1);
 				T0_PK009_CAP.setOpacity(1);
+				if(autoYn[i] == 'Y'){
+					T0_PK009_AUTO.setValue(1);
+				}else{
+					T0_PK009_AUTO.setValue(0);
+				}
 				break;
 			case 'PK010':
 				T0_PK010.setDisabled(false);
