@@ -3,7 +3,7 @@
 <mapper namespace="kr.tracom.bms.domain.VD0202.VD0202Mapper">
 
 	<select id="VD0202G0R0" resultType="Map" parameterType="Map">
-		<!-- SELECT 			 A.OPER_DT 
+		SELECT 	DATE_FORMAT( A.OPER_DT, '%Y-%m-%d') AS OPER_DT
 				  		, A.REP_ROUT_ID
 						, A.VHC_ID
 						, A.ROUT_ID
@@ -22,8 +22,9 @@
 		ON				A.VHC_ID = C.VHC_ID
 		
 		WHERE			A.OPER_DT = DATE_FORMAT(NOW(), '%Y/%m/%d')
-		AND				B.DEL_YN != 'Y' -->
-		SELECT 			DATE_FORMAT( A.OPER_DT, '%Y-%m-%d') AS OPER_DT
+		AND				B.DEL_YN != 'Y'
+		
+		<!-- SELECT 			DATE_FORMAT( A.OPER_DT, '%Y-%m-%d') AS OPER_DT
 				  		, A.REP_ROUT_ID
 						, C.VHC_ID
 						, A.ROUT_ID
@@ -40,7 +41,7 @@
 		LEFT JOIN  		BRT_CUR_OPER_INFO A
 		ON				C.VHC_ID = A.VHC_ID
 		LEFT JOIN   	BMS_ROUT_MST B
-		ON				A.ROUT_ID = B.ROUT_ID
+		ON				A.ROUT_ID = B.ROUT_ID -->
 		
 		<where>
 			<if test="CONTENT1 != ''">
@@ -54,7 +55,8 @@
 		ORDER BY		C.VHC_ID
 	</select>
 	
-	<select id="VD0202G1R0" resultType="Map" parameterType="Map">
+<!-- 수정전 차내장치 목록 	
+<select id="VD0202G1R0" resultType="Map" parameterType="Map">
 		SELECT 			A.VHC_ID
 						,A.DVC_ID
 						,A.ORG_ID
@@ -83,6 +85,10 @@
 		AND				A.USE_YN = 'Y'
 		
 		ORDER BY		A.DVC_KIND
+	</select> -->
+	
+	<select id="VD0202G1R0" resultType="Map" parameterType="Map">
+		CALL	PROC_DVC_MONITOR(#{VHC_ID})
 	</select>
 	
 	<select id="VD0202SHI1" resultType="Map">
