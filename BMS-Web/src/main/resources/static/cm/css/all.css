@@ -1440,13 +1440,13 @@ ul.question li a:hover {font-weight:bold;}
     border-radius: 5px;
     }
     
-.tab_his li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
-.tab_his li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
-.tab_his li:hover {color: #0475f4;}
-.tab_his li:last-child{margin-right:0;border-right:0;}
-.tab_his li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
-.tab_his li.on + li {border-left:none;} 
-.tab_his li:first-child {border-left:none;}
+.dvc_his li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
+.dvc_his li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
+.dvc_his li:hover {color: #0475f4;}
+.dvc_his li:last-child{margin-right:0;border-right:0;}
+.dvc_his li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
+.dvc_his li.on + li {border-left:none;} 
+.dvc_his li:first-child {border-left:none;}
 
 /* 기상/대기 탭관련 */
 .tab_wet

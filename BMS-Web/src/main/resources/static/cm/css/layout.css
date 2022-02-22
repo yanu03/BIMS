@@ -148,6 +148,7 @@
 .grdr_20_2_290 {display:grid; grid-template-rows: minmax(20px, max-content) 2px 288px;} 
 .grdr_20_2_350_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 350px minmax(20px, max-content) auto;} 
 .grdr_20_2_400_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 400px minmax(20px, max-content) auto;} 
+.grdr_20_2_450_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 450px minmax(20px, max-content) auto;} 
 .grdr_20_36_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(36px, max-content) auto;} /* 왼쪽그리드 하단 */
 .grdr_20_36_250_20_20_36_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(36px, max-content) minmax(250px, max-content) minmax(20px, max-content) minmax(20px, max-content) minmax(36px, max-content) auto;} /* 왼쪽그리드 하단 */
 .grdr_20_2_250_20_20_36_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(250px, max-content) minmax(20px, max-content) minmax(20px, max-content) minmax(36px, max-content) auto;} /* 왼쪽그리드 하단 */
@@ -163,8 +164,11 @@
 .grdr_20_36_1f_20_20_36_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(36px, max-content) 1fr minmax(20px, max-content) minmax(20px, max-content) minmax(36px, max-content) 1fr;} /* 예약화면 */
 .grdr_20_2_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_3f_20_7f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 3fr minmax(20px, max-content) 7fr;} /* 왼쪽그리드 하단 */
+.grdr_20_2_6f_20_4f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 6fr minmax(20px, max-content) 4fr;} /* 왼쪽그리드 하단 */
+.grdr_20_2_7f_20_3f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 7fr minmax(20px, max-content) 3fr;} /* 왼쪽그리드 하단 */
 .grdr_20_20_2_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) 1fr minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
+.grdr_1f_1f_1f {display:grid; grid-template-rows: repeat(3, 1fr)} /* 왼쪽그리드 하단 */
 .grdr_6f_20_4f {display:grid; grid-template-rows: 6fr minmax(20px, max-content) 4fr;}
 
 .grdr_30_40_a {display:grid; grid-template-rows: 30px 40px auto;}
