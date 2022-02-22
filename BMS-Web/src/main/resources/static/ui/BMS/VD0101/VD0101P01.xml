@@ -34,7 +34,9 @@
 				<w2:dataMap baseNode="map" id="dma_search">
 					<w2:keyInfo>
 						<w2:key id="PARAM_ECPT_IDS" name="제외파라미터" dataType="text"></w2:key>
+						<w2:key id="PARAM_ECPT_IDS_DIV" name="제외파라미터" dataType="text"></w2:key>
 						<w2:key id="DVC_KIND" name="장치종류" dataType="text"></w2:key>
+						<w2:key id="VHC_ID" name="차량아이디" dataType="text"></w2:key>
 						<w2:key id="TYPE" name="TYPE" dataType="text"></w2:key>
 						<w2:key id="CONTENT" name="CONTENT" dataType="text"></w2:key>
 					</w2:keyInfo>
@@ -60,7 +62,9 @@
 	scwin.onpageload = function() {
 		scwin.param = com.getParameter();
 		dma_search.set("DVC_KIND" , scwin.param.data.DVC_KIND);
+		dma_search.set("VHC_ID" , scwin.param.data.VHC_ID);
 		dma_search.set("PARAM_ECPT_IDS" , scwin.param.data.PARAM_ECPT_IDS);
+		dma_search.set("PARAM_ECPT_IDS_DIV" , scwin.param.data.PARAM_ECPT_IDS_DIV);
 		
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
 		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
@@ -102,10 +106,23 @@
 	scwin.sub_VD0101P0R0_submitdone = function(e) {
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
-		
+			/*
 			//파라미터 종류로 제외(ID필요?)
 			var ids = dma_search.get("PARAM_ECPT_IDS");
+			var ids2 = dma_search.get("PARAM_ECPT_IDS_DIV");
 			//com.excludeItemsByGrid(VD0101P0, ids, "PARAM_KIND");
+			
+			var data = com.getGridViewDataList(VD0101P0);
+			for (i = 0; i < ids.length; i++) {
+				var curIndex = data.getMatchedIndex("PARAM_KIND", ids[i]);
+				var curIndex2 = data.getMatchedIndex("PARAM_DIV", ids2[i]);
+				
+				if(curIndex[i] == curIndex2[i]){
+					//data.removeRow(curIndex);
+				}
+				
+			}*/
+			
 		}
 		com.setFocusedCell(VD0101P0, "DVC_KIND");
 		

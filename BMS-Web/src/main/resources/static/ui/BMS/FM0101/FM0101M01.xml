@@ -644,10 +644,10 @@
 									<w2:column width="100" style="height:20px;" inputType="text" id="column28" value="사용여부"
 										blockSelect="false">
 									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column12"
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column12"
 										value="자동여부" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column width="100" style="height:20px;" inputType="text" id="column78" value="스케줄여부"
+									<!--  <w2:column width="100" style="height:20px;" inputType="text" id="column78" value="스케줄여부"
 										blockSelect="false">
 									</w2:column> -->
 									<w2:column width="300" style="height:20px;" inputType="text" id="column11" value="비고"
@@ -675,10 +675,10 @@
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="USE_YN"
 										value="" blockSelect="false" displayMode="label" readOnly="false" displayFormatter="scwin.useYnDisFormatter">
 									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="AUTO_YN"
-										value="" blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.autoYnDisFormatter">
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="AUTO_YN"
+										value="" blockSelect="false" displayMode="label" displayFormatter="scwin.autoYnDisFormatter">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="SCHEDULE_YN"
+									<!-- <w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="SCHEDULE_YN"
 										value="" blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.schYnDisFormatter">
 									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="REMARK"

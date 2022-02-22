@@ -289,7 +289,7 @@
 		com.executeSubmission(sub_vhcItem);	
 		
 		$("#VD0204_TAB").attr("style", "width:200px; height:26px; margin-left: 10px; float:left");
-		$(".pgm_list2").css("display", "none");
+		pgm_list2.hide();
 		VD0204_ul.hide();
 		
 		//탭 목록 클릭 이벤트
@@ -299,16 +299,19 @@
 			$(".ctl_dvc").find("#"+li_id).addClass("on");
 			
 			if(li_id == "li_OBE") {
-				$(".pgm_list").css("display", "");
-				$(".pgm_list2").css("display", "none");
+				$("#mf_tac_layout_contents_MN00050204_body_wfm_mainBtn_btn_main_generator_1_btn_main").css("display", "");
+				pgm_list.show("");
+				pgm_list2.hide();
 			}
 			else if(li_id == "li_tagless") {
 				$("#VD0204_TAB2").attr("style", "width:200px; height:26px; margin-left: 10px; float:left");
-				$(".pgm_list").css("display", "none");
-				$(".pgm_list2").css("display", "");
-				com.executeSubmission(sub_VD0204G2R0);	
+				$("#mf_tac_layout_contents_MN00050204_body_wfm_mainBtn_btn_main_generator_1_btn_main").css("display", "none");
+				pgm_list.hide();
+				pgm_list2.show("");
+				com.executeSubmission(sub_VD0204G2R0);
 			}
 		});
+		
 	};
 
 	scwin.onpageunload = function() {
@@ -966,24 +969,22 @@
 					
 					<xf:group style="" id="VD0204_ul" class="" tagname="ul">
 						<xf:group style="" id="" class="" tagname="li">
-							<xf:group tagname="ul">
+							<xf:group tagname="ul" style="list-style-type:disc;">
 								<xf:group tagname="li">
 									<xf:group class="repeat" tagname="li">
-										<w2:textbox label="다중 체크 안내문 테스트입니다. 후 작업 필요" style="" id="" tagname="strong" ref=""></w2:textbox>
+										<w2:textbox label="다중 체크 안내문 테스트입니다. (후 작업 필요)" style="" id="" tagname="strong" ref=""></w2:textbox>
 									</xf:group>
 								</xf:group>
 								<xf:group tagname="li">
 									<xf:group class="repeat" tagname="li">
-										<w2:textbox label="일괄리셋만 가능합니다. 후 작업 필요" style="" id="" tagname="strong" ref=""></w2:textbox>
+										<w2:textbox label="다중 체크는 일괄리셋만 가능합니다. (후 작업 필요)" style="" id="" tagname="strong" ref=""></w2:textbox>
 									</xf:group>
 								</xf:group>
 							</xf:group>
 						</xf:group>
 					</xf:group>
 					
-					
 				</xf:group><!-- pgm_list end -->
-				
 
 				<xf:group id="pgm_list2" class="pgm_list2 grdr_20_35_2_a" style="">
 					<xf:group id="" class="gr_sub_header" style="">
@@ -1031,6 +1032,5 @@
 				</xf:group><!-- pgm_list2 end -->
 			</xf:group>
 		</xf:group>
-		
 	</body>
 </html>

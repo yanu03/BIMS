@@ -35,6 +35,7 @@
 					<w2:keyInfo>
 						<w2:key id="PARAM_ECPT_IDS" name="제외파라미터" dataType="text"></w2:key>
 						<w2:key id="FCLT_KIND" name="장치종류" dataType="text"></w2:key>
+						<w2:key id="FCLT_ID" name="장치종류" dataType="text"></w2:key>
 						<w2:key id="TYPE" name="TYPE" dataType="text"></w2:key>
 						<w2:key id="CONTENT" name="CONTENT" dataType="text"></w2:key>
 					</w2:keyInfo>
@@ -60,6 +61,7 @@
 	scwin.onpageload = function() {
 		scwin.param = com.getParameter();
 		dma_search.set("FCLT_KIND" , scwin.param.data.FCLT_KIND);
+		dma_search.set("FCLT_ID" , scwin.param.data.FCLT_ID);
 		dma_search.set("PARAM_ECPT_IDS" , scwin.param.data.PARAM_ECPT_IDS);
 		
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
@@ -102,10 +104,10 @@
 	scwin.sub_FM0101P0R0_submitdone = function(e) {
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
-		
-			//파라미터 종류로 제외(ID필요?)
+			
+			/*//파라미터 종류로 제외(ID필요?)
 			var ids = dma_search.get("PARAM_ECPT_IDS");
-			//com.excludeItemsByGrid(FM0101P0, ids, "PARAM_KIND");
+			//com.excludeItemsByGrid(FM0101P0, ids, "PARAM_KIND");*/
 		}
 		com.setFocusedCell(FM0101P0, "FCLT_KIND");
 		

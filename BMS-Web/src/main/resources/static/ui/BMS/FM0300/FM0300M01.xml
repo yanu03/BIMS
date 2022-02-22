@@ -201,7 +201,7 @@
 		$p.executeSubmission(sub_FM0300SHI1);	
 		$p.executeSubmission(sub_FM0300SHI2);	
 		
-		$("#VD0300_TAB").attr("style", "width:200px; height:26px;  float:left");
+		$("#FM0300_TAB").attr("style", "width:200px; height:26px;  float:left");
 		FM0300G3.hide();
 		
 		//탭 목록 클릭 이벤트
@@ -516,7 +516,7 @@
 								<w2:textbox class="df_tt fl" id="" label="유지보수/장애발생 이력" style=""></w2:textbox>
 							</xf:group>
 						</xf:group>
-						<ul id="VD0300_TAB" class="fclt_his" style="">
+						<ul id="FM0300_TAB" class="fclt_his" style="">
 							<li id="li_HIS" class="on">유지보수 이력</li>
 							<li id="li_COND" class="">장애발생 이력</li>
 						</ul>

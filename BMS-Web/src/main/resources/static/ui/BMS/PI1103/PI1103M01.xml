@@ -350,15 +350,15 @@
 									
 									</xf:group>
 									<xf:group>
-										<xf:select1 id="" selectedIndex="-1" appearance="full" style="width: auto;height: 21px;margin-left : 27px;" cols=""
+										<xf:select1 id="" selectedIndex="-1" appearance="full" style="width: auto;height: 21px;margin-left : 15px;" cols=""
 											rows="1" ref="data:dlt_BMS_ED_INFO.FRAME">
 											<xf:choices>
 												<xf:item>
-													<xf:label><![CDATA[전자노선도|실명제판 형]]></xf:label>
+													<xf:label><![CDATA[투명디스플레이|실명제판 형]]></xf:label>
 													<xf:value><![CDATA[FR001]]></xf:value>
 												</xf:item>
 												<xf:item>
-													<xf:label><![CDATA[실명제판|전자노선도 형]]></xf:label>
+													<xf:label><![CDATA[실명제판|투명디스플레이 형]]></xf:label>
 													<xf:value><![CDATA[FR002]]></xf:value>
 												</xf:item>
 											</xf:choices>
