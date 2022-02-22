@@ -59,6 +59,17 @@
 						<w2:column id="CTR_YN" name="제어여부" dataType="text"></w2:column>
 						<w2:column id="SEND_DATE" name="갱신일시" dataType="text"></w2:column>
 						<w2:column id="DVC_COORDS" name="장치좌표" dataType="text"></w2:column>
+						<w2:column id="PK001" name="리셋" dataType="text"></w2:column>
+						<w2:column id="PK002" name="전원(ON/OFF)" dataType="text"></w2:column>
+						<w2:column id="PK003" name="화면(ON/OFF)" dataType="text"></w2:column>
+						<w2:column id="PK004" name="사운드 음량" dataType="text"></w2:column>
+						<w2:column id="PK005" name="LCD 휘도" dataType="text"></w2:column>
+						<w2:column id="PK008" name="커맨드" dataType="text"></w2:column>
+						<w2:column id="PK011" name="로그레벨" dataType="text"></w2:column>
+						<w2:column id="PK012" name="IP/PORT" dataType="text"></w2:column>
+						<w2:column id="PK013" name="통신" dataType="text"></w2:column>
+						<w2:column id="PK014" name="AP" dataType="text"></w2:column>
+						<w2:column id="PK015" name="GPS" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_repRoutItem" saveRemovedData="true">
@@ -122,6 +133,7 @@
 		</style>
 
 		<script type="text/javascript" lazy="false"><![CDATA[
+	
 	scwin.onpageload = function() {
 		
 		 var autoOptions = {
@@ -145,6 +157,11 @@
 		com.setCommonDtl(codeOptions);
 
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID, autoOptions);		
+
+		var subOptions = {
+			SEARCH:[{cbFnc:scwin.moveCtrlClick,nm:"상태 및 제어",class:"gear"}]
+		};		
+		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);
 
 //		VD0202G0.mergeCol(2,false);
 //		VD0202G0.mergeCells("byrestriccol");
@@ -247,7 +264,6 @@
 	scwin.sub_VD0202G0R0_submitdone = function(e) {
 		if(dlt_BRT_CUR_OPER_INFO.getAllJSON().length > 0) {
 			VD0202G0.setFocusedCell(0, "VHC_ID");
-			debugger;
 			for(var i=0; i<dlt_BRT_CUR_OPER_INFO.getDataLength(); i++) {
 				oper_sts = dlt_BRT_CUR_OPER_INFO.getCellData(i, "OPER_STS");
 				
@@ -310,7 +326,11 @@
 			if (ctr_yn == "N" || ctr_yn == "") {
 				//VD0202G1.setDisabled("cell", i, "DVC_CTR", true);
 				//제어 버튼 안보이게 처리
+				
+				//파라미터 이전
 				VD0202G1.setCellClass(i, "DVC_CTR", "hideData");
+				//파라미터 이후
+				VD0202G1.setCellClass(i, "PK001", "hideData");
 			}
 
 			var dvc_kind = dlt_BMS_DVC_INFO.getCellData(i, "DVC_KIND");
@@ -507,6 +527,7 @@
 				VD0202G1.setDisabled("cell", i, "DVC_CTR", true);
 				//제어 버튼 안보이게 처리
 				VD0202G1.setCellClass(i, "DVC_CTR", "hideData");
+				VD0202G1.setCellClass(i, "PK001", "hideData");
 			}
 
 			var dvc_kind = dlt_BMS_DVC_INFO.getCellData(i, "DVC_KIND");
@@ -710,7 +731,12 @@
 				wdcComp.createWindow(options);
 			}
 		}
-	};]]></script>
+	};
+	
+	scwin.moveCtrlClick = function() {
+		scwin.openMenu("차내장치 상태 및 제어","/ui/BMS/VD0204/VD0204M01.xml", "MN00050204", dlt_BMS_DVC_INFO.getCellData(VD0202G1.getFocusedRowIndex(), "DVC_ID"));		
+		var bac= null;		
+	}	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
@@ -769,7 +795,7 @@
 							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순서"
 							sortable="true" rowStatusHeaderValue="상태" overflowX="hidden" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
 							dataList="data:dlt_BRT_CUR_OPER_INFO" ignoreCellClick="false" style="" autoFit="lastColumn" visibleRowNum="" id="VD0202G0"
-							class="cm_grid left" tooltipPositionY="" focusMode="row">
+							class="cm_grid left" tooltipPositionY="" focusMode="row" noResultMessage="금일 고장건수 없음">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
@@ -779,10 +805,13 @@
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column6"
 										value="차량번호" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column8"
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column9"
+										value="대표노선명" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column8"
 										value="차량종류" blockSelect="false" displayMode="label">
 									</w2:column>								
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column5"
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column5"
 										value="운행상태" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
@@ -793,6 +822,9 @@
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="VHC_NO"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REP_ROUT_NM"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="VHC_KIND"
@@ -820,6 +852,7 @@
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="차내장치 상태" style=""></w2:textbox>
 						</xf:group>
+						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
 					<!-- <xf:group class="brt_bus_img">
 					</xf:group> -->				
@@ -831,10 +864,37 @@
 						</xf:group>
 					</xf:group>
 						<xf:group id="" class="" style="">
+							<!-- <w2:pivot style="position:absolute;width:100%;height:100%;" 
+							dataList="data:dlt_BMS_DVC_INFO" vals="" rows="DVC_ID" 
+							cols="INCDNT_TYPE" defaultAggregator="Sum" valuesAxis="col" id="VD0202G2" renderMode="compact" autoFit="allColumn" 
+							grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Sum" allTotalName="총계" digitsAfterDecimal="0" useNumberFormat="true" scaler="1" grandTotalName="" suffix="건" prefix="" noResultMessageVisible="true" noResultMessage="데이터 없음" ev:onrefresh="">
+					    		<w2:fieldInfo>
+									<w2:field id="DVC_ID" name="장치ID"></w2:field>
+									<w2:field id="ORG_ID" name="기관ID"></w2:field>
+									<w2:field id="DVC_KIND" name="장치종류"></w2:field>
+									<w2:field id="DVC_TYPE" name="장치유형"></w2:field>
+									<w2:field id="DVC_COND" name="장치상태"></w2:field>
+									<w2:field id="USE_YN" name="사용여부"></w2:field>
+									<w2:field id="INST_LOC" name="설치위치"></w2:field>
+									<w2:field id="ORG_NM" name="기관명"></w2:field>
+									<w2:field id="DVC_POWER" name="전원종료"></w2:field>
+									<w2:field id="DVC_RESET" name="리셋"></w2:field>
+									<w2:field id="MNG_ID" name="관리ID"></w2:field>
+									<w2:field id="REMARK" name="비고"></w2:field>
+									<w2:field id="DVC_IP" name="장치IP"></w2:field>
+									<w2:field id="CTR_YN" name="제어여부"></w2:field>
+									<w2:field id="SEND_DATE" name="갱신일시"></w2:field>
+									<w2:field id="DVC_COORDS" name="장치좌표"></w2:field>
+									<w2:field id="PARAM_DIV" name="매개변수구분"></w2:field>
+									<w2:field id="PARAM_KIND" name="매개변수종류"></w2:field>
+					    		</w2:fieldInfo>
+					    	</w2:pivot>	 -->
+					    	
+					    						
 								<w2:gridView id="VD0202G1" style="width:98%;height:98%" defaultCellHeight="20" rowNumVisible="true"
 								useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
 								overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
-								dataList="data:dlt_BMS_DVC_INFO" class="cm_grid" autoFit="lastColumn" fixedColumnScrollHidden="" ev:oncellclick="scwin.VD0201G1_oncellclick" ev:onscrolly="" ev:onrowindexchange="scwin.VD0202G1_onrowindexchange" focusMove="" focusMode="">
+								dataList="data:dlt_BMS_DVC_INFO" class="cm_grid" autoFit="lastColumn" fixedColumnScrollHidden="" ev:oncellclick="scwin.VD0201G1_oncellclick" ev:onscrolly="" ev:onrowindexchange="scwin.VD0202G1_onrowindexchange" focusMove="" focusMode="row">
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
@@ -847,7 +907,43 @@
 										<w2:column removeBorderStyle="false" width="180" inputType="text" style="height:25px"
 											id="column1" value="장치종류" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:25px"
+										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
+											id="column9" value="리셋" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:25px"
+											id="column2" value="전원(ON/OFF)" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:25px"
+											id="column11" value="화면(ON/OFF)" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
+											id="column7" value="사운드 음량" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
+											id="column10" value="LCD 휘도" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
+											id="column8" value="커맨드" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
+											id="column12" value="로그레벨" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
+											id="column13" value="IP/PORT" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
+											id="column14" value="통신" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
+											id="column15" value="AP" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
+											id="column16" value="GPS" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:25px"
+											id="column17" value="비고" blockSelect="false" displayMode="label">
+										</w2:column>
+										<!-- <w2:column removeBorderStyle="false" width="150" inputType="text" style="height:25px"
 											id="column9" value="장치위치" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:25px"
@@ -864,7 +960,7 @@
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:25px"
 											id="column8" value="비고" blockSelect="false" displayMode="label">
-										</w2:column>
+										</w2:column> -->
 									</w2:row>
 								</w2:header>
 								<w2:gBody style="" id="gBody1">
@@ -878,7 +974,43 @@
 										<w2:column removeBorderStyle="false" width="125" inputType="select" style="height:25px" 
 											id="DVC_KIND" value="" blockSelect="false" displayMode="label">
 										</w2:column>
+										<w2:column removeBorderStyle="false" width="145" inputType="button" style="height:25px"
+											id="PK001" value="리셋" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
+											id="PK002" value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
+											id="PK003" value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
+											id="PK004" value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
+											id="PK005" value="" blockSelect="false" displayMode="label">
+										</w2:column>
 										<w2:column removeBorderStyle="false" width="145" inputType="select" style="height:25px"
+											id="PK008" value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
+											id="PK011" value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
+											id="PK012" value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
+											id="PK013" value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
+											id="PK014" value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
+											id="PK015" value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
+											id="REMARK" value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<!-- <w2:column removeBorderStyle="false" width="145" inputType="select" style="height:25px"
 											id="INST_LOC" value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
@@ -895,7 +1027,7 @@
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
 											id="REMARK" value="" blockSelect="false" displayMode="label" textAlign="left">
-										</w2:column>
+										</w2:column> -->
 									</w2:row>
 								</w2:gBody>
 								<w2:footer id="footer1" style="">
@@ -906,7 +1038,7 @@
 										</w2:column>
 									</w2:row>
 								</w2:footer>								
-							</w2:gridView>					
+							</w2:gridView>		
 						</xf:group>
 						<!-- 					<xf:group id="" style="">
 						<div id="map_VD0202" style="overflow:hidden;">
