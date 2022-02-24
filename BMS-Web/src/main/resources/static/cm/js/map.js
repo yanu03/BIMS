@@ -3763,7 +3763,6 @@ routMap.drawMockLink = function(mapId, grid, focusIdx, clickEvent, dataCheckFunc
 				
 				//focus와 같으면 파란색으로
 				if(focusIdx == i) {
-					debugger;
 					color = "#1e90ff";
 				}
 				routMap.drawLine(mapId, start, end, color, "addSubGrid", clickEvent, i, dataCheckFunc);
@@ -4259,18 +4258,23 @@ routMap.addPolygonByClick = function(mapId, data, grgId, grgNm, e){
 	var lonlat = e.latLng;
 	
 	var idx = data.insertRow();
+	if(idx > 29) {
+		com.alert("차고지 포인트는 30개를 초과할 수 없습니다.")
+		data.deleteRow();
+	}
 	
-
-	var today = new Date();
-	var tmp = {
-			GRG_ID: grgId,
-			SN: idx+1,
-			GPS_Y: util.getDispGps(lonlat.Ma,7),
-			GPS_X: util.getDispGps(lonlat.La,7)
-			};
-
-	data.setRowJSON(idx, tmp, true);
-	routMap.drawPolygon(mapId, data);
+	else {
+		var today = new Date();
+		var tmp = {
+				GRG_ID: grgId,
+				SN: idx+1,
+				GPS_Y: util.getDispGps(lonlat.Ma,7),
+				GPS_X: util.getDispGps(lonlat.La,7)
+		};
+		
+		data.setRowJSON(idx, tmp, true);
+		routMap.drawPolygon(mapId, data);
+	}
 }
 
 

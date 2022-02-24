@@ -413,17 +413,28 @@
 	}	
 	
 	scwin.add_grg_done = function(obj){
-		if (typeof obj === "undefined") {
-			dlt_BMS_ROUT_NODE_CMPSTN.setCellData(SI0402G1.getFocusedRowIndex(),"NODE_TYPE", oldNodeType);
+		var matchedIndexArr = dlt_BMS_ROUT_NODE_CMPSTN.getMatchedIndex("NODE_TYPE", "NT004");
+		if(matchedIndexArr.length > 10) {
+			com.alert("차고지는 10개를 초과할 수 없습니다.");	
 		}
+		
 		else {
-			if(com.isEmpty(obj.GPS_Y)==false && com.isEmpty(obj.GPS_X)==false){
-				curPoint.latLng.Ma = obj.GPS_Y;
-				curPoint.latLng.La = obj.GPS_X;
+		
+			if (typeof obj === "undefined") {
+				dlt_BMS_ROUT_NODE_CMPSTN.setCellData(SI0402G1.getFocusedRowIndex(),"NODE_TYPE", oldNodeType);
 			}
-			var idx = routMap.addGrgByClick("map_SI0402", SI0402G1,curRoutId,curPoint);
-			scwin.mappingNode("map_SI0402", SI0402G1, idx, obj, true);
+			else {
+				if(com.isEmpty(obj.GPS_Y)==false && com.isEmpty(obj.GPS_X)==false){
+					curPoint.latLng.Ma = obj.GPS_Y;
+					curPoint.latLng.La = obj.GPS_X;
+				}
+				var idx = routMap.addGrgByClick("map_SI0402", SI0402G1,curRoutId,curPoint);
+				scwin.mappingNode("map_SI0402", SI0402G1, idx, obj, true);
+			}
+			
 		}
+		
+		
 	}	
 	
 	scwin.mappingNode = function(mapId, grid, index, data, draggable){
