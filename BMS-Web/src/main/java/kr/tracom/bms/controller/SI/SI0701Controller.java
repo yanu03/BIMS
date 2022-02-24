@@ -30,7 +30,7 @@ public class SI0701Controller extends ControllerSupport{
 	 * @date 2017.12.22
 	 * @param {} 없음
 	 * @returns mv dlt_si0701SearchItem ( 공통코드 아이템 리스트 )
-	 * @author InswaveSystems
+	 * @author tracom
 	 * @example
 	 */
 	@RequestMapping("/si0701/selectSI0701SearchItem")
@@ -45,7 +45,7 @@ public class SI0701Controller extends ControllerSupport{
 	 * @date 2017.12.22
 	 * @param {} 없음
 	 * @returns mv List : 공통코드 전체 리스트
-	 * @author InswaveSystems
+	 * @author tracom
 	 * @example
 	 */
 	@RequestMapping("/si0701/selectSI0701Dtl")
@@ -60,7 +60,7 @@ public class SI0701Controller extends ControllerSupport{
 	 * @date 2017.12.22
 	 * @param {} dma_userInfo { SSN_USER_ID :"사용자 ID" }
 	 * @returns mv List ( 사용자의 메뉴 리스트 )
-	 * @author InswaveSystems
+	 * @author tracom
 	 * @example
 	 */
 	/*@RequestMapping("/si0701/selectMenuList")
@@ -75,7 +75,7 @@ public class SI0701Controller extends ControllerSupport{
 	 * @date 2017.12.22
 	 * @param {} dma_si0701CO { CO_CD : "공통그룹 코드" }
 	 * @returns mv dlt_si0701Dtl ( 공통코드 리스트 );
-	 * @author InswaveSystems
+	 * @author tracom
 	 * @example
 	 */
 	@RequestMapping("/si0701/selectSI0701DtlList")
@@ -97,7 +97,7 @@ public class SI0701Controller extends ControllerSupport{
 	 * @date 2017.12.22
 	 * @param {} dlt_si0701Co ( 공통코드그룹 상태인( C,U,D ) 리스트 ), dlt_si0701Dtl ( 공통코드 상태인( C,U,D ) 리스트 )
 	 * @returns mv dlt_result (입력,수정,삭제된 건수 및 상태)
-	 * @author InswaveSystems
+	 * @author tracom
 	 * @example
 	 */
 	@RequestMapping("/si0701/updateSI0701CoAll")
@@ -114,7 +114,7 @@ public class SI0701Controller extends ControllerSupport{
 	 * @date 2017.12.22
 	 * @param {} dlt_si0701Co ( 공통코드그룹 상태인( C,U,D ) 리스트 ), dma_search ( 조회조건 )
 	 * @returns mv dlt_result (입력,수정,삭제된 건수 및 상태), dlt_si0701Co ( 공통코드 그룹 리스트 )
-	 * @author InswaveSystems
+	 * @author tracom
 	 * @example
 	 */
 	@RequestMapping("/si0701/updateSI0701Co")
@@ -131,7 +131,7 @@ public class SI0701Controller extends ControllerSupport{
 	 * @date 2017.12.22
 	 * @param {} dlt_si0701Dtl ( 공통코드 상태인( C,U,D ) 리스트 ), dma_si0701CO ( 조회조건 )
 	 * @returns mv dma_result ( 입력,수정,삭제된 건수 및 상태 ), dlt_si0701Dtl ( 공통코드 리스트 )
-	 * @author InswaveSystems
+	 * @author tracom
 	 * @example
 	 */
 	@RequestMapping("/si0701/selectSI0701DtlUpdate")
@@ -148,7 +148,7 @@ public class SI0701Controller extends ControllerSupport{
 	 * 
 	 * @date 2017.12.22
 	 * @param param {dma_si0701Dtl : {CO_CD:"02,01", DATA_PREFIX:"dlt_code"}}
-	 * @author InswaveSystems
+	 * @author tracom
 	 * @example
 	 */
 	@RequestMapping("/si0701/selectCodeList")
@@ -193,7 +193,7 @@ public class SI0701Controller extends ControllerSupport{
 	 * 
 	 * @date 2021.04.28
 	 * @param param {dma_si0701Dtl : {CO_CD:"02,01", DATA_PREFIX:"dlt_code"}}
-	 * @author InswaveSystems
+	 * @author tracom
 	 * @example
 	 */
 	@RequestMapping("/si0701/selectSystemList")
