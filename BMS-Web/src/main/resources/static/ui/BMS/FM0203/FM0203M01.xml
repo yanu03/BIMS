@@ -117,7 +117,7 @@
 			</xf:submission>
 			<xf:submission id="sub_FM0203G0D0" ref='data:json,{"action":"modified","id":"dlt_BMS_FCLT_INFO"}' target="data:json,dma_result"
 				action="/fm/FM0203G0D0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
-				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_FM0203G0D0_submitdone" ev:submiterror=""
+				customHandler="" mode="asynchronous" processMsg="저장중입니다..." ev:submit="" ev:submitdone="scwin.sub_FM0203G0D0_submitdone" ev:submiterror=""
 				abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_FM0203G1R0" ref="data:json,dma_subsearch" target="data:json,dlt_BMS_FCLT_UPD_LOG" action="/fm/FM0203G1R0"
@@ -185,6 +185,7 @@
 	
 	scwin.sub_FM0203G0S0_submitdone = function(e) {
 		com.saveDone(FM0203G0, sub_FM0203G0R0);	
+		com.saveDone(FM0203G1, sub_FM0203G1R0);	
 	};
 	
 	//예약버튼 클릭 이벤트
@@ -252,17 +253,28 @@
 
 	
 	scwin.FM0203G0_oncellclick = function(row,col,colId) {
-		if (col != "0"){
+		var rowCount = dlt_BMS_FCLT_INFO.getRowCount();
+		
+		if(FM0203G0.getCellChecked(row, 'chk')==0){
+			for(var i = 0; i < rowCount; i++){
+				FM0203G0.setCellChecked(i, 'chk', false);			
+			}
+		   	FM0203G0.setCellChecked(row, 'chk', true);
+		   	
+		}
+		
+		/*if (col != "0"){
 			if(FM0203G0.getCellChecked(row, 'chk')==0){
 				FM0203G0.setCellChecked(row, 'chk', true);
 			}else if(FM0203G0.getCellChecked(row, 'chk')==1){
 				FM0203G0.setCellChecked(row, 'chk', false);
 			}
-		}
+		}*/
 	};
 	
 	scwin.sub_FM0203G0D0_submitdone = function(e) {
 		com.saveDone(FM0203G0, sub_FM0203G0R0);
+		com.saveDone(FM0203G1, sub_FM0203G1R0);
 	};
 	
 	scwin.FCLT_KIND_onchange = function(info) {

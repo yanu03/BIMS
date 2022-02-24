@@ -152,7 +152,7 @@
 			</xf:submission>
 			<xf:submission id="sub_FM0300G2S0" ref='data:json,{"action":"modified","id":"dlt_BMS_FCLT_HIS"}' target="data:json,dma_result"
 				action="/fm/FM0300G2S0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
-				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_FM0300G2S0_submitdone" ev:submiterror=""
+				customHandler="" mode="asynchronous" processMsg="저장중입니다..." ev:submit="" ev:submitdone="scwin.sub_FM0300G2S0_submitdone" ev:submiterror=""
 				abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_FM0300G2R0" ref="data:json,dma_subsearch2" target="data:json,dlt_BMS_FCLT_HIS" action="/fm/FM0300G2R0"
@@ -162,6 +162,11 @@
 			<xf:submission id="sub_FM0300G3R0" ref="data:json,dma_subsearch3" target="data:json,dlt_BMS_FCLT_COND_LOG"
 				action="/fm/FM0300G3R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
 				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_FM0300G3S0" ref='data:json,{"action":"modified","id":"dlt_BMS_FCLT_COND_LOG"}' target="data:json,dma_result"
+				action="/fm/FM0300G3S0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
+				customHandler="" mode="asynchronous" processMsg="저장중입니다..." ev:submit="" ev:submitdone="scwin.sub_FM0300G3S0_submitdone" ev:submiterror=""
+				abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_FM0300SHI2" ref="" target="data:json,dlt_searchitem3" action="/fm/FM0300SHI2" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
@@ -182,7 +187,9 @@
 		 };
 		
 		var mainOptions = {
-			ADD : scwin.btn_add_onclick
+			ADD : scwin.btn_add_onclick,
+			SAVE : scwin.btn_save_onclick,
+			DEL : scwin.btn_del_onclick
 		};
 		 
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID3, autoOptions, mainOptions);
@@ -190,7 +197,8 @@
 		var codeOptions = [ 
 							{code : "FCLT_KIND", compID : "FM0300G1:FCLT_KIND"},
 							{code : "INST_LOC", compID : "FM0300G1:INST_LOC"},
-							{code : "WORK_TYPE", compID : "FM0300G2:WORK_TYPE"}
+							{code : "WORK_TYPE", compID : "FM0300G2:WORK_TYPE"},
+							{code : "FCLT_COND", compID : "FM0300G3:FCLT_COND"}
 		 ];
 		 
 		com.setCommonDtl(codeOptions, function() {
@@ -210,14 +218,14 @@
 			$(".fclt_his").find("li").removeClass("on");
 			$(".fclt_his").find("#"+li_id).addClass("on");
 			
-			if(li_id == "li_HIS") {
+			if(li_id == "li_FCLT_HIS") {
 				FM0300G2.show("");
 				FM0300G3.hide();
 			}
-			else if(li_id == "li_COND") {
+			else if(li_id == "li_FCLT_COND") {
 				FM0300G2.hide();
 				FM0300G3.show("");
-				com.setFocusedCell(PI0400G1, "UPD_DTM");
+				//com.setFocusedCell(PI0400G1, "UPD_DTM");
 			}
 		});
 	};
@@ -239,6 +247,20 @@
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
 			com.saveDone(FM0300G0,sub_FM0300G0R0);
+		}
+	};
+	
+	scwin.sub_FM0300G2S0_submitdone = function(e) {
+		var sCode = com.getResultCode(e);
+		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
+			com.saveDone(FM0300G2,sub_FM0300G2R0);
+		}
+	};
+	
+	scwin.sub_FM0300G3S0_submitdone = function(e) {
+		var sCode = com.getResultCode(e);
+		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
+			com.saveDone(FM0300G3,sub_FM0300G3R0);
 		}
 	};
 		
@@ -292,9 +314,42 @@
 	};
 	
 	scwin.btn_add_onclick = function() {
-		var fcltID = dma_subsearch2.get("FCLT_ID");
-		com.addGrid2(FM0300G2, "APLY_DATE");
-		dlt_BMS_FCLT_HIS.setCellData(FM0300G2.getFocusedRowIndex(), "FCLT_ID", fcltID);
+		var fcltID = dlt_BMS_FCLT_INFO.getCellData(FM0300G1.getFocusedRowIndex(), "FCLT_ID");
+		var mngID = dlt_BMS_FCLT_INFO.getCellData(FM0300G1.getFocusedRowIndex(), "MNG_ID");
+		var liHisClass = $('#li_FCLT_HIS').attr('class'); 
+		var liCondClass = $('#li_FCLT_COND').attr('class'); 
+		
+		if(liHisClass == 'on'){
+			com.addGrid2(FM0300G2, "APLY_DATE");
+			dlt_BMS_FCLT_HIS.setCellData(FM0300G2.getFocusedRowIndex(), "FCLT_ID", fcltID);
+		}else if(liCondClass == 'on'){
+			com.addGrid2(FM0300G3, "SEND_DATE");
+			dlt_BMS_FCLT_COND_LOG.setCellData(FM0300G3.getFocusedRowIndex(), "MNG_ID", mngID);
+		}
+		
+	}
+	
+	scwin.btn_save_onclick = function(){
+		var liHisClass = $('#li_FCLT_HIS').attr('class'); 
+		var liCondClass = $('#li_FCLT_COND').attr('class'); 
+		
+		if(liHisClass == 'on'){
+			com.saveGrid(FM0300G2, sub_FM0300G2S0);
+		}else if(liCondClass == 'on'){
+			com.saveGrid(FM0300G3, sub_FM0300G3S0);
+		}
+		
+	}
+	
+	scwin.btn_del_onclick = function(){
+		var liHisClass = $('#li_FCLT_HIS').attr('class'); 
+		var liCondClass = $('#li_FCLT_COND').attr('class'); 
+		
+		if(liHisClass == 'on'){
+			com.delGrid(FM0300G2);
+		}else if(liCondClass == 'on'){
+			com.delGrid(FM0300G3);
+		}
 	}
 	
 	scwin.sub_FM0300G2S0_submitdone = function(e) {
@@ -517,8 +572,8 @@
 							</xf:group>
 						</xf:group>
 						<ul id="FM0300_TAB" class="fclt_his" style="">
-							<li id="li_HIS" class="on">유지보수 이력</li>
-							<li id="li_COND" class="">장애발생 이력</li>
+							<li id="li_FCLT_HIS" class="on">유지보수 이력</li>
+							<li id="li_FCLT_COND" class="">장애발생 이력</li>
 						</ul>
 						<xf:group></xf:group>
 						<w2:gridView id="FM0300G2" style="height:98%" defaultCellHeight="20" rowNumVisible="true"
@@ -529,7 +584,7 @@
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px"
-										id="column4" value="변경일" blockSelect="false" displayMode="label" class="req">
+										id="column4" value="적용일" blockSelect="false" displayMode="label" class="req">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px"
 										id="column3" value="작업 유형" blockSelect="false" displayMode="label">
@@ -544,7 +599,7 @@
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
-									<w2:column removeBorderStyle="false" width="123" inputType="text" style="height:20px"
+									<w2:column removeBorderStyle="false" width="123" inputType="calendar" style="height:20px"
 										id="APLY_DATE" value="" blockSelect="false" displayMode="label" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="120" inputType="select" style="height:20px"
@@ -580,7 +635,7 @@
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
 										id="column4" value="관리ID" blockSelect="false" displayMode="label" class="req">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
+									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px"
 										id="column3" value="장치상태" blockSelect="false" displayMode="label" class="req">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
@@ -593,7 +648,7 @@
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
-									<w2:column removeBorderStyle="false" width="129" inputType="text" style="height:20px"
+									<w2:column removeBorderStyle="false" width="129" inputType="calendar" style="height:20px"
 										id="SEND_DATE" value="" blockSelect="false" displayMode="label" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="107" inputType="text" style="height:20px" 

@@ -26,4 +26,10 @@ public interface VD0300Mapper {
 	
 	public int VD0300G2D0(Map param);
 	
+	public int VD0300G3I0(Map param);
+	
+	public int VD0300G3U0(Map param);
+	
+	public int VD0300G3D0(Map param);
+	
 }

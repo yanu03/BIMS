@@ -28,4 +28,10 @@ public interface FM0300Mapper {
 	
 	public int FM0300G2D0(Map param);
 	
+	public int FM0300G3I0(Map param);
+	
+	public int FM0300G3U0(Map param);
+	
+	public int FM0300G3D0(Map param);
+	
 }

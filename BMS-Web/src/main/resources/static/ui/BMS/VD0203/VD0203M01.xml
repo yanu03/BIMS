@@ -114,7 +114,7 @@
 			</xf:submission>
 			<xf:submission id="sub_VD0203G0D0" ref='data:json,{"action":"modified","id":"dlt_DVC_INFO"}' target="data:json,dma_result"
 				action="/vd/VD0203G0D0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
-				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_VD0203G0D0_submitdone" ev:submiterror=""
+				customHandler="" mode="asynchronous" processMsg="저장중입니다..." ev:submit="" ev:submitdone="scwin.sub_VD0203G0D0_submitdone" ev:submiterror=""
 				abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_VD0203G1R0" ref="data:json,dma_subsearch" target="data:json,dlt_UPD_RSV_INFO" action="/vd/VD0203G1R0"
@@ -174,8 +174,16 @@
 
 	};
 	
+	//예약 서브미션 콜백 함수
 	scwin.sub_VD0203G0S0_submitdone = function(e) {
 		com.saveDone(VD0203G0, sub_VD0203G0R0);	
+		com.saveDone(VD0203G1, sub_VD0203G1R0);	
+	};
+	
+	//예약취소 서브미션 콜백 함수
+	scwin.sub_VD0203G0D0_submitdone = function(e) {
+		com.saveDone(VD0203G0, sub_VD0203G0R0);
+		com.saveDone(VD0203G1, sub_VD0203G1R0);
 	};
 	
 	//예약버튼 클릭 이벤트
@@ -263,17 +271,24 @@
 	};
 	
 	scwin.VD0203G0_oncellclick = function(row,col,colId) {
-		if (col != "0"){
+			var rowCount = dlt_DVC_INFO.getRowCount();
+			
+			if(VD0203G0.getCellChecked(row, 'chk')==0){
+				for(var i = 0; i < rowCount; i++){
+					VD0203G0.setCellChecked(i, 'chk', false);			
+				}
+			   	VD0203G0.setCellChecked(row, 'chk', true);
+			   	
+			}
+	
+		/*if (col != "0"){
 			if(VD0203G0.getCellChecked(row, 'chk')==0){
 				VD0203G0.setCellChecked(row, 'chk', true);
 			}else if(VD0203G0.getCellChecked(row, 'chk')==1){
 				VD0203G0.setCellChecked(row, 'chk', false);
 			}
-		}
-	};
-	
-	scwin.sub_VD0203G0D0_submitdone = function(e) {
-		com.saveDone(VD0203G0, sub_VD0203G0R0);
+		}*/
+		
 	};
 	
 	scwin.DVC_KIND_onchange = function(info) {
@@ -281,8 +296,6 @@
 	};
 	
 	scwin.file_onInputValueChange = function(returnValue) {
-		
-		
 		// 확장자 추출
 		var lastDot = returnValue.lastIndexOf('.'); 
 		var fileExtension = returnValue.substring(lastDot+1, returnValue.length);

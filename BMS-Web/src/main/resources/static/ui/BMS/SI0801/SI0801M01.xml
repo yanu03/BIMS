@@ -517,9 +517,9 @@
 								</w2:attributes>
 							</xf:group>
 							<xf:group tagname="td" style="" class="w2tb_td">
-								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+								<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
 									disabledClass="w2selectbox_disabled" id="DATA_TYPE" style="width: 148px;height: 21px;" submenuSize="auto"
-									ref="data:dlt_BMS_FCLT_PARAM_CFG_INFO.DATA_TYPE" chooseOptionLabel="-선택-">
+									ref="data:dlt_BMS_FCLT_PARAM_CFG_INFO.DATA_TYPE" chooseOptionLabel="">
 									<xf:choices></xf:choices>
 								</xf:select1>
 							</xf:group>

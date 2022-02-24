@@ -162,7 +162,7 @@
 				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_VD0300G2S0" ref='data:json,{"action":"modified","id":"dlt_BMS_DVC_HIS"}' target="data:json,dma_result" action="/vd/VD0300G2S0" method="post" mediatype="application/json" encoding="UTF-8"
-				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_VD0300G2S0_submitdone"
+				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="저장중입니다..." ev:submit="" ev:submitdone="scwin.sub_VD0300G2S0_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_VD0300G2R0" ref="data:json,dma_subsearch2" target="data:json,dlt_BMS_DVC_HIS" action="/vd/VD0300G2R0"
@@ -171,6 +171,10 @@
 			</xf:submission>
 			<xf:submission id="sub_VD0300G3R0" ref="data:json,dma_subsearch3" target="data:json,dlt_BMS_DVC_COND_LOG" action="/vd/VD0300G3R0" method="post" mediatype="application/json" encoding="UTF-8"
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
+				ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_VD0300G3S0" ref='data:json,{"action":"modified","id":"dlt_BMS_DVC_COND_LOG"}' target="data:json,dma_result" action="/vd/VD0300G3S0" method="post" mediatype="application/json" encoding="UTF-8"
+				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="저장중입니다..." ev:submit="" ev:submitdone="scwin.sub_VD0300G3S0_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
 		</xf:model>
@@ -184,11 +188,14 @@
 			Main : { grid : VD0300G0, srchSbm : sub_VD0300G0R0, srchGrp : pgm_header, keyColumn : "VHC_ID", focusColumn : "VHC_NO", name :  "차량 목록"},
 			Sub1 : { grid : VD0300G1, srchSbm : sub_VD0300G1R0, savSbm : sub_VD0300G1S0, keyColumn : "DVC_ID", name :  "장치 목록"},
 			Sub2 : { grid : VD0300G2, srchSbm : sub_VD0300G2R0, savSbm : sub_VD0300G2S0, name :  "유지보수 이력"},
-			Sub3 : { grid : VD0300G3, srchSbm : sub_VD0300G3R0, name :  "장애발생 이력"}
+			Sub3 : { grid : VD0300G3, srchSbm : sub_VD0300G3R0, savSbm : sub_VD0300G3S0, name :  "장애발생 이력"}
 		 };
 		
 		var mainOptions = {
-			ADD : scwin.btn_add_onclick
+			ADD : scwin.btn_add_onclick,
+			SAVE : scwin.btn_save_onclick,
+			DEL : scwin.btn_del_onclick
+			
 		};
 		 
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID3, autoOptions, mainOptions);
@@ -200,7 +207,8 @@
 							{code : "VHC_FUEL", compID : "VD0300G0:VHC_FUEL"},
 							{code : "DVC_KIND", compID : "VD0300G1:DVC_KIND"},
 							{code : "INST_LOC", compID : "VD0300G1:INST_LOC"},
-							{code : "WORK_TYPE", compID : "VD0300G2:WORK_TYPE"}
+							{code : "WORK_TYPE", compID : "VD0300G2:WORK_TYPE"},
+							{code : "DVC_COND", compID : "VD0300G3:DVC_COND"}
 		 ];
 		 
 		com.setCommonDtl(codeOptions, function() {
@@ -226,7 +234,7 @@
 			else if(li_id == "li_COND") {
 				VD0300G2.hide();
 				VD0300G3.show("");
-				com.setFocusedCell(PI0400G1, "UPD_DTM");
+				//com.setFocusedCell(VD0300G3, "SEND_DATE");
 			}
 		});
 	};
@@ -248,6 +256,20 @@
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
 			com.saveDone(VD0300G0,sub_VD0300G0R0);
+		}
+	};
+	
+	scwin.sub_VD0300G2S0_submitdone = function(e) {
+		var sCode = com.getResultCode(e);
+		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
+			com.saveDone(VD0300G2,sub_VD0300G2R0);
+		}
+	};
+	
+	scwin.sub_VD0300G3S0_submitdone = function(e) {
+		var sCode = com.getResultCode(e);
+		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
+			com.saveDone(VD0300G3,sub_VD0300G3R0);
 		}
 	};
 		
@@ -299,10 +321,43 @@
 		com.setCommonDtl(codeOption);
 	};
 	
+	//추가 버튼 클릭 이벤트
 	scwin.btn_add_onclick = function() {
-		var dvcID = dma_subsearch2.get("DVC_ID");
-		com.addGrid2(VD0300G2, "APLY_DATE");
-		dlt_BMS_DVC_HIS.setCellData(VD0300G2.getFocusedRowIndex(), "DVC_ID", dvcID);
+		var dvcID = dlt_BMS_DVC_INFO.getCellData(VD0300G1.getFocusedRowIndex(), "DVC_ID");
+		var mngID = dlt_BMS_DVC_INFO.getCellData(VD0300G1.getFocusedRowIndex(), "MNG_ID");
+		var liHisClass = $('#li_HIS').attr('class'); 
+		var liCondClass = $('#li_COND').attr('class'); 
+		
+		if(liHisClass == 'on'){
+			com.addGrid2(VD0300G2, "APLY_DATE");
+			dlt_BMS_DVC_HIS.setCellData(VD0300G2.getFocusedRowIndex(), "DVC_ID", dvcID);
+		}else if(liCondClass == 'on'){
+			com.addGrid2(VD0300G3, "SEND_DATE");
+			dlt_BMS_DVC_COND_LOG.setCellData(VD0300G3.getFocusedRowIndex(), "MNG_ID", mngID);
+		}
+	}
+	
+	scwin.btn_save_onclick = function(){
+		var liHisClass = $('#li_HIS').attr('class'); 
+		var liCondClass = $('#li_COND').attr('class'); 
+		
+		if(liHisClass == 'on'){
+			com.saveGrid(VD0300G2, sub_VD0300G2S0);
+		}else if(liCondClass == 'on'){
+			com.saveGrid(VD0300G3, sub_VD0300G3S0);
+		}
+		
+	}
+	
+	scwin.btn_del_onclick = function(){
+		var liHisClass = $('#li_HIS').attr('class'); 
+		var liCondClass = $('#li_COND').attr('class'); 
+		
+		if(liHisClass == 'on'){
+			com.delGrid(VD0300G2);
+		}else if(liCondClass == 'on'){
+			com.delGrid(VD0300G3);
+		}
 	}
 	
 	scwin.sub_VD0300G2S0_submitdone = function(e) {
@@ -599,7 +654,7 @@
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
-									<w2:column removeBorderStyle="false" width="123" inputType="text" style="height:20px"
+									<w2:column removeBorderStyle="false" width="123" inputType="calendar" style="height:20px"
 										id="APLY_DATE" value="" blockSelect="false" displayMode="label" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="120" inputType="select" style="height:20px"
@@ -648,11 +703,11 @@
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
-									<w2:column removeBorderStyle="false" width="129" inputType="text" style="height:20px"
+									<w2:column removeBorderStyle="false" width="129" inputType="calendar" style="height:20px"
 										id="SEND_DATE" value="" blockSelect="false" displayMode="label" userData1="M">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="107" inputType="text" style="height:20px" id="MNG_ID"
-										value="" blockSelect="false" displayMode="label" maxlength="10" userData1="M">
+									<w2:column removeBorderStyle="false" width="107" inputType="text" style="height:20px" 
+										id="MNG_ID" value="" blockSelect="false" displayMode="label" maxlength="10" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="82" inputType="select" style="height:20px"
 										id="DVC_COND" value="" blockSelect="false" displayMode="label" userData1="M">

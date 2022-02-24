@@ -408,14 +408,14 @@
 						<w2:gridView id="PI0400G0" style="" defaultCellHeight="20" rowNumVisible="true" useShiftKey="true"
 							readOnly="true" ev:onrowindexchange="scwin.PI0400G0_onrowindexchange" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true"
 							rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
-							ignoreCellClick="false" dataList="data:dlt_BMS_WEAT_INFO" class="cm_grid tab" autoFit="allColumn" fixedColumnScrollHidden=""
+							ignoreCellClick="false" dataList="data:dlt_BMS_WEAT_INFO" class="cm_grid tab" autoFit="lastColumn" fixedColumnScrollHidden=""
 							sortOrderReverse="true" focusMode="row">
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
-									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+									<w2:column removeBorderStyle="false" width="160" inputType="text" style="height:20px"
 										id="column5" value="업데이트일시" blockSelect="false" displayMode="label" sortLabel="" sortable="">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+									<w2:column removeBorderStyle="false" width="160" inputType="text" style="height:20px"
 										id="column4" value="발표일시" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
@@ -438,6 +438,9 @@
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100%" inputType="text" style="height:20px"
 										id="column9" value="강수량(mm)" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="100%" inputType="text" style="height:20px"
+										id="column10" value="" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
 							</w2:header>
@@ -470,6 +473,9 @@
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="RAINFALL"
 										value="" blockSelect="false" displayMode="label" textAlign="right">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id=""
+										value="" blockSelect="false" displayMode="label" textAlign="">
+									</w2:column>
 								</w2:row>
 							</w2:gBody>
 							<w2:footer style="" id="footer1">
@@ -484,13 +490,13 @@
 						<w2:gridView id="PI0400G1" style="" defaultCellHeight="20" rowNumVisible="true" useShiftKey="true"
 							readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태" overflowX="auto"
 							overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_BMS_ATMO_INFO"
-							class="cm_grid tab" autoFit="allColumn" fixedColumnScrollHidden="" focusMode="row">
+							class="cm_grid tab" autoFit="lastColumn" fixedColumnScrollHidden="" focusMode="row">
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
-									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+									<w2:column removeBorderStyle="false" width="160" inputType="text" style="height:20px"
 										id="column5" value="업데이트일시" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+									<w2:column removeBorderStyle="false" width="160" inputType="text" style="height:20px"
 										id="column4" value="발표일시" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
@@ -508,8 +514,11 @@
 									<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px"
 										id="column7" value="오존농도(ppm)" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="100%" inputType="text" style="height:20px"
+									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
 										id="column8" value="이산화질소농도(ppm)" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="100%" inputType="text" style="height:20px"
+										id="column9" value="" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
 							</w2:header>
@@ -538,6 +547,9 @@
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="NDC"
 										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id=""
+										value="" blockSelect="false" displayMode="label" textAlign="">
 									</w2:column>
 								</w2:row>
 							</w2:gBody>

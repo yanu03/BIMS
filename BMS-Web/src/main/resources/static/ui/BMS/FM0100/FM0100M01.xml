@@ -109,7 +109,7 @@
 			</xf:submission>
 			<xf:submission id="sub_FM0100G1S0" ref='data:json,{"action":"modified","id":"dlt_BMS_FCLT_INFO"}' target="data:json,dma_result"
 				action="/fm/FM0100G1S0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
-				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_FM0100G1S0_submitdone" ev:submiterror=""
+				customHandler="" mode="asynchronous" processMsg="저장중입니다..." ev:submit="" ev:submitdone="scwin.sub_FM0100G1S0_submitdone" ev:submiterror=""
 				abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_FM0100SHI1" ref="" target="data:json,dlt_searchitem2" action="/fm/FM0100SHI1" method="post"

@@ -61,4 +61,11 @@ public class VD0300Controller extends ControllerSupport {
 		return result.getResult();
 	}
 	
+	@RequestMapping("/vd/VD0300G3S0")
+	public @ResponseBody Map<String, Object> VD0300G3S0() throws Exception {
+		Map map = vd0300Service.VD0300G3S0();
+		result.setData("dma_result", map);
+		return result.getResultSave();
+	}
+	
 }

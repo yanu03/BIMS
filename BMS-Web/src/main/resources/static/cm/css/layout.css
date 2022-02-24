@@ -168,6 +168,7 @@
 .grdr_20_2_7f_20_3f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 7fr minmax(20px, max-content) 3fr;} /* 왼쪽그리드 하단 */
 .grdr_20_20_2_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) 1fr minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
+.grdr_20_1f_20_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) 1fr minmax(20px, max-content) minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_1f_1f_1f {display:grid; grid-template-rows: repeat(3, 1fr)} /* 왼쪽그리드 하단 */
 .grdr_6f_20_4f {display:grid; grid-template-rows: 6fr minmax(20px, max-content) 4fr;}
 

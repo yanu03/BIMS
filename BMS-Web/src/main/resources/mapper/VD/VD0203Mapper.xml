@@ -25,7 +25,7 @@
 		ON DI.ORG_ID = OM.ORG_ID
 		<where>
 			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
-				AND USER_ID LIKE CONCAT('%',#{CONTENT},'%') || USER_NM LIKE CONCAT('%',#{CONTENT},'%')
+				AND VHC_NO LIKE CONCAT('%',#{CONTENT},'%') || COMPLETE_YN LIKE CONCAT('%',#{CONTENT},'%')
 			</if>
 			<if test="TYPE == 'VHC_NO'">
 				AND VHC_NO LIKE CONCAT('%',#{CONTENT},'%')
