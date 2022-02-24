@@ -69,7 +69,12 @@ var RoutMAP = function(){
 	this.divEvent = "";
 }
 
-/**노선 맵 시작**/
+/**
+ * 노선 맵 초기화
+
+ * @param mapId : 생성할 map Id
+ * @param options : 맵의 옵션
+ */
 routMap.initMap = function(mapId,options) {
 	
 	var mapContainer = document.getElementById(mapId);
@@ -110,6 +115,13 @@ routMap.initMap = function(mapId,options) {
 	return map;
 }
 
+/**
+ * 노선 맵 복제
+
+ * @param mapId : 복제 map Id
+ * @param options : 맵의 옵션
+ * @param map : 복제 대상 map
+ */
 routMap.cronMap = function(mapId,options, map) {
 	
 //	var mapContainer = document.getElementById(mapId);
@@ -145,6 +157,12 @@ routMap.cronMap = function(mapId,options, map) {
 	return map;
 }
 
+/**
+ * 노선 맵 초기화
+
+ * @param mapId : 생성할 map Id
+ * @param options : 맵의 옵션
+ */
 routMap.initMap2 = function(mapId,options) {
 	
 	var mapContainer = document.getElementById(mapId);
@@ -180,14 +198,24 @@ routMap.initMap2 = function(mapId,options) {
 	return map;
 } 
 
-/**맵 이동**/
+/**
+ * 특정 위/경도 중심으로 맵 센터 이동
+
+ * @param mapId : 대상 map Id
+ * @param lat : 위도
+ * @param lon : 경도
+ */
 routMap.moveMap = function(mapId, lat, lon) {
 	if(routMap.mapInfo[mapId].isMove){
 		routMap.mapInfo[mapId].map.setCenter(new kakao.maps.LatLng(lat, lon));
 	}
 }
 
-/**마커삭제**/
+/**
+ * 마커 전체 삭제
+
+ * @param mapId : 대상 map Id
+ */
 routMap.removeMarkers = function(mapId) {
 	if(routMap.mapInfo[mapId].markers != null && routMap.mapInfo[mapId].markers.length != 0) {
 		for (var i = 0; i < routMap.mapInfo[mapId].markers.length; i++) {
@@ -198,7 +226,7 @@ routMap.removeMarkers = function(mapId) {
 	routMap.mapInfo[mapId].markers = [];
 }
 
-routMap.removeMarkers2 = function(mapId) {
+/*routMap.removeMarkers2 = function(mapId) {
 	if(routMap.mapInfo[mapId].markers != null && routMap.mapInfo[mapId].markers.length != 0) {
 		for (var i = 0; i < routMap.mapInfo[mapId].markers.length; i++) {
 			routMap.mapInfo[mapId].markers[i].setMap(null);
@@ -206,9 +234,13 @@ routMap.removeMarkers2 = function(mapId) {
 	}
 	
 	routMap.mapInfo[mapId].markers = [];
-}
+}*/
 
-/**버스마커삭제**/
+/**
+ * 버스 마커 전체 삭제
+
+ * @param mapId : 대상 map Id
+ */
 routMap.removeBusMarkers = function(mapId) {
 	if(routMap.mapInfo[mapId].busMarkers != null && routMap.mapInfo[mapId].busMarkers.length != 0) {
 		for (var i = 0; i < routMap.mapInfo[mapId].busMarkers.length; i++) {
@@ -219,13 +251,24 @@ routMap.removeBusMarkers = function(mapId) {
 	routMap.mapInfo[mapId].busMarkers = [];
 }
 
+/**
+ * 특정 index의 버스 마커 삭제
+
+ * @param mapId : 대상 map Id
+ * @param index : 대상 버스 마커 index
+ */
 routMap.removeIndexBusMarker = function(mapId,index) {
 	if(routMap.mapInfo[mapId].busMarkers != null && routMap.mapInfo[mapId].busMarkers.length != 0) {
 		routMap.mapInfo[mapId].busMarkers[index].setMap(null);
 	}
 }
 
-/**유저마커삭제**/
+/**
+ * 사용 안함 전체 user 마커 삭제
+
+ * @param mapId : 대상 map Id
+ */
+/****/
 routMap.removeMarkers_user = function(mapId) {
 	for (var i = 0; i < routMap.mapInfo[mapId].markers_user.length; i++) {
 		routMap.mapInfo[mapId].markers_user[i].setMap(null);
@@ -234,7 +277,13 @@ routMap.removeMarkers_user = function(mapId) {
 }
 
 
-/**마커그리기**/
+/**
+ * 마커그리기
+
+ * @param mapId : 대상 map Id
+ * @param lat : 위도
+ * @param lon : 경도
+ */
 routMap.mapMarker = function(mapId, lat, lng){
 	routMap.removeMarkers(mapId);
 	
@@ -246,7 +295,14 @@ routMap.mapMarker = function(mapId, lat, lng){
 	routMap.mapInfo[mapId].markers.push(marker);
 }
 
-/**리스트 선그리기**/
+/**
+ * 배열 선그리기
+
+ * @param mapId : 대상 map Id
+ * @param lat_arr : 위도 배열
+ * @param lng_arr : 경도 배열
+ * @param color : 선 색
+ */
 routMap.drawLineArr = function(mapId, lat_arr, lng_arr, color){
 	var path = [];
 	for(var i=0; i < lat_arr.length; i++){
@@ -265,7 +321,14 @@ routMap.drawLineArr = function(mapId, lat_arr, lng_arr, color){
 	routMap.mapInfo[mapId].polylines.push(polyline);
 }
 
-/**선그리기**/
+/**
+ * 선그리기
+
+ * @param mapId : 대상 map Id
+ * @param first : 시작 위/경도
+ * @param last : 종료 위/경도
+ * @param color : 선 색
+ */
 routMap.drawLine = function(mapId, first, last, color, eventKinds, clickEvent, rowIndex, dataCheckFunc){
 	var path = [];
 	path.push(new kakao.maps.LatLng(first.GPS_Y, first.GPS_X));
@@ -327,7 +390,11 @@ routMap.drawLine = function(mapId, first, last, color, eventKinds, clickEvent, r
 	routMap.mapInfo[mapId].polylines.push(polyline);
 }
 
-/**선삭제**/
+/**
+ * 선삭제
+
+ * @param mapId : 대상 map Id
+ */
 routMap.deleteLine = function(mapId){
 	if(routMap.mapInfo[mapId].polylines != null && routMap.mapInfo[mapId].polylines.length != 0) {
 		for (var i = 0; i < routMap.mapInfo[mapId].polylines.length; i++) {
@@ -338,7 +405,11 @@ routMap.deleteLine = function(mapId){
 	routMap.mapInfo[mapId].polylines = [];
 }
 
-/**다각형삭제**/
+/**
+ * 다각형삭제
+
+ * @param mapId : 대상 map Id
+ */
 routMap.deletePolygon = function(mapId){
 	if(routMap.mapInfo[mapId].polygons != null && routMap.mapInfo[mapId].polygons.length != 0) {
 		for (var i = 0; i < routMap.mapInfo[mapId].polygons.length; i++) {
@@ -349,7 +420,14 @@ routMap.deletePolygon = function(mapId){
 	routMap.mapInfo[mapId].polygons = [];
 }
 
-/**마커여러개추가**/
+/**
+ * 마커여러개추가
+
+ * @param mapId : 대상 map Id
+ * @param lat_arr : 위도 배열
+ * @param lng_arr : 경도 배열
+ * @param id_arr :id 배열
+ */
 routMap.addMarkers = function(mapId, lat_arr, lng_arr, id_arr) {
 	for(var i=0; i < lat_arr.length; i++){
 		var marker = new kakao.maps.Marker({
@@ -363,15 +441,37 @@ routMap.addMarkers = function(mapId, lat_arr, lng_arr, id_arr) {
 	}
 }
 
+/**
+ * 지도상의 노드 클릭시 호출되는 함수
+
+ * @param mapId : 대상 map Id
+ * @param idx : 클릭한 index
+ */
 routMap.nodeChange = function(mapId, idx){
 	routMap.mapInfo[mapId].nodeChangeCb(idx);
 }
 
+/**
+ * 지도상의 마우스 커서 세팅
+
+ * @param mapId : 대상 map Id
+ * @param cursor : 마우스 커서
+ */
 routMap.setMapCursor = function(mapId, cursor){
 	routMap.mapInfo[mapId].map.setCursor(cursor);
 }
 
-/**노드마커 추가**/
+/**
+ * 노드마커 추가
+
+ * @param mapId : 대상 map Id
+ * @param data : 그리드의 data
+ * @param grid : 대상 그리드
+ * @param idx : 마커의 index
+ * @param focusIdx : 포커스 index
+ * @param idx : 마커의 index
+ * @param isOverLayHidden : 마커내의 overlay 숨기기 여부
+ */
 routMap.addMarkerInter = function(mapId, data, grid, idx, focusIdx, isOverLayHidden) {
 	// 마커 이미지의 이미지 크기 입니다
 	var imageSize = new kakao.maps.Size(19, 28);  
@@ -561,7 +661,17 @@ routMap.addMarkerInter = function(mapId, data, grid, idx, focusIdx, isOverLayHid
 	routMap.mapInfo[mapId].markers.push(marker);
 }
 
-/**사운드 노드마커 추가**/
+
+/**
+ * 사운드 노드마커 추가
+
+ * @param mapId : 대상 map Id
+ * @param data : 그리드의 data
+ * @param grid : 대상 그리드
+ * @param idx : 마커의 index
+ * @param focusIdx : 포커스 index
+ * @param idx : 마커의 index
+ */
 routMap.addSoundMarkerInter = function(mapId, data, grid, idx, focusIdx) {
 	// 마커 이미지의 이미지 크기 입니다
 	var imageSize = new kakao.maps.Size(19, 28); 
@@ -755,7 +865,13 @@ routMap.addSoundMarkerInter = function(mapId, data, grid, idx, focusIdx) {
 	routMap.mapInfo[mapId].markers.push(marker);
 }
 
-//인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+/**
+ * 마커 마우스 over 시 호출되는 콜백 함수 : overlay을 출력함
+
+ * @param mapId : 대상 map 
+ * @param marker : 대상 마커
+ * @param overlay : 마커위에 출력할 overlay
+ */
 routMap.makeOverListener = function(map, marker, overlay) {
 	return function() {
 		overlay.setMap(map)
@@ -763,7 +879,13 @@ routMap.makeOverListener = function(map, marker, overlay) {
 	};
 }
 
-// 인포윈도우를 닫는 클로저를 만드는 함수입니다
+/**
+ * 마커 마우스 out 시 호출되는 콜백 함수 : overlay을 삭제함
+
+ * @param mapId : 대상 map 
+ * @param marker : 대상 마커
+ * @param overlay : 삭제할 overlay
+ */
 routMap.makeOutListener = function(mapInfo,mapInfo,overlay,markerImage) {
 	return function() {
 		overlay.setMap(null)
@@ -776,7 +898,14 @@ routMap.makeOutListener = function(mapInfo,mapInfo,overlay,markerImage) {
 	};
 }
 
-/**통통튀는 마커 생성**/
+/**
+ * 사용 안함 통통튀는 마커 생성
+
+ * @param mapId : 대상 map id
+ * @param lat : 위도
+ * @param lng : 경도
+ * @param id : 마커 타이틀
+ */
 routMap.addMarkerAni = function(mapId, lat, lng, id) {
 	var aniType = kakao.maps.MarkerOptions.ANIMATE_BOUNCE;
 	var coordIdx = 0;
@@ -803,8 +932,15 @@ routMap.addMarkerAni = function(mapId, lat, lng, id) {
 	setTimeout(func, 300);
 }
 
+/**
+ * 버스마커 표시
 
-/**버스마커 **/
+ * @param mapId : 대상 map id
+ * @param data : 그리드의 data
+ * @param idx : 마커의 index
+ * @param focusIdx : 포커스 index
+ * @param busGrid : 버스 그리드
+ */
 routMap.showBusMarker = function(mapId, data, idx, focusIdx, busGrid) {
 	// 마커 이미지의 이미지 크기 입니다
 	var imageSize = new kakao.maps.Size(35, 35); 
@@ -938,7 +1074,15 @@ routMap.showBusMarker = function(mapId, data, idx, focusIdx, busGrid) {
 	
 }
 
-/**클릭 오버레이가 다른 showBusMarker **/
+/**
+ * 버스마커 표시 : 마우스 오른쪽 클릭 처리 추가함
+
+ * @param mapId : 대상 map id
+ * @param data : 그리드의 data
+ * @param idx : 마커의 index
+ * @param focusIdx : 포커스 index
+ * @param busGrid : 버스 그리드
+ */
 routMap.showBusMarkerClickOverlay = function(mapId, data, idx, focusIdx, busGrid) {
 	// 마커 이미지의 이미지 크기 입니다
 	var imageSize = new kakao.maps.Size(35, 35); 
@@ -1084,7 +1228,15 @@ routMap.showBusMarkerClickOverlay = function(mapId, data, idx, focusIdx, busGrid
 	
 }
 
-/**버스마커 이번트 처리 안되는 경우에만 사용하세요...**/
+/**
+ * 버스마커 표시 : 버스마커 이번트 처리 안되는 경우에만 사용
+
+ * @param mapId : 대상 map id
+ * @param data : 그리드의 data
+ * @param idx : 마커의 index
+ * @param focusIdx : 포커스 index
+ * @param busGrid : 버스 그리드
+ */
 routMap.showBusMarkerNotEvent = function(mapId, data, idx, focusIdx, busGrid) {
 	// 마커 이미지의 이미지 크기 입니다
 	var imageSize = new kakao.maps.Size(35, 35); 
@@ -1177,6 +1329,16 @@ routMap.showBusMarkerNotEvent = function(mapId, data, idx, focusIdx, busGrid) {
 		routMap.mapInfo[mapId].busMarkers.push(marker);
 	}
 }
+
+/**
+ * 말풍선overlay 표시
+
+ * @param mapId : 대상 map id
+ * @param data : 그리드의 data
+ * @param marker : 대상마커
+ * @param idx : 마커의 index
+ * @param focusIdx : 포커스 index
+ */
 routMap.showBubbleOverlay = function(mapId, data, marker, idx, focusIdx) {
 	var zIndex= 2;
 	var overlayName = null;
@@ -1272,6 +1434,16 @@ routMap.showBubbleOverlay = function(mapId, data, marker, idx, focusIdx) {
 	
 }
 
+/**
+ * 사용안함 클릭overlay 표시
+
+ * @param mapId : 대상 map id
+ * @param data : 그리드의 data
+ * @param idx : 마커의 index
+ * @param focusIdx : 포커스 index
+ * @param marker : 대상마커
+ * @param markerImage : 마커이미지
+ */
 routMap.showClickOverlay = function(mapId, data, idx, focusIdx, marker, markerImage) {
 	var infoWindow = null;
 
@@ -1473,6 +1645,15 @@ routMap.showClickBusOverlay = function(mapId, data, idx, focusIdx, marker) {
 	
 }
 
+/**
+ * 디스패치overlay 표시
+
+ * @param mapId : 대상 map id
+ * @param data : 그리드의 data
+ * @param idx : 마커의 index
+ * @param focusIdx : 포커스 index
+ * @param marker : 대상마커
+ */
 routMap.showDsptchOverlay = function(mapId, data, idx, focusIdx, marker) {
 	var zIndex = 100000;
 	var showMessage = "";
@@ -1581,6 +1762,15 @@ routMap.showDsptchOverlay = function(mapId, data, idx, focusIdx, marker) {
 	
 }
 
+/**
+ * 이벤트overlay 표시
+
+ * @param mapId : 대상 map id
+ * @param data : 그리드의 data
+ * @param idx : 마커의 index
+ * @param focusIdx : 포커스 index
+ * @param marker : 대상마커
+ */
 routMap.showEventOverlay = function(mapId, data, idx, focusIdx, marker) {
 	var zIndex = 100000;
 	var eventMsg = "";
@@ -1733,8 +1923,15 @@ routMap.showEventOverlay = function(mapId, data, idx, focusIdx, marker) {
 	}
 }
 
-//범례 SHOW 메소드
-//etcOnOff = 'on'시 일반노드, 음성노드 show
+/**
+ * 범례 SHOW 메소드
+
+ * @param mapId : 대상 map id
+ * @param list : data list
+ * @param focusIdx : 포커스 index
+ * @param grid : 대상 grid
+ * @param etcOnOff : 'on'시 일반노드, 음성노드 show
+ */
 routMap.showCategory = function(mapId, list, focusIdx, grid, etcOnOff) {
 	$("#"+mapId).find("#category_"+ mapId).empty();
 	
@@ -1906,6 +2103,15 @@ routMap.showCategory = function(mapId, list, focusIdx, grid, etcOnOff) {
 
 
 // MO0101M01 전용입니다
+/**
+ * 범례 SHOW 메소드
+
+ * @param mapId : 대상 map id
+ * @param list : data list
+ * @param focusIdx : 포커스 index
+ * @param grid : 대상 grid
+ * @param etcOnOff : 'on'시 일반노드, 음성노드 show
+ */
 routMap.showCategory2 = function(mapId, sttnMapId, crsMapId, sttnList, crsList, focusIdx, grid) {
 	$("#"+mapId).find("#category_"+ mapId).empty();
 	
@@ -2036,6 +2242,15 @@ routMap.showCategory2 = function(mapId, sttnMapId, crsMapId, sttnList, crsList, 
 	}); //end click
 } //showCategory2
 
+/**
+ *  마커 보이기
+
+ * @param mapId : 대상 map id
+ * @param list : data list
+ * @param focusIdx : 포커스 index
+ * @param grid : 대상 grid
+ * @param etcOnOff : 'on'시 일반노드, 음성노드 show
+ */
 routMap.showMarker = function(mapId, data, idx, focusIdx, grid) {
 	// 마커 이미지의 이미지 크기 입니다
 	var imageSize = new kakao.maps.Size(19, 28); 
@@ -2299,8 +2514,12 @@ routMap.showMarker = function(mapId, data, idx, focusIdx, grid) {
 	routMap.mapInfo[mapId].markers.push(marker);
 }
 
-
-/**노드마커 **/
+/**
+ *  마커 보이기
+ * @param mapId : 대상 map id
+ * @param list : data list
+ * @param idx : 마커 index
+ */
 routMap.showMarker2 = function(mapId, data, idx) {
 
 	// 마커 이미지의 이미지 크기 입니다
@@ -2437,7 +2656,15 @@ routMap.showMarker2 = function(mapId, data, idx) {
 	routMap.mapInfo[mapId].markers.push(marker);
 }
 
-//탭이 있을 경우 showMarker
+/**
+ *  탭이 있을 경우 마커 보이기
+
+ * @param mapId : 대상 map id
+ * @param list : data list
+ * @param focusIdx : 포커스 index
+ * @param grid : 대상 grid
+ * @param etcOnOff : 'on'시 일반노드, 음성노드 show
+ */
 routMap.showMarkerTab = function(mapId, data, idx, focusIdx, grid) {
 	// 마커 이미지의 이미지 크기 입니다
 	var imageSize = new kakao.maps.Size(24, 35); 
@@ -2538,6 +2765,13 @@ routMap.showMarkerTab = function(mapId, data, idx, focusIdx, grid) {
 	routMap.mapInfo[mapId].markers.push(marker);
 }
 
+/**
+ *  신호마커표시
+
+ * @param mapId : 대상 map id
+ * @param baseData : db 데이터
+ * @param socketData : 소켓으로 전송받은 데이터
+ */
 routMap.showSigMarker = function(mapId, baseData, socketData) {
 	var imageSize = new kakao.maps.Size(32, 15); 
 	//var imageSize = new kakao.maps.Size(30, 20); 
@@ -2577,7 +2811,14 @@ routMap.showSigMarker = function(mapId, baseData, socketData) {
 	routMap.mapInfo[mapId].markers.push(marker)	
 }
 
-//이벤트 없음.. 해당 함수에 click이나 이벤트 처리하면 안됨
+/**
+ *  마커 만 보이기 : 이벤트 없음.. 해당 함수에 click이나 이벤트 처리하면 안됨
+ * @param mapId : 대상 map id
+ * @param data : 그리드의 data
+ * @param idx : 마커 index
+ * @param focusIdx : 포커스 index
+ * @param grid : 대상 그리드
+ */
 routMap.showOnlyMarker = function(mapId, data, idx, focusIdx, grid) {
 	// 마커 이미지의 이미지 크기 입니다
 	var imageSize = new kakao.maps.Size(19, 28); 
@@ -2707,7 +2948,13 @@ routMap.showOnlyMarker = function(mapId, data, idx, focusIdx, grid) {
 	routMap.mapInfo[mapId].markers.push(marker);
 }
 
-/**지도위 팝업 생성**/
+/**
+ *  지도위 팝업 생성
+ * @param mapId : 대상 map id
+ * @param lat : 위도
+ * @param lng : 경도
+ * @param msg : 팝업 메시지
+ */
 routMap.popUp = function(mapId,lat, lng, msg){
 
 	var content =
@@ -2726,7 +2973,10 @@ routMap.popUp = function(mapId,lat, lng, msg){
 	routMap.mapInfo[mapId].infoArr.push(routMap.mapInfo[mapId].infoWindow);
 }
 
-/**팝업 전체 삭제**/
+/**
+ *  팝업 전체 삭제
+ * @param mapId : 대상 map id
+ */
 routMap.removeAllInfoWindow = function(mapId){
 	if(routMap.mapInfo[mapId].infoArr != null){
 		for(var i=0; i<routMap.mapInfo[mapId].infoArr.length; i++){
@@ -2737,6 +2987,10 @@ routMap.removeAllInfoWindow = function(mapId){
 	}
 }
 
+/**
+ *  모든 overlay 삭제
+ * @param mapId : 대상 map id
+ */
 routMap.removeAllOverlay = function(mapId){
 	if(routMap.mapInfo[mapId].overArr != null){
 		for(var i=0; i<routMap.mapInfo[mapId].overArr.length; i++){
@@ -2755,6 +3009,10 @@ routMap.removeAllOverlay = function(mapId){
 	} 
 }
 
+/**
+ *  모든 버스overlay 삭제
+ * @param mapId : 대상 map id
+ */
 routMap.removeAllBusOverlay = function(mapId){
 	if(routMap.mapInfo[mapId].busOverArr.length != 0){
 		for(var i=0; i<routMap.mapInfo[mapId].busOverArr.length; i++){
@@ -2783,6 +3041,11 @@ routMap.removeAllBusOverlay = function(mapId){
 	}
 }
 
+/**
+ *  특정 index의 버스overlay 삭제
+ * @param mapId : 대상 map id
+ * @param index : 특정 index
+ */
 routMap.removeIndexBusOverlay = function(mapId,index){
 	if(routMap.mapInfo[mapId].busOverArr != null&&routMap.mapInfo[mapId].busOverArr.length!=0&&routMap.mapInfo[mapId].busOverArr[index]!=null){
 		routMap.mapInfo[mapId].busOverArr[index].setMap(null);
@@ -2795,12 +3058,21 @@ routMap.removeIndexBusOverlay = function(mapId,index){
 	}
 }
 
+/**
+ *  오른쪽 click overlay 삭제
+ * @param mapId : 대상 map id
+ */
 routMap.removeRightClickOverlay = function(mapId){
 	if(routMap.mapInfo[mapId].rightClickOverlay != null) {
 		routMap.mapInfo[mapId].rightClickOverlay.setMap(null);
 	}
 }
 
+/**
+ *  마커 추가
+ * @param mapId : 대상 map id
+ * @param data : 추가할 마커 정보
+ */
 routMap.addMarker = function(mapId, data) {
 	
 	var marker = new kakao.maps.Marker({
@@ -2826,6 +3098,10 @@ routMap.addMarker = function(mapId, data) {
 	routMap.mapInfo[mapId].markers.push(marker);
 }
 
+/**
+ *  모든 원 삭제
+ * @param mapId : 대상 map id
+ */
 routMap.deleteCircle = function(mapId) {
 	if( routMap.mapInfo[mapId].circles != null &&  routMap.mapInfo[mapId].circles.length != 0) {
 		for(var i = 0; i <  routMap.mapInfo[mapId].circles.length; i++) {
@@ -2836,6 +3112,10 @@ routMap.deleteCircle = function(mapId) {
 	}
 }
 
+/**
+ *  모든 노드 삭제
+ * @param mapId : 대상 map id
+ */
 routMap.deleteNode = function(mapId) {
 	if( routMap.mapInfo[mapId].nodes != null &&  routMap.mapInfo[mapId].nodes.length != 0) {
 		for(var i = 0; i < routMap.mapInfo[mapId].nodes.length; i++) {
@@ -2846,6 +3126,13 @@ routMap.deleteNode = function(mapId) {
 	}
 }
 
+/**
+ *  특정 위치에 원 그리기
+ * @param mapId : 대상 map id
+ * @param lat : 위도
+ * @param lon : 경도
+ * @param radius : 반경
+ */
 routMap.getDrawingCircle = function(mapId, lat, lon, radius) {
 	var circle = new kakao.maps.Circle({
 		center: new kakao.maps.LatLng(lat, lon),
@@ -2861,6 +3148,12 @@ routMap.getDrawingCircle = function(mapId, lat, lon, radius) {
 	return circle;
 }
 
+/**
+ *  특정 위치에 노드의 작은 원(반경 4) 그리기
+ * @param mapId : 대상 map id
+ * @param lat : 위도
+ * @param lon : 경도
+ */
 routMap.getDrawingNode = function(mapId, lat, lon) {
 	var node = new kakao.maps.Circle({
 		center: new kakao.maps.LatLng(lat, lon),
@@ -2877,6 +3170,13 @@ routMap.getDrawingNode = function(mapId, lat, lon) {
 	return node;
 }
 
+/**
+ *  노선 노드 상의 가장 가까운 index를 찾아 return함
+ * @param lat : 위도
+ * @param lon : 경도
+ * @param routeData : 노선 데이터
+ * @param curIndex : 현재 index
+ */
 routMap.returnInsertRouteInfo = function(lat, lon, routeData, curIndex) {
 	var min = 10000000;
 	var minIndex = null;
@@ -2915,6 +3215,13 @@ routMap.returnInsertRouteInfo = function(lat, lon, routeData, curIndex) {
 	}
 }
 
+/**
+ *  클릭으로 노드 경로 추가함
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param routeId : 대상 노선ID
+ * @param e : 클릭한 event 정보
+ */
 routMap.addPathByClick = function(mapId,grid,routeId,e){
 	
 	if(com.getGridViewDataList(grid).length >= routMap.MAX_NODE_CNT){
@@ -2950,6 +3257,13 @@ routMap.addPathByClick = function(mapId,grid,routeId,e){
 	routMap.drawRoute(mapId, grid, idx);
 }
 
+/**
+ *  클릭으로 버텍스 경로 추가함
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param routeId : 대상 노선ID
+ * @param e : 클릭한 event 정보
+ */
 routMap.addVertexByClick = function(mapId,grid,routeId,e){
 	
 	var routeData = com.getGridDispJsonData(grid);
@@ -3007,6 +3321,13 @@ routMap.addVertexByClick = function(mapId,grid,routeId,e){
 	}
 }
 
+/**
+ *  클릭으로 정류소 경로 추가함
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param routeId : 대상 노선ID
+ * @param e : 클릭한 event 정보
+ */
 routMap.addSttnByClick = function(mapId,grid,routeId,e){
 	
 	var idx = -1;
@@ -3065,6 +3386,13 @@ routMap.addSttnByClick = function(mapId,grid,routeId,e){
 	return idx;
 }
 
+/**
+ *  클릭으로 교차로 경로 추가함
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param routeId : 대상 노선ID
+ * @param e : 클릭한 event 정보
+ */
 routMap.addCrossByClick = function(mapId,grid,routeId,e){
 	var idx = -1;
 	var routeData = com.getGridDispJsonData(grid);
@@ -3123,6 +3451,13 @@ routMap.addCrossByClick = function(mapId,grid,routeId,e){
 }
 
 
+/**
+ *  클릭으로 사운도 위치 추가함
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param routeId : 대상 노선ID
+ * @param e : 클릭한 event 정보
+ */
 routMap.addSoundByClick = function(mapId,grid,routeId,e){
 	var idx = -1;
 	var routeData = com.getGridDispJsonData(grid);
@@ -3180,6 +3515,13 @@ routMap.addSoundByClick = function(mapId,grid,routeId,e){
 	return idx;
 }
 
+/**
+ *  클릭으로 교차로 위치 추가함
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param routeId : 대상 노선ID
+ * @param e : 클릭한 event 정보
+ */
 routMap.addGrgByClick = function(mapId,grid,routeId,e){
 	var idx = -1;
 	var routeData = com.getGridDispJsonData(grid);
@@ -3237,6 +3579,12 @@ routMap.addGrgByClick = function(mapId,grid,routeId,e){
 	return idx;
 }
 
+/**
+ *  노드 포커스
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param focusIdx : 포커스 index
+ */
 routMap.focusNode = function(mapId, grid,focusIdx){
 	
 	focusIdx = com.getGridDispIndex(grid,focusIdx);
@@ -3262,6 +3610,14 @@ routMap.focusNode = function(mapId, grid,focusIdx){
 	//routMap.moveMap(mapId, routeData[focusIdx].GPS_Y, routeData[focusIdx].GPS_X);
 }
 
+/**
+ * 지도에 데이터리스트의 모든 노드 추가
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param dataList : grid의 데이터리스트
+ * @param routeId : 노선id
+ * @param area : 권역
+ */
 routMap.insertNodeAll = function(mapId, grid,dataList,routeId,area){
 	
 	for (i = 0; i < dataList.length; i++) {
@@ -3270,6 +3626,14 @@ routMap.insertNodeAll = function(mapId, grid,dataList,routeId,area){
 	routMap.drawRoute(mapId, grid, -1);
 }
 
+/**
+ * 지도에 데이터리스트의 모든 표준 노드 추가
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param dataList : grid의 데이터리스트
+ * @param routeId : 노선id
+ * @param area : 권역
+ */
 routMap.insertStdNodeAll = function(mapId, grid,dataList,routeId,area){
 	
 	for (i = 0; i < dataList.length; i++) {
@@ -3278,7 +3642,14 @@ routMap.insertStdNodeAll = function(mapId, grid,dataList,routeId,area){
 	routMap.drawRoute(mapId, grid, -1);
 }
 
-//노드 추가
+/**
+ * 노드 추가
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param data : 추가할 데이터
+ * @param routeId : 노선id
+ * @param area : 권역
+ */
 routMap.addNode = function(mapId, grid, data, routeId,area) {
 	var routeData = com.getGridDispJsonData(grid);
 	if(com.getGridViewDataList(grid).length >= routMap.MAX_NODE_CNT){
@@ -3371,7 +3742,14 @@ routMap.addNode = function(mapId, grid, data, routeId,area) {
 	
 }
 
-//표준노드 추가
+/**
+ * 표준노드 추가
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param data : 추가할 데이터
+ * @param routeId : 노선id
+ * @param area : 권역
+ */
 routMap.addStdNode = function(mapId, grid, data, routeId,area) {
 	var routeData = com.getGridDispJsonData(grid);
 	if(com.getGridViewDataList(grid).length >= routMap.MAX_NODE_CNT){
@@ -3461,9 +3839,13 @@ routMap.addStdNode = function(mapId, grid, data, routeId,area) {
 	
 }
 
+/**
+ * 노선에서 노드 이동
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param e : 클릭한 event 정보
+ */
 routMap.moveRoute = function(mapId, grid, e){
-	
-	
 	var routeData = com.getGridDispJsonData(grid);
 	var point = e.marker.getPosition();
 	var node = $.extend(true, {}, routeData[e.index]);
@@ -3528,7 +3910,14 @@ routMap.moveRoute = function(mapId, grid, e){
 	}
 }
 
+/**
+ * 그리드 정보로 노선에서 노드 그리기
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param focusIdx : 포커서 index
+ */
 routMap.drawRoute = function(mapId, grid, focusIdx) {
+	
 	var list = com.getGridDispJsonData(grid);
 
 	if(routMap.mapInfo[mapId].linkMode){
@@ -3614,6 +4003,12 @@ routMap.drawRoute = function(mapId, grid, focusIdx) {
 	}
 }
 
+/**
+ * 데이터 리스트로 노선에서 노드 그리기
+ * @param mapId : 대상 map id
+ * @param list : 대상 데이터 리스트
+ * @param focusIdx : 포커서 index
+ */
 routMap.drawRoute2 = function(mapId, list, focusIdx) {
 	if(routMap.mapInfo[mapId].linkMode){
 		if(list.length>0){
@@ -3781,7 +4176,12 @@ routMap.drawMockLink = function(mapId, grid, focusIdx, clickEvent, dataCheckFunc
 //		}
 	}
 }
-
+/**
+ * 그리드로 노선에서 사운드 노드 그리기
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param focusIdx : 포커서 index
+ */
 routMap.drawSound = function(mapId, grid, focusIdx) {
 	
 	var list = com.getGridDispJsonData(grid);
@@ -3873,6 +4273,13 @@ routMap.drawSound = function(mapId, grid, focusIdx) {
 	}
 }
 
+/**
+ * 그리드로 노선에서 노드 표시
+ * @param mapId : 대상 map id
+ * @param list : 대상 데이터 리스트
+ * @param id : 노드 id
+ * @param type : 노드 유형
+ */
 routMap.showRoute = function(mapId, list, id, type) {
 
 	var focusIdx = -1;
@@ -3935,7 +4342,13 @@ routMap.showRoute = function(mapId, list, id, type) {
 	}
 }
 
-//화면만 그림. 이벤트 없어야 함
+/**
+ * 그리드로 노선에서 노드 표시
+ * @param mapId : 대상 map id
+ * @param list : 대상 데이터 리스트
+ * @param id : 노드 id
+ * @param type : 노드 유형
+ */
 routMap.showRoute2 = function(mapId, list, focusIdx, grid) {
 	routMap.initDisplay(mapId);
 	if(list != null && list.length != 0) {
@@ -3984,6 +4397,13 @@ routMap.showRoute2 = function(mapId, list, focusIdx, grid) {
 	}
 }
 
+/**
+ * 노드 표시
+ * @param mapId : 대상 map id
+ * @param list : 대상 데이터 리스트
+ * @param focusIdx : 포커스 index
+ * @param grid : 대상 그리드
+ */
 routMap.showNode = function(mapId, list, focusIdx, grid) {
 	routMap.initNode(mapId);
 	if(list != null && list.length != 0) {
@@ -4008,6 +4428,13 @@ routMap.showNode = function(mapId, list, focusIdx, grid) {
 	}
 }
 
+/**
+ * 마커목록 표시
+ * @param mapId : 대상 map id
+ * @param list : 대상 데이터 리스트
+ * @param focusIdx : 포커스 index
+ * @param grid : 대상 그리드
+ */
 routMap.showMarkerList = function(mapId, list, focusIdx, grid) {
 	routMap.initNode(mapId);
 	if(list != null && list.length != 0) {
@@ -4028,7 +4455,13 @@ routMap.showMarkerList = function(mapId, list, focusIdx, grid) {
 	}
 }
 
-//탭이 있을때 showMarkerList
+/**
+ * 탭이 있을때 마커목록 표시
+ * @param mapId : 대상 map id
+ * @param list : 대상 데이터 리스트
+ * @param focusIdx : 포커스 index
+ * @param grid : 대상 그리드
+ */
 routMap.showMarkerListTab = function(mapId, list, focusIdx, grid) {
 	routMap.initNode(mapId);
 	
@@ -4050,6 +4483,13 @@ routMap.showMarkerListTab = function(mapId, list, focusIdx, grid) {
 	}
 }
 
+/**
+ * 차 표시
+ * @param mapId : 대상 map id
+ * @param list : 대상 데이터 리스트
+ * @param vhc_id : 차량 ID
+ * @param grid : 대상 그리드
+ */
 routMap.showVehicle = function(mapId, list, vhc_id, grid) {
 
 	var focusIdx = -1;
@@ -4085,7 +4525,14 @@ routMap.showVehicle = function(mapId, list, vhc_id, grid) {
 }
 
 
-/*웹소켓 차량 정보 지도에 표시*/
+/**
+ * 웹소켓 차량 정보 지도에 표시
+ * @param mapId : 대상 map id
+ * @param json : 전달된 차량 데이터
+ * @param cur_vhc_id : 현재차량 ID
+ * @param index : 차량과 매핑된 index
+ * @param focusIdx : 포커스된 index
+ */
 routMap.showVehicle2 = function(mapId, json, cur_vhc_id, grid, index, focusIdx) {
 	//주석 빼기
     routMap.initIndexBus(mapId,index);
@@ -4111,7 +4558,13 @@ routMap.showVehicle2 = function(mapId, json, cur_vhc_id, grid, index, focusIdx) 
 	}
 }
 
-/*이번트 처리 안되는 경우에만 사용하세요...*/
+/**
+ * 차 표시 : 이벤트 처리 안됨
+ * @param mapId : 대상 map id
+ * @param list : 대상 데이터 리스트
+ * @param vhc_id : 차량 ID
+ * @param grid : 대상 그리드
+ */
 routMap.showVehicleNotEvent = function(mapId, list, vhc_id, grid) {
 
 	var focusIdx = -1;
@@ -4145,7 +4598,15 @@ routMap.showVehicleNotEvent = function(mapId, list, vhc_id, grid) {
 		}
 	}
 }
-//클릭 오버레이 다른 showVehicle2
+
+/**
+ * 차 표시 : 클릭overlay 동작
+ * @param mapId : 대상 map id
+ * @param json : 전달된 차량 데이터
+ * @param cur_vhc_id : 현재차량 ID
+ * @param index : 차량과 매핑된 index
+ * @param focusIdx : 포커스된 index
+ */
 routMap.showVehicleClickOverlay2 = function(mapId, json, cur_vhc_id, grid, index, focusIdx) {
 	//주석 빼기
 	routMap.initIndexBus(mapId,index);
@@ -4171,6 +4632,13 @@ routMap.showVehicleClickOverlay2 = function(mapId, json, cur_vhc_id, grid, index
 	}
 }
 
+/**
+ * 차 이동
+ * @param mapId : 대상 map id
+ * @param json : 전달된 데이터
+ * @param index : 차량과 매핑된 index
+ * @param focusIdx : 포커스된 index
+ */
 routMap.moveVehicle = function(mapId, json, index, focusIdx) {
 	var latLng = new kakao.maps.LatLng(json.GPS_Y, json.GPS_X);
 	
@@ -4192,6 +4660,13 @@ routMap.moveVehicle = function(mapId, json, index, focusIdx) {
 	}	
 }
 
+/**
+ * 클릭시 차 위치 이동
+ * @param mapId : 대상 map id
+ * @param json : 웹소켓을 통해 전달된 데이터
+ * @param curIndex : 현재 index
+ * @param e : 클릭한 event 정보
+ */
 routMap.changeLocVehicleByClick = function(mapId, grid, curIndex, e){
 	var data = com.getGridViewDataList(grid);
 	var lonlat = e.latLng;
@@ -4203,6 +4678,12 @@ routMap.changeLocVehicleByClick = function(mapId, grid, curIndex, e){
 	routMap.showVehicle3(mapId, jsonObj, grid, 0);
 }
 
+/**
+ * 차 표시
+ * @param mapId : 대상 map id
+ * @param json : 전달된 차량데이터
+ * @param grid : 대상 그리드
+ */
 routMap.showVehicle3 = function(mapId, json, grid) {
 	
 	//주석 빼기
@@ -4219,7 +4700,14 @@ routMap.showVehicle3 = function(mapId, json, grid) {
 	}
 }
 
-//실시간 위치정보 모니터링 화면과 같이 클릭 오버레이가 다른 showVehicle
+
+/**
+ * 차량 표시 : overlay 클릭시 처리
+ * @param mapId : 대상 map id
+ * @param list : 대상 데이터 목록
+ * @param vhc_id : 차량 id
+ * @param grid : 대상 그리드
+ */
 routMap.showVehicleClickOverlay = function(mapId, list, vhc_id, grid) {
 	var focusIdx = -1;
 	
@@ -4254,6 +4742,13 @@ routMap.showVehicleClickOverlay = function(mapId, list, vhc_id, grid) {
 	}
 }
 
+/**
+ * 클릭시 다각형(차고지) 추가
+ * @param mapId : 대상 map id
+ * @param list : 대상 데이터 목록
+ * @param vhc_id : 차량 id
+ * @param grid : 대상 그리드
+ */
 routMap.addPolygonByClick = function(mapId, data, grgId, grgNm, e){
 	var lonlat = e.latLng;
 	
@@ -4277,8 +4772,12 @@ routMap.addPolygonByClick = function(mapId, data, grgId, grgNm, e){
 	}
 }
 
-
-//일반 지도 라인 그리기
+/**
+ * 다각형(차고지) 그리기
+ * @param mapId : 대상 map id
+ * @param data : 대상 데이터
+ * @param name : 차고지 명
+ */
 routMap.drawPolygon = function(mapId, data, name) {
 	
 
@@ -4370,6 +4869,10 @@ routMap.drawPolygon = function(mapId, data, name) {
 	}
 }
 
+/**
+ * 맵초기화
+ * @param mapId : 대상 map id
+ */
 routMap.initDisplay = function(mapId){
 	
 	routMap.removeAllInfoWindow(mapId);
@@ -4381,22 +4884,38 @@ routMap.initDisplay = function(mapId){
 	routMap.deletePolygon(mapId);
 }
 
-
+/**
+ * 노드(overlay, 마커)초기화
+ * @param mapId : 대상 map id
+ */
 routMap.initNode = function(mapId){
 	routMap.removeAllOverlay(mapId);
 	routMap.removeMarkers(mapId);
 }
 
+/**
+ * 버스(overlay, 마커)초기화
+ * @param mapId : 대상 map id
+ */
 routMap.initBus = function(mapId){
 	routMap.removeAllBusOverlay(mapId);
 	routMap.removeBusMarkers(mapId);
 }
 
+/**
+ * 특정 index의 bus overlay, bus marker 삭제
+ * @param mapId : 대상 map id
+ * @param index : 삭제할 index
+ */
 routMap.initIndexBus = function(mapId,index){
 	routMap.removeIndexBusOverlay(mapId,index);
 	routMap.removeIndexBusMarker(mapId,index);
 }
 
+/**
+ * map 정보 초기화
+ * @param mapId : 대상 map id
+ */
 routMap.initMapInfo = function(mapId){
 	routMap.initDisplay(mapId);
 	routMap.initBus(mapId);
@@ -4416,23 +4935,47 @@ routMap.initMapInfo = function(mapId){
 	routMap.mapInfo[mapId].selectedIndex = -1;
 }
 
+/**
+ * 모든 overlay 초기화
+ * @param mapId : 대상 map id
+ */
 routMap.initOverlay = function(mapId) {
 	routMap.removeAllOverlay(mapId);	
 }
 
+/**
+ * 노드 타입 세팅
+ * @param mapId : 대상 map id
+ * @param dispCheck : 체크할 disp 타입
+ */
 routMap.setDispCheck = function(mapId, dispCheck) {
 	routMap.mapInfo[mapId].dispCheck = dispCheck;
 }
 
-//맵 타입 지정
+
+/**
+ * 맵 타입 지정
+ * @param mapId : 대상 map id
+ * @param type : 맵 타입
+ */
 routMap.addOverMapType = function(mapId, type) {
    routMap.mapInfo[mapId].map.addOverlayMapTypeId(type);  
 }
 
+/**
+ * 맵 타입 삭제
+ * @param mapId : 대상 map id
+ * @param type : 맵 타입
+ */
 routMap.removeOverMapType = function(mapId, type) {
 	routMap.mapInfo[mapId].map.removeOverlayMapTypeId(type);
 }
 
+/**
+ * 링크 정보 표시
+ * @param mapId : 대상 map id
+ * @param list : 링크 리스트
+ */
 routMap.showCommuMap = function(mapId, list) {
 	//routMap.initDisplay(mapId);
 	if(list != null && list.length != 0) {
@@ -4539,7 +5082,14 @@ routMap.showLink = function(mapId, list) {
 	}
 }*/
 
-/**두 지점간의 거리 계산 **/
+/**
+ * 두 지점간의 거리 계산
+ * @param x1 : 시작 위도
+ * @param y1 : 시작 경도
+ * @param x2 : 종료 위도
+ * @param y2 : 종료 경도
+ * @return int : 계산된 거리 값
+ */
 function getDistanceBetween(x1, y1, x2, y2) {
 	let kEarthRadiusKms = 6376.5;
     
@@ -4562,7 +5112,16 @@ function getDistanceBetween(x1, y1, x2, y2) {
     return distance; 
 }
 
-/**한점이 직선상에 직교좌표를 생성한 좌표를 반환**/
+/**
+ * 한점이 직선상에 직교좌표를 생성한 좌표를 반환
+ * @param x : 비교할 위도
+ * @param y : 비교할 경도
+ * @param x1 : 시작 위도
+ * @param y1 : 시작 경도
+ * @param x2 : 종료 위도
+ * @param y2 : 종료 경도
+ * @return point : 직교하는 좌표
+ */
 function getPointToLine(x, y, x1, y1, x2, y2) {
 	var isValid = false;
 	var point;
@@ -4594,7 +5153,17 @@ function getPointToLine(x, y, x1, y1, x2, y2) {
 	return isValid ? point : null;
 }
 
-/**한점이 직선에 직교좌표를 생성하고 거리를 계산**/
+
+/**
+ * 한점이 직선에 직교좌표를 생성하고 거리를 계산
+ * @param x : 비교할 위도
+ * @param y : 비교할 경도
+ * @param x1 : 시작 위도
+ * @param y1 : 시작 경도
+ * @param x2 : 종료 위도
+ * @param y2 : 종료 경도
+ * @return int : 계산된 거리 값
+ */
 function getDistanceToLine(x, y, x1, y1, x2, y2) {
 	var point = getPointToLine(x, y, x1, y1, x2, y2);
 	
