@@ -1593,7 +1593,8 @@ ul.question li a:hover {font-weight:bold;}
     float: right;
     top: 90px;
     right: 10px;
-    position: absolute;    
+    position: absolute;
+    width: 211px;    
 }
 
 .map_status th
