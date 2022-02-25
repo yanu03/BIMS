@@ -149,7 +149,7 @@ public class EventThread extends Thread{
             switch(attrId){
                 case BrtAtCode.BUS_INFO: //정주기 버스 정보
                 	
-                	logger.debug("Received BrtAtCode.BUS_INFO >> {}", atMessage);
+                	//logger.debug("Received BrtAtCode.BUS_INFO >> {}", atMessage);
                 	
                     
                 	AtBusInfo busInfo = (AtBusInfo)atMessage.getAttrData();
@@ -260,15 +260,7 @@ public class EventThread extends Thread{
                 	 }
                 	 
                 	 
-                	 try {
-                		//이력 insert            
-                		 historyMapper.insertEventHistory(busEventMap);     		 
-                	 } catch (DuplicateKeyException e) {
-                 		//logger.error("", e);
-                 	 }	catch (Exception e) {
-                 		logger.error("", e);
-                	 }                	 
-                	 
+                	 //historyMapper.insertEventHistory(busEventMap);   //이력 insert 는 SBRT에서 함     		 
                 	 
 
                      switch(eventCode){
@@ -333,7 +325,7 @@ public class EventThread extends Thread{
                         	 paramMap.put("COL_VAL3", (int)eventCode);
                         	 eventType = commonMapper.selectDlCdCol(paramMap);
                         	 
-                    		 historyMapper.insertOperVioltHistory(busEventMap); //운행위반이력 insert                    		 
+                    		 //historyMapper.insertOperVioltHistory(busEventMap); //운행위반이력 insert는 SBRT에서 함                    		 
                     	 } catch (Exception e) {
                     		 logger.error("", e);
                     	 }
@@ -364,7 +356,7 @@ public class EventThread extends Thread{
                         	 paramMap.put("COL_VAL3", (int)eventCode);
                         	 eventType = commonMapper.selectDlCdCol(paramMap);
                         	 
-                    		 curInfoMapper.insertIncidentInfo(busEventMap); //돌발정보 insert                    		 
+                    		 //curInfoMapper.insertIncidentInfo(busEventMap); //돌발정보 insert는 SBRT에서 함                    		 
                     	 } catch (Exception e) {
                     		 logger.error("", e);
                     	 }
@@ -495,12 +487,8 @@ public class EventThread extends Thread{
 	                		dispatchLog.put("DSPTCH_KIND", dpLv);
 	                		dispatchLog.put("DSPTCH_CONTS", dispatch.getMessage());
 	                		
-	                		historyMapper.insertDispatchHistory(dispatchLog);
+	                		//historyMapper.insertDispatchHistory(dispatchLog); //이력 insert는 SBRT에서 함
 	                		
-                		//} else {
-                		//	logger.info("디스패치 무시됨(현재 운행중인 차량정보 없음) : udpDtm:{}, vhcId:{}", udpDtm, vhcId);
-                		//}
-	                	
 	                	
                 	} catch (DuplicateKeyException e) {
                 		//logger.error("", e);
@@ -570,39 +558,10 @@ public class EventThread extends Thread{
 	}
 	
     
-    private int insertCurOperInfo(Map<String, Object> curOperInfo) {
-    	
-    	
-    	/*
-    	try {
-	    	//운행일 생성. 시간에 따라 0시(24시) ~ 02시까지는 이전 날짜로 운행일 설정
-	    	curOperInfo.put("OPER_DT", OperDtUtil.convertTimeToOperDt(curOperInfo.get("UPD_DTM").toString(), "yyyy-MM-dd HH:mm:ss")); 	    		
-	    	
-	    	
-	    	//다음노드(교차로 or 정류소)
-	    	Map<String, Object> realNodeInfo = timsMapper.selectNodeByLinkSn(curOperInfo); //통플에서 넘어온 노드순번(실제로는 링크순번) 으로 실제 노드순번 구하기
-	    	if(realNodeInfo != null) {
-		    	curOperInfo.put("ROUT_NM", realNodeInfo.get("ROUT_NM"));
-		    	curOperInfo.put("NODE_TYPE", realNodeInfo.get("NODE_TYPE"));
-		    	curOperInfo.put("NODE_NM", realNodeInfo.get("NODE_NM"));
-		    	curOperInfo.put("NODE_SN", realNodeInfo.get("NODE_SN"));
-	    	}
-	    	
-	    	Map<String, Object> nextNodeInfo = timsMapper.selectNextSttnCrsInfo(curOperInfo);
-	    	if(nextNodeInfo != null) {
-				curOperInfo.put("PREV_NODE_NM", nextNodeInfo.get("PREV_NODE_NM"));
-				curOperInfo.put("NEXT_NODE_ID", nextNodeInfo.get("NEXT_NODE_ID"));
-				curOperInfo.put("NEXT_NODE_NM", nextNodeInfo.get("NEXT_NODE_NM")); 
-				curOperInfo.put("NEXT_NODE_TYPE", nextNodeInfo.get("NEXT_NODE_TYPE"));
-	    	}
-    	} catch (Exception e) {
-    		
-		}
-		*/
-    	
+    private void insertCurOperInfo(Map<String, Object> curOperInfo) {
     	setOperEventData(curOperInfo);
     	
-    	return curInfoMapper.insertCurOperInfo(curOperInfo);
+    	//DB 업데이트는 SBRT 에서 함
     }
     
 	
