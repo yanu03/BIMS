@@ -253,9 +253,9 @@
 		var param = com.getParameter();
 		
 		if(dlt_BMS_NODE_MST.getCellData(row, "STTN_FCLT_TYPE") == 'ST003'){
-			document.getElementById('mf_tac_layout_contents_MN00050201_body_STTN_IMG').className = "ST003_station";
+			document.getElementById(STTN_IMG.getID()).className = "ST003_station";
 		}else{
-			document.getElementById('mf_tac_layout_contents_MN00050201_body_STTN_IMG').className = 'ST002_station';
+			document.getElementById(STTN_IMG.getID()).className = 'ST002_station';
 		}
 	};
 	
@@ -340,7 +340,7 @@
 			
 		}
 		
-		$('#mf_tac_layout_contents_MN00050201_body_STTN_IMG').html(str);
+		$('#'+STTN_IMG.getID()).html(str);
 		
 		
 		var fclt_ctrindex = FM0202G1.getColumnIndex("FCLT_CTR");
@@ -356,8 +356,8 @@
 			}
 		}
 		
-		oriBgWidth = document.getElementById("mf_tac_layout_contents_MN00050201_body_STTN_IMG").offsetWidth;
-		oriBgHeight = document.getElementById("mf_tac_layout_contents_MN00050201_body_STTN_IMG").offsetHeight;
+		oriBgWidth = document.getElementById(STTN_IMG.getID()).offsetWidth;
+		oriBgHeight = document.getElementById(STTN_IMG.getID()).offsetHeight;
 		
 		for(var i = 0; i < dlt_BMS_FCLT_INFO.getRowCount(); i++){
 			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
@@ -379,8 +379,8 @@
 		clearTimeout(timer);
 		timer = setTimeout(function(){
 			debugger;
-			var bgWidth = document.getElementById("mf_tac_layout_contents_MN00050201_body_STTN_IMG").offsetWidth;
-			var bgHeight = document.getElementById("mf_tac_layout_contents_MN00050201_body_STTN_IMG").offsetHeight;
+			var bgWidth = document.getElementById(STTN_IMG.getID()).offsetWidth;
+			var bgHeight = document.getElementById(STTN_IMG.getID()).offsetHeight;
 			
 			for (i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++) {
 				var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
@@ -400,8 +400,8 @@
 				document.getElementById(fcltId+'img').height = Math.ceil(bHeight);
 			}
 			
-			oriBgWidth = document.getElementById("mf_tac_layout_contents_MN00050201_body_STTN_IMG").offsetWidth;
-			oriBgHeight = document.getElementById("mf_tac_layout_contents_MN00050201_body_STTN_IMG").offsetHeight;
+			oriBgWidth = document.getElementById(STTN_IMG.getID()).offsetWidth;
+			oriBgHeight = document.getElementById(STTN_IMG.getID()).offsetHeight;
 			oriFcltWidth = document.getElementById(fcltId+'img').width;
 			oriFcltHeight = document.getElementById(fcltId+'img').height;
 		}, delay);
@@ -444,7 +444,7 @@
 			
 		}
 		
-		$('#mf_tac_layout_contents_MN00050201_body_STTN_IMG').html(str);
+		$('#'+STTN_IMG.getID()).html(str);
 		
 		var fcltID = dlt_BMS_FCLT_INFO.getCellData(row, "FCLT_ID");
 		var fcltKind = dlt_BMS_FCLT_INFO.getCellData(row, "FCLT_KIND");
@@ -465,8 +465,8 @@
 				$('#'+fcltID).children('img').attr("src", '/cm/images/bms/AIRCON_abnormal_selected.png');
 			}
 		
-		oriBgWidth = document.getElementById("mf_tac_layout_contents_MN00050201_body_STTN_IMG").offsetWidth;
-		oriBgHeight = document.getElementById("mf_tac_layout_contents_MN00050201_body_STTN_IMG").offsetHeight;
+		oriBgWidth = document.getElementById(STTN_IMG.getID()).offsetWidth;
+		oriBgHeight = document.getElementById(STTN_IMG.getID()).offsetHeight;
 	};
 	
 	

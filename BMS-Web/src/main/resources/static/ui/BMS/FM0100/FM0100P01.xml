@@ -43,6 +43,7 @@
 		<script type="text/javascript" lazy="false"><![CDATA[
         
 	scwin.onpageload = function() {
+
 		scwin.param = com.getParameter();
 		dma_searchitem.set("FCLT_ID", scwin.param.FCLT_ID);   
 		dma_searchitem.set("FCLT_KIND", scwin.param.FCLT_KIND);   
@@ -53,12 +54,14 @@
 		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
 		
 		if(dma_searchitem.get("STTN_FCLT_TYPE") == 'ST002'){
-			document.getElementById('mf_tac_layout_contents_MN00060101_body_FM0100P01_wframe_STTN_IMG').className = "ST002_station";
+			document.getElementById(STTN_IMG.getID()).className = "ST002_station";
 		}else if(dma_searchitem.get("STTN_FCLT_TYPE") == 'ST003'){
-			document.getElementById('mf_tac_layout_contents_MN00060101_body_FM0100P01_wframe_STTN_IMG').className = "ST003_station";
+			document.getElementById(STTN_IMG.getID()).className = "ST003_station";
 		}else{
-			document.getElementById('mf_tac_layout_contents_MN00060101_body_FM0100P01_wframe_STTN_IMG').className = "ST002_station";
+			document.getElementById(STTN_IMG.getID()).className = "ST002_station";
 		}
+		
+		
 		
 		if(dma_searchitem.get("FCLT_COORDS") != ''){
 			var coord = dma_searchitem.get("FCLT_COORDS").split(',');
@@ -77,11 +80,13 @@
 				imgSrc = "/cm/images/bms/AIRCON_normal.png";
 			}
 			
+			
+			
 			str += '<div id="'+fcltId+'"style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group " onmousedown="startDrag(event, this)">';
 			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'">';
 			str += '</div>'
 		
-		$('#mf_tac_layout_contents_MN00060101_body_FM0100P01_wframe_STTN_IMG').html(str);
+		$('#'+STTN_IMG.getID()).html(str);
 		
 		$("#"+fcltId).on("click", function(e) {
  			e.stopPropagation();
@@ -103,7 +108,7 @@
 			str += '<div id="" style="position: absolute; top:20px; left:600px" class="w2group " onclick="onclickAIRCON(this.style.top, this.style.left)"><input type="radio" name="test" tabindex="0" id="" class="w2trigger " value="에어컨"></div>'
 		}
 	
-		$('#mf_tac_layout_contents_MN00060101_body_FM0100P01_wframe_STTN_IMG').html(str);
+		$('#'+STTN_IMG.getID()).html(str);
 		
 		// 이벤트 등록
         document.onmousedown = imgShow;
@@ -132,16 +137,16 @@
 			//var top = event.clientY - 50;
 			//var left = event.clientX - 50;
 			
-			var top = $('#mf_tac_layout_contents_MN00060101_body_FM0100P01_wframe_STTN_IMG').offset().top;
-			var left = $('#mf_tac_layout_contents_MN00060101_body_FM0100P01_wframe_STTN_IMG').offset().left;
+			var top = $('#'+STTN_IMG.getID()).offset().top;
+			var left = $('#'+STTN_IMG.getID()).offset().left;
 			
 			str += '<div id="" style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group ">';
 			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgPath+'">';
 			str += '</div>'
 			
-			$('#mf_tac_layout_contents_MN00060101_body_FM0100P01_wframe_STTN_IMG').html(str);
+			$('#'+STTN_IMG.getID()).html(str);
 		}else if(event.button == 2){
-			$('#mf_tac_layout_contents_MN00060101_body_FM0100P01_wframe_STTN_IMG').empty();
+			$('#'+STTN_IMG.getID()).empty();
 		}
 	}*/
 	
@@ -165,7 +170,7 @@
 		str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgPath+'" id="'+imgId+'"  >';
 		str += '</div>'
 		
-		$('#mf_tac_layout_contents_MN00060101_body_FM0100P01_wframe_STTN_IMG').html(str);
+		$('#'+STTN_IMG.getID()).html(str);
  		
  		$("#"+fcltId).on("click", function(e) {
  			e.stopPropagation();
@@ -234,7 +239,7 @@
 		var imgId = ""
 		
 		if(info.newValue == 'ST003'){
-			document.getElementById('mf_tac_layout_contents_MN00060101_body_FM0100P01_wframe_STTN_IMG').className = "ST003_station";
+			document.getElementById(STTN_IMG.getID()).className = "ST003_station";
 			
 			/*if(dma_searchitem.get("FCLT_KIND") == 'FK001'){
 				str += '<div id="" style="position: absolute; top:100px; left:100px" class="w2group " onclick="onclickBIT(this.style.top, this.style.left)"><input type="radio" name="test" tabindex="0" id="" class="w2trigger " value="BIT"></div>'
@@ -248,7 +253,7 @@
 			}*/
 			
 		}else{
-			document.getElementById('mf_tac_layout_contents_MN00060101_body_FM0100P01_wframe_STTN_IMG').className = 'ST002_station';
+			document.getElementById(STTN_IMG.getID()).className = 'ST002_station';
 			
 			/*if(dma_searchitem.get("FCLT_KIND") == 'FK001'){
 				str += '<div id="" style="position: absolute; top:100px; left:1100px" class="w2group " onclick="onclickBIT(this.style.top, this.style.left)"><input type="radio" name="test" tabindex="0" id="" class="w2trigger " value="BIT"></div>'
@@ -262,7 +267,7 @@
 			}*/
 		}
 		
-		$('#mf_tac_layout_contents_MN00060101_body_FM0100P01_wframe_STTN_IMG').html(str);
+		$('#'+STTN_IMG.getID()).html(str);
 	};
 	
 	]]></script>

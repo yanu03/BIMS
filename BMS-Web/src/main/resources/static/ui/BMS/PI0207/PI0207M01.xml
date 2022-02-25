@@ -432,7 +432,7 @@
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="음성 목록" style=""></w2:textbox>
-							<xf:group style="float:right; margin-right:300px" id="">
+							<xf:group style="float:right; margin-right:200px" id="">
 								<audio controls="" style="width: 250px;height: 25px;" id="audio0" preload="" muted="" loop=""
 								autoplay="" ref="" src="">
 								</audio>
