@@ -643,7 +643,7 @@
 							<w2:textbox class="df_tt fl" id="" label="지도" style=";"></w2:textbox>
 						</xf:group>
 
-						<xf:group class="check" id="" style="right: 100px">
+						<!-- <xf:group class="check" id="" style="right: 100px">
 							<xf:select id="disp_check" selectedIndex="0" cols="" appearance="full" style="" rows="1"
 								ref="data:dma_disp_check.check" ev:onviewchange="scwin.dma_disp_check_onviewchange">
 								<xf:choices>
@@ -661,7 +661,7 @@
 									</xf:item>
 								</xf:choices>
 							</xf:select>
-						</xf:group>
+						</xf:group> -->
 					</xf:group>
 					<xf:group class="" id="" style="">
 					</xf:group>
