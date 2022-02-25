@@ -50,7 +50,7 @@ public interface SI0701Mapper {
 	 * @date 2016. 12. 05.
 	 * @param
 	 * @returns
-	 * @author InswaveSystems
+	 * @author tracom
 	 */
 	public int deleteSI0701DtlAll(Map param);
 
