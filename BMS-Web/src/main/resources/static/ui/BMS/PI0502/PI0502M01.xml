@@ -42,7 +42,7 @@
 						<w2:column id="ORGA_NM" name="편성명" dataType="text"></w2:column>
 
 						<w2:column id="VIDEO_COUNT" name="영상개수" dataType="text"></w2:column>
-						<w2:column id="TOTAL_TIME" name="총 재생시간" dataType="text"></w2:column>
+						<w2:column id="TOTAL_TIME" name="총 재생시간(초)" dataType="text"></w2:column>
 						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
@@ -315,7 +315,7 @@
 										value="영상개수" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column17"
-										value="총 재생시간" blockSelect="false" displayMode="label">
+										value="총 재생시간(초)" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="71" inputType="text" style="height:20px" id="column21"
 										value="비고" blockSelect="false" displayMode="label">
