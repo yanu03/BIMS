@@ -129,8 +129,9 @@
 		
 		var mainOptions = {
 			SEARCH : scwin.btn_search_onclick,
-			ADD : scwin.btn_add_onclick,
-			DELETE : scwin.btn_delete_onclick,
+			ADD : {disp:"hide"},
+			DEL : {disp:"hide"},
+			CNL :{disp:"hide"},
 			SAVE : scwin.btn_save_onclick,
 			EXL_I : scwin.btn_exli_onclick,
 			EXL : scwin.btn_exl_onclick,

@@ -39,7 +39,7 @@
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
 		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
 		
-		var backGroundid = "#mf_tac_layout_contents_MN00050101_body_FM0100P01_wframe_busImg";
+		var backGroundid = "#mf_tac_layout_contents_MN00040101_body_FM0100P01_wframe_busImg";
         vhc_kind = dma_searchitem.get("VHC_KIND");
 		if(vhc_kind == 'VK001'){
 			$(backGroundid).attr("class", "brt_bus_img");
@@ -166,7 +166,7 @@
 		str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+imgId+'"  >';
 		str += '</div>'
 		
-		var backGroundid = "#mf_tac_layout_contents_MN00050101_body_FM0100P01_wframe_busImg";
+		var backGroundid = "#mf_tac_layout_contents_MN00040101_body_FM0100P01_wframe_busImg";
 		$(backGroundid).html(str);
  		
  		$("#"+dvcId).on("click", function(e) {
@@ -233,7 +233,7 @@
 		var str = ""
 		var imgSrc = ""
 		var imgId = ""
-		var backGroundid = "#mf_tac_layout_contents_MN00050101_body_FM0100P01_wframe_busImg";
+		var backGroundid = "#mf_tac_layout_contents_MN00040101_body_FM0100P01_wframe_busImg";
 		
 		if(info.newValue == 'VK001'){
 			$(backGroundid).attr("class", "brt_bus_img");

@@ -60,7 +60,7 @@ public class KafkaConsumer {
     private EventResponse eventResponse;
 	
 
-    /*@KafkaListener(topics = "#{'${kafka.topic.member}'.split(',')}")*/
+    @KafkaListener(topics = "#{'${kafka.topic.member}'.split(',')}")
     public void processResult(ConsumerRecord<String, KafkaMessage> record) throws Exception {
     	
     	Map<String, Object> map = null;

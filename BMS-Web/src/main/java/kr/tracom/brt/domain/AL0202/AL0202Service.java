@@ -187,7 +187,7 @@ public class AL0202Service extends ServiceSupport {
 		Map result = saveResult(iCnt, uCnt, dCnt);
 		
 		//운행계획 생성되었다고 BRT 서비스에 알림
-		TimsService.notifyOperAllocCompleted();
+		//TimsService.notifyOperAllocCompleted();
 		
 		return result;		
 	}
