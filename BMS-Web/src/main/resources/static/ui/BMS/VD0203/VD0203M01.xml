@@ -51,6 +51,7 @@
 						<w2:column id="COMPLETE_YN" name="예약상태" dataType="text"></w2:column>
 						<w2:column id="DVC_KIND" name="장치 유형" dataType="text"></w2:column>
 						<w2:column id="ORG_DIV" name="제조사" dataType="text"></w2:column>
+						<w2:column id="ORG_ID" name="제조사" dataType="text"></w2:column>
 						<w2:column id="INST_LOC" name="장착 위치" dataType="text"></w2:column>
 						<w2:column id="DVC_ID" name="장치ID" dataType="text"></w2:column>
 						<w2:column id="DVC_IP" name="장치IP" dataType="text"></w2:column>
@@ -76,6 +77,7 @@
 						<w2:column id="SEND_DTM" name="처리일시" dataType="date"></w2:column>
 						<w2:column id="MNG_ID" name="관리ID" dataType="text"></w2:column>
 						<w2:column id="ORG_DIV" name="제조사" dataType="text"></w2:column>
+						<w2:column id="ORG_ID" name="제조사" dataType="text"></w2:column>
 						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
 						<w2:column id="INST_LOC" name="설치위치" dataType="text"></w2:column>
 						<w2:column id="FILE_NM" name="파일명" dataType="text"></w2:column>
@@ -84,6 +86,7 @@
 				<w2:dataMap baseNode="map" id="dma_subsearch">
 					<w2:keyInfo>
 						<w2:key id="VHC_ID" name="차량번호" dataType="text"></w2:key>
+						<w2:key id="SELC_REV_DATE" name="날짜" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataMap baseNode="map" id="dma_fileinfo">
@@ -97,6 +100,12 @@
 						<w2:key id="CHK" name="파일체크" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_searchitem2" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="ORG_ID" name="기관ID" dataType="text"></w2:column>
+						<w2:column id="ORG_NM" name="기관명" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
 			<xf:submission id="sub_VD0203G0R0" ref="data:json,dma_search" target="data:json,dlt_DVC_INFO" action="/vd/VD0203G0R0"
@@ -125,6 +134,10 @@
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="" ev:submit="" ev:submitdone="scwin.sub_VD0203FCK0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
+			<xf:submission id="sub_VD0203SHI1" ref="" target="data:json,dlt_searchitem2" action="/vd/VD0203SHI1" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
+				ev:submit="" ev:submitdone="scwin.sub_VD0203SHI1_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
 		</xf:model>
 
 		<script type="text/javascript"><![CDATA[
@@ -147,31 +160,41 @@
 		//코드옵션
 		//(code : DataCollection의 컬럼 ID명, compID : "FormId , GridId : GridColumn")
 		//Grid일 경우 inputType이 select여야 함. form일경우 selectBox여야 함.
-		var codeOptions = [ {code : "ORG_DIV", compID : "VD0203G0:ORG_DIV"}
-							,{code : "INST_LOC", compID : "VD0203G0:INST_LOC"}
+		var codeOptions = [ //{code : "ORG_DIV", compID : "VD0203G0:ORG_DIV"}
+							{code : "INST_LOC", compID : "VD0203G0:INST_LOC"}
 							,{code : "DVC_KIND", compID : "sbx_DVC_KIND, VD0203G0:DVC_KIND"}
 							,{code : "PROCE_RST", compID : "VD0203G1:PROCE_RST"}
-							,{code : "ORG_DIV", compID : "VD0203G1:ORG_DIV"}
+							//,{code : "ORG_DIV", compID : "VD0203G1:ORG_DIV"}
 							,{code : "DVC_KIND", compID : "VD0203G1:DVC_KIND"}
 							,{code : "INST_LOC", compID : "VD0203G1:INST_LOC"}
 						];
-		
 		//코드옵션 실행
 		com.setCommonDtl(codeOptions, function() {
 			com.searchGrid(VD0203G0, sub_VD0203G0R0);
 		});
 		
-		
-		VD0203G0.mergeCol(0,false);
-		VD0203G0.mergeCol(2,false);
-		VD0203G0.mergeCells("byrestriccol");
-		
-		$p.executeSubmission(sub_VD0203SHI0);
+		com.executeSubmission(sub_VD0203SHI0);
 		//acb_autoChoiceBox.setNodeSet("data:dlt_searchitem", "VHC_NO", "VHC_NO");
 	};
 
 	scwin.onpageunload = function() {
 
+	};
+	
+	//검색 조회 콜백 함수
+	scwin.sub_VD0203SHI0_submitdone = function(e) {
+		sbx_DVC_KIND.setValue("DK001");
+		com.executeSubmission(sub_VD0203SHI1);
+	};
+	
+	//검색 조회 콜백 함수
+	scwin.sub_VD0203SHI1_submitdone = function(e) {
+		com.executeSubmission(sub_VD0203G0R0);
+	};
+	
+	//그리드0 조회 콜백 함수
+	scwin.sub_VD0203G0R0_submitdone = function(e) {
+		com.setFocusedCell(VD0203G0, "VHC_NO");
 	};
 	
 	//예약 서브미션 콜백 함수
@@ -188,21 +211,25 @@
 	
 	//예약버튼 클릭 이벤트
 	scwin.btn_resrv_onclick = function() {
-		
 		var jsondata = VD0203G0.getCheckedJSON("chk");
-		var data = {data : jsondata, callbackFn : "scwin.VD0203P0_callbackFn"};
+		
 		if(jsondata.length > 0){
-			var options = { id : "VD0203P01",
-							popupName : "예약 날짜",
-							modal : true,
-							width : 300,
-							height : 380						
-							};
-			com.openPopup("/ui/BMS/VD0203/VD0203P01.xml", options, data);
+			var data = {data : jsondata, callbackFn : "scwin.VD0203P0_callbackFn"};
+			if(jsondata.length > 0){
+				var options = { id : "VD0203P01",
+								popupName : "예약 날짜",
+								modal : true,
+								width : 220, 
+								height: 350					
+								};
+				com.openPopup("/ui/BMS/VD0203/VD0203P01.xml", options, data);
+			}
+		
+		}else{
+			com.alert("업데이트할 장치를 선택해주세요.");
 		}
+		
 	};
-	
-
 	
 	scwin.VD0203P0_callbackFn = function(obj) {
 		
@@ -219,16 +246,23 @@
 	
 	scwin.btn_resrvcnl_onclick = function() {
 		var rows = VD0203G0.getCheckedIndex("chk");
-		var count = rows.length;
-		var str = count + " 건의 데이터를 예약 취소 하시겠습니까?";
 		
-		if(count > 0) {
-			com.confirm(str, function(rtn) {
-				if (rtn) {
-					com.executeSubmission(sub_VD0203G0D0);
-				}	
-			});
+		if(rows.length > 0){
+			var count = rows.length;
+			var str = count + " 건의 데이터를 예약 취소 하시겠습니까?";
+			
+			if(count > 0) {
+				com.confirm(str, function(rtn) {
+					if (rtn) {
+						com.executeSubmission(sub_VD0203G0D0);
+					}	
+				});
+			}
+		
+		}else{
+			com.alert("예약취소할 장치를 선택해주세요.");
 		}
+		
 		
 	}
 
@@ -247,12 +281,6 @@
 			acb_autoChoiceBox.show("");
 		} 
 	};
-	
-	
-	scwin.sub_VD0203G0R0_submitdone = function(e) {
-		com.setFocusedCell(VD0203G0, "VHC_NO");
-	};
-
 	
 	scwin.upload0_ondone = function(retXml) {
 		
@@ -323,7 +351,7 @@
 	};
 
 	scwin.sub_VD0203G1R0_submitdone = function(e) {
-		com.setFocusedCell(VD0203G1, "VHC_NO");	
+		//com.setFocusedCell(VD0203G1, "VHC_NO");	
 	};
 	
 	
@@ -344,6 +372,13 @@
 			$p.$(fileDispId).attr("placeholder", "등록된 파일이 없습니다.");		
 		}
 	};
+	
+	
+	//예약상세 정보 날짜 검색
+	scwin.SELC_REV_DATE_onviewchange = function(info) {
+		dma_subsearch.set("SELC_REV_DATE", info.newValue);
+		com.executeSubmission(sub_VD0203G1R0);
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -362,7 +397,7 @@
 						<xf:choices></xf:choices>
 					</xf:select1>
 					<xf:group id="" style="" class="label">
-							<w2:span id="" class="" label="검색 항목"></w2:span>
+						<w2:span id="" class="" label="검색 항목"></w2:span>
 					</xf:group>
 					<xf:group id="" style="" class="search">
 						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
@@ -385,9 +420,10 @@
 						</xf:select1>
 						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="차량번호 또는 예약상태"></xf:input>
 						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
-							chooseOptionValue="" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange="" ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange"
-							id="acb_autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start" selectedData=""
-							class="search_auto" style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false" visibleRowNum="">
+							chooseOptionValue="" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
+							ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="acb_autoChoiceBox" interactionMode="" noResult="useData"
+							ref="data:dma_search.CONTENT" search="start" selectedData="" class="search_auto" style="display:none" submenuSize="auto"
+							textAlign="left" useKeywordHighlight="false" visibleRowNum="">
 							<w2:choices>
 								<w2:itemset nodeset="data:dlt_searchitem">
 									<w2:label ref="VDO_ID"></w2:label>
@@ -419,7 +455,7 @@
 							owNumHeaderValue="순번" sortable="false" rowStatusHeaderValue="상태" overflowX="scroll" overflowY="scroll" rowStatusVisible="false"
 							fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_DVC_INFO" class="cm_grid left" autoFit="lastColumn"
 							ev:oncellclick="scwin.VD0203G0_oncellclick" ev:onrowindexchange="scwin.VD0203G0_onrowindexchange" sortEvent="onclick"
-							disabledScrollHidden="" focusMode="row">
+							disabledScrollHidden="" focusMode="row" mergeCells="byrestriccol" mergeCol="VHC_NO">
 
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
@@ -430,11 +466,12 @@
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:22px;" id="column15"
 										value="차량번호" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:22px;" id="column14"
-										value="예약상태" blockSelect="false" displayMode="label">
-									</w2:column>
+									<w2:column width="100" id="column59" value="장치ID"></w2:column>
 									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:22px;" id="column13"
 										value="장치 유형" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:22px;" id="column14"
+										value="예약상태" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:22px;" id="column49"
 										value="제조사" blockSelect="false" displayMode="label">
@@ -442,7 +479,6 @@
 									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:22px;" id="column3"
 										value="장착 위치" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column width="100" id="column59" value="장치ID"></w2:column>
 									<w2:column width="120" id="column60" value="장치IP"></w2:column>
 									<w2:column width="160" id="column61" value="관리ID"></w2:column>
 									<w2:column width="200" id="column86" value="비고"></w2:column>
@@ -456,20 +492,26 @@
 									<w2:column headers="VD0203G0_column15" textAlign="left" removeBorderStyle="false" width=""
 										inputType="text" style="height:20px" id="VHC_NO" userData1="M" value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column headers="VD0203G0_column14" removeBorderStyle="false" width="" inputType="text"
-										style="height:20px" id="COMPLETE_YN" value="" blockSelect="false" displayMode="label">
-									</w2:column>
+									<w2:column width="" id="DVC_ID"></w2:column>
 									<w2:column headers="VD0203G0_column13" removeBorderStyle="false" width="" inputType="select"
 										style="height:20px" id="DVC_KIND" value="" blockSelect="false" displayMode="label">
 									</w2:column>
+									<w2:column headers="VD0203G0_column14" removeBorderStyle="false" width="" inputType="text"
+										style="height:20px" id="COMPLETE_YN" value="" blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column headers="VD0203G0_column49" autocomplete="" removeBorderStyle="false" dataType=""
-										blockSelect="false" displayMode="label" calendarClass="" width="" inputType="select" style="height:20px" id="ORG_DIV" value="보기"
-										class="">
+										blockSelect="false" displayMode="label" calendarClass="" width="" inputType="select" style="height:20px" id="ORG_ID" value="보기"
+										class="" allOption="" chooseOption="" ref="">
+										<w2:choices>
+											<w2:itemset nodeset="data:dlt_searchitem2">
+												<w2:label ref="ORG_NM"></w2:label>
+												<w2:value ref="ORG_ID"></w2:value>
+											</w2:itemset>
+										</w2:choices>
 									</w2:column>
 									<w2:column headers="VD0203G0_column3" removeBorderStyle="false" width="" inputType="select"
 										style="height:20px" id="INST_LOC" value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column width="" id="DVC_ID"></w2:column>
 									<w2:column width="" id="DVC_IP" textAlign="right"></w2:column>
 									<w2:column width="" id="MNG_ID" textAlign="left"></w2:column>
 									<w2:column width="" id="REMARK" textAlign="left"></w2:column>
@@ -497,6 +539,9 @@
 					<xf:group id="gr_sub_header" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="예약상세 정보" style=""></w2:textbox>
+							<w2:inputCalendar footerDiv="false" id="SELC_REV_DATE" style="width: 120px;height: 23px; margin-left:10px" renderDiv="true" focusOnDateSelect="false"
+								calendarValueType="yearMonth" rightAlign="false" renderType="component" ev:onviewchange="scwin.SELC_REV_DATE_onviewchange">
+							</w2:inputCalendar>
 						</xf:group>
 					</xf:group>
 					<xf:group id="" class="" style=""></xf:group>
@@ -504,13 +549,14 @@
 						<w2:gridView id="VD0203G1" defaultCellHeight="20" rowNumVisible="false" useShiftKey="true" scrollByColumn="false"
 							owNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태" overflowX="scroll" overflowY="scroll" rowStatusVisible="false"
 							fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_UPD_RSV_INFO" class="cm_grid left" autoFit="lastColumn"
-							ev:onrowindexchange="" sortEvent="onclick" disabledScrollHidden="" focusMode="row">
+							ev:onrowindexchange="" sortEvent="onclick" disabledScrollHidden="" focusMode="row" mergeCells="byrestriccol" mergeCol="VHC_NO">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:22px;" id="column15"
 										value="차량번호" blockSelect="false" displayMode="label">
 									</w2:column>
+									<w2:column width="150" id="column61" value="장치종류"></w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:22px;" id="column14"
 										value="예약상태" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -523,9 +569,8 @@
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:22px;" id="column3"
 										value="처리일시" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column width="160" id="column59" value="관리ID" ></w2:column>
+									<w2:column width="160" id="column59" value="관리ID"></w2:column>
 									<w2:column width="100" id="column60" value="제조사"></w2:column>
-									<w2:column width="150" id="column61" value="장치종류"></w2:column>
 									<w2:column width="120" id="column86" value="설치위치"></w2:column>
 								</w2:row>
 							</w2:header>
@@ -534,6 +579,7 @@
 									<w2:column headers="VD0203G1_column15" textAlign="center" removeBorderStyle="false" width=""
 										inputType="text" style="height:20px" id="VHC_NO" userData1="M" value="" blockSelect="false" displayMode="label">
 									</w2:column>
+									<w2:column width="" id="DVC_KIND" inputType="select" textAlign="center"></w2:column>
 									<w2:column headers="VD0203G1_column14" removeBorderStyle="false" width="" inputType="text"
 										style="height:20px" id="COMPLETE_YN" value="" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -541,15 +587,22 @@
 										style="height:20px" id="RSV_DT" value="" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column headers="VD0203G1_column49" autocomplete="" removeBorderStyle="false" dataType=""
-										blockSelect="false" displayMode="label" calendarClass="" width="" inputType="select" style="height:20px" id="PROCE_RST"
-										value="보기" class="">
+										blockSelect="false" displayMode="label" calendarClass="" width="" inputType="select" style="height:20px" id="PROCE_RST" value="보기"
+										class="">
 									</w2:column>
 									<w2:column headers="VD0203G1_column3" removeBorderStyle="false" width="" inputType="text"
 										style="height:20px" id="SEND_DTM" value="" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column width="" id="MNG_ID" textAlign="left"></w2:column>
-									<w2:column width="" id="ORG_DIV" inputType="select" textAlign="center"></w2:column>
-									<w2:column width="" id="DVC_KIND" inputType="select" textAlign="center"></w2:column>
+									<w2:column width="" id="ORG_ID" inputType="select" textAlign="center" allOption="" chooseOption=""
+										ref="">
+										<w2:choices>
+											<w2:itemset nodeset="data:dlt_searchitem2">
+												<w2:label ref="ORG_NM"></w2:label>
+												<w2:value ref="ORG_ID"></w2:value>
+											</w2:itemset>
+										</w2:choices>
+									</w2:column>
 									<w2:column width="" id="INST_LOC" inputType="select" textAlign="center"></w2:column>
 								</w2:row>
 							</w2:gBody>
@@ -572,5 +625,6 @@
 				</xf:group>
 			</xf:group>
 		</xf:group>
+		
 	</body>
 </html>

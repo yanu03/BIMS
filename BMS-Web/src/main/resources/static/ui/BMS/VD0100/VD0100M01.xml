@@ -96,7 +96,6 @@
 						<w2:key id="TYPE" name="name2" dataType="text"></w2:key>
 						<w2:key id="CONTENT" name="name3" dataType="text"></w2:key>
 						<w2:key id="USE_YN" name="name4" dataType="text"></w2:key>
-
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_searchitem2" saveRemovedData="true">

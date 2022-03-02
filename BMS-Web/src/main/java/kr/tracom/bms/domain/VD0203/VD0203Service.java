@@ -43,6 +43,10 @@ public class VD0203Service extends ServiceSupport {
 	public List VD0203SHI0() throws Exception {
 		return VD0203Mapper.VD0203SHI0();
 	}
+	
+	public List VD0203SHI1() throws Exception {
+		return VD0203Mapper.VD0203SHI1();
+	}
 
 	public Map VD0203G0S0() throws Exception {
 		int iCnt = 0;
