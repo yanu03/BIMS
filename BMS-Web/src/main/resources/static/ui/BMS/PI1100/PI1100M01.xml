@@ -427,15 +427,15 @@
 				</xf:group><!-- pgm_list -->
 				
 				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_400_20_a" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="영상 정보" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					<xf:group></xf:group>
-					<xf:group class="" id="" style="">
-						<xf:group class="w2tb tb" id="PI1100F0" style="width:100%;" tagname="table">
+					<xf:group class="" id="" style="overflow:auto; position:relative;">
+						<xf:group class="w2tb tb" id="PI1100F0" style="width:100%; position:absolute" tagname="table">
 							<w2:attributes>
 								<w2:summary></w2:summary>
 							</w2:attributes>
@@ -579,10 +579,6 @@
 								</xf:group>
 							</xf:group>
 						</xf:group>
-					</xf:group>
-					<xf:group style="" id=""></xf:group>
-					<xf:group style="position: relative;" id="">
-						<xf:image src="/cm/images/add/bg_brt.png" style="width: 100%;height: 100%; position: absolute;" id=""></xf:image>
 					</xf:group>
 				</xf:group><!-- pgm_detail -->
 			</xf:group>

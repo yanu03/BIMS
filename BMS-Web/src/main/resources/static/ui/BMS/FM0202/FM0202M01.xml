@@ -791,9 +791,9 @@
 									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column8"
 										value="시설물유형" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="column6"
+									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="column6"
 										value="리셋" blockSelect="false" displayMode="label">
-									</w2:column>
+									</w2:column> -->
 									<w2:column width="100" id="column3" value="제조사"></w2:column>
 									<w2:column width="150" id="column5" value="유지보수기관"></w2:column>
 									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px" id="column13"
@@ -817,7 +817,7 @@
 									<w2:column removeBorderStyle="false" width="109" inputType="select" style="height:20px" id="FCLT_KIND"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column width="70" id="FCLT_CTR" value="리셋" inputType="button" disabled=""></w2:column>
+									<!-- <w2:column width="70" id="FCLT_CTR" value="리셋" inputType="button" disabled=""></w2:column> -->
 									<w2:column id="MAKER" blockSelect="false" readOnly="true" style="height:25px;" width=""
 										inputType="select" displayMode="label" textAlign="center" chooseOption="false" chooseOptionLabel="" checkboxLabelFormatter=""
 										allOption="" ref="">

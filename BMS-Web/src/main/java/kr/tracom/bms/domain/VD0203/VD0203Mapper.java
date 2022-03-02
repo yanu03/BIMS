@@ -14,6 +14,8 @@ public interface VD0203Mapper {
 	
 	public List VD0203SHI0();
 	
+	public List VD0203SHI1();
+	
 	public int VD0203G0I0(Map param);
 	
 	public int VD0203G0I1(Map param);

@@ -183,6 +183,10 @@
 
 	};
 	
+	scwin.sub_FM0203SHI0_submitdone = function(e) {
+		sbx_FCLT_KIND.setValue("FK001");
+	};
+	
 	scwin.sub_FM0203G0S0_submitdone = function(e) {
 		com.saveDone(FM0203G0, sub_FM0203G0R0);	
 		com.saveDone(FM0203G1, sub_FM0203G1R0);	
@@ -192,12 +196,21 @@
 	scwin.btn_resrv_onclick = function() {
 		
 		var jsondata = FM0203G0.getCheckedJSON("chk");
-		var data = {data : jsondata, callbackFn : "scwin.FM0203P0_callbackFn"};
+		
 		if(jsondata.length > 0){
-			var options = { id : "FM0203P01",
-							popupName : "예약 날짜",
-							modal : true};
-			com.openPopup("/ui/BMS/FM0203/FM0203P01.xml", options, data);
+			var data = {data : jsondata, callbackFn : "scwin.FM0203P0_callbackFn"};
+			if(jsondata.length > 0){
+				var options = { id : "FM0203P01",
+								popupName : "예약 날짜",
+								modal : true,
+								width : 220, 
+								height: 350		
+								};
+				com.openPopup("/ui/BMS/FM0203/FM0203P01.xml", options, data);
+			}
+		
+		}else {
+			com.alert("업데이트할 시설물을 선택해주세요");
 		}
 		
 	};
@@ -217,15 +230,21 @@
 	
 	scwin.btn_resrvcnl_onclick = function() {
 		var rows = FM0203G0.getCheckedIndex("chk");
-		var count = rows.length;
-		var str = count + " 건의 데이터를 예약 취소 하시겠습니까?";
 		
-		if(count > 0) {
-			com.confirm(str, function(rtn) {
-				if (rtn) {
-					com.executeSubmission(sub_FM0203G0D0);
-				}	
-			});
+		if(rows.length > 0){
+			var count = rows.length;
+			var str = count + " 건의 데이터를 예약 취소 하시겠습니까?";
+			
+			if(count > 0) {
+				com.confirm(str, function(rtn) {
+					if (rtn) {
+						com.executeSubmission(sub_FM0203G0D0);
+					}	
+				});
+			}
+		
+		}else {
+			com.alert("예약취소할 시설물을 선택해주세요.");
 		}
 		
 	}
@@ -325,7 +344,7 @@
 	};
 
 	scwin.sub_FM0203G1R0_submitdone = function(e) {
-		com.setFocusedCell(FM0203G1, "STTN_NO");	
+		//com.setFocusedCell(FM0203G1, "STTN_NO");	
 	};
 
 	
@@ -347,6 +366,8 @@
 		}
 	};
 	
+	
+	
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -357,7 +378,7 @@
 			<xf:group id="pgm_header" class="pgm_header" style="">
 				<xf:group id="" style="" class="gr_search">
 					<xf:group id="" style="" class="label">
-						<w2:span id="" class="" label="장치종류"></w2:span>
+						<w2:span id="" class="" label="시설물종류"></w2:span>
 					</xf:group>
 					<xf:select1 disabledClass="w2selectbox_disabled" appearance="minimal" direction="auto" chooseOption="true"
 						displayMode="label" optionOrder="false" id="sbx_FCLT_KIND" ref="data:dma_search.FCLT_KIND" ev:onchange="scwin.FCLT_KIND_onchange"
@@ -436,19 +457,19 @@
 									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:22px;" id="column14"
 										value="정류장명" blockSelect="false" displayMode="label">
 									</w2:column>
+									<w2:column width="100" id="column60" value="시설물ID"></w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:22px;" id="column49"
+										value="시설물유형" blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:22px;" id="column13"
 										value="예약상태" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:22px;" id="column49"
-										value="장치유형" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column width="100" id="column60" value="장치ID"></w2:column>
 									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:22px;" id="column3"
 										value="제조사" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column width="150" id="column59" value="장착위치"></w2:column>
-									<w2:column width="150" id="column61" value="장치IP"></w2:column>
-									<w2:column width="100" id="column61" value="관리ID"></w2:column>
+									<w2:column width="120" id="column59" value="장착위치"></w2:column>
+									<w2:column width="120" id="column61" value="장치IP"></w2:column>
+									<w2:column width="160" id="column62" value="관리ID"></w2:column>
 									<w2:column width="200" id="column86" value="비고"></w2:column>
 								</w2:row>
 							</w2:header>
@@ -463,13 +484,13 @@
 									<w2:column headers="FM0203G0_column16" textAlign="left" removeBorderStyle="false" width=""
 										inputType="text" style="height:20px" id="STTN_NM" userData1="M" value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column headers="FM0203G0_column14" removeBorderStyle="false" width="" inputType="text"
-										style="height:20px" id="COMPLETE_YN" value="" blockSelect="false" displayMode="label">
-									</w2:column>
+									<w2:column width="" id="FCLT_ID"></w2:column>
 									<w2:column headers="FM0203G0_column13" removeBorderStyle="false" width="" inputType="select"
 										style="height:20px" id="FCLT_KIND" value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column width="" id="FCLT_ID"></w2:column>
+									<w2:column headers="FM0203G0_column14" removeBorderStyle="false" width="" inputType="text"
+										style="height:20px" id="COMPLETE_YN" value="" blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column headers="FM0203G0_column49" autocomplete="" removeBorderStyle="false" dataType=""
 										blockSelect="false" displayMode="label" calendarClass="" width="" inputType="select" style="height:20px" id="ORG_DIV" value="보기"
 										class="">
@@ -485,7 +506,7 @@
 							<w2:footer style="" id="footer1">
 								<w2:row style="" id="row3">
 									<w2:column removeBorderStyle="false" width="" inputType="expression" style="height:20px;" id="column48"
-										value="" blockSelect="false" displayMode="label" colSpan="8" rowSpan="" expression="&quot;데이터 개수 : &quot; + COUNT('STTN_NO')"
+										value="" blockSelect="false" displayMode="label" colSpan="9" rowSpan="" expression="&quot;데이터 개수 : &quot; + COUNT('STTN_NO')"
 										textAlign="left" headers="FM0203G0_column3">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column52"
@@ -511,7 +532,7 @@
 						<w2:gridView id="FM0203G1" defaultCellHeight="20" rowNumVisible="false" useShiftKey="true" scrollByColumn="false"
 							owNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태" overflowX="scroll" overflowY="scroll" rowStatusVisible="false"
 							fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_BMS_FCLT_UPD_LOG" class="cm_grid left" autoFit="lastColumn"
-							ev:onrowindexchange="" sortEvent="onclick" disabledScrollHidden="" focusMode="row">
+							ev:onrowindexchange="" sortEvent="onclick" disabledScrollHidden="" focusMode="row" mergeCells="byrestriccol" mergeCol="STTN_NO">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">

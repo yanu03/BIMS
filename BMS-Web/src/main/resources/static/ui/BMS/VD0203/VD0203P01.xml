@@ -37,7 +37,7 @@
 		scwin.param = com.getParameter();
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
 		
-		VD0203C0.setSize(250, 200);
+		//VD0203C0.setSize(250, 200);
 	};
 	
 	scwin.onpageunload = function() {
@@ -94,8 +94,8 @@
 			</xf:group>
 
 			<xf:group style="" id="" class="popup_content">
-				<w2:span label="예약일 :" style="" id=""></w2:span>
-				<xf:input adjustMaxLength="false" id="input1" style="width: 144px;height: 21px;margin: 15px;" ev:onkeypress="scwin.input1_onkeypress" ev:onviewchange="scwin.input1_onviewchange"></xf:input>
+				<!-- <w2:span label="예약일 :" style="" id=""></w2:span>
+				<xf:input adjustMaxLength="false" id="input1" style="width: 144px;height: 21px;margin: 15px;" ev:onkeypress="scwin.input1_onkeypress" ev:onviewchange="scwin.input1_onviewchange"></xf:input> -->
 				<w2:calendar footerDiv="false" id="VD0203C0" style="width: auto;height: auto;" useYearSelect="" ev:onclick="scwin.VD0203C0_onclick" ev:ondateselect="scwin.VD0203C0_ondateselect" displayFormat='' displayFormatFunc=""></w2:calendar>
 			</xf:group>
 			<xf:group id="" style="" class="popup_bottom">
