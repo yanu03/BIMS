@@ -900,10 +900,10 @@
 										style="height:20px" value="권역" width="182">
 									</w2:column>
 									<w2:column blockSelect="false" displayMode="label" id="column12" inputType="text" removeBorderStyle="false"
-										style="height:20px" value="운수사명" width="103">
+										style="height:20px" value="운수사명" width="150">
 									</w2:column>
 									<w2:column blockSelect="false" displayMode="label" id="column11" inputType="text" removeBorderStyle="false"
-										style="height:20px" value="비고" width="274">
+										style="height:20px" value="비고" width="100">
 									</w2:column>
 								</w2:row>
 							</w2:header>
@@ -916,7 +916,7 @@
 										style="height:20px" width="182">
 									</w2:column>
 									<w2:column blockSelect="false" displayMode="label" eventPriority="oneditend" id="COMP_NM" inputType="text"
-										removeBorderStyle="false" style="height:20px" width="103">
+										removeBorderStyle="false" style="height:20px" width="150">
 									</w2:column>
 									<w2:column blockSelect="false" displayMode="label" eventPriority="oneditend" id="REMARK" inputType="text"
 										removeBorderStyle="false" style="height:20px" width="274">
