@@ -295,6 +295,7 @@
 		dma_subsearch.set("ORG_ID", dlt_BMS_VHC_MST.getCellData(row, "ORG_ID"))
 		var focusOption = {keyMap : dma_subsearch};
 		com.changeDualGrid(VD0300G0, VD0300G1, sub_VD0300G1S0, sub_VD0300G1R0, focusOption, row, oldRow);
+		
 	};
 	
 	scwin.sub_VD0300G1R0_submitdone = function(e) {
@@ -362,6 +363,18 @@
 	
 	scwin.sub_VD0300G2S0_submitdone = function(e) {
 		com.saveDone(VD0300G2,sub_VD0300G2R0);		
+	};
+	
+	scwin.sub_VD0300G1R0_submitdone = function(e) {
+		//장치 목록 없으면 탭 목록 초기화
+		if(dlt_BMS_DVC_INFO.getAllData().length == 0) {
+			dlt_BMS_DVC_HIS.removeAll();
+			dlt_BMS_DVC_COND_LOG.removeAll();
+		} 
+		else {
+			VD0300G1.setFocusedCell(0, "DVC_ID");	
+		}
+	
 	};
 	]]></script>
 	</head>

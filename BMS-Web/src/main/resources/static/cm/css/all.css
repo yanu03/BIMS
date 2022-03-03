@@ -65,7 +65,7 @@ a:hover,a:active,a:focus{text-decoration:none}
 .dpib{display: inline-block;}
 
 .w2group{background:transparent;}
-.w2input, .w2inputCalendar_divInput {font-size:12px; font-family: Malgun Gothic, mgw, Verdana, dotum, Sans-serif}
+.w2input, .w2inputCalendar_divInput,.w2textarea {font-size:12px; font-family: Malgun Gothic, mgw, Verdana, dotum, Sans-serif}
 
 
 /* Search Box */

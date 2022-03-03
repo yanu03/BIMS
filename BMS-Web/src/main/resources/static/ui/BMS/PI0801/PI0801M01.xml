@@ -26,7 +26,7 @@
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_INNER_LED_INFO" saveRemovedData="true">
 					<w2:columnInfo>
-						<w2:column id="ILD_ID" name="실내LEDID" dataType="text"></w2:column>
+						<w2:column id="ILD_ID" name="실내LED ID" dataType="text"></w2:column>
 						<w2:column id="ILD_NM" name="실내LED명" dataType="text"></w2:column>
 						<w2:column id="SN" name="순번" dataType="number"></w2:column>
 						<w2:column id="TXT_A" name="상단표출문구" dataType="text"></w2:column>
@@ -500,21 +500,21 @@
 		
 		//오디오 타입에따라 입력창 활성, 비활성화
 		if (audioType == "WAV"){
-			VOC_PATH.setDisabled(false);
-			KR_TTS.setDisabled(true);
-			EN_TTS.setDisabled(true);
-			playTTS.setDisabled(true);
-			btn_basicPhrase.setDisabled(true);
-			playTTS2.setDisabled(true);
-			btn_basicPhrase2.setDisabled(true);			
+			VOC_PATH2.setDisabled(false);
+			KR_TTS2.setDisabled(true);
+			EN_TTS2.setDisabled(true);
+			playTTS3.setDisabled(true);
+			btn_basicPhrase3.setDisabled(true);
+			playTTS4.setDisabled(true);
+			btn_basicPhrase4.setDisabled(true);			
 		} else if (audioType == "TTS"){
-//			VOC_PATH.setDisabled(true);
-			KR_TTS.setDisabled(false);
-			EN_TTS.setDisabled(false);
-			playTTS.setDisabled(false);
-			btn_basicPhrase.setDisabled(false);
-			playTTS2.setDisabled(false);
-			btn_basicPhrase2.setDisabled(false);						
+//			VOC_PATH2.setDisabled(true);
+			KR_TTS2.setDisabled(false);
+			EN_TTS2.setDisabled(false);
+			playTTS3.setDisabled(false);
+			btn_basicPhrase3.setDisabled(false);
+			playTTS4.setDisabled(false);
+			btn_basicPhrase4.setDisabled(false);						
 		}	
 		
 		//오디오 세팅
@@ -863,18 +863,18 @@
 							</ul>
 						</xf:group>
 						<xf:group class="PI0801T0">
-							<xf:group class="defaultbox" id="" style="">
+							<xf:group class="defaultbox PI0801T0" id="" style="">
 								<w2:textbox class="df_tt fl" id="" label="기본문구 목록" style=""></w2:textbox>
 							</xf:group>
 							<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 						</xf:group>						
 						<xf:group class="PI0801T1">
-							<xf:group class="defaultbox" id="" style="display: none;">
+							<xf:group class="defaultbox PI0801T1" id="" style="display: none;">
 								<w2:textbox class="df_tt fl" id="" label="음성, LED 목록" style=""></w2:textbox>
 							</xf:group>
 						</xf:group>						
 						<xf:group class="PI0801T2">
-							<xf:group class="defaultbox" id="" style="display: none;">
+							<xf:group class="defaultbox PI0801T2" id="" style="display: none;">
 								<w2:textbox class="df_tt fl" id="" label="기타 음성 목록" style=""></w2:textbox>
 							</xf:group>
 						</xf:group>						
@@ -896,13 +896,13 @@
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column7"
-											value="실내LEDID" blockSelect="false" displayMode="label" class="req">
+											value="실내LED ID" blockSelect="false" displayMode="label" class="req">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column6"
 											value="실내LED명" blockSelect="false" displayMode="label" class="req">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="50" inputType="text" style="height:20px" id="column5"
-											value="순번" blockSelect="false" displayMode="label">
+											value="표출순서" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column4"
 											value="상단표출문구" blockSelect="false" displayMode="label">
@@ -947,7 +947,6 @@
 								</w2:footer>							
 							</w2:gridView>
 						</xf:group> <!-- PI0801T0 -->
-						
 						<xf:group id="PI0801T1" class="PI0801T1" style="height: 100%;display: none;">
 							<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.PI0801G1_onrowindexchange" ev:oncellclick=""
 								showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순서" sortable="true"
@@ -971,10 +970,10 @@
 										<w2:column removeBorderStyle="false" width="180" inputType="text" style="height:20px" id="column5"
 											value="재생기간" blockSelect="false" displayMode="label" class="req">
 										</w2:column>
-										<w2:column width="250" style="height:20px;" inputType="text" id="column6" value="한국어TTS"
+										<w2:column width="250" style="height:20px;" inputType="text" id="column6" value="한국어 TTS"
 											blockSelect="false" class="req">
 										</w2:column>
-										<w2:column width="250" style="height:20px;" inputType="text" id="column7" value="영어TTS"
+										<w2:column width="250" style="height:20px;" inputType="text" id="column7" value="영어 TTS"
 											blockSelect="false" class="req">
 										</w2:column>
 										<w2:column width="250" style="height:20px;" inputType="text" id="column8" value="화면표시문구(한글)"
@@ -1064,7 +1063,7 @@
 						</xf:group> <!-- PI0801T1 -->
 						
 						<xf:group id="PI0801T2" class="PI0801T2" style="height: 100%;display: none;">
-							<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.PI0801G2_onrowindexchange" ev:oncellclick=""
+							<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin." ev:oncellclick=""
 								showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순서"
 								sortable="true" rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
 								dataList="data:dlt_BMS_VOC_INFO2" ignoreCellClick="false" style="height:100%;" autoFit="lastColumn" visibleRowNum="" id="PI0801G2"
@@ -1087,6 +1086,9 @@
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="250" inputType="text" style="height:20px" id="column39" value="한국어 TTS"
 											blockSelect="false" displayMode="label" class="req">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="250" inputType="text" style="height:20px" id="column40" value="영어 TTS"
+											blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column width="250" style="height:20px;" inputType="text" id="column28" value="화면 표시 문구(한글)" blockSelect="false">
 										</w2:column>
@@ -1123,6 +1125,9 @@
 											blockSelect="false" displayMode="label" readOnly="true">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="255" inputType="text" style="height:20px" id="KR_TTS" value="" blockSelect="false"
+											displayMode="label" displayFormatter="" textAlign="left" userData1="M">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="255" inputType="text" style="height:20px" id="ER_TTS" value="" blockSelect="false"
 											displayMode="label" displayFormatter="" textAlign="left" userData1="M">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="116" inputType="text" style="height:20px" id="SCR_TXT" value=""
@@ -1180,13 +1185,13 @@
 									<w2:summary></w2:summary>
 								</w2:attributes>
 								<xf:group tagname="colgroup">
-									<xf:group style="width:90px;" tagname="col"></xf:group>
-									<xf:group style="width:120px;" tagname="col"></xf:group>
-									<xf:group style="width:90px;" tagname="col"></xf:group>
-									<xf:group style="width:120px;" tagname="col"></xf:group>
+									<xf:group style="width:150px;" tagname="col"></xf:group>
+									<xf:group style="" tagname="col"></xf:group>
+									<xf:group style="width:150px;" tagname="col"></xf:group>
+									<xf:group style="" tagname="col"></xf:group>
 								</xf:group>
 								<xf:group style="" tagname="tr">
-									<xf:group class="w2tb_th req" style="" tagname="th">표출문구ID</xf:group>
+									<xf:group class="w2tb_th req" style="" tagname="th">실내LED ID</xf:group>
 									<xf:group class="w2tb_td" style="" tagname="td">
 										<w2:attributes>
 											<w2:colspan>3</w2:colspan>
@@ -1198,7 +1203,7 @@
 									</xf:group>
 								</xf:group>
 								<xf:group style="" tagname="tr">
-									<xf:group class="w2tb_th req" style="" tagname="th">표출문구명</xf:group>
+									<xf:group class="w2tb_th req" style="" tagname="th">실내LED명</xf:group>
 									<xf:group class="w2tb_td" style="" tagname="td">
 										<w2:attributes>
 											<w2:colspan>3</w2:colspan>
@@ -1290,12 +1295,12 @@
 									<xf:group style="" class="w2tb_th req" tagname="th">음성명</xf:group>
 	
 									<xf:group tagname="td" style="" class="w2tb_td">
-										<xf:input adjustMaxLength="false" id="VOC_NM" style="width:100%;height:24px;" ref="data:dlt_BMS_VOC_INFO.VOC_NM"
+										<xf:input adjustMaxLength="false" id="VOC_NM" style="height:24px;" ref="data:dlt_BMS_VOC_INFO.VOC_NM"
 											placeholder="" maxlength="20">
 										</xf:input>
 									</xf:group>
 									<xf:group tagname="th" style="" class="w2tb_th req">
-										재생유형
+										음성유형
 										<w2:attributes>
 											<w2:scope>row</w2:scope>
 										</w2:attributes>
@@ -1363,13 +1368,13 @@
 										</w2:attributes>
 										<xf:group class="ml5 fr" id="" style=""></xf:group>
 				
-										<xf:textarea id="KR_TTS" style="width: 80%;height: 100px;" ref="data:dlt_BMS_VOC_INFO.KR_TTS" maxlength="200" ev:onviewchange="scwin.KR_TTS_onviewchange" ev:onkeypress="scwin.KR_TTS_onkeypress" ev:onblur="scwin.KR_TTS_onblur"></xf:textarea>
+										<xf:textarea id="KR_TTS" style="width: 500px;height: 100px;" ref="data:dlt_BMS_VOC_INFO.KR_TTS" maxlength="200" ev:onviewchange="scwin.KR_TTS_onviewchange" ev:onkeypress="scwin.KR_TTS_onkeypress" ev:onblur="scwin.KR_TTS_onblur"></xf:textarea>
 										
-										<xf:group style="display: inline;position: absolute;margin-left: 10px; float:right;"  id="">
-											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px;" id="playTTS" ev:onclick="scwin.playTTS_onclick">
+										<xf:group style="display: contents;position: absolute;margin-left: 10px; float:right;"  id="">
+											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;    margin-top: 20px;    margin-left: 10px;" id="playTTS" ev:onclick="scwin.playTTS_onclick">
 												<xf:label><![CDATA[미리듣기]]></xf:label>
 											</xf:trigger>
-											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;" id="btn_basicPhrase" ev:onclick="scwin.btn_basicPhrase_onclick">
+											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;    margin-bottom: 10px;    margin-top: 20px;    margin-left: 10px;" id="btn_basicPhrase" ev:onclick="scwin.btn_basicPhrase_onclick">
 												<xf:label><![CDATA[기본문구 삽입]]></xf:label>
 											</xf:trigger>
 										</xf:group>									
@@ -1389,12 +1394,12 @@
 										</w2:attributes>
 										<xf:group class="ml5 fr" id="" style=""></xf:group>
 				
-										<xf:textarea id="ER_TTS" style="width: 80%;height: 100px;" ref="data:dlt_BMS_VOC_INFO.EN_TTS" maxlength="200" ev:onviewchange="scwin.ER_TTS_onviewchange"></xf:textarea>
-										<xf:group style="display: inline;position: absolute;margin-left: 10px; float:right;"  id="">
-											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px;" id="playTTS2" ev:onclick="scwin.playTTS2_onclick">
+										<xf:textarea id="ER_TTS" style="width: 500px;height: 100px;" ref="data:dlt_BMS_VOC_INFO.EN_TTS" maxlength="200" ev:onviewchange="scwin.ER_TTS_onviewchange"></xf:textarea>
+										<xf:group style="display: contents;position: absolute;margin-left: 10px; float:right;"  id="">
+											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px;margin-left: 10px;" id="playTTS2" ev:onclick="scwin.playTTS2_onclick">
 												<xf:label><![CDATA[미리듣기]]></xf:label>
 											</xf:trigger>
-											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;" id="btn_basicPhrase2" ev:onclick="scwin.btn_basicPhrase2_onclick" disabled="">
+											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px;margin-left: 10px;" id="btn_basicPhrase2" ev:onclick="scwin.btn_basicPhrase2_onclick" disabled="">
 												<xf:label><![CDATA[기본문구 삽입]]></xf:label>
 											</xf:trigger>
 										</xf:group>									
@@ -1545,9 +1550,9 @@
 								<w2:summary></w2:summary>
 							</w2:attributes>
 							<xf:group tagname="colgroup">
-								<xf:group style="width:120px;" tagname="col"></xf:group>
+								<xf:group style="width:150px;" tagname="col"></xf:group>
 								<xf:group style="" tagname="col"></xf:group>
-								<xf:group style="width:120px;" tagname="col"></xf:group>
+								<xf:group style="width:150px;" tagname="col"></xf:group>
 								<xf:group style="" tagname="col"></xf:group>
 							</xf:group>
 							<xf:group style="" tagname="tr">
@@ -1566,7 +1571,7 @@
 								<xf:group style="" class="w2tb_th req" tagname="th">음성명</xf:group>
 
 								<xf:group tagname="td" style="" class="w2tb_td">
-									<xf:input adjustMaxLength="false" id="VOC_NM2" style="width:100%;height:24px;" ref="data:dlt_BMS_VOC_INFO2.VOC_NM"
+									<xf:input adjustMaxLength="false" id="VOC_NM2" style="height:24px;" ref="data:dlt_BMS_VOC_INFO2.VOC_NM"
 										placeholder="" maxlength="20">
 									</xf:input>
 								</xf:group>
@@ -1639,12 +1644,12 @@
 									</w2:attributes>
 									<xf:group class="ml5 fr" id="" style=""></xf:group>
 
-									<xf:textarea id="KR_TTS2" style="width: 80%;height: 100px;" ref="data:dlt_BMS_VOC_INFO2.KR_TTS" maxlength="200"></xf:textarea>
-									<xf:group style="display: inline;position: absolute;margin-left: 5px;" id="">
-										<xf:trigger type="button" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px;" id="playTTS3" ev:onclick="scwin.playTTS_onclick">
+									<xf:textarea id="KR_TTS2" style="width: 500px;height: 100px;" ref="data:dlt_BMS_VOC_INFO2.KR_TTS" maxlength="200"></xf:textarea>
+									<xf:group style="display: contents;position: absolute;margin-left: 5px;" id="">
+										<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px; margin-left: 10px;" id="playTTS3" ev:onclick="scwin.playTTS_onclick">
 											<xf:label><![CDATA[미리듣기]]></xf:label>
 										</xf:trigger>
-										<xf:trigger type="button" style="width: 100px;height: 20px;" id="btn_basicPhrase3" ev:onclick="scwin.btn_basicPhrase3_onclick">
+										<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px; margin-left: 10px;" id="btn_basicPhrase3" ev:onclick="scwin.btn_basicPhrase3_onclick">
 											<xf:label><![CDATA[기본문구 삽입]]></xf:label>
 										</xf:trigger>
 									</xf:group>
@@ -1664,12 +1669,12 @@
 									</w2:attributes>
 									<xf:group class="ml5 fr" id="" style=""></xf:group>
 
-									<xf:textarea id="EN_TTS2" style="width: 80%;height: 100px;" ref="data:dlt_BMS_VOC_INFO2.EN_TTS" maxlength="200"></xf:textarea>
-									<xf:group style="display: inline;position: absolute;margin-left: 5px;" id="">
-										<xf:trigger type="button" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px;" id="playTTS4" ev:onclick="scwin.playTTS2_onclick">
+									<xf:textarea id="EN_TTS2" style="width: 500px;height: 100px;" ref="data:dlt_BMS_VOC_INFO2.EN_TTS" maxlength="200"></xf:textarea>
+									<xf:group style="display: contents;position: absolute;margin-left: 5px;" id="">
+										<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px; margin-left: 10px;" id="playTTS4" ev:onclick="scwin.playTTS2_onclick">
 											<xf:label><![CDATA[미리듣기]]></xf:label>
 										</xf:trigger>
-										<xf:trigger type="button" style="width: 100px;height: 20px;" id="btn_basicPhrase4" ev:onclick="scwin.btn_basicPhrase4_onclick" disabled="">
+										<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px; margin-left: 10px;" id="btn_basicPhrase4" ev:onclick="scwin.btn_basicPhrase4_onclick" disabled="">
 											<xf:label><![CDATA[기본문구 삽입]]></xf:label>
 										</xf:trigger>
 									</xf:group>									

@@ -222,7 +222,7 @@
 		PLF_IMP_DEV_MST
 	SET
 		  IMP_ID = #{MNG_ID}
-		, IMP_TYPE = ''
+		<!-- , IMP_TYPE = '' -->
 	WHERE
 		IMP_NM = (SELECT VHC_NO FROM BMS_VHC_MST WHERE VHC_ID = #{VHC_ID});
 		
@@ -230,7 +230,7 @@
 		PLF_IMP_SESS_INFO
 	SET
 		  SESS_ID = #{MNG_ID}
-		, REMOTE_TYPE = ''
+		<!-- , REMOTE_TYPE = '' -->
 	WHERE
 		SESS_NM = (SELECT VHC_NO FROM BMS_VHC_MST WHERE VHC_ID = #{VHC_ID});
 </update>

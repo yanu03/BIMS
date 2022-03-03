@@ -142,7 +142,7 @@
 		var subOptions = {
 			ADD: {cbFnc:scwin.editClick,nm:"편집시작",class:"addCross"}
 		};
-		
+		scwin.param = com.getParameter();
 		var mainOptions = {
 			SAVE : scwin.btn_save_onclick
 		};
@@ -424,8 +424,42 @@
 				}				
 			});	
 		}
-		
 	}
+	
+	scwin.btn_search_onclick = function() {
+		var options = {
+			id : "SI0101P02",
+			popupName : "주소 검색",
+			modal : true
+		};
+		
+		var data = { callbackFn : "scwin.insertAddr",
+					menuCode : scwin.param.menuCode
+		};
+		
+		com.openPopup(("/ui/BMS/SI0101/SI0101P02.xml"), options, data);
+		
+	    daum.postcode.load(function(){
+	        new daum.Postcode({
+		        width : 795,
+		        height : 558,
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+	                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+	                ADDR.setValue(data.address);
+	                com.closePopup();
+	            }
+	        }).embed(mf_tac_layout_contents_MN00010102_body_SI0102P04_wframe);
+	    });        				
+	}
+	
+	scwin.insertAddr = function(cooldinate) {
+		
+		var row = SI0101G0.getFocusedRowIndex();
+		
+		dlt_BMS_GRG_MST.setCellData(row, "GPS_X", cooldinate.substr(0, 10));
+		dlt_BMS_GRG.setCellData(row, "GPS_Y", cooldinate.substr(16, 24));
+	};		
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -497,6 +531,9 @@
 									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:22px;" id="column15" value="차고지명"
 										blockSelect="false" displayMode="label" class="req">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:22px;" id="column17" value="차고지영문명"
+										blockSelect="false" displayMode="label" class="req">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:22px;" id="column14" value="소유형태"
 										blockSelect="false" displayMode="label">
 									</w2:column>
@@ -533,6 +570,9 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column4" value="적용종료일"
 										blockSelect="false" displayMode="label">
 									</w2:column> -->
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:22px;" id="column20" value="사용여부"
+										blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="380" inputType="text" style="height:22px;" id="column3" value="비고"
 										blockSelect="false" displayMode="label">
 									</w2:column>
@@ -546,8 +586,11 @@
 									<w2:column removeBorderStyle="false" width="186" inputType="text" style="height:20px" id="GRG_NM" value=""
 										blockSelect="false" displayMode="label" userData1="M" textAlign="left" class="req">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="186" inputType="text" style="height:20px" id="GRG_ENM" value=""
+										blockSelect="false" displayMode="label" textAlign="left" class="req">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="64" inputType="select" style="height:20px" id="OWNER_TYPE" value=""
-										blockSelect="false" displayMode="label" userData1="M">
+										blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="230" inputType="text" style="height:20px" id="ADDR" value=""
 										blockSelect="false" displayMode="label" textAlign="left">
@@ -582,6 +625,9 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="APPL_ED_DT" value=""
 										blockSelect="false" displayMode="label">
 									</w2:column> -->
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="USE_YN" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK" value=""
 										blockSelect="false" displayMode="label" textAlign="left">
 									</w2:column>
@@ -667,8 +713,11 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:input adjustMaxLength="" class="" disabled="" id="ADDR" mandatory="" ref="data:dlt_BMS_GRG_MST.ADDR"
-										style="width:70%;height:21px;" allowChar="" validator="" validateOnInput="false" initValue="" maxByteLength="" maxlength="100">
+										style="width:263px;height:21px;" allowChar="" validator="" validateOnInput="false" initValue="" maxByteLength="" maxlength="100">
 									</xf:input>
+									<xf:image class="btn" ev:onclick="scwin.btn_search_onclick" id="btn_search" longdesc=""
+										src="/cm/images/inc/icon_search.gif" style="width:21px;height:20px;margin-left:5px;">
+									</xf:image>									
 								</xf:group>
 							</xf:group>
 							<xf:group style="" tagname="tr">
@@ -677,7 +726,7 @@
 									<w2:attributes><w2:colspan>3</w2:colspan><w2:rowspan>1</w2:rowspan></w2:attributes>
 									<xf:group id="" style="">
 										<xf:input adjustMaxLength="" allowChar="" class="" disabled="" id="EMAIL" initValue="" mandatory=""
-											maxByteLength="" maxlength="50" ref="data:dlt_BMS_GRG_MST.EMAIL" style="width:70%;height:21px;" validateOnInput="false"
+											maxByteLength="" maxlength="50" ref="data:dlt_BMS_GRG_MST.EMAIL" style="width:263px;height:21px;" validateOnInput="false"
 											validator="">
 										</xf:input>
 									</xf:group>
@@ -691,7 +740,7 @@
 									<w2:attributes></w2:attributes>
 									<xf:input adjustMaxLength="" class="" customModelFormatter="com.transPhone" disabled="" fireEventOnInvalid=""
 										id="PHONE" invalidMessageFunc="" mandatory="" maxlength="13" readOnly="" ref="data:dlt_BMS_GRG_MST.PHONE" 
-										style="width:100%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput="" validator="" displayFormatter="com.transPhone">
+										style="width:100%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput="" validator="" displayFormatter="com.transPhone" allowChar="0-9">
 									</xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" tagname="th">팩스<w2:attributes>
@@ -749,17 +798,17 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group class="w2tb_th" tagname="th">법접면적<w2:attributes>
+								<xf:group class="w2tb_th" tagname="th">법적면적(㎡)<w2:attributes>
 										<w2:scope>row</w2:scope>
 									</w2:attributes></xf:group>
 								<xf:group class="w2tb_td" tagname="td">
 									<w2:attributes></w2:attributes>
 									<xf:input adjustMaxLength="" class="" customModelFormatter="" disabled="" fireEventOnInvalid=""
 										id="LEGAL_AREA" invalidMessageFunc="" mandatory="" maxlength="7" readOnly="" ref="data:dlt_BMS_GRG_MST.LEGAL_AREA"
-										style="width:100%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput="" validator="">
+										style="width:100%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput="" validator="" allowChar="0-9">
 									</xf:input>
 								</xf:group>
-								<xf:group class="w2tb_th" tagname="th">확보면적<w2:attributes>
+								<xf:group class="w2tb_th" tagname="th">확보면적(㎡)<w2:attributes>
 										<w2:scope>row</w2:scope>
 									</w2:attributes></xf:group>
 								<xf:group class="w2tb_td" tagname="td">
@@ -779,7 +828,7 @@
 									</xf:select1>
 									<xf:input adjustMaxLength="" class="" customModelFormatter="" disabled="" fireEventOnInvalid=""
 										id="SECURE_AREA" invalidMessageFunc="" mandatory="" maxlength="7" readOnly="" ref="data:dlt_BMS_GRG_MST.SECURE_AREA"
-										style="width:100%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput="" validator="">
+										style="width:100%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput="" validator="" allowChar="0-9"> 
 									</xf:input>
 								</xf:group>
 							</xf:group>
