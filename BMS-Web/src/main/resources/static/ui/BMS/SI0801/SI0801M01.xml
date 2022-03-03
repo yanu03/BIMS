@@ -120,9 +120,9 @@
 		
 		var autoOptions = {
 			Main : { grid : SI0801G0, srchSbm : sub_SI0801G0R0, savSbm : sub_SI0801G0S0
-					 , srchGrp : pgm_header, keyColumn : "FCLT_KIND", focusColumn : "FCLT_KIND", name :  "파라미터 목록"},
+					 , srchGrp : pgm_header, keyColumn : "REMARK", focusColumn : "FCLT_KIND", name :  "파라미터 목록"},
 			Sub1 : { grid : SI0801G1, srchSbm : sub_SI0801G1R0, savSbm : sub_SI0801G1S0, name :  "스케쥴 상세"}
-		};
+		};											//KeyColumn 비고 바꿔야 한다. 그리드 포커스 때문에 키컬럼을 remark로 했음
 		
 		var mainOptions = {SAVE:scwin.saveGrid}
 		
@@ -410,22 +410,22 @@
 							<w2:gBody width="" style="" id="gBody4">
 								<w2:row style="" id="row5">
 									<w2:column width="134" style="height:20px;" inputType="select" id="FCLT_KIND" blockSelect="false"
-										displayMode="label" readOnly="true" userData1="M">
+										displayMode="label" readOnly="true" userData1="M" textAlign="left">
 									</w2:column>
 									<w2:column width="159" style="height:20px;" inputType="select" id="PARAM_DIV" blockSelect="false"
 										displayMode="label" readOnly="true" textAlign="">
 									</w2:column>
 									<w2:column width="126" style="height:20px;" inputType="select" id="PARAM_KIND" blockSelect="false"
-										displayFormat="" readOnly="true">
+										displayFormat="" readOnly="true" textAlign="left">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="DATA_TYPE"
 										value="" blockSelect="false" displayMode="label" readOnly="true" valueType="other">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_LENGTH"
-										value="" blockSelect="false" displayMode="label" readOnly="true">
+										value="" blockSelect="false" displayMode="label" readOnly="true" textAlign="right">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_VAL"
-										value="" blockSelect="false" displayMode="label" readOnly="true">
+										value="" blockSelect="false" displayMode="label" readOnly="true" textAlign="right">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="USE_YN"
 										value="" blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.useYnDisFormatter">
@@ -437,7 +437,7 @@
 										value="" blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.schYnDisFormatter">
 									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="REMARK"
-										value="" blockSelect="false" displayMode="label" readOnly="true">
+										value="" blockSelect="false" displayMode="label" readOnly="true" textAlign="left">
 									</w2:column>
 								</w2:row>
 							</w2:gBody>
@@ -533,7 +533,7 @@
 							</xf:group>
 							<xf:group tagname="td" class="w2tb_td">
 								<w2:attributes></w2:attributes>
-								<xf:input adjustMaxLength="false" id="" style="width: 144px;height: 21px;"
+								<xf:input adjustMaxLength="false" id="" style="width: 144px;height: 21px;text-align: right;"
 									ref="data:dlt_BMS_FCLT_PARAM_CFG_INFO.DATA_LENGTH" maxlength="2" allowChar="0-9" maxByteLength="">
 								</xf:input>
 							</xf:group>
@@ -545,7 +545,7 @@
 							</xf:group>
 							<xf:group tagname="td" class="w2tb_td">
 								<w2:attributes></w2:attributes>
-								<xf:input adjustMaxLength="false" id="" style="width: 144px;height: 21px;"
+								<xf:input adjustMaxLength="false" id="" style="width: 144px;height: 21px;text-align: right;"
 									ref="data:dlt_BMS_FCLT_PARAM_CFG_INFO.DATA_VAL" allowChar="0-9:.">
 								</xf:input>
 							</xf:group>
@@ -661,16 +661,16 @@
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
-										<w2:column removeBorderStyle="false" width="50" inputType="text" style="height:20px" id="column13"
+										<w2:column removeBorderStyle="false" width="50" inputType="text" style="height:20px;text-align: right;" id="column13"
 											value="순번" blockSelect="false" displayMode="label" sortable="true" class="req">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column12"
 											value="시작시간" blockSelect="false" displayMode="label" sortable="true" class="req">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column1"
+										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column1"
 											value="종료시간" blockSelect="false" displayMode="label" class="req">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column10"
+										<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="column10"
 											value="설정값" blockSelect="false" displayMode="label" sortable="true">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column8"
@@ -690,10 +690,10 @@
 											value="" blockSelect="false" displayMode="label" userData1="M">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px" id="DATA_VAL"
-											value="" blockSelect="false" displayMode="label">
+											value="" blockSelect="false" displayMode="label" textAlign="right">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="211" inputType="text" style="height:20px" id="REMARK"
-											value="" blockSelect="false" displayMode="label">
+											value="" blockSelect="false" displayMode="label" textAlign="left">
 										</w2:column>
 									</w2:row>
 								</w2:gBody>

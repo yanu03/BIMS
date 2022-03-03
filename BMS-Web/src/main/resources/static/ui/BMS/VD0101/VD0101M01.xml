@@ -641,16 +641,16 @@
 										displayMode="label" readOnly="false" textAlign="">
 									</w2:column>
 									<w2:column width="126" style="height:20px;" inputType="select" id="PARAM_KIND" blockSelect="false"
-										displayFormat="" readOnly="false">
+										displayFormat="" readOnly="false" textAlign="left">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="DATA_TYPE"
 										value="" blockSelect="false" displayMode="label" readOnly="false" valueType="other">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_LENGTH"
-										value="" blockSelect="false" displayMode="label" readOnly="false">
+										value="" blockSelect="false" displayMode="label" readOnly="false" textAlign="right">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_VAL"
-										value="" blockSelect="false" displayMode="label" readOnly="false">
+										value="" blockSelect="false" displayMode="label" readOnly="false" textAlign="right">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ATTR1_VAL"
 										value="" blockSelect="false" displayMode="label" readOnly="false">
@@ -668,7 +668,7 @@
 										value="" blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.schYnDisFormatter">
 										</w2:column> -->
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="REMARK" value=""
-										blockSelect="false" displayMode="label" readOnly="false">
+										blockSelect="false" displayMode="label" readOnly="false" textAlign="left">
 									</w2:column>
 								</w2:row>
 							</w2:gBody>

@@ -230,7 +230,7 @@
 									<w2:column width="300" style="height:20px;" inputType="text" id="column3" value="본문" blockSelect="false"
 										displayMode="label" userData1="">
 									</w2:column>
-									<w2:column width="100" style="height:20px;" inputType="text" id="column4" value="공지유형"
+									<w2:column width="90" style="height:20px;" inputType="text" id="column4" value="공지유형"
 										blockSelect="false">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column41"
@@ -244,13 +244,13 @@
 										displayMode="label" readOnly="true" userData1="M" userData2="">
 									</w2:column>
 									<w2:column width="159" style="height:20px;" inputType="text" id="TITLE" blockSelect="false"
-										displayMode="label" readOnly="true" userData1="M">
+										displayMode="label" readOnly="true" userData1="M" textAlign="left">
 									</w2:column>
 									<w2:column width="80" style="height:20px;" inputType="text" id="CONTENT" blockSelect="false"
-										displayMode="label" readOnly="true" userData1="">
+										displayMode="label" readOnly="true" userData1="" textAlign="left">
 									</w2:column>
 									<w2:column width="159" style="height:20px;" inputType="select" id="NOTICE_TYPE" blockSelect="false"
-										displayMode="label" readOnly="true" textAlign="left">
+										displayMode="label" readOnly="true" textAlign="">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="84" inputType="text" style="height:20px" id="REMARK"
 										value="" blockSelect="false" displayMode="" textAlign="left">
@@ -297,7 +297,7 @@
 								</xf:group>
 								<xf:group style="" class="w2tb_th" tagname="th">공지유형</xf:group>
 								<xf:group style="" class="w2tb_td" tagname="td">
-									<xf:select1 id="NOTICE_TYPE" chooseOption="true" style="height: 21px;" submenuSize="auto"
+									<xf:select1 id="NOTICE_TYPE" chooseOption="true" style="height: 21px;width: 100px;" submenuSize="auto"
 										allOption="" disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled"
 										ref="data:dlt_BMS_NOTICE_SCNRO_MST.NOTICE_TYPE" chooseOptionLabel="">
 										<xf:choices></xf:choices>
@@ -399,7 +399,7 @@
 					</xf:group>
 					<xf:group style="" id=""></xf:group>
 					<xf:group style="position:relative" id="">
-						<xf:image src="/cm/images/add/bg_brt.png" style="width: 100%;height: 100%; position:absolute" id=""></xf:image>
+						<xf:image src="/cm/images/add/bg_brt.png" style="width: 100%;height: 100%; position:absolute; object-fit:contain; cursor:default" id=""></xf:image>
 					</xf:group>
 				</xf:group><!-- pgm_detail -->
 			</xf:group>

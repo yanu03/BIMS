@@ -442,6 +442,7 @@
 				    			<w2:field id="MIN_SPD" name="최저속도"></w2:field>
 				    		</w2:fieldInfo>
 				    	</w2:pivot>-->
+				    	
 				    	<w2:gridView alwaysTriggerScrollStart="" autoFit="allColumn" captionTitle="" class="cm_grid left"
 							dataList="data:dlt_BRT_ROUT_AVER_OPER_SP_STAT" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 							ev:onrowindexchange="scwin.ST0202G1_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true"
