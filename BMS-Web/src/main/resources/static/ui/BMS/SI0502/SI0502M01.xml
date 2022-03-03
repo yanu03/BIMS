@@ -336,10 +336,10 @@
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column9"
-										value="환승ID" blockSelect="false" displayMode="label">
+										value="환승ID" blockSelect="false" displayMode="label" class="req">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column7"
-										value="환승명" blockSelect="false" displayMode="label">
+										value="환승명" blockSelect="false" displayMode="label" class="req">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column8"
 										value="환승구분" blockSelect="false" displayMode="label">
@@ -361,10 +361,10 @@
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
 									<w2:column removeBorderStyle="false" width="106" inputType="text" style="height:20px" id="TRNS_ID"
-										value="" blockSelect="false" displayMode="label" readOnly="true">
+										value="" blockSelect="false" displayMode="label" readOnly="true" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="104" inputType="text" style="height:20px" id="TRNS_NM"
-										value="" blockSelect="false" displayMode="label" readOnly="false" textAlign="left">
+										value="" blockSelect="false" displayMode="label" readOnly="false" textAlign="left" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="TRNS_DIV"
 										value="" blockSelect="false" displayMode="label" readOnly="false">

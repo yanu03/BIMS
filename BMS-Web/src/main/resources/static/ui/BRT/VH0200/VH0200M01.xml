@@ -384,7 +384,7 @@
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions);
 		
 		var subOptions2 = {
-			SEARCH:{cbFnc:scwin.openPopUpChart,nm:"변경운행 시공도 보기",class:"search"}, EXL:{}
+			SEARCH:{cbFnc:scwin.openPopUpChart,nm:"변경운행 시공도 보기",class:"search"}
 		};
 
 		com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions2);
@@ -840,10 +840,10 @@
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ALLOC_NO"
-										value="" blockSelect="false" displayMode="label">
+										value="" blockSelect="false" displayMode="label" textAlign="right">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="OPER_SN"
-										value="" blockSelect="false" displayMode="label">
+										value="" blockSelect="false" displayMode="label" textAlign="right">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="OCR_NODE_ID"
 										value="" blockSelect="false" displayMode="label">
@@ -852,10 +852,10 @@
 										blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="GPS_X"
-										value="" blockSelect="false" displayMode="label">
+										value="" blockSelect="false" displayMode="label" textAlign="right">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="GPS_Y"
-										value="" blockSelect="false" displayMode="label" textAlign="left" disabled="">
+										value="" blockSelect="false" displayMode="label" textAlign="right">
 									</w2:column>
 								</w2:row>
 							</w2:gBody>

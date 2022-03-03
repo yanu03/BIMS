@@ -431,13 +431,19 @@
 									<w2:column width="100" style="height:25px;" inputType="text" id="column1" value="대체ID"
 										blockSelect="false" displayMode="label" userData1="" userData2="" class="req">
 									</w2:column>
-									<w2:column width="140" style="height:20px;" inputType="text" id="column2" value="발생일시" blockSelect="false"
-										displayMode="label" userData1="" class="req" displayFormat="" displayFormatFunc="">
-									</w2:column>
 									<w2:column width="80" style="height:20px;" inputType="text" id="column3" value="노선명"
 										blockSelect="false" displayMode="label" userData1="" class="req">
 									</w2:column>
+									<w2:column width="100" style="height:20px;" inputType="text" id="column11" value="운행일" blockSelect="false"
+										displayMode="label" userData1="" class="req" displayFormat="" displayFormatFunc="">
+									</w2:column>
+									<w2:column width="140" style="height:20px;" inputType="text" id="column2" value="발생일시" blockSelect="false"
+										displayMode="label" userData1="" class="req" displayFormat="" displayFormatFunc="">
+									</w2:column>
 									<w2:column width="100" style="height:20px;" inputType="text" id="column7" value="원차량"
+										blockSelect="false" class="req">
+									</w2:column>
+									<w2:column width="100" style="height:20px;" inputType="text" id="column15" value="원운전자"
 										blockSelect="false" class="req">
 									</w2:column>
 									<w2:column width="100" style="height:20px;" inputType="text" id="column8" value="대체차량"
@@ -446,8 +452,11 @@
 									<w2:column width="80" style="height:20px;" inputType="text" id="column9" value="대체운전사"
 										blockSelect="false">
 									</w2:column>
-									<w2:column width="100" style="height:20px;" inputType="text" id="column4" value="돌발유형"
+									<!-- <w2:column width="100" style="height:20px;" inputType="text" id="column4" value="돌발유형"
 										blockSelect="false">
+									</w2:column> -->
+									<w2:column width="140" style="height:20px;" inputType="text" id="column57" value="대체일시" blockSelect="false"
+										displayMode="label" userData1="" class="" displayFormat="" displayFormatFunc="">
 									</w2:column>
 									<w2:column width="350" style="height:20px;" inputType="text" id="column12" value="상세내역"
 										blockSelect="false">
@@ -459,13 +468,19 @@
 									<w2:column width="118" style="height:20px;" inputType="text" id="RPC_ID" blockSelect="false"
 										displayMode="label" readOnly="true" userData1="M" userData2="">
 									</w2:column>
-									<w2:column width="159" style="height:20px;" inputType="text" id="OCR_DTM" blockSelect="false"
-										displayMode="label" readOnly="true" userData1="M">
-									</w2:column>
 									<w2:column textAlign="center" width="80" style="height:20px;" inputType="text" id="ROUT_NM"
 										blockSelect="false" displayMode="label" readOnly="true" userData1="M">
 									</w2:column>
+									<w2:column width="159" style="height:20px;" inputType="text" id="OPER_DT" blockSelect="false"
+										displayMode="label" readOnly="true" userData1="M">
+									</w2:column>
+									<w2:column width="159" style="height:20px;" inputType="text" id="OCR_DTM" blockSelect="false"
+										displayMode="label" readOnly="true" userData1="M">
+									</w2:column>
 									<w2:column width="159" style="height:20px;" inputType="text" id="GRP_VHC_NO" blockSelect="false"
+										displayMode="label" readOnly="true" userData1="M">
+									</w2:column>
+									<w2:column width="159" style="height:20px;" inputType="text" id="GRP_DRV_NM" blockSelect="false"
 										displayMode="label" readOnly="true" userData1="M">
 									</w2:column>
 									<w2:column width="159" style="height:20px;" inputType="text" id="RPC_VHC_NO" blockSelect="false"
@@ -474,11 +489,14 @@
 									<w2:column width="159" style="height:20px;" inputType="text" id="RPC_DRV_NM" blockSelect="false"
 										displayMode="label" readOnly="true">
 									</w2:column>
-									<w2:column width="159" style="height:20px;" inputType="select" id="INCDNT_TYPE" blockSelect="false"
+									<!-- <w2:column width="159" style="height:20px;" inputType="select" id="INCDNT_TYPE" blockSelect="false"
 										displayMode="label" readOnly="true">
+									</w2:column> -->
+									<w2:column width="159" style="height:20px;" inputType="text" id="RPC_DTM" blockSelect="false"
+										displayMode="label" readOnly="true" userData1="">
 									</w2:column>
 									<w2:column width="159" style="height:20px;" inputType="text" id="DETAILS" blockSelect="false"
-										displayMode="label" readOnly="true">
+										displayMode="label" readOnly="true" textAlign="left">
 									</w2:column>
 								</w2:row>
 							</w2:gBody>

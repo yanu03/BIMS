@@ -77,8 +77,8 @@
 		
 		var autoOptions = {
 			Main : { grid : SI0800G0, srchSbm : sub_SI0800G0R0, savSbm : sub_SI0800G0S0
-					 , srchGrp : pgm_header, keyColumn : "DVC_KIND", focusColumn : "DVC_KIND", name :  "파라미터 목록"}
-		};
+					 , srchGrp : pgm_header, keyColumn : "REMARK", focusColumn : "DVC_KIND", name :  "파라미터 목록"}
+		};									//KeyColumn 비고 바꿔야 한다. 그리드 포커스 때문에 키컬럼을 remark로 했음
 		
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions);
 		
@@ -89,12 +89,12 @@
 						];
 		
 		//com.executeSubmission(sub_SI0800G0R0);
-		com.executeSubmission(sub_SI0800SHI0);
 		
 		com.setCommonDtl(codeOptions, function() {
 			com.searchGrid(SI0800G0, sub_SI0800G0R0);
 		});				
 		
+		com.executeSubmission(sub_SI0800SHI0);
 	};	
 		
 	scwin.sub_SI0800SHI0_submitdone = function(e) {
@@ -104,7 +104,7 @@
 	scwin.sub_SI0800G0R0_submitdone = function(e) {
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
-			com.setFocusedCell(SI0800G0, "DVC_KIND");
+			com.setFocusedCell(SI0800G0, "PARAM_DIV");
 		}
 	};
 	
@@ -117,8 +117,9 @@
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
 			com.saveDone(SI0800G0,sub_SI0800G0R0);
 		}
+		//com.executeSubmission(sub_SI0800G0R0);
+		
 	};
-	
 	
 	scwin.sbx_ChoiceBox_onviewchange = function(info) {
 		
@@ -274,22 +275,22 @@
 							<w2:gBody width="" style="" id="gBody4">
 								<w2:row style="" id="row5">
 									<w2:column width="134" style="height:20px;" inputType="select" id="DVC_KIND" blockSelect="false"
-										displayMode="label" readOnly="true" userData1="M">
+										displayMode="label" readOnly="true" userData1="M" textAlign="left">
 									</w2:column>
 									<w2:column width="159" style="height:20px;" inputType="select" id="PARAM_DIV" blockSelect="false"
 										displayMode="label" readOnly="true" textAlign="">
 									</w2:column>
 									<w2:column width="126" style="height:20px;" inputType="select" id="PARAM_KIND" blockSelect="false"
-										displayFormat="" readOnly="true">
+										displayFormat="" readOnly="true" textAlign="left">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="DATA_TYPE"
 										value="" blockSelect="false" displayMode="label" readOnly="true" valueType="other">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_LENGTH"
-										value="" blockSelect="false" displayMode="label" readOnly="true">
+										value="" blockSelect="false" displayMode="label" readOnly="true" textAlign="right">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_VAL"
-										value="" blockSelect="false" displayMode="label" readOnly="true">
+										value="" blockSelect="false" displayMode="label" readOnly="true" textAlign="right">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="USE_YN"
 										value="" blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.useYnDisFormatter">
@@ -397,7 +398,7 @@
 							</xf:group>
 							<xf:group tagname="td" class="w2tb_td">
 								<w2:attributes></w2:attributes>
-								<xf:input adjustMaxLength="false" id="" style="width: 144px;height: 21px;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_LENGTH" maxlength="2" allowChar="0-9" maxByteLength=""></xf:input>
+								<xf:input adjustMaxLength="false" id="" style="width: 144px;height: 21px;text-align: right;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_LENGTH" maxlength="2" allowChar="0-9" maxByteLength=""></xf:input>
 							</xf:group>
 							<xf:group tagname="th" class="w2tb_th">
 								설정값
@@ -407,7 +408,7 @@
 							</xf:group>
 							<xf:group tagname="td" class="w2tb_td">
 								<w2:attributes></w2:attributes>
-								<xf:input adjustMaxLength="false" id="" style="width: 144px;height: 21px;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_VAL" allowChar="0-9:."></xf:input>
+								<xf:input adjustMaxLength="false" id="" style="width: 144px;height: 21px;text-align: right;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_VAL" allowChar="0-9:."></xf:input>
 							</xf:group>
 						</xf:group>
 						<xf:group tagname="tr" style="">
@@ -481,7 +482,7 @@
 					</xf:group>
 					<xf:group style="" id=""></xf:group>
 					<xf:group style="position: relative;" id="">
-						<xf:image src="/cm/images/add/bg_brt.png" style="width: 100%;height: 100%;position: absolute;" id=""></xf:image>
+						<xf:image src="/cm/images/add/bg_brt.png" style="width: 100%;height: 100%;position: absolute; object-fit:contain; cursor:default" id=""></xf:image>
 					</xf:group>
 
 				</xf:group>

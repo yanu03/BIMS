@@ -132,6 +132,8 @@
 
 .grdr_20_40_a {display:grid; grid-template-rows: 20px 40px auto;}
 
+.grdr_2_a {display:grid; grid-template-rows: 2px auto;}
+.grdr_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(20px, max-content) auto;}
 .grdr_20_2_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px auto;}
 .grdr_20_2_110_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 110px auto;}
 .grdr_20_2_140_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 140px auto;}
@@ -139,6 +141,7 @@
 .grdr_20_20_2_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(20px, max-content) 2px auto;}
 .grdr_20_35_2_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(35px, max-content) 2px auto;}
 .grdr_25_2_a {display:grid; grid-template-rows: minmax(25px, max-content) 2px auto;}
+.grdr_20_2_170_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 170px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
 .grdr_20_2_187_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 187px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
 .grdr_20_2_187_2_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 187px 2px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
 .grdr_20_2_200_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 200px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/

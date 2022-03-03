@@ -94,7 +94,7 @@
 			</xf:submission>
 			<xf:submission id="sub_PI1002G0S0" ref='data:json,dlt_BMS_NOTICE_MST'
 				target="data:json,dma_result" action="/pi/PI1002G0S0" method="post" mediatype="application/json" encoding="UTF-8" instance=""
-				replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit=""
+				replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="저장중입니다..." ev:submit=""
 				ev:submitdone="scwin.sub_PI1002G0S0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI1002G1R0" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_STTN_MST" action="/pi/PI1002G1R0"
@@ -472,12 +472,12 @@
 									<w2:column width="0" style="height:20px;" inputType="text" id="column30" value="전송 차량"
 										blockSelect="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column31"
+									<!-- <w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column31"
 										value="발송방법" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column width="120" style="height:20px;" inputType="text" id="column28" value="예약일시"
 										blockSelect="false">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="column41"
 										value="전송상태" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -507,12 +507,12 @@
 											</w2:itemset>
 										</w2:choices>
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="SEND_DIV"
+									<!-- <w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="SEND_DIV"
 										value="" blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.sendDIVDisFormatter">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="RSV_DTM" value=""
 										blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.dateDisFormatter">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="SEND_STS"
 										value="" blockSelect="false" displayMode="label" autoFitFilterList="" displayFormatter="scwin.sendSTSDisFormatter"
 										displayFormat="">
@@ -746,7 +746,7 @@
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column10"
 										value="경도" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="50" inputType="text" style="height:20px" id="column6"
+									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column6"
 										value="비고" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
