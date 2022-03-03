@@ -591,8 +591,8 @@
 		
 		 var data = { data : routId, data2 : dayDiv, data3 : routNm, data4 : operSn, data5:transData, data6:realData, callbackFn : "" };
          var options = { id : "AL0600P0",
-         				 width : "1600px",
-         				 height : "900px",
+         				 width : "1280px",
+         				 height : "700px",
                          popupName : "운행 결과 비교 시공도", 
                          modal : true};
 		

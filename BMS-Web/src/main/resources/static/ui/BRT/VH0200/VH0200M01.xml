@@ -595,8 +595,8 @@
 		
 		 var data = { data4 : operSn, data5:transData, data6:realData, callbackFn : "" };
          var options = { id : "VH0200P0",
-         				 width : "1600px",
-         				 height : "900px",
+         				 width : "1280px",
+         				 height : "700px",
                          popupName : "변경 운행 시공도", 
                          modal : true};
 		
