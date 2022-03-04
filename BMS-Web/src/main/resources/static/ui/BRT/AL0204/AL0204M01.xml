@@ -527,8 +527,8 @@
 		
 		 var data = { data : routId, data2 : dayDiv, data3 : routNm, data4:transData, data5:chkCnt, callbackFn : "" };
          var options = { id : "AL0204P0",
-         				 width : "1600px",
-         				 height : "800px",
+         				 width : "1280px",
+         				 height : "700px",
                          popupName : "운행 결과 비교 시공도", 
                          modal : true};
 		

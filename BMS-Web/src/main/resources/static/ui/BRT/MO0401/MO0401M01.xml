@@ -64,7 +64,7 @@
 			</xf:submission>
 			<xf:submission id="sub_MO0401G0S0" ref='data:json,{"action":"modified","id":"dlt_BRT_OPER_INST_MSG_MST"}' target="" action="/mo/MO0401G0S0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				processMsg="저장중입니다..." ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_MO0401SHI0" ref="" target="data:json,dlt_searchitem" action="/mo/MO0401SHI0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
@@ -204,16 +204,16 @@
 									<w2:column width="400" style="height:20px;" inputType="text" id="column3" value="메시지내용" blockSelect="false"
 										displayMode="label" userData1="">
 									</w2:column>
-									<w2:column width="90" style="height:20px;" inputType="text" id="column5" value="사용여부"
-										blockSelect="false">
-									</w2:column>
-									<w2:column width="90" style="height:20px;" inputType="text" id="column4" value="작성자"
+									<w2:column width="70" style="height:20px;" inputType="text" id="column5" value="사용여부"
 										blockSelect="false">
 									</w2:column>
 									<w2:column width="130" style="height:20px;" inputType="text" id="column6" value="업데이트일시"
 										blockSelect="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column41"
+									<w2:column width="90" style="height:20px;" inputType="text" id="column4" value="작성자"
+										blockSelect="false">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="250" inputType="text" style="height:20px" id="column41"
 										value="비고" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
@@ -232,11 +232,11 @@
 									<w2:column width="159" style="height:20px;" inputType="text" id="USE_YN" blockSelect="false"
 										displayMode="label" readOnly="true" displayFormatter="scwin.useYn">
 									</w2:column>
-									<w2:column width="159" style="height:20px;" inputType="text" id="UPD_ID" blockSelect="false"
-										displayMode="label" readOnly="true">
-									</w2:column>
 									<w2:column removeBorderStyle="false" width="116" inputType="text" style="height:20px" id="UPD_DTM" value=""
 										blockSelect="false" displayMode="label" readOnly="true" displayFormatter="">
+									</w2:column>
+									<w2:column width="159" style="height:20px;" inputType="text" id="UPD_ID" blockSelect="false"
+										displayMode="label" readOnly="true">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="84" inputType="text" style="height:20px" id="REMARK" value=""
 										blockSelect="false" displayMode=""  textAlign="left">
@@ -348,6 +348,11 @@
 							</xf:group>
 						</xf:group>
 					</xf:group><!-- table end -->
+					
+					<xf:group style="position: relative;" id="">
+						<xf:image src="/cm/images/add/bg_brt.png" style="width: 100%;height: 100%; position: absolute; object-fit: contain; cursor:default" id=""></xf:image>
+					</xf:group>
+					
 				</xf:group> <!-- pgm_detail -->
 			</xf:group>
 		</xf:group>
