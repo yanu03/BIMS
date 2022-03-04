@@ -596,6 +596,8 @@
 		 var data = { data4 : operSn, data5:transData, data6:realData, callbackFn : "" };
          var options = { id : "VH0200P0",
          				 width : "1280px",
+         				 
+         				 
          				 height : "700px",
                          popupName : "변경 운행 시공도", 
                          modal : true};
@@ -747,7 +749,7 @@
 							</w2:choices>
 						</w2:autoComplete>
 						<xf:group class="label" id="" style="margin-left: 10px;">
-							<w2:span class="" id="" label="기간"></w2:span>
+							<w2:span class="" id="" label="발생일시"></w2:span>
 						</xf:group>
 						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
 							style="width:120px; margin-right: 10px; float: left;margin-top: 3px;" id="F_DATE" renderType="component" renderDiv="true"
