@@ -7877,7 +7877,7 @@ com.changeDualGrid = function(mainGrid, subGrid, subSaveSbmObj, subSrchSbmObj, f
 
 		for (var i = 0; i < keyColumnArr.length; i++) {
 			curKeyValue = mainData.getCellData(row, keyColumnArr[i]);
-			//focusOption.keyMap.set(keyColumnArr[i], curKeyValue);
+			focusOption.keyMap.set(keyColumnArr[i], curKeyValue);
 			
 			if(i!=0)curKeyValues += ",";
 			curKeyValues += (curKeyValue);
@@ -7970,7 +7970,7 @@ com.changeDualGrid2 = function(mainGrid, subGrid, subSaveSbmObj, subSrchSbmObj, 
 
 		for (var i = 0; i < keyColumnArr.length; i++) {
 			curKeyValue = mainData.getCellData(row, keyColumnArr[i]);
-			//focusOption.keyMap.set(keyColumnArr[i], curKeyValue);
+			focusOption.keyMap.set(keyColumnArr[i], curKeyValue);
 			
 			if(i!=0)curKeyValues += ",";
 			curKeyValues += (curKeyValue);
@@ -8069,7 +8069,7 @@ com.changeThirdGrid = function(mainGrid, subGrid1, subGrid2, subSaveSbmObj1, sub
 		
 		for (var i = 0; i < keyColumnArr.length; i++) {
 			curKeyValue = mainData.getCellData(row, keyColumnArr[i]);
-			//focusOption.keyMap.set(keyColumnArr[i], curKeyValue);
+			focusOption.keyMap.set(keyColumnArr[i], curKeyValue);
 			
 			if(i!=0)curKeyValues += ",";
 			curKeyValues += (curKeyValue);
