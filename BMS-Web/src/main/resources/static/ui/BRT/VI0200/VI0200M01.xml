@@ -357,7 +357,7 @@
 	};
 	
 	scwin.CPLNT_DIV_onviewchange = function(info) {
-		debugger;
+		
 		var cplntDiv = info.newValue;
 		
 		if(cplntDiv == ''){

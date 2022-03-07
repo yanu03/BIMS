@@ -49,6 +49,15 @@ public class SI0402Service extends ServiceSupport {
 		List<Map<String, Object>> param = getSimpleList("dlt_BMS_ROUT_NODE_CMPSTN");
 		
 		try {
+			String exl_update = (String) map.get("EXL_UPDATE");
+			
+			if(CommonUtil.notEmpty(exl_update)&&"true".equals(exl_update)) {
+				if(param.size()>0) {
+					Map delParam = new HashMap();
+					delParam.put("ROUT_ID", param.get(0).get("ROUT_ID"));
+					si0402Mapper.SI0402G1DA0(delParam);
+				}
+			}
 			for (int i = 0; i < param.size(); i++) {
 				Map data = (Map) param.get(i);
 				
@@ -72,9 +81,17 @@ public class SI0402Service extends ServiceSupport {
 				
 				if (rowStatus.equals("C")) {
 					Map key = null;
+					
 					if(CommonUtil.empty(data.get("NODE_ID"))){
 						key = si0402Mapper.SI0402G1K0();
 					}
+					
+					/*if(Constants.NODE_TYPE_VERTEX.equals(nodeType)==true){
+						data.put("STTN_ID","");
+						data.put("STTN_NO","");
+						data.put("GRG_ID","");
+					}*/
+					
 					if((Constants.NODE_TYPE_VERTEX.equals(nodeType)==false)
 						&&(Constants.NODE_TYPE_SOUND.equals(nodeType)==false)
 						&&(Constants.NODE_TYPE_GARAGE.equals(nodeType)==false)
@@ -119,6 +136,13 @@ public class SI0402Service extends ServiceSupport {
 						routMapper.updateMainRoutNodeToAnotherRoute(data);
 					}
 				} else if (rowStatus.equals("U")) {
+					
+					/*if(Constants.NODE_TYPE_VERTEX.equals(nodeType)==true){
+						data.put("STTN_ID","");
+						data.put("STTN_NO","");
+						data.put("GRG_ID","");
+					}*/
+					
 					if((Constants.NODE_TYPE_VERTEX.equals(nodeType)==false)
 						&&(Constants.NODE_TYPE_SOUND.equals(nodeType)==false)
 						&&(Constants.NODE_TYPE_GARAGE.equals(nodeType)==false)

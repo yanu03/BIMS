@@ -363,16 +363,16 @@
 				</when>  
 				<otherwise>
 					<if test="TYPE == 'DISP_NODE'">
-					AND A.NODE_TYPE != 'NT006'
+					AND A.NODE_TYPE != 'NT006' AND A.NODE_TYPE != 'NT008'
 					</if>
 					<if test="TYPE == 'LINK_NODE'">
 					AND A.LINK_NODE_YN = 'Y'
 					</if>
 					<if test="TYPE == 'SOUND_NODE'">
-					AND A.NODE_TYPE != 'NT005'
+					AND A.NODE_TYPE != 'NT005' AND A.NODE_TYPE != 'NT008'
 					</if>
 					<if test="@kr.tracom.util.CommonUtil@empty(TYPE)">
-					AND A.NODE_TYPE != 'NT006'
+					AND A.NODE_TYPE != 'NT006' AND A.NODE_TYPE != 'NT008'
 					</if>
 				</otherwise>
 			</choose>
@@ -394,16 +394,16 @@
 				</when>  
 				<otherwise>
 					<if test="TYPE == 'DISP_NODE'">
-					AND A.NODE_TYPE != 'NT006'
+					AND A.NODE_TYPE != 'NT006' AND A.NODE_TYPE != 'NT008'
 					</if>
 					<if test="TYPE == 'LINK_NODE'">
 					AND A.LINK_NODE_YN = 'Y'
 					</if>
 					<if test="TYPE == 'SOUND_NODE'">
-					AND A.NODE_TYPE != 'NT005'
+					AND A.NODE_TYPE != 'NT005' AND A.NODE_TYPE != 'NT008'
 					</if>
 					<if test="@kr.tracom.util.CommonUtil@empty(TYPE)">
-					AND A.NODE_TYPE != 'NT006'
+					AND A.NODE_TYPE != 'NT006' AND A.NODE_TYPE != 'NT008'
 					</if>
 				</otherwise>
 			</choose>
@@ -424,23 +424,23 @@
 			</if>	 -->		
 			<choose>
 				<when test="@kr.tracom.util.CommonUtil@notEmpty(NODE_TYPE)">
-					AND A.NODE_TYPE != 'NT005' AND A.NODE_TYPE = #{NODE_TYPE}
+					AND A.NODE_TYPE != 'NT005' AND A.NODE_TYPE != 'NT008' AND A.NODE_TYPE = #{NODE_TYPE}
 				</when>  
 				<otherwise>
 					<if test="TYPE == 'DISP_NODE'">
-						AND A.NODE_TYPE != 'NT006'
+						AND A.NODE_TYPE != 'NT006' AND A.NODE_TYPE != 'NT008'
 					</if>
 					<if test="TYPE == 'LINK_NODE'">
 						AND A.LINK_NODE_YN = 'Y'
 					</if>
 					<if test="TYPE == 'SOUND_NODE'">
-						AND A.NODE_TYPE != 'NT005'
+						AND A.NODE_TYPE != 'NT005' AND A.NODE_TYPE != 'NT008'
 					</if>
 					<if test="TYPE == 'ROUT_MODE'">
-						AND A.ROUT_ID  = #{ROUT_ID} AND A.NODE_TYPE != 'NT006'
+						AND A.ROUT_ID  = #{ROUT_ID} AND A.NODE_TYPE != 'NT006' AND A.NODE_TYPE != 'NT008'
 					</if>
 					<if test="@kr.tracom.util.CommonUtil@empty(TYPE)">
-						AND A.NODE_TYPE != 'NT006'
+						AND A.NODE_TYPE != 'NT006' AND A.NODE_TYPE != 'NT008'
 						<if test="CONTENT1 != null">
 							AND C.REP_ROUT_ID = #{CONTENT1}			
 						</if>

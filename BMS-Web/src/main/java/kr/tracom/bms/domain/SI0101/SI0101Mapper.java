@@ -29,4 +29,6 @@ public interface SI0101Mapper {
 	public int SI0101P0U0(Map param);
 	
 	public int SI0101P0DA0(Map param);
+	
+	public int deleteAllGrgMst();
 }

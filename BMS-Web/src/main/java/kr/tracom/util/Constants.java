@@ -12,6 +12,7 @@ public class Constants {
 	public static final String NODE_TYPE_VERTEX = "NT005"; //버텍스
 	public static final String NODE_TYPE_SOUND = "NT006"; //음성노드
 	public static final String NODE_TYPE_ENTRY = "NT007"; //교통진출입점
+	public static final String NODE_TYPE_SIGNAL = "NT008"; //신호
 	
 	public static final String MOCK_NODE_TYPE_CROSS = "101"; //교차로
 	public static final String MOCK_NODE_TYPE_END = "102"; //시종점

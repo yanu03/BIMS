@@ -378,7 +378,7 @@
 		
 		clearTimeout(timer);
 		timer = setTimeout(function(){
-			debugger;
+			
 			var bgWidth = document.getElementById(STTN_IMG.getID()).offsetWidth;
 			var bgHeight = document.getElementById(STTN_IMG.getID()).offsetHeight;
 			

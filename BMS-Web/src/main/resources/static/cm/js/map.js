@@ -8,6 +8,7 @@ var routMap = {
 		GARAGE : "NT004",
 		VERTEX : "NT005",
 		SOUND : "NT006",
+		SIGNAL : "NT008",
 	},
 	MAX_NODE_CNT : 800,
 	LIMIT_SPEED : 50
@@ -50,6 +51,7 @@ var RoutMAP = function(){
 	this.isShowCrs = "on";
 	this.isShowNormal = "on";
 	this.isShowVertex = "on";
+	this.isShowSignal = "on";
 	this.isShowRoad = "on";
 	this.isShowAbnormal = "on";
 	this.isShowSound = "on";
@@ -497,6 +499,11 @@ routMap.addMarkerInter = function(mapId, data, grid, idx, focusIdx, isOverLayHid
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex.png", imageSize);
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex_selected.png", imageSize);
 	}
+	else if(data.NODE_TYPE == routMap.NODE_TYPE.SIGNAL){
+		imageSize = new kakao.maps.Size(12, 12); 
+		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex.png", imageSize);
+		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex_selected.png", imageSize);
+	}	
 	else {
 		imageSize = new kakao.maps.Size(19, 28); 
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/road_trans.png", imageSize);
@@ -697,6 +704,11 @@ routMap.addSoundMarkerInter = function(mapId, data, grid, idx, focusIdx) {
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex.png", imageSize);
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex_selected.png", imageSize);
 	}
+	else if(data.NODE_TYPE == routMap.NODE_TYPE.SIGNAL){
+		imageSize = new kakao.maps.Size(12, 12); 
+		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex.png", imageSize);
+		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex_selected.png", imageSize);
+	}	
 	else if(data.NODE_TYPE == routMap.NODE_TYPE.SOUND){
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/voice_node.png", imageSize);
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/voice_node_selected.png", imageSize);
@@ -2278,6 +2290,11 @@ routMap.showMarker = function(mapId, data, idx, focusIdx, grid) {
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex.png", imageSize);
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex_selected.png", imageSize);
 	}
+	else if(routMap.mapInfo[mapId].isShowSignal == "on" &&data.NODE_TYPE == routMap.NODE_TYPE.SIGNAL){
+		imageSize = new kakao.maps.Size(12, 12);
+		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex.png", imageSize);
+		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex_selected.png", imageSize);
+	}
 	else if (routMap.mapInfo[mapId].isShowNode == "on" && data.Node_TYPE == routMap.NODE_TYPE.NORMAL){
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/road_trans.png", imageSize);
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/road_selected.png", imageSize);
@@ -2543,6 +2560,11 @@ routMap.showMarker2 = function(mapId, data, idx) {
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/busstop_selected.png", imageSize);
 	}
 	else if(routMap.mapInfo[mapId].isShowVertex == "on" &&data.NODE_TYPE == routMap.NODE_TYPE.VERTEX){
+		imageSize = new kakao.maps.Size(12, 12); 
+		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex.png", imageSize);
+		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex_selected.png", imageSize);
+	}
+	else if(routMap.mapInfo[mapId].isShowSignal == "on" &&data.NODE_TYPE == routMap.NODE_TYPE.SIGNAL){
 		imageSize = new kakao.maps.Size(12, 12); 
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex.png", imageSize);
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex_selected.png", imageSize);
@@ -2846,6 +2868,11 @@ routMap.showOnlyMarker = function(mapId, data, idx, focusIdx, grid) {
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex.png", imageSize);
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex_selected.png", imageSize);
 	}
+	else if(routMap.mapInfo[mapId].isShowSignal == "on" &&data.NODE_TYPE == routMap.NODE_TYPE.SIGNAL){
+		imageSize = new kakao.maps.Size(12, 12);
+		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex.png", imageSize);
+		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex_selected.png", imageSize);
+	}	
 	else if (routMap.mapInfo[mapId].isShowNode == "on" && data.Node_TYPE == routMap.NODE_TYPE.NORMAL){
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/road_trans.png", imageSize);
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/road_selected.png", imageSize);
@@ -3957,6 +3984,7 @@ routMap.drawRoute = function(mapId, grid, focusIdx) {
 			}*/
 			
 			// 노드 타입이 버스 정류소 마커 표시
+			
 			if(list[i].NODE_TYPE == routMap.NODE_TYPE.BUSSTOP && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.BUSSTOP)>=0) {
 				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
 			}
@@ -3964,6 +3992,9 @@ routMap.drawRoute = function(mapId, grid, focusIdx) {
 				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
 			}
 			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.VERTEX && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.VERTEX)>=0) {
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
+			}
+			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.SIGNAL && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.SIGNAL)>=0) {
 				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
 			}
 			// 아닐 경우(일반 노드) 네모 박스 표시

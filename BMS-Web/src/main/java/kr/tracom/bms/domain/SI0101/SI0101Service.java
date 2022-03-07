@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.tracom.cm.support.ServiceSupport;
+import kr.tracom.util.CommonUtil;
 
 @Service
 public class SI0101Service extends ServiceSupport{
@@ -32,7 +33,14 @@ public class SI0101Service extends ServiceSupport{
 		int uCnt = 0;
 		int dCnt = 0;		
 		
+		Map<String, Object> map = getSimpleDataMap("dma_search");
+	
 		List<Map<String, Object>> param = getSimpleList("dlt_BMS_GRG_MST");
+
+		String exl_update = (String) map.get("EXL_UPDATE");
+		if(CommonUtil.notEmpty(exl_update)&&"true".equals(exl_update)) {
+			si0101Mapper.deleteAllGrgMst();
+		}
 		
 		for (int i = 0; i < param.size(); i++) {
 

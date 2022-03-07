@@ -62,6 +62,7 @@
 						<w2:key id="GRG_NM" name="차고지명" dataType="text"></w2:key>
 						<w2:key id="CENTER_GPS_X" name="중심GPS_X" dataType="text"></w2:key>
 						<w2:key id="CENTER_GPS_Y" name="중심GPS_Y" dataType="text"></w2:key>
+						<w2:key id="EXL_UPDATE" name="엑셀업데이트" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataMap baseNode="map" id="dma_SEQ_BMS_GRG_MST_0">
@@ -96,7 +97,7 @@
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="조회 중입니다..." ev:submit="" ev:submitdone="scwin.sub_SI0101G0R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_SI0101G0S0" ref='data:json,{"action":"modified","id":"dlt_BMS_GRG_MST"}' target="data:json,dma_result"
+			<xf:submission id="sub_SI0101G0S0" ref='data:json,[{"action":"modified","id":"dlt_BMS_GRG_MST"},"dma_search"]' target="data:json,dma_result"
 				action="/si/SI0101G0S0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
 				customHandler="" mode="asynchronous" processMsg="저장 중입니다.." ev:submit="" ev:submitdone="scwin.sub_SI0101G0S0_submitdone"
 				ev:submiterror="" abortTrigger="">
@@ -142,19 +143,20 @@
 		var subOptions = {
 			ADD: {cbFnc:scwin.editClick,nm:"편집시작",class:"addCross"}
 		};
-		scwin.param = com.getParameter();
+		
 		var mainOptions = {
 			SAVE : scwin.btn_save_onclick
 		};
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
-				
-		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);		
 		
 		var codeOptions = [ {code : "OWNER_TYPE", compID : "SI0101G0:OWNER_TYPE, OWNER_TYPE" } ];
 		
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions, codeOptions);
+				
+		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);		
+		
 		com.setCommonDtl(codeOptions, function(){
 			com.searchGrid(SI0101G0, sub_SI0101G0R0);
-		});			
+		});
 		
 		$p.executeSubmission(sub_SI0101SHI0);
 
@@ -166,6 +168,7 @@
 		});
 		
 		map.setLevel(3);
+		//com.setExlUpdate(SI0101G0, false); //엑셀 업데이트 초기화
 	};
 
 	scwin.onpageunload = function() {
@@ -173,6 +176,7 @@
 	};
 					
 	scwin.sub_SI0101G0R0_submitdone = function(e) {
+		//com.setExlUpdate(SI0101G0, false); //엑셀 업데이트 초기화
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
 			com.setFocusedCell(SI0101G0, "GRG_NM");
@@ -184,10 +188,11 @@
 	 */
 	scwin.sub_SI0101G0S0_submitdone = function(e) {
 		dlt_BMS_GRG_MST.modifyAllStatus("R");
-//		var sCode = com.getResultCode(e);
-//		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
-//			com.saveDone(SI0101G0,sub_SI0101G0R0);
-//		}
+
+		var sCode = com.getResultCode(e);
+		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
+			com.saveDone(SI0101G0,sub_SI0101G0R0);
+		}
 	};
 
 	scwin.btn_add_onclick = function() {
@@ -395,9 +400,6 @@
 		}		
 	};
 	
-	scwin.saveClick = function(e) {
-		
-	}
 	
 	scwin.sub_SI0101P0S0_submitdone = function(e) {
 		dlt_GRG_RDS_INFO.modifyAllStatus("R");
@@ -414,6 +416,8 @@
 		if (mainModifiedCnt > 0 || subModifiedCnt > 0) {
 			com.confirm("데이터를 저장하시겠습니까?", function(rtn)  {
 				if (rtn) {
+						dma_search.set("EXL_UPDATE" , com.getExlUpdate(SI0101G0));
+						
 						if(mainModifiedCnt > 0) {
 							com.executeSubmission(sub_SI0101G0S0);	
 						}

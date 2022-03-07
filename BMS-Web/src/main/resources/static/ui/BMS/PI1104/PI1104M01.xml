@@ -212,7 +212,7 @@
 //		dma_BMS_ED_INFO.set("FONT", dlt_BMS_ED_INFO.getCellData(row, "FONT"));
 //		dma_BMS_ED_INFO.set("REMARK", dlt_BMS_ED_INFO.getCellData(row, "REMARK"));
 		
-		debugger;
+		
 		var jsonData = dlt_BMS_ED_INFO.getAllJSON()[row];
 		dma_BMS_ED_INFO.setJSON(jsonData);
 		

@@ -14,6 +14,7 @@
 						<w2:key id="TYPE" name="name1" dataType="text"></w2:key>
 						<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
 						<w2:key id="USE_YN" name="name3" dataType="text"></w2:key>
+						<w2:key id="EXL_UPDATE" name="엑셀업데이트" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataMap baseNode="map" id="dma_search2">
@@ -21,6 +22,7 @@
 						<w2:key id="TYPE" name="name1" dataType="text"></w2:key>
 						<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
 						<w2:key id="USE_YN" name="name3" dataType="text"></w2:key>
+						<w2:key id="EXL_UPDATE" name="엑셀업데이트" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataMap baseNode="map" id="dma_result">
@@ -121,24 +123,29 @@
 			</xf:submission>
 		</xf:model>
 		<script type="text/javascript" lazy="false"><![CDATA[
+	var autoOptions = [];
+	var mainOptions = [];
 	scwin.onpageload = function() {
-		var autoOptions = {
-			Main : { grid : SI0407G1, srchSbm : sub_SI0407G1R0, savSbm : sub_SI0407G1S0
-				, srchGrp : pgm_header, keyColumn : "MOCK_LINK_ID", focusColumn : "MOCK_LINK_ID", name : "표준 노드링크 목록"}
+		autoOptions = {
+			Main : { grid : SI0407G0, srchSbm : sub_SI0407G0R0, savSbm : sub_SI0407G1S0
+				, srchGrp : pgm_header, keyColumn : "MOCK_LINK_ID", focusColumn : "MOCK_LINK_ID", name : "표준 노드"}
 		 };		
 		
-		var mainOptions = {
-			SEARCH : scwin.btn_search_onclick,
-			ADD : {disp:"hide"},
-			DEL : {disp:"hide"},
-			CNL :{disp:"hide"},
+		mainOptions = {
+			/*SEARCH : scwin.btn_search_onclick,
+			ADD : scwin.btn_add_onclick,
+			DELETE : scwin.btn_delete_onclick,
 			SAVE : scwin.btn_save_onclick,
 			EXL_I : scwin.btn_exli_onclick,
 			EXL : scwin.btn_exl_onclick,
-			EXL_F : scwin.btn_exlf_onclick
+			EXL_F : scwin.btn_exlf_onclick*/
+			SAVE : scwin.btn_save_onclick,
 			
 		};
+		
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions);	
+		
+		autoOptions.Main.grid = SI0407G0;
 		 
 		//com.executeSubmission(sub_SI0407SHI1);
 
@@ -172,7 +179,11 @@
 				} else if (nodeFocus == 0) {
 					com.setFocusedCell(SI0407G0, "MOCK_NODE_ID");	
 				}
-				scwin.SI0407G0_onrowindexchange();			
+				scwin.SI0407G0_onrowindexchange();
+				
+				autoOptions.Main = { grid : SI0407G0, srchSbm : sub_SI0407G0R0, savSbm : sub_SI0407G1S0
+					, srchGrp : pgm_header, keyColumn : "MOCK_LINK_ID", focusColumn : "MOCK_LINK_ID", name : "표준 노드"};
+				com.updateMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions);
 			}
 			else if(li_id == "li_mockLink") {
 				nodeActive = 0;
@@ -188,7 +199,11 @@
 				} else if (linkFocus == 0) {
 					com.setFocusedCell(SI0407G1, "MOCK_LINK_ID");	
 				}				
-				scwin.SI0407G1_onrowindexchange();	
+				scwin.SI0407G1_onrowindexchange();
+				
+				autoOptions.Main = { grid : SI0407G1, srchSbm : sub_SI0407G1R0, savSbm : sub_SI0407G1S0
+					, srchGrp : pgm_header, keyColumn : "MOCK_LINK_ID", focusColumn : "MOCK_LINK_ID", name : "표준 링크"};
+				com.updateMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions,mainOptions );
 			}
 		});		
 	};
@@ -326,7 +341,16 @@
 		com.changeSingleGrid(SI0407G0, row, oldRow);		
 	};
 	
-	scwin.btn_search_onclick = function(e) {
+	scwin.btn_save_onclick = function(e) {
+		if(nodeActive) {
+			com.saveGrid(SI0407G0, sub_SI0407G0S0);
+		}
+		else if(linkActive){
+			com.saveGrid(SI0407G1, sub_SI0407G1S0);
+		}
+	}
+	
+	/*scwin.btn_search_onclick = function(e) {
 	
 		if(nodeActive) {
 			com.executeSubmission(sub_SI0407G0R0);
@@ -355,16 +379,7 @@
 		}	
 	}
 	
-	scwin.btn_save_onclick = function(e) {
-		if(nodeActive) {
-			com.saveGrid(SI0407G0, sub_SI0407G0S0);
-		}
-		else if(linkActive){
-			com.saveGrid(SI0407G1, sub_SI0407G1S0);
-		}
-	}
-	
-	scwin.btn_exli_onclick = function(e) {
+	cwin.btn_exli_onclick = function(e) {
 		if(nodeActive) {
 			com.exlUploadGrid(SI0407G0);
 		}
@@ -389,7 +404,8 @@
 		else if(linkActive) {
 			com.exlFrmGrid(SI0407G1);	
 		}	
-	}]]></script>
+	}*/
+	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
@@ -497,7 +513,7 @@
 					<xf:group id="" class="" style="">
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="SI0407G0" class="cm_grid leftL"
 								autoFitMinWidth="0" dataList="data:dlt_BMS_MOCK_NODE" ev:onrowindexchange="scwin.SI0407G0_onrowindexchange"
-								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="true"
+								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="false"
 								rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false"
 								useShiftKey="true">
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
@@ -571,7 +587,7 @@
 							</w2:gridView>
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="SI0407G1" class="cm_grid leftL"
 								autoFitMinWidth="0" dataList="data:dlt_BMS_MOCK_LINK" ev:onrowindexchange="scwin.SI0407G1_onrowindexchange"
-								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="true"
+								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="false"
 								rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true"
 								style="display: none;">
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
