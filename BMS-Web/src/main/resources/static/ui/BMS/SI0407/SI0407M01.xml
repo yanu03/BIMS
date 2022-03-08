@@ -55,8 +55,8 @@
 						<w2:column id="ROAD_TYPE" name="도로유형" dataType="text"></w2:column>
 						<w2:column id="ROAD_NO" name="도로번호" dataType="text"></w2:column>
 						<w2:column id="ROAD_NAME" name="도로명" dataType="text"></w2:column>
-						<w2:column id="ROAD_USE" name="도로사용여부" dataType="text" defaultValue="Y"></w2:column>
-						<w2:column id="MULTI_LINK" name="중용구간여부" dataType="text" defaultValue="Y"></w2:column>
+						<w2:column id="ROAD_USE" name="도로사용여부" dataType="text"></w2:column>
+						<w2:column id="MULTI_LINK" name="중용구간여부" dataType="text"></w2:column>
 						<w2:column id="CONNECT" name="연결로코드" dataType="text"></w2:column>
 						<w2:column id="MAX_SPD" name="최고제한속도" dataType="text"></w2:column>
 						<w2:column id="REST_VEH" name="통과제한차량" dataType="text"></w2:column>
@@ -125,6 +125,8 @@
 		<script type="text/javascript" lazy="false"><![CDATA[
 	var autoOptions = [];
 	var mainOptions = [];
+	var codeOptions1 = [];
+	var codeOptions2 = [];
 	scwin.onpageload = function() {
 		autoOptions = {
 			Main : { grid : SI0407G0, srchSbm : sub_SI0407G0R0, savSbm : sub_SI0407G1S0
@@ -143,20 +145,35 @@
 			
 		};
 		
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions);	
+		codeOptions1 = [ {code : "MOCK_NODE_TYPE", compID : "SI0407G0:MOCK_NODE_TYPE" }
+							,{code : "TURN_P", compID : "SI0407G0:TURN_P" }
+						];
+		
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions, codeOptions1);	
 		
 		autoOptions.Main.grid = SI0407G0;
 		 
 		//com.executeSubmission(sub_SI0407SHI1);
 
-//		com.setCommonDtl(codeOptions, function() {
-//			com.searchGrid(SI0407G1, sub_SI0407G1R0);
-//		});	
+		com.setCommonDtl(codeOptions1, function() {
+			com.searchGrid(SI0407G0, sub_SI0407G0R0);
+		});
+		
+		codeOptions2 = [ {code : "ROAD_RANK", compID : "SI0407G1:ROAD_RANK" }
+							,{code : "ROAD_TYPE", compID : "SI0407G1:ROAD_TYPE" }
+							,{code : "ROAD_USE", compID : "SI0407G1:ROAD_USE" }
+							,{code : "MULTI_LINK", compID : "SI0407G1:MULTI_LINK" }
+							,{code : "CONNECT", compID : "SI0407G1:CONNECT" }
+							,{code : "REST_VEH", compID : "SI0407G1:REST_VEH" }
+						];
+		com.setCommonDtl(codeOptions2, function() {
+			com.searchGrid(SI0407G1, sub_SI0407G1R0);
+		});		
 		com.executeSubmission(sub_SI0407SHI0);
 		com.executeSubmission(sub_SI0407SHI1);
 		com.executeSubmission(sub_SI0407SHI2);
-		com.executeSubmission(sub_SI0407G0R0);
-		com.executeSubmission(sub_SI0407G1R0);
+		//com.executeSubmission(sub_SI0407G0R0);
+		//com.executeSubmission(sub_SI0407G1R0);
 		
 		//탭 목록 클릭 이벤트
 		$(".moni_img").find("li").click( function() {
@@ -183,7 +200,7 @@
 				
 				autoOptions.Main = { grid : SI0407G0, srchSbm : sub_SI0407G0R0, savSbm : sub_SI0407G1S0
 					, srchGrp : pgm_header, keyColumn : "MOCK_LINK_ID", focusColumn : "MOCK_LINK_ID", name : "표준 노드"};
-				com.updateMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions);
+				com.updateMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions, codeOptions1);
 			}
 			else if(li_id == "li_mockLink") {
 				nodeActive = 0;
@@ -203,7 +220,7 @@
 				
 				autoOptions.Main = { grid : SI0407G1, srchSbm : sub_SI0407G1R0, savSbm : sub_SI0407G1S0
 					, srchGrp : pgm_header, keyColumn : "MOCK_LINK_ID", focusColumn : "MOCK_LINK_ID", name : "표준 링크"};
-				com.updateMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions,mainOptions );
+				com.updateMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions,mainOptions, codeOptions2 );
 			}
 		});		
 	};
@@ -224,6 +241,7 @@
 	scwin.sub_SI0407G1S0_submitdone = function(e) {
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
+			com.saveDone(SI0407G0,sub_SI0407G0R0);
 			com.saveDone(SI0407G1,sub_SI0407G1R0);
 		}
 	};
@@ -522,7 +540,7 @@
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column9"
 											value="노드ID" blockSelect="false" displayMode="label" class="req">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column8"
+										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column8"
 											value="노드유형" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column7"
@@ -547,7 +565,7 @@
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
 											id="MOCK_NODE_ID" value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="MOCK_NODE_TYPE"
+										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="MOCK_NODE_TYPE"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="NODE_NAME"
@@ -562,7 +580,7 @@
 												</w2:itemset>
 											</w2:choices>											
 										</w2:column> -->
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="TURN_P"
+										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="TURN_P"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="GPS_X"
@@ -605,7 +623,7 @@
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column16"
 											value="차로수" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column15"
+										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column15"
 											value="도로등급" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column14"
@@ -623,7 +641,7 @@
 										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column10"
 											value="중용구간여부" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column9"
+										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column9"
 											value="연결로코드" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column8"
@@ -672,10 +690,10 @@
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="LANES"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="ROAD_RANK"
+										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="ROAD_RANK"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="ROAD_TYPE"
+										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="ROAD_TYPE"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="ROAD_NO"
@@ -684,19 +702,19 @@
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="ROAD_NAME"
 											value="" blockSelect="false" displayMode="label" textAlign="left">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="ROAD_USE"
+										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="ROAD_USE"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="MULTI_LINK"
+										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="MULTI_LINK"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="CONNECT"
+										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="CONNECT"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="MAX_SPD"
 											value="" blockSelect="false" displayMode="label" textAlign="right">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REST_VEH"
+										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="REST_VEH"
 											value="" blockSelect="false" displayMode="label" textAlign="right">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REST_W"

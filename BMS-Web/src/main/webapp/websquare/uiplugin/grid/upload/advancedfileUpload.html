@@ -50,11 +50,12 @@
    	var Upload_msg16 = "";
    	var Upload_msg17 = "";
    	var Grid_warning9 = "";
+   	var codeDataList = {};
     
 	window.onload = doInit;
 	window.onbeforeunload = doFinish;
 	function doInit() {
-
+		
 		var uploadInfo;
         try {
         	domain = getParameter("domain");
@@ -189,6 +190,7 @@
 		useMaxByteLength = uploadInfo.useMaxByteLength;
 		dateFormat = uploadInfo.dateFormat;
 		byteCheckEncoding = uploadInfo.byteCheckEncoding;
+		codeDataList = uploadInfo.codeDataList;
 
 		var header_Exist =document.getElementsByName("header");
 		//skipSpace 처리
@@ -380,6 +382,7 @@
 	}
 
 	function returnData( vData ) {
+		
 		if( processMsg != "" ) {
 			hideProcessMessage();
 		}
@@ -447,9 +450,31 @@
 			}
 			
 			try {
-
+				var columnList = columnIds.split(",");
+				var columnListLength = columnList.length;
+				
+				var orgGridId = gridID.substring(gridID.lastIndexOf("_") + 1);
+				
+				var codeDataList = opener.gcm.GRID_INFO[orgGridId].codeDataList;
+				var codeDataListLength = codeDataList.length;
+				var dataArr = child.split("\",\"");
+				for (var i = 0; i < columnListLength; i++) {
+					if((typeof codeDataList[columnList[i]] !== "undefined") && (codeDataList[columnList[i]].length!=0)){
+						var codeArr = codeDataList[columnList[i]];
+						for (var x = 0; x*columnListLength + i < dataArr.length; x++) {
+							for (var y = 0; y < codeArr.length; y++) {
+								if(dataArr[x*columnListLength + i].replace(/ /g,"").indexOf(codeArr[y].DL_CD_NM.replace(/ /g,""))>=0){
+									//dataArr[x*columnListLength + i]="\""+codeArr[y].DL_CD+"\"";
+									dataArr[x*columnListLength + i]=codeArr[y].DL_CD;
+								}
+							}
+						}
+					}
+				}
+				child = dataArr.join("\",\"");
+				
 				var jsonArray = {
-						columnInfo:columnIds.split(","),
+						columnInfo:columnList,
 						data:child
 		     	}
 
@@ -507,6 +532,7 @@
 				var fileName = fileNameDom.value;
 				var fileNameArr = fileName.split("\\"); //fileName에 대해서 IE에서는 파일 경로가 나오는데 FF chrome은 나오지 않는다. 따라서 '\\'기준으로 나눠준다.
 				opener.window[gridID].fireFileReadEnd( fileNameArr[fileNameArr.length-1] );
+				opener.gcm.GRID_INFO[orgGridId].exlUpdate = true;
 				window.self.close();
 			} catch (e) {
 				opener.WebSquare.exception.printStackTrace(e);

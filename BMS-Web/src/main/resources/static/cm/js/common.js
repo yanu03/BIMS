@@ -6791,7 +6791,8 @@ com.delUndoGrid = function(grid){
  * @param {fnc} cnlGridCb 초기화 이후에 호출되는 callback 함수
  */
 com.clearGrid = function(grid, cnlGridCb){
-	gcm.GRID_INFO[grid.org_id].exlUpdate = false; //엑셀 업데이트도 초기화
+	if(com.isEmpty(gcm.GRID_INFO[grid.org_id])==false)
+		gcm.GRID_INFO[grid.org_id].exlUpdate = false; //엑셀 업데이트도 초기화
 	
 	if(com.isEmpty(gcm.GRID_INFO[grid.org_id])==false && com.isEmpty(gcm.GRID_INFO[grid.org_id].undo)==false
 			 && gcm.GRID_INFO[grid.org_id].undo == false)return;
