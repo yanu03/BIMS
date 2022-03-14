@@ -532,7 +532,8 @@
 				var fileName = fileNameDom.value;
 				var fileNameArr = fileName.split("\\"); //fileName에 대해서 IE에서는 파일 경로가 나오는데 FF chrome은 나오지 않는다. 따라서 '\\'기준으로 나눠준다.
 				opener.window[gridID].fireFileReadEnd( fileNameArr[fileNameArr.length-1] );
-				opener.gcm.GRID_INFO[orgGridId].exlUpdate = true;
+				//opener.gcm.GRID_INFO[orgGridId].exlUpdate = true;
+				opener.gcm.GRID_INFO[orgGridId].search_map.set("EXL_UPDATE", true);
 				window.self.close();
 			} catch (e) {
 				opener.WebSquare.exception.printStackTrace(e);

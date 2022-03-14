@@ -137,7 +137,7 @@
 		
 		var autoOptions = {
 			Main : { grid : SI0402G0, srchSbm : sub_SI0402G0R0, srchGrp : pgm_header, keyColumn : "ROUT_ID", focusColumn : "ROUT_ID", name : "노선 목록"},
-			Sub1 : { grid : SI0402G1, srchSbm : sub_SI0402G1R0, srchGrp : pgm_subList, savSbm : sub_SI0402G1S0, name :  "노선 경로정보"}
+			Sub1 : { grid : SI0402G1, srchSbm : sub_SI0402G1R0, srchGrp : pgm_subList, savSbm : sub_SI0402G1S0, name :  "노선 경로정보", search_map : dma_sub_search}
 		 };
 		 
 		var mainOptions = {
@@ -542,7 +542,7 @@
 						}
 						//dlt_BMS_ROUT_NODE_CMPSTN.setCellAllData(0, "ROUT_ID", dlt_BMS_ROUT_MST.getCellData(SI0402G1.getFocusedRowIndex(),"ROUT_ID"))
 						
-						dma_sub_search.set("EXL_UPDATE" , com.getExlUpdate(SI0402G1));
+						//dma_sub_search.set("EXL_UPDATE" , com.getExlUpdate(SI0402G1));
 						
 						com.saveData(SI0402G1,null,sub_SI0402G1S0);
 					}

@@ -20,7 +20,9 @@ public interface SI0407Mapper {
 	
 	public int SI0407G0D0(Map param);
 	
-	public int SI0407G0U0(Map param);	
+	public int SI0407G0U0(Map param);
+	
+	public int deleteAllMockNode();
 	
 	public List SI0407G1R0(Map param);
 	
@@ -28,6 +30,8 @@ public interface SI0407Mapper {
 	
 	public int SI0407G1D0(Map param);
 	
-	public int SI0407G1U0(Map param);	
+	public int SI0407G1U0(Map param);
 	
+	public int deleteAllMockLink();
+
 }

@@ -51,17 +51,23 @@ public class SI0407Service extends ServiceSupport {
 		int uCnt = 0;
 		int dCnt = 0;		
 		
+		Map map = getSimpleDataMap("dma_search");
+		
 		List<Map<String, Object>> param = getSimpleList("dlt_BMS_MOCK_NODE");
 		try {
+			String exl_update = (String) map.get("EXL_UPDATE");
+			if(CommonUtil.notEmpty(exl_update)&&"true".equals(exl_update)) {
+				si0407Mapper.deleteAllMockNode();
+			}
 			for (int i = 0; i < param.size(); i++) {
 				Map data = (Map) param.get(i);
 				String rowStatus = (String) data.get("rowStatus");
 				if (rowStatus.equals("C")) {
-					iCnt += si0407Mapper.SI0407G1I0(data);
+					iCnt += si0407Mapper.SI0407G0I0(data);
 				} else if (rowStatus.equals("U")) {
-					uCnt += si0407Mapper.SI0407G1U0(data);
+					uCnt += si0407Mapper.SI0407G0U0(data);
 				} else if (rowStatus.equals("D")) {
-					dCnt += si0407Mapper.SI0407G1D0(data);
+					dCnt += si0407Mapper.SI0407G0D0(data);
 				} 
 			}			
 		} catch(Exception e) {
@@ -83,7 +89,7 @@ public class SI0407Service extends ServiceSupport {
 	
 	public List SI0407G1R0() throws Exception {
 		// TODO Auto-generated method stub
-		Map param = getSimpleDataMap("dma_search2");
+		Map param = getSimpleDataMap("dma_search");
 		return si0407Mapper.SI0407G1R0(param);		
 	}
 	
@@ -100,34 +106,23 @@ public class SI0407Service extends ServiceSupport {
 		int uCnt = 0;
 		int dCnt = 0;		
 		
+		Map map = getSimpleDataMap("dma_search");
+		
 		List<Map<String, Object>> param = getSimpleList("dlt_BMS_MOCK_LINK");
 		try {
+			String exl_update = (String) map.get("EXL_UPDATE");
+			if(CommonUtil.notEmpty(exl_update)&&"true".equals(exl_update)) {
+				si0407Mapper.deleteAllMockLink();
+			}
+
 			for (int i = 0; i < param.size(); i++) {
 				Map data = (Map) param.get(i);
 				String rowStatus = (String) data.get("rowStatus");
 				if (rowStatus.equals("C")) {
-					if(data.get("MOCK_NODE_TYPE").equals(Constants.MOCK_NODE_TYPE_CROSS)) {
-						data.put("NODE_TYPE", Constants.NODE_TYPE_CROSS);
-					}
-					else {
-						data.put("NODE_TYPE", Constants.NODE_TYPE_NORMAL);
-					}
 					iCnt += si0407Mapper.SI0407G1I0(data);
-				} else if (rowStatus.equals("U")) {
-					if(data.get("MOCK_NODE_TYPE").equals(Constants.MOCK_NODE_TYPE_CROSS)) {
-						data.put("NODE_TYPE", Constants.NODE_TYPE_CROSS);
-					}
-					else {
-						data.put("NODE_TYPE", Constants.NODE_TYPE_NORMAL);
-					}					
+				} else if (rowStatus.equals("U")) {			
 					uCnt += si0407Mapper.SI0407G1U0(data);
-				} else if (rowStatus.equals("D")) {
-					if(data.get("MOCK_NODE_TYPE").equals(Constants.MOCK_NODE_TYPE_CROSS)) {
-						data.put("NODE_TYPE", Constants.NODE_TYPE_CROSS);
-					}
-					else {
-						data.put("NODE_TYPE", Constants.NODE_TYPE_NORMAL);
-					}					
+				} else if (rowStatus.equals("D")) {				
 					dCnt += si0407Mapper.SI0407G1D0(data);
 				} 
 			}			

@@ -122,6 +122,7 @@
 .grdc_400_20_a_20_400 {display:grid; grid-template-columns:400px 20px auto 20px 400px;}
 
 .grdr_20_a {display:grid; grid-template-rows: minmax(20px, max-content) auto;}
+.grdr_41_a {display:grid; grid-template-rows: minmax(41px, max-content) auto;}
 .grdr_41_36_a {display:grid; grid-template-rows: minmax(41px, max-content) minmax(36px, max-content) auto;}
 .grdr_36_a_40 {display:grid; grid-template-rows: minmax(36px, max-content) auto minmax(40px, max-content); }
 .grdr_36_a_100_40 {display:grid; grid-template-rows: minmax(36px, max-content) auto minmax(100px, max-content) minmax(40px, max-content); }

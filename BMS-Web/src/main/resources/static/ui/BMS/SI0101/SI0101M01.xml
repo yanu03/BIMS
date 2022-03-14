@@ -137,7 +137,7 @@
 	scwin.onpageload = function() {
 		var autoOptions = {
 			Main : { grid : SI0101G0, srchSbm : sub_SI0101G0R0, savSbm : sub_SI0101G0S0, keySbm : sub_SI0101G0K0 
-					,srchGrp : pgm_header, keyColumn : "GRG_ID", focusColumn : "GRG_NM", name :  "차고지 목록"}
+					,srchGrp : pgm_header, keyColumn : "GRG_ID", focusColumn : "GRG_NM", name :  "차고지 목록", search_map : dma_search}
 		};
 		
 		var subOptions = {
@@ -416,7 +416,7 @@
 		if (mainModifiedCnt > 0 || subModifiedCnt > 0) {
 			com.confirm("데이터를 저장하시겠습니까?", function(rtn)  {
 				if (rtn) {
-						dma_search.set("EXL_UPDATE" , com.getExlUpdate(SI0101G0));
+						//dma_search.set("EXL_UPDATE" , com.getExlUpdate(SI0101G0));
 						
 						if(mainModifiedCnt > 0) {
 							com.executeSubmission(sub_SI0101G0S0);	
