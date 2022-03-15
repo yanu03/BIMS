@@ -124,7 +124,6 @@
 	var isGrgAdd;
 	var oldNodeType;
 	var curRoutId;
-	var curRoutId;
 
 	scwin.onpageload = function() {
 
@@ -173,6 +172,7 @@
 			, onClick: scwin.onClickMap
 			, nodeChangeCb: scwin.nodeChangeCb
 			, draggable: true
+			, isChange: true
 		});
 
 		

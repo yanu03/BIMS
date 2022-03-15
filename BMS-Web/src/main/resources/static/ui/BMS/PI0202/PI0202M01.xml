@@ -149,6 +149,7 @@
 			, onClick: scwin.onClickMap
 			, nodeChangeCb: scwin.nodeChangeCb
 			, draggable: true
+			, isChange: true
 			, isSound: true
 		});
 		
