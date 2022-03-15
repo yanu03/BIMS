@@ -200,7 +200,7 @@
 	};
 	
 	scwin.paramPopupOnclick = function(){
-		debugger;
+		
 		var focusRowIdx = scwin.idxRowAuthority;
 		var dvcKind = dlt_BMS_DVC_INFO.getCellData(VD0101G1.getFocusedRowIndex(), "DVC_KIND")
 		dma_subsearch.set("DVC_KIND", dvcKind);

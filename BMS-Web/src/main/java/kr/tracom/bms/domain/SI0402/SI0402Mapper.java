@@ -28,6 +28,8 @@ public interface SI0402Mapper {
 	
 	public Map SI0402G1K0();
 	
+	public int SI0402G1DA0(Map param); //노선과노드구성 테이블 삭제
+	
 	public Map SI0402G1K1();
 	
 	public int SI0402G1DA1(Map param); //노선과링크구성 테이블 삭제

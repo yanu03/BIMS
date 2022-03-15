@@ -25,6 +25,7 @@
 						<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
 						<w2:key id="TYPE" name="TYPE" dataType="text"></w2:key>
 						<w2:key id="LAST_NODE_ID" name="마지막노드ID" dataType="text"></w2:key>
+						<w2:key id="EXL_UPDATE" name="엑셀업데이트" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataMap baseNode="map" id="dma_result">
@@ -136,7 +137,7 @@
 		
 		var autoOptions = {
 			Main : { grid : SI0402G0, srchSbm : sub_SI0402G0R0, srchGrp : pgm_header, keyColumn : "ROUT_ID", focusColumn : "ROUT_ID", name : "노선 목록"},
-			Sub1 : { grid : SI0402G1, srchSbm : sub_SI0402G1R0, srchGrp : pgm_subList, savSbm : sub_SI0402G1S0, name :  "노선 경로정보"}
+			Sub1 : { grid : SI0402G1, srchSbm : sub_SI0402G1R0, srchGrp : pgm_subList, savSbm : sub_SI0402G1S0, name :  "노선 경로정보", search_map : dma_sub_search}
 		 };
 		 
 		var mainOptions = {
@@ -146,7 +147,7 @@
 			SAVE:scwin.btn_save_onclick
 		};
 		
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainOptions);
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainOptions, codeOptions);
 	
 		var subOptions = {
 			SAVE:[{cbFnc:scwin.subGridUp, nm:"상",class:"up"},{cbFnc:scwin.subGridDown,nm:"하",class:"down"}]
@@ -176,6 +177,7 @@
 
 		
 		scwin.disp_check_normal();
+		//com.setExlUpdate(SI0402G1, false); //엑셀 업데이트 초기화
 	};
 
 	
@@ -225,11 +227,17 @@
 		if(info.colIndex == 2){
 			oldNodeType = info.oldValue;
 			
-			if (info.newValue == "NT005") {
+			if (oldNodeType != "NT008" && info.newValue == "NT005") {
 				com.alert("버텍스로 변경 할수 없습니다.");
 				dlt_BMS_ROUT_NODE_CMPSTN.setCellData(SI0402G1.getFocusedRowIndex(),"NODE_TYPE", oldNodeType);
 				return;
 			}
+			
+			if (oldNodeType != "NT005" && info.newValue == "NT008") {
+				com.alert("신호로 변경 할수 없습니다.");
+				dlt_BMS_ROUT_NODE_CMPSTN.setCellData(SI0402G1.getFocusedRowIndex(),"NODE_TYPE", oldNodeType);
+				return;
+			}			
 			
 			if (info.newValue == "NT006") {
 				com.alert("음성노드는 음성 편성에서만 선택할 수 있습니다.");
@@ -287,6 +295,7 @@
 	scwin.sub_SI0402G1S0_submitdone = function(e) {
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
+			//com.setExlUpdate(SI0402G1, false); //엑셀 업데이트 초기화
 			scwin.releaseGeoBtn();
 			routMap.initMapInfo("map_SI0402");
 			com.saveDone(SI0402G1,sub_SI0402G1R0);
@@ -531,6 +540,10 @@
 							var lastNodeId = dlt_BMS_ROUT_NODE_CMPSTN.getCellData(dlt_BMS_ROUT_NODE_CMPSTN.getRowCount()-1, "NODE_ID");
 							dma_sub_search.set("LAST_NODE_ID", lastNodeId);
 						}
+						//dlt_BMS_ROUT_NODE_CMPSTN.setCellAllData(0, "ROUT_ID", dlt_BMS_ROUT_MST.getCellData(SI0402G1.getFocusedRowIndex(),"ROUT_ID"))
+						
+						//dma_sub_search.set("EXL_UPDATE" , com.getExlUpdate(SI0402G1));
+						
 						com.saveData(SI0402G1,null,sub_SI0402G1S0);
 					}
 				});
@@ -701,6 +714,7 @@
 	
 	scwin.disp_check_normal = function(){
 		disp_check.getCheckboxList()[0].checked = true;
+		disp_check.getCheckboxList()[1].checked = true;
 		disp_check.getCheckboxList()[2].checked = true;
 		disp_check.getCheckboxList()[3].checked = true;
 		routMap.setDispCheck("map_SI0402", disp_check.getValue());
@@ -923,31 +937,28 @@
 								<w2:header id="header1" style="">
 									<w2:row id="row1" style="">
 										<w2:column blockSelect="false" displayMode="label" id="column1" inputType="text"
+											removeBorderStyle="false" style="height:20px" value="노선ID" width="0">
+										</w2:column>
+										<w2:column blockSelect="false" displayMode="label" id="column1" inputType="text"
 											removeBorderStyle="false" style="height:20px" value="노드ID" width="100">
 										</w2:column>
 										<w2:column blockSelect="false" displayMode="label" id="column2" inputType="text"
-											removeBorderStyle="false" style="height:20px" value="노드명" width="100">
+											removeBorderStyle="false" style="height:20px" value="노드명" width="180">
 										</w2:column>
 										<w2:column blockSelect="false" displayMode="label" id="column3" inputType="text"
 											removeBorderStyle="false" style="height:20px" value="유형" width="70">
 										</w2:column>
 										<w2:column blockSelect="false" displayMode="label" id="column4" inputType="text"
-											removeBorderStyle="false" style="height:20px" value="경도" width="100">
+											removeBorderStyle="false" style="height:20px" value="경도" width="80">
 										</w2:column>
 										<w2:column blockSelect="false" displayMode="label" id="column5" inputType="text"
-											removeBorderStyle="false" style="height:20px" value="위도" width="100">
-										</w2:column>
-										<w2:column blockSelect="false" displayMode="label" id="column6" inputType="text"
-											removeBorderStyle="false" style="height:20px" value="정류소ID" width="100">
+											removeBorderStyle="false" style="height:20px" value="위도" width="80">
 										</w2:column>
 										<w2:column blockSelect="false" displayMode="label" id="column7" inputType="text"
 											removeBorderStyle="false" style="height:20px" value="정류소번호" width="70">
 										</w2:column>
-										<w2:column blockSelect="false" displayMode="label" id="column12" inputType="text"
-											removeBorderStyle="false" style="height:20px" value="차고지ID" width="100">
-										</w2:column>
 										<w2:column blockSelect="false" displayMode="label" id="column11" inputType="text"
-											removeBorderStyle="false" style="height:20px" value="현시번호" width="70">
+											removeBorderStyle="false" style="height:20px" value="신호현시" width="70">
 										</w2:column>
 										<w2:column blockSelect="false" displayMode="label" id="column8" inputType="text"
 											removeBorderStyle="false" style="height:20px" value="교차로ID" width="100">
@@ -955,10 +966,19 @@
 										<w2:column blockSelect="false" displayMode="label" id="column9" inputType="text"
 											removeBorderStyle="false" style="height:20px" value="링크ID" width="100">
 										</w2:column>
+										<!-- <w2:column blockSelect="false" displayMode="label" id="column6" inputType="text"
+											removeBorderStyle="false" style="height:20px" value="정류소ID" width="100">
+										</w2:column>
+										<w2:column blockSelect="false" displayMode="label" id="column12" inputType="text"
+											removeBorderStyle="false" style="height:20px" value="차고지ID" width="100">
+										</w2:column> -->
 									</w2:row>
 								</w2:header>
 								<w2:gBody id="gBody1" style="">
 									<w2:row id="row2" style="">
+										<w2:column blockSelect="false" displayMode="label" id="ROUT_ID" inputType="text"
+											removeBorderStyle="false" style="height:20px" width="" readonly="true">
+										</w2:column>
 										<w2:column blockSelect="false" displayMode="label" id="NODE_ID" inputType="text"
 											removeBorderStyle="false" style="height:20px" width="" readonly="true">
 										</w2:column>
@@ -974,13 +994,7 @@
 										<w2:column blockSelect="false" displayMode="label" id="GPS_Y" inputType="text" removeBorderStyle="false"
 											style="height:20px" width="" textAlign="right">
 										</w2:column>
-										<w2:column blockSelect="false" displayMode="label" id="STTN_ID" inputType="text" removeBorderStyle="false"
-											style="height:20px" width="" readonly="true">
-										</w2:column>
 										<w2:column blockSelect="false" displayMode="label" id="STTN_NO" inputType="text" removeBorderStyle="false"
-											style="height:20px" width="" readonly="true">
-										</w2:column>
-										<w2:column blockSelect="false" displayMode="label" id="GRG_ID" inputType="text" removeBorderStyle="false"
 											style="height:20px" width="" readonly="true">
 										</w2:column>
 										<w2:column blockSelect="false" displayMode="label" id="PHASE_NO" inputType="text" removeBorderStyle="false"
@@ -992,6 +1006,12 @@
 										<w2:column blockSelect="false" displayMode="label" id="LINK_ID" inputType="text" removeBorderStyle="false"
 											style="height:20px" width="" readonly="true">
 										</w2:column>
+										<!-- <w2:column blockSelect="false" displayMode="label" id="STTN_ID" inputType="text" removeBorderStyle="false"
+											style="height:20px" width="" readonly="true">
+										</w2:column>
+										<w2:column blockSelect="false" displayMode="label" id="GRG_ID" inputType="text" removeBorderStyle="false"
+											style="height:20px" width="" readonly="true">
+										</w2:column> -->
 									</w2:row>
 								</w2:gBody>
 								<w2:footer id="footer1" style="">
@@ -1021,8 +1041,8 @@
 										<xf:value><![CDATA[NT003]]></xf:value>
 									</xf:item>
 									<xf:item>
-									<xf:label><![CDATA[버텍스]]></xf:label>
-										<xf:value><![CDATA[NT005]]></xf:value>
+									<xf:label><![CDATA[버텍스/신호]]></xf:label>
+										<xf:value><![CDATA[NT005/NT008]]></xf:value>
 									</xf:item>
 									<xf:item>
 										<xf:label><![CDATA[정류소]]></xf:label>

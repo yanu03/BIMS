@@ -1871,7 +1871,7 @@ com.downLoadExcel = function(grdObj, options, infoArr) {
 		useHeader : options.useHeader || "true", // String, [defalut: true] 다운로드시 Header를 출력 할지 여부( "true"인경우 출력, "false"인경우 미출력)
 		useSubTotal : options.useSubTotal || "false", // String, [defalut: false] 다운로드시 SubTotal을 출력 할지 여부( "true"인경우 출력, "false"인경우 미출력),
 		// expression을 지정한 경우 avg,sum,min,max,targetColValue,숫자를 지원 함.
-		useFooter : options.useFooter || "true", // String, [defalut: true] 다운로드시 Footer를 출력 할지 여부( "true"인경우 출력, "false"인경우 미출력)
+		useFooter : options.useFooter || "false", // String, [defalut: true] 다운로드시 Footer를 출력 할지 여부( "true"인경우 출력, "false"인경우 미출력)
 		separator : options.separator || ",", // String, [defalut: ,] 다운로드시 서버로 데이터 전송할때, 데이터를 구분짓는 구분자, default는 comma(,)
 		subTotalScale : options.subTotalScale || -1, // Number, [defalut: -1] 다운로드시 subTotal 평균계산시 소수점 자리수를 지정
 		subTotalRoundingMode : options.subTotalRoundingMode || "", // String, [defalut: 없음] 다운로드시 subTotal 평균계산시 Round를 지정 한다.
@@ -2033,7 +2033,7 @@ com.uploadExcel = function(grdObj, options) {
 		// ( 엑셀컬럼수가 그리드컬럼수 보다 작은 경우 그리드 컬러수를 설정)
 		headerExist : options.headerExist || "0", // String, [defalut:0] excel파일에서 그리드의 데이터에 header가 있는지 여부
 		// (1이면 header 존재 0이면 없음)
-		footerExist : options.footerExist || "1", // String, [defalut: 1] excel파일에서 그리드의 데이터에 footer가 있는지 여부
+		footerExist : options.footerExist || "0", // String, [defalut: 1] excel파일에서 그리드의 데이터에 footer가 있는지 여부
 		// (1이면 footer 존재 0이면 없음 기본값은 1 그리드에 footer가 없으면 적용되지 않음)
 		append : options.append || "0", // String, [defalut: 0] excel파일에서 가져온 데이터를 그리드에 append시킬지 여부
 		// (1이면 현재 그리드에 데이터를 추가로 넣어줌 0이면 현재 그리드의 데이터를 삭제하고 넣음)
@@ -2048,7 +2048,7 @@ com.uploadExcel = function(grdObj, options) {
 		insertColumns : options.insertColumns || "",// Array, radio, checkbox와 같은 컬럼을 엑셀에서 받아 오지 않고
 		// 사용자 컬럼 설정 으로 업로드 ( 데이터 구조 : [ { columnIndex:1, columnValue:"1" } ] )
 		popupUrl : options.popupUrl || "", // String, 업로드시에 호출할 popup의 url
-		status : options.status || "R", // String, [defalut: R]업로드된 데이터의 초기 상태값, 설정하지 않으면 "R"로 설정되며 "C"값을 설정 할 수 있다.
+		status : options.status || "C", // String, [defalut: R]업로드된 데이터의 초기 상태값, 설정하지 않으면 "R"로 설정되며 "C"값을 설정 할 수 있다.
 		pwd : options.pwd || "" // String, 엑셀파일에 암호가 걸려 있는 경우, 비밀번호
 	};
 
@@ -4406,7 +4406,8 @@ var autoOptions = {
  };
 com.setMainBtn2(wfm_mainBtn, btnCom.TYPE.SINGLE_GRID, autoOptions, userOptions);
 */
-com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt) {
+com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
+	
 	var programAuthority = gcm.CUR_PROGRAM_AUTH;
 	com.enableDisp(autoOpt);
 	
@@ -4414,6 +4415,7 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt) {
 	
 	if(programAuthority.AUTH_CHECK != 'Y')return;
 	
+	wfm_mainBtn.getWindow().btn_main_generator.removeAll();
 	
 	for(var i in gcm.BTN){
 		try {
@@ -4497,7 +4499,7 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt) {
 						}
 						else if(i==gcm.BTN.EXL_I.nm){
 							item.cbFnc = function(){
-								com.exlUploadGrid(main.grid);
+								com.exlUploadGrid(main.grid, codeOptions);
 							}
 						}
 						else if(i==gcm.BTN.EXL.nm){
@@ -4549,7 +4551,7 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt) {
 						}
 						else if(i==gcm.BTN.EXL_I.nm){
 							item.cbFnc = function(){
-								com.exlUploadGrid(main.grid);
+								com.exlUploadGrid(main.grid, codeOptions);
 							}
 						}
 						else if(i==gcm.BTN.EXL.nm){
@@ -4625,7 +4627,7 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt) {
 						}
 						else if(i==gcm.BTN.EXL_I.nm){
 							item.cbFnc = function(){
-								com.exlUploadGrid(main.grid);
+								com.exlUploadGrid(main.grid, codeOptions);
 							}
 						}
 						else if(i==gcm.BTN.EXL.nm){
@@ -4702,10 +4704,10 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt) {
 								var sub = autoOpt.Sub1;
 								if ((typeof sub !== "undefined")&&(sub !== null)){
 									if ((typeof sub.exlGrid !== "undefined")&&(sub.exlGrid !== null)){
-										com.exlUploadGrid(sub.exlGrid);
+										com.exlUploadGrid(sub.exlGrid, codeOptions);
 									}
 									else {
-										com.exlUploadGrid(sub.grid);
+										com.exlUploadGrid(sub.grid, codeOptions);
 									}
 								}
 							}
@@ -4798,7 +4800,7 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt) {
 						else if(i==gcm.BTN.EXL_I.nm){
 							item.cbFnc = function(){
 								var sub = autoOpt.Sub2;
-								com.exlUploadGrid(sub.grid);
+								com.exlUploadGrid(sub.grid, codeOptions);
 							}
 						}
 						else if(i==gcm.BTN.EXL.nm){
@@ -4885,7 +4887,7 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt) {
 						}
 						else if(i==gcm.BTN.EXL_I.nm){
 							item.cbFnc = function(){
-								com.exlUploadGrid(main.grid);
+								com.exlUploadGrid(main.grid, codeOptions);
 							}
 						}
 						else if(i==gcm.BTN.EXL.nm){
@@ -4969,7 +4971,7 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt) {
 						}
 						else if(i==gcm.BTN.EXL_I.nm){
 							item.cbFnc = function(){
-								com.exlUploadGrid(sub.grid);
+								com.exlUploadGrid(sub.grid, codeOptions);
 							}
 						}
 						else if(i==gcm.BTN.EXL.nm){
@@ -5056,7 +5058,7 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt) {
 						}
 						else if(i==gcm.BTN.EXL_I.nm){
 							item.cbFnc = function(){
-								com.exlUploadGrid(main.grid);
+								com.exlUploadGrid(main.grid, codeOptions);
 							}
 						}
 						else if(i==gcm.BTN.EXL.nm){
@@ -5097,6 +5099,699 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt) {
 	}
 	return gcm.BTN;
 };
+
+/*com.updateMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
+	var programAuthority = gcm.CUR_PROGRAM_AUTH;
+	com.enableDisp(autoOpt);
+	
+	com.initGridInfo(autoOpt); //그리드 항목명 저장
+	
+	if(programAuthority.AUTH_CHECK != 'Y')return;
+	
+	var tmpParentIdx = 0;
+	
+	for(var i in gcm.BTN){
+		try {
+			var item = gcm.BTN[i];
+			if(eval("programAuthority."+item.value) == "Y"){
+				
+				if ((typeof usrOpt !== "undefined")&&(usrOpt !== null)&&
+						((typeof eval("usrOpt."+i) === "function")||(typeof usrOpt[i] !== "undefined"))) {
+					var main = autoOpt.Main;
+					if (typeof eval("usrOpt."+i) === "function") {
+						var mainBtn = wfm_mainBtn.getWindow().btn_main_generator.getChild(tmpParentIdx++, "btn_main");
+						var str = item.str;
+						mainBtn.setValue(str);
+						mainBtn.addClass(item.class);
+						mainBtn.bind("onclick", eval("usrOpt."+i));
+						if ((i == gcm.BTN.SEARCH.nm)&&(typeof main.srchGrp !== "undefined")&&(main.srchGrp !== null)){
+							com.setEnterKeyEvent(main.srchGrp, eval("usrOpt."+i));
+						}
+					}
+					else if((typeof eval(usrOpt[i].cbFnc) === "function")||(typeof usrOpt[i].nm !== "undefined")
+							||(typeof usrOpt[i].class !== "undefined")){
+						var mainBtn = wfm_mainBtn.getWindow().btn_main_generator.getChild(tmpParentIdx++, "btn_main");
+						if(typeof eval(usrOpt[i].cbFnc) === "function"){
+							mainBtn.bind("onclick", eval(usrOpt[i].cbFnc));
+							if ((i == gcm.BTN.SEARCH.nm)&&(typeof main.srchGrp !== "undefined")&&(main.srchGrp !== null)){
+								com.setEnterKeyEvent(main.srchGrp, eval(usrOpt[i].cbFnc));
+							}
+						}
+						if(usrOpt[i].nm !== "undefined"){
+							mainBtn.setValue(usrOpt[i].nm);
+						}
+						if(usrOpt[i].class !== "undefined"){
+							mainBtn.addClass(usrOpt[i].class);
+						}
+					}
+					else{
+						
+					}
+				}
+				else if((typeof autoOpt !== "undefined")&&(autoOpt !== null)){
+					var mainBtn = wfm_mainBtn.getWindow().btn_main_generator.getChild(tmpParentIdx++, "btn_main");
+					var str = item.str;
+					mainBtn.setValue(str);
+					mainBtn.addClass(item.class);
+					mainBtn.bind("onclick", null);
+					
+					var main = autoOpt.Main;
+				
+					if( type == gcm.DISP_TYPE.SINGLE_GRID){ //단일 그리드
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+								com.searchGrid(main.grid, main.srchSbm , main.savSbm);
+							}
+						}
+						else if(i == gcm.BTN.ADD.nm){
+							item.cbFnc = function(){
+								if ((typeof main.keySbm !== "undefined")&&(main.keySbm !== null)){
+									$p.executeSubmission(main.keySbm);
+								}
+								else{
+									com.addGrid2(main.grid,main.focusColumn);
+								}
+							}
+						}
+						else if(i == gcm.BTN.DEL.nm){
+							item.cbFnc = function(){
+								com.delGrid(main.grid);
+							}
+						}
+						else if(i==gcm.BTN.CNL.nm){
+							item.cbFnc = function(){
+								com.cancelGrid(main.grid);
+							}
+						}
+						else if(i==gcm.BTN.SAVE.nm){
+							item.cbFnc = function(){
+								com.saveGrid(main.grid, main.savSbm);
+							}
+						}
+						else if(i==gcm.BTN.EXL_I.nm){
+							item.cbFnc = function(){
+								com.exlUploadGrid(main.grid, codeOptions);
+							}
+						}
+						else if(i==gcm.BTN.EXL.nm){
+							item.cbFnc = function(){
+								
+								com.exlGrid(main.grid);
+							}
+						}
+						else if(i==gcm.BTN.EXL_F.nm){
+							item.cbFnc = function(){
+								
+								com.exlFrmGrid(main.grid);
+							}
+						}
+						else if(i==gcm.BTN.CLOSE.nm){
+							item.cbFnc = function(){
+								com.closeTab(main.grid);
+							}
+						}
+					}
+					else if( type == gcm.DISP_TYPE.SINGLE_GRID_FORM){ //단일 그리드와 폼
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+								com.searchGridForm(main.grid, null, main.srchSbm , main.savSbm);
+							}
+						}
+						else if(i == gcm.BTN.ADD.nm){
+							item.cbFnc = function(){
+								if ((typeof main.keySbm !== "undefined")&&(main.keySbm !== null)){
+									$p.executeSubmission(main.keySbm);
+								}
+								else{
+									com.addGrid2(main.grid,main.focusColumn);
+								}
+							}
+						}
+						else if(i == gcm.BTN.DEL.nm){
+							item.cbFnc = function(){
+								com.delGrid(main.grid);
+							}
+						}
+						else if(i==gcm.BTN.CNL.nm){
+							item.cbFnc = function(){
+								com.cancelGrid(main.grid);
+							}
+						}
+						else if(i==gcm.BTN.SAVE.nm){
+							item.cbFnc = function(){
+								com.saveGridForm(main.grid, main.frm, main.savSbm);
+							}
+						}
+						else if(i==gcm.BTN.EXL_I.nm){
+							item.cbFnc = function(){
+								com.exlUploadGrid(main.grid, codeOptions);
+							}
+						}
+						else if(i==gcm.BTN.EXL.nm){
+							item.cbFnc = function(){
+								com.exlGrid(main.grid);
+							}
+						}
+						else if(i==gcm.BTN.EXL_F.nm){
+							item.cbFnc = function(){
+								com.exlFrmGrid(main.grid);
+							}
+						}
+						else if(i==gcm.BTN.CLOSE.nm){
+							item.cbFnc = function(){
+								com.closeTab(main.grid);
+							}
+						}
+					}
+					else if( type == gcm.DISP_TYPE.DUAL_GRID){ //듀얼 그리드
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.searchDualGrid(main.grid, sub.grid, null, main.srchSbm, main.savSbm, main.allSavSbm, sub.savSbm)
+								}
+								else{
+									com.searchGrid(main.grid, main.srchSbm , main.savSbm);
+								}
+							}
+						}
+						else if(i == gcm.BTN.ADD.nm){
+							item.cbFnc = function(){
+								if ((typeof main.keySbm !== "undefined")&&(main.keySbm !== null)){
+									$p.executeSubmission(main.keySbm);
+								}
+								else{
+									com.addGrid2(main.grid,main.focusColumn);
+								}
+							}
+						}
+						else if(i == gcm.BTN.DEL.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.delDualGrid(main.grid, sub.grid);
+								}
+								else {
+									com.delGrid(main.grid);
+								}
+							}
+						}
+						else if(i==gcm.BTN.CNL.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.cancelDualGrid(main.grid, sub.grid, main.cnlGridCb, sub.cnlGridCb);
+								}
+								else {
+									com.cancelGrid(main.grid);
+								}
+							}
+						}
+						else if(i==gcm.BTN.SAVE.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.saveDualGrid(main.grid, sub.grid, null, main.savSbm, main.allSavSbm, sub.savSbm);
+								}
+								else if ((typeof main.savSbm !== "undefined")&&(main.savSbm !== null)){
+									com.saveGrid(main.grid, main.savSbm);
+								}
+							}
+						}
+						else if(i==gcm.BTN.EXL_I.nm){
+							item.cbFnc = function(){
+								com.exlUploadGrid(main.grid, codeOptions);
+							}
+						}
+						else if(i==gcm.BTN.EXL.nm){
+							item.cbFnc = function(){
+								com.exlGrid(main.grid);
+							}
+						}
+						else if(i==gcm.BTN.EXL_F.nm){
+							item.cbFnc = function(){
+								com.exlFrmGrid(main.grid);
+							}
+						}
+						else if(i==gcm.BTN.CLOSE.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.closeTab(main.grid, sub.grid);
+								}
+								else{
+									com.closeTab(main.grid);
+								}
+							}
+						}
+					}
+					else if( type == gcm.DISP_TYPE.DUAL_GRID2){ //듀얼 그리드 에서 서브그리드만 저장
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.searchDualGrid(main.grid, sub.grid, null, main.srchSbm, main.savSbm, main.allSavSbm, sub.savSbm)
+								}
+								else{
+									com.searchGrid(main.grid, main.srchSbm , main.savSbm);
+								}
+							}
+						}
+						else if(i == gcm.BTN.ADD.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub.keySbm !== "undefined")&&(sub.keySbm !== null)){
+									$p.executeSubmission(sub.keySbm);
+								}
+								else{
+									com.addGrid2(sub.grid,sub.focusColumn);
+								}
+							}
+						}
+						else if(i == gcm.BTN.DEL.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.delGrid(sub.grid);
+								}
+							}
+						}
+						else if(i==gcm.BTN.CNL.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.cancelGrid(sub.grid, null, sub.cnlGridCb);
+								}
+							}
+						}
+						else if(i==gcm.BTN.SAVE.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.saveGrid(sub.grid, sub.savSbm);
+								}
+							}
+						}
+						else if(i==gcm.BTN.EXL_I.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									if ((typeof sub.exlGrid !== "undefined")&&(sub.exlGrid !== null)){
+										com.exlUploadGrid(sub.exlGrid, codeOptions);
+									}
+									else {
+										com.exlUploadGrid(sub.grid, codeOptions);
+									}
+								}
+							}
+						}
+						else if(i==gcm.BTN.EXL.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									if ((typeof sub.exlGrid !== "undefined")&&(sub.exlGrid !== null)){
+										com.exlGrid(sub.exlGrid);
+									}
+									else {
+										com.exlGrid(sub.grid);
+									}
+								}
+							}
+						}
+						else if(i==gcm.BTN.EXL_F.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									if ((typeof sub.exlGrid !== "undefined")&&(sub.exlGrid !== null)){
+										com.exlFrmGrid(sub.exlGrid);
+									}
+									else {
+										com.exlFrmGrid(sub.grid);
+									}
+								}
+							}
+						}
+						else if(i==gcm.BTN.CLOSE.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.closeTab(main.grid, sub.grid);
+								}
+								else{
+									com.closeTab(main.grid);
+								}
+							}
+						}
+					}
+					else if( type == gcm.DISP_TYPE.DUAL_GRID3){ //듀얼 그리드
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub2;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.searchDualGrid(main.grid, sub.grid, null, main.srchSbm, main.savSbm, main.allSavSbm, sub.savSbm)
+								}
+								else{
+									com.searchGrid(main.grid, main.srchSbm , main.savSbm);
+								}
+							}
+						}
+						else if(i == gcm.BTN.ADD.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub2;
+								if ((typeof main.keySbm !== "undefined")&&(main.keySbm !== null)){
+									$p.executeSubmission(sub.keySbm);
+								}
+								else{
+									com.addGrid2(sub.grid,sub.focusColumn);
+								}
+							}
+						}
+						else if(i == gcm.BTN.DEL.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub2;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.delGrid(sub.grid);
+								}
+							}
+						}
+						else if(i==gcm.BTN.CNL.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub2;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.cancelGrid(sub.grid);
+								}
+							}
+						}
+						else if(i==gcm.BTN.SAVE.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub2;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.saveGrid(sub.grid, sub.savSbm);
+								}
+							}
+						}
+						else if(i==gcm.BTN.EXL_I.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub2;
+								com.exlUploadGrid(sub.grid, codeOptions);
+							}
+						}
+						else if(i==gcm.BTN.EXL.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub2;
+								com.exlGrid(sub.grid);
+							}
+						}
+						else if(i==gcm.BTN.EXL_F.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub2;
+								com.exlFrmGrid(sub.grid);
+							}
+						}
+						else if(i==gcm.BTN.CLOSE.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub2;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.closeTab(main.grid, sub.grid);
+								}
+								else{
+									com.closeTab(main.grid);
+								}
+							}
+						}
+					}
+					else if( type == gcm.DISP_TYPE.DUAL_GRID_FORM){ //복함 그리드와 폼
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.searchDualGrid(main.grid, sub.grid, main.frm, main.srchSbm, main.savSbm, main.allSavSbm, sub.savSbm)
+								}
+								else{
+									com.searchGrid(main.grid, main.srchSbm , main.savSbm);
+								}
+							}
+						}
+						else if(i == gcm.BTN.ADD.nm){
+							item.cbFnc = function(){
+								if ((typeof main.keySbm !== "undefined")&&(main.keySbm !== null)){
+									$p.executeSubmission(main.keySbm);
+								}
+								else {
+									com.addGrid2(main.grid,main.focusColumn);
+									
+								}	
+							} 
+						}
+						else if(i == gcm.BTN.DEL.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.delDualGrid(main.grid, sub.grid);
+								}
+								else {
+									com.delGrid(main.grid);
+								}
+							}
+						}
+						else if(i==gcm.BTN.CNL.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.cancelDualGrid(main.grid, sub.grid);
+								}
+								else {
+									com.cancelGrid(main.grid);
+								}
+							}
+						}
+						else if(i==gcm.BTN.SAVE.nm){
+							item.cbFnc = function(){
+
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.saveDualGrid(main.grid, sub.grid, main.frm, main.savSbm, main.allSavSbm, sub.savSbm);
+								}
+								else {
+									com.saveGrid(main.grid, main.savSbm);
+								}
+							}
+						}
+						else if(i==gcm.BTN.EXL_I.nm){
+							item.cbFnc = function(){
+								com.exlUploadGrid(main.grid, codeOptions);
+							}
+						}
+						else if(i==gcm.BTN.EXL.nm){
+							item.cbFnc = function(){
+								com.exlGrid(main.grid);
+							}
+						}
+						else if(i==gcm.BTN.EXL_F.nm){
+							item.cbFnc = function(){
+								com.exlFrmGrid(main.grid);
+							}
+						}
+						else if(i==gcm.BTN.CLOSE.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.closeTab(main.grid, sub.grid);
+								}
+								else{
+									com.closeTab(main.grid);
+								}
+							}
+						}
+					}
+					else if( type == gcm.DISP_TYPE.DUAL_GRID_FORM2){ //복함 그리드와 폼
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+								
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.searchDualGrid(main.grid, sub.grid, main.frm, main.srchSbm, main.savSbm, main.allSavSbm, sub.savSbm)
+								}
+								else{
+									com.searchGrid(sub.grid, sub.srchSbm , sub.savSbm);
+								}
+							}
+						}
+						else if(i == gcm.BTN.ADD.nm){
+							var sub = autoOpt.Sub1;
+							item.cbFnc = function(){
+								if ((typeof sub.keySbm !== "undefined")&&(sub.keySbm !== null)){
+									$p.executeSubmission(sub.keySbm);
+								} 	else{
+									com.addGrid2(sub.grid,sub.focusColumn);
+								}
+							}
+						}
+						else if(i == gcm.BTN.DEL.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.delGrid(sub.grid);									
+								}
+								else {
+									com.delGrid(sub.grid);
+								}
+							}
+						}
+						else if(i==gcm.BTN.CNL.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.cancelDualGrid(main.grid, sub.grid);
+								}
+								else {
+									com.cancelGrid(sub.grid);
+								}
+							}
+						}
+						else if(i==gcm.BTN.SAVE.nm){
+							item.cbFnc = function(){
+								
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.saveDualGrid(main.grid, sub.grid, main.frm, main.savSbm, main.allSavSbm, sub.savSbm);
+								}
+								else {
+									com.saveGrid(sub.grid, sub.savSbm);
+								}
+							}
+						}
+						else if(i==gcm.BTN.EXL_I.nm){
+							item.cbFnc = function(){
+								com.exlUploadGrid(sub.grid, codeOptions);
+							}
+						}
+						else if(i==gcm.BTN.EXL.nm){
+							item.cbFnc = function(){
+								com.exlGrid(sub.grid);
+							}
+						}
+						else if(i==gcm.BTN.EXL_F.nm){
+							item.cbFnc = function(){
+								com.exlFrmGrid(sub.grid);
+							}
+						}
+						else if(i==gcm.BTN.CLOSE.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.closeTab(main.grid, sub.grid);
+								}
+								else{
+									com.closeTab(sub.grid);
+								}
+							}
+						}
+					}
+					
+					else if( type == gcm.DISP_TYPE.THIRD_GRID_FORM){ //3 그리드와 폼
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+								
+								var sub1 = autoOpt.Sub1;
+								var sub2 = autoOpt.Sub2;
+								if ((typeof sub1 !== "undefined")&&(sub1 !== null)&&(typeof sub2 !== "undefined")&&(sub2 !== null)){
+									com.searchThirdGrid(main.grid, sub1.grid, sub1.grid, main.frm, main.srchSbm, main.savSbm,
+											main.allSavSbm, sub1.savSbm, sub2.savSbm)
+								}
+								else{
+									com.searchGrid(main.grid, main.srchSbm , main.savSbm);
+								}
+								
+							}
+						}
+						else if(i == gcm.BTN.ADD.nm){
+							item.cbFnc = function(){
+								if ((typeof main.keySbm !== "undefined")&&(main.keySbm !== null)){
+									$p.executeSubmission(main.keySbm);
+								}
+							}
+						}
+						else if(i == gcm.BTN.DEL.nm){
+							item.cbFnc = function(){
+								var sub1 = autoOpt.Sub1;
+								var sub2 = autoOpt.Sub2;
+								if ((typeof sub1 !== "undefined")&&(sub1 !== null)&&(typeof sub2 !== "undefined")&&(sub2 !== null)){
+									com.delThirdGrid(main.grid, sub1.grid, sub2.grid);
+								}
+								else {
+									com.delGrid(main.grid);
+								}
+							}
+						}
+						else if(i==gcm.BTN.CNL.nm){
+							item.cbFnc = function(){
+								var sub1 = autoOpt.Sub1;
+								var sub2 = autoOpt.Sub2;
+								if ((typeof sub1 !== "undefined")&&(sub1 !== null)&&(typeof sub2 !== "undefined")&&(sub2 !== null)){
+									com.cancelThirdGrid(main.grid, sub1.grid, sub2.grid);
+								}
+								else {
+									com.cancelGrid(main.grid);
+								}
+							}
+						}
+						else if(i==gcm.BTN.SAVE.nm){
+							item.cbFnc = function(){
+								var sub1 = autoOpt.Sub1;
+								var sub2 = autoOpt.Sub2;
+								if ((typeof sub1 !== "undefined")&&(sub1 !== null)&&(typeof sub2 !== "undefined")&&(sub2 !== null)){
+									com.saveThirdGrid(main.grid, sub1.grid, sub2.grid, main.frm, main.savSbm, main.allSavSbm, sub1.savSbm, sub2.savSbm);
+								}
+								else {
+									com.saveGrid(main.grid, main.savSbm);
+								}
+							}
+						}
+						else if(i==gcm.BTN.EXL_I.nm){
+							item.cbFnc = function(){
+								com.exlUploadGrid(main.grid, codeOptions);
+							}
+						}
+						else if(i==gcm.BTN.EXL.nm){
+							item.cbFnc = function(){
+								com.exlGrid(main.grid);
+							}
+						}
+						else if(i==gcm.BTN.EXL_F.nm){
+							item.cbFnc = function(){
+								com.exlFrmGrid(main.grid);
+							}
+						}
+						else if(i==gcm.BTN.CLOSE.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.closeTab(main.grid, sub.grid);
+								}
+								else{
+									com.closeTab(main.grid);
+								}
+							}
+						}
+					}
+					
+					if(i == gcm.BTN.SEARCH.nm){
+
+						if ((typeof main.srchGrp !== "undefined")&&(main.srchGrp !== null)){
+							com.setEnterKeyEvent(main.srchGrp, item.cbFnc);
+						}
+					}
+					mainBtn.bind("onclick", item.cbFnc);
+				}
+			}
+		} catch (e) {
+			
+		}
+	}
+	return gcm.BTN;
+};*/
 
 /**권한에 따른 메인 버튼 생성
  * 
@@ -5263,7 +5958,7 @@ com.setPopupBtn = function(wfm_mainBtn, popOpt, autoOpt) {
 					}
 					else if(i==gcm.BTN.EXL_I.nm){
 						item.cbFnc = function(){
-							com.exlUploadGrid(main.grid);
+							com.exlUploadGrid(main.grid, codeOptions);
 						}
 					}
 					else if(i==gcm.BTN.EXL.nm){
@@ -5334,7 +6029,7 @@ com.setSubBtn = function(btnOptions, generator) {
  * @param {} subOpt 서브 옵션
  * 
  */
-com.setSubBtn2 = function(wfm_subBtn,autoOpt, subOpt) {
+com.setSubBtn2 = function(wfm_subBtn,autoOpt, subOpt, codeOptions) {
 	
 	var programAuthority = gcm.CUR_PROGRAM_AUTH;
 
@@ -5473,7 +6168,7 @@ com.setSubBtn2 = function(wfm_subBtn,autoOpt, subOpt) {
 					}
 					else if(i==gcm.BTN.EXL_I.nm){
 						item.cbFnc = function(){
-							com.exlUploadGrid(sub.grid);
+							com.exlUploadGrid(sub.grid, codeOptions);
 						}
 					}
 					else if(i==gcm.BTN.EXL.nm){
@@ -5686,6 +6381,22 @@ com.saveData = function(grid,form,saveSbmObj){
 		//com.delUndoGrid(grid);
 	}
 }
+
+com.setExlUpdate = function(grid, val){
+	if(com.isEmpty(gcm.GRID_INFO[grid.org_id])==false && com.isEmpty(gcm.GRID_INFO[grid.org_id].search_map)==false){
+		//gcm.GRID_INFO[grid.org_id].exlUpdate = val;
+		gcm.GRID_INFO[grid.org_id].search_map.set("EXL_UPDATE", val);
+	}
+}
+
+com.getExlUpdate = function(grid){
+	if(com.isEmpty(gcm.GRID_INFO[grid.org_id])==false && com.isEmpty(gcm.GRID_INFO[grid.org_id].search_map)==false){
+		//return gcm.GRID_INFO[grid.org_id].exlUpdate;
+		gcm.GRID_INFO[grid.org_id].search_map.get("EXL_UPDATE");
+	}
+	else return false;
+}
+
 
 /**모든 데이터 저장 가능여부 확인후 저장 프로세스 수행
  * 
@@ -5973,6 +6684,11 @@ com.cancelGrid = function(grid,str,cnlGridCb){
 		com.confirm(str, function(rtn) {
 			if (rtn) {
 				com.clearGrid(grid,cnlGridCb);
+				var index = grid.getFocusedRowIndex();
+				var rowCount = com.getGridViewDataList(grid).getRowCount();
+				if(grid.getFocusedRowIndex() >= rowCount){
+					grid.setFocusedCell((rowCount-1), grid.getColumnID(0), true);
+				};
 			}
 		});
 	}
@@ -6086,10 +6802,14 @@ com.delUndoGrid = function(grid){
  * @param {fnc} cnlGridCb 초기화 이후에 호출되는 callback 함수
  */
 com.clearGrid = function(grid, cnlGridCb){
+	if(com.isEmpty(gcm.GRID_INFO[grid.org_id])==false){
+		//gcm.GRID_INFO[grid.org_id].exlUpdate = false; //엑셀 업데이트도 초기화
+		com.setExlUpdate(grid,false);
+	}
 	
-	 if(com.isEmpty(gcm.GRID_INFO[grid.org_id])==false && com.isEmpty(gcm.GRID_INFO[grid.org_id].undo)==false
+	if(com.isEmpty(gcm.GRID_INFO[grid.org_id])==false && com.isEmpty(gcm.GRID_INFO[grid.org_id].undo)==false
 			 && gcm.GRID_INFO[grid.org_id].undo == false)return;
-	 
+
 	var data = com.getGridViewDataList(grid);
 
 	com.delUndoGrid(grid);
@@ -6321,6 +7041,15 @@ com.delGridChecked = function(grid,str,afterCb){
 	}
 }
 
+com.deleteAllGrid = function(grid){
+	var data = com.getGridViewDataList(grid);
+	var count = data.getTotalRow();
+
+	for(var i=count-1; i>=0; i--){
+		data.deleteRow(i);
+	}
+}
+
 /** grid의 모든 항목 삭제
  * 
  * @date 2021.03.13
@@ -6328,9 +7057,9 @@ com.delGridChecked = function(grid,str,afterCb){
  * @author tracom
  * @param {Object} grid 대상 그리드
  */
-com.delAllGrid = function(grid){
+com.removeAllGrid = function(grid){
 	var data = com.getGridViewDataList(grid);
-	var count = getTotalRow();
+	var count = data.getTotalRow();
 
 	for(var i=count-1; i>=0; i--){
 		data.removeRow(i);
@@ -6531,6 +7260,34 @@ com.saveGrid = function(grid,sbmObj,yesno_str,str){
 	}
 }
 
+com.saveExlGrid = function(grid,sbmObj, param){
+	var idx = grid.getModifiedIndex().length;
+	
+	if (idx == 0) {
+		if(	(typeof str == "undefined") || (str.trim() == ""))
+			str = "저장할 데이터가 없습니다";
+		com.alert(str);
+		return false;
+	}
+
+	if (com.validateGridView(grid)) {
+		var yesno_str = "";
+		if (idx > 0) {
+			if(	(typeof yesno_str == "undefined") || (yesno_str.trim() == "")){
+				yesno_str = com.strModifiedCnt(grid) + "의 데이터가 저장됩니다. \n 진행하시겠습니까?";
+			}
+			else {
+				yesno_str = idx + yesno_str;
+			}
+			com.confirm(yesno_str, function(rtn) {
+				if (rtn) {
+					com.saveData(grid,null,sbmObj);
+				}
+			});
+		}
+	}
+}
+
 /** 2개(부모,자식)그리드의 수정된 항목 저장
  * 
  * @date 2021.03.13
@@ -6674,25 +7431,16 @@ com.saveGridForm = function(grid,form,sbmObj,searchSbmObj,yesno_str,str){
  * @param {Object} grid 대상 그리드
  * @param {String} str 다운받을 파일이름
  */
-com.exlGrid = function(grid, str, codeOption){
+com.exlGrid = function(grid,str){
 	if(	(typeof str == "undefined") || (str.trim() == ""))
-		str = com.getParameter().menuNm;
+		str = gcm.GRID_INFO[grid.org_id].name; //com.getParameter().menuNm;
 
 	
 	var options = {
 		fileName : str+".xls", //[defalut: excel.xlsx] 다운로드하려는 파일의 이름으로 필수 입력 값 (지원하는 타입 => xls, xlsx, csv)
 		fileType : "xls"
 	};
-	
-	if(codeOption != undefined && codeOption != null) {
-		if(codeOption == "data") {
-			options.type = "0"
-		}
-		if(codeOption == "code") {
-			options.type = "1"
-		}
-	}
-	
+
 	var infoArr = {};
 	com.gridDataDownLoad(grid,options, infoArr);
 }
@@ -6706,19 +7454,26 @@ com.exlGrid = function(grid, str, codeOption){
  * @author tracom
  * @param {Object} grid 대상 그리드
  */
-com.exlUploadGrid = function(grid, codeOption){
-	var options = {};
-	
-	if(codeOption != undefined && codeOption != null) {
-		if(codeOption == "data") {
-			options.type = "0"
+com.exlUploadGrid = function(grid, codeOptions){
+	var str = "엑셀 업로드시 " +gcm.GRID_INFO[grid.org_id].name + "의 데이터가 재 갱신 됩니다. 엑셀 업로드를 하시겠습니까?" ;
+	com.confirm(str, function(rtn) {
+		if (rtn) {
+			//com.deleteAllGrid(grid);
+			var options = {};
+			if(com.isEmpty(codeOptions)==false){
+				var codeDataList = []
+				for (var i = 0; i < codeOptions.length; i++) {
+					var codeObj = codeOptions[i];
+					var dltId = gcm.DATA_PREFIX + codeObj.code;
+					var dataListObj = $p.getComponentById(dltId);
+					codeDataList[codeObj.code] = dataListObj.getAllJSON();
+				}
+				options.codeDataList = codeDataList;
+				gcm.GRID_INFO[grid.org_id].codeDataList = codeDataList;
+			}
+			com.gridDataUpload(grid, "xls", options);
 		}
-		if(codeOption == "code") {
-			options.type = "1"
-		}
-	}	
-	
-	com.gridDataUpload(grid, "xls", options);
+	});
 }
 
 
@@ -6729,23 +7484,23 @@ com.exlUploadGrid = function(grid, codeOption){
  * @author tracom
  * @param {Object} grid 대상 그리드
  */
-com.exlFrmGrid = function(grid, codeOption){
+com.exlFrmGrid = function(grid){
+	
+	
+	var gridInfo = gcm.GRID_INFO[grid.org_id];
+	
 	var options = {};
-	
-	if(codeOption != undefined && codeOption != null) {
-		if(codeOption == "data") {
-			options.type = "0"
-		}
-		if(codeOption == "code") {
-			options.type = "1"
-		}	
-	}
-	
-	options.fileName = "header.xls";
-	options.dataProvider = "com.inswave.template.provider.ExcelDownHeader";
+	options.fileName = gridInfo.name + "_양식";
+	options.path = top.window.location.href + "exl/"+grid.org_id +".xlsx";
+	//options.dataProvider = "com.inswave.template.provider.ExcelDownHeader";
 	var infoArr = {};
 	
-	com.gridDataDownLoad(grid, options , infoArr);	
+	  var element = document.createElement('a');
+      element.setAttribute('href',options.path);
+      element.setAttribute('download', options.fileName);
+      document.body.appendChild(element);
+      element.click();
+	//com.gridDataDownLoad(grid, options , infoArr);	
 }
 
 /**검색후 grid,form에 갱신하는 함수 : 수정할 항목이 있으면 저장후 검색되도록 동작함
@@ -6896,6 +7651,7 @@ com.getMatchedIndex = function(data, keyColumn, keyValue){
  * 
  */
 com.setFocusedCell = function(grid, focusColumn) {
+	
 	try{
 		var gridInfo = gcm.GRID_INFO[grid.org_id];
 		if ((typeof gridInfo != "undefined") && (gridInfo!=null)){
@@ -6947,6 +7703,7 @@ com.setFocusedCell2 = function(grid, searchColumn, searchValue) {
  * 
  */
 com.initGridInfo = function(options){
+	
 	try{
 		
 		if ((typeof options !== "undefined") && (options!==null)){
@@ -6969,6 +7726,9 @@ com.initGridInfo = function(options){
 				if ((typeof main.undo !== "undefined") && (main.undo!==null)){
 					gridInfo.undo = main.undo;
 				}
+				if ((typeof main.search_map !== "undefined") && (main.search_map!==null)){
+					gridInfo.search_map = main.search_map;
+				}				
 				
 				gcm.GRID_INFO[main.grid.org_id] = gridInfo;	
 			}
@@ -6988,6 +7748,10 @@ com.initGridInfo = function(options){
 				if ((typeof sub1.undo !== "undefined") && (sub1.undo!==null)){
 					gridInfo.undo = sub1.undo;
 				}
+				if ((typeof sub1.search_map !== "undefined") && (sub1.search_map!==null)){
+					gridInfo.search_map = sub1.search_map;
+				}
+				
 				gcm.GRID_INFO[sub1.grid.org_id] = gridInfo;	
 			}
 			if ((typeof options.Sub2 !== "undefined") && (options.Sub2!==null)){ //서브 그리드1 세팅
@@ -7006,6 +7770,10 @@ com.initGridInfo = function(options){
 				if ((typeof sub2.undo !== "undefined") && (sub2.undo!==null)){
 					gridInfo.undo = sub2.undo;
 				}
+				if ((typeof sub2.search_map !== "undefined") && (sub2.search_map!==null)){
+					gridInfo.search_map = sub2.search_map;
+				}
+				
 				gcm.GRID_INFO[sub2.grid.org_id] = gridInfo;	
 			}
 		}	
@@ -7027,6 +7795,7 @@ com.initGridInfo = function(options){
  * @param {errIndex} errIndex 오류 index
  */
 com.setGridInfo = function(grid,focusOption,curIndex,curKeyValue,oldIndex,errIndex){
+	
 	try{
 		gridInfo = gcm.GRID_INFO[grid.org_id];
 		
@@ -7478,12 +8247,12 @@ com.changeSingleGrid = function(mainGrid, row, oldRow) {
 	var curKeyValues = "";
 	try{
 		var mainData = com.getGridViewDataList(mainGrid);
-		var keyColumn = mainData.getCellData(row, gcm.GRID_INFO[mainGrid.org_id].keyColumn);
+		var keyColumn = gcm.GRID_INFO[mainGrid.org_id].keyColumn;
 		var keyColumnArr = keyColumn.split(',');
 
 		for (var i = 0; i < keyColumnArr.length; i++) {
 			curKeyValue = mainData.getCellData(row, keyColumnArr[i]);
-			focusOption.keyMap.set(keyColumnArr[i], curKeyValue);
+			//focusOption.keyMap.set(keyColumnArr[i], curKeyValue);
 			
 			if(i!=0)curKeyValues += ",";
 			curKeyValues += (curKeyValue);
@@ -7755,5 +8524,46 @@ com.gridMove = function(grid,searchColumn, content, index){
 				}
 			}
 		}
+	}
+}
+
+/** 
+ * 
+ * @date 2022.03.11
+ * @memberOf com
+ * @author tracom
+ * @param {Object} grid 대상 그리드
+ * @param {Object} saveSbmObj 저장 submission 객체
+ * @param {String} str 저장 동작시 확인여부 문구
+ */
+com.checkGridSave = function(grid,saveSbmObj,str){
+	
+	if(	(typeof saveSbmObj !== "undefined")&&(saveSbmObj !== null)){
+		var idx = grid.getModifiedIndex().length;
+		
+		//저장하지 않고 조회할 경우
+		if(idx > 0) {
+			if(	(typeof str == "undefined") || (str.trim() == "")){
+				str = com.strModifiedCnt(grid) + "의 저장하지 않은 데이터가 있습니다. 저장 후 조회 하시겠습니까?";
+			}
+			else {
+				str = idx + str;
+			}
+			com.confirm(str, function(rtn){
+				if (rtn) {
+					com.saveData(grid, saveSbmObj)
+				}
+				else {
+					com.clearGrid(grid);
+				}
+				return;
+			});
+		} 
+		else {
+			com.clearGrid(grid);
+		}
+	}
+	else {
+		//com.clearGrid(grid);
 	}
 }
