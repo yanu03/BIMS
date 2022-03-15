@@ -54,11 +54,11 @@
 		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
 		
 		if(dma_searchitem.get("STTN_FCLT_TYPE") == 'ST002'){
-			document.getElementById(STTN_IMG.getID()).className = "ST002_station";
+			document.getElementById(STTN_IMG.getID()).className = "ST002_station_1";
 		}else if(dma_searchitem.get("STTN_FCLT_TYPE") == 'ST003'){
 			document.getElementById(STTN_IMG.getID()).className = "ST003_station";
 		}else{
-			document.getElementById(STTN_IMG.getID()).className = "ST002_station";
+			document.getElementById(STTN_IMG.getID()).className = "ST002_station_1";
 		}
 		
 		
@@ -79,8 +79,6 @@
 			}else if(fcltKind == 'FK005'){
 				imgSrc = "/cm/images/bms/AIRCON_normal.png";
 			}
-			
-			
 			
 			str += '<div id="'+fcltId+'"style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group " onmousedown="startDrag(event, this)">';
 			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'">';

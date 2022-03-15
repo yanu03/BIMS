@@ -428,7 +428,7 @@
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="시설물 목록" style=""></w2:textbox>
-							<xf:input adjustMaxLength="false" id="" style="width: 144px;height: 21px; float: right;"></xf:input>
+							<xf:input adjustMaxLength="false" id="" style="width: 144px;float: right;"></xf:input>
 							<w2:span label="버전정보 : " style="float: right;margin-right: 10px;margin-top: 2px;" id=""></w2:span>
 							<w2:upload imageStyle="position:absolute;vertical-align:middle;word-wrap:break-word"
 								inputStyle="vertical-align:middle;word-wrap:break-word" ev:ondone="scwin.upload0_ondone"
@@ -464,9 +464,9 @@
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:22px;" id="column13"
 										value="예약상태" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:22px;" id="column3"
+									<!-- <w2:column removeBorderStyle="false" width="120" inputType="text" style="height:22px;" id="column3"
 										value="제조사" blockSelect="false" displayMode="label">
-									</w2:column>
+									</w2:column> -->
 									<w2:column width="120" id="column59" value="장착위치"></w2:column>
 									<w2:column width="120" id="column61" value="장치IP"></w2:column>
 									<w2:column width="160" id="column62" value="관리ID"></w2:column>
@@ -491,10 +491,10 @@
 									<w2:column headers="FM0203G0_column14" removeBorderStyle="false" width="" inputType="text"
 										style="height:20px" id="COMPLETE_YN" value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column headers="FM0203G0_column49" autocomplete="" removeBorderStyle="false" dataType=""
+									<!-- <w2:column headers="FM0203G0_column49" autocomplete="" removeBorderStyle="false" dataType=""
 										blockSelect="false" displayMode="label" calendarClass="" width="" inputType="select" style="height:20px" id="ORG_DIV" value="보기"
 										class="">
-									</w2:column>
+									</w2:column> -->
 									<w2:column headers="FM0203G0_column3" removeBorderStyle="false" width="" inputType="select"
 										style="height:20px" id="INST_LOC" value="" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -552,9 +552,10 @@
 										value="처리일시" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column width="100" id="column59" value="관리ID" ></w2:column>
-									<w2:column width="100" id="column60" value="제조사"></w2:column>
+									<!-- <w2:column width="100" id="column60" value="제조사"></w2:column> -->
 									<w2:column width="150" id="column61" value="장치종류"></w2:column>
 									<w2:column width="120" id="column86" value="설치위치"></w2:column>
+									<w2:column width="120" id="column86" value=""></w2:column>
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
@@ -576,9 +577,10 @@
 										style="height:20px" id="SEND_DATE" value="" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column width="" id="MNG_ID"></w2:column>
-									<w2:column width="" id="ORG_DIV" inputType="select" textAlign="center"></w2:column>
+									<!-- <w2:column width="" id="ORG_DIV" inputType="select" textAlign="center"></w2:column> -->
 									<w2:column width="" id="FCLT_KIND" inputType="select" textAlign="center"></w2:column>
 									<w2:column width="" id="INST_LOC" inputType="select" textAlign="center"></w2:column>
+									<w2:column width="" id="" inputType="select" textAlign="center"></w2:column>
 								</w2:row>
 							</w2:gBody>
 							<w2:footer style="" id="footer1">

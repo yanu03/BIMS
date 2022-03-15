@@ -352,7 +352,7 @@
 			</xf:submission>
 			<xf:submission id="sub_OPER_ALL_REAL_NODE" ref="data:json,dma_sub_search" target='data:json,["dlt_BRT_OPER_ALLOC_RL_NODE_INFO","dlt_BRT_OPER_ALLOC_PL_NODE_CNT"]'
 				action="/operPlan/selectOperAllocRealNode" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
-				errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_OPER_ALL_REAL_NODE_submitdone" ev:submiterror="" abortTrigger="">
+				errorHandler="" customHandler="" mode="asynchronous" processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_OPER_ALL_REAL_NODE_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 		</xf:model>
 
@@ -591,8 +591,8 @@
 		
 		 var data = { data : routId, data2 : dayDiv, data3 : routNm, data4 : operSn, data5:transData, data6:realData, callbackFn : "" };
          var options = { id : "AL0600P0",
-         				 width : "1280px",
-         				 height : "700px",
+         				 width : "1600px",
+         				 height : "800px",
                          popupName : "운행 결과 비교 시공도", 
                          modal : true};
 		

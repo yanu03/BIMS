@@ -898,7 +898,7 @@
 									</xf:group>
 									<xf:group tagname="td" style="" class="w2tb_td" id="T_PK016">
 										<xf:select selectedindex="-1" id="" appearance="full"
-											style="height: 21px;margin-left: 10px;" cols="" rows="" ref="">
+											style="margin-left: 10px;" cols="" rows="" ref="">
 											<xf:choices>
 												<xf:item>
 													<xf:label><![CDATA[여부]]></xf:label>
@@ -914,7 +914,7 @@
 										</w2:attributes>
 									</xf:group>
 									<xf:group tagname="td" style="" class="w2tb_td" id="T_PK017">
-										<xf:input adjustMaxLength="false" id="input2" style="height: 21px;" type="number"></xf:input>
+										<xf:input adjustMaxLength="false" id="input2" style="" type="number"></xf:input>
 									</xf:group>
 								</xf:group>
 								<xf:group tagname="tr" style="">
@@ -926,7 +926,7 @@
 									</xf:group>
 									<xf:group tagname="td" style="" class="w2tb_td" id="T_PK011">
 										<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-											disabledClass="w2selectbox_disabled" id="selectbox1" style="height: 21px;" submenuSize="auto" ref="" chooseOptionLabel="">
+											disabledClass="w2selectbox_disabled" id="selectbox1" style="" submenuSize="auto" ref="" chooseOptionLabel="">
 											<xf:choices>
 												<xf:item>
 													<xf:label><![CDATA[string]]></xf:label>
@@ -942,7 +942,7 @@
 										</w2:attributes>
 									</xf:group>
 									<xf:group tagname="td" style="" class="w2tb_td" id="T_PK005">
-										<xf:input adjustMaxLength="false" id="LCD_LUM" style="height: 21px;" type="number"></xf:input>
+										<xf:input adjustMaxLength="false" id="LCD_LUM" style="" type="number"></xf:input>
 									</xf:group>
 								</xf:group>
 								<xf:group tagname="tr" style="">
@@ -954,7 +954,7 @@
 									</xf:group>
 									<xf:group tagname="td" class="w2tb_td" id="T_PK004">
 										<w2:attributes></w2:attributes>
-										<xf:input adjustMaxLength="false" id="input1" style="height: 21px;" type="number"></xf:input>
+										<xf:input adjustMaxLength="false" id="input1" style="" type="number"></xf:input>
 									</xf:group>
 									<xf:group tagname="th" class="w2tb_th" style="height: 10px;"><w2:attributes>
 											<w2:scope>row</w2:scope>

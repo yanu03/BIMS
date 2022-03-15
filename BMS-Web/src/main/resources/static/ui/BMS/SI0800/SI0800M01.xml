@@ -341,7 +341,7 @@
 								</w2:attributes>
 							</xf:group>
 							<xf:group tagname="td" style="" class="w2tb_td">
-								<xf:select1 id="DVC_KIND" chooseOption="" style="width:148px;height:21px;" submenuSize="auto" allOption=""
+								<xf:select1 id="DVC_KIND" chooseOption="" style="width:148px;" submenuSize="auto" allOption=""
 									disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled"
 									ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DVC_KIND" labelWidthAuto="">
 									<xf:choices></xf:choices>
@@ -355,7 +355,7 @@
 							</xf:group>
 							<xf:group tagname="td" style="" class="w2tb_td">
 								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-									disabledClass="w2selectbox_disabled" id="PARAM_DIV" style="width: 148px;height: 21px;" submenuSize="auto"
+									disabledClass="w2selectbox_disabled" id="PARAM_DIV" style="width: 148px;" submenuSize="auto"
 									ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.PARAM_DIV">
 									<xf:choices></xf:choices>
 								</xf:select1>
@@ -370,7 +370,7 @@
 							</xf:group>
 							<xf:group tagname="td" style="" class="w2tb_td">
 								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-									disabledClass="w2selectbox_disabled" id="PARAM_KIND" style="width: 148px;height: 21px;" submenuSize="auto"
+									disabledClass="w2selectbox_disabled" id="PARAM_KIND" style="width: 148px;" submenuSize="auto"
 									ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.PARAM_KIND">
 									<xf:choices></xf:choices>
 								</xf:select1>
@@ -383,7 +383,7 @@
 							</xf:group>
 							<xf:group tagname="td" style="" class="w2tb_td">
 								<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-									disabledClass="w2selectbox_disabled" id="DATA_TYPE" style="width: 148px;height: 21px;" submenuSize="auto"
+									disabledClass="w2selectbox_disabled" id="DATA_TYPE" style="width: 148px;" submenuSize="auto"
 									ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_TYPE" chooseOptionLabel="">
 									<xf:choices></xf:choices>
 								</xf:select1>
@@ -398,7 +398,7 @@
 							</xf:group>
 							<xf:group tagname="td" class="w2tb_td">
 								<w2:attributes></w2:attributes>
-								<xf:input adjustMaxLength="false" id="" style="width: 144px;height: 21px;text-align: right;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_LENGTH" maxlength="2" allowChar="0-9" maxByteLength=""></xf:input>
+								<xf:input adjustMaxLength="false" id="" style="width: 144px;text-align: right;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_LENGTH" maxlength="2" allowChar="0-9" maxByteLength=""></xf:input>
 							</xf:group>
 							<xf:group tagname="th" class="w2tb_th">
 								설정값
@@ -408,7 +408,7 @@
 							</xf:group>
 							<xf:group tagname="td" class="w2tb_td">
 								<w2:attributes></w2:attributes>
-								<xf:input adjustMaxLength="false" id="" style="width: 144px;height: 21px;text-align: right;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_VAL" allowChar="0-9:."></xf:input>
+								<xf:input adjustMaxLength="false" id="" style="width: 144px;text-align: right;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_VAL" allowChar="0-9:."></xf:input>
 							</xf:group>
 						</xf:group>
 						<xf:group tagname="tr" style="">
@@ -420,7 +420,7 @@
 							</xf:group>
 							<xf:group tagname="td" class="w2tb_td">
 								<w2:attributes></w2:attributes>
-								<xf:input adjustMaxLength="false" id="" style="width: 144px;height: 21px;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.ATTR1_VAL"></xf:input>
+								<xf:input adjustMaxLength="false" id="" style="width: 144px;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.ATTR1_VAL"></xf:input>
 							</xf:group>
 							<xf:group tagname="th" class="w2tb_th">
 								속성2
@@ -430,7 +430,7 @@
 							</xf:group>
 							<xf:group tagname="td" class="w2tb_td">
 								<w2:attributes></w2:attributes>
-								<xf:input adjustMaxLength="false" id="" style="width: 144px;height: 21px;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.ATTR2_VAL"></xf:input>
+								<xf:input adjustMaxLength="false" id="" style="width: 144px;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.ATTR2_VAL"></xf:input>
 							</xf:group>
 						</xf:group>
 						<xf:group tagname="tr" style="">
@@ -442,7 +442,7 @@
 							</xf:group>
 							<xf:group tagname="td" style="" class="w2tb_td">
 								<xf:select1 id="radio0" selectedIndex="0" appearance="full"
-									style="width:100%;height:21px;margin-left :20px;" userData1="" cols="2" rows="" ref='data:dlt_BMS_DVC_PARAM_CFG_INFO.USE_YN'
+									style="width:100%;margin-left :20px;" userData1="" cols="2" rows="" ref='data:dlt_BMS_DVC_PARAM_CFG_INFO.USE_YN'
 									useRadioTitle="" visibleColumn="">
 									<xf:choices>
 										<xf:item>
@@ -474,7 +474,7 @@
 									<w2:colspan>3</w2:colspan>
 									<w2:rowspan>1</w2:rowspan>
 								</w2:attributes>
-								<xf:textarea id="REMARK" style="width:100%;height:90px;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.REMARK"
+								<xf:textarea id="REMARK" style="width:100%;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.REMARK"
 									maxlength="200">
 								</xf:textarea>
 							</xf:group>

@@ -1197,7 +1197,7 @@
 											<w2:colspan>3</w2:colspan>
 											<w2:rowspan>1</w2:rowspan>
 										</w2:attributes>
-										<xf:input class="" id="ILD_ID" mandatory="" ref="data:dlt_BMS_INNER_LED_INFO.ILD_ID" style="width:100px;height:21px;"
+										<xf:input class="" id="ILD_ID" mandatory="" ref="data:dlt_BMS_INNER_LED_INFO.ILD_ID" style="width:100px;"
 											disabled="true" adjustMaxLength="" maxlength="6">
 										</xf:input>																		
 									</xf:group>
@@ -1210,7 +1210,7 @@
 											<w2:rowspan>1</w2:rowspan>
 										</w2:attributes>
 										<xf:input adjustMaxLength="" allowChar="" class="" disabled="" id="ILD_NM" initValue=""
-											mandatory="" ref="data:dlt_BMS_INNER_LED_INFO.ILD_NM" style="width:100%;height:21px;" validateOnInput="false" validator="" maxlength="30">
+											mandatory="" ref="data:dlt_BMS_INNER_LED_INFO.ILD_NM" style="width:100%;" validateOnInput="false" validator="" maxlength="30">
 										</xf:input>
 									</xf:group>
 								</xf:group>
@@ -1221,12 +1221,12 @@
 											<w2:rowspan>1</w2:rowspan>
 										</w2:attributes>
 										<xf:input adjustMaxLength="" class="" disabled="true" id="SN" mandatory="" maxlength="6"
-											ref="data:dlt_BMS_INNER_LED_INFO.SN" style="width:50px;height:21px;">
+											ref="data:dlt_BMS_INNER_LED_INFO.SN" style="width:50px;">
 										</xf:input>
 									</xf:group>
 								</xf:group>
 								<xf:group tagname="tr" style="">
-									<xf:group tagname="th" class="w2tb_th" style="vertical-align: top;height: 70px;">상단표출문구
+									<xf:group tagname="th" class="w2tb_th" style="vertical-align: top;">상단표출문구
 										<w2:attributes><w2:scope>row</w2:scope></w2:attributes>
 									</xf:group>
 									<xf:group tagname="td" class="w2tb_td">
@@ -1234,30 +1234,30 @@
 											<w2:colspan>3</w2:colspan>
 											<w2:rowspan>1</w2:rowspan>
 										</w2:attributes>
-										<xf:textarea adjustMaxLength="false" id="TXT_A" style="width: 100%;height: 70px;" ref="data:dlt_BMS_INNER_LED_INFO.TXT_A" maxlength="200">
+										<xf:textarea adjustMaxLength="false" id="TXT_A" style="width: 100%;" ref="data:dlt_BMS_INNER_LED_INFO.TXT_A" maxlength="200">
 										</xf:textarea>
 									</xf:group>
 								</xf:group>
 								<xf:group style="" tagname="tr">
-									<xf:group class="w2tb_th" style="height: 70px;vertical-align: top;" tagname="th">하단표출문구</xf:group>
+									<xf:group class="w2tb_th" style="vertical-align: top;" tagname="th">하단표출문구</xf:group>
 									<xf:group class="w2tb_td" style="" tagname="td">
 										<w2:attributes>
 											<w2:colspan>3</w2:colspan>
 											<w2:rowspan>1</w2:rowspan>
 										</w2:attributes>
-										<xf:textarea adjustMaxLength="false" id="TXT_B" style="width: 100%;height: 70px;" ref="data:dlt_BMS_INNER_LED_INFO.TXT_B" maxlength="200">
+										<xf:textarea adjustMaxLength="false" id="TXT_B" style="width: 100%;" ref="data:dlt_BMS_INNER_LED_INFO.TXT_B" maxlength="200">
 										</xf:textarea>
 									</xf:group>
 								</xf:group>
 								<xf:group style="" tagname="tr">
-									<xf:group class="w2tb_th" style="height: 70px;vertical-align: top;" tagname="th">비고</xf:group>
+									<xf:group class="w2tb_th" style="vertical-align: top;" tagname="th">비고</xf:group>
 									<xf:group class="w2tb_td" style="" tagname="td">
 										<w2:attributes>
 											<w2:colspan>3</w2:colspan>
 											<w2:rowspan>1</w2:rowspan>
 										</w2:attributes>
 										<xf:group id="preview" style=""></xf:group>
-										<xf:textarea adjustMaxLength="false" id="REMARK" style="width: 100%;height: 70px;" ref="data:dlt_BMS_INNER_LED_INFO.REMARK" maxlength="200">
+										<xf:textarea adjustMaxLength="false" id="REMARK" style="width: 100%;" ref="data:dlt_BMS_INNER_LED_INFO.REMARK" maxlength="200">
 										</xf:textarea>
 									</xf:group>
 								</xf:group>
@@ -1268,8 +1268,6 @@
 							<!-- 수정전
 							<xf:group id="PI0201F0" style="width:100%; height:100%; position:absolute; " class="w2tb tb" tagname="table" > -->
 							<xf:group id="PI0201F0" style="width:100%" class="w2tb tb" tagname="table" >
-							
-							
 								<w2:attributes>
 									<w2:summary></w2:summary>
 								</w2:attributes>
@@ -1286,7 +1284,7 @@
 											<w2:colspan>3</w2:colspan>
 											<w2:rowspan>1</w2:rowspan>
 										</w2:attributes>
-										<xf:input adjustMaxLength="false" id="VOC_ID" style="height:24px;width: 100px;" ref="data:dlt_BMS_VOC_INFO.VOC_ID"
+										<xf:input adjustMaxLength="false" id="VOC_ID" style="width: 100px;" ref="data:dlt_BMS_VOC_INFO.VOC_ID"
 											placeholder="" readOnly="true" disabled="true">
 										</xf:input>
 									</xf:group>
@@ -1295,7 +1293,7 @@
 									<xf:group style="" class="w2tb_th req" tagname="th">음성명</xf:group>
 	
 									<xf:group tagname="td" style="" class="w2tb_td">
-										<xf:input adjustMaxLength="false" id="VOC_NM" style="height:24px;" ref="data:dlt_BMS_VOC_INFO.VOC_NM"
+										<xf:input adjustMaxLength="false" id="VOC_NM" style="" ref="data:dlt_BMS_VOC_INFO.VOC_NM"
 											placeholder="" maxlength="20">
 										</xf:input>
 									</xf:group>
@@ -1306,7 +1304,7 @@
 										</w2:attributes>
 									</xf:group>
 									<xf:group tagname="td" style="" class="w2tb_td">
-										<xf:select1 id="PLAY_TYPE" chooseOption="" style="width: 120px;height: 21px;" submenuSize="auto"
+										<xf:select1 id="PLAY_TYPE" chooseOption="" style="width: 120px;" submenuSize="auto"
 											allOption="" disabled="" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled" title=""
 											ref="data:dlt_BMS_VOC_INFO.PLAY_TYPE" ev:onchange="scwin.PLAY_TYPE_onchange" ev:onviewchange="scwin.PLAY_TYPE_onviewchange">
 											<xf:choices>
@@ -1329,12 +1327,12 @@
 											<w2:colspan>3</w2:colspan>
 											<w2:rowspan>1</w2:rowspan>
 										</w2:attributes>
-										<w2:inputCalendar footerDiv="false" id="PLAY_ST_DT" style="float:left; width:110px; height:23px;margin-right: 5px;" renderDiv="true"
+										<w2:inputCalendar footerDiv="false" id="PLAY_ST_DT" style="float:left; width:110px; height:24px;margin-right: 5px;" renderDiv="true"
 											focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component"
 											ref="data:dlt_BMS_VOC_INFO.PLAY_ST_DT" editType="" displayFormat="" ioFormat="" calendarDisplayFormatFunc="" ev:onviewchange="scwin.PLAY_ST_DT_onviewchange">
 										</w2:inputCalendar>
 										<w2:span label="~" style="margin-right: 5px;" id=""></w2:span>
-										<w2:inputCalendar footerDiv="false" id="PLAY_ED_DT" style="width: 110px;height: 23px;" renderDiv="true"
+										<w2:inputCalendar footerDiv="false" id="PLAY_ED_DT" style="width: 110px; height:24px;" renderDiv="true"
 											focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component"
 											ref="data:dlt_BMS_VOC_INFO.PLAY_ED_DT" ev:onviewchange="scwin.PLAY_ED_DT_onviewchange">
 										</w2:inputCalendar>
@@ -1368,7 +1366,7 @@
 										</w2:attributes>
 										<xf:group class="ml5 fr" id="" style=""></xf:group>
 				
-										<xf:textarea id="KR_TTS" style="width: 500px;height: 100px;" ref="data:dlt_BMS_VOC_INFO.KR_TTS" maxlength="200" ev:onviewchange="scwin.KR_TTS_onviewchange" ev:onkeypress="scwin.KR_TTS_onkeypress" ev:onblur="scwin.KR_TTS_onblur"></xf:textarea>
+										<xf:textarea id="KR_TTS" style="width: 500px;" ref="data:dlt_BMS_VOC_INFO.KR_TTS" maxlength="200" ev:onviewchange="scwin.KR_TTS_onviewchange" ev:onkeypress="scwin.KR_TTS_onkeypress" ev:onblur="scwin.KR_TTS_onblur"></xf:textarea>
 										
 										<xf:group style="display: contents;position: absolute;margin-left: 10px; float:right;"  id="">
 											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;    margin-top: 20px;    margin-left: 10px;" id="playTTS" ev:onclick="scwin.playTTS_onclick">
@@ -1394,7 +1392,7 @@
 										</w2:attributes>
 										<xf:group class="ml5 fr" id="" style=""></xf:group>
 				
-										<xf:textarea id="ER_TTS" style="width: 500px;height: 100px;" ref="data:dlt_BMS_VOC_INFO.EN_TTS" maxlength="200" ev:onviewchange="scwin.ER_TTS_onviewchange"></xf:textarea>
+										<xf:textarea id="ER_TTS" style="width: 500px;" ref="data:dlt_BMS_VOC_INFO.EN_TTS" maxlength="200" ev:onviewchange="scwin.ER_TTS_onviewchange"></xf:textarea>
 										<xf:group style="display: contents;position: absolute;margin-left: 10px; float:right;"  id="">
 											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px;margin-left: 10px;" id="playTTS2" ev:onclick="scwin.playTTS2_onclick">
 												<xf:label><![CDATA[미리듣기]]></xf:label>
@@ -1419,7 +1417,7 @@
 										</w2:attributes>
 										<xf:group class="ml5 fr" id="" style=""></xf:group>
 				
-										<xf:textarea id="SCR_TXT" style="width: 100%;height: 100%;" ref="data:dlt_BMS_VOC_INFO.SCR_TXT" userData1="" maxlength="200" ev:onviewchange="scwin.SCR_TXT_onviewchange"></xf:textarea>
+										<xf:textarea id="SCR_TXT" style="width: 100%;" ref="data:dlt_BMS_VOC_INFO.SCR_TXT" userData1="" maxlength="200" ev:onviewchange="scwin.SCR_TXT_onviewchange"></xf:textarea>
 									</xf:group>
 								</xf:group>
 								<xf:group style="" tagname="tr">
@@ -1435,7 +1433,7 @@
 											<w2:rowspan>1</w2:rowspan>
 										</w2:attributes>
 										<xf:group class="ml5 fr" id="" style=""></xf:group>
-										<xf:textarea id="SCR_TXT_EN" ref="data:dlt_BMS_VOC_INFO.SCR_TXT_EN" style="width: 100%;height: 100%;" maxlength="200" ev:onviewchange="scwin.SCR_TXT_EN_onviewchange"></xf:textarea>
+										<xf:textarea id="SCR_TXT_EN" ref="data:dlt_BMS_VOC_INFO.SCR_TXT_EN" style="width: 100%;" maxlength="200" ev:onviewchange="scwin.SCR_TXT_EN_onviewchange"></xf:textarea>
 									</xf:group>
 								</xf:group>
 								<xf:group tagname="tr" style="">
@@ -1468,7 +1466,7 @@
 										</w2:attributes>
 										<xf:group class="ml5 fr" id="" style=""></xf:group>
 				
-										<xf:textarea id="STTN_TEXT_A" style="width: 100%;height: 100%;" ref="data:dlt_BMS_VOC_INFO.STTN_TEXT_A" maxlength="200" ev:onviewchange="scwin.STTN_TEXT_A_onviewchange"></xf:textarea>
+										<xf:textarea id="STTN_TEXT_A" style="width: 100%;" ref="data:dlt_BMS_VOC_INFO.STTN_TEXT_A" maxlength="200" ev:onviewchange="scwin.STTN_TEXT_A_onviewchange"></xf:textarea>
 									</xf:group>
 								</xf:group>
 								<xf:group tagname="tr" style="">
@@ -1485,7 +1483,7 @@
 										</w2:attributes>
 										<xf:group class="ml5 fr" id="" style=""></xf:group>
 				
-										<xf:textarea id="STTN_TEXT_B" style="width: 100%;height: 100%;" ref="data:dlt_BMS_VOC_INFO.STTN_TEXT_B" maxlength="200" ev:onviewchange="scwin.STTN_TEXT_B_onviewchange"></xf:textarea>
+										<xf:textarea id="STTN_TEXT_B" style="width: 100%;" ref="data:dlt_BMS_VOC_INFO.STTN_TEXT_B" maxlength="200" ev:onviewchange="scwin.STTN_TEXT_B_onviewchange"></xf:textarea>
 									</xf:group>
 								</xf:group>
 								<xf:group tagname="tr" style="">
@@ -1502,7 +1500,7 @@
 										</w2:attributes>
 										<xf:group class="ml5 fr" id="" style=""></xf:group>
 				
-										<xf:textarea id="STTN_TEXT_A_EN" style="width: 100%;height: 100%;" ref="data:dlt_BMS_VOC_INFO.STTN_TEXT_A_EN" maxlength="200" ev:onviewchange="scwin.STTN_TEXT_A_EN_onviewchange"></xf:textarea>
+										<xf:textarea id="STTN_TEXT_A_EN" style="width: 100%;" ref="data:dlt_BMS_VOC_INFO.STTN_TEXT_A_EN" maxlength="200" ev:onviewchange="scwin.STTN_TEXT_A_EN_onviewchange"></xf:textarea>
 									</xf:group>
 								</xf:group>
 								<xf:group tagname="tr" style="">
@@ -1519,7 +1517,7 @@
 										</w2:attributes>
 										<xf:group class="ml5 fr" id="" style=""></xf:group>
 				
-										<xf:textarea id="STTN_TEXT_B_EN" style="width: 100%;height: 100%;" ref="data:dlt_BMS_VOC_INFO.STTN_TEXT_B_EN" maxlength="200" ev:onviewchange="scwin.STTN_TEXT_B_EN_onviewchange"></xf:textarea>
+										<xf:textarea id="STTN_TEXT_B_EN" style="width: 100%;" ref="data:dlt_BMS_VOC_INFO.STTN_TEXT_B_EN" maxlength="200" ev:onviewchange="scwin.STTN_TEXT_B_EN_onviewchange"></xf:textarea>
 									</xf:group>
 								</xf:group>
 								<xf:group tagname="tr" style="">
@@ -1535,7 +1533,7 @@
 											<w2:rowspan>1</w2:rowspan>
 										</w2:attributes>
 										<xf:textarea adjustMaxLength="" class="" disabled="" id="" mandatory="" ref="data:dlt_BMS_VOC_INFO.REMARK"
-											style="width:100%;height:70px;" maxlength="200">
+											style="width:100%;" maxlength="200">
 										</xf:textarea>
 									</xf:group>
 								</xf:group>
@@ -1562,7 +1560,7 @@
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:input adjustMaxLength="false" id="VOC_ID2" style="width:100px;height:24px;" ref="data:dlt_BMS_VOC_INFO2.VOC_ID"
+									<xf:input adjustMaxLength="false" id="VOC_ID2" style="width:100px;" ref="data:dlt_BMS_VOC_INFO2.VOC_ID"
 										placeholder="" readOnly="true" disabled="true">
 									</xf:input>
 								</xf:group>
@@ -1571,7 +1569,7 @@
 								<xf:group style="" class="w2tb_th req" tagname="th">음성명</xf:group>
 
 								<xf:group tagname="td" style="" class="w2tb_td">
-									<xf:input adjustMaxLength="false" id="VOC_NM2" style="height:24px;" ref="data:dlt_BMS_VOC_INFO2.VOC_NM"
+									<xf:input adjustMaxLength="false" id="VOC_NM2" style="" ref="data:dlt_BMS_VOC_INFO2.VOC_NM"
 										placeholder="" maxlength="20">
 									</xf:input>
 								</xf:group>
@@ -1582,7 +1580,7 @@
 									</w2:attributes>
 								</xf:group>
 								<xf:group tagname="td" style="" class="w2tb_td">
-									<xf:select1 id="PLAY_TYPE2" chooseOption="" style="width: 120px;height: 21px;" submenuSize="auto" allOption=""
+									<xf:select1 id="PLAY_TYPE2" chooseOption="" style="width: 120px;" submenuSize="auto" allOption=""
 										disabled="" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled" title=""
 										ref="data:dlt_BMS_VOC_INFO2.PLAY_TYPE" ev:onchange="scwin.PLAY_TYPE2_onchange" ev:onviewchange="scwin.PLAY_TYPE2_onviewchange">
 										<xf:choices>
@@ -1605,12 +1603,12 @@
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<w2:inputCalendar footerDiv="false" id="PLAY_ST_DT2" style="float:left; width:110px; height:23px;margin-right: 5px;"
+									<w2:inputCalendar footerDiv="false" id="PLAY_ST_DT2" style="float:left; width:110px;height:24px; margin-right: 5px;"
 										renderDiv="true" focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component"
 										ref="data:dlt_BMS_VOC_INFO2.PLAY_ST_DT" editType="" displayFormat="" ioFormat="" calendarDisplayFormatFunc="" ev:onviewchange="scwin.PLAY_ST_DT2_onviewchange">
 									</w2:inputCalendar>
 									<w2:span label="~" style="margin-right: 5px;" id=""></w2:span>
-									<w2:inputCalendar footerDiv="false" id="PLAY_ED_DT2" style="width: 110px;height: 23px;" renderDiv="true"
+									<w2:inputCalendar footerDiv="false" id="PLAY_ED_DT2" style="width: 110px;height:24px;" renderDiv="true"
 										focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component"
 										ref="data:dlt_BMS_VOC_INFO2.PLAY_ED_DT" ev:onviewchange="scwin.PLAY_ED_DT2_onviewchange">
 									</w2:inputCalendar>
@@ -1624,7 +1622,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<w2:upload imageStyle="position:absolute;vertical-align:middle;word-wrap:break-word"
-										inputStyle="vertical-align:middle;word-wrap:break-word" style="width: 272px;height: 23px;" id="VOC_PATH2" inputClass=""
+										inputStyle="vertical-align:middle;word-wrap:break-word" style="width: 272px;height:24px;" id="VOC_PATH2" inputClass=""
 										ev:onInputValueChange="scwin.upload1_onInputValueChange" ev:ondone="scwin.VOC_PATH2_ondone" accept=".wav,.tts" title="" type=""
 										disabled="" class="">
 									</w2:upload>
@@ -1644,7 +1642,7 @@
 									</w2:attributes>
 									<xf:group class="ml5 fr" id="" style=""></xf:group>
 
-									<xf:textarea id="KR_TTS2" style="width: 500px;height: 100px;" ref="data:dlt_BMS_VOC_INFO2.KR_TTS" maxlength="200"></xf:textarea>
+									<xf:textarea id="KR_TTS2" style="width: 500px;" ref="data:dlt_BMS_VOC_INFO2.KR_TTS" maxlength="200"></xf:textarea>
 									<xf:group style="display: contents;position: absolute;margin-left: 5px;" id="">
 										<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px; margin-left: 10px;" id="playTTS3" ev:onclick="scwin.playTTS_onclick">
 											<xf:label><![CDATA[미리듣기]]></xf:label>
@@ -1669,7 +1667,7 @@
 									</w2:attributes>
 									<xf:group class="ml5 fr" id="" style=""></xf:group>
 
-									<xf:textarea id="EN_TTS2" style="width: 500px;height: 100px;" ref="data:dlt_BMS_VOC_INFO2.EN_TTS" maxlength="200"></xf:textarea>
+									<xf:textarea id="EN_TTS2" style="width: 500px;" ref="data:dlt_BMS_VOC_INFO2.EN_TTS" maxlength="200"></xf:textarea>
 									<xf:group style="display: contents;position: absolute;margin-left: 5px;" id="">
 										<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px; margin-left: 10px;" id="playTTS4" ev:onclick="scwin.playTTS2_onclick">
 											<xf:label><![CDATA[미리듣기]]></xf:label>
@@ -1696,7 +1694,7 @@
 									</w2:attributes>
 									<xf:group class="ml5 fr" id="" style=""></xf:group>
 
-									<xf:textarea id="SCR_TXT2" style="width: 100%;height: 100%;" ref="data:dlt_BMS_VOC_INFO2.SCR_TXT" maxlength="200"></xf:textarea>
+									<xf:textarea id="SCR_TXT2" style="width: 100%;" ref="data:dlt_BMS_VOC_INFO2.SCR_TXT" maxlength="200"></xf:textarea>
 								</xf:group>
 							</xf:group>
 							<xf:group style="" tagname="tr">
@@ -1714,7 +1712,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:group class="ml5 fr" id="" style=""></xf:group>
-									<xf:textarea id="SCR_TXT_EN2" ref="data:dlt_BMS_VOC_INFO2.SCR_TXT_EN" style="width: 100%;height: 100%;" maxlength="200"></xf:textarea>
+									<xf:textarea id="SCR_TXT_EN2" ref="data:dlt_BMS_VOC_INFO2.SCR_TXT_EN" style="width: 100%;" maxlength="200"></xf:textarea>
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
@@ -1743,7 +1741,7 @@
 									</w2:attributes>
 									<xf:group class="ml5 fr" id="" style=""></xf:group>
 
-									<xf:textarea id="TXT_A2" style="width: 100%;height: 100%;" ref="data:dlt_BMS_VOC_INFO2.TXT_A" maxlength="200"></xf:textarea>
+									<xf:textarea id="TXT_A2" style="width: 100%;" ref="data:dlt_BMS_VOC_INFO2.TXT_A" maxlength="200"></xf:textarea>
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
@@ -1757,11 +1755,11 @@
 									</w2:attributes>
 									<xf:group class="ml5 fr" id="" style=""></xf:group>
 
-									<xf:textarea id="TXT_B2" style="width: 100%;height: 100%;" ref="data:dlt_BMS_VOC_INFO2.TXT_B" maxlength="200"></xf:textarea>
+									<xf:textarea id="TXT_B2" style="width: 100%;" ref="data:dlt_BMS_VOC_INFO2.TXT_B" maxlength="200"></xf:textarea>
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" class="w2tb_th" style="height: 50px;vertical-align: top;" id="" tabIndex="">
+								<xf:group tagname="th" class="w2tb_th" style="vertical-align: top;" id="" tabIndex="">
 									비고
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
@@ -1773,7 +1771,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:textarea adjustMaxLength="" class="" disabled="" id="REMARK2" mandatory="" ref="data:dlt_BMS_VOC_INFO2.REMARK"
-										style="width:100%;height:70px;" maxlength="200">
+										style="width:100%;" maxlength="200">
 									</xf:textarea>
 								</xf:group>
 							</xf:group>

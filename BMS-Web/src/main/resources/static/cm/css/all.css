@@ -90,12 +90,12 @@ a:hover,a:active,a:focus{text-decoration:none}
 
 .w2calendar_footer .w2selectbox .w2selectbox_col_button{width:14px; height:14px; background-size: 85%; background-image:url(/cm/images/inc/btn_select_arrow.gif); background-position:left center;}
 
-.w2input, .w2textarea, .w2inputCalendar_divInput, .w2selectbox, .w2checkcombobox, .w2autoComplete {border:1px solid #dddddd; box-sizing:border-box;height:22px;}
+.w2input, .w2textarea, .w2inputCalendar_divInput, .w2selectbox, .w2checkcombobox, .w2autoComplete {border:1px solid #dddddd; box-sizing:border-box;height:24px;}
 .w2input, /* .w2selectbox */ .w2checkcombobox, .w2inputCalendar {width:120px;}
 
 .w2grid .w2inputCalendar_divInput{box-sizing:content-box;}
 
-.w2textarea{width:120px;height:50px;}
+.w2textarea{width:120px;height:90px;}
 .w2radio .w2radio_main,.w2checkbox .w2checkbox_main{width:auto}
 .w2radio.w100 .w2radio_main,.w2checkbox.w100 .w2checkbox_main{width:100%}
 .w2radio_label,.w2checkbox_label{height:19px;line-height:19px} 
@@ -191,7 +191,7 @@ a:hover,a:active,a:focus{text-decoration:none}
 .tb .w2tb_td{padding:2px;color:#3b3b3b;}
 .tb tbody .w2tb_th .pot{color:#5a89bc}
 .tb .w2input, .tb .w2selectbox, .tb .w2checkcombobox, .tb .w2inputCalendar{width:100%;}
-.tb .w2textarea{width:100%;height:50px;}
+.tb .w2textarea{width:100%;height:90px;}
 .tb input[type="checkbox"], .tableListH.w2tb input[type="radio"] { border: none;}
 .tb .w2inputCalendar_div.req{background:none;padding-left:0 !important}
 .tb .w2inputCalendar_div.req .w2inputCalendar_divInput{background:rgb(243,248,255);padding-left:0 !important;text-align:center;}
@@ -1408,6 +1408,29 @@ ul.question li a:hover {font-weight:bold;}
 .ctl_fclt li.on + li {border-left:none;} 
 .ctl_fclt li:first-child {border-left:none;}
 
+/* 정류소/교차로 시간표 탭관련 */
+.sttnCrs_tab
+{
+    position: relative;
+    /* top: 10px; */
+    /* left: 10px; */
+    width: 302px;
+    border: 1px solid #d9d9d9;
+    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
+    /* background: #eee; */
+    overflow: hidden;
+    z-index: 2;
+    border-radius: 5px;
+    }
+    
+.sttnCrs_tab li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
+.sttnCrs_tab li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
+.sttnCrs_tab li:hover {color: #0475f4;}
+.sttnCrs_tab li:last-child{margin-right:0;border-right:0;}
+.sttnCrs_tab li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
+.sttnCrs_tab li.on + li {border-left:none;} 
+.sttnCrs_tab li:first-child {border-left:none;}
+
 /* 시설물 유지보수/장애발생 이력 탭관련 */
 .fclt_his
 {
@@ -1453,6 +1476,52 @@ ul.question li a:hover {font-weight:bold;}
 .dvc_his li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
 .dvc_his li.on + li {border-left:none;} 
 .dvc_his li:first-child {border-left:none;}
+
+/* 교차로 탭관련 */
+.tab_crs
+{
+    position: relative;
+    /* top: 10px; */
+    /* left: 10px; */
+    width: 302px;
+    border: 1px solid #d9d9d9;
+    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
+    /* background: #eee; */
+    overflow: hidden;
+    z-index: 2;
+    border-radius: 5px;
+    }
+    
+.tab_crs li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
+.tab_crs li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
+.tab_crs li:hover {color: #0475f4;}
+.tab_crs li:last-child{margin-right:0;border-right:0;}
+.tab_crs li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
+.tab_crs li.on + li {border-left:none;} 
+.tab_crs li:first-child {border-left:none;}
+
+/* 정류소 탭관련 */
+.tab_sttn
+{
+    position: relative;
+    /* top: 10px; */
+    /* left: 10px; */
+    width: 302px;
+    border: 1px solid #d9d9d9;
+    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
+    /* background: #eee; */
+    overflow: hidden;
+    z-index: 2;
+    border-radius: 5px;
+    }
+    
+.tab_sttn li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
+.tab_sttn li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
+.tab_sttn li:hover {color: #0475f4;}
+.tab_sttn li:last-child{margin-right:0;border-right:0;}
+.tab_sttn li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
+.tab_sttn li.on + li {border-left:none;} 
+.tab_sttn li:first-child {border-left:none;}
 
 /* 코스 탭관련 */
 .tab_cos

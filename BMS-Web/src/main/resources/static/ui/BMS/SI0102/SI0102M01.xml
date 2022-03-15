@@ -595,7 +595,7 @@
 										<w2:colspan>5</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:input class="" id="" mandatory="" ref="data:dlt_BMS_TRANSCOMP_MST.COMP_ID" style="width:100px;height:21px;"
+									<xf:input class="" id="" mandatory="" ref="data:dlt_BMS_TRANSCOMP_MST.COMP_ID" style="width:100px;"
 										disabled="true" adjustMaxLength="" maxlength="10">
 									</xf:input>
 								</xf:group></xf:group>
@@ -615,7 +615,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:input adjustMaxLength="" class="req" disabled="" id="COMP_NM" mandatory=""
-										ref="data:dlt_BMS_TRANSCOMP_MST.COMP_NM" style="width:100%;height:21px;" fireEventOnInvalid="" validator="" validateOnInput=""
+										ref="data:dlt_BMS_TRANSCOMP_MST.COMP_NM" style="width:100%;" fireEventOnInvalid="" validator="" validateOnInput=""
 										validateOnCheckMaxByteLength="" invalidMessageFunc="" readOnly="" maxlength="10">
 									</xf:input>
 								</xf:group>
@@ -623,7 +623,7 @@
 							<xf:group tagname="td" class="w2tb_td">
 								<w2:attributes></w2:attributes>
 								<xf:input adjustMaxLength="" allowChar="" class="req" disabled="" id="REP_NM" initValue="" mandatory=""
-									maxlength="30" ref="data:dlt_BMS_TRANSCOMP_MST.REP_NM" style="height:21px;" validateOnInput="false" validator="">
+									maxlength="30" ref="data:dlt_BMS_TRANSCOMP_MST.REP_NM" style="" validateOnInput="false" validator="">
 								</xf:input>
 							</xf:group></xf:group>
 							<xf:group style="" tagname="tr">
@@ -634,7 +634,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:input adjustMaxLength="" class="" disabled="" id="ADDR" mandatory="" maxlength="100"
-										ref="data:dlt_BMS_TRANSCOMP_MST.ADDR" style="width:87.12%;height:21px;" refSync="">
+										ref="data:dlt_BMS_TRANSCOMP_MST.ADDR" style="width:87.12%;" refSync="">
 									</xf:input>
 									<w2:anchor class="btn_gcm" ev:onclick="scwin.btn_address_onclick" id="btn_address" outerDiv="true"
 										style="left:0px;top:0px;margin-right: 5px;">
@@ -655,7 +655,7 @@
 									<xf:group id="" style=""></xf:group>
 									<xf:input allowChar="0-9" customModelFormatter="com.transPhone" dataType="text"
 										displayFormatter="com.transPhone" id="OFFICE_PHONE1" maxlength="13" ref="data:dlt_BMS_TRANSCOMP_MST.FAX"
-										style="width:110px;height: 21px;">
+										style="width:110px;">
 									</xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" style="" tagname="th">메일</xf:group>
@@ -667,7 +667,7 @@
 									<xf:group id="" style=""></xf:group>
 									<xf:input adjustMaxLength="" allowChar="aA-zZ,0-9,@,." class="" customModelFormatter=""
 										customModelUnformatter="" disabled="" displayFormatter="" id="EMAIL" invalidMessageFunc="" mandatory="" maxlength="50"
-										ref="data:dlt_BMS_TRANSCOMP_MST.EMAIL" style="width:100%;height:21px;" tooltipFormatter="" validator="">
+										ref="data:dlt_BMS_TRANSCOMP_MST.EMAIL" style="width:100%;" tooltipFormatter="" validator="">
 									</xf:input>
 								</xf:group>
 								<!-- <xf:group tagname="td" class="w2tb_td">
@@ -692,7 +692,7 @@
 										ref="data:dlt_BMS_TRANSCOMP_MST.DRV_CNT" skin="type1" style="position: relative;width: 110px;height: 21px;display: none;">
 									</w2:spinner> -->
 									<xf:input allowChar="0-9" customModelFormatter="" dataType="text" displayFormatter="" id="drv_cnt"
-										maxlength="5" ref="data:dlt_BMS_TRANSCOMP_MST.DRV_CNT" style="width:110px;height: 21px;" minByteLength="">
+										maxlength="5" ref="data:dlt_BMS_TRANSCOMP_MST.DRV_CNT" style="width:110px;" minByteLength="">
 									</xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" tagname="th">
@@ -710,7 +710,7 @@
 										ref="data:dlt_BMS_TRANSCOMP_MST.SVC_ROUT_CNT" skin="type1" style="position: relative;width: 110px;height: 21px;display: none;">
 									</w2:spinner> -->
 									<xf:input allowChar="0-9" customModelFormatter="" dataType="text" displayFormatter="" id="SVC_ROUT_CNT"
-										maxlength="5" minByteLength="" ref="data:dlt_BMS_TRANSCOMP_MST.SVC_ROUT_CNT" style="width:110px;height: 21px;">
+										maxlength="5" minByteLength="" ref="data:dlt_BMS_TRANSCOMP_MST.SVC_ROUT_CNT" style="width:110px;">
 									</xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" tagname="td" style="">
@@ -722,7 +722,7 @@
 									<xf:input adjustMaxLength="" allowChar="0-9" applyFormat="" class="" customModelFormatter=""
 										dataType="text" disabled="" displayFormat="" displayFormatter="" escape="" euroMask="" id="COMP_REG_NO" imeMode="" ioFormat=""
 										mandatory="" maskFormat="" maskFormatModelExcludeChar="" maxlength="10" ref="data:dlt_BMS_TRANSCOMP_MST.COMP_REG_NO"
-										style="width:110px;height:21px;" validator="">
+										style="width:110px;" validator="">
 									</xf:input>
 								</xf:group>
 							</xf:group>
@@ -739,7 +739,7 @@
 										ref="data:dlt_BMS_TRANSCOMP_MST.SPR_VHC_CNT" skin="type1" style="position: relative;width: 110px;height: 21px;display: none;">
 									</w2:spinner> -->
 									<xf:input allowChar="0-9" customModelFormatter="" dataType="text" displayFormatter="" id="SPR_VHC_CNT"
-										maxlength="5" minByteLength="" ref="data:dlt_BMS_TRANSCOMP_MST.SPR_VHC_CNT" style="width:110px;height: 21px;" refSync="">
+										maxlength="5" minByteLength="" ref="data:dlt_BMS_TRANSCOMP_MST.SPR_VHC_CNT" style="width:110px;" refSync="">
 									</xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" tagname="td" style="">
@@ -750,7 +750,7 @@
 									<w2:attributes></w2:attributes>
 									<xf:input allowChar="0-9" customModelFormatter="com.transPhone" customModelUnformatter=""
 										dataType="text" disabled="" displayFormatter="com.transPhone" id="" maskFormat="" maxlength="13" minByteLength=""
-										ref="data:dlt_BMS_TRANSCOMP_MST.PHONE" style="width:110px;height: 21px;" validator="">
+										ref="data:dlt_BMS_TRANSCOMP_MST.PHONE" style="width:110px;" validator="">
 									</xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" tagname="td" style="">
@@ -763,7 +763,7 @@
 										ref="data:dlt_BMS_TRANSCOMP_MST.LIC_VHC_CNT" skin="type1" style="position: relative;width: 110px;height: 21px;display: none;">
 									</w2:spinner> -->
 									<xf:input allowChar="0-9" customModelFormatter="" dataType="text" displayFormatter="" id="LIC_VHC_CNT10"
-										maxlength="5" minByteLength="" ref="data:dlt_BMS_TRANSCOMP_MST.LIC_VHC_CNT" style="width:110px;height: 21px;">
+										maxlength="5" minByteLength="" ref="data:dlt_BMS_TRANSCOMP_MST.LIC_VHC_CNT" style="width:110px;">
 									</xf:input>
 								</xf:group>
 							</xf:group>

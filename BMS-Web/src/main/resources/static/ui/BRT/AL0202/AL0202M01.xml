@@ -2189,7 +2189,7 @@
 					<xf:group class="search" id="" style="">
 						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
 							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="TYPE10"
-							optionOrder="false" ref="data:dma_search.TYPE" style="height:20px;width:100px;margin-right: 10px;float:left;" submenuSize="auto"
+							optionOrder="false" ref="data:dma_search.TYPE" style="width:100px;margin-right: 10px;float:left;" submenuSize="auto"
 							textAlign="left">
 
 							<xf:choices>
@@ -2311,9 +2311,9 @@
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="배차편성 상세" style=""></w2:textbox>
 							<w2:span label="운행횟수 : " style="float: left; margin-left: 50px; margin-right: 8px;margin-top: 2px;" id=""></w2:span>
-							<xf:input adjustMaxLength="false" id="OPER_CNT" ref="data:dlt_BRT_OPER_PL_MST.OPER_CNT" style="width: 50px;height: 21px; float: left; margin-right:15px" ev:onkeyup="" ev:oneditkeyup='scwin.cnt_oneditkeyup'></xf:input>
+							<xf:input adjustMaxLength="false" id="OPER_CNT" ref="data:dlt_BRT_OPER_PL_MST.OPER_CNT" style="width: 50px; float: left; margin-right:15px" ev:onkeyup="" ev:oneditkeyup='scwin.cnt_oneditkeyup'></xf:input>
 							<w2:span label="배차횟수 : " style="float: left; margin-right: 8px;margin-top: 2px;" id=""></w2:span>
-							<xf:input adjustMaxLength="false" id="ALLOC_CNT" ref="data:dlt_BRT_OPER_PL_MST.ALLOC_CNT" style="width: 50px;height: 21px; float: left; margin-right:15px" ev:onkeyup="" ev:oneditkeyup="scwin.cnt_oneditkeyup"></xf:input>
+							<xf:input adjustMaxLength="false" id="ALLOC_CNT" ref="data:dlt_BRT_OPER_PL_MST.ALLOC_CNT" style="width: 50px; float: left; margin-right:15px" ev:onkeyup="" ev:oneditkeyup="scwin.cnt_oneditkeyup"></xf:input>
 							<!-- <w2:span label="시점방면 : " style="float: left; margin-right: 8px;margin-top: 2px;" id=""></w2:span>
 							<xf:select1 id="ST_WAY" selectedIndex="-1" appearance="full" style="width: auto;height: 21px;" cols="" rows="1" ref="" ev:onviewchange="scwin.ST_WAY_onviewchange">
 								<xf:choices>

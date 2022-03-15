@@ -22,6 +22,9 @@
 		<if test="TYPE == 'REP_ROUT_NM'">
 			AND REP_ROUT_NM LIKE CONCAT('%',#{CONTENT},'%') 
 		</if>
+		<if test="USE_YN != null and USE_YN != ''">
+			AND USE_YN = #{USE_YN}
+		</if>
 </select>
 
 <select id="SI0405SHI0" resultType="Map">

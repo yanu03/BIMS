@@ -683,9 +683,56 @@ body {
 	
 }
 
+.ST003_station_1{
+	background-image: url('/cm/images/bms/ST003.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	/* background-position: top;
+	background-size: contain; */
+	position: relative;
+	width: 100%;
+	height: 100%;
+	
+}
+
+.ST003_station_2{
+	background-image: url('/cm/images/bms/ST003_2.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	/* background-position: top;
+	background-size: contain; */
+	position: relative;
+	width: 100%;
+	height: 100%;
+	
+}
+
+.ST003_station_3{
+	background-image: url('/cm/images/bms/ST003_3.png');
+	background-repeat: no-repeat;
+	background-position: center;
+	/* background-position: top;
+	background-size: contain; */
+	position: relative;
+	width: 100%;
+	height: 100%;
+	
+}
+
 .ST002_station{
 	background-image: url('/cm/images/bms/ST002_1.jpg');
 	background-repeat: no-repeat;
+	/*background-position: top;
+	background-size: contain;*/
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.ST002_station_1{
+	background-image: url('/cm/images/bms/ST002_2.jpg');
+	background-repeat: no-repeat;
+	background-position: center;
 	/*background-position: top;
 	background-size: contain;*/
 	position: relative;

@@ -311,7 +311,7 @@
 								</xf:group>
 								<xf:group style="" class="w2tb_th req" tagname="th">요일</xf:group>
 								<xf:group style="" class="w2tb_td" tagname="td">
-									<xf:input adjustMaxLength="false" id="DAY_OF_WEEK" style="height:24px;width: 80px;" placeholder=""
+									<xf:input adjustMaxLength="false" id="DAY_OF_WEEK" style="width: 80px;" placeholder=""
 										readOnly="" disabled="">
 									</xf:input>
 								</xf:group>
@@ -323,7 +323,7 @@
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:input adjustMaxLength="false" id="HOLI_NM" style="width:100%;height: 21px;"
+									<xf:input adjustMaxLength="false" id="HOLI_NM" style="width:100%;"
 										ref="data:dlt_BRT_HOLI_MST.HOLI_NM" maxlength="30">
 									</xf:input>
 								</xf:group>
@@ -335,7 +335,7 @@
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:select1 id="DAY_TYPE" chooseOption="true" style="width: 148px;height: 21px;" submenuSize="auto"
+									<xf:select1 id="DAY_TYPE" chooseOption="true" style="width: 148px;" submenuSize="auto"
 										allOption="" disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled"
 										ref="data:dlt_BRT_HOLI_MST.DAY_TYPE" chooseOptionLabel="-선택-">
 										<xf:choices>
@@ -352,7 +352,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" class="w2tb_th" style="height: 70px;vertical-align: top" id="" tabIndex="">
+								<xf:group tagname="th" class="w2tb_th" style="vertical-align: top" id="" tabIndex="">
 									비고
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
@@ -363,7 +363,7 @@
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:textarea id="REMARK" style="width: 100%;height: 100px;" ref="data:dlt_BRT_HOLI_MST.REMARK"
+									<xf:textarea id="REMARK" style="width: 100%;" ref="data:dlt_BRT_HOLI_MST.REMARK"
 										maxlength="200">
 									</xf:textarea>
 								</xf:group>
