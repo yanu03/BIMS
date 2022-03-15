@@ -1651,7 +1651,7 @@
 					<xf:group id="pgm_list" class="pgm_list" style="">
 						<xf:group id="" style="">
 							<xf:group style="width: 303px;">
-								<ul id="" class="moni_img"  style="margin-bottom: 3px;">
+								<ul id="" class="tab_ul moni_img"  style="margin-bottom: 3px;">
 									<li id="li_busimg" class="on">
 										<!-- <span class="busimg"></span> -->
 										버스

@@ -157,14 +157,14 @@
 			, draggable: false
 		});
 		
-		$("#SI0501_TAB").attr("style", "width:200px; height:27px;  float:left");
-		map_SI0501_div.hide();
+		$().attr("style", "width:200px; height:27px;  float:left");
+		//map_SI0501_div.hide();
 		
 		//탭 목록 클릭 이벤트
-		$(".tab_sttn").find("li").click( function() {
+		$("#SI0501_TAB").find("li").click( function() {
 			var li_id = this.id;
-			$(".tab_sttn").find("li").removeClass("on");
-			$(".tab_sttn").find("#"+li_id).addClass("on");
+			$("#SI0501_TAB").find("li").removeClass("on");
+			$("#SI0501_TAB").find("#"+li_id).addClass("on");
 			
 			if(li_id == "li_rout") {
 				pgm_sub_subList.show("");
@@ -172,6 +172,7 @@
 			}
 			else if(li_id == "li_map") {
 				pgm_sub_subList.hide();
+				routMap.showRoute("map_SI0501", dlt_BMS_ROUT_NODE_CMPSTN.getAllJSON(), dma_sub_search.get("STTN_ID"), "BUSSTOP");
 				map_SI0501_div.show("");
 			}
 		});
@@ -665,22 +666,17 @@
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="해당 경유 노선" style=""></w2:textbox>
 						</xf:group>
-						<xf:group style="" id="">
-							<ul id="SI0501_TAB" class="tab_sttn" style="">
-								<li id="li_rout" class="on">노선 정보</li>
-								<li id="li_map" class="">지도</li>
+						<xf:group class="tab_div" id="">
+							<ul id="SI0501_TAB" class="tab_ul" style="width:200px">
+								<li id="li_map" class="on" >지도</li>
+								<li id="li_rout" class="">노선 정보</li>
 							</ul>
 						</xf:group>
-						<xf:group id="pgm_sub_subList" class="" style="">
-							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
-								checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_ROUT_MST" disabledScrollHidden="" editModeEvent=""
-								editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
-								ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row"
-								id="SI0501G1" ignoreCellClick="false" ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode=""
-								moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="순번"
-								rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false"
-								rowStatusWidth="40" scrollByColumn="false" showSortableUseFilter="" sortOrderReverse="" sortable="" sortedIconPosition="" style=""
-								summaryAuto="" useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true" visibleRowNum="" wheelRows="">
+						<xf:group id="pgm_sub_subList" class="" style="display:none">
+							<w2:gridView autoFit="lastColumn" autoFitMinWidth="0" class="cm_grid right" dataList="data:dlt_BMS_ROUT_MST"
+								fixedColumnWithHidden="true" focusMode="row"
+								id="SI0501G1" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false"
+								rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" >
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 								<w2:header style="" id="header2">
 									<w2:row style="" id="row4">
@@ -732,6 +728,14 @@
 										</w2:column>
 									</w2:row>
 								</w2:gBody>
+								<w2:footer style="" id="footer1">
+									<w2:row style="" id="row3">
+										<w2:column removeBorderStyle="false" width="" inputType="expression"
+											style="height:20px; border-right:5px" id="column48" value="" blockSelect="false" displayMode="label" colSpan="7" rowSpan=""
+											expression="&quot;데이터 개수 : &quot; + COUNT('ROUT_ID')" textAlign="left">
+										</w2:column>
+									</w2:row>
+								</w2:footer>
 							</w2:gridView>
 						</xf:group>
 						<xf:group id="map_SI0501_div" class="" style="">
