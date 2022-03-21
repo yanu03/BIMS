@@ -197,12 +197,12 @@
 	
 	scwin.TYPE1_onviewchange = function(info) {	
 		com.executeSubmission(sub_routItem);
-		com.searchGrid(VH0105G0, sub_VH0105G0R0);
+		//com.searchGrid(VH0105G0, sub_VH0105G0R0);
 	};
 	
-	scwin.TYPE2_onviewchange = function(info) {		
+	/*scwin.TYPE2_onviewchange = function(info) {		
 		com.searchGrid(VH0105G0, sub_VH0105G0R0);
-	};
+	};*/
 	
 	scwin.F_DATE_onviewchange = function(info) {
 		var ldate = L_DATE.getValue();
@@ -465,16 +465,16 @@
 							<w2:footer id="footer1" style="">
 								<w2:row id="row2" style="">
 									<w2:column blockSelect="false" colSpan="48" displayMode="label"
-										expression="" id="column42" inputType="expression" removeBorderStyle="false"
-										style="height:20px;" textAlign="left" width="2386">
-									</w2:column>
-								</w2:row>
-								<w2:row id="row3" style="">
-									<w2:column blockSelect="false" colSpan="48" displayMode="label"
 										expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
 										style="height:20px;" textAlign="left" width="2386">
 									</w2:column>
 								</w2:row>
+								<!-- <w2:row id="row3" style="">
+									<w2:column blockSelect="false" colSpan="48" displayMode="label"
+										expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
+										style="height:20px;" textAlign="left" width="2386">
+									</w2:column>
+								</w2:row> -->
 							</w2:footer>
 						</w2:gridView>
 					</xf:group>

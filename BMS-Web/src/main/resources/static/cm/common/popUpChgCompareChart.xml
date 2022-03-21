@@ -67,7 +67,7 @@
 		dma_sub_search.set("OPER_SN", scwin.param.data4);
 		
 		
-		dma_sub_search.set("OPER_SN", dma_sub_search.get("OPER_SN")+'회차');		
+		dma_sub_search.set("OPER_SN", dma_sub_search.get("OPER_SN")+'회차');
 		
 		scwin.DrawChart();		
 	};

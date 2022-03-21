@@ -170,17 +170,20 @@
 		var focusIdx = VH0104G0.getFocusedRowIndex();
 		var focusDataList = dlt_BRT_CUR_CHG_OPER_INFO_HIS.getRowJSON(focusIdx);
 		
-		routMap.showVehicle3("map_VH0104", focusDataList,  VH0104G0);
+		if(focusDataList.GPS_X != '' && focusDataList.GPS_Y != ''){
+			routMap.showVehicle3("map_VH0104", focusDataList,  VH0104G0);
+		}
+		
 	};
 	
 	scwin.TYPE1_onviewchange = function(info) {	
 		com.executeSubmission(sub_routItem);
-		com.searchGrid(VH0104G0, sub_VH0104G0R0);
+		//com.searchGrid(VH0104G0, sub_VH0104G0R0);
 	};
 	
-	scwin.TYPE2_onviewchange = function(info) {		
+	/*scwin.TYPE2_onviewchange = function(info) {		
 		com.searchGrid(VH0104G0, sub_VH0104G0R0);
-	};
+	};*/
 	
 	scwin.F_DATE_onviewchange = function(info) {
 		var ldate = L_DATE.getValue();
