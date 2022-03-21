@@ -2224,7 +2224,7 @@
 				</xf:group>
 			</xf:group>
 
-			<xf:group id="pgm_content" class="pgm_content grdc_3f_20_7f" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_500_20_a" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
 					<xf:group class="defaultbox" id="" style="">
 						<w2:textbox class="df_tt fl" id="" label="배차편성 목록" style=""></w2:textbox>
@@ -2239,10 +2239,54 @@
 							<w2:header style="" id="header1">
 								<w2:row style="" id="routInfo_row1">
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
-										id="col_REP_ROUT_ID" value="대표노선ID" blockSelect="false" displayMode="label"  rowSpan="2">
+										id="col_REP_ROUT_ID" value="대표노선ID" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
+										id="col_REP_ROUT_NM" value="대표노선명" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="55" inputType="text" style="height:20px"
-										id="col_REP_ROUT_NM" value="대표노선" blockSelect="false" displayMode="label"  rowSpan="2">
+										id="col_DAY_DIV" value="요일구분" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px"
+										id="col_WAY_ASC_NM1" value="하행방면" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px"
+										id="col_WAY_ASC_NM2" value="상행방면" blockSelect="false" displayMode="label">
+									</w2:column>
+									<!-- <w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px"
+										id="REMARK" value="" blockSelect="false" displayMode="label">
+									</w2:column> -->
+								</w2:row>
+							</w2:header>
+							<w2:gBody style="" id="gBody1">
+								<w2:row style="" id="row2">
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="REP_ROUT_ID"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="REP_ROUT_NM"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="DAY_DIV"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" textAlign="left" style="height:20px; padding-left:5px" id="WAY_DESC_NM"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" textAlign="left" style="height:20px; padding-left:5px" id="WAY_ASC_NM"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<!-- <w2:column removeBorderStyle="false" width="" inputType="text" textAlign="left" style="height:20px;" id="REMARK"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column> -->
+								</w2:row>
+							</w2:gBody>
+							<!-- <w2:header style="" id="header1">
+								<w2:row style="" id="routInfo_row1">
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
+										id="col_REP_ROUT_ID" value="대표노선ID" blockSelect="false" displayMode="label"  rowSpan="2">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="65" inputType="text" style="height:20px"
+										id="col_REP_ROUT_NM" value="대표노선명" blockSelect="false" displayMode="label"  rowSpan="2">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="55" inputType="text" style="height:20px"
 										id="col_DAY_DIV" value="요일구분" blockSelect="false" displayMode="label"  rowSpan="2">
@@ -2293,7 +2337,7 @@
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
-							</w2:gBody>
+							</w2:gBody> -->
 							<w2:footer style="" id="footer1">
 								<w2:row style="" id="row3">
 									<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;"

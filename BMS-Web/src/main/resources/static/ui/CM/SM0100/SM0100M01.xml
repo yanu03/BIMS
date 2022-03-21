@@ -370,9 +370,10 @@
 						FOCUS : dlt_commonDtl.getCellData(grd_dtlView.getFocusedRowIndex(), "FOCUS"),
 						STATUS : dlt_commonDtl.getCellData(grd_dtlView.getFocusedRowIndex(), "STATUS"),
 						callbackFn : "scwin.imgPathCallback" };
-				   	 
+			
+			var dlCdNm = dlt_commonDtl.getCellData(row, "DL_CD_NM");
 			var opt = { id : "SM0100P01", 
-						popupName : "이미지 업로드",
+						popupName : dlCdNm + " 이미지 업로드",
 						width : 1050,
 						height : 500,
 						modal : true};
@@ -385,16 +386,19 @@
 	 * 상세코드 그리드 이미지(경로) 콜백 메소드
 	 */
 	scwin.imgPathCallback = function(data){
+		debugger;
 		var coCd = dlt_commonDtl.getCellData(grd_dtlView.getFocusedRowIndex(), "CO_CD");
 		var dlCd = dlt_commonDtl.getCellData(grd_dtlView.getFocusedRowIndex(), "DL_CD");
 		var imgNm = data[0].IMG_NM;
 		var focus = data[0].FOCUS;
 		var status = data[0].STATUS;
+		var imgPathOri = data[0].IMG_PATH_ORI;
 		var path = "/fileUpload/common/code/"
 		
 		dlt_commonDtl.setCellData(grd_dtlView.getFocusedRowIndex(), "FOCUS", focus);
 		dlt_commonDtl.setCellData(grd_dtlView.getFocusedRowIndex(), "STATUS", status);
 		dlt_commonDtl.setCellData(grd_dtlView.getFocusedRowIndex(), "IMG_NM", imgNm);
+		dlt_commonDtl.setCellData(grd_dtlView.getFocusedRowIndex(), "IMG_PATH_ORI", imgPathOri);
 		dlt_commonDtl.setCellData(grd_dtlView.getFocusedRowIndex(), "IMG_PATH", path+coCd+dlCd);
 	}
 	]]></script>

@@ -225,9 +225,9 @@ public class CommonService extends ServiceSupport {
 					if(data.get("IMG_PATH").equals(data.get("IMG_PATH_ORI")) == false) {
 						doMoveFile("up/","common/code/",data.get("IMG_NM").toString(),data.get("CO_CD").toString()+data.get("DL_CD").toString()+data.get("IMG_NM").toString());
 						//doMoveFile("up/","common/code/",data.get("IMG_NM").toString(),data.get("CO_CD").toString()+data.get("DL_CD").toString()+data.get("IMG_NM").toString()+".png");
+						commonMapper.updateCommonDtlImgPath(data);
 					}
 					
-					//commonMapper.updateCommonDtlImgPath(data);
 					
 					/*  2020-09-29 추가
 		    		 *  설명: .jpg 이미지와 CERTI 이미지가 없을 경우 운전자 단말기에서 로그인이 되지 않음. 따라서 아래 코드 추가함

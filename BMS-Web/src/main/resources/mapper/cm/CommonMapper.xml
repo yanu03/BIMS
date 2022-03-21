@@ -215,7 +215,7 @@
 				AND IMG_PATH = #{IMG_PATH}
 	</update>
 	
-	<!-- 이미지경로 insert -->
+	<!-- 이미지경로 추가 -->
 	<insert id="insertCommonDtlImgPath" parameterType="Map">
 		INSERT INTO BMS_DL_CD_IMG_INFO(CO_CD, DL_CD, IMG_PATH, IMG_NM, FOCUS, STATUS)
 		VALUES (#{CO_CD}, #{DL_CD}, #{IMG_PATH}, #{IMG_NM}, #{FOCUS}, #{STATUS})
@@ -227,6 +227,17 @@
 		FOCUS = #{FOCUS},
 		STATUS = #{STATUS}
 	</insert>
+	
+	<!-- 이미지경로 수정 -->
+	<update id="updateCommonDtlImgPath" parameterType="Map">
+		UPDATE BMS_DL_CD_IMG_INFO 
+		SET 	IMG_PATH = #{IMG_PATH},
+				FOCUS = #{FOCUS},
+				STATUS = #{STATUS}
+		WHERE	CO_CD = #{CO_CD}
+				AND DL_CD = #{DL_CD_ORG}
+				AND IMG_PATH = #{IMG_PATH_ORI}
+	</update>
 
 	<!-- 시스템  테이블의  데이타 읽어오기 -->
 	<select id="selectSystemList" resultType="Map">

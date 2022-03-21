@@ -34,7 +34,7 @@
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
 			<xf:submission id="sub_SM0100P0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_DL_CD_IMG_INFO" action="/common/selectCommonDtlImg" method="post" mediatype="application/json" encoding="UTF-8"
-				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_SM0100P0R0_submitdone"
+				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_SM0100P0R0_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
 		</xf:model>
@@ -75,7 +75,7 @@
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
 		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
 		
-		//com.executeSubmission(sub_SM0100P0R0);
+		com.executeSubmission(sub_SM0100P0R0);
 		
 	};
 	
@@ -90,7 +90,7 @@
 		var fileNameIndex = returnValue.lastIndexOf('\\');
 		var real_fileName = returnValue.substring(fileNameIndex+1, returnValue.length);
 		
-		dlt_BMS_DL_CD_IMG_INFO.removeAll();
+		//dlt_BMS_DL_CD_IMG_INFO.removeAll();
 		dlt_BMS_DL_CD_IMG_INFO.insertRow();
 		dlt_BMS_DL_CD_IMG_INFO.setCellData(0, "IMG_NM", real_fileName);
 		dlt_BMS_DL_CD_IMG_INFO.modifyAllStatus("R");
@@ -153,9 +153,9 @@
 					<xf:group class="label" id="" style="">
 						<w2:span class="" id="" label="이미지 유형"></w2:span>
 					</xf:group>
-					<xf:group id="" style="" class="radio">
+					<!-- <xf:group id="" style="" class="">
 						<xf:select1 id="" ref="data:dma_search.FOCUS" selectedIndex="0" cols="" appearance="full"
-							style="margin-right: 10px;" rows="1" ev:onviewchange="scwin.FOCUS_onviewchange">
+							style="margin-right: 10px; float: left; position: relative; margin-top: 3px;" rows="1" ev:onviewchange="scwin.FOCUS_onviewchange">
 							<xf:choices>
 								<xf:item>
 									<xf:label><![CDATA[기본]]></xf:label>
@@ -167,9 +167,9 @@
 								</xf:item>
 							</xf:choices>
 						</xf:select1>
-					</xf:group>
-					<!-- <xf:group class="search" id="" style="float: left;">
-						<xf:select1 id="FOCUS" chooseOption="true" style="" submenuSize="auto" allOption="" disabled="false" direction="auto"
+					</xf:group> -->
+					<xf:group class="search" id="" style="float: left;">
+						<xf:select1 id="FOCUS" chooseOption="" style="" submenuSize="auto" allOption="" disabled="false" direction="auto"
 							appearance="minimal" disabledClass="w2selectbox_disabled" class="search_type_100" chooseOptionLabel="-선택-"
 							ref="data:dma_search.FOCUS" ev:onviewchange="scwin.FOCUS_onviewchange">
 							<xf:choices>
@@ -183,14 +183,15 @@
 								</xf:item>
 							</xf:choices>
 						</xf:select1>
-					</xf:group> -->
+					</xf:group>
 					<xf:group class="label" id="" style="">
-						<w2:span class="" id="" label="시설 상태"></w2:span>
+						<w2:span class="" id="" label="상태"></w2:span>
 					</xf:group>
 					<xf:group class="search" id="" style="float: left;">
-						<xf:select1 id="STATUS_SELECT" chooseOption="true" style="" submenuSize="auto" allOption="" disabled="false" direction="auto"
-							appearance="minimal" disabledClass="w2selectbox_disabled" class="search_type_100" chooseOptionLabel="-선택-"
+						<xf:select1 id="STATUS_SELECT" chooseOption="" style="" submenuSize="auto" allOption="" disabled="false"
+							direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled" class="search_type_100" chooseOptionLabel="-선택-"
 							ref="data:dma_search.STATUS" ev:onviewchange="scwin.STATUS_SELECT_onviewchange">
+							<xf:choices></xf:choices>
 						</xf:select1>
 					</xf:group>
 					<xf:group class="label" id="" style="">
