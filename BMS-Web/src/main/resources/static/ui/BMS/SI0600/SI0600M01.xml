@@ -540,7 +540,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:input class="" id="CLSFCTN_ID" mandatory="" ref="data:dlt_EMER_CLSFCTN_MST.CLSFCTN_ID"
-										style="width:100px;height:21px;" disabled="true" adjustMaxLength="">
+										style="width:100px;" disabled="true" adjustMaxLength="">
 									</xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th req" style="" tagname="th">분류명</xf:group>
@@ -550,7 +550,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:input class="req" id="CLSFCTN_NM"  mandatory="" ref="data:dlt_EMER_CLSFCTN_MST.CLSFCTN_NM"
-										style="width:100%;height:21px;"  adjustMaxLength="" maxlength="30" disabled="">
+										style="width:100%;"  adjustMaxLength="" maxlength="30" disabled="">
 									</xf:input>
 								</xf:group>
 							</xf:group>
@@ -559,7 +559,7 @@
 									<w2:attributes></w2:attributes>
 									<xf:input adjustMaxLength="" class="" disabled="" ev:oneditenter="" ev:onfocus="scwin.PARTNER_NM_onfocus"
 										fireEventOnInvalid="" id="PARTNER_NM" invalidMessageFunc="" mandatory="" readOnly="" ref="data:dlt_EMER_CLSFCTN_MST.PARTNER_NM"
-										style="width:80%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput="" validator="">
+										style="width:80%;" validateOnCheckMaxByteLength="" validateOnInput="" validator="">
 									</xf:input>
 									<xf:image class="btn" ev:onclick="scwin.PARTNER_SEARCH_onclick" id="PARTNER_SEARCH" longdesc=""
 										src="/cm/images/inc/icon_search.gif" style="width:21px;height:23px;margin-left:5px;">
@@ -570,7 +570,7 @@
 									<w2:attributes></w2:attributes>
 									<xf:input adjustMaxLength="" allowChar="0-9" class="" customModelFormatter="com.transPhone"
 										displayFormatter="com.transPhone" id="PHONE" mandatory="" maxlength="30" ref="data:dlt_EMER_CLSFCTN_MST.PHONE" refSync=""
-										style="height:21px;">
+										style="">
 									</xf:input>
 								</xf:group></xf:group><xf:group tagname="tr" style=""><xf:group tagname="th" class="w2tb_th">주소<w2:attributes><w2:scope>row</w2:scope></w2:attributes></xf:group>
 								<xf:group tagname="td" class="w2tb_td">
@@ -579,7 +579,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:input adjustMaxLength="" class="" disabled="" id="ADDR" mandatory="" maxlength="100"
-										ref="data:dlt_EMER_CLSFCTN_MST.ADDR" style="width:87.12%;height:21px;" refSync="">
+										ref="data:dlt_EMER_CLSFCTN_MST.ADDR" style="width:87.12%;" refSync="">
 									</xf:input>
 									<w2:anchor class="btn_gcm" ev:onclick="scwin.btn_address_onclick" id="btn_address" outerDiv="true"
 										style="left:0px;top:0px;margin-right: 5px;">
@@ -589,7 +589,7 @@
 	<xf:group tagname="td" class="w2tb_td">
 		<w2:attributes></w2:attributes>
 		<xf:input adjustMaxLength="" allowChar="0-9" class="" customModelFormatter="com.transPhone" displayFormatter="com.transPhone" id="FAX"
-			mandatory="" maxlength="30" ref="data:dlt_EMER_CLSFCTN_MST.FAX" refSync="" style="height:21px;" initValue="">
+			mandatory="" maxlength="30" ref="data:dlt_EMER_CLSFCTN_MST.FAX" refSync="" style="" initValue="">
 		</xf:input>
 	</xf:group>
 	<xf:group tagname="td" class="w2tb_th">이메일<w2:attributes></w2:attributes></xf:group>
@@ -597,17 +597,17 @@
 		<w2:attributes></w2:attributes>
 		<xf:input adjustMaxLength="" allowChar="aA-zZ,0-9,@,." class="" customModelFormatter="" customModelUnformatter="" disabled=""
 			displayFormatter="" id="EMAIL" invalidMessageFunc="" mandatory="" maxlength="50" ref="data:dlt_EMER_CLSFCTN_MST.EMAIL"
-			style="width:100%;height:21px;" tooltipFormatter="" validator="">
+			style="width:100%;" tooltipFormatter="" validator="">
 		</xf:input>
 	</xf:group></xf:group><xf:group style="" tagname="tr">
-								<xf:group class="w2tb_th" style="" tagname="th">비고</xf:group>
+								<xf:group class="w2tb_th" style="vertical-align: top;" tagname="th">비고</xf:group>
 								<xf:group class="w2tb_td" style="" tagname="td">
 									<w2:attributes>
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:textarea adjustMaxLength="" disabled="" id="REMARK" mandatory=""
-										ref="data:dlt_EMER_CLSFCTN_MST.REMARK" style="width:100%;height:95px;" allowChar="" validator="" validateOnInput="false"
+										ref="data:dlt_EMER_CLSFCTN_MST.REMARK" style="width:100%;" allowChar="" validator="" validateOnInput="false"
 										initValue="" maxlength="200">
 									</xf:textarea>
 								</xf:group>

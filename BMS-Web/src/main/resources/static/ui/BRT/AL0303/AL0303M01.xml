@@ -513,7 +513,7 @@
 				</xf:group><!-- pgm_list -->
 
 				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_250_20_20_2_a" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_280_20_20_2_a" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="대체차량 상세 정보" style=""></w2:textbox>
@@ -538,7 +538,7 @@
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:input adjustMaxLength="false" id="" style="width: 144px;height: 21px;"
+									<xf:input adjustMaxLength="false" id="" style="width: 144px;"
 										ref="data:dlt_BRT_RPC_VHC_INFO.RPC_ID" disabled="true">
 									</xf:input>
 								</xf:group>
@@ -563,7 +563,7 @@
 										<w2:colspan>1</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:input id="ROUT_NM" class="req" chooseOption="true" style="width: 100px;height: 21px;"
+									<xf:input id="ROUT_NM" class="req" chooseOption="true" style="width: 100px;"
 										allOption="" disabled="" ev:onfocus="scwin.REP_ROUT_NM_onfocus" ref="data:dlt_BRT_RPC_VHC_INFO.ROUT_NM" >
 									</xf:input>
 									<xf:image class="btn" ev:onclick="scwin.REP_ROUT_NM_SEARCH_onclick" id="REP_ROUT_NM_SEARCH" longdesc=""
@@ -576,7 +576,7 @@
 										<w2:colspan>1</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:input id="INCDNT_ID" class="" chooseOption="true" style="width: 100px;height: 21px;"
+									<xf:input id="INCDNT_ID" class="" chooseOption="true" style="width: 100px;"
 										allOption="" disabled="" ev:onfocus="scwin.INCDNT_ID_onfocus" ref="data:dlt_BRT_RPC_VHC_INFO.INCDNT_ID" >
 									</xf:input>
 									<xf:image class="btn" ev:onclick="scwin.INCDNT_ID_SEARCH_onclick" id="INCDNT_ID_SEARCH" longdesc=""
@@ -609,7 +609,7 @@
 								<xf:group tagname="td" style="" class="w2tb_td">
 									<xf:input adjustMaxLength="" class="req" disabled="" ev:oneditenter=""
 										ev:onfocus="scwin.GRP_VHC_NO_onfocus" fireEventOnInvalid="" id="GRP_VHC_NO" invalidMessageFunc="" mandatory="" readOnly=""
-										ref="data:dlt_BRT_RPC_VHC_INFO.GRP_VHC_NO" style="width:80%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput=""
+										ref="data:dlt_BRT_RPC_VHC_INFO.GRP_VHC_NO" style="width:80%;" validateOnCheckMaxByteLength="" validateOnInput=""
 										validator="" ev:onviewchange="scwin.GRP_VHC_NO_onviewchange">
 									</xf:input>
 									<xf:image class="btn" ev:onclick="scwin.GRP_VHC_NO_onclick" id="GRP_VHC_NO_SEARCH" longdesc=""
@@ -619,7 +619,7 @@
 									<xf:group style="" class="w2tb_td" tagname="td">
 										<xf:input adjustMaxLength="" class="req" disabled="" ev:oneditenter=""
 											ev:onfocus="" fireEventOnInvalid="" id="GRP_DRV_NM" invalidMessageFunc="" mandatory="" readOnly="true"
-											ref="data:dlt_BRT_RPC_VHC_INFO.GRP_DRV_NM" style="width:80%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput=""
+											ref="data:dlt_BRT_RPC_VHC_INFO.GRP_DRV_NM" style="width:80%;" validateOnCheckMaxByteLength="" validateOnInput=""
 											validator="">
 										</xf:input>
 										<!--  <xf:image class="btn" ev:onclick="scwin.RPC_VHC_NO_onclick" id="RPC_VHC_NO_SEARCH" longdesc=""
@@ -633,7 +633,7 @@
 								<xf:group tagname="td" style="" class="w2tb_td">
 									<xf:input adjustMaxLength="" class="req" disabled="" ev:oneditenter=""
 										ev:onfocus="scwin.RPC_VHC_NO_onfocus" fireEventOnInvalid="" id="RPC_VHC_NO" invalidMessageFunc="" mandatory="" readOnly=""
-										ref="data:dlt_BRT_RPC_VHC_INFO.RPC_VHC_NO" style="width:80%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput=""
+										ref="data:dlt_BRT_RPC_VHC_INFO.RPC_VHC_NO" style="width:80%;" validateOnCheckMaxByteLength="" validateOnInput=""
 										validator="">
 									</xf:input>
 									<xf:image class="btn" ev:onclick="scwin.RPC_VHC_NO_onclick" id="RPC_VHC_NO_SEARCH" longdesc=""
@@ -643,7 +643,7 @@
 									<xf:group style="" class="w2tb_td" tagname="td">
 										<xf:input adjustMaxLength="" class="" disabled="" ev:oneditenter=""
 											ev:onfocus="scwin.RPC_DRV_NM_onfocus" fireEventOnInvalid="" id="RPC_DRV_NM" invalidMessageFunc="" mandatory="" readOnly=""
-											ref="data:dlt_BRT_RPC_VHC_INFO.RPC_DRV_NM" style="width:80%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput=""
+											ref="data:dlt_BRT_RPC_VHC_INFO.RPC_DRV_NM" style="width:80%;" validateOnCheckMaxByteLength="" validateOnInput=""
 											validator="">
 										</xf:input>
 										<xf:image class="btn" ev:onclick="scwin.RPC_DRV_NM_onclick" id="RPC_DRV_NM_SEARCH" longdesc=""
@@ -680,7 +680,7 @@
 								</xf:group>
 							</xf:group>-->
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" class="w2tb_th" style="height: 70px;vertical-align: top;" id="" tabIndex="">
+								<xf:group tagname="th" class="w2tb_th" style="vertical-align: top;" id="" tabIndex="">
 									상세내역
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
@@ -691,7 +691,7 @@
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:textarea id="DETAILS" style="width: 100%;height: 70px;" ref="data:dlt_BRT_RPC_VHC_INFO.DETAILS"></xf:textarea>
+									<xf:textarea id="DETAILS" style="width: 100%;" ref="data:dlt_BRT_RPC_VHC_INFO.DETAILS"></xf:textarea>
 								</xf:group>
 							</xf:group>
 						</xf:group>

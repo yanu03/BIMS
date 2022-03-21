@@ -137,7 +137,7 @@
 	scwin.onpageload = function() {
 		var autoOptions = {
 			Main : { grid : SI0101G0, srchSbm : sub_SI0101G0R0, savSbm : sub_SI0101G0S0, keySbm : sub_SI0101G0K0 
-					,srchGrp : pgm_header, keyColumn : "GRG_ID", focusColumn : "GRG_NM", name :  "차고지 목록"}
+					,srchGrp : pgm_header, keyColumn : "GRG_ID", focusColumn : "GRG_NM", name :  "차고지 목록", search_map : dma_search}
 		};
 		
 		var subOptions = {
@@ -416,7 +416,7 @@
 		if (mainModifiedCnt > 0 || subModifiedCnt > 0) {
 			com.confirm("데이터를 저장하시겠습니까?", function(rtn)  {
 				if (rtn) {
-						dma_search.set("EXL_UPDATE" , com.getExlUpdate(SI0101G0));
+						//dma_search.set("EXL_UPDATE" , com.getExlUpdate(SI0101G0));
 						
 						if(mainModifiedCnt > 0) {
 							com.executeSubmission(sub_SI0101G0S0);	
@@ -674,7 +674,7 @@
 										<w2:colspan>1</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:input class="" id="GRG_ID" mandatory="" ref="data:dlt_BMS_GRG_MST.GRG_ID" style="width:100px;height:21px;"
+									<xf:input class="" id="GRG_ID" mandatory="" ref="data:dlt_BMS_GRG_MST.GRG_ID" style="width:100px;"
 										disabled="true" adjustMaxLength="" maxlength="10" maxByteLength="">
 									</xf:input>
 								</xf:group>
@@ -682,7 +682,7 @@
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes></w2:attributes>
 									<xf:input adjustMaxLength="" class="req" disabled="" fireEventOnInvalid="" id="GRG_NM" invalidMessageFunc="" mandatory=""
-										readOnly="" ref="data:dlt_BMS_GRG_MST.GRG_NM" style="width:100%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput=""
+										readOnly="" ref="data:dlt_BMS_GRG_MST.GRG_NM" style="width:100%;" validateOnCheckMaxByteLength="" validateOnInput=""
 										validator="" maxlength="30" customModelFormatter="">
 									</xf:input>
 								</xf:group>
@@ -693,7 +693,7 @@
 
 									<xf:input adjustMaxLength="" class="" customModelFormatter="" disabled="" fireEventOnInvalid=""
 										id="GRG_ENM" invalidMessageFunc="" mandatory="" maxlength="50" readOnly="" ref="data:dlt_BMS_GRG_MST.GRG_ENM"
-										style="width:100%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput="" validator="">
+										style="width:100%;" validateOnCheckMaxByteLength="" validateOnInput="" validator="">
 									</xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" style="" tagname="th">소유형태</xf:group>
@@ -717,7 +717,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:input adjustMaxLength="" class="" disabled="" id="ADDR" mandatory="" ref="data:dlt_BMS_GRG_MST.ADDR"
-										style="width:263px;height:21px;" allowChar="" validator="" validateOnInput="false" initValue="" maxByteLength="" maxlength="100">
+										style="width:263px;" allowChar="" validator="" validateOnInput="false" initValue="" maxByteLength="" maxlength="100">
 									</xf:input>
 									<xf:image class="btn" ev:onclick="scwin.btn_search_onclick" id="btn_search" longdesc=""
 										src="/cm/images/inc/icon_search.gif" style="width:21px;height:20px;margin-left:5px;">
@@ -730,7 +730,7 @@
 									<w2:attributes><w2:colspan>3</w2:colspan><w2:rowspan>1</w2:rowspan></w2:attributes>
 									<xf:group id="" style="">
 										<xf:input adjustMaxLength="" allowChar="" class="" disabled="" id="EMAIL" initValue="" mandatory=""
-											maxByteLength="" maxlength="50" ref="data:dlt_BMS_GRG_MST.EMAIL" style="width:263px;height:21px;" validateOnInput="false"
+											maxByteLength="" maxlength="50" ref="data:dlt_BMS_GRG_MST.EMAIL" style="width:263px;" validateOnInput="false"
 											validator="">
 										</xf:input>
 									</xf:group>
@@ -744,7 +744,7 @@
 									<w2:attributes></w2:attributes>
 									<xf:input adjustMaxLength="" class="" customModelFormatter="com.transPhone" disabled="" fireEventOnInvalid=""
 										id="PHONE" invalidMessageFunc="" mandatory="" maxlength="13" readOnly="" ref="data:dlt_BMS_GRG_MST.PHONE" 
-										style="width:100%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput="" validator="" displayFormatter="com.transPhone" allowChar="0-9">
+										style="width:100%;" validateOnCheckMaxByteLength="" validateOnInput="" validator="" displayFormatter="com.transPhone" allowChar="0-9">
 									</xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" tagname="th">팩스<w2:attributes>
@@ -757,7 +757,7 @@
 									</w2:attributes>
 									<xf:input adjustMaxLength="" class="" customModelFormatter="com.transPhone" disabled="" fireEventOnInvalid=""
 										id="FAX" invalidMessageFunc="" mandatory="" maxlength="13" readOnly="" ref="data:dlt_BMS_GRG_MST.FAX"
-										style="width:100%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput="" validator="" displayFormatter="com.transPhone">
+										style="width:100%;" validateOnCheckMaxByteLength="" validateOnInput="" validator="" displayFormatter="com.transPhone">
 									</xf:input>
 								</xf:group>
 							</xf:group>
@@ -809,7 +809,7 @@
 									<w2:attributes></w2:attributes>
 									<xf:input adjustMaxLength="" class="" customModelFormatter="" disabled="" fireEventOnInvalid=""
 										id="LEGAL_AREA" invalidMessageFunc="" mandatory="" maxlength="7" readOnly="" ref="data:dlt_BMS_GRG_MST.LEGAL_AREA"
-										style="width:100%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput="" validator="" allowChar="0-9">
+										style="width:100%;" validateOnCheckMaxByteLength="" validateOnInput="" validator="" allowChar="0-9">
 									</xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" tagname="th">확보면적(㎡)<w2:attributes>
@@ -832,7 +832,7 @@
 									</xf:select1>
 									<xf:input adjustMaxLength="" class="" customModelFormatter="" disabled="" fireEventOnInvalid=""
 										id="SECURE_AREA" invalidMessageFunc="" mandatory="" maxlength="7" readOnly="" ref="data:dlt_BMS_GRG_MST.SECURE_AREA"
-										style="width:100%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput="" validator="" allowChar="0-9"> 
+										style="width:100%;" validateOnCheckMaxByteLength="" validateOnInput="" validator="" allowChar="0-9"> 
 									</xf:input>
 								</xf:group>
 							</xf:group>
@@ -864,7 +864,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" class="w2tb_th" style="height: 70px;vertical-align: top;" id="" tabIndex="">
+								<xf:group tagname="th" class="w2tb_th" style="height: 90px;vertical-align: top;" id="" tabIndex="">
 									비고
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
@@ -876,7 +876,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:textarea adjustMaxLength="" class="" disabled="" id="REMARK" mandatory="" ref="data:dlt_BMS_GRG_MST.REMARK"
-										style="width:100%;height:70px;" maxlength="200">
+										style="width:100%;" maxlength="200">
 									</xf:textarea>
 								</xf:group>
 							</xf:group>

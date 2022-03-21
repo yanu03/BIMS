@@ -517,6 +517,9 @@
 									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column7"
 										value="유지보수기관" blockSelect="false" displayMode="label">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column7"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
@@ -548,6 +551,9 @@
 												<w2:value ref="CLSFCTN_ID"></w2:value>
 											</w2:itemset>
 										</w2:choices>
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px" id=""
+										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
 							</w2:gBody>

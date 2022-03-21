@@ -90,6 +90,8 @@
 		</xf:model>
 		<script type="text/javascript" lazy="false"><![CDATA[
 	scwin.onpageload = function() {
+	
+	
 		
 		var autoOptions = {
 			Main : { grid : PI0400G0, frm : PI0400F0, srchSbm : sub_PI0400G0R0, srchGrp : pgm_header, keyColumn : "NOTI_DT",
@@ -130,6 +132,8 @@
 				com.setFocusedCell(PI0400G1, "UPD_DTM");
 			}
 		});
+		
+		
 	};	
 	
 	scwin.sub_PI0400G0R0_submitdone = function(e) {
@@ -393,7 +397,7 @@
 				</xf:group>
 				<xf:group id="" style="" class="vertical_line"></xf:group>
 				
-				<xf:group class="pgm_detail grdr_20_20_2_1f_20_1f" id="pgm_detail">
+				<!-- <xf:group class="pgm_detail grdr_20_20_2_1f_20_1f" id="pgm_detail">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="기상/대기 이력" style=""></w2:textbox>
@@ -403,8 +407,8 @@
 						<li id="li_WET" class="on">기상</li>
 						<li id="li_ATOM" class="">대기</li>
 					</ul>
-					<xf:group></xf:group>
-					<xf:group id="" class="" style="">
+					<xf:group></xf:group> -->
+					<!-- <xf:group id="" class="" style="">
 						<w2:gridView id="PI0400G0" style="" defaultCellHeight="20" rowNumVisible="true" useShiftKey="true"
 							readOnly="true" ev:onrowindexchange="scwin.PI0400G0_onrowindexchange" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true"
 							rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
@@ -562,24 +566,26 @@
 								</w2:row>
 							</w2:footer>
 						</w2:gridView>
-					</xf:group>
-						
-					<!-- <w2:tabControl useTabKeyOnly="true" id="tabControl" useMoveNextTabFocus="false" useConfirmMessage="false"
-							confirmTrueAction="exist" confirmFalseAction="new" alwaysDraw="false" style="width: 100%;" tabScroll="" tableRender="" tabPosition=""
+					</xf:group> 
+				-->
+				<xf:group class="pgm_list grdr_400_20_a">
+					<xf:group id="" style="position:relative;height: 400px;" class="">
+						<w2:tabControl useTabKeyOnly="true" id="tabControl" class="innerTab" useMoveNextTabFocus="false" useConfirmMessage="false"
+							confirmTrueAction="exist" confirmFalseAction="new" alwaysDraw="false" style="" tabScroll="" tableRender="" tabPosition=""
 							ev:ontabclick="scwin.tabControl_ontabclick">
-							<w2:tabs disabled="false" style="width:70px;height:30px;" id="tabs3" label="기상"></w2:tabs>
-							<w2:content alwaysDraw="false" style="height:100%;" id="content3">
+							<w2:tabs disabled="false" style="" id="tabs3" label="기상"></w2:tabs>
+							<w2:content alwaysDraw="false" style="" id="content3" class="innerTabContent">
 								<w2:gridView id="PI0400G0" style="" defaultCellHeight="20" rowNumVisible="true" useShiftKey="true"
 									readOnly="true" ev:onrowindexchange="scwin.PI0400G0_onrowindexchange" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true"
 									rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
-									ignoreCellClick="false" dataList="data:dlt_BMS_WEAT_INFO" class="cm_grid tab" autoFit="allColumn" fixedColumnScrollHidden=""
+									ignoreCellClick="false" dataList="data:dlt_BMS_WEAT_INFO" class="cm_grid tab" autoFit="lastColumn" fixedColumnScrollHidden=""
 									sortOrderReverse="true" focusMode="row">
 									<w2:header style="" id="header1">
 										<w2:row style="" id="row1">
-											<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+											<w2:column removeBorderStyle="false" width="160" inputType="text" style="height:20px"
 												id="column5" value="업데이트일시" blockSelect="false" displayMode="label" sortLabel="" sortable="">
 											</w2:column>
-											<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+											<w2:column removeBorderStyle="false" width="160" inputType="text" style="height:20px"
 												id="column4" value="발표일시" blockSelect="false" displayMode="label">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
@@ -602,6 +608,9 @@
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="100%" inputType="text" style="height:20px"
 												id="column9" value="강수량(mm)" blockSelect="false" displayMode="label">
+											</w2:column>
+											<w2:column removeBorderStyle="false" width="100%" inputType="text" style="height:20px"
+												id="column10" value="" blockSelect="false" displayMode="label">
 											</w2:column>
 										</w2:row>
 									</w2:header>
@@ -634,6 +643,9 @@
 											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="RAINFALL"
 												value="" blockSelect="false" displayMode="label" textAlign="right">
 											</w2:column>
+											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id=""
+												value="" blockSelect="false" displayMode="label" textAlign="">
+											</w2:column>
 										</w2:row>
 									</w2:gBody>
 									<w2:footer style="" id="footer1">
@@ -646,18 +658,18 @@
 									</w2:footer>
 								</w2:gridView>
 							</w2:content>
-							<w2:tabs disabled="false" style="width:70px;height:30px;" id="tabs4" label="대기"></w2:tabs>
-							<w2:content alwaysDraw="false" style="height:100%" id="content4">
+							<w2:tabs disabled="false" style="" id="tabs4" label="대기"></w2:tabs>
+							<w2:content alwaysDraw="false" class="innerTabContent" id="content4">
 								<w2:gridView id="PI0400G1" style="" defaultCellHeight="20" rowNumVisible="true" useShiftKey="true"
 									readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태" overflowX="auto"
 									overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_BMS_ATMO_INFO"
-									class="cm_grid tab" autoFit="allColumn" fixedColumnScrollHidden="" focusMode="row">
+									class="cm_grid tab" autoFit="lastColumn" fixedColumnScrollHidden="" focusMode="row">
 									<w2:header style="" id="header1">
 										<w2:row style="" id="row1">
-											<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+											<w2:column removeBorderStyle="false" width="160" inputType="text" style="height:20px"
 												id="column5" value="업데이트일시" blockSelect="false" displayMode="label">
 											</w2:column>
-											<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+											<w2:column removeBorderStyle="false" width="160" inputType="text" style="height:20px"
 												id="column4" value="발표일시" blockSelect="false" displayMode="label">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
@@ -675,8 +687,11 @@
 											<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px"
 												id="column7" value="오존농도(ppm)" blockSelect="false" displayMode="label">
 											</w2:column>
-											<w2:column removeBorderStyle="false" width="100%" inputType="text" style="height:20px"
+											<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
 												id="column8" value="이산화질소농도(ppm)" blockSelect="false" displayMode="label">
+											</w2:column>
+											<w2:column removeBorderStyle="false" width="100%" inputType="text" style="height:20px"
+												id="column9" value="" blockSelect="false" displayMode="label">
 											</w2:column>
 										</w2:row>
 									</w2:header>
@@ -706,6 +721,9 @@
 											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="NDC"
 												value="" blockSelect="false" displayMode="label" textAlign="right">
 											</w2:column>
+											<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id=""
+												value="" blockSelect="false" displayMode="label" textAlign="">
+											</w2:column>
 										</w2:row>
 									</w2:gBody>
 									<w2:footer style="" id="footer1">
@@ -718,7 +736,8 @@
 									</w2:footer>
 								</w2:gridView>
 							</w2:content>
-						</w2:tabControl>  -->
+						</w2:tabControl>
+					</xf:group>
 
 					<xf:group id="" class="horizontal_line"></xf:group>
 					

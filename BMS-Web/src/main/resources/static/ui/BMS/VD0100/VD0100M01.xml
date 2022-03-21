@@ -733,15 +733,15 @@
 				
 				<xf:group id="" class="vertical_line">
 				</xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_250_20_a ">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_280_20_a ">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="차내장치 정보" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					<xf:group class="" id="" style=""></xf:group>
-					<xf:group class="" id="" style="">
-						<xf:group class="w2tb tb" id="VD0100F0" style="width:100%;" tagname="table">
+					<xf:group class="" id="" style="overflow:auto; position:relative;">
+						<xf:group class="w2tb tb" id="VD0100F0" style="width:100%; position:absolute" tagname="table">
 							<w2:attributes>
 								<w2:summary></w2:summary>
 							</w2:attributes>
@@ -755,7 +755,7 @@
 								<xf:group class="w2tb_th req" style="" tagname="th">장치ID</xf:group>
 								<xf:group class="w2tb_td" style="" tagname="td">
 									<xf:input adjustMaxLength="" class="" disabled="true" id="DVC_ID" mandatory=""
-										ref="data:dlt_BMS_DVC_INFO.DVC_ID" style="width:100px;height:21px;">
+										ref="data:dlt_BMS_DVC_INFO.DVC_ID" style="width:100px;">
 									</xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th req" style="" tagname="th" id="">제조사</xf:group>
@@ -764,7 +764,7 @@
 										<w2:colspan>1</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:select1 id="ORG_NM" chooseOption="true" style="width: 160px;height: 21px;" submenuSize="auto"
+									<xf:select1 id="ORG_NM" chooseOption="true" style="width: 160px;" submenuSize="auto"
 										allOption="" disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled"
 										ref="data:dlt_BMS_DVC_INFO.ORG_ID" chooseOptionLabel="-선택-" ev:onchange="scwin.ORG_NM_onchange">
 										<xf:choices>
@@ -790,7 +790,7 @@
 									</w2:attributes>
 									<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="-선택-"
 										direction="auto" disabled="false" disabledClass="w2selectbox_disabled" displayMode="label" id="DVC_KIND" labelWidthAuto=""
-										mandatory="true" optionOrder="" ref="data:dlt_BMS_DVC_INFO.DVC_KIND" renderType="component" style="height:24px; width:200px;"
+										mandatory="true" optionOrder="" ref="data:dlt_BMS_DVC_INFO.DVC_KIND" renderType="component" style="height:24px; width:160px;"
 										submenuSize="auto">
 										<xf:choices></xf:choices>
 									</xf:select1>
@@ -814,7 +814,7 @@
 								<xf:group class="w2tb_td" style="" tagname="td">
 									<xf:group id="" style=""></xf:group>
 									<xf:input allowChar="" customModelFormatter="" dataType="text" displayFormatter="" displaymessage=""
-										id="MNG_ID" maxByteLength="" maxlength="16" ref="data:dlt_BMS_DVC_INFO.MNG_ID" style="width:100%;height: 21px;">
+										id="MNG_ID" maxByteLength="" maxlength="16" ref="data:dlt_BMS_DVC_INFO.MNG_ID" style="width:100%;">
 									</xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" style="" tagname="th">부모장치</xf:group>
@@ -826,7 +826,7 @@
 									<xf:group id="" style=""></xf:group>
 									<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="-선택-"
 										customLabelFormatter="scwin.customLabel" direction="auto" disabled="false" disabledClass="w2selectbox_disabled" ev:onchange=""
-										id="PARENT_ID10" ref="data:dlt_BMS_DVC_INFO.PARENT_ID" style="width: 160px;height: 21px;" submenuSize="auto">
+										id="PARENT_ID10" ref="data:dlt_BMS_DVC_INFO.PARENT_ID" style="width: 160px;" submenuSize="auto">
 										<xf:choices>
 											<xf:itemset nodeset="data:dlt_BMS_DVC_INFO">
 												<xf:label ref="DVC_KIND_NM_LOC"></xf:label>
@@ -846,7 +846,7 @@
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes></w2:attributes>
 									<xf:select1 id="CTR_YN" selectedIndex="0" appearance="full"
-										style="width: 150px;height: 21px;margin-left: 20px" cols="" rows="1" ref="data:dlt_BMS_DVC_INFO.CTR_YN">
+										style="width: 150px;margin-left: 20px" cols="" rows="1" ref="data:dlt_BMS_DVC_INFO.CTR_YN">
 										<xf:choices>
 											<xf:item>
 												<xf:label><![CDATA[예]]></xf:label>
@@ -868,7 +868,7 @@
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes></w2:attributes>
 									<xf:select1 id="" selectedIndex="0" appearance="full"
-										style="width: 150px;height: 21px;margin-left: 20px" cols="" rows="1" ref="data:dlt_BMS_DVC_INFO.USE_YN">
+										style="width: 150px;margin-left: 20px" cols="" rows="1" ref="data:dlt_BMS_DVC_INFO.USE_YN">
 										<xf:choices>
 											<xf:item>
 												<xf:label><![CDATA[예]]></xf:label>
@@ -895,7 +895,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:input allowChar="" customModelFormatter="" dataType="text" displayFormatter="" displaymessage=""
-										id="DVC_COORDS" maxByteLength="" maxlength="16" ref="data:dlt_BMS_DVC_INFO.DVC_COORDS" style="width:160px;height: 21px;">
+										id="DVC_COORDS" maxByteLength="" maxlength="16" ref="data:dlt_BMS_DVC_INFO.DVC_COORDS" style="width:160px;">
 									</xf:input>
 									<xf:trigger type="button" style="width:79px;height:23px;margin-left: 10px;" id="btn_DVC_COORDS"
 										ev:onclick="scwin.DVC_COORDS_onclick">
@@ -910,7 +910,7 @@
 									<w2:attributes></w2:attributes>
 									<xf:input adjustMaxLength="" class="" disabled="" ev:oneditenter=""
 										ev:onfocus="scwin.CLSFCTN_NM_onfocus" fireEventOnInvalid="" id="CLSFCTN_NM" invalidMessageFunc="" mandatory="" maxlength=""
-										readOnly="" ref="data:dlt_BMS_DVC_INFO.CLSFCTN_NM" style="width:150px;height:21px;" validateOnCheckMaxByteLength=""
+										readOnly="" ref="data:dlt_BMS_DVC_INFO.CLSFCTN_NM" style="width:150px;" validateOnCheckMaxByteLength=""
 										validateOnInput="" validator="">
 									</xf:input>
 									<xf:image class="btn" ev:onclick="scwin.CLSFCTN_NM_SEARCH_onclick" id="CLSFCTN_NM_SEARCH" longdesc=""
@@ -926,7 +926,7 @@
 									<w2:attributes></w2:attributes>
 									<xf:input allowChar="0-9." customModelFormatter="" customModelUnformatter="" dataType="text" disabled=""
 										displayFormatter="com.transPhone" id="DVC_IP10" maskFormat="" maxlength="16" minByteLength="" ref="data:dlt_BMS_DVC_INFO.DVC_IP"
-										style="width:100%;height: 21px;" validator="">
+										style="width:100%;" validator="">
 									</xf:input>
 								</xf:group>
 								<xf:group tagname="td" class="w2tb_th">
@@ -937,7 +937,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" class="w2tb_th" style="height: 70px; vertical-align: top;" id="" tabIndex="">
+								<xf:group tagname="th" class="w2tb_th" style="vertical-align: top;" id="" tabIndex="">
 									비고
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
@@ -948,7 +948,7 @@
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:textarea id="REMARK" style="width: 100%;height: 70px;" maxlength="200"
+									<xf:textarea id="REMARK" style="width: 100%;" maxlength="200"
 										ref="data:dlt_BMS_DVC_INFO.REMARK">
 									</xf:textarea>
 								</xf:group>

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:w2="http://www.inswave.com/websquare"
+	xmlns:xf="http://www.w3.org/2002/xforms">
+	<head>
+		<w2:type>DEFAULT</w2:type>
+		<w2:buildDate />
+		<xf:model>
+			<xf:instance>
+				<data xmlns="" />
+			</xf:instance>
+			<w2:dataCollection baseNode="map">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_DL_CD_IMG_INFO" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="CO_CD" name="공통코드" dataType="text"></w2:column>
+						<w2:column id="DL_CD" name="상세코드" dataType="text"></w2:column>
+						<w2:column id="IMG_PATH" name="이미지경로" dataType="text"></w2:column>
+						<w2:column id="IMG_PATH_ORI" name="이미지경로원본" dataType="text"></w2:column>
+						<w2:column id="IMG_NM" name="이미지이름" dataType="text"></w2:column>
+						<w2:column id="FOCUS" name="포커스" dataType="text"></w2:column>
+						<w2:column id="STATUS" name="상태" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataMap baseNode="map" id="dma_search">
+					<w2:keyInfo>
+						<w2:key id="TYPE" name="name1" dataType="text"></w2:key>
+						<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
+						<w2:key id="USE_YN" name="name3" dataType="text"></w2:key>
+						<w2:key id="CO_CD" name="공통코드" dataType="text"></w2:key>
+						<w2:key id="DL_CD" name="상세코드" dataType="text"></w2:key>
+						<w2:key id="FOCUS" name="포커스" dataType="text"></w2:key>
+						<w2:key id="STATUS" name="상태" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+			</w2:dataCollection>
+			<w2:workflowCollection></w2:workflowCollection>
+			<xf:submission id="sub_SM0100P0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_DL_CD_IMG_INFO" action="/common/selectCommonDtlImg" method="post" mediatype="application/json" encoding="UTF-8"
+				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_SM0100P0R0_submitdone"
+				ev:submiterror="" abortTrigger="">
+			</xf:submission>
+		</xf:model>
+		<script type="text/javascript" lazy="false"><![CDATA[
+        
+	scwin.onpageload = function() {
+		scwin.param = com.getParameter();
+		
+		dlt_BMS_DL_CD_IMG_INFO.removeAll();
+		dlt_BMS_DL_CD_IMG_INFO.insertRow();
+		dlt_BMS_DL_CD_IMG_INFO.setRowJSON(0, scwin.param, true);
+		dlt_BMS_DL_CD_IMG_INFO.modifyAllStatus("R");
+		
+		
+		var cocd = dlt_BMS_DL_CD_IMG_INFO.getCellData(0, "CO_CD");
+		
+		if(cocd == 'FCLT_KIND') {
+			var codeOptions = [ {code : "FCLT_COND", compID : "STATUS_SELECT" }];
+			com.setCommonDtl(codeOptions);
+		}else if(cocd == 'DVC_KIND'){
+			var codeOptions = [ {code : "DVC_COND", compID : "STATUS_SELECT" }];
+			com.setCommonDtl(codeOptions);
+		}else if(cocd == 'STTN_FCLT_TYPE'){
+			var codeOptions = [ {code : "COND_ERROR", compID : "STATUS_SELECT" }];
+			com.setCommonDtl(codeOptions);
+		}else if(cocd == 'VHC_KIND'){
+			var codeOptions = [ {code : "BUS_STS", compID : "STATUS_SELECT" }];
+			com.setCommonDtl(codeOptions);
+		}
+		
+		dma_search.set("FOCUS", scwin.param.FOCUS);
+		dma_search.set("STATUS", scwin.param.STATUS);
+		dma_search.set("CO_CD", scwin.param.CO_CD);
+		dma_search.set("DL_CD", scwin.param.DL_CD);
+				
+		//$p.$("#image1").attr("src", dlt_BMS_DL_CD_IMG_INFO.getCellData(0, "IMG_PATH"));
+		
+		scwin.closeCallbackFncName = scwin.param.callbackFn;
+		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
+		
+		com.executeSubmission(sub_SM0100P0R0);
+		
+	};
+	
+	scwin.onpageunload = function() {
+		
+	};
+	
+	/**
+	 * 이미지 파일 선택 시
+	 */
+	scwin.upload0_onInputValueChange = function(returnValue) {
+		var fileNameIndex = returnValue.lastIndexOf('\\');
+		var real_fileName = returnValue.substring(fileNameIndex+1, returnValue.length);
+		
+		//dlt_BMS_DL_CD_IMG_INFO.removeAll();
+		dlt_BMS_DL_CD_IMG_INFO.insertRow();
+		dlt_BMS_DL_CD_IMG_INFO.setCellData(0, "IMG_NM", real_fileName);
+		dlt_BMS_DL_CD_IMG_INFO.modifyAllStatus("R");
+		btn_upload.submit();
+		
+	};
+	
+	/**
+	 * 이미지 파일 업로드 시
+	 */
+	scwin.upload0_ondone = function(retXml) {
+		var real_fileName = dlt_BMS_DL_CD_IMG_INFO.getCellData(0, "IMG_NM");
+		var src = "/fileUpload/up/" + real_fileName; 
+		
+		$p.$("#image1").attr("src", src);
+		
+	};
+	
+	/**
+	 * 확인 버튼
+	 */
+	scwin.btn_confirm_onclick = function() {
+		dlt_BMS_DL_CD_IMG_INFO.setCellData(0, "FOCUS", dma_search.get("FOCUS"));
+		dlt_BMS_DL_CD_IMG_INFO.setCellData(0, "STATUS", dma_search.get("STATUS"));
+		
+		var data = dlt_BMS_DL_CD_IMG_INFO.getAllJSON();
+		com.closePopup(scwin.closeCallbackFncName, data);
+	};
+		
+	/**
+	 * 취소 버튼
+	 */
+	scwin.btn_cancel_onclick = function() {
+		com.closePopup();
+	};
+	
+	scwin.sub_SM0100P0R0_submitdone = function(e) {
+		$p.$("#image1").attr("src", dlt_BMS_DL_CD_IMG_INFO.getCellData(0, "IMG_PATH"));
+	};
+	
+	scwin.FOCUS_onviewchange = function(info) {
+		if(dma_search.get("STATUS") != null && dma_search.get("STATUS") != ''){
+			dma_search.set("FOCUS", info.newValue);
+			com.executeSubmission(sub_SM0100P0R0);
+		}
+	};
+	
+	scwin.STATUS_SELECT_onviewchange = function(info) {
+		if(dma_search.get("FOCUS") != null && dma_search.get("FOCUS") != ''){
+			dma_search.set("STATUS", info.newValue);
+			com.executeSubmission(sub_SM0100P0R0);
+		}
+	};
+	]]></script>
+	</head>
+	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
+		<xf:group class="popup_container grdr_36_a_40" id="popup_container" style="">
+			<xf:group id="popup_header" style="" class="popup_header">
+				<xf:group class="gr_search" id="" style="">
+					<xf:group class="label" id="" style="">
+						<w2:span class="" id="" label="이미지 유형"></w2:span>
+					</xf:group>
+					<!-- <xf:group id="" style="" class="">
+						<xf:select1 id="" ref="data:dma_search.FOCUS" selectedIndex="0" cols="" appearance="full"
+							style="margin-right: 10px; float: left; position: relative; margin-top: 3px;" rows="1" ev:onviewchange="scwin.FOCUS_onviewchange">
+							<xf:choices>
+								<xf:item>
+									<xf:label><![CDATA[기본]]></xf:label>
+									<xf:value><![CDATA[Y]]></xf:value>
+								</xf:item>
+								<xf:item>
+									<xf:label><![CDATA[선택]]></xf:label>
+									<xf:value><![CDATA[N]]></xf:value>
+								</xf:item>
+							</xf:choices>
+						</xf:select1>
+					</xf:group> -->
+					<xf:group class="search" id="" style="float: left;">
+						<xf:select1 id="FOCUS" chooseOption="" style="" submenuSize="auto" allOption="" disabled="false" direction="auto"
+							appearance="minimal" disabledClass="w2selectbox_disabled" class="search_type_100" chooseOptionLabel="-선택-"
+							ref="data:dma_search.FOCUS" ev:onviewchange="scwin.FOCUS_onviewchange">
+							<xf:choices>
+								<xf:item>
+									<xf:label><![CDATA[기본]]></xf:label>
+									<xf:value><![CDATA[Y]]></xf:value>
+								</xf:item>
+								<xf:item>
+									<xf:label><![CDATA[선택]]></xf:label>
+									<xf:value><![CDATA[N]]></xf:value>
+								</xf:item>
+							</xf:choices>
+						</xf:select1>
+					</xf:group>
+					<xf:group class="label" id="" style="">
+						<w2:span class="" id="" label="상태"></w2:span>
+					</xf:group>
+					<xf:group class="search" id="" style="float: left;">
+						<xf:select1 id="STATUS_SELECT" chooseOption="" style="" submenuSize="auto" allOption="" disabled="false"
+							direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled" class="search_type_100" chooseOptionLabel="-선택-"
+							ref="data:dma_search.STATUS" ev:onviewchange="scwin.STATUS_SELECT_onviewchange">
+							<xf:choices></xf:choices>
+						</xf:select1>
+					</xf:group>
+					<xf:group class="label" id="" style="">
+						<w2:span class="" id="" label="파일 선택"></w2:span>
+					</xf:group>
+					<xf:group class="search" id="" style="float: left;">
+						<w2:upload imageStyle="position:absolute;vertical-align:middle;word-wrap:break-word"
+							inputStyle="vertical-align:middle;word-wrap:break-word" style="width: 272px;height: 23px;" id="btn_upload" inputClass=""
+							ev:onInputValueChange="scwin.upload0_onInputValueChange" ev:ondone="scwin.upload0_ondone" accept=".png,.jpg" title="" type=""
+							disabled="false" class="">
+						</w2:upload>
+					</xf:group>
+					<!--<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe> -->
+				</xf:group>
+			</xf:group>
+			<xf:group style="" id="" class="popup_content">
+				<xf:group  class="w2tb tb" id="SM0100F0" style="width:100%; position:absolute;" tagname="table">
+					<w2:attributes>
+						<w2:summary></w2:summary>
+					</w2:attributes>
+					<xf:group tagname="colgroup">
+						<xf:group style="width:90px;" tagname="col"></xf:group>
+						<xf:group style="width:120px;" tagname="col"></xf:group>
+						<xf:group style="width:90px;" tagname="col"></xf:group>
+						<xf:group style="width:120px;" tagname="col"></xf:group>
+					</xf:group>
+					<!-- <xf:group style="" tagname="tr">
+						<xf:group class="w2tb_th" style="" tagname="th">파일선택</xf:group>
+						<xf:group class="w2tb_td" style="" tagname="td">
+							<w2:attributes>
+								<w2:colspan>3</w2:colspan>
+								<w2:rowspan>1</w2:rowspan>
+							</w2:attributes>
+							<w2:upload imageStyle="position:absolute;vertical-align:middle;word-wrap:break-word"
+								inputStyle="vertical-align:middle;word-wrap:break-word" style="width: 272px;height: 23px;" id="btn_upload" inputClass=""
+								ev:onInputValueChange="scwin.upload0_onInputValueChange" ev:ondone="scwin.upload0_ondone" accept=".png,.jpg" title="" type=""
+								disabled="false" class="">
+							</w2:upload>
+						</xf:group>
+					</xf:group> -->
+					<xf:group tagname="tr" style="">
+						<xf:group tagname="th" class="w2tb_th" style="height: 300px; " id="" tabIndex="">
+							이미지 미리보기
+							<w2:attributes>
+								<w2:scope>row</w2:scope>
+							</w2:attributes>
+						</xf:group>
+						<xf:group tagname="td" class="w2tb_td" style="text-align: center;">
+							<w2:attributes>
+								<w2:colspan>3</w2:colspan>
+								<w2:rowspan>1</w2:rowspan>
+							</w2:attributes>
+							<xf:image id="image1" ref="data:dlt_BMS_DL_CD_IMG_INFO.IMG_PATH" src=""
+								style="" disabled="" class="SI0300M01_image">
+							</xf:image>
+						</xf:group>
+					</xf:group>
+				</xf:group>
+			</xf:group>
+			<xf:group id="" style="" class="popup_bottom">
+				<w2:anchor id="btn_confirm" style="" ev:onclick="scwin.btn_confirm_onclick" class="btn_cm">
+					<xf:label><![CDATA[확인]]></xf:label>
+				</w2:anchor>
+				<w2:anchor id="btn_cancel" style="" ev:onclick="scwin.btn_cancel_onclick" class="btn_cm" outerDiv="">
+					<xf:label><![CDATA[취소]]></xf:label>
+				</w2:anchor>
+			</xf:group>
+		</xf:group>
+	</body>
+</html>

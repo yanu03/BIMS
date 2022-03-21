@@ -462,6 +462,15 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
 										value="비고" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
+										value="5" blockSelect="false" displayMode="label" sortable="false">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
+										value="6" blockSelect="false" displayMode="label" sortable="false">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
+										value="" blockSelect="false" displayMode="label" sortable="false">
+									</w2:column>
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody2">
@@ -482,6 +491,15 @@
 										value="" blockSelect="false" displayMode="label"  textAlign="right">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="image" style="height:20px;" id="5"
+										value="" blockSelect="false" displayMode="label" imageSrc="/cm/images/bms/AIRTUBE_normal.png" imageHeight="30" imageWidth="30" imageClickFunction="">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="image" style="height:20px" id="6"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id=""
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
@@ -748,10 +766,10 @@
 											value="" blockSelect="false" displayMode="label" userData1="M">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px" id="DATA_VAL"
-											value="" blockSelect="false" displayMode="label">
+											value="" blockSelect="false" displayMode="label" textAlign="right">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="211" inputType="text" style="height:20px" id="REMARK"
-											value="" blockSelect="false" displayMode="label">
+											value="" blockSelect="false" displayMode="label" textAlign="left">
 										</w2:column>
 									</w2:row>
 								</w2:gBody>

@@ -14,6 +14,8 @@
 						<w2:column id="chk" name="선택" dataType="text"></w2:column>
 						<w2:column id="COMP_ID" name="운수사ID" dataType="text"></w2:column>
 						<w2:column id="COMP_NM" name="운수사명" dataType="text"></w2:column>
+						<w2:column id="AREA" name="권역" dataType="text"></w2:column>
+						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_search">
@@ -43,7 +45,16 @@
 			{userStr:"조회", auth: gcm.BTN.SEARCH, cbFnc: scwin.btn_search_onclick}
 		];
 		com.setMainBtn3(wfm_mainBtn, btnOptions);
-		com.executeSubmission(sub_SI0401P0R0);				
+		
+		var codeOptions = [ 
+		                  {code : "AREA", compID : "SI0401P0:AREA" }
+		               ];
+	
+	    com.setCommonDtl(codeOptions, function() {
+	       com.searchGrid(SI0401P0, sub_SI0401P0R0);
+	    });  
+		
+		//com.executeSubmission(sub_SI0401P0R0);				
 	};
 	
 	scwin.onpageunload = function() {
@@ -129,7 +140,7 @@
 			
 			<xf:group style="" id="" class="popup_content">
 				<w2:gridView  fixedColumnWithHidden="true" dataList="data:dlt_BMS_TRANSCOMP_MST" useShiftKey="false" readOnly="true"
-					style="" scrollByColumn="false" id="SI0401P0" autoFit="allColumn" class="cm_grid popup"
+					style="" scrollByColumn="false" id="SI0401P0" autoFit="lastColumn" class="cm_grid popup"
 					ev:oncellclick="scwin.SI0401P0_oncellclick"
 					focusFlow="" focusMode="row">
 					<w2:header style="" id="header1">
@@ -139,7 +150,11 @@
 							<w2:column blockSelect="false" id="column7" inputType="text" style="height:20px" value="운수사ID"
 								width="100">
 							</w2:column>
-							<w2:column blockSelect="false" id="column5" inputType="text" style="height:20px" value="운수사명" width="90"></w2:column>
+							<w2:column blockSelect="false" id="column1" inputType="text" style="height:20px" value="권역"
+								width="100">
+							</w2:column>
+							<w2:column blockSelect="false" id="column5" inputType="text" style="height:20px" value="운수사명" width="150"></w2:column>
+							<w2:column blockSelect="false" id="column2" inputType="text" style="height:20px" value="비고" width="250"></w2:column>
 						</w2:row>
 					</w2:header>
 					<w2:gBody id="gBody1" style="">
@@ -148,7 +163,9 @@
 								style="height:20px" trueValue="1" width="" viewType="" typeGetter="">
 							</w2:column>
 							<w2:column blockSelect="false" id="COMP_ID" inputType="text" style="height:20px" width=""></w2:column>
+							<w2:column blockSelect="false" id="AREA" inputType="select" style="height:20px" width=""></w2:column>
 							<w2:column blockSelect="false" id="COMP_NM" inputType="text" style="height:20px" width="" textAlign="left"></w2:column>
+							<w2:column blockSelect="false" id="REMARK" inputType="text" style="height:20px" width="" textAlign="left"></w2:column>
 						</w2:row>
 					</w2:gBody>
 				</w2:gridView>

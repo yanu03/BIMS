@@ -333,7 +333,7 @@
 
 				</xf:group>
 				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_350_20_a" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_360_20_a" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="차량 상세 정보" style=""></w2:textbox>
@@ -359,7 +359,7 @@
 										<w2:colspan>1</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:input class="" id="VHC_ID" mandatory="" ref="data:dlt_BMS_VHC_MST.VHC_ID" style="width:100px;height:21px;"
+									<xf:input class="" id="VHC_ID" mandatory="" ref="data:dlt_BMS_VHC_MST.VHC_ID" style="width:100px;"
 										disabled="true" adjustMaxLength="" maxlength="">
 									</xf:input>
 								</xf:group>
@@ -370,7 +370,7 @@
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes></w2:attributes>
 									<xf:input adjustMaxLength="" class="req" disabled="" fireEventOnInvalid="" id="VHC_NO" invalidMessageFunc="" mandatory=""
-										readOnly="" ref="data:dlt_BMS_VHC_MST.VHC_NO" style="width:100%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput=""
+										readOnly="" ref="data:dlt_BMS_VHC_MST.VHC_NO" style="width:100%;" validateOnCheckMaxByteLength="" validateOnInput=""
 										validator="" maxlength="9" customModelFormatter="">
 									</xf:input>
 								</xf:group>
@@ -379,7 +379,7 @@
 								<xf:group class="w2tb_th req" style="" tagname="th">운수사</xf:group>
 								<xf:group class="w2tb_td" style="" tagname="td">
 									<xf:input adjustMaxLength="" class="req" disabled="" fireEventOnInvalid="" id="COMP_NM" invalidMessageFunc="" mandatory=""
-										readOnly="" ref="data:dlt_BMS_VHC_MST.COMP_NM" style="width:80%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput=""
+										readOnly="" ref="data:dlt_BMS_VHC_MST.COMP_NM" style="width:80%;" validateOnCheckMaxByteLength="" validateOnInput=""
 										validator="" ev:oneditenter="" ev:onfocus="scwin.COMP_NM_onfocus">
 									</xf:input>
 									<xf:image class="btn" ev:onclick="scwin.btn_searchComp_onclick" id="btn_searchComp" longdesc=""
@@ -408,7 +408,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:input adjustMaxLength="" class="" disabled="" id="CHAS_NO" mandatory="" ref="data:dlt_BMS_VHC_MST.CHAS_NO"
-										style="width:100%;height:21px;" allowChar="" validator="" validateOnInput="false" initValue="" maxByteLength="" maxlength="17">
+										style="width:100%;" allowChar="" validator="" validateOnInput="false" initValue="" maxByteLength="" maxlength="17">
 									</xf:input>
 								</xf:group>
 								<xf:group tagname="td" class="w2tb_th">
@@ -452,7 +452,7 @@
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes></w2:attributes>
 									<xf:input adjustMaxLength="" allowChar="" class="" disabled="" id="MODEL_NM" initValue="" mandatory=""
-										ref="data:dlt_BMS_VHC_MST.MODEL_NM" style="width:100%;height:21px;" validateOnInput="false" validator="" maxlength="30">
+										ref="data:dlt_BMS_VHC_MST.MODEL_NM" style="width:100%;" validateOnInput="false" validator="" maxlength="30">
 									</xf:input>
 								</xf:group>
 							</xf:group>
@@ -539,7 +539,7 @@
 								<xf:group class="w2tb_td" tagname="td">
 									<w2:attributes></w2:attributes>
 									<w2:spinner buttonSize="30" dataType="number" id="PSG_CNT" inputReadOnly="" min="0" ref="data:dlt_BMS_VHC_MST.PSG_CNT"
-										skin="type1" style="position: relative;width: 110px;height: 21px;" max="9999999">
+										skin="type1" style="position: relative;width: 110px; height:21px;" max="9999999">
 									</w2:spinner>
 								</xf:group>
 							</xf:group>
@@ -551,7 +551,7 @@
 								</xf:group>
 								<xf:group class="w2tb_td" tagname="td">
 									<w2:attributes></w2:attributes>
-									<xf:select1 id="" selectedIndex="0" appearance="full" style="width: 100%;height: 21px;margin-left: 20px;" cols="" 
+									<xf:select1 id="" selectedIndex="0" appearance="full" style="width: 100%;margin-left: 20px;" cols="" 
 										rows="1" ref="data:dlt_BMS_VHC_MST.SPARE_YN">
 										<xf:choices>
 											<xf:item>
@@ -574,7 +574,7 @@
 								<xf:group class="w2tb_td" tagname="td">
 									<w2:attributes></w2:attributes>
 									<xf:select1 appearance="full" cols="" id="" ref="data:dlt_BMS_VHC_MST.SCRAP_YN" rows="1"
-										selectedIndex="0" style="width: 100%;height: 21px;display: none;">
+										selectedIndex="0" style="width: 100%;display: none;">
 										<xf:choices>
 											<xf:item>
 												<xf:label><![CDATA[예]]></xf:label>
@@ -587,7 +587,7 @@
 										</xf:choices>
 									</xf:select1>
 									<xf:select1 appearance="full" cols="" id="" ref="data:dlt_BMS_VHC_MST.SCRAP_YN" rows="1"
-										selectedIndex="0" style="height: 21px;margin-left: 20px;">
+										selectedIndex="0" style="margin-left: 20px;">
 										<xf:choices>
 											<xf:item>
 												<xf:label><![CDATA[예]]></xf:label>
@@ -613,7 +613,7 @@
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:select1 id="" selectedIndex="0" appearance="full" style="width: 150px;height: 21px;margin-left: 20px" cols=""
+									<xf:select1 id="" selectedIndex="0" appearance="full" style="width: 150px;margin-left: 20px" cols=""
 										rows="1" ref="data:dlt_BMS_VHC_MST.USE_YN">
 										<xf:choices>
 											<xf:item>
@@ -641,7 +641,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:textarea adjustMaxLength="" class="" disabled="" id="REMARK" mandatory="" ref="data:dlt_BMS_VHC_MST.REMARK"
-										style="width:100%;height:70px;" maxlength="200">
+										style="width:100%;" maxlength="200">
 									</xf:textarea>
 								</xf:group>
 							</xf:group>

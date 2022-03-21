@@ -310,7 +310,7 @@
     							<xf:group class="w2tb_th req" style="" tagname="th">담당자&amp;nbsp;ID</xf:group>
     							<xf:group class="w2tb_td" style="" tagname="td">
     								<xf:input adjustMaxLength="" class="" disabled="true" id="MEMBER_ID" mandatory=""
-    									ref="data:dlt_BMS_PARTNER_MEMBER_INFO.MEMBER_ID" style="width:100%;height:21px;" readOnlyClass="">
+    									ref="data:dlt_BMS_PARTNER_MEMBER_INFO.MEMBER_ID" style="width:100%;" readOnlyClass="">
     								</xf:input>
     							</xf:group>
     							<xf:group class="w2tb_th req" tagname="td">담당자&amp;nbsp;명<w2:attributes></w2:attributes></xf:group>
@@ -318,7 +318,7 @@
     								<w2:attributes></w2:attributes>
     								<xf:input adjustMaxLength="" class="req" disabled="" fireEventOnInvalid="" id="MEMBER_NM"
     									invalidMessageFunc="" mandatory="" maxlength="5" readOnly="" ref="data:dlt_BMS_PARTNER_MEMBER_INFO.MEMBER_NM"
-    									style="width:100%;height:21px;" userData1="M" validateOnCheckMaxByteLength="" validateOnInput="" validator="">
+    									style="width:100%;" userData1="M" validateOnCheckMaxByteLength="" validateOnInput="" validator="">
     								</xf:input>
     							</xf:group>
     						</xf:group>
@@ -335,7 +335,7 @@
     							<xf:group class="w2tb_th" style="" tagname="th">이메일</xf:group>
     							<xf:group class="w2tb_td" style="" tagname="td">
     								<xf:input adjustMaxLength="" class="" id="EMAIL" mandatory=""
-    									ref="data:dlt_BMS_PARTNER_MEMBER_INFO.EMAIL" style="width:100%;height:21px;">
+    									ref="data:dlt_BMS_PARTNER_MEMBER_INFO.EMAIL" style="width:100%;">
     								</xf:input>
     							</xf:group>
     						</xf:group>
@@ -343,14 +343,14 @@
     							<xf:group class="w2tb_th" style="" tagname="th">전화번호</xf:group>
     							<xf:group class="w2tb_td" style="" tagname="td">
     								<xf:input adjustMaxLength="" allowChar="0-9-" class="" id="PHONE" mandatory="" maxlength="13"
-    									ref="data:dlt_BMS_PARTNER_MEMBER_INFO.PHONE" style="width:100%;height:21px;"
+    									ref="data:dlt_BMS_PARTNER_MEMBER_INFO.PHONE" style="width:100%;"
     									customModelFormatter="com.transPhone" displayFormatter="com.transPhone">
     								</xf:input>
     							</xf:group>
     							<xf:group class="w2tb_th" style="" tagname="th">팩스</xf:group>
     							<xf:group class="w2tb_td" style="" tagname="td">
     								<xf:input adjustMaxLength="" allowChar="0-9-" class="" id="FAX" mandatory=""
-    									ref="data:dlt_BMS_PARTNER_MEMBER_INFO.FAX" style="width:100%;height:21px;" userData2="com.checkEmail"
+    									ref="data:dlt_BMS_PARTNER_MEMBER_INFO.FAX" style="width:100%;" userData2="com.checkEmail"
     									customModelFormatter="com.transPhone" displayFormatter="com.transPhone" maxlength="13">
     								</xf:input>
     							</xf:group>
@@ -360,7 +360,7 @@
     							<xf:group class="w2tb_td" style="" tagname="td">
     								<xf:input adjustMaxLength="" class="" disabled="" ev:oneditenter=""
     									ev:onfocus="scwin.PARTNER_NM_onfocus" fireEventOnInvalid="" id="PARTNER_NM" invalidMessageFunc="" mandatory="" readOnly=""
-    									ref="data:dlt_BMS_PARTNER_MEMBER_INFO.PARTNER_NM" style="width:80%;height:21px;" validateOnCheckMaxByteLength="" validateOnInput=""
+    									ref="data:dlt_BMS_PARTNER_MEMBER_INFO.PARTNER_NM" style="width:80%;" validateOnCheckMaxByteLength="" validateOnInput=""
     									validator="" title="">
     								</xf:input>
     								<xf:image class="btn" ev:onclick="scwin.btn_searchComp_onclick" id="btn_searchComp" longdesc=""
@@ -369,7 +369,7 @@
     							</xf:group>
     						</xf:group>
     						<xf:group style="" tagname="tr">
-    							<xf:group class="w2tb_th" id="" style="height: 70px;" tabIndex="" tagname="th">
+    							<xf:group class="w2tb_th" id="" style="vertical-align: top;" tabIndex="" tagname="th">
     								비고
     								<w2:attributes>
     									<w2:scope>row</w2:scope>
@@ -381,7 +381,7 @@
     									<w2:rowspan>1</w2:rowspan>
     								</w2:attributes>
     								<xf:textarea adjustMaxLength="" class="" disabled="" id="REMARK" mandatory=""
-    									ref="data:dlt_BMS_PARTNER_MEMBER_INFO.REMARK" style="width:100%;height:70px;">
+    									ref="data:dlt_BMS_PARTNER_MEMBER_INFO.REMARK" style="width:100%;;">
     								</xf:textarea>
     							</xf:group>
     						</xf:group>

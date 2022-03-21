@@ -9,6 +9,7 @@ var routMap = {
 		VERTEX : "NT005",
 		SOUND : "NT006",
 		SIGNAL : "NT008",
+		DISP : "NT009"
 	},
 	MAX_NODE_CNT : 800,
 	LIMIT_SPEED : 50
@@ -33,6 +34,7 @@ var RoutMAP = function(){
 	this.nodes = [];
 	this.draggable = false;
 	this.dragging = false; //드래그 중인지
+	this.isChange = false;
 	this.dispCheck = "";
 	this.nodeChangeCb = {};
 	this.isMove = true;
@@ -106,6 +108,7 @@ routMap.initMap = function(mapId,options) {
 	routMap.mapInfo[mapId].map=map;
 	routMap.mapInfo[mapId].nodeChangeCb = options.nodeChangeCb;
 	routMap.mapInfo[mapId].draggable=options.draggable;
+	routMap.mapInfo[mapId].isChange=options.isChange;
 	routMap.mapInfo[mapId].linkMode=options.linkMode;
 	routMap.mapInfo[mapId].mockLinkMode=options.mockLinkMode;
 	routMap.mapInfo[mapId].isSound=options.isSound;
@@ -499,11 +502,21 @@ routMap.addMarkerInter = function(mapId, data, grid, idx, focusIdx, isOverLayHid
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex.png", imageSize);
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex_selected.png", imageSize);
 	}
-	else if(data.NODE_TYPE == routMap.NODE_TYPE.SIGNAL){
+	else if(data.NODE_TYPE == routMap.NODE_TYPE.DISP){
 		imageSize = new kakao.maps.Size(12, 12); 
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex.png", imageSize);
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex_selected.png", imageSize);
+	}
+	else if(data.NODE_TYPE == routMap.NODE_TYPE.SIGNAL){
+		imageSize = new kakao.maps.Size(20, 12); 
+		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/light_green.png", imageSize);
+		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/light_red.png", imageSize);
 	}	
+	else if(data.NODE_TYPE == routMap.NODE_TYPE.SOUND){
+		imageSize = new kakao.maps.Size(15, 20); 
+		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/voice_node.png", imageSize);
+		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/voice_node_selected.png", imageSize);
+	}
 	else {
 		imageSize = new kakao.maps.Size(19, 28); 
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/road_trans.png", imageSize);
@@ -567,7 +580,7 @@ routMap.addMarkerInter = function(mapId, data, grid, idx, focusIdx, isOverLayHid
 		else if(data.NODE_TYPE == routMap.NODE_TYPE.CROSS){
 			msg = "<div class = 'customoverlay cross'>";
 		}
-		if(data.draggable){
+		if(data.isChange){
 			
 			if(data.NODE_TYPE == routMap.NODE_TYPE.CROSS){
 				msg += "<span class = 'map_title' style=''>" + data.NODE_NM
@@ -3657,6 +3670,84 @@ routMap.addVertexByClick = function(mapId,grid,routeId,e){
 }
 
 /**
+ *  클릭으로 화면용 버텍스 경로 추가함
+ * @param mapId : 대상 map id
+ * @param grid : 대상 그리드
+ * @param routeId : 대상 노선ID
+ * @param e : 클릭한 event 정보
+ */
+routMap.addDispVertexByClick = function(mapId,grid,routeId,e){
+	
+	var routeData = com.getGridDispJsonData(grid);
+	if(routeData.length >= routMap.MAX_NODE_CNT){
+		//com.alert ("더이상 추가할 수 없습니다.");
+		return false;
+	}
+	
+	var lonlat = e.latLng;
+	var min = 10000000;
+	var minIndex = null;
+	var nodeSn = 0;
+	for(var i = 0; i < routeData.length - 1; i++) {
+		var result = getDistanceToLine(
+			lonlat.Ma,
+			lonlat.La,
+			routeData[i].GPS_Y,
+			routeData[i].GPS_X,
+			routeData[i + 1].GPS_Y,
+			routeData[i + 1].GPS_X
+		)
+		
+		if(result.distance) {
+			if(min > result.distance) {
+				nodeSn = routeData[i].NODE_SN;
+				min = result.distance;
+				minIndex = i;
+			}
+		}
+	}
+	
+	if(minIndex == null) {
+		com.alert("선택할 수 없는 좌표입니다. 경로를 먼저 입력하세요");
+	} else {
+		var idx = minIndex + 1;;
+		
+		idx = com.getGridViewDataList(grid).insertRow(idx);
+	
+		var today = new Date();
+		var data = {
+			ROUT_ID: routeId,
+			NODE_SN: nodeSn,
+			NODE_NM: /*routNm + */"DP_" + util.getCurrentDate().substring(4),
+			NODE_TYPE: routMap.NODE_TYPE.DISP,
+			GPS_Y: util.getDispGps(lonlat.Ma,7),
+			GPS_X: util.getDispGps(lonlat.La,7),
+			draggable:routMap.mapInfo[mapId].draggable
+		};
+	
+		com.getGridViewDataList(grid).setRowJSON(idx, data, true);
+		
+		var j = 0;
+		for(var i = 0; i < com.getGridViewDataList(grid).getRowCount(); i++){
+			if(nodeSn == com.getGridViewDataList(grid).getCellData(i, "NODE_SN")){
+				
+				if(j==0){
+					com.getGridViewDataList(grid).modifyRowStatus(i, "C");
+				}
+				else {
+					com.getGridViewDataList(grid).setCellData(i, "NODE_CHILD_SN",j);
+				}
+				j++;
+			}
+		}
+		
+		//routeData = com.getGridDispJsonData(grid);
+		routMap.drawRoute(mapId, grid, idx);
+		grid.setFocusedCell(idx,"NODE_ID");
+	}
+}
+
+/**
  *  클릭으로 정류소 경로 추가함
  * @param mapId : 대상 map id
  * @param grid : 대상 그리드
@@ -4218,6 +4309,10 @@ routMap.moveRoute = function(mapId, grid, e){
 			data.deleteRow(e.index);
 		}*/
 		
+		if(com.isEmpty(temp.NODE_CHILD_SN)==false && temp.NODE_CHILD_SN==-1){
+			temp.NODE_CHILD_SN = 0;
+		}
+		
 		var idx = 0;
 		if(val==true){
 			idx = data.insertRow(e.index);
@@ -4302,6 +4397,12 @@ routMap.drawRoute = function(mapId, grid, focusIdx) {
 			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.VERTEX && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.VERTEX)>=0) {
 				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
 			}
+			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.DISP) {
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
+			}
+			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.SOUND /*&& routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.SOUND)>=0*/) {
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
+			}			
 			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.SIGNAL && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.SIGNAL)>=0) {
 				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
 			}
@@ -4315,7 +4416,9 @@ routMap.drawRoute = function(mapId, grid, focusIdx) {
 				if(com.isEmpty(mornStd)){
 					mornStd = oldMornStd;
 				}
-				oldMornStd = list[i].MORN_STD;
+				else {
+					oldMornStd = list[i].MORN_STD;
+				}
 				
 				var color = "#3396ff";
 				if(mornStd=='MS002'){
@@ -4404,7 +4507,9 @@ routMap.drawRoute2 = function(mapId, list, focusIdx) {
 				if(com.isEmpty(mornStd)){
 					mornStd = oldMornStd;
 				}
-				oldMornStd = list[i].MORN_STD;
+				else {
+					oldMornStd = list[i].MORN_STD;
+				}
 				
 				var color = "#3396ff";
 				if(mornStd=='MS002'){
@@ -4579,13 +4684,19 @@ routMap.drawSound = function(mapId, grid, focusIdx) {
 				list[i].draggable = false;
 				routMap.addSoundMarkerInter(mapId, list[i], grid, i, focusIdx);
 			}
+			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.NORMAL) {
+				routMap.addSoundMarkerInter(mapId, list[i], grid, i, focusIdx);
+			}
+			
 
 			if(i < list.length -1){
 				var mornStd = list[i].MORN_STD;
 				if(com.isEmpty(mornStd)){
 					mornStd = oldMornStd;
 				}
-				oldMornStd = list[i].MORN_STD;
+				else {
+					oldMornStd = list[i].MORN_STD;
+				}
 				
 				var color = "#3396ff";
 				if(mornStd=='MS002'){
@@ -4655,7 +4766,9 @@ routMap.showRoute = function(mapId, list, id, type) {
 				if(com.isEmpty(mornStd)){
 					mornStd = oldMornStd;
 				}
-				oldMornStd = list[i].MORN_STD;
+				else {
+					oldMornStd = list[i].MORN_STD;
+				}
 				
 				var color = "#3396ff";
 				if(mornStd=='MS002'){
@@ -4710,7 +4823,9 @@ routMap.showRoute2 = function(mapId, list, focusIdx, grid) {
 				if(com.isEmpty(mornStd)){
 					mornStd = oldMornStd;
 				}
-				oldMornStd = list[i].MORN_STD;
+				else {
+					oldMornStd = list[i].MORN_STD;
+				}
 				
 				var color = "#3396ff";
 				if(mornStd=='MS002'){

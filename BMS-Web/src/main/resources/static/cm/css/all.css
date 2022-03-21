@@ -5,7 +5,7 @@
 html,body{margin:0;padding:0; width: 100%; height: 100%;}
 body{color:#3b3b3b;font-style:normal;-webkit-text-size-adjust:none;}
 p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,table,form,fieldset,pre{margin:0;padding:0}
-body,input,textarea,select,button,table,pre{font-size:12px;font-family: Malgun Gothic, mgw, Verdana, dotum, Sans-serif}
+body,input,textarea,select,button,table,pre{font-size:12px;font-family: Malgun Gothic, mgw, Verdana, dotum, Sans-serif;}
 table{empty-cells:show}
 caption,legend{display:none}
 a img,img{vertical-align:top; cursor:pointer;}
@@ -90,12 +90,12 @@ a:hover,a:active,a:focus{text-decoration:none}
 
 .w2calendar_footer .w2selectbox .w2selectbox_col_button{width:14px; height:14px; background-size: 85%; background-image:url(/cm/images/inc/btn_select_arrow.gif); background-position:left center;}
 
-.w2input, .w2textarea, .w2inputCalendar_divInput, .w2selectbox, .w2checkcombobox, .w2autoComplete {border:1px solid #dddddd; box-sizing:border-box;height:22px;}
+.w2input, .w2textarea, .w2inputCalendar_divInput, .w2selectbox, .w2checkcombobox, .w2autoComplete {border:1px solid #dddddd; box-sizing:border-box;height:24px;}
 .w2input, /* .w2selectbox */ .w2checkcombobox, .w2inputCalendar {width:120px;}
 
 .w2grid .w2inputCalendar_divInput{box-sizing:content-box;}
 
-.w2textarea{width:120px;height:50px;}
+.w2textarea{width:120px;height:90px;}
 .w2radio .w2radio_main,.w2checkbox .w2checkbox_main{width:auto}
 .w2radio.w100 .w2radio_main,.w2checkbox.w100 .w2checkbox_main{width:100%}
 .w2radio_label,.w2checkbox_label{height:19px;line-height:19px} 
@@ -129,7 +129,7 @@ a:hover,a:active,a:focus{text-decoration:none}
 .ly_col_cont{display:block;position:relative;min-width:15px;min-height:15px}
 
 .pgtitlebox{position:relative;min-height:10px;padding:0;margin:10px 0 10px;overflow:hidden;}
-.pgtitlebox .wf_contNavi{float:right;line-height:16px;}
+.pgtitlebox .wf_contNavi{float:right;line-height:16px; margin-top: 3px;}
 .pgtitlebox .wf_contHeader{float:left;}
 .pgtitlebox .pg_tt{display:inline-block;color:#333;font-size:16px;font-weight: bold;position:relative;padding: 0 0 0 23px;letter-spacing: -1px;}
 .pgtitlebox .pg_tt:after {content:'';display:block;width: 14px;height: 14px;background: #333333;position: absolute;top: 4px;left: 9px;border-radius: 50%;opacity: 0;}
@@ -191,7 +191,7 @@ a:hover,a:active,a:focus{text-decoration:none}
 .tb .w2tb_td{padding:2px;color:#3b3b3b;}
 .tb tbody .w2tb_th .pot{color:#5a89bc}
 .tb .w2input, .tb .w2selectbox, .tb .w2checkcombobox, .tb .w2inputCalendar{width:100%;}
-.tb .w2textarea{width:100%;height:50px;}
+.tb .w2textarea{width:100%;height:90px;}
 .tb input[type="checkbox"], .tableListH.w2tb input[type="radio"] { border: none;}
 .tb .w2inputCalendar_div.req{background:none;padding-left:0 !important}
 .tb .w2inputCalendar_div.req .w2inputCalendar_divInput{background:rgb(243,248,255);padding-left:0 !important;text-align:center;}
@@ -263,8 +263,37 @@ a:hover,a:active,a:focus{text-decoration:none}
 
 .table_btn.w2trigger_disabled  {background: gainsboro;border-radius: 3px;cursor: pointer;width: auto !important;box-sizing: border-box;padding: 1px 6px !important; height: auto !important;background: #fff;color: #b3b3b3;border: 1px solid #1a237e;box-shadow: none;}
 
+/* SDI */
+.tac_layout .w2tabcontrol_tabhost li{margin-right: 0;border:1px solid #c4cad6;background:#fff;min-width: 140px;height:34px;line-height:34px;border-left: none;}
+.tac_layout .w2tabcontrol_tabhost li.w2tabcontrol_active,.tac_layout .w2tabcontrol_tabhost li.w2tabcontrol_selected {border-bottom:1px solid #fff}
+/* .tac_layout .w2tabcontrol_tabhost li a{margin:0 17px;} */
+.tac_layout .w2tabcontrol_control,
+.tac_layout .w2tabcontrol_tabhost{height:36px; z-index: 1;}
+.tac_layout .w2tabcontrol_control .scroll{left:0px !important;}
+.tac_layout .w2tabcontrol_container{position: absolute; left:0; top:35px; right:0; bottom:40px; border:none; float:none; height:auto !important; border-top:1px solid #c4cad6;}
+
+.tac_layout .w2tabcontrol_contents_wrapper{position: absolute; left: 0; right: 0; top: 0; bottom: 0; height: auto !important; overflow: auto; background: #fff;  border-width: 0px 1px 1px 1px;/*  border-style: solid;  */border-color: #c4cad6; box-sizing:border-box;}
+.tac_layout .w2tabcontrol_contents_wrapper.w2iframe{height:inherit !important}
+
+/* 탭 비 활성화 인 경우 색 */
+.tac_layout .w2tabcontrol_tabhost .w2tabcontrol_tab_left,
+.tac_layout .w2tabcontrol_tabhost .w2tabcontrol_tab_center,
+.tac_layout .w2tabcontrol_tabhost .w2tabcontrol_tab_right{background:#f7f7f7;}
+
+/* 탭 활성화 인 경우 색 */
+.tac_layout .w2tabcontrol_tabhost .w2tabcontrol_active .w2tabcontrol_tab_left,
+.tac_layout .w2tabcontrol_tabhost .w2tabcontrol_active .w2tabcontrol_tab_center,
+.tac_layout .w2tabcontrol_tabhost .w2tabcontrol_active  .w2tabcontrol_tab_right{background:none;}
+
+/* mask */
+.tac_layout .w2tabcontrol_control .mask{left:0;right:90px;margin-left:0;}
+.tac_layout .w2tabcontrol_control .btn_scrollLeft{right:66px;display:none}
+.tac_layout .w2tabcontrol_control .btn_scrollRight{right:46px;display:none}
+.tac_layout .w2tabcontrol_control .btn_submenu{right:23px;display:none}
+.tac_layout .w2tabcontrol_tab_close, .tac_layout .w2tabcontrol_tab_close2{top: 3px;background:url(/cm/images/inc/icon_mdi_close2.png) no-repeat left top; width:11px; right:5px; left:auto; top:5px;}
+
 /* tabControl */
-.cm_tabmenu{position:relative;padding:0;margin:0;margin:0}/* margin:15px 0 0 */
+/* .cm_tabmenu{position:relative;padding:0;margin:0;margin:0}margin:15px 0 0
 .cm_tabmenu .w2tabcontrol_tabhost{height:22px}
 .cm_tabmenu .w2tabcontrol_tabhost li a{top:0;line-height:22px;margin:0 15px 0 14px;color:#818181}
 .cm_tabmenu .w2tabcontrol_tabhost .w2tabcontrol_tab_left{width:4px;background:url(/cm/images/contents/tab01_off.gif) no-repeat}
@@ -276,7 +305,53 @@ a:hover,a:active,a:focus{text-decoration:none}
 .cm_tabmenu .w2tabcontrol_tabhost .w2tabcontrol_active .w2tabcontrol_tab_right{background:url(/cm/images/contents/tab03_on.gif) no-repeat}
 .cm_tabmenu .w2tabcontrol_container{float:none;width:auto !important;height:auto !important;border:0;border:1px solid #c8cad0;padding:5px}
 .cm_tabmenu .tabcontbox{padding:0;min-height:100px;}
-.cm_tabmenu .defaultbox:first-child{margin-top:0;}
+.cm_tabmenu .defaultbox:first-child{margin-top:0;} */
+
+.innerTab .w2tabcontrol_contents_wrapper{position: absolute; left: 0; right: 0; top: 10px; bottom: 0; height: auto !important; overflow: auto; background: #fff;  border-width: 0px 1px 1px 1px;/*  border-style: solid;  */border-color: #c4cad6; box-sizing:border-box;}
+.innerTab .w2tabcontrol_container{position: absolute; left:0; top:31px; right:0; bottom:0px; border:none; float:none; height:auto !important; border-top:1px solid #c4cad6;}
+/* .innerTab .w2tabcontrol_contents_wrapper {overflow:hidden;} */
+.innerTabContent {height:100%;}
+.innerTab .w2tabcontrol_tabhost
+{
+    position: relative;
+    /* top: 10px;
+    left: 10px; */
+    width: auto;
+    border: 1px solid #d9d9d9;
+    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%);
+    background: #eee; */
+    overflow: hidden;
+    z-index: 2;
+    bottom: 0px;
+    border-radius: 5px;
+    height:30px;
+    } 
+    
+/* 탭 비 활성화 인 경우 색 */
+.innerTab .w2tabcontrol_tabhost .w2tabcontrol_tab_left,
+.innerTab .w2tabcontrol_tabhost .w2tabcontrol_tab_right{background:none;}
+
+/* 탭 활성화 인 경우 색 */
+.innerTab .w2tabcontrol_tabhost .w2tabcontrol_active .w2tabcontrol_tab_left,
+.innerTab .w2tabcontrol_tabhost .w2tabcontrol_active  .w2tabcontrol_tab_right{background:none;}
+
+.innerTab .w2tabcontrol_tabhost li {margin-right: 0; border: 0px; min-width: 0px; height: 100%; line-height: 100%; border-left: none;}
+
+.innerTab .w2tabcontrol_tabhost li.w2tabcontrol_active,.innerTab .w2tabcontrol_tabhost li.w2tabcontrol_selected {border-bottom:0px;background:#f7f7f7}
+    
+.innerTab .w2tabcontrol_tabhost .w2tabcontrol_tab_center {float:left;list-style: none;border-left: 0px}
+.innerTab .w2tabcontrol_tabhost .w2tabcontrol_active .w2tabcontrol_tab_center {background: #0475f4;border-radius: 5px;border-left: none;border-right: none;}
+.innerTab .w2tabcontrol_tabhost .w2tabcontrol_active .w2tabcontrol_tab_center a {color: #fff !important;}
+
+    
+.innerTab .w2tabcontrol_tabhost .w2tabcontrol_tab_center a {position: relative;top: 0px;line-height: 100%;margin-right: 0px;margin-left: 0px;
+															text-decoration: none; display: block;text-align: center;padding:8px 0; cursor: pointer;width: 100px;color: black;}
+.innerTab .w2tabcontrol_tabhost .w2tabcontrol_tab_center a:hover {color: #0475f4;}
+.innerTab .w2tabcontrol_tabhost .w2tabcontrol_tab_center:last-child{margin-right:0;border-right:0;}
+/* .innerTab .w2tabcontrol_tabhost .w2tabcontrol_tab_center span {display: block;margin:0 auto 3px;width:27px;height: 28px;} */
+/* .innerTab .w2tabcontrol_tabhost .w2tabcontrol_tab_center.on + .w2tabcontrol_tab_center {border-left:none;} 
+.innerTab .w2tabcontrol_tabhost .w2tabcontrol_tab_center:first-child {border-left:none;} */
+
 
 /* button */
 /*
@@ -1256,8 +1331,8 @@ ul.question li a:hover {font-weight:bold;}
 
 
 /* 지도 카테고리 관련*/
-.map_wrap, .map_wrap * {margin:0; padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
-.map_wrap {position:relative;width:100%;height:350px;}
+/* .map_wrap, .map_wrap * {margin:0; padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+.map_wrap {position:relative;width:100%;height:350px;} */
 .category {position:absolute;top:10px;left:10px;border-radius: 5px;border: 1px solid #d9d9d9;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);background: #fff;overflow: hidden;z-index: 2;}
 .category li {float:left;list-style: none;border-right: 1px solid #d9d9d9;padding: 7px 0;text-align: center;cursor: pointer;width: 68px;font-size: 11px;font-weight: bold;color: dimgrey;}
 .category li.on {/* background: #0475f4; */color: #0475f4;}
@@ -1316,77 +1391,46 @@ ul.question li a:hover {font-weight:bold;}
 	background-size: contain;
 }
 
-/* 운행 디스패치 탭관련 */
-.stat_dsptch
+.tab_div
+{
+	border-bottom: 1px solid #c4cad6;
+	margin-bottom: 10px
+}
+
+
+
+.tab_ul
 {
     position: relative;
     /* top: 10px; */
     /* left: 10px; */
-    width: 302px;
-    border: 1px solid #d9d9d9;
+    border-top: 1px solid #d9d9d9;
+    border-left: 1px solid #d9d9d9;
+    border-right: 1px solid #d9d9d9;
     /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
     /* background: #eee; */
     overflow: hidden;
     z-index: 2;
     border-radius: 5px;
-    }
+}
     
-.stat_dsptch li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
-.stat_dsptch li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
-.stat_dsptch li:hover {color: #0475f4;}
-.stat_dsptch li:last-child{margin-right:0;border-right:0;}
-.stat_dsptch li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
-.stat_dsptch li.on + li {border-left:none;} 
-.stat_dsptch li:first-child {border-left:none;}
+.tab_ul li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
+.tab_ul li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
+.tab_ul li:hover {color: #0475f4;}
+.tab_ul li:last-child{margin-right:0;border-right:0;}
+.tab_ul li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
+.tab_ul li.on + li {border-left:none;} 
+.tab_ul li:first-child {border-left:none;}
+
 
 /* 운행 정시성 탭관련 */
 .stat_pnctlty
 {
-    position: relative;
-    /* top: 10px; */
-    /* left: 10px; */
-    width: 302px;
-    border: 1px solid #d9d9d9;
-    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
-    /* background: #eee; */
-    overflow: hidden;
-    z-index: 2;
-    border-radius: 5px;
-    }
-    
-.stat_pnctlty li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
-.stat_pnctlty li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
-.stat_pnctlty li:hover {color: #0475f4;}
-.stat_pnctlty li:last-child{margin-right:0;border-right:0;}
-.stat_pnctlty li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
-.stat_pnctlty li.on + li {border-left:none;} 
-.stat_pnctlty li:first-child {border-left:none;}
+    width: 301px;
+}
 
-/* 시설 유지보수 통계 탭관련 */
-.stat_fclt
-{
-    position: relative;
-    /* top: 10px; */
-    /* left: 10px; */
-    width: 302px;
-    border: 1px solid #d9d9d9;
-    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
-    /* background: #eee; */
-    overflow: hidden;
-    z-index: 2;
-    bottom: 5px;
-    border-radius: 5px;
-    }
-.stat_fclt li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;}
-.stat_fclt li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
-.stat_fclt li:hover {color: #0475f4;}
-.stat_fclt li:last-child{margin-right:0;border-right:0;}
-.stat_fclt li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
-.stat_fclt li.on + li {border-left:none;} 
-.stat_fclt li:first-child {border-left:none;}
-
-/* 시설물 상태 및 제어 탭관련 */
-.ctl_fclt
+/* 정류소/교차로 시간표 탭관련 */
+.sttnCrs_tab
 {
     position: relative;
     /* top: 10px; */
@@ -1400,13 +1444,13 @@ ul.question li a:hover {font-weight:bold;}
     border-radius: 5px;
     }
     
-.ctl_fclt li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
-.ctl_fclt li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
-.ctl_fclt li:hover {color: #0475f4;}
-.ctl_fclt li:last-child{margin-right:0;border-right:0;}
-.ctl_fclt li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
-.ctl_fclt li.on + li {border-left:none;} 
-.ctl_fclt li:first-child {border-left:none;}
+.sttnCrs_tab li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
+.sttnCrs_tab li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
+.sttnCrs_tab li:hover {color: #0475f4;}
+.sttnCrs_tab li:last-child{margin-right:0;border-right:0;}
+.sttnCrs_tab li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
+.sttnCrs_tab li.on + li {border-left:none;} 
+.sttnCrs_tab li:first-child {border-left:none;}
 
 /* 시설물 유지보수/장애발생 이력 탭관련 */
 .fclt_his
@@ -1454,6 +1498,29 @@ ul.question li a:hover {font-weight:bold;}
 .dvc_his li.on + li {border-left:none;} 
 .dvc_his li:first-child {border-left:none;}
 
+/* 교차로 탭관련 */
+.tab_crs
+{
+    position: relative;
+    /* top: 10px; */
+    /* left: 10px; */
+    width: 302px;
+    border: 1px solid #d9d9d9;
+    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
+    /* background: #eee; */
+    overflow: hidden;
+    z-index: 2;
+    border-radius: 5px;
+    }
+    
+.tab_crs li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
+.tab_crs li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
+.tab_crs li:hover {color: #0475f4;}
+.tab_crs li:last-child{margin-right:0;border-right:0;}
+.tab_crs li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
+.tab_crs li.on + li {border-left:none;} 
+.tab_crs li:first-child {border-left:none;}
+
 /* 코스 탭관련 */
 .tab_cos
 {
@@ -1499,29 +1566,6 @@ ul.question li a:hover {font-weight:bold;}
 .tab_wet li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
 .tab_wet li.on + li {border-left:none;} 
 .tab_wet li:first-child {border-left:none;}
-
-/* 차내장치 상태 및 제어 탭관련 */
-.ctl_dvc
-{
-    position: relative;
-    /* top: 10px; */
-    /* left: 10px; */
-    width: 302px;
-    border: 1px solid #d9d9d9;
-    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
-    /* background: #eee; */
-    overflow: hidden;
-    z-index: 2;
-    border-radius: 5px;
-    }
-    
-.ctl_dvc li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
-.ctl_dvc li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
-.ctl_dvc li:hover {color: #0475f4;}
-.ctl_dvc li:last-child{margin-right:0;border-right:0;}
-.ctl_dvc li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
-.ctl_dvc li.on + li {border-left:none;} 
-.ctl_dvc li:first-child {border-left:none;}
 
 /* 신호 통계 탭관련 */
 .stat_sgn
@@ -1595,25 +1639,10 @@ ul.question li a:hover {font-weight:bold;}
 /* 탭관련 */
 .moni_img 
 {
-    position: relative;
-    /* top: 10px; */
-    /* left: 10px; */
     width: auto;
-    border: 1px solid #d9d9d9;
-    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
-    /* background: #eee; */
-    overflow: hidden;
-    z-index: 2;
     bottom: 5px;
-    border-radius: 5px;
     }
-.moni_img li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;}
-.moni_img li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
-.moni_img li:hover {color: #0475f4;}
-.moni_img li:last-child{margin-right:0;border-right:0;}
-.moni_img li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
-.moni_img li.on + li {border-left:none;} 
-.moni_img li:first-child {border-left:none;}
+
 .moni_img li .busimg
 {
 	background:url(/cm/images/tmap/bus_red.png) no-repeat;	
@@ -6407,5 +6436,3 @@ readers do not read off random characters that represent icons */
 .bit_tb {
 margin-right: 130px; margin-left: 130px; background-color: black;color: white;border-color: black;height: 200px;
 }
-
-

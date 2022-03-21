@@ -255,7 +255,7 @@
 		if(dlt_BMS_NODE_MST.getCellData(row, "STTN_FCLT_TYPE") == 'ST003'){
 			document.getElementById(STTN_IMG.getID()).className = "ST003_station";
 		}else{
-			document.getElementById(STTN_IMG.getID()).className = 'ST002_station';
+			document.getElementById(STTN_IMG.getID()).className = 'ST002_station_1';
 		}
 	};
 	

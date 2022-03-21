@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.tracom.bms.domain.SI0504.SI0504Mapper">
+
+<select id="SI0504G0R0" resultType="Map">
+	SELECT  ROUT_ID,
+			REP_ROUT_ID,
+			INT_ROUT_ID,
+			PUB_ROUT_ID,
+			REP_ROUT_NM,
+			ROUT_NM,
+			ROUT_TYPE,
+			ROUT_DIV,
+			DVC_NM,
+			RSV_ROUT_YN,
+			ST_STTN_ID,
+			ST_STTN_NM,
+			ST_STTN_ENM,
+			ED_STTN_ID,
+			ED_STTN_ENM,
+			ED_STTN_NM,
+			RET_STTN_ID,
+			RET_STTN_NM,
+			RET_STTN_ENM,
+			STTN_CNT,
+			ROUT_LEN,
+			ROUT_STRT_LEN,
+			CURVATURE,
+			JIT_DSPCH_YN,
+			LIC_VHC_CNT,
+			SPR_VHC_CNT,
+			DATE_FORMAT(APPL_ST_DT, '%Y%M%D') APPL_ST_DT,
+			DATE_FORMAT(APPL_ED_DT, '%Y%M%D') APPL_ED_DT,
+			WAY_DIV,
+			USER_WAY_DIV,
+			WAY_INFO,
+			AREA,
+			SHAPE_DIV,
+			HOLI_YN,
+			USE_YN,
+			REMARK
+			
+	FROM BMS_ROUT_MST
+	WHERE DEL_YN = 'N'
+	<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT)">
+		<if test="TYPE == 'ALL'">
+			AND ROUT_ID LIKE CONCAT('%',#{CONTENT},'%') || ROUT_NM LIKE CONCAT('%',#{CONTENT},'%') || REP_ROUT_NM LIKE CONCAT('%',#{CONTENT},'%') 
+		</if>
+		<if test="TYPE == 'ROUT_ID'">
+			AND ROUT_ID LIKE CONCAT('%',#{CONTENT},'%')
+		</if>
+		<if test="TYPE == 'ROUT_NM'">
+			AND ROUT_NM LIKE CONCAT('%',#{CONTENT},'%')
+		</if>
+		<if test="TYPE == 'REP_ROUT_NM'">
+			AND REP_ROUT_NM LIKE CONCAT('%',#{CONTENT},'%') 
+		</if>
+	</if>
+
+	ORDER BY REP_ROUT_NM, WAY_DIV
+</select>
+
+<select id="SI0504G0K0" resultType="Map">
+	SELECT CONCAT('RT', LPAD(NEXTVAL(SEQ_BMS_ROUT_MST_0), 8, '0')) AS 'SEQ'
+</select>
+
+<select id="SI0504SHI0" resultType="Map">
+	SELECT ROUT_ID, ROUT_NM, REP_ROUT_NM
+	FROM BMS_ROUT_MST
+	ORDER BY ROUT_ID
+</select>
+
+<insert id="SI0504G0I0" parameterType="Map">
+	INSERT INTO BMS_ROUT_MST(
+			ROUT_ID,
+			REP_ROUT_ID,
+			<if test = "@kr.tracom.util.CommonUtil@notEmpty(INT_ROUT_ID)">
+			INT_ROUT_ID,
+			</if>
+			<if test = "@kr.tracom.util.CommonUtil@notEmpty(PUB_ROUT_ID)">
+			PUB_ROUT_ID,
+			</if>
+			REP_ROUT_NM,
+			ROUT_NM,
+			ROUT_TYPE,
+			ROUT_DIV,
+			DVC_NM,
+			RSV_ROUT_YN,
+			ST_STTN_ID,
+			ST_STTN_NM,
+			ST_STTN_ENM,
+			ED_STTN_ID,
+			ED_STTN_ENM,
+			ED_STTN_NM,
+			RET_STTN_ID,
+			RET_STTN_NM,
+			RET_STTN_ENM,
+			STTN_CNT,
+			ROUT_LEN,
+			ROUT_STRT_LEN,
+			CURVATURE,
+			JIT_DSPCH_YN,
+			LIC_VHC_CNT,
+			SPR_VHC_CNT,
+			APPL_ST_DT,
+			APPL_ED_DT,
+			WAY_DIV,
+			USER_WAY_DIV,
+			WAY_INFO,
+			AREA,
+			SHAPE_DIV,
+			HOLI_YN,
+			USE_YN,
+			REMARK,
+			UPD_DTM,
+			UPD_ID
+			)
+	
+	VALUES		
+			(
+			#{ROUT_ID},
+			#{REP_ROUT_ID},
+			<if test = "@kr.tracom.util.CommonUtil@notEmpty(INT_ROUT_ID)">			
+			#{INT_ROUT_ID},
+			</if>
+			<if test = "@kr.tracom.util.CommonUtil@notEmpty(PUB_ROUT_ID)">
+			#{PUB_ROUT_ID},
+			</if>			
+			#{REP_ROUT_NM},
+			#{ROUT_NM},
+			#{ROUT_TYPE},
+			#{ROUT_DIV},
+			#{DVC_NM},
+			#{RSV_ROUT_YN},
+			#{ST_STTN_ID},
+			#{ST_STTN_NM},
+			#{ST_STTN_ENM},
+			#{ED_STTN_ID},
+			#{ED_STTN_ENM},
+			#{ED_STTN_NM},
+			#{RET_STTN_ID},
+			#{RET_STTN_NM},
+			#{RET_STTN_ENM},
+			#{STTN_CNT},
+			#{ROUT_LEN},
+			#{ROUT_STRT_LEN},
+			#{CURVATURE},
+			#{JIT_DSPCH_YN},
+			#{LIC_VHC_CNT},
+			#{SPR_VHC_CNT},
+			STR_TO_DATE(#{APPL_ST_DT}, '%Y%m%d'),
+			STR_TO_DATE(#{APPL_ED_DT}, '%Y%m%d'),
+			#{WAY_DIV},
+			#{USER_WAY_DIV},
+			#{WAY_INFO},
+			#{AREA},
+			#{SHAPE_DIV},
+			#{HOLI_YN},
+			#{USE_YN},
+			#{REMARK},
+			#{UPD_DTM},
+			#{SSN_USER_ID}
+			)				
+</insert>
+
+<update id="SI0504G0U0" parameterType="Map">
+	UPDATE BMS_ROUT_MST
+	SET 	ROUT_ID = #{ROUT_ID},
+			REP_ROUT_ID = #{REP_ROUT_ID},
+			<if test = "@kr.tracom.util.CommonUtil@notEmpty(INT_ROUT_ID)">
+			INT_ROUT_ID = #{INT_ROUT_ID},
+			</if>
+			<if test = "@kr.tracom.util.CommonUtil@notEmpty(PUB_ROUT_ID)">
+			PUB_ROUT_ID = #{PUB_ROUT_ID},
+			</if>
+			REP_ROUT_NM = #{REP_ROUT_NM},
+			ROUT_NM = #{ROUT_NM},
+			ROUT_TYPE = #{ROUT_TYPE},
+			ROUT_DIV = #{ROUT_DIV},
+			DVC_NM = #{DVC_NM},
+			RSV_ROUT_YN = #{RSV_ROUT_YN},
+			ST_STTN_ID = #{ST_STTN_ID},
+			ST_STTN_NM = #{ST_STTN_NM},
+			ST_STTN_ENM = #{ST_STTN_ENM},
+			ED_STTN_ID = #{ED_STTN_ID},
+			ED_STTN_ENM = #{ED_STTN_ENM},
+			ED_STTN_NM = #{ED_STTN_NM},
+			RET_STTN_ID = #{RET_STTN_ID},
+			RET_STTN_NM = #{RET_STTN_NM},
+			RET_STTN_ENM = #{RET_STTN_ENM},
+			STTN_CNT = #{STTN_CNT},
+			ROUT_LEN = #{ROUT_LEN},
+			ROUT_STRT_LEN = #{ROUT_STRT_LEN},
+			CURVATURE = #{CURVATURE},
+			JIT_DSPCH_YN = #{JIT_DSPCH_YN},
+			LIC_VHC_CNT = #{LIC_VHC_CNT},
+			SPR_VHC_CNT = #{SPR_VHC_CNT},
+			APPL_ST_DT = STR_TO_DATE(#{APPL_ST_DT}, '%Y%m%d'),
+			APPL_ED_DT = STR_TO_DATE(#{APPL_ED_DT}, '%Y%m%d'),
+			WAY_DIV = #{WAY_DIV},
+			USER_WAY_DIV = #{USER_WAY_DIV},
+			WAY_INFO = #{WAY_INFO},
+			AREA = #{AREA},
+			SHAPE_DIV = #{SHAPE_DIV},
+			HOLI_YN = #{HOLI_YN},
+			USE_YN = #{USE_YN},
+			REMARK = #{REMARK},
+			UPD_DTM = #{UPD_DTM},
+			UPD_ID  = #{SSN_USER_ID}
+	WHERE ROUT_ID = #{ROUT_ID}
+</update>
+
+<update id="SI0504G0U1" parameterType="Map">
+	UPDATE BMS_REP_ROUT_MST
+	SET 	ST_STTN_ID = #{ST_STTN_ID},
+			ED_STTN_ID = #{ED_STTN_ID},
+			UPD_DTM = #{UPD_DTM},
+			UPD_ID  = #{SSN_USER_ID}
+	WHERE REP_ROUT_ID = #{REP_ROUT_ID}
+</update>
+
+<delete id="SI0504G0D0" parameterType="Map">
+	UPDATE BMS_ROUT_MST
+	SET	DEL_YN = 'Y', USE_YN = 'N'
+	WHERE ROUT_ID = #{ROUT_ID};
+	
+	<!-- DELETE
+	FROM BMS_ROUT_MST
+	WHERE ROUT_ID = #{ROUT_ID}; -->
+	
+	DELETE
+	FROM BMS_ROUT_COMP_CMPSTN
+	WHERE ROUT_ID = #{ROUT_ID};
+</delete>
+
+<select id="SI0504G1R0" resultType="Map">
+ 	SELECT A.COMP_ID, A.AREA, A.COMP_NM, A.REMARK, B.ROUT_ID
+	FROM BMS_TRANSCOMP_MST A INNER JOIN BMS_ROUT_COMP_CMPSTN B ON A.COMP_ID=B.COMP_ID 
+	WHERE B.ROUT_ID = #{ROUT_ID}
+</select>
+
+<insert id="SI0504G1I0" parameterType="Map">
+	INSERT INTO BMS_ROUT_COMP_CMPSTN
+		   (ROUT_ID, COMP_ID)
+	VALUES (#{ROUT_ID}, #{COMP_ID})
+
+</insert>
+
+<delete id="SI0504G1D0" parameterType="Map">
+	DELETE FROM BMS_ROUT_COMP_CMPSTN
+	WHERE ROUT_ID = #{ROUT_ID} 
+	AND COMP_ID = #{COMP_ID}
+</delete>
+
+<select id="SI0504P0R0" resultType="Map">
+	SELECT COMP_ID, COMP_NM
+	FROM BMS_TRANSCOMP_MST
+		<where>
+			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
+				AND COMP_ID LIKE CONCAT('%',#{CONTENT},'%') || COMP_NM LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+			<if test="TYPE == 'COMP_ID'">
+				AND COMP_ID LIKE CONCAT('%',#{CONTENT},'%')
+			</if>
+			<if test="TYPE == 'COMP_NM'">
+				AND COMP_NM LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+		</where>
+</select>
+
+<select id="SI0504P1R0" resultType="Map">
+	SELECT REP_ROUT_ID, REP_ROUT_NM, ROUT_TYPE, WAY_YN, HOLI_YN, REMARK
+	FROM BMS_REP_ROUT_MST WHERE USE_YN = 'Y'
+	<if test="CONTENT != null and CONTENT != ''">
+		AND REP_ROUT_ID LIKE CONCAT('%',#{CONTENT},'%') || REP_ROUT_NM LIKE CONCAT('%',#{CONTENT},'%') 
+	</if>
+	<if test="TYPE == 'REP_ROUT_ID'">
+		AND REP_ROUT_ID LIKE CONCAT('%',#{CONTENT},'%')
+	</if>
+	<if test="TYPE == 'REP_ROUT_NM'">
+		AND REP_ROUT_NM LIKE CONCAT('%',#{CONTENT},'%') 
+	</if>
+</select>
+
+<select id="SI0504P1K0" resultType="Map">
+	SELECT CONCAT('RR', LPAD(NEXTVAL(SEQ_BMS_ROUT_MST_0), 8, '0')) AS 'SEQ'
+</select>
+
+<insert id="SI0504P1I0" parameterType="Map">
+	INSERT INTO BMS_REP_ROUT_MST
+			(
+			REP_ROUT_ID,
+			REP_ROUT_NM,
+			ROUT_TYPE,
+			WAY_YN,
+			HOLI_YN,
+			USE_YN,
+			REMARK,
+			UPD_DTM,
+			UPD_ID
+			)
+	
+	VALUES		
+			(
+			#{REP_ROUT_ID},
+			#{REP_ROUT_NM},
+			#{ROUT_TYPE},
+			#{WAY_YN},
+			#{HOLI_YN},
+			'Y',
+			#{REMARK},
+			#{UPD_DTM},
+			#{SSN_USER_ID}
+			)				
+</insert>
+
+<update id="SI0504P1U0" parameterType="Map">
+	UPDATE BMS_REP_ROUT_MST
+	SET 	REP_ROUT_NM = #{REP_ROUT_NM},
+			ROUT_TYPE = #{ROUT_TYPE},
+			WAY_YN = #{WAY_YN},
+			HOLI_YN = #{HOLI_YN},
+			USE_YN = 'Y',
+			REMARK = #{REMARK},
+			UPD_DTM = #{UPD_DTM},
+			UPD_ID  = #{SSN_USER_ID}
+	WHERE REP_ROUT_ID = #{REP_ROUT_ID}
+</update>
+
+<delete id="SI0504P1D0" parameterType="Map">
+	UPDATE BMS_REP_ROUT_MST
+	SET	DEL_YN = 'Y', USE_YN = 'N'
+	WHERE REP_ROUT_ID = #{REP_ROUT_ID}
+	<!-- DELETE
+	FROM BMS_REP_ROUT_MST
+	WHERE REP_ROUT_ID = #{REP_ROUT_ID} -->
+</delete>
+
+<select id="SI0504P2R0" resultType="Map">
+	SELECT STTN_ID, STTN_NM, STTN_ENM
+	FROM BMS_STTN_MST
+	WHERE DEL_YN!='Y'
+	<if test="CONTENT != null and CONTENT != ''">
+		AND STTN_ID LIKE CONCAT('%',#{CONTENT},'%') || STTN_NM LIKE CONCAT('%',#{CONTENT},'%') 
+	</if>
+	<if test="TYPE == 'STTN_ID'">
+		AND STTN_ID LIKE CONCAT('%',#{CONTENT},'%')
+	</if>
+	<if test="TYPE == 'STTN_NM'">
+		AND STTN_NM LIKE CONCAT('%',#{CONTENT},'%') 
+	</if>
+</select>
+
+</mapper>

@@ -65,6 +65,7 @@
         				<w2:column id="TRNS_ID" name="환승ID" dataType="text"></w2:column>
         				<w2:column id="TRNS_DIV" name="환승구분" dataType="text"></w2:column>
         				<w2:column id="TRNS_NM" name="환승명" dataType="text"></w2:column>
+        				<w2:column id="WALK_DIST" name="도보거리" dataType="text"></w2:column>
         				<w2:column id="GPS_X" name="GPS_X좌표" dataType="text"></w2:column>
         				<w2:column id="GPS_Y" name="GPS_Y좌표" dataType="text"></w2:column>
         				<w2:column id="TM_Y" name="TM_Y좌표" dataType="text"></w2:column>
@@ -344,6 +345,9 @@
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column8"
 										value="환승구분" blockSelect="false" displayMode="label">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column10"
+										value="도보거리(m)" blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column6"
 										value="경도" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -368,6 +372,9 @@
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="TRNS_DIV"
 										value="" blockSelect="false" displayMode="label" readOnly="false">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="WALK_DIST" value=""
+										blockSelect="false" displayMode="label" readOnly="false" textAlign="right" maxLength="4">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="GPS_X" value=""
 										blockSelect="false" displayMode="label" readOnly="false" textAlign="right">

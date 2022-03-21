@@ -288,15 +288,15 @@
 		com.executeSubmission(sub_VD0204SHI1);	
 		com.executeSubmission(sub_vhcItem);	
 		
-		$("#VD0204_TAB").attr("style", "width:200px; height:26px; margin-left: 10px; float:left");
+		//$("#VD0204_TAB").attr("style", "width:200px; height:26px; margin-left: 10px; float:left");
 		pgm_list2.hide();
 		VD0204_ul.hide();
 		
 		//탭 목록 클릭 이벤트
-		$(".ctl_dvc").find("li").click( function() {
+		$("#VD0204_TAB").find("li").click( function() {
 			var li_id = this.id;
-			$(".ctl_dvc").find("li").removeClass("on");
-			$(".ctl_dvc").find("#"+li_id).addClass("on");
+			$("#VD0204_TAB").find("li").removeClass("on");
+			$("#VD0204_TAB").find("#"+li_id).addClass("on");
 			
 			if(li_id == "li_OBE") {
 				$("#mf_tac_layout_contents_MN00050204_body_wfm_mainBtn_btn_main_generator_1_btn_main").css("display", "");
@@ -507,13 +507,13 @@
 			
 			//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
 			if(chkLen > 1 ){
-				pgm_content2.hide();
+				pgm_sub_list.hide();
 				VD0204_ul.show("");
 				
 				//VD0204G1.setDisabled("grid", true);
 				//VD0204F0.setDisabled(true);
 			}else if(chkLen < 2){
-				pgm_content2.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
+				pgm_sub_list.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
 				VD0204_ul.hide();
 				
 				//VD0204G1.setDisabled("grid", false);
@@ -530,14 +530,14 @@
 			var chkLen = chkCount.length;
 			
 			//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
-			pgm_content2.hide();
+			pgm_sub_list.hide();
 			VD0204_ul.show("");
 				
 			//VD0204G1.setDisabled("grid", true);
 			//VD0204F0.setDisabled(true);
 			/*
 			else if(chkLen < 2){
-				pgm_content2.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
+				pgm_sub_list.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
 				VD0204_ul.hide();
 				
 				//VD0204G1.setDisabled("grid", false);
@@ -571,10 +571,10 @@
 			var equalChk = allEqual(chk);
 			
 			if(equalChk == true){
-				pgm_content2.hide();
+				pgm_sub_list.hide();
 				VD0204_ul.show("");
 			}else{
-				pgm_content2.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
+				pgm_sub_list.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
 				VD0204_ul.hide();
 			}
 		}
@@ -734,18 +734,24 @@
 				</xf:group>
 			</xf:group><!-- pgm_header -->
 			
-			<xf:group id="pgm_content" class="pgm_content grdc_a" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_20_2_1f_20_1f" style="">
+			<xf:group id="pgm_content" class="pgm_content grdr_20_a" style="">
+				<xf:group id="" class="tab_div" style="">
+					<ul id="VD0204_TAB" class="tab_ul" style="width:200px">
+						<li id="li_OBE" class="on">OBE</li>
+						<li id="li_tagless" class="">태그리스</li>
+					</ul>
+				</xf:group>
+				<xf:group id="pgm_list" class="pgm_list grdr_20_2_1f_20_1f" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="차내장치 파라미터 상태" style=""></w2:textbox>
 						</xf:group>
 						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<ul id="VD0204_TAB" class="ctl_dvc" style="">
+					<!-- <ul id="VD0204_TAB" class="ctl_dvc" style="">
 						<li id="li_OBE" class="on">OBE</li>
 						<li id="li_tagless" class="">태그리스</li>
-					</ul>
+					</ul> -->
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">
 						<w2:gridView autoFit="allColumn" class="cm_grid left" dataList="data:dlt_BMS_DVC_COND_PARAM_INFO"
@@ -780,8 +786,8 @@
 					</xf:group>
 					<xf:group id="" class="horizontal_line"></xf:group>
 
-					<xf:group style="" id="pgm_content2" class="pgm_content grdc_65f_25_35f">
-						<xf:group id="" class="pgm_list grdr_20_2_a" style="">
+					<xf:group style="" id="pgm_sub_list" class="pgm_list grdc_65f_25_35f">
+						<xf:group id="" class="grdr_20_2_a" style="">
 							<xf:group id="" class="gr_sub_header" style="">
 								<xf:group class="defaultbox" id="" style="">
 									<w2:textbox class="df_tt fl" id="" label="프로세스" style=""></w2:textbox>
@@ -898,7 +904,7 @@
 									</xf:group>
 									<xf:group tagname="td" style="" class="w2tb_td" id="T_PK016">
 										<xf:select selectedindex="-1" id="" appearance="full"
-											style="height: 21px;margin-left: 10px;" cols="" rows="" ref="">
+											style="margin-left: 10px;" cols="" rows="" ref="">
 											<xf:choices>
 												<xf:item>
 													<xf:label><![CDATA[여부]]></xf:label>
@@ -914,7 +920,7 @@
 										</w2:attributes>
 									</xf:group>
 									<xf:group tagname="td" style="" class="w2tb_td" id="T_PK017">
-										<xf:input adjustMaxLength="false" id="input2" style="height: 21px;" type="number"></xf:input>
+										<xf:input adjustMaxLength="false" id="input2" style="" type="number"></xf:input>
 									</xf:group>
 								</xf:group>
 								<xf:group tagname="tr" style="">
@@ -926,7 +932,7 @@
 									</xf:group>
 									<xf:group tagname="td" style="" class="w2tb_td" id="T_PK011">
 										<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-											disabledClass="w2selectbox_disabled" id="selectbox1" style="height: 21px;" submenuSize="auto" ref="" chooseOptionLabel="">
+											disabledClass="w2selectbox_disabled" id="selectbox1" style="" submenuSize="auto" ref="" chooseOptionLabel="">
 											<xf:choices>
 												<xf:item>
 													<xf:label><![CDATA[string]]></xf:label>
@@ -942,7 +948,7 @@
 										</w2:attributes>
 									</xf:group>
 									<xf:group tagname="td" style="" class="w2tb_td" id="T_PK005">
-										<xf:input adjustMaxLength="false" id="LCD_LUM" style="height: 21px;" type="number"></xf:input>
+										<xf:input adjustMaxLength="false" id="LCD_LUM" style="" type="number"></xf:input>
 									</xf:group>
 								</xf:group>
 								<xf:group tagname="tr" style="">
@@ -954,7 +960,7 @@
 									</xf:group>
 									<xf:group tagname="td" class="w2tb_td" id="T_PK004">
 										<w2:attributes></w2:attributes>
-										<xf:input adjustMaxLength="false" id="input1" style="height: 21px;" type="number"></xf:input>
+										<xf:input adjustMaxLength="false" id="input1" style="" type="number"></xf:input>
 									</xf:group>
 									<xf:group tagname="th" class="w2tb_th" style="height: 10px;"><w2:attributes>
 											<w2:scope>row</w2:scope>
@@ -987,17 +993,13 @@
 					
 				</xf:group><!-- pgm_list end -->
 
-				<xf:group id="pgm_list2" class="pgm_list2 grdr_20_35_2_a" style="">
+				<xf:group id="pgm_list2" class="pgm_list grdr_20_2_a" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="차내장치 파라미터 상태" style=""></w2:textbox>
 						</xf:group>
 						<!--  <w2:wframe id="wfm_subBtn3" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>-->
 					</xf:group>
-					<ul id="VD0204_TAB2" class="ctl_dvc" style="">
-						<li id="li_OBE" class="on">OBE</li>
-						<li id="li_tagless" class="">태그리스</li>
-					</ul>
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">
 						<w2:gridView autoFit="allColumn" class="cm_grid left" dataList="data:dlt_BMS_DVC_TAG_COND_PARAM_INFO"

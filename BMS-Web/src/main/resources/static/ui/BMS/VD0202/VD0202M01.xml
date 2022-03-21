@@ -332,7 +332,7 @@
 				//파라미터 이후
 				VD0202G1.setCellClass(i, "PK001", "hideData");
 			}
-
+			
 			var dvc_kind = dlt_BMS_DVC_INFO.getCellData(i, "DVC_KIND");
 			var dvc_cond = dlt_BMS_DVC_INFO.getCellData(i, "DVC_COND");
 			switch (dvc_kind){
@@ -529,7 +529,6 @@
 				VD0202G1.setCellClass(i, "DVC_CTR", "hideData");
 				VD0202G1.setCellClass(i, "PK001", "hideData");
 			}
-
 			var dvc_kind = dlt_BMS_DVC_INFO.getCellData(i, "DVC_KIND");
 			var dvc_cond = dlt_BMS_DVC_INFO.getCellData(i, "DVC_COND");
 			switch (dvc_kind){

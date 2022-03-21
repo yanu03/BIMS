@@ -4407,12 +4407,15 @@ var autoOptions = {
 com.setMainBtn2(wfm_mainBtn, btnCom.TYPE.SINGLE_GRID, autoOptions, userOptions);
 */
 com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
+	
 	var programAuthority = gcm.CUR_PROGRAM_AUTH;
 	com.enableDisp(autoOpt);
 	
 	com.initGridInfo(autoOpt); //그리드 항목명 저장
 	
 	if(programAuthority.AUTH_CHECK != 'Y')return;
+	
+	wfm_mainBtn.getWindow().btn_main_generator.removeAll();
 	
 	for(var i in gcm.BTN){
 		try {
@@ -5097,7 +5100,7 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
 	return gcm.BTN;
 };
 
-com.updateMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
+/*com.updateMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
 	var programAuthority = gcm.CUR_PROGRAM_AUTH;
 	com.enableDisp(autoOpt);
 	
@@ -5106,6 +5109,7 @@ com.updateMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
 	if(programAuthority.AUTH_CHECK != 'Y')return;
 	
 	var tmpParentIdx = 0;
+	
 	for(var i in gcm.BTN){
 		try {
 			var item = gcm.BTN[i];
@@ -5149,6 +5153,7 @@ com.updateMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
 					var str = item.str;
 					mainBtn.setValue(str);
 					mainBtn.addClass(item.class);
+					mainBtn.bind("onclick", null);
 					
 					var main = autoOpt.Main;
 				
@@ -5190,11 +5195,13 @@ com.updateMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
 						}
 						else if(i==gcm.BTN.EXL.nm){
 							item.cbFnc = function(){
+								
 								com.exlGrid(main.grid);
 							}
 						}
 						else if(i==gcm.BTN.EXL_F.nm){
 							item.cbFnc = function(){
+								
 								com.exlFrmGrid(main.grid);
 							}
 						}
@@ -5784,7 +5791,7 @@ com.updateMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
 		}
 	}
 	return gcm.BTN;
-};
+};*/
 
 /**권한에 따른 메인 버튼 생성
  * 
@@ -6376,13 +6383,17 @@ com.saveData = function(grid,form,saveSbmObj){
 }
 
 com.setExlUpdate = function(grid, val){
-	if(com.isEmpty(gcm.GRID_INFO[grid.org_id])==false)
-		gcm.GRID_INFO[grid.org_id].exlUpdate = val;
+	if(com.isEmpty(gcm.GRID_INFO[grid.org_id])==false && com.isEmpty(gcm.GRID_INFO[grid.org_id].search_map)==false){
+		//gcm.GRID_INFO[grid.org_id].exlUpdate = val;
+		gcm.GRID_INFO[grid.org_id].search_map.set("EXL_UPDATE", val);
+	}
 }
 
 com.getExlUpdate = function(grid){
-	if(com.isEmpty(gcm.GRID_INFO[grid.org_id])==false)
-		return gcm.GRID_INFO[grid.org_id].exlUpdate;
+	if(com.isEmpty(gcm.GRID_INFO[grid.org_id])==false && com.isEmpty(gcm.GRID_INFO[grid.org_id].search_map)==false){
+		//return gcm.GRID_INFO[grid.org_id].exlUpdate;
+		gcm.GRID_INFO[grid.org_id].search_map.get("EXL_UPDATE");
+	}
 	else return false;
 }
 
@@ -6791,8 +6802,10 @@ com.delUndoGrid = function(grid){
  * @param {fnc} cnlGridCb 초기화 이후에 호출되는 callback 함수
  */
 com.clearGrid = function(grid, cnlGridCb){
-	if(com.isEmpty(gcm.GRID_INFO[grid.org_id])==false)
-		gcm.GRID_INFO[grid.org_id].exlUpdate = false; //엑셀 업데이트도 초기화
+	if(com.isEmpty(gcm.GRID_INFO[grid.org_id])==false){
+		//gcm.GRID_INFO[grid.org_id].exlUpdate = false; //엑셀 업데이트도 초기화
+		com.setExlUpdate(grid,false);
+	}
 	
 	if(com.isEmpty(gcm.GRID_INFO[grid.org_id])==false && com.isEmpty(gcm.GRID_INFO[grid.org_id].undo)==false
 			 && gcm.GRID_INFO[grid.org_id].undo == false)return;
@@ -7478,7 +7491,7 @@ com.exlFrmGrid = function(grid){
 	
 	var options = {};
 	options.fileName = gridInfo.name + "_양식";
-	options.path = top.window.location.href + "exl/"+grid.org_id +".xls";
+	options.path = top.window.location.href + "exl/"+grid.org_id +".xlsx";
 	//options.dataProvider = "com.inswave.template.provider.ExcelDownHeader";
 	var infoArr = {};
 	
@@ -7713,6 +7726,9 @@ com.initGridInfo = function(options){
 				if ((typeof main.undo !== "undefined") && (main.undo!==null)){
 					gridInfo.undo = main.undo;
 				}
+				if ((typeof main.search_map !== "undefined") && (main.search_map!==null)){
+					gridInfo.search_map = main.search_map;
+				}				
 				
 				gcm.GRID_INFO[main.grid.org_id] = gridInfo;	
 			}
@@ -7732,6 +7748,10 @@ com.initGridInfo = function(options){
 				if ((typeof sub1.undo !== "undefined") && (sub1.undo!==null)){
 					gridInfo.undo = sub1.undo;
 				}
+				if ((typeof sub1.search_map !== "undefined") && (sub1.search_map!==null)){
+					gridInfo.search_map = sub1.search_map;
+				}
+				
 				gcm.GRID_INFO[sub1.grid.org_id] = gridInfo;	
 			}
 			if ((typeof options.Sub2 !== "undefined") && (options.Sub2!==null)){ //서브 그리드1 세팅
@@ -7750,6 +7770,10 @@ com.initGridInfo = function(options){
 				if ((typeof sub2.undo !== "undefined") && (sub2.undo!==null)){
 					gridInfo.undo = sub2.undo;
 				}
+				if ((typeof sub2.search_map !== "undefined") && (sub2.search_map!==null)){
+					gridInfo.search_map = sub2.search_map;
+				}
+				
 				gcm.GRID_INFO[sub2.grid.org_id] = gridInfo;	
 			}
 		}	
@@ -8500,5 +8524,46 @@ com.gridMove = function(grid,searchColumn, content, index){
 				}
 			}
 		}
+	}
+}
+
+/** 
+ * 
+ * @date 2022.03.11
+ * @memberOf com
+ * @author tracom
+ * @param {Object} grid 대상 그리드
+ * @param {Object} saveSbmObj 저장 submission 객체
+ * @param {String} str 저장 동작시 확인여부 문구
+ */
+com.checkGridSave = function(grid,saveSbmObj,str){
+	
+	if(	(typeof saveSbmObj !== "undefined")&&(saveSbmObj !== null)){
+		var idx = grid.getModifiedIndex().length;
+		
+		//저장하지 않고 조회할 경우
+		if(idx > 0) {
+			if(	(typeof str == "undefined") || (str.trim() == "")){
+				str = com.strModifiedCnt(grid) + "의 저장하지 않은 데이터가 있습니다. 저장 후 조회 하시겠습니까?";
+			}
+			else {
+				str = idx + str;
+			}
+			com.confirm(str, function(rtn){
+				if (rtn) {
+					com.saveData(grid, saveSbmObj)
+				}
+				else {
+					com.clearGrid(grid);
+				}
+				return;
+			});
+		} 
+		else {
+			com.clearGrid(grid);
+		}
+	}
+	else {
+		//com.clearGrid(grid);
 	}
 }
