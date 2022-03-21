@@ -217,6 +217,32 @@ a:hover,a:active,a:focus{text-decoration:none}
 .cond_abnormal > .w2grid_select {color: #fff !important;}
 .cond_normal {background: #ddedff;}
 .cond_neutrality {background:#fffccb;}
+
+/* 안보이는 color */
+/* .color_div3 {color : #ff6a00 !important;} */
+/* .color_div3 {color : #ffd500 !important;} */
+/* .color_div2 {color : #001b64 !important;} */
+/* .color_div3 {color : #000000 !important;} */
+.color_div1 {color : #fd04af !important;}
+.color_div2 {color : #ff0000 !important;}
+.color_div3 {color : #00b952 !important;}
+.color_div4 {color : #0075c9 !important;}
+.color_div5 {color : #752ea9 !important;}
+.color_div7 {color : #a06a32 !important;}
+.color_div8 {color : #33333 !important;}
+.color_div9 {color : #33333 !important;}
+.color_div10 {color : #33333 !important;}
+.color_div11 {color : #33333 !important;}
+.color_div12 {color : #33333 !important;}
+.color_div13 {color : #33333 !important;}
+.color_div14 {color : #33333 !important;}
+.color_div15 {color : #33333 !important;}
+.color_div16 {color : #33333 !important;}
+.color_div17 {color : #33333 !important;}
+.color_div18 {color : #33333 !important;}
+.color_div19 {color : #33333 !important;}
+.color_div20 {color : #33333 !important;}
+
 .cm_gridbox{position:relative;padding:0;margin:0;}
 .cm_grid{
 		 /* border-top:2px solid rgba(0,61,124,1); */
