@@ -469,9 +469,6 @@
 									<!-- <w2:column removeBorderStyle="false" userData1="M" width="" inputType="text" style="height:20px" id="PLAY_DATE" value=""
 										blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.playDateDisFormatter">
 									</w2:column> -->
-									<!-- <w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="PLAY_DATE" value=""
-										blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.playDateDisFormatter">
-									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="KR_TTS" value=""
 										blockSelect="false" displayMode="label" readOnly="true" displayFormatter="" userData1="M" textAlign="left">
 									</w2:column>
