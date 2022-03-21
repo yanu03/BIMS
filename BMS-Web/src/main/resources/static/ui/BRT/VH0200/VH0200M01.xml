@@ -521,8 +521,8 @@
 		
 		+'<w2:footer style="" id="footer2">'
 		+'<w2:row style="" id="row4">'
-		+'<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;"'
-		+'id="column53" value="" blockSelect="false" displayMode="label" colSpan="15" rowSpan=""'
+		+'<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;" '
+		+'id="column55" value="" blockSelect="false" displayMode="label" colSpan="100" rowSpan="" '
 		+'expression="&quot;데이터 개수 : &quot; + COUNT(&apos;COMP_ID&apos;)" textAlign="left">'
 		+'</w2:column>'
 		+'</w2:row>'
@@ -535,6 +535,7 @@
 		VH0200G1.setFixedColumn(1);
 
 		dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.modifyAllStatus("R");
+		VH0200G1.setRowColor(firstIndex, 'red');
 		VH0200G1.setFocusedCell(firstIndex, "OPER_SN", false);
 	};
        
@@ -925,6 +926,14 @@
 									</w2:column>
 								</w2:row>
 							</w2:gBody>
+							<w2:footer style="" id="footer2">
+								<w2:row style="" id="row4">
+									<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;"
+										id="column42" value="" blockSelect="false" displayMode="label" colSpan="15" rowSpan=""
+										expression="&quot;데이터 개수 : &quot; + COUNT(&apos;COMP_ID&apos;)" textAlign="left">
+									</w2:column>
+								</w2:row>
+							</w2:footer>
 						</w2:gridView>
 					</xf:group>
 				<!--  	<xf:group id="" class="horizontal_line"></xf:group>

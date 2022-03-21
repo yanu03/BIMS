@@ -84,7 +84,7 @@
 			</xf:submission>
 			<xf:submission id="sub_PI0201G0S0" ref='data:json,["dlt_BMS_VOC_INFO","dma_AUDIO_INFO"]' target="" action="/pi/PI0201G0S0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				processMsg="저장중입니다..." ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI0201SHI0" ref="" target="data:json,dlt_searchitem" action="/pi/PI0201SHI0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
@@ -307,6 +307,8 @@
 		if (playeddt < playstdt && playeddt != ""){
 			com.messagBox("alert", "지정할 수 없는 날짜입니다.",scwin.checkClosest(info));
 		}
+		
+		
 	};
 	
 	scwin.checkClosest = function(info) {
@@ -324,7 +326,13 @@
 		if (playeddt < playstdt){
 			com.messagBox("alert", "지정할 수 없는 날짜입니다.",scwin.checkCloseed(info));
 		}
+		
+		playstdt = playstdt.substring(0, 4) + "-" + playstdt.substring(4, 6) + "-" + playstdt.substring(6)
+		playeddt = playeddt.substring(0, 4) + "-" + playeddt.substring(4, 6) + "-" + playeddt.substring(6)
+		
+		dlt_BMS_VOC_INFO.setCellData(PI0201G0.getFocusedRowIndex(), 'PLAY_DATE', playstdt + ' ~ ' + playeddt);
 	};
+	
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -456,7 +464,7 @@
 										displayMode="label" readOnly="true">
 									</w2:column>
 									<w2:column removeBorderStyle="false" userData1="M" width="" inputType="text" style="height:20px" id="PLAY_DATE" value=""
-										blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.playDateDisFormatter">
+										blockSelect="false" displayMode="label" readOnly="true" displayFormatter="">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="KR_TTS" value=""
 										blockSelect="false" displayMode="label" readOnly="true" displayFormatter="" userData1="M" textAlign="left">
@@ -490,7 +498,7 @@
 							<w2:footer style="" id="footer1">
 								<w2:row style="" id="row3">
 									<w2:column removeBorderStyle="false" width="" inputType="expression" style="height:20px;" id="column48" value=""
-										blockSelect="false" displayMode="label" colSpan="13" rowSpan="" expression="&quot;데이터 개수 : &quot; + COUNT('GRG_ID')"
+										blockSelect="false" displayMode="label" colSpan="30" rowSpan="" expression="&quot;데이터 개수 : &quot; + COUNT('GRG_ID')"
 										textAlign="left">
 									</w2:column>
 								</w2:row>

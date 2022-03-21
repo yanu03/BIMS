@@ -102,7 +102,7 @@ ORDER BY
 </select>
 
 <select id="VH0200G1R0" resultType="Map" parameterType="Map">
-SELECT 
+<!-- SELECT 
 	A.REP_ROUT_ID 
 	,DATE_FORMAT(A.OCR_DTM, '%Y-%m-%d') OCR_DTM 
 	,DATE_FORMAT(A.OPER_DT, '%Y-%m-%d') OPER_DT 
@@ -136,9 +136,9 @@ WHERE
 	AND A.ALLOC_NO = #{ALLOC_NO} 
 	AND (A.NODE_TYPE = 'NT001'||A.NODE_TYPE = 'NT002')
 ORDER BY 
-	A.OCR_DTM, A.NODE_SN
+	A.OCR_DTM, A.NODE_SN -->
 
- <!-- SELECT 
+SELECT 
 	A.REP_ROUT_ID 
 	,A.OPER_SN 
 	,A.NODE_ID 
@@ -173,7 +173,7 @@ WHERE
 		AND A.OPER_SN = #{OPER_SN}
 	</if>
 GROUP BY OPER_SN, NODE_SN
-ORDER BY OPER_SN, NODE_SN  -->
+ORDER BY OPER_SN, NODE_SN
 	
 	
 <!--  SELECT 
