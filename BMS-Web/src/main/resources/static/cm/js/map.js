@@ -2567,7 +2567,7 @@ routMap.showMarker = function(mapId, data, idx, focusIdx, grid) {
  * @param mapId : 대상 map id
  * @param list : data list
  */
-routMap.showMarkerNoGrid= function(mapId, data) {
+routMap.showMarkerNoGrid = function(mapId, data) {
 	// 마커 이미지의 이미지 크기 입니다
 	var imageSize = new kakao.maps.Size(19, 28); 
 	var markerImage = null;

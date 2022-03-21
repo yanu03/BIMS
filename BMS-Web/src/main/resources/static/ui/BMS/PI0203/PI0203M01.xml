@@ -279,6 +279,11 @@
 		if (playstdt > playeddt){
 			com.messagBox("alert", "지정할 수 없는 날짜입니다.", scwin.checkCloseINST(info));
 		}
+		
+		playstdt = playstdt.substring(0, 4) + "-" + playstdt.substring(4, 6) + "-" + playstdt.substring(6)
+		playeddt = playeddt.substring(0, 4) + "-" + playeddt.substring(4, 6) + "-" + playeddt.substring(6)
+		
+		dlt_BMS_VOC_INFO.setCellData(PI0203G0.getFocusedRowIndex(), 'PLAY_DATE', playstdt + ' ~ ' + playeddt);		
 	};
 	
 	scwin.checkCloseBUY = function(info) {
