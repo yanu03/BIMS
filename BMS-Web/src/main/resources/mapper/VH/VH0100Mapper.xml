@@ -5,6 +5,7 @@
 <select id="VH0100G0R0" parameterType="Map" resultType="Map">
 	SELECT
 		DATE_FORMAT(A.SEND_DATE, '%Y-%m-%d %H:%i:%s') SEND_DATE
+		,A.REP_ROUT_ID
 		,A.VHC_NO
 		,A.VHC_ID
 		,A.SEND_GPS_X AS GPS_X
@@ -32,11 +33,15 @@
 		,B.NODE_NM
 		,C.ROUT_NM
 		,D.LINK_NM
+		,E.REP_ROUT_NM
+		,F.DRV_NM
 	FROM
 		BRT_DSPTCH_LOG A
 		LEFT JOIN BMS_NODE_MST B ON A.NODE_ID = B.NODE_ID
 		LEFT JOIN BMS_ROUT_MST C ON A.ROUT_ID = C.ROUT_ID
 		LEFT JOIN BMS_LINK_MST D ON A.LINK_ID = D.LINK_ID
+		LEFT JOIN BMS_REP_ROUT_MST E ON A.REP_ROUT_ID = E.REP_ROUT_ID
+		LEFT JOIN BMS_DRV_MST F ON A.DRV_ID = F.DRV_ID
 	<where>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT1)">
 				A.REP_ROUT_ID = #{CONTENT1}
@@ -54,7 +59,10 @@
 			<![CDATA[AND DATE_FORMAT(A.SEND_DATE, '%Y%m%d') <= #{L_DATE}]]>
 		</if>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
-			AND DATE_FORMAT(A.SEND_DATE, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+				AND DATE_FORMAT(A.SEND_DATE, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+		</if>			
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(DSPTCH_DIV)">
+				AND DSPTCH_DIV = #{DSPTCH_DIV}
 		</if>			
 	</where>
 	ORDER BY
