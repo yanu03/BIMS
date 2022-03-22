@@ -203,35 +203,61 @@
       com.changeDualGrid(SI0401G0, SI0401G1, sub_SI0401G1S0, sub_SI0401G1R0, focusOption, row, oldRow);
    };
    
-   //서브 그리드 추가 클릭 이벤트
+   //관련 운수사 그리드 추가 클릭 이벤트
    scwin.btn_add2_onclick = function() {
-   
-   		
-   	  var dspchYn = dlt_BMS_ROUT_MST.getCellData(SI0401G0.getFocusedRowIndex(), "JIT_DSPCH_YN")
-   	  if(dspchYn == 'JY001'  || dspchYn == ''){ //JY001-개별배차, JY002-공동배차
-   	  	com.alert("공동배차 선택 후 사용 가능합니다.");
-   	  }else if(dspchYn == 'JY002'){
-	      var focusRowIdx = scwin.idxRow;
-	      if (focusRowIdx == -1) {
-	         com.alert("노선 목록 선택후 관련 운수사를 등록하실 수 있습니다.");
-	      } else {
-	         var rowStatus = SI0401G0.getRowStatus(focusRowIdx);
-	         if (rowStatus == "C") {
-	            com.alert("노선 등록 후에 사용 가능합니다.");
-	         } else {
-	            var val_COMP_ID = dlt_BMS_TRANSCOMP_MST.getColData("COMP_ID");
-	            dma_param_ROUTEID.set("COMP_IDS", val_COMP_ID);
-	            var param = dma_param_ROUTEID.get("ROUT_ID");
-	            if (param != "") {
-	               var data = { data : dma_param_ROUTEID.getJSON(), callbackFn : "scwin.insertSubGrid" };
-	               var options = { id : "SI0401P01",
-	                           popupName : "운수사 목록", 
-	                           modal : true};
-	               com.openPopup("/ui/BMS/SI0401/SI0401P01.xml", options, data);
-	            }
-	         }
-	      }      
-   	  }
+   	  	var dspchYn = dlt_BMS_ROUT_MST.getCellData(SI0401G0.getFocusedRowIndex(), "JIT_DSPCH_YN")
+	 	if(dspchYn == null || dspchYn == ''){
+   	 		com.alert("공동배차여부를 선택해주세요.");
+   	 	}
+   	 	else if(dspchYn == 'JY001'){
+   	 		var rowCnt = dlt_BMS_TRANSCOMP_MST.getRowCount();
+	   		if(rowCnt >= 1){
+	   			com.alert("해당 노선은 개별배차입니다.");
+	   		}else if(rowCnt == 0){
+	   			var focusRowIdx = scwin.idxRow;
+				if (focusRowIdx == -1) {
+				   com.alert("노선 목록 선택후 관련 운수사를 등록하실 수 있습니다.");
+				} else {
+				   var rowStatus = SI0401G0.getRowStatus(focusRowIdx);
+				   if (rowStatus == "C") {
+				      com.alert("노선 등록 후에 사용 가능합니다.");
+				   } else {
+				      var val_COMP_ID = dlt_BMS_TRANSCOMP_MST.getColData("COMP_ID");
+				      dma_param_ROUTEID.set("COMP_IDS", val_COMP_ID);
+				      var param = dma_param_ROUTEID.get("ROUT_ID");
+				      if (param != "") {
+				         var data = { data : dma_param_ROUTEID.getJSON(), callbackFn : "scwin.insertSubGrid" };
+				         var options = { id : "SI0401P01",
+				                     popupName : "운수사 목록", 
+				                     modal : true};
+				         com.openPopup("/ui/BMS/SI0401/SI0401P01.xml", options, data);
+				      }
+				   }
+				}
+	   		}
+   	 	}
+   	 	else if(dspchYn == 'JY002'){
+   	 		var focusRowIdx = scwin.idxRow;
+			if (focusRowIdx == -1) {
+			   com.alert("노선 목록 선택후 관련 운수사를 등록하실 수 있습니다.");
+			} else {
+			   var rowStatus = SI0401G0.getRowStatus(focusRowIdx);
+			   if (rowStatus == "C") {
+			      com.alert("노선 등록 후에 사용 가능합니다.");
+			   } else {
+			      var val_COMP_ID = dlt_BMS_TRANSCOMP_MST.getColData("COMP_ID");
+			      dma_param_ROUTEID.set("COMP_IDS", val_COMP_ID);
+			      var param = dma_param_ROUTEID.get("ROUT_ID");
+			      if (param != "") {
+			         var data = { data : dma_param_ROUTEID.getJSON(), callbackFn : "scwin.insertSubGrid" };
+			         var options = { id : "SI0401P01",
+			                     popupName : "운수사 목록", 
+			                     modal : true};
+			         com.openPopup("/ui/BMS/SI0401/SI0401P01.xml", options, data);
+			      }
+			   }
+			}
+   	 	}
    	  
    };
    

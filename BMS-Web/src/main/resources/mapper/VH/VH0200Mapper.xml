@@ -38,14 +38,14 @@ FROM
 			AND A.VHC_NO LIKE CONCAT('%', #{CONTENT3}, '%')
 	</if>
 	
-	<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
-		<![CDATA[AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') >= #{F_DATE}]]>
+	<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0200) and @kr.tracom.util.CommonUtil@empty(L_DATE_VH0200)">
+		<![CDATA[AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') >= #{F_DATE_VH0200}]]>
 	</if>
-	<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
-		<![CDATA[AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') <= #{L_DATE}]]>
+	<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0200) and @kr.tracom.util.CommonUtil@empty(F_DATE_VH0200)">
+		<![CDATA[AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') <= #{L_DATE_VH0200}]]>
 	</if>
-	<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
-		AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+	<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0200) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0200)">
+		AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') BETWEEN #{F_DATE_VH0200} AND #{L_DATE_VH0200}
 	</if>
 </where>
 GROUP BY
@@ -87,14 +87,14 @@ FROM
 				AND A.VHC_ID LIKE CONCAT('%', #{CONTENT3}, '%')
 		</if>
 		
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
-			<![CDATA[AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') >= #{F_DATE}]]>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0200) and @kr.tracom.util.CommonUtil@empty(L_DATE_VH0200)">
+			<![CDATA[AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') >= #{F_DATE_VH0200}]]>
 		</if>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
-			<![CDATA[AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') <= #{L_DATE}]]>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0200) and @kr.tracom.util.CommonUtil@empty(F_DATE_VH0200)">
+			<![CDATA[AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') <= #{L_DATE_VH0200}]]>
 		</if>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
-			AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0200) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0200)">
+			AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') BETWEEN #{F_DATE_VH0200} AND #{L_DATE_VH0200}
 		</if>
 		
 	</where>
@@ -223,6 +223,19 @@ FROM
 		AND A.OPER_SN = #{OPER_SN}
 	</if> -->
 	GROUP BY OPER_SN
+</select>
+
+<select id="VH0200G2CNT" resultType="Map" parameterType="Map">
+SELECT 
+	COUNT(DISTINCT OCR_DTM) AS CHG_CNT
+	,OPER_SN
+FROM 
+	BRT_CUR_CHG_OPER_DTL_INFO_HIS
+WHERE 
+	OPER_DT = #{OPER_DT}
+	AND ALLOC_NO = #{ALLOC_NO}
+GROUP BY 
+	OPER_SN
 </select>
 
 <select id="VH0200G2R0" resultType="Map" parameterType="Map">
