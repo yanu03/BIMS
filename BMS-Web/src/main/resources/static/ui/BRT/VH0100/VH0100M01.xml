@@ -83,6 +83,12 @@
 						<w2:column id="MORN_STD" name="집중모니터링기준" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_dsptchDivItem" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="DL_CD" name="상세코드" dataType="text"></w2:column>
+						<w2:column id="DL_CD_NM" name="상세코드명" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
 			<xf:submission id="sub_VH0100G0R0" ref='data:json,dma_search' target="data:json,dlt_BRT_DSPTCH_LOG" action="/vh/VH0100G0R0"
@@ -98,13 +104,17 @@
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_repRoutItem_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_routItem" ref="data:json,dma_search" target="data:json,dlt_routItem" action="/rout/selectRoutItem" method="post" mediatype="application/json"
-				encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
-				ev:submiterror="" abortTrigger="">
+			<xf:submission id="sub_routItem" ref="data:json,dma_search" target="data:json,dlt_routItem" action="/rout/selectRoutItem"
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_vhcItem" ref="" target="data:json,dlt_vhcItem" action="/vhc/selectVhcItem" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_dsptchDivItem" ref="" target="data:json,dlt_dsptchDivItem" action="/vh/selectDsptchDivItem" method="post" mediatype="application/json" encoding="UTF-8"
+				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
+				ev:submiterror="" abortTrigger="">
 			</xf:submission>
 		</xf:model>
 
@@ -114,9 +124,6 @@
 
 		<script type="text/javascript" lazy="false"><![CDATA[
 	scwin.onpageload = function() {
-		//색깔변경
-		//footer 정리
-		
 		 var autoOptions = {
 			Main : { grid : VH0100G0, srchSbm : sub_VH0100G0R0, keyColumn : "SEND_DATE", srchGrp : pgm_header, name : "Dispatch 전송 이력",
 						focusColumn : "SEND_DATE"}
@@ -144,10 +151,8 @@
 		var weekAgoDate = year+month+weekAgoDay;
 		var firstday = year+month+"01";	
 
-		dma_search.F_DATE = util.getCurrentDate2(-7);
-		F_DATE.setValue(weekAgoDate);
-		
-		dma_search.L_DATE = util.getCurrentDate2();
+		//F_DATE.setValue(weekAgoDate);
+		F_DATE.setValue(todaysDate);
 		L_DATE.setValue(todaysDate);
 		
 		var map = routMap.initMap2("map_VH0100", 
@@ -167,6 +172,7 @@
 		map.setLevel(7);
 		com.executeSubmission(sub_repRoutItem);
 		com.executeSubmission(sub_vhcItem);	
+		com.executeSubmission(sub_dsptchDivItem);	
 		
 	};	
 	
@@ -302,12 +308,14 @@
 	};
 	
 	scwin.getFooterDiv = function(data, dataType) {
+		var sum = 0;
 		var count01 = 0;
 		var count02 = 0;
 		var count03 = 0; 
 		var result = "";
 		
 		if (data.length > 0) {
+			sum = data.length;
 			for (var i=0; i<data.length; i++) {
 				if(data[i] == "DP001") {
 					count01++;
@@ -320,7 +328,7 @@
 				}					
 			}
 			
-			result = "일반 메시지 : " + count01 + "건, 운행중 디스패치 : " + count02 + "건, 정차중 디스패치 : " + count03 + "건";
+			result = "총계 : " + sum + "건, 일반 메시지 : " + count01 + "건, 운행중 디스패치 : " + count02 + "건, 정차중 디스패치 : " + count03 + "건";
 			return result;
 		}
 	};		
@@ -349,7 +357,7 @@
 							</xf:choices>
 						</xf:select1>
 					</xf:group>
-					<xf:group class="label" id="" style="">
+					<!-- <xf:group class="label" id="" style="">
 						<w2:span class="" id="" label="노선"></w2:span>
 					</xf:group>
 					<xf:group class="search" id="" style="">
@@ -363,7 +371,7 @@
 								</xf:itemset>
 							</xf:choices>
 						</xf:select1>
-					</xf:group>
+					</xf:group> -->
 					<xf:group class="label" id="" style="">
 						<w2:span class="" id="" label="차량번호" style=""></w2:span>
 					</xf:group>
@@ -387,20 +395,13 @@
 					<xf:group class="search" id="" style="width:">
 						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
 							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE2_onviewchange" id="" optionOrder="false"
-							ref="data:dma_search.DSPTCH_DIV" class="search_type_100" style="width: 125px;" submenuSize="auto" textAlign="center" chooseOptionLabel="-전체-">
+							ref="data:dma_search.DSPTCH_DIV" class="search_type_100" style="width: 125px;" submenuSize="auto" textAlign="center"
+							chooseOptionLabel="-전체-">
 							<xf:choices>
-								<xf:item>
-									<xf:label><![CDATA[일반 메시지]]></xf:label>
-									<xf:value><![CDATA[DP001]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[운행중 디스패치]]></xf:label>
-									<xf:value><![CDATA[DP002]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[정차중 디스패치]]></xf:label>
-									<xf:value><![CDATA[DP003]]></xf:value>
-								</xf:item>
+								<xf:itemset nodeset="data:dlt_dsptchDivItem">
+									<xf:label ref="DL_CD_NM"></xf:label>
+									<xf:value ref="DL_CD"></xf:value>
+								</xf:itemset>
 							</xf:choices>
 						</xf:select1>
 					</xf:group>									
@@ -418,7 +419,7 @@
 							calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange" placeholder="yyyymmdd">
 						</w2:inputCalendar>
 						<xf:group id="" style="margin-left: 10px;" class="radio">
-							<xf:select1 id="calendar_radio" ref="" selectedIndex="2" cols="" appearance="full"
+							<xf:select1 id="calendar_radio" ref="" selectedIndex="1" cols="" appearance="full"
 								style="margin-light: 10px;min-width: 200px;" rows="1" ev:onviewchange="scwin.calendar_radio_onviewchange">
 								<xf:choices>
 									<xf:item>
@@ -461,7 +462,7 @@
 							readOnly="true" keepDefaultColumnWidth="" oddEvenColorDisplay="" rowNumWidth="" summaryAuto="" excludeDeletedRows=""
 							useCtrlOnMultisort="" useFilterList="" useFilterListSync="" sortedIconPosition="" sortable="true" sortOrderReverse=""
 							showSortableUseFilter="" focusMode="row" rowNumStatusUniqueId="" rowNumStatusResize="" ev:onbeforecolumnmove="" userData1=""
-							preventMultisort="" showSortableImage="false" sortEvent="onclick">
+							preventMultisort="" showSortableImage="false" sortEvent="onclick" noResultMessage="기간내 이력 없음">
 							<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header2">
 								<w2:row style="" id="row3">
