@@ -217,32 +217,6 @@ a:hover,a:active,a:focus{text-decoration:none}
 .cond_abnormal > .w2grid_select {color: #fff !important;}
 .cond_normal {background: #ddedff;}
 .cond_neutrality {background:#fffccb;}
-
-/* 안보이는 color */
-/* .color_div3 {color : #ff6a00 !important;} */
-/* .color_div3 {color : #ffd500 !important;} */
-/* .color_div2 {color : #001b64 !important;} */
-/* .color_div3 {color : #000000 !important;} */
-.color_div1 {color : #fd04af !important;}
-.color_div2 {color : #ff0000 !important;}
-.color_div3 {color : #00b952 !important;}
-.color_div4 {color : #0075c9 !important;}
-.color_div5 {color : #752ea9 !important;}
-.color_div7 {color : #a06a32 !important;}
-.color_div8 {color : #33333 !important;}
-.color_div9 {color : #33333 !important;}
-.color_div10 {color : #33333 !important;}
-.color_div11 {color : #33333 !important;}
-.color_div12 {color : #33333 !important;}
-.color_div13 {color : #33333 !important;}
-.color_div14 {color : #33333 !important;}
-.color_div15 {color : #33333 !important;}
-.color_div16 {color : #33333 !important;}
-.color_div17 {color : #33333 !important;}
-.color_div18 {color : #33333 !important;}
-.color_div19 {color : #33333 !important;}
-.color_div20 {color : #33333 !important;}
-
 .cm_gridbox{position:relative;padding:0;margin:0;}
 .cm_grid{
 		 /* border-top:2px solid rgba(0,61,124,1); */
@@ -1454,98 +1428,6 @@ ul.question li a:hover {font-weight:bold;}
 {
     width: 301px;
 }
-
-/* 정류소/교차로 시간표 탭관련 */
-.sttnCrs_tab
-{
-    position: relative;
-    /* top: 10px; */
-    /* left: 10px; */
-    width: 302px;
-    border: 1px solid #d9d9d9;
-    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
-    /* background: #eee; */
-    overflow: hidden;
-    z-index: 2;
-    border-radius: 5px;
-    }
-    
-.sttnCrs_tab li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
-.sttnCrs_tab li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
-.sttnCrs_tab li:hover {color: #0475f4;}
-.sttnCrs_tab li:last-child{margin-right:0;border-right:0;}
-.sttnCrs_tab li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
-.sttnCrs_tab li.on + li {border-left:none;} 
-.sttnCrs_tab li:first-child {border-left:none;}
-
-/* 시설물 유지보수/장애발생 이력 탭관련 */
-.fclt_his
-{
-    position: relative;
-    /* top: 10px; */
-    /* left: 10px; */
-    width: 302px;
-    border: 1px solid #d9d9d9;
-    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
-    /* background: #eee; */
-    overflow: hidden;
-    z-index: 2;
-    border-radius: 5px;
-    }
-    
-.fclt_his li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
-.fclt_his li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
-.fclt_his li:hover {color: #0475f4;}
-.fclt_his li:last-child{margin-right:0;border-right:0;}
-.fclt_his li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
-.fclt_his li.on + li {border-left:none;} 
-.fclt_his li:first-child {border-left:none;}
-
-/* 차내장치 유지보수/장애발생 이력 탭관련 */
-.dvc_his
-{
-    position: relative;
-    /* top: 10px; */
-    /* left: 10px; */
-    width: 302px;
-    border: 1px solid #d9d9d9;
-    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
-    /* background: #eee; */
-    overflow: hidden;
-    z-index: 2;
-    border-radius: 5px;
-    }
-    
-.dvc_his li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
-.dvc_his li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
-.dvc_his li:hover {color: #0475f4;}
-.dvc_his li:last-child{margin-right:0;border-right:0;}
-.dvc_his li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
-.dvc_his li.on + li {border-left:none;} 
-.dvc_his li:first-child {border-left:none;}
-
-/* 교차로 탭관련 */
-.tab_crs
-{
-    position: relative;
-    /* top: 10px; */
-    /* left: 10px; */
-    width: 302px;
-    border: 1px solid #d9d9d9;
-    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
-    /* background: #eee; */
-    overflow: hidden;
-    z-index: 2;
-    border-radius: 5px;
-    }
-    
-.tab_crs li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
-.tab_crs li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
-.tab_crs li:hover {color: #0475f4;}
-.tab_crs li:last-child{margin-right:0;border-right:0;}
-.tab_crs li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
-.tab_crs li.on + li {border-left:none;} 
-.tab_crs li:first-child {border-left:none;}
 
 /* 코스 탭관련 */
 .tab_cos

@@ -1395,6 +1395,7 @@ com.getGridDispJsonData = function(grid) {
 	var retData = [];
 	for(var i = 0; i < rowData.length; i++) { //노선의 노드 순번을 그리드 순서대로 재 할당함.
 		if(data.getRowStatus(i)!="D"){
+			rowData[i].realIndex = i;
 			retData.push(rowData[i]);
 		}
 	}
@@ -1414,12 +1415,27 @@ com.getGridDispJsonData2 = function(data) {
 	var retData = [];
 	for(var i = 0; i < rowData.length; i++) { //노선의 노드 순번을 그리드 순서대로 재 할당함.
 		if(data.getRowStatus(i)!="D"){
+			rowData[i].realIndex = i;
 			retData.push(rowData[i]);
 		}
 	}
 	return retData;
 };
 
+/**
+ * 화면 인덱스 기준으로 실제 인덱스 얻기
+ *
+ * @date 2021.01.11
+ * @param {Object} grid 대상 grid
+ * @param {int} index 범위 index
+ * @memberOf com
+ * @author tracom
+ * @return {int} 삭제된 데이터 제외한 index
+ */
+com.getGridRealIndex = function(grid, index) {
+	var data = com.getGridDispJsonData(grid);
+	return data.getAllJSON()[index].realIndex;
+};
 
 /**
  * 특정 컴포넌트에 바인된 DataList나 DataMap의 컬럼 이름을 반환한다.
@@ -4712,12 +4728,13 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
 								}
 							}
 						}
-						else if(i==gcm.BTN.EXL.nm){
+						else if(i==gcm.BTN.EXL.nm){ 
+							
 							item.cbFnc = function(){
 								var sub = autoOpt.Sub1;
 								if ((typeof sub !== "undefined")&&(sub !== null)){
 									if ((typeof sub.exlGrid !== "undefined")&&(sub.exlGrid !== null)){
-										com.exlGrid(sub.exlGrid);
+										com.exlGrid(sub.exlGrid, sub.grid);
 									}
 									else {
 										com.exlGrid(sub.grid);
@@ -7431,9 +7448,15 @@ com.saveGridForm = function(grid,form,sbmObj,searchSbmObj,yesno_str,str){
  * @param {Object} grid 대상 그리드
  * @param {String} str 다운받을 파일이름
  */
-com.exlGrid = function(grid,str){
-	if(	(typeof str == "undefined") || (str.trim() == ""))
-		str = gcm.GRID_INFO[grid.org_id].name; //com.getParameter().menuNm;
+com.exlGrid = function(exlGrid,grid,str){
+	if(	(typeof str == "undefined") || (str.trim() == "")){
+		if(	typeof grid != "undefined"){
+			str = gcm.GRID_INFO[grid.org_id].name; //com.getParameter().menuNm;
+		}
+		else {
+			str = gcm.GRID_INFO[exlGrid.org_id].name; //com.getParameter().menuNm;
+		}
+	}
 
 	
 	var options = {
@@ -7442,7 +7465,7 @@ com.exlGrid = function(grid,str){
 	};
 
 	var infoArr = {};
-	com.gridDataDownLoad(grid,options, infoArr);
+	com.gridDataDownLoad(exlGrid,options, infoArr);
 }
 
 /**	 

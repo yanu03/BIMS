@@ -545,6 +545,8 @@
 						//dma_sub_search.set("EXL_UPDATE" , com.getExlUpdate(SI0402G1));
 						
 						com.saveData(SI0402G1,null,sub_SI0402G1S0);
+						
+						
 					}
 				});
 			}
@@ -597,7 +599,11 @@
 	
 	scwin.btn_sub_del = function() {
 		
-		com.delGrid(SI0402G1);
+		//com.delGrid(SI0402G1);
+		com.delGrid(SI0402G1,null, function() {
+				routMap.drawRoute("map_SI0402", SI0402G1, SI0402G1.getFocusedRowIndex(), false);
+			}
+		);		
 	};
 	
 	scwin.btn_sub_move = function() {
@@ -920,7 +926,7 @@
 						<xf:group id="" class="gr_sub_header" style="">
 							<xf:group class="gr_sub_search" id="" style="">
 								<xf:group class="label" id="" style="">
-									<w2:span class="" id="" label="검색 항목"></w2:span>
+									<w2:span class="" id="" label="찾기"></w2:span>
 								</xf:group>
 								<xf:group class="search" id="" style="">
 									<xf:input id="search_sub_input" class="search_input" ref="data:dma_sub_search.CONTENT" placeholder="노드ID 또는 노드명"></xf:input>

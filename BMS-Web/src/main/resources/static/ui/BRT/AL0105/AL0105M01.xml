@@ -355,7 +355,7 @@
 					<xf:group id="" class="gr_sub_header" style="">
 							<xf:group class="gr_sub_search" id="" style="">
 								<xf:group class="label" id="" style="">
-									<w2:span class="" id="" label="검색"></w2:span>
+									<w2:span class="" id="" label="찾기"></w2:span>
 								</xf:group>
 								<xf:group class="search" id="" style="">
 									<xf:input id="search_sub_input" class="search_input" style="width:auto;" ref="" placeholder="운전자ID 또는 운전자명"></xf:input>

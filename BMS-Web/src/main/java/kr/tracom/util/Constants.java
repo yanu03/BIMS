@@ -151,11 +151,11 @@ public class Constants {
     	public static final float STD_DEC = -2.5f; //기준감속(-2.5)
     	
     	
-    	public static final String DL_CD_MAX_SPEED_DEFAULT = "SS020";
-    	public static final String DL_CD_MAX_SPEED_LIMIT = "SS021";
+    	public static final String DL_CD_MAX_SPEED_DEFAULT = "SS020"; //BRT 제한속도(운행계획)
+    	public static final String DL_CD_MAX_SPEED_LIMIT = "SS021"; //BRT 최대 제한속도(운행계획)	
     	public static final String DL_CD_MIN_SPEED_LIMIT = "SS010"; //목표 표정속도
-    	public static final String DL_CD_LIMIT_DIFF_SEC = "SS022";
-    	public static final String DL_CD_MAX_DELAY_SEC = "SS023";
+    	public static final String DL_CD_LIMIT_DIFF_SEC = "SS022"; //종점 도착 시간 차(운행계획)	
+    	public static final String DL_CD_MAX_DELAY_SEC = "SS023"; //정류소 최대 추가 대기 시간(운행계획)	
     	public static final String DL_CD_STD_AAC = "SS024"; //기준가속
     	public static final String DL_CD_STD_DEC = "SS025"; //기준감속
 

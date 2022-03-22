@@ -60,7 +60,7 @@
 						<w2:column id="REP_ROUT_NM" name="대표노선명" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ROUT_NODE_CMPSTN" saveRemovedData="true">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ROUT_NODE_DISP_VW" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
 						<w2:column id="NODE_ID" name="노드ID" dataType="text"></w2:column>
@@ -98,8 +98,8 @@
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_VD0201SHI0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_VD0201G2R0" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_ROUT_NODE_CMPSTN"
-				action="/rout/selectNodeListByRout" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
+			<xf:submission id="sub_VD0201G2R0" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_ROUT_NODE_DISP_VW"
+				action="/rout/selectNodeDispListByRout" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
 				customHandler="" mode="asynchronous" processMsg="조회 중입니다.." ev:submit="" ev:submitdone="scwin.sub_VD0201G2R0_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -271,12 +271,12 @@
 	};
 	
 	scwin.sub_VD0201G2R0_submitdone = function(e) {
-		routMap.showRoute2("map_VD0201", dlt_BMS_ROUT_NODE_CMPSTN.getAllJSON(), -1);			
+		routMap.showRoute2("map_VD0201", dlt_BMS_ROUT_NODE_DISP_VW.getAllJSON(), -1);			
 		//routMap.drawRoute2("map_VD0201", dlt_BMS_ROUT_LINK_CMPSTN.getAllJSON());
 
 		routMap.showVehicle("map_VD0201", dlt_BRT_CUR_OPER_INFO.getAllJSON(),
 							 dlt_BRT_CUR_OPER_INFO.getCellData(VD0201G0.getFocusedRowIndex(), "VHC_ID"), VD0201G0);	
-		routMap.showCategory("map_VD0201", dlt_BMS_ROUT_NODE_CMPSTN.getAllJSON());					 
+		routMap.showCategory("map_VD0201", dlt_BMS_ROUT_NODE_DISP_VW.getAllJSON());					 
 	};
 	
 	//전원,리셋 버튼 클릭 이벤트

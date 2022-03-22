@@ -71,6 +71,8 @@ var RoutMAP = function(){
 	this.divDsptch = "";
 	this.isEvent = "off";
 	this.divEvent = "";
+	this.isOverLayHidden = false;
+	this.isFirst = true;
 }
 
 /**
@@ -87,6 +89,8 @@ routMap.initMap = function(mapId,options) {
 		disableDoubleClickZoom: true,
 		level : 5
 	};
+	
+	if(typeof options.level !== "undefined") mapOptions.level = options.level;
 	
     mapContainer.style.width = options.width;
     mapContainer.style.height = options.height; 
@@ -113,7 +117,7 @@ routMap.initMap = function(mapId,options) {
 	routMap.mapInfo[mapId].mockLinkMode=options.mockLinkMode;
 	routMap.mapInfo[mapId].isSound=options.isSound;
 	routMap.mapInfo[mapId].onMarkerClick=options.onMarkerClick;
-	
+	routMap.mapInfo[mapId].isOverLayHidden=options.isOverLayHidden;
 	
 	//routMap.initDisplay(mapId);
 
@@ -156,6 +160,7 @@ routMap.cronMap = function(mapId,options, map) {
 	routMap.mapInfo[mapId].linkMode=options.linkMode;
 	routMap.mapInfo[mapId].isSound=options.isSound;
 	routMap.mapInfo[mapId].onMarkerClick=options.onMarkerClick;
+	routMap.mapInfo[mapId].isOverLayHidden=options.isOverLayHidden;
 	
 	//routMap.initDisplay(mapId);
 
@@ -197,12 +202,17 @@ routMap.initMap2 = function(mapId,options) {
 	routMap.mapInfo[mapId].draggable=options.draggable;
 	routMap.mapInfo[mapId].linkMode=options.linkMode;
 	routMap.mapInfo[mapId].isSound=options.isSound;
+	routMap.mapInfo[mapId].isOverLayHidden=options.isOverLayHidden;
 	
 	//routMap.initDisplay(mapId);
 	
 	return map;
 } 
 
+routMap.destroy = function(mapId) {
+	if(com.isEmpty(routMap.mapInfo[mapId].map)==false)
+		routMap.mapInfo[mapId].map.destroy();
+}
 /**
  * 특정 위/경도 중심으로 맵 센터 이동
 
@@ -350,7 +360,7 @@ routMap.drawLine = function(mapId, first, last, color, eventKinds, clickEvent, r
 	var polyline = new kakao.maps.Polyline({
 		path: path,
 		strokeColor: color, // 라인 색상
-		strokeWeight: 7, // 라인 두께
+		strokeWeight: 5, // 라인 두께
 		strokeStyle:'solid',
 		strokeOpacity: 0.8
 	});
@@ -628,10 +638,13 @@ routMap.addMarkerInter = function(mapId, data, grid, idx, focusIdx, isOverLayHid
 				nodeId: data.NODE_ID,
 				index: data.index
 			});
+			//routMap.focusNode(mapId, grid,idx);
+			
 			routMap.mapInfo[mapId].isMove = false;
-			routMap.mapInfo[mapId].oldSelectedIndex = routMap.mapInfo[mapId].selectedIndex; 
-			routMap.mapInfo[mapId].selectedIndex = idx;
-			grid.setFocusedCell(idx,"NODE_ID");
+			/*routMap.mapInfo[mapId].oldSelectedIndex = routMap.mapInfo[mapId].selectedIndex; 
+			routMap.mapInfo[mapId].selectedIndex = idx;*/
+			
+			grid.setFocusedCell(data.realIndex,"NODE_ID");
 			return;
 		}
 		// 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
@@ -655,10 +668,12 @@ routMap.addMarkerInter = function(mapId, data, grid, idx, focusIdx, isOverLayHid
 		// 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
 		routMap.mapInfo[mapId].selectedMarker = marker;
 
+		//routMap.focusNode(mapId, grid,idx);
+		
 		marker.setZIndex(3);
 		routMap.mapInfo[mapId].isMove = false;
-		routMap.mapInfo[mapId].selectedIndex = idx;
-		grid.setFocusedCell(idx,"NODE_ID");
+		/*routMap.mapInfo[mapId].selectedIndex = idx;*/
+		grid.setFocusedCell(data.realIndex,"NODE_ID");
 	});
 	
 	kakao.maps.event.addListener(marker, 'dragstart', function() {
@@ -837,10 +852,12 @@ routMap.addSoundMarkerInter = function(mapId, data, grid, idx, focusIdx) {
 				nodeId: data.NODE_ID,
 				index: data.index
 			});
+			//routMap.focusNode(mapId, grid,idx);
+			
 			routMap.mapInfo[mapId].isMove = false;
-			routMap.mapInfo[mapId].oldSelectedIndex = routMap.mapInfo[mapId].selectedIndex;
-			routMap.mapInfo[mapId].selectedIndex = idx;
-			grid.setFocusedCell(idx,"NODE_ID");
+			/*routMap.mapInfo[mapId].oldSelectedIndex = routMap.mapInfo[mapId].selectedIndex;
+			routMap.mapInfo[mapId].selectedIndex = idx;*/
+			grid.setFocusedCell(data.realIndex,"NODE_ID");
 			return;
 		}
 		// 클릭된 마커가 없고, click 마커가 클릭된 마커가 아니면
@@ -865,9 +882,11 @@ routMap.addSoundMarkerInter = function(mapId, data, grid, idx, focusIdx) {
 		routMap.mapInfo[mapId].selectedMarker = marker;
 
 		marker.setZIndex(3);
+		//routMap.focusNode(mapId, grid,idx);
+		
 		routMap.mapInfo[mapId].isMove = false;
-		routMap.mapInfo[mapId].selectedIndex = idx;
-		grid.setFocusedCell(idx,"NODE_ID");
+		/*routMap.mapInfo[mapId].selectedIndex = idx;*/
+		grid.setFocusedCell(data.realIndex,"NODE_ID");
 	});
 	
 	if(data.NODE_TYPE == routMap.NODE_TYPE.SOUND){
@@ -1104,9 +1123,10 @@ routMap.showBusMarker = function(mapId, data, idx, focusIdx, busGrid) {
 		routMap.mapInfo[mapId].selectedMarker = marker;
 		marker.setZIndex(3);
 		//routMap.mapInfo[mapId].isMove = false;
-		routMap.mapInfo[mapId].selectedIndex = idx;
+		//routMap.mapInfo[mapId].selectedIndex = idx;
 		
 		if(typeof busGrid != "undefined") {
+			//routMap.focusNode(mapId, busGrid,idx);
 			busGrid.setFocusedCell(idx,"VHC_ID");
 		}
 		
@@ -1222,9 +1242,10 @@ routMap.showBusMarkerClickOverlay = function(mapId, data, idx, focusIdx, busGrid
 		routMap.mapInfo[mapId].selectedMarker = marker;
 		marker.setZIndex(3);
 		//routMap.mapInfo[mapId].isMove = false;
-		routMap.mapInfo[mapId].selectedIndex = idx;
+		//routMap.mapInfo[mapId].selectedIndex = idx;
 		
 		if(typeof busGrid != "undefined") {
+			//routMap.focusNode(mapId, busGrid,idx);
 			busGrid.setFocusedCell(idx,"VHC_ID");
 		}
 		
@@ -2516,16 +2537,19 @@ routMap.showMarker = function(mapId, data, idx, focusIdx, grid) {
 		marker.setZIndex(3);
 		//routMap.mapInfo[mapId].isMove = false;
 		//routMap.mapInfo[mapId].overArr[routMap.mapInfo[mapId].selectedIndex].setMap(null);
-		routMap.mapInfo[mapId].oldSelectedIndex = routMap.mapInfo[mapId].selectedIndex;
-		routMap.mapInfo[mapId].selectedIndex = idx;
+		//routMap.mapInfo[mapId].oldSelectedIndex = routMap.mapInfo[mapId].selectedIndex;
+		//routMap.mapInfo[mapId].selectedIndex = idx;
 		if(typeof grid != "undefined") {
 			if(typeof data.NODE_NM != "undefined"){
+				//routMap.focusNode(mapId, grid,idx);
 				grid.setFocusedCell(idx,"NODE_ID");
 			}
 			else if(typeof data.INCDNT_TYPE != "undefined") {
+				//routMap.focusNode(mapId, grid,idx);
 				grid.setFocusedCell(idx,"ROUT_NM");
 			}
 			else if(typeof data.VIOLT_TYPE != "undefined") {
+				//routMap.focusNode(mapId, grid,idx);
 				grid.setFocusedCell(idx,"ROUT_NM");
 			}
 		}
@@ -2567,7 +2591,7 @@ routMap.showMarker = function(mapId, data, idx, focusIdx, grid) {
  * @param mapId : 대상 map id
  * @param list : data list
  */
-routMap.showMarkerNoGrid = function(mapId, data) {
+routMap.showMarkerNoGrid= function(mapId, data) {
 	// 마커 이미지의 이미지 크기 입니다
 	var imageSize = new kakao.maps.Size(19, 28); 
 	var markerImage = null;
@@ -2985,9 +3009,10 @@ routMap.showMarker2 = function(mapId, data, idx) {
 		marker.setZIndex(3);
 		routMap.mapInfo[mapId].isMove = false;
 		//routMap.mapInfo[mapId].overArr[routMap.mapInfo[mapId].selectedIndex].setMap(null);
-		routMap.mapInfo[mapId].oldSelectedIndex = routMap.mapInfo[mapId].selectedIndex;
-		routMap.mapInfo[mapId].selectedIndex = idx;
+		//routMap.mapInfo[mapId].oldSelectedIndex = routMap.mapInfo[mapId].selectedIndex;
+		//routMap.mapInfo[mapId].selectedIndex = idx;
 		if(typeof grid != "undefined") {
+			//routMap.focusNode(mapId, grid,idx);
 			grid.setFocusedCell(idx,"NODE_ID");
 		}
 	});	
@@ -3093,9 +3118,10 @@ routMap.showMarkerTab = function(mapId, data, idx, focusIdx, grid) {
 		// 클릭된 마커를 현재 클릭된 마커 객체로 설정합니다
 		routMap.mapInfo[mapId].selectedMarker = marker;
 		marker.setZIndex(3);
-		routMap.mapInfo[mapId].oldSelectedIndex = routMap.mapInfo[mapId].selectedIndex;
-		routMap.mapInfo[mapId].selectedIndex = idx;
+		//routMap.mapInfo[mapId].oldSelectedIndex = routMap.mapInfo[mapId].selectedIndex;
+		//routMap.mapInfo[mapId].selectedIndex = idx;
 		if(grid != null && typeof grid != "undefined") {
+			//routMap.focusNode(mapId, grid,idx);
 			grid.setFocusedCell(idx,"NODE_ID");
 		}
 		
@@ -3715,16 +3741,34 @@ routMap.addDispVertexByClick = function(mapId,grid,routeId,e){
 		idx = com.getGridViewDataList(grid).insertRow(idx);
 	
 		var today = new Date();
-		var data = {
-			ROUT_ID: routeId,
-			NODE_SN: nodeSn,
-			NODE_NM: /*routNm + */"DP_" + util.getCurrentDate().substring(4),
-			NODE_TYPE: routMap.NODE_TYPE.DISP,
-			GPS_Y: util.getDispGps(lonlat.Ma,7),
-			GPS_X: util.getDispGps(lonlat.La,7),
-			draggable:routMap.mapInfo[mapId].draggable
-		};
-	
+		var data = {};
+		if(idx>0){
+			data = {
+				ROUT_ID: routeId,
+				NODE_SN: nodeSn,
+				NODE_NM: /*routNm + */"DP_" + util.getCurrentDate().substring(4),
+				NODE_TYPE: routMap.NODE_TYPE.DISP,
+				GPS_Y: util.getDispGps(lonlat.Ma,7),
+				GPS_X: util.getDispGps(lonlat.La,7),
+				LINK_ID:  routeData[idx-1].LINK_ID,
+				ST_GPS_X: routeData[idx-1].ST_GPS_X,
+				ST_GPS_Y: routeData[idx-1].ST_GPS_Y,
+				ED_GPS_X: routeData[idx-1].ED_GPS_X,
+				ED_GPS_Y: routeData[idx-1].ED_GPS_Y,
+				draggable:routMap.mapInfo[mapId].draggable
+			};
+		}
+		else {
+			data = {
+				ROUT_ID: routeId,
+				NODE_SN: nodeSn,
+				NODE_NM: /*routNm + */"DP_" + util.getCurrentDate().substring(4),
+				NODE_TYPE: routMap.NODE_TYPE.DISP,
+				GPS_Y: util.getDispGps(lonlat.Ma,7),
+				GPS_X: util.getDispGps(lonlat.La,7),
+				draggable:routMap.mapInfo[mapId].draggable
+			};
+		}
 		com.getGridViewDataList(grid).setRowJSON(idx, data, true);
 		
 		var j = 0;
@@ -4012,28 +4056,30 @@ routMap.addGrgByClick = function(mapId,grid,routeId,e){
  * @param focusIdx : 포커스 index
  */
 routMap.focusNode = function(mapId, grid,focusIdx){
-	
+
 	focusIdx = com.getGridDispIndex(grid,focusIdx);
-	//routeData = com.getGridDispJsonData(grid);
-	//if(routMap.mapInfo[mapId].selectedIndex!=focusIdx){
+	if(mapId == "map_AL0101" || mapId == "map_FM0201"){
+		routMap.showNode(mapId, com.getGridDispJsonData(grid), focusIdx);
+	}
+	else {
+		//if(routMap.mapInfo[mapId].selectedIndex == focusIdx) return;
 		routMap.mapInfo[mapId].oldSelectedIndex = routMap.mapInfo[mapId].selectedIndex;
 		routMap.mapInfo[mapId].selectedIndex = focusIdx;
 		
-		// ?????
-		if(mapId == "map_AL0101" || mapId == "map_FM0201"){
-			routMap.showNode(mapId, com.getGridDispJsonData(grid), focusIdx);
+		/*if(routMap.mapInfo[mapId].isFirst){
+			routMap.mapInfo[mapId].isFirst = false;
 		}
 		else {
-			if(routMap.mapInfo[mapId].isSound){
-				routMap.drawSound(mapId, grid, focusIdx);
-			}
-			else {
-				routMap.drawRoute(mapId, grid, focusIdx);
-			}
+			routMap.mapInfo[mapId].map.setLevel(0);
+		}*/
+		if(routMap.mapInfo[mapId].isSound){
+			routMap.drawSound(mapId, grid, focusIdx);
 		}
-	//}
+		else {
+			routMap.drawRoute(mapId, grid, focusIdx);
+		}
+	}
 	routMap.mapInfo[mapId].isMove = true;
-	//routMap.moveMap(mapId, routeData[focusIdx].GPS_Y, routeData[focusIdx].GPS_X);
 }
 
 /**
@@ -4274,6 +4320,40 @@ routMap.addStdNode = function(mapId, grid, data, routeId,area) {
 routMap.moveRoute = function(mapId, grid, e){
 	var routeData = com.getGridDispJsonData(grid);
 	var point = e.marker.getPosition();
+	
+	var val = false;
+	
+	if(e.index == 0 || e.index == routeData.length-1){
+		val = true;
+	}
+	else {
+		val = routMap.returnInsertRouteInfo(point.Ma, point.La,routeData,e.index);
+	}
+	
+	if(val) {
+		var data = com.getGridViewDataList(grid);
+		data.setCellData(e.index, "GPS_Y", util.getDispGps(point.Ma,7));
+		data.setCellData(e.index, "GPS_X", util.getDispGps(point.La,7));
+		
+		/*var nodeChildSn = data.getCellData(e.index, "NODE_CHILD_SN");;
+		if(com.isEmpty(nodeChildSn)==false && nodeChildSn==-1){
+			data.setCellData(e.index, "NODE_CHILD_SN", 0);
+		}*/
+		
+		if(routMap.mapInfo[mapId].isSound){
+			routMap.drawSound(mapId, grid, e.index);
+		}
+		else {
+			routMap.drawRoute(mapId, grid, e.index);
+		}
+
+	} else {
+		routMap.drawRoute(mapId, grid, e.index);
+	}
+}
+/*routMap.moveRoute = function(mapId, grid, e){
+	var routeData = com.getGridDispJsonData(grid);
+	var point = e.marker.getPosition();
 	var node = $.extend(true, {}, routeData[e.index]);
 	//routeData.splice(e.index, 1);
 	
@@ -4300,14 +4380,6 @@ routMap.moveRoute = function(mapId, grid, e){
 		var data = com.getGridViewDataList(grid);
 		
 		data.removeRow(e.index);
-		
-		/*if(data.getRowStatus(e.index)=="C"){ //생성된 경우 데이터에서 삭제함
-			data.removeRow(e.index);
-		}
-		else {
-			grid.setRowVisible(e.index, false);
-			data.deleteRow(e.index);
-		}*/
 		
 		if(com.isEmpty(temp.NODE_CHILD_SN)==false && temp.NODE_CHILD_SN==-1){
 			temp.NODE_CHILD_SN = 0;
@@ -4338,7 +4410,7 @@ routMap.moveRoute = function(mapId, grid, e){
 		
 		routMap.drawRoute(mapId, grid, e.index);
 	}
-}
+}*/
 
 /**
  * 그리드 정보로 노선에서 노드 그리기
@@ -4388,27 +4460,28 @@ routMap.drawRoute = function(mapId, grid, focusIdx) {
 			
 			// 노드 타입이 버스 정류소 마커 표시
 			
+			var isOverLayHidden = routMap.mapInfo[mapId].isOverLayHidden;
 			if(list[i].NODE_TYPE == routMap.NODE_TYPE.BUSSTOP && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.BUSSTOP)>=0) {
-				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, isOverLayHidden);
 			}
 			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.CROSS && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.CROSS)>=0) {
-				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, isOverLayHidden);
 			}
 			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.VERTEX && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.VERTEX)>=0) {
-				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, isOverLayHidden);
 			}
-			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.DISP) {
-				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
+			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.DISP && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.DISP)>=0) {
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, isOverLayHidden);
 			}
 			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.SOUND /*&& routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.SOUND)>=0*/) {
-				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, isOverLayHidden);
 			}			
 			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.SIGNAL && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.SIGNAL)>=0) {
-				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, isOverLayHidden);
 			}
 			// 아닐 경우(일반 노드) 네모 박스 표시
 			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.NORMAL && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.NORMAL)>=0) {
-				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, isOverLayHidden);
 			}
 			
 			if(i < list.length -1){
