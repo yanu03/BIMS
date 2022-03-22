@@ -209,7 +209,7 @@
 	};	
 	
 	scwin.REP_ROUT_NM_SEARCH_callback = function(obj) {
-		debugger;
+		
 		dlt_BRT_RPC_VHC_INFO.setCellData(AL0303G0.getFocusedRowIndex(), "REP_ROUT_ID", obj[0].REP_ROUT_ID);
 		dlt_BRT_RPC_VHC_INFO.setCellData(AL0303G0.getFocusedRowIndex(), "ROUT_ID", obj[0].ROUT_ID);
 		ROUT_NM.setValue(obj[0].ROUT_NM);
@@ -259,7 +259,7 @@
 	};
 	
 	scwin.RPC_VHC_NO_callback = function(obj) {
-		debugger;
+		
 		if(obj[0].VHC_NO != GRP_VHC_NO.getValue()){	
 			dlt_BRT_RPC_VHC_INFO.setCellData(AL0303G0.getFocusedRowIndex(), "RPC_VHC_ID", obj[0].VHC_ID);
 			dlt_BRT_RPC_VHC_INFO.setCellData(AL0303G0.getFocusedRowIndex(), "RPC_VHC_NO", obj[0].VHC_NO);
@@ -288,7 +288,7 @@
    };
 	
 	scwin.sub_AL0303G1R0_submitdone = function(e) {
-		debugger;
+		
 		var allJson = dlt_BMS_ROUT_NODE_CMPSTN.getAllJSON();
 		
 		if(allJson != '' && allJson != null){

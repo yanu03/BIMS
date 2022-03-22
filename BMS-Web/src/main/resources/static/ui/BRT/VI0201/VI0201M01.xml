@@ -175,7 +175,7 @@
 	};
 	
 	scwin.VI0201G0_onrowindexchange = function(row,oldRow) {
-		debugger;
+		
 		var jsonObj = dlt_BRT_CPLNT_HIS.getRowJSON(row);
 		
 		var cplntDiv = dlt_BRT_CPLNT_HIS.getCellData(row, "CPLNT_DIV");
@@ -331,7 +331,7 @@
 	};
 	
 	scwin.sbx_ChoiceBox_onviewchange = function(info) {		
-		debugger;
+		
 		if (info.newValue == "ALL") {
 			acb_autoChoiceBox.hide();
 			search_input.setValue("");
