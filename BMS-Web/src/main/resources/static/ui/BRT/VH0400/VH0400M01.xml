@@ -152,10 +152,8 @@
 		var weekAgoDate = year+month+weekAgoDay;
 		var firstday = year+month+"01";	
 
-		dma_search.F_DATE = util.getCurrentDate2(-7);
-		F_DATE.setValue(weekAgoDate);
-		
-		dma_search.L_DATE = util.getCurrentDate2();
+		//F_DATE.setValue(weekAgoDate);
+		F_DATE.setValue(todaysDate);
 		L_DATE.setValue(todaysDate);
 
 		var map = routMap.initMap2("map_VH0400", 
@@ -400,8 +398,18 @@
 		}
 	};	
 	
-	scwin.getFooterDiv = function(data, dataType) {
-		debugger;
+	scwin.getFooterDivTop = function(data, dataType) {
+		var result = scwin.getEventCount(data, dataType, "top");
+		return result;
+	};
+	
+	scwin.getFooterDivBottom = function(data, dataType) {
+		var result = scwin.getEventCount(data, dataType, "bottom");
+		return result;
+	};							
+	
+	scwin.getEventCount = function(data, dataType, footerPosition) {
+		var sum = 0;
 		var count01 = 0;
 		var count02 = 0;
 		var count03 = 0; 
@@ -425,6 +433,7 @@
 		var result = "";
 		
 		if (data.length > 0) {
+			sum = data.length;
 			for (var i=0; i<data.length; i++) {
 				switch(data[i]) {
 					case "ET001":
@@ -507,24 +516,22 @@
 					count20++;
 					break;					
 				}
+			}				
+			
+			if(footerPosition == 'top') {
+				result = "총계 : " +sum + "건, 정류장 출발 : " + count02 + "건, 정류장 도착 : " + count01 + "건, 기점 출발 : " + count04 + "건, 기점 도착 : " + count03;
+				result += "건, 종점 출발 : " + count06 + "건, 종점 도착 : " + count05 + "건, 노드 통과 : " + count07 + "건, 음성 출력 : " + count08;
+				result += "건, 과속 주행 : " + count12 + "건";				
 			}
 			
-//			result = "정류장 도착 : " + count01 + "건, 정류장 출발 : " + count02 + "건, 기점 도착 : " + count03 + "건, 기점 출발 : " + count04;
-//			result += "건, 종점 도착 : " + count05 + "건, 종점 출발 : " + count06 + "건, 노드 통과 : " + count07 + "건, 음성 출력 : " + count08;
-//			result += "건, 문열림 : " + count09 + "건, 문닫힘 : " + count10 + "건, 무정차 주행 : " + count11 + "건, 과속 주행 : " + count12;
-//			result += "건, 급가속 : " + count13 + "건, 급감속 : " + count14 + "건, 급출발 : " + count15 + "건, 급정지 : " + count16;
-//			result += "건, 개문주행 : " + count17 + "건, 노선이탈 : "+ count18 + "건, 차고지 도착 : "+ count19 + "건, 차고지 출발 : " + count20;
-			
-			result = "정류장 출발 : " + count02 + "건, 정류장 도착 : " + count01 + "건, 기점 출발 : " + count04 + "건, 기점 도착 : " + count03;
-			result += "건, 종점 출발 : " + count06 + "건, 종점 도착 : " + count05 + "건, 노드 통과 : " + count07 + "건, 음성 출력 : " + count08;
-			result += "건, 무정차 주행 : " + count11 + "건, 과속 주행 : " + count12+ "건, 차고지 출발 : "+ count20 + "건, 차고지 도착 : " + count19 + "건";
-			
-			
+			else if (footerPosition == 'bottom') {
+				result += "무정차 주행 : " + count11+ "건, 문열림 : " + count09 + "건, 문닫힘 : " + count10				
+				result += "건, 급가속 : " + count13 + "건, 급감속 : " + count14 + "건, 급출발 : " + count15 + "건, 급정지 : " + count16;
+				result += "건, 개문주행 : " + count17 + "건, 노선이탈 : "+ count18 + "건, 차고지 출발 : "+ count20 + "건, 차고지 도착 : " + count19 + "건";				
+			}
 			return result;
 		}
-	};			
-	
-	]]></script>
+	}]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
@@ -549,7 +556,7 @@
 							</xf:choices>
 						</xf:select1>
 					</xf:group>
-					<xf:group class="label" id="" style="">
+					<!-- <xf:group class="label" id="" style="">
 						<w2:span class="" id="" label="노선"></w2:span>
 					</xf:group>
 					<xf:group class="search" id="" style="">
@@ -563,7 +570,7 @@
 								</xf:itemset>
 							</xf:choices>
 						</xf:select1>
-					</xf:group>
+					</xf:group> -->
 					<xf:group class="search" id="" style="margin-left: 10px;">
 						<xf:group class="label" id="" style="">
 							<w2:span class="" id="" label="차량번호" style=""></w2:span>
@@ -607,7 +614,7 @@
 							style="width: 120px;float: left;margin-top: 3px;" id="L_DATE" renderType="component" renderDiv="true" calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange">
 						</w2:inputCalendar>
 						<xf:group id="" style="margin-left: 10px;" class="radio">
-							<xf:select1 id="calendar_radio" ref="" selectedIndex="2" cols="" appearance="full"
+							<xf:select1 id="calendar_radio" ref="" selectedIndex="1" cols="" appearance="full"
 								style="margin-light: 10px;min-width: 200px;" rows="1" ev:onviewchange="scwin.calendar_radio_onviewchange">
 								<xf:choices>
 									<xf:item>
@@ -650,7 +657,7 @@
 							oddEvenColorDisplay="" rowNumWidth="" summaryAuto="" excludeDeletedRows="" useCtrlOnMultisort="" useFilterList=""
 							useFilterListSync="" sortedIconPosition="" sortable="true" sortOrderReverse="" showSortableUseFilter="" focusMode="row"
 							rowNumStatusUniqueId="" rowNumStatusResize="" ev:onbeforecolumnmove="" userData1="" preventMultisort="" showSortableImage="false"
-							sortEvent="onclick">
+							sortEvent="onclick" noResultMessage="기간내 이력 없음">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="overflow:scroll;" id="row1">
@@ -753,9 +760,15 @@
 							<w2:footer id="footer1" style="">
 								<w2:row id="row3" style="">
 									<w2:column blockSelect="false" colSpan="14" displayMode="label"
-										expression="custom(scwin.getFooterDiv, 'EVT_TYPE')" id="column42" inputType="expression" removeBorderStyle="false"
-										style="height:28px;" textAlign="left">
+										expression="custom(scwin.getFooterDivTop, 'EVT_TYPE')" id="column42" inputType="expression" removeBorderStyle="false"
+										style="height:27px;" textAlign="left" autoFitFilterList="">
 									</w2:column>
+								</w2:row>
+								<w2:row id="row4" style="">
+									<w2:column blockSelect="false" colSpan="14" displayMode="label"
+										expression="custom(scwin.getFooterDivBottom, 'EVT_TYPE')" id="column43" inputType="expression" removeBorderStyle="false"
+										style="height:27px;" textAlign="left" autoFitFilterList="">
+									</w2:column>								
 								</w2:row>
 							</w2:footer>							
 						</w2:gridView>
