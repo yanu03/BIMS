@@ -236,7 +236,7 @@
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainOptions);
 		
 		var subOptions = {
-			SEARCH: {cbFnc:scwin.btn_sub_search, nm:"조회", class:"search"}
+			SEARCH: {cbFnc:scwin.btn_sub_move, nm:"조회", class:"search"}
 		};
 		
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);
@@ -263,10 +263,10 @@
 		AL0205G2_DIV.hide();
 		
 		//탭 목록 클릭 이벤트
-		$(".sttnCrs_tab").find("li").click( function() {
+		$("#AL0205_TAB").find("li").click( function() {
 			var li_id = this.id;
-			$(".sttnCrs_tab").find("li").removeClass("on");
-			$(".sttnCrs_tab").find("#"+li_id).addClass("on");
+			$("#AL0205_TAB").find("li").removeClass("on");
+			$("#AL0205_TAB").find("#"+li_id).addClass("on");
 			
 			if(li_id == "li_sttn") {
 				AL0205G0_DIV.show("");
@@ -309,11 +309,22 @@
 						];		
 	
 		com.setCommonDtl(codeOptions);
+		scwin.btn_sub_move();
 	};
 	
+	scwin.btn_sub_move = function() {
+		var tab= $('#'+AL0205G0.getID());
+		if(com.isEmpty(dma_sub_search.get("CONTENT"))==false){
+			com.gridMove(AL0205G0, "STTN_ID,STTN_NM", dma_sub_search.get("CONTENT"), AL0205G0.getFocusedRowIndex());
+		}
+		else {
+			com.gridMove(AL0205G2, "CRS_ID,CRS_NM", dma_sub_search.get("CONTENT"), AL0205G2.getFocusedRowIndex());
+		}
+	}	
 	//교차로 조회 콜백 메소드
 	scwin.sub_AL0205G0R1_submitdone = function(e) {
 		com.setFocusedCell(AL0205G2, "CRS_ID");
+		scwin.btn_sub_move();
 	};
 	
 	//상세 시간표 조회 콜백 메소드
@@ -637,18 +648,20 @@
 				</xf:group>
 			</xf:group>
 			<xf:group id="pgm_content" class="pgm_content grdc_650_20_a" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_20_20_a" style="">
-					<xf:group class="defaultbox" id="" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_20_a" style="">
+					<!-- <xf:group class="defaultbox" id="" style="">
 						<w2:textbox class="df_tt fl" id="" label="정류소/교차로 목록" style=""></w2:textbox>
+					</xf:group> -->
+					<xf:group class="tab_div" id="">
+						<ul id="AL0205_TAB" class="tab_ul" style="width:200px">
+							<li id="li_sttn" class="on">정류소</li>
+							<li id="li_crs" class="">교차로</li>
+						</ul>
 					</xf:group>
-					<ul id="AL0205_TAB" class="sttnCrs_tab" style="">
-						<li id="li_sttn" class="on">정류소</li>
-						<li id="li_crs" class="">교차로</li>
-					</ul>
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="gr_sub_search" id="" style="">
 							<xf:group class="label" id="" style="">
-								<w2:span class="" id="" label="검색"></w2:span>
+								<w2:span class="" id="" label="찾기"></w2:span>
 							</xf:group>
 							<xf:group class="search" id="" style="">
 								<xf:input id="search_sub_input" class="search_input" style="width:auto;" ref="" placeholder="정류소ID 또는 정류소명"></xf:input>

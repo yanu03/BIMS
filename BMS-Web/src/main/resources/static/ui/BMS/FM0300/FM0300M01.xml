@@ -209,14 +209,14 @@
 		$p.executeSubmission(sub_FM0300SHI1);	
 		$p.executeSubmission(sub_FM0300SHI2);	
 		
-		$("#FM0300_TAB").attr("style", "width:200px; height:26px;  float:left");
+		//$("#FM0300_TAB").attr("style", "width:200px; height:26px;  float:left");
 		FM0300G3.hide();
 		
 		//탭 목록 클릭 이벤트
-		$(".fclt_his").find("li").click( function() {
+		$("#FM0300_TAB").find("li").click( function() {
 			var li_id = this.id;
-			$(".fclt_his").find("li").removeClass("on");
-			$(".fclt_his").find("#"+li_id).addClass("on");
+			$("#FM0300_TAB").find("li").removeClass("on");
+			$("#FM0300_TAB").find("#"+li_id).addClass("on");
 			
 			if(li_id == "li_FCLT_HIS") {
 				FM0300G2.show("");
@@ -571,16 +571,18 @@
 					<xf:group id="" class="horizontal_line">
 					</xf:group>	
 										
-					<xf:group id="" style="" class="pgm_detail grdr_20_20_2_a">
-						<xf:group id="" class="gr_sub_header" style="">
+					<xf:group id="" style="" class="pgm_detail grdr_20_2_a">
+						<!-- <xf:group id="" class="gr_sub_header" style="">
 							<xf:group class="defaultbox" id="" style="">
 								<w2:textbox class="df_tt fl" id="" label="유지보수/장애발생 이력" style=""></w2:textbox>
 							</xf:group>
+						</xf:group> -->
+						<xf:group id="" class="tab_div" style="">
+							<ul id="FM0300_TAB" class="tab_ul" style="width:200px">
+								<li id="li_FCLT_HIS" class="on">유지보수 이력</li>
+								<li id="li_FCLT_COND" class="">장애발생 이력</li>
+							</ul>
 						</xf:group>
-						<ul id="FM0300_TAB" class="fclt_his" style="">
-							<li id="li_FCLT_HIS" class="on">유지보수 이력</li>
-							<li id="li_FCLT_COND" class="">장애발생 이력</li>
-						</ul>
 						<xf:group></xf:group>
 						<w2:gridView id="FM0300G2" style="height:98%" defaultCellHeight="20" rowNumVisible="true"
 							useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"

@@ -70,14 +70,22 @@
 						<w2:column id="NODE_SN" name="노드순번" dataType="number" defaultValue="0"></w2:column>
 						<w2:column id="NODE_CHILD_SN" name="노드자식순번" dataType="number" defaultValue="0"></w2:column>
 						<w2:column id="OLD_NODE_CHILD_SN" name="이전 노드자식순번" dataType="number" defaultValue="0"></w2:column>
-						<w2:column id="NODE_ID" name="링크ID" dataType="text"></w2:column>
+						<w2:column id="NODE_ID" name="노드ID" dataType="text"></w2:column>
 						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
 						<w2:column id="NODE_TYPE" name="노드유형" dataType="text"></w2:column>
 						<w2:column id="GPS_X" name="경도" dataType="text"></w2:column>
 						<w2:column id="GPS_Y" name="위도" dataType="text"></w2:column>
 						<w2:column id="ORG_GPS_X" name="원 경도" dataType="text"></w2:column>
 						<w2:column id="ORG_GPS_Y" name="원 위도" dataType="text"></w2:column>
+						<w2:column id="LINK_ID" name="링크아이디" dataType="text"></w2:column>
 						<w2:column id="MORN_STD" name="집중모니터링기준" dataType="text"></w2:column>
+						<w2:column id="ED_NODE_ID" name="종료노드ID" dataType="text"></w2:column>
+						<w2:column id="REP_ROUT_ID" name="대표노선ID" dataType="text"></w2:column>
+						<w2:column id="WAY_DIV" name="상하행구분" dataType="text"></w2:column>
+						<w2:column id="ST_GPS_X" name="시작 GPS X" dataType="text"></w2:column>
+						<w2:column id="ST_GPS_Y" name="시작 GPS Y" dataType="text"></w2:column>
+						<w2:column id="ED_GPS_X" name="종료 GPS Y" dataType="text"></w2:column>
+						<w2:column id="ED_GPS_Y" name="종료 GPS Y" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_disp_check">
@@ -157,6 +165,8 @@
 			, onClick: scwin.onClickMap
 			, nodeChangeCb: scwin.nodeChangeCb
 			, draggable: true
+			, isOverLayHidden : true
+			, level : 0
 		});
 
 		
@@ -171,7 +181,7 @@
 	
 	scwin.sub_SI0408G0R0_submitdone = function(e) {
 		scwin.releaseGeoBtn();
-		com.setFocusedCell(SI0408G0, "ROUT_ID");	
+		com.setFocusedCell(SI0408G0, "ROUT_ID");
 	};
 	
 	scwin.sbx_ChoiceBox_onviewchange = function(info) {
@@ -247,31 +257,30 @@
 	}
 
 	scwin.dma_disp_check_onviewchange = function(info) {
-		debugger;
+		
 		scwin.releaseGeoBtn();
 		routMap.setDispCheck("map_SI0408", disp_check.getValue());
 		routMap.drawRoute("map_SI0408", SI0408G1, SI0408G1.getFocusedRowIndex());
 	}
 	
 	scwin.SI0408G1_onrowindexchange = function(row,oldRow) {
+		
 		routMap.focusNode("map_SI0408",SI0408G1,row);
 	};
 	
 	scwin.sub_SI0408G1R0_submitdone = function(e) {
-	
-		debugger;
 		scwin.refreshGridStatus();
 		if(BMS_ROUT_NODE_DISP_CMPSTN.getTotalRow() == 0){
 			routMap.initDisplay("map_SI0408");
 		}
 		else {
-			//com.setFocusedCell(SI0408G1, "NODE_ID");
-			if(SI0408G1.getFocusedRowIndex() == -1 ){
+			com.setFocusedCell(SI0408G1, "NODE_ID");
+			/*if(SI0408G1.getFocusedRowIndex() == -1 ){
 				SI0408G1.setFocusedCell( 0, "NODE_ID");
 			}
 			else {
 				SI0408G1.setFocusedCell( SI0408G1.getFocusedRowIndex(), "NODE_ID");
-			}
+			}*/
 		}
 		scwin.btn_sub_move();
 		
@@ -294,6 +303,12 @@
 
 
 		//routMap.drawRoute("map_SI0408", SI0408G1, -1, true);
+		
+		/*for(var i =0; i < BMS_ROUT_NODE_DISP_CMPSTN.getRowCount(); i++){
+			if(BMS_ROUT_NODE_DISP_CMPSTN.getCellData(i, "NODE_CHILD_SN")>=0){
+				BMS_ROUT_NODE_DISP_CMPSTN.modifyRowStatus(i, "C");
+			}
+		}*/
 	};
 	
 	scwin.sub_SI0408G1S0_submitdone = function(e) {
@@ -331,7 +346,7 @@
 		//var routNm = SI0408G0.getFocusedCellData("ROUT_NM");
 		
 		if(isVertexAdd){
-			debugger;
+			
 			routMap.addDispVertexByClick("map_SI0408", SI0408G1,curRoutId,e);
 		}
 	}
@@ -357,7 +372,7 @@
 	};
 	
 	scwin.btn_sub_del = function() {
-		debugger;
+		
 		var focusIndex = SI0408G1.getFocusedRowIndex();
 		var nodeChildSn = BMS_ROUT_NODE_DISP_CMPSTN.getCellData(focusIndex,"NODE_CHILD_SN");
 		var nodeSn = BMS_ROUT_NODE_DISP_CMPSTN.getCellData(focusIndex,"NODE_SN");
@@ -388,6 +403,8 @@
 							j++;
 						}
 					}
+					routMap.focusNode("map_SI0408",SI0408G1,SI0408G1.getFocusedRowIndex());
+					//routMap.drawRoute("map_SI0408", SI0408G1, SI0408G1.getFocusedRowIndex(), false);
 				}
 			);
 		}
@@ -605,7 +622,7 @@
 						</xf:group>
 						<xf:group id="" class="" style="">
 							<w2:gridView   alwaysTriggerScrollStart="" autoFit="lastColumn"
-								id="SI0408G1" class="cm_grid leftL" autoFitMinWidth="0" dataList="data:BMS_ROUT_NODE_DISP_CMPSTN" sortable="false" readOnly="true"
+								id="SI0408G1" class="cm_grid leftL" autoFitMinWidth="0" dataList="data:BMS_ROUT_NODE_DISP_CMPSTN" sortable="false"
 								ev:onrowindexchange="scwin.SI0408G1_onrowindexchange"	ev:onviewchange="scwin.SI0408G1_onviewchange" ixedColumnWithHidden="true" dataDragDrop="true"
 								focusMode="row"  ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false"
 								useShiftKey="true">
@@ -645,35 +662,35 @@
 								</w2:header>
 								<w2:gBody id="gBody1" style="">
 									<w2:row id="row2" style="">
-										<w2:column blockSelect="false" displayMode="label" id="ROUT_ID" inputType="text"
+										<w2:column blockSelect="false" displayMode="label" id="ROUT_ID" inputType="text" readOnly="true"
 											removeBorderStyle="false" style="" width="" >
 										</w2:column>
-										<w2:column blockSelect="false" displayMode="label" id="NODE_ID" inputType="text"
+										<w2:column blockSelect="false" displayMode="label" id="NODE_ID" inputType="text" readOnly="true"
 											removeBorderStyle="false" style="" width="" >
 										</w2:column>
-										<w2:column blockSelect="false" displayMode="label" id="NODE_NM" inputType="text" removeBorderStyle="false"
-											style="" width="" textAlign="left">
+										<w2:column blockSelect="false" displayMode="label" id="NODE_NM" inputType="text" readOnly="true" 
+											removeBorderStyle="false" style="" width="" textAlign="left">
 										</w2:column>
-										<w2:column blockSelect="false" displayMode="label" eventPriority="oneditend" id="NODE_TYPE"
+										<w2:column blockSelect="false" displayMode="label" eventPriority="oneditend" id="NODE_TYPE" readOnly="true"
 											inputType="select" removeBorderStyle="false" style="" width="">
 										</w2:column>
-										<w2:column blockSelect="false" displayMode="label" id="NODE_SN" inputType="text" removeBorderStyle="false"
-											style="" width="" >
+										<w2:column blockSelect="false" displayMode="label" id="NODE_SN" inputType="text" readOnly="true" 
+											removeBorderStyle="false" style="" width="" >
 										</w2:column>
-										<w2:column blockSelect="false" displayMode="label" id="NODE_CHILD_SN" inputType="text" removeBorderStyle="false"
-											style="" width="" readonly="">
+										<w2:column blockSelect="false" displayMode="label" id="NODE_CHILD_SN" inputType="text" readOnly="true"
+											removeBorderStyle="false" style="" width="" readonly="">
 										</w2:column>
-										<w2:column blockSelect="false" displayMode="label" id="GPS_X" inputType="text" removeBorderStyle="false"
-											style="" width="" textAlign="right">
+										<w2:column blockSelect="false" displayMode="label" id="GPS_X" inputType="text" 
+											removeBorderStyle="false" style="" width="" textAlign="right">
 										</w2:column>
-										<w2:column blockSelect="false" displayMode="label" id="GPS_Y" inputType="text" removeBorderStyle="false"
-											style="" width="" textAlign="right">
+										<w2:column blockSelect="false" displayMode="label" id="GPS_Y" inputType="text"
+											removeBorderStyle="false" style="" width="" textAlign="right">
 										</w2:column>
-										<w2:column blockSelect="false" displayMode="label" id="ORG_GPS_X" inputType="text" removeBorderStyle="false"
-											style="" width="" textAlign="right">
+										<w2:column blockSelect="false" displayMode="label" id="ORG_GPS_X" inputType="text" readOnly="true"
+											removeBorderStyle="false" style="" width="" textAlign="right">
 										</w2:column>
-										<w2:column blockSelect="false" displayMode="label" id="ORG_GPS_Y" inputType="text" removeBorderStyle="false"
-											style="" width="" textAlign="right">
+										<w2:column blockSelect="false" displayMode="label" id="ORG_GPS_Y" inputType="text" readOnly="true"
+											removeBorderStyle="false" style="" width="" textAlign="right">
 										</w2:column>										
 									</w2:row>
 								</w2:gBody>
@@ -704,8 +721,8 @@
 										<xf:value><![CDATA[NT003]]></xf:value>
 									</xf:item>
 									<xf:item>
-									<xf:label><![CDATA[버텍스/신호]]></xf:label>
-										<xf:value><![CDATA[NT005/NT008]]></xf:value>
+									<xf:label><![CDATA[버텍스/신호/DP]]></xf:label>
+										<xf:value><![CDATA[NT005/NT008/NT009]]></xf:value>
 									</xf:item>
 									<xf:item>
 										<xf:label><![CDATA[정류소]]></xf:label>
