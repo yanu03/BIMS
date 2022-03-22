@@ -45,14 +45,14 @@
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT3)">
 				AND A.VHC_NO LIKE CONCAT('%', #{CONTENT3}, '%')
 		</if>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
-			<![CDATA[AND DATE_FORMAT(A.OCR_DTM, '%Y%m%d') >= #{F_DATE}]]>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0104) and @kr.tracom.util.CommonUtil@empty(L_DATE_VH0104)">
+			<![CDATA[AND DATE_FORMAT(A.OCR_DTM, '%Y%m%d') >= #{F_DATE_VH0104}]]>
 		</if>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
-			<![CDATA[AND DATE_FORMAT(A.OCR_DTM, '%Y%m%d') <= #{L_DATE}]]>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0104) and @kr.tracom.util.CommonUtil@empty(F_DATE_VH0104)">
+			<![CDATA[AND DATE_FORMAT(A.OCR_DTM, '%Y%m%d') <= #{L_DATE_VH0104}]]>
 		</if>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
-			AND DATE_FORMAT(A.OCR_DTM, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0104) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0104)">
+			AND DATE_FORMAT(A.OCR_DTM, '%Y%m%d') BETWEEN #{F_DATE_VH0104} AND #{L_DATE_VH0104}
 		</if>			
 	</where>
 	

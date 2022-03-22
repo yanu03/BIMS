@@ -63,8 +63,8 @@
 		LEFT JOIN BMS_DRV_MST F
 		ON A.DRV_ID = F.DRV_ID
 	<where>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(OCR_NODE_TYPE)">
-				A.OCR_NODE_TYPE = #{OCR_NODE_TYPE}
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(OPER_STS)">
+				A.OPER_STS = #{OPER_STS}
 		</if>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT1)">
 				AND A.REP_ROUT_ID = #{CONTENT1}
@@ -75,14 +75,14 @@
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT3)">
 				AND VHC_NO LIKE CONCAT('%', #{CONTENT3}, '%')
 		</if>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
-			<![CDATA[AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') >= #{F_DATE}]]>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0105) and @kr.tracom.util.CommonUtil@empty(L_DATE_VH0105)">
+			<![CDATA[AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') >= #{F_DATE_VH0105}]]>
 		</if>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
-			<![CDATA[AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') <= #{L_DATE}]]>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0105) and @kr.tracom.util.CommonUtil@empty(F_DATE_VH0105)">
+			<![CDATA[AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') <= #{L_DATE_VH0105}]]>
 		</if>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
-			AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0105) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0105)">
+			AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') BETWEEN #{F_DATE_VH0105} AND #{L_DATE_VH0105}
 		</if>			
 	</where>
 	ORDER BY
