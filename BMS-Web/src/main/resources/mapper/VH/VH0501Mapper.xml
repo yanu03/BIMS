@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.tracom.brt.domain.VH0501.VH0501Mapper">
+
+<select id="VH0501G0R0" parameterType="Map" resultType="Map">
+	SELECT			DATE_FORMAT(A.INTG_DTM, '%Y-%m-%d %H:%i:%s' ) INTG_DTM
+				,	A.INTG_NM
+				,	A.INTG_STS
+				,	CONVERT(A.DATA USING UTF8) AS DATA
+				,	A.LOG
+				
+	FROM			BMS_INTG_HIS A
+	
+	<where>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT1)">
+				A.INTG_NM = #{CONTENT1}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT2)">
+				AND A.INTG_STS = #{CONTENT2}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
+			<![CDATA[AND DATE_FORMAT(A.INTG_DTM, '%Y%m%d') >= #{F_DATE}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
+			<![CDATA[AND DATE_FORMAT(A.INTG_DTM, '%Y%m%d') <= #{L_DATE}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
+				AND DATE_FORMAT(A.INTG_DTM, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+		</if>			
+	</where>
+	
+	ORDER BY		A.INTG_DTM DESC
+</select>
+
+<select id="selectIntgNmItem" resultType="Map">
+		(SELECT 
+						INTG_NM
+				
+		FROM 			BMS_INTG_MST
+	
+		ORDER BY		INTG_ID
+		)
+		
+		UNION
+		
+		(
+		SELECT			CATEGORY
+
+		FROM			BMS_NEWS_INFO
+		
+		
+		GROUP BY		CATEGORY
+		
+		ORDER BY		CATEGORY	
+		)
+</select>
+
+<select id="selectIntgStsItem" resultType="Map">
+	SELECT 			DL_CD
+				,	DL_CD_NM
+				
+	FROM			BMS_DL_CD_INFO
+	
+	WHERE			CO_CD = 'INTG_STS'
+	AND				USE_YN = 'Y'
+	
+	ORDER BY		SORT
+</select>
+
+</mapper>

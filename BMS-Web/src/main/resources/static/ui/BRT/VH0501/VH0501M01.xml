@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:w2="http://www.inswave.com/websquare"
+	xmlns:xf="http://www.w3.org/2002/xforms">
+<head>
+	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+		<w2:type>DEFAULT</w2:type>
+		<w2:buildDate />
+		<xf:model>
+			<xf:instance>
+				<data xmlns="" />
+			</xf:instance>
+			<w2:dataCollection baseNode="map">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_INTG_HIS" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="INTG_DTM" name="연계일시" dataType="text"></w2:column>
+						<w2:column id="INTG_NM" name="연계명" dataType="text"></w2:column>
+						<w2:column id="INTG_STS" name="연계상태" dataType="text"></w2:column>
+						<w2:column id="DATA" name="데이터" dataType="text"></w2:column>
+						<w2:column id="LOG" name="로그" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataMap baseNode="map" id="dma_search">
+					<w2:keyInfo>
+						<w2:key id="CONTENT1" name="name1" dataType="text"></w2:key>
+						<w2:key id="CONTENT2" name="name2" dataType="text"></w2:key>
+						<w2:key id="CONTENT3" name="name3" dataType="text"></w2:key>
+						<w2:key id="F_DATE" name="name4" dataType="date"></w2:key>
+						<w2:key id="L_DATE" name="name5" dataType="date"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_intgNmItem" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="INTG_ID" name="연계ID" dataType="text"></w2:column>
+						<w2:column id="INTG_NM" name="연계명" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_intgStsItem" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="DL_CD" name="상세코드" dataType="text"></w2:column>
+						<w2:column id="DL_CD_NM" name="상세코드명" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+			</w2:dataCollection>
+			<w2:workflowCollection></w2:workflowCollection>
+			<xf:submission id="sub_VH0501G0R0" ref='data:json,dma_search' target="data:json,dlt_BMS_INTG_HIS" action="/vh/VH0501G0R0"
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="조회 중입니다.." ev:submit="" ev:submitdone="scwin.sub_VH0501G0R0_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_selectIntgNmItem" ref="" target="data:json,dlt_intgNmItem" action="/vh/selectIntgNmItem" method="post" mediatype="application/json"
+				encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
+				ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_selectIntgStsItem" ref="" target="data:json,dlt_intgStsItem" action="/vh/selectIntgStsItem" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
+				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+		</xf:model>
+
+		<style type='text/css'>
+		.VH0501T0 .w2tabcontrol_container{position: absolute; left:0; top:35px; right:0; bottom:0px; border:none; float:none; height:auto !important; border-top:1px solid #c4cad6;}
+		</style>
+
+		<script type="text/javascript" lazy="false"><![CDATA[
+	scwin.onpageload = function() {
+		
+		 var autoOptions = {
+			Main : { grid : VH0501G0, srchSbm : sub_VH0501G0R0, keyColumn : "INTG_DTM", srchGrp : pgm_header, name : "Dispatch 전송 이력",
+						focusColumn : "INTG_DTM"}
+		 };
+		 
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions);
+
+		var date = new Date();
+		var year = date.getFullYear().toString();
+		var month = (date.getMonth()+1).toString();
+		var day = date.getDate().toString();
+		var zero = 0;
+		
+		//글자수 맞추기
+		if(day.length == 1){
+			day = zero + day;
+		}
+		
+		if(month.length == 1){
+			month = zero + month;
+		}
+		
+		var weekAgoDay = parseInt(day) - 7;
+		var todaysDate = year+month+day;
+		var weekAgoDate = year+month+weekAgoDay;
+		var firstday = year+month+"01";	
+
+		//F_DATE.setValue(weekAgoDate);
+		F_DATE.setValue(todaysDate);
+		L_DATE.setValue(todaysDate);
+		
+		var codeOptions = [ {code : "INTG_STS", compID : "VH0501G0:INTG_STS" }
+							 ];	
+		 
+		com.setCommonDtl(codeOptions, function() {
+			com.searchGrid(VH0501G0, sub_VH0501G0R0);
+		});
+		
+		com.executeSubmission(sub_selectIntgNmItem);	
+		com.executeSubmission(sub_selectIntgStsItem);	
+		
+	};	
+	
+	scwin.VH0501G0_onrowindexchange = function(row,oldRow) {
+
+	};
+	
+	scwin.sub_VH0501G0R0_submitdone = function(e) {
+		com.setFocusedCell(VH0501G0, "INTG_DTM");
+		
+		var intgNm = "";
+		var	intgSts = "";
+		
+		for (i=0; i<dlt_BMS_INTG_HIS.getDataLength(); i++) {
+			intgNm = dlt_BMS_INTG_HIS.getCellData(i, "INTG_NM");
+			intgSts = dlt_BMS_INTG_HIS.getCellData(i, "INTG_STS");
+			
+			switch(intgNm) {
+				//기상
+				case "기상":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div1");
+				break;
+				
+				//대기
+				case "대기":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div2");
+				break;
+				
+				//교통소통
+				case "교통소통":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div3");
+				break;
+				
+				//세종노선상세정보
+				case "세종노선상세정보":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div4");
+				break;
+				
+				//공공데이터포털 노선연계
+				case "공공데이터포털 노선연계":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div5");
+				break;
+				
+				//공공데이터포털 노선_정류장연계
+				case "공공데이터포털 노선_정류장연계":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div6");
+				break;
+				
+				//공공데이터포털 버스현재위치
+				case "공공데이터포털 버스현재위치":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div7");
+				break;
+				
+				//공공데이터포털 도시코드 연계
+				case "공공데이터포털 도시코드 연계":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div8");
+				break;
+				
+				case "경제":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div9");
+				break;
+				
+				case "날씨":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div10");
+				break;
+				
+				case "문화·연예":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div11");
+				break;
+				
+				case "사용자 뉴스":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div12");
+				break;
+				
+				case "사회":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div13");
+				break;
+				
+				case "세계":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div14");
+				break;
+				
+				case "스포츠":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div15");
+				break;
+				
+				case "정치":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div16");
+				break;
+				
+				case "최신":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div17");
+				break;
+				
+				case "헤드라인":
+				VH0501G0.setCellClass(i, "INTG_NM", "color_div18");
+				break;
+			}
+			
+			switch(intgSts) {
+				//정상
+				case "IS001":
+				VH0501G0.setCellClass(i, "INTG_STS", "cond_normal");
+				break;
+				
+				//실패
+				case "IS002":
+				VH0501G0.setCellClass(i, "INTG_STS", "cond_abnormal");
+				break;				
+			}
+			
+			
+		}		
+		
+	};
+
+	scwin.TYPE1_onviewchange = function(info) {	
+	
+	};
+	
+	scwin.TYPE2_onviewchange = function(info) {		
+	
+	};
+	
+	scwin.F_DATE_onviewchange = function(info) {
+		var ldate = L_DATE.getValue();
+		var fdate = F_DATE.getValue();
+		
+		if (fdate > ldate && ldate != ""){
+			com.messagBox("alert", "지정할 수 없는 날짜입니다.", scwin.checkCLoseF(info));
+		}
+		
+		else{
+			calendar_radio.setValue("DIRECT");
+		}
+		
+	};
+	scwin.checkCLoseF = function(info) {
+		F_DATE.setValue(info.oldValue);
+	}
+	scwin.checkCLoseL = function(info) {
+		L_DATE.setValue(info.oldValue);
+	}	
+	scwin.L_DATE_onviewchange = function(info) {
+		var ldate = L_DATE.getValue();
+		var fdate = F_DATE.getValue();
+		
+		if (fdate > ldate){
+			com.messagBox("alert", "지정할 수 없는 날짜입니다.",scwin.checkCLoseL(info));
+		}
+	};
+	
+	//라디오 버튼에 따라 날짜 설정
+	scwin.calendar_radio_onviewchange = function(info) {
+		var date = new Date();
+		var year = date.getFullYear().toString();
+		var month = (date.getMonth()+1).toString();
+		var day = date.getDate().toString();
+		var zero = 0;
+		
+		//글자수 맞추기
+		if(day.length == 1){
+			day = zero + day;
+		}
+		
+		if(month.length == 1){
+			month = zero + month;
+		}
+		
+		var weekAgoDay = parseInt(day) - 7;
+		var todaysDate = year+month+day;
+		var weekAgoDate = year+month+weekAgoDay;
+		var firstday = year+month+"01";		
+		
+		if(info.value == "DIRECT") {
+			F_DATE.setValue();
+			L_DATE.setValue();
+		}
+		
+		else if(info.value == "TODAY") {
+			F_DATE.setValue(todaysDate);
+			L_DATE.setValue(todaysDate);	
+		}
+		
+		else if(info.value == "WEEK") {
+			F_DATE.setValue(weekAgoDate);
+			L_DATE.setValue(todaysDate);			
+		}
+		
+		else if(info.value == "MONTH") {
+			F_DATE.setValue(firstday);
+			L_DATE.setValue(todaysDate);				
+		}
+	};
+	
+	scwin.getEventCount = function(data, dataType, footerPosition) {
+		var sum = 0;
+		var count01 = 0;
+		var count02 = 0;
+		var count03 = 0; 
+		var count04 = 0; 
+		var count05 = 0; 
+		var count06 = 0; 
+		var count07 = 0; 
+		var count08 = 0; 
+		var count09 = 0; 
+		var count10 = 0; 
+		var count11 = 0; 
+		var count12 = 0; 
+		var count13 = 0; 
+		var count14 = 0; 
+		var count15 = 0; 
+		var count16 = 0; 
+		var count17 = 0; 
+		var count18 = 0; 
+				
+		var stsCount01 = 0;
+		var stsCount02 = 0;
+		
+		var result = "";
+		
+		if (data.length > 0) {
+			sum = data.length;
+			for (var i=0; i<data.length; i++) {
+				switch(data[i]) {
+					case "기상":
+					count01++;
+					break;
+					
+					case "대기":
+					count02++;
+					break;
+					
+					case "교통소통":
+					count03++;
+					break;
+					
+					case "세종노선상세정보":
+					count04++;
+					break;
+					
+					case "공공데이터포털 노선연계":
+					count05++;
+					break;
+					
+					case "공공데이터포털 노선_정류장연계":
+					count06++;
+					break;
+					
+					case "공공데이터포털 버스현재위치":
+					count07++;							
+					break;
+					
+					case "공공데이터포털 도시코드 연계":
+					count08++;
+					break;
+					
+					case "경제":
+					count09++;
+					break;
+					
+					case "날씨":
+					count10++;
+					break;
+					
+					case "문화·연예":
+					count11++;
+					break;
+					
+					case "사용자 뉴스":
+					count12++;
+					break;
+					
+					case "사회":
+					count13++;
+					break;
+					
+					case "세계":
+					count14++;
+					break;
+					
+					case "스포츠":
+					count15++;
+					break;
+					
+					case "정치":
+					count16++;
+					break;
+					
+					case "최신":
+					count17++;
+					break;
+					
+					case "헤드라인":
+					count18++;
+					break;		
+								
+					case "IS001":
+					stsCount01++;
+					break;
+					
+					case "IS002":
+					stsCount02++;
+					break;
+				
+				}
+			}				
+			
+			if(footerPosition == 'top') {
+				result = "총계 : " + sum + "건, 정상 : " + stsCount01+ "건, 실패 : " + stsCount02 + "건";						
+			}
+			
+			else if (footerPosition == 'middle') {
+				result =  "기상 : " + count01 + "건, 대기 : " + count02 + "건, 교통 소통 : " + count03 + "건, 세종노선상세정보 : " + count04;
+				result += "건, 공공데이터포털 노선연계 : " + count05 + "건, 공공데이터포털 노선_정류장연계 : " + count06 + "건, 공공데이터포털 버스현재위치 : " + count07;
+				result += "건, 공공데이터포털 도시코드 연계 : " + count08 + "건";
+			}
+			
+			else if (footerPosition == 'bottom') {
+				result =  "경제 : " + count09 + "건, 날씨 : " + count10 + "건, 문화·연예 : " + count11 + "건, 사용자 뉴스 : " + count12;
+				result += "건, 사회 : " + count13 + "건, 세계 : " + count14 + "건, 스포츠 : " + count15;
+				result += "건, 정치 : " + count16 + "건, 최신 : " + count17 + "건, 헤드라인 : " + count18 + "건";			
+			}
+			return result;
+		}
+	}
+	
+	scwin.getFooterDivTop = function(data, dataType) {
+		var result = scwin.getEventCount(data, dataType, "top");
+		return result;
+	};
+	
+	scwin.getFooterDivMiddle = function(data, dataType) {
+		var result = scwin.getEventCount(data, dataType, "middle");
+		return result;
+	};
+	
+	scwin.getFooterDivBottom = function(data, dataType) {
+		var result = scwin.getEventCount(data, dataType, "bottom");
+		return result;
+	};			
+	]]></script>
+	</head>
+	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
+		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
+			<xf:group id="pgm_navi" class="pgm_navi" style="">
+				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
+			</xf:group>
+			<xf:group class="pgm_header" id="pgm_header" style="">
+				<xf:group class="gr_search" id="" style="">
+					<xf:group class="label" id="" style="margin-left: 10px;">
+						<w2:span class="" id="" label="연계명" style=""></w2:span>
+					</xf:group>	
+					<xf:group class="search" id="" style="width:">
+						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE2_onviewchange" id="" optionOrder="false"
+							ref="data:dma_search.CONTENT1" class="search_type_100" style="width: 125px;" submenuSize="auto" textAlign="left"
+							chooseOptionLabel="-전체-">
+							<xf:choices>
+								<xf:itemset nodeset="data:dlt_intgNmItem">
+									<xf:label ref="INTG_NM"></xf:label>
+									<xf:value ref="INTG_NM"></xf:value>
+								</xf:itemset>
+							</xf:choices>
+						</xf:select1>
+					</xf:group>									
+					<xf:group class="label" id="" style=";">
+						<w2:span class="" id="" label="연계상태" style=""></w2:span>
+					</xf:group>	
+					<xf:group class="search" id="" style="width:">
+						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE2_onviewchange" id="" optionOrder="false"
+							ref="data:dma_search.CONTENT2" class="search_type_100" style="width: 125px;" submenuSize="auto" textAlign="center"
+							chooseOptionLabel="-전체-">
+							<xf:choices>
+								<xf:itemset nodeset="data:dlt_intgStsItem">
+									<xf:label ref="DL_CD_NM"></xf:label>
+									<xf:value ref="DL_CD"></xf:value>
+								</xf:itemset>
+							</xf:choices>
+						</xf:select1>
+					</xf:group>									
+					<xf:group class="label" id="" style="">
+						<w2:span class="" id="" label="기간"></w2:span>
+					</xf:group>
+					<xf:group class="search" id="" style="">
+						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+							style="width:120px; margin-right: 10px; float: left;margin-top: 3px;" id="F_DATE" renderType="component" renderDiv="true"
+							calendarValueType="yearMonthDate" ref="data:dma_search.F_DATE" ev:onviewchange="scwin.F_DATE_onviewchange" placeholder="yyyymmdd">
+						</w2:inputCalendar>
+						<w2:span label="~" style="float: left;margin-right: 10px;margin-top: 5px;" id=""></w2:span>
+						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+							style="width: 120px;float: left;margin-top: 3px;" id="L_DATE" renderType="component" renderDiv="true"
+							calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange" placeholder="yyyymmdd">
+						</w2:inputCalendar>
+						<xf:group id="" style="margin-left: 10px;" class="radio">
+							<xf:select1 id="calendar_radio" ref="" selectedIndex="1" cols="" appearance="full"
+								style="margin-light: 10px;min-width: 200px;" rows="1" ev:onviewchange="scwin.calendar_radio_onviewchange">
+								<xf:choices>
+									<xf:item>
+										<xf:label><![CDATA[직접입력]]></xf:label>
+										<xf:value><![CDATA[DIRECT]]></xf:value>
+									</xf:item>
+									<xf:item>
+										<xf:label><![CDATA[금일]]></xf:label>
+										<xf:value><![CDATA[TODAY]]></xf:value>
+									</xf:item>
+									<xf:item>
+										<xf:label><![CDATA[일주일]]></xf:label>
+										<xf:value><![CDATA[WEEK]]></xf:value>
+									</xf:item>
+									<xf:item>
+										<xf:label><![CDATA[1개월]]></xf:label>
+										<xf:value><![CDATA[MONTH]]></xf:value>
+									</xf:item>
+								</xf:choices>
+							</xf:select1>
+						</xf:group>
+					</xf:group>
+					<w2:wframe class="" id="wfm_mainBtn" scope="true" src="/cm/common/wf_mainBtn.xml" style="left : 1000px;"></w2:wframe>
+				</xf:group>
+			</xf:group>
+			<xf:group id="pgm_content" class="pgm_content grdc_1300_20_a" style="" >
+				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
+					<xf:group class="defaultbox" id="" style="">
+						<w2:textbox class="df_tt fl" id="" label="외부정보 연계 이력" style=""></w2:textbox>
+					</xf:group>
+					<xf:group></xf:group>
+					<xf:group id="" class="" style="">
+						<w2:gridView id="VH0501G0" rowNumVisible="true"
+							useShiftKey="true" scrollByColumn="false" owNumHeaderValue="순번" sortable="true" 
+							rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false"
+							 fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_BMS_INTG_HIS" class="cm_grid left" 
+							 autoFit="lastColumn" ev:oncellclick="scwin.VH0501G0_oncellclick"  ev:onrowindexchange="scwin.VH0501G0_onrowindexchange"
+							 rowNumHeaderValue="순번" focusMode="row" readOnly="true" noResultMessage="기간내 이력 없음">													
+							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
+							<w2:header style="" id="header1">
+								<w2:row style="" id="row1">
+									<w2:column removeBorderStyle="false" width="140" inputType="text" style="height:20px" id="column5"
+										value="연계일시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column3"
+										value="연계상태" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column4"
+										value="연계명" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="250" inputType="text" style="height:20px" id="column1"
+										value="실패로그" blockSelect="false" displayMode="label">
+									</w2:column>
+									<!-- <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column2"
+										value="데이터" blockSelect="false" displayMode="label">
+									</w2:column> -->
+								</w2:row>
+							</w2:header>
+							<w2:gBody style="" id="gBody1">
+								<w2:row style="" id="row2">
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="INTG_DTM"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="INTG_STS"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="INTG_NM"
+										value="" blockSelect="false" displayMode="label" textAlign="left">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="LOG" value=""
+										blockSelect="false" displayMode="label" textAlign="left">
+									</w2:column>
+									<!-- <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="DATA" value=""
+										blockSelect="false" displayMode="label" textAlign="left">
+									</w2:column> -->
+								</w2:row>
+							</w2:gBody>
+							<w2:footer id="footer1" style="">
+								<w2:row id="row3" style="">
+									<w2:column blockSelect="false" colSpan="14" displayMode="label"
+										expression="custom(scwin.getFooterDivTop, 'INTG_STS')" id="column42" inputType="expression" removeBorderStyle="false"
+										style="height:26px;" textAlign="left" autoFitFilterList="">
+									</w2:column>
+								</w2:row>
+								<w2:row id="row4" style="">
+									<w2:column blockSelect="false" colSpan="14" displayMode="label"
+										expression="custom(scwin.getFooterDivMiddle, 'INTG_NM')" id="column43" inputType="expression" removeBorderStyle="false"
+										style="height:26px;" textAlign="left" autoFitFilterList="">
+									</w2:column>								
+								</w2:row>
+								<w2:row id="row5" style="">
+									<w2:column blockSelect="false" colSpan="14" displayMode="label"
+										expression="custom(scwin.getFooterDivBottom, 'INTG_NM')" id="column44" inputType="expression" removeBorderStyle="false"
+										style="height:26px;" textAlign="left" autoFitFilterList="">
+									</w2:column>								
+								</w2:row>
+							</w2:footer>							
+						</w2:gridView>
+					</xf:group>
+				</xf:group><!-- pgm_list end -->
+				<xf:group id="" class="vertical_line"></xf:group>
+
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a" style="">
+					<xf:group class="gr_map_header" id="" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl" id="" label="정상연계 데이터" style=""></w2:textbox>
+						</xf:group>
+					</xf:group>
+					<xf:group></xf:group>
+					<xf:group id="" style="">
+						<xf:textarea id="" style="width: 100%;height: 100%;" nextTabByEnter="" ref="data:dlt_BMS_INTG_HIS.DATA"></xf:textarea>
+					</xf:group>
+				</xf:group><!-- pgm_detail end -->				
+			</xf:group> <!-- end content --> 
+		</xf:group> <!-- end container -->
+	</body>
+</html>
