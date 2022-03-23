@@ -116,6 +116,16 @@
 			search_input.setPlaceholder("권한명");
 		}
 	};
+	
+	scwin.grd_excludeProgramAuthority_oncellclick = function(row,col,colId) {
+		if(col==0)return;
+		if(grd_excludeProgramAuthority.getCellChecked(row,"chk")){
+			grd_excludeProgramAuthority.setCellChecked(row,"chk",false)
+		}
+		else {
+			grd_excludeProgramAuthority.setCellChecked(row,"chk",true)
+		}		
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -153,7 +163,7 @@
 			
 			<xf:group style="" id="" class="popup_content">
 				<w2:gridView id="grd_excludeProgramAuthority" dataList="dlt_programAuthority" autoFit="allColumn" readOnly="true" style="height:240px;" useShiftKey="false" scrollByColumn="false" class="cm_grid"
-					ev:onrowindexchange="scwin.grd_excludeProgramAuthority_onrowindexchange" fixedColumnWithHidden="true" >
+					ev:onrowindexchange="scwin.grd_excludeProgramAuthority_onrowindexchange" fixedColumnWithHidden="true" ev:oncellclick="scwin.grd_excludeProgramAuthority_oncellclick" focusMove="" focusMode="row">
 					<w2:header id="header1" style="">
 						<w2:row id="row1" style="">
 							<w2:column id="chkHeader" blockSelect="false" style="height:20px" width="39" inputType="checkbox" value="선택"></w2:column>
