@@ -24,4 +24,10 @@ public class VH0502Controller extends ControllerSupport {
 		return result.getResult();
 	}
 	
+	@RequestMapping("/vh/VH0502SHI0")
+	public @ResponseBody Map<String, Object> VH0502SHI0() throws Exception {
+		result.setData("dlt_searchitem", vh0502Service.VH0502SHI0());
+		return result.getResult();
+	}
+	
 }

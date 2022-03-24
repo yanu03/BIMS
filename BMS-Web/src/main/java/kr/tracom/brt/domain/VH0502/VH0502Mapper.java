@@ -10,4 +10,6 @@ public interface VH0502Mapper {
 	
 	public List<Map> VH0502G0R0(Map param);
 	
+	public List<Map> VH0502SHI0();
+	
 }

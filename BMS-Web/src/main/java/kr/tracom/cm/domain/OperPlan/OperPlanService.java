@@ -546,8 +546,10 @@ public class OperPlanService extends ServiceSupport {
 					nextNodePhaseInfo = (Map<String, Object>) nextNodeMap.get(String.valueOf(next_node_sn));
 
 					//다음노드 진입현시 정보 확인
-					next_node_type = String.valueOf(nextNodePhaseInfo.get("NODE_TYPE"));
-					next_cross_id = String.valueOf(nextNodePhaseInfo.get("CRS_ID"));
+					if(nextNodePhaseInfo != null ) {
+						next_node_type = String.valueOf(nextNodePhaseInfo.get("NODE_TYPE"));
+						next_cross_id = String.valueOf(nextNodePhaseInfo.get("CRS_ID"));
+					}
 
 					acc_len = 0;
 					dec_len = 0;
