@@ -87,6 +87,7 @@
 						<w2:key id="REP_ROUT_ID" name="대표노선아이디" dataType="text"></w2:key>
 						<w2:key id="WAY_DIV" name="상하행구분" dataType="text"></w2:key>
 						<w2:key id="DAY_DIV" name="요일구분" dataType="text"></w2:key>
+						<w2:key id="EXL_UPDATE" name="엑셀업데이트" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_repRoutItem" saveRemovedData="true">
@@ -143,11 +144,14 @@
 		var autoOptions = {
 			Main : { grid : AL0201G0, srchSbm : sub_AL0201G0R0, savSbm : sub_AL0201G0S0, srchGrp : pgm_header, keyColumn : "REP_ROUT_ID,WAY_DIV,DAY_DIV", 
 					focusColumn : "REP_ROUT_ID", name :  "대표노선 운행계획"},
-			Sub1 : { grid : AL0201G1, srchSbm : sub_AL0201G1R0, savSbm : sub_AL0201G1S0, name :  "대표노선 운행계획 상세",cnlGridCb:scwin.btn_cancel_cb}
+			Sub1 : { grid : AL0201G1, srchSbm : sub_AL0201G1R0, savSbm : sub_AL0201G1S0, name :  "대표노선 운행계획 상세",cnlGridCb:scwin.btn_cancel_cb, search_map : dma_sub_search}
 		};
 	
 		var mainOptions = {
-			PLAY:{cbFnc:scwin.btn_auto_onclick, nm:"자동",class:"autoApply"}
+			PLAY:{cbFnc:scwin.btn_auto_onclick, nm:"자동",class:"autoApply"},
+			EXL_I:{},
+			EXL_F:{}
+			
 		};
 		
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID, autoOptions, mainOptions);
@@ -156,11 +160,13 @@
 			ADD: [{cbFnc:scwin.btn_sub_add_onclick,nm:"추가",class:"add"}], DEL:[{cbFnc:scwin.btn_sub_del_onclick,nm:"삭제",class:"add"}]
 					, CNL:{}, EXL_I:{}, EXL:{}, EXL_F:{} //, PLAY:{cbFnc:scwin.btn_sub_auto_onclick,nm:"자동",class:"autoApply"}
 		};
-		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);	
 		
 		var codeOptions = [{ code : "DAY_DIV", compID : "AL0201G0:DAY_DIV"}
 							,{ code : "WAY_DIV", compID : "AL0201G0:WAY_DIV"}
 						];
+						
+		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions,codeOptions);	
+		
 		com.setCommonDtl(codeOptions, function() {
 				com.searchGrid(AL0201G0,sub_AL0201G0R0);
 		});
@@ -831,64 +837,64 @@
 							fixedColumnWithHidden="true" dataList="dlt_BRT_OPER_PL_ROUT_INFO" id="AL0201G1" readOnly="" style=""
 							scrollByColumn="false" useShiftKey="true" rowStatusVisible="false" rowStatusHeaderValue="상태" 
 							rowNumHeaderValue="순번" rowNumVisible="false" rowNumStatusUniqueId="" rowNumStatusResize="" ev:oneditkeyup="" ev:onafteredit="scwin.AL0201G1_onafteredit">
-							<w2:header id="header1" style="">
+							<w2:header id="header1" style="height:24px">
 								<w2:row id="row2" style="">
-									<w2:column removeBorderStyle="false" width="40" inputType="checkbox" style="height:20px" id="chkHeader"
+									<w2:column removeBorderStyle="false" width="40" inputType="checkbox" style="height:24px" id="chkHeader"
 										value="선택" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column1"
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:24px" id="column1"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column2"
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:24px" id="column2"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column3"
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:24px" id="column3"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="40" inputType="text" style="height:20px" id="column25"
+									<w2:column removeBorderStyle="false" width="40" inputType="text" style="height:24px" id="column25"
 										value="운행순번" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column21"
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:24px" id="column21"
 										value="노선시작(시분)" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column22"
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:24px" id="column22"
 										value="노선종료(시분)" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="65" inputType="text" style="height:20px" id="column23"
+									<w2:column removeBorderStyle="false" width="65" inputType="text" style="height:24px" id="column23"
 										value="운행간격(분)" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="65" inputType="text" style="height:20px" id="column24"
+									<w2:column removeBorderStyle="false" width="65" inputType="text" style="height:24px" id="column24"
 										value="운행시간(시분)" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
 							</w2:header>
 							<w2:gBody id="gBody4" style="">
 								<w2:row id="row5" style="">
-									<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
+									<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:24px"
 										inputType="checkbox" id="chk" blockSelect="false">
 									</w2:column>
-									<w2:column id="REP_ROUT_ID" blockSelect="false" style="height:20px" width="" inputType="text"
+									<w2:column id="REP_ROUT_ID" blockSelect="false" style="height:24px" width="" inputType="text"
 										displayMode="label">
 									</w2:column>
-									<w2:column id="DAY_DIV" blockSelect="false" style="height:20px" width="" inputType="text"
+									<w2:column id="DAY_DIV" blockSelect="false" style="height:24px" width="" inputType="text"
 										displayMode="label">
 									</w2:column>
-									<w2:column id="WAY_DIV" blockSelect="false" style="height:20px" width="" inputType="text"
+									<w2:column id="WAY_DIV" blockSelect="false" style="height:24px" width="" inputType="text"
 										displayMode="label">
 									</w2:column>
-									<w2:column id="OPER_SN" blockSelect="false" style="height:20px;" width="" inputType="text"
+									<w2:column id="OPER_SN" blockSelect="false" style="height:24px;" width="" inputType="text"
 										displayMode="label">
 									</w2:column>
-									<w2:column id="ROUT_ST_TM" blockSelect="false" style="height:20px" width="" inputType="text"
+									<w2:column id="ROUT_ST_TM" blockSelect="false" style="height:24px" width="" inputType="text"
 										displayMode="label" allowChar="0-9 :" customFormatter="com.transTime2" userData1="M">
 									</w2:column>
-									<w2:column id="ROUT_ED_TM" blockSelect="false" style="height:20px" width="" inputType="text"
+									<w2:column id="ROUT_ED_TM" blockSelect="false" style="height:24px" width="" inputType="text"
 										displayMode="label" allowChar="0-9 :" customFormatter="com.transTime2" userData1="M">
 									</w2:column>
-									<w2:column id="OPER_INTV" blockSelect="false" style="height:20px;" width="" inputType="text"
+									<w2:column id="OPER_INTV" blockSelect="false" style="height:24px;" width="" inputType="text"
 										displayMode="label">
 									</w2:column>
-									<w2:column id="OPER_TM" blockSelect="false" style="height:20px;" width="" inputType="text"
+									<w2:column id="OPER_TM" blockSelect="false" style="height:24px;" width="" inputType="text"
 										readonly="" displayMode="label">
 									</w2:column>
 								</w2:row>
@@ -897,7 +903,7 @@
 								<w2:row id="row3" style="">
 									<w2:column blockSelect="false" colSpan="9" displayMode="label"
 										expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
-										style="height:20px;" textAlign="left" width="1830">
+										style="height:24px;" textAlign="left" width="1830">
 									</w2:column>
 								</w2:row>
 							</w2:footer>
