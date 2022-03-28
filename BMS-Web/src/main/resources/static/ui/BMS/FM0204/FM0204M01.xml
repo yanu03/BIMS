@@ -328,7 +328,8 @@
 		
 		var codeOptions = [ {code : "FCLT_KIND", compID : "FM0204G0:FCLT_KIND"},
 							{code : "PARAM_KIND"},
-							{code : "FCLT_COND", compID : "FM0204G0:FCLT_COND"}
+							{code : "FCLT_COND", compID : "FM0204G0:FCLT_COND"},
+							{code : "LOG_LEVEL", compID : "LOG_LEVEL"}
 		 ];
 		 
 		com.setCommonDtl(codeOptions, function() {
@@ -577,7 +578,7 @@
 				T0_PK010.setDisabled(false);
 				break;
 			case 'PK011':
-				T0_PK011.setDisabled(false);
+				LOG_LEVEL.setDisabled(false);
 				break;
 			case 'PK012':
 				T0_PK012.setDisabled(false);
@@ -1442,12 +1443,8 @@
 												<w2:rowspan>1</w2:rowspan>
 											</w2:attributes>
 											<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="" direction="auto" disabled="false"
-												disabledClass="w2selectbox_disabled" id="T0_PK011" ref="" style="" submenuSize="auto">
+												disabledClass="w2selectbox_disabled" id="LOG_LEVEL" ref="" style="" submenuSize="auto">
 												<xf:choices>
-													<xf:item>
-														<xf:label><![CDATA[string]]></xf:label>
-														<xf:value><![CDATA[string]]></xf:value>
-													</xf:item>
 												</xf:choices>
 											</xf:select1>
 										</xf:group>

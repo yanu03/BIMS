@@ -40,7 +40,7 @@
 					<w2:key id="DAY_DIV" name="요일구분" dataType="text"></w2:key>
 					<w2:key id="ROUT_ID" name="노선ID" dataType="text"></w2:key>
 					<w2:key id="ROUT_NM" name="노선명" dataType="text"></w2:key>
-					<w2:key id="OPER_SN" name="운행회차" dataType="text"></w2:key>
+					<w2:key id="OPER_SN" name="운행순번" dataType="text"></w2:key>
 				</w2:keyInfo>
 			</w2:dataMap>
 		</w2:dataCollection>

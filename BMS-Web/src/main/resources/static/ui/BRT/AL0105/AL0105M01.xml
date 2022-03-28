@@ -114,7 +114,7 @@
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainOptions);
 		
 		var subOptions = {
-			SEARCH: {cbFnc:scwin.btn_sub_search, nm:"조회", class:"search"}
+			SEARCH: {cbFnc:scwin.btn_sub_move, nm:"조회", class:"search"}
 		};
 		
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);
@@ -140,16 +140,18 @@
 	};	
 	
 	//그리드1 검색
-	scwin.btn_sub_search = function(){
-		dma_sub_search.set("CONTENT1", search_sub_input.getValue());
-		com.executeSubmission(sub_AL0105G1R0);
-	}
+	scwin.btn_sub_move = function() {
+		debugger;
+		if(com.isEmpty(dma_sub_search.get("CONTENT1"))==false){
+			com.gridMove(AL0105G1, "DRV_ID,DRV_NM", dma_sub_search.get("CONTENT1"), AL0105G1.getFocusedRowIndex());
+		}
+	};
 	
 	//그리드2 검색
-	scwin.btn_sub_search2 = function(){
+	/*scwin.btn_sub_search2 = function(){
 		dma_sub_search.set("CONTENT2", search_sub_input2.getValue());
 		com.executeSubmission(sub_AL0105G2R0);
-	}
+	}*/
 	
 	scwin.sub_AL0105G0R0_submitdone = function(e) {
 		com.setFocusedCell(AL0105G0, "REP_ROUT_ID");		
@@ -358,7 +360,7 @@
 									<w2:span class="" id="" label="찾기"></w2:span>
 								</xf:group>
 								<xf:group class="search" id="" style="">
-									<xf:input id="search_sub_input" class="search_input" style="width:auto;" ref="" placeholder="운전자ID 또는 운전자명"></xf:input>
+									<xf:input id="search_sub_input" class="search_input" style="width:auto;" ref="data:dma_sub_search.CONTENT1" placeholder="운전자ID 또는 운전자명"></xf:input>
 								</xf:group>
 								<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 							</xf:group>

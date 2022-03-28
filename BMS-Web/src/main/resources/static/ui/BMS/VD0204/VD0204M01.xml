@@ -277,7 +277,8 @@
 							{code : "VHC_FUEL", compID : "VD0204G0:VHC_FUEL"},
 							{code : "DVC_KIND", compID : "VD0204G1:DVC_KIND"},
 							{code : "INST_LOC", compID : "VD0204G1:INST_LOC"},
-							{code : "PARAM_KIND"}
+							{code : "PARAM_KIND"},
+							{code : "LOG_LEVEL", compID : "LOG_LEVEL"}
 		 ];
 		 
 		com.setCommonDtl(codeOptions, function() {
@@ -932,13 +933,8 @@
 									</xf:group>
 									<xf:group tagname="td" style="" class="w2tb_td" id="T_PK011">
 										<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-											disabledClass="w2selectbox_disabled" id="selectbox1" style="" submenuSize="auto" ref="" chooseOptionLabel="">
-											<xf:choices>
-												<xf:item>
-													<xf:label><![CDATA[string]]></xf:label>
-													<xf:value><![CDATA[string]]></xf:value>
-												</xf:item>
-											</xf:choices>
+											disabledClass="w2selectbox_disabled" id="LOG_LEVEL" style="" submenuSize="auto" ref="" chooseOptionLabel="">
+											<xf:choices></xf:choices>
 										</xf:select1>
 									</xf:group>
 									<xf:group tagname="th" style="height: 10px;" class="w2tb_th">

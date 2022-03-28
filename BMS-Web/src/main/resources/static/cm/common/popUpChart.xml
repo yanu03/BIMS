@@ -26,7 +26,7 @@
 			</w2:dataList>
 			<w2:dataList baseNode="list" repeatNode="map" id="dlt_OPER_SN_INFO" saveRemovedData="true">
 				<w2:columnInfo>
-					<w2:column id="OPER_SN" name="운행회차" dataType="number" defaultValue="0"></w2:column>
+					<w2:column id="OPER_SN" name="운행순번" dataType="number" defaultValue="0"></w2:column>
 				</w2:columnInfo>
 			</w2:dataList>
 			<w2:dataList baseNode="list" repeatNode="map" id="dlt_BRT_OPER_ALLOC_PL_NODE_INFO" saveRemovedData="true">
@@ -58,7 +58,7 @@
 						<w2:key id="DAY_DIV" name="요일구분" dataType="text"></w2:key>
 						<w2:key id="ROUT_ID" name="노선ID" dataType="text"></w2:key>
 						<w2:key id="ROUT_NM" name="노선명" dataType="text"></w2:key>
-						<w2:key id="OPER_SN" name="운행회차" dataType="text"></w2:key>
+						<w2:key id="OPER_SN" name="운행순번" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>			
 		</w2:dataCollection>
