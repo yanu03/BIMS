@@ -144,7 +144,7 @@
 	
 	scwin.SI0405G0_onrowindexchange = function(row,oldRow) {
 		com.changeSingleGrid(SI0405G0, row, oldRow);
-		debugger;
+		
 		var disabled = true;
 		
 		var wayYn = dlt_BMS_REP_ROUT_MST.getCellData(SI0405G0.getFocusedRowIndex(), "WAY_YN");

@@ -52,6 +52,7 @@
 .grdc_if_60_if {display:grid; grid-template-columns:1fr 60px 1fr;}
 
 .grdc_a {display:grid; grid-template-columns:auto}
+.grdc_20000 {display:grid; grid-template-columns:83720px}
 .grdc_500_a {display:grid; grid-template-columns:500px auto;}
 .grdc_300_a {display:grid; grid-template-columns:300px auto;}
 .grdc_250_a {display:grid; grid-template-columns:250px auto;}
@@ -94,6 +95,7 @@
 .grdc_1000_20_a {display:grid; grid-template-columns:1000px 20px auto;}
 .grdc_870_20_a {display:grid; grid-template-columns:870px 20px auto;}
 .grdc_1200_20_a {display:grid; grid-template-columns:1200px 20px auto;}
+.grdc_1300_20_a {display:grid; grid-template-columns:1300px 20px auto;}
 .grdc_1400_20_a {display:grid; grid-template-columns:1400px 20px auto;}
 .grdc_1200_20_550_a {display:grid; grid-template-columns:1200px 20px 550px auto;}
 .grdc_400_20_900_20_a {display:grid; grid-template-columns:400px 20px 900px 20px auto;}

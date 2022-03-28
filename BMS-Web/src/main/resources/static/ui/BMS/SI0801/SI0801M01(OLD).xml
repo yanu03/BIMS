@@ -147,7 +147,7 @@
 	
 	//스케쥴 유무 업데이트를 위한 저장 함수
 	scwin.saveGrid = function() {
-		debugger;
+		
 		var str;
 		var yesno_str;
 		var idx_G0 = SI0801G0.getModifiedIndex().length;

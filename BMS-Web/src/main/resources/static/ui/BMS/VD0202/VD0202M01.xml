@@ -148,7 +148,7 @@
 //		});
 		
 		var codeOptions = [ {code : "OPER_STS", compID : "VD0202G0:OPER_STS"},
-							{code : "VHC_KIND", compID : "VD0202G0:VHC_KIND, TYPE1"},
+							{code : "VHC_KIND", compID : "VD0202G0:VHC_KIND, TYPE2"},
 							{code : "DVC_KIND", compID : "VD0202G1:DVC_KIND"},
 							{code : "INST_LOC", compID : "VD0202G1:INST_LOC"},
 							{code : "DVC_COND", compID : "VD0202G1:DVC_COND"}
@@ -241,7 +241,7 @@
 		com.changeDualGrid(VD0202G0, VD0202G1, null, sub_VD0202G1R0, focusOption, row, oldRow);	
 		var routID = dlt_BRT_CUR_OPER_INFO.getCellData(VD0202G0.getFocusedRowIndex(), "ROUT_ID");
 		dma_sub_search.set("ROUT_ID", routID);
-		com.executeSubmission(sub_VD0202G2R0);
+		//com.executeSubmission(sub_VD0202G2R0);
 		
 		var param = com.getParameter();
 		var busClass = null;
@@ -273,6 +273,7 @@
 						break;	
 					case "":
 						dlt_BRT_CUR_OPER_INFO.setCellData(i, "OPER_STS", "운행종료");
+						dlt_BRT_CUR_OPER_INFO.modifyRowStatus(i, "R");
 						break;	
 					}	//end switch
 					
@@ -282,7 +283,7 @@
 			dma_sub_search.set("ROUT_ID", null);
 			dma_sub_search.set("VHC_ID", null);
 			//$p.executeSubmission(sub_VD0202G1R0);
-			$p.executeSubmission(sub_VD0202G2R0);				
+			//$p.executeSubmission(sub_VD0202G2R0);				
 		}
 	
 		
@@ -481,7 +482,7 @@
 	};
 	
 	scwin.sub_VD0202G2R0_submitdone = function(e) {
-		routMap.showRoute2("map_VD0202", dlt_BMS_ROUT_NODE_DISP_VW.getAllJSON(), -1);			
+		//routMap.showRoute2("map_VD0202", dlt_BMS_ROUT_NODE_DISP_VW.getAllJSON(), -1);			
 		//routMap.drawRoute2("map_VD0202", dlt_BMS_ROUT_LINK_CMPSTN.getAllJSON());
 
 		routMap.showVehicle("map_VD0202", dlt_BRT_CUR_OPER_INFO.getAllJSON(),
@@ -490,6 +491,10 @@
 	};
 	
 	scwin.TYPE1_onviewchange = function(info) {
+		com.executeSubmission(sub_VD0202G0R0);
+	};
+	
+	scwin.TYPE2_onviewchange = function(info) {
 //		$p.executeSubmission(sub_VD0202SHI1);
 		com.executeSubmission(sub_VD0202G0R0);
 	};
@@ -748,12 +753,27 @@
 			<xf:group class="pgm_header" id="pgm_header" style="">
 				<xf:group class="gr_search" id="" style="">
 					<xf:group class="label" id="" style="">
+						<w2:span class="" id="" label="대표 노선"></w2:span>
+					</xf:group>
+					<xf:group class="search" id="" style="">
+						<xf:select1 allOption="true" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE1_onviewchange" id="TYPE1" optionOrder="false"
+							ref="data:dma_search.CONTENT1" class="search_type_100" style="" submenuSize="auto" textAlign="center" chooseOptionLabel="-전체-">
+							<xf:choices>
+								<xf:itemset nodeset="data:dlt_repRoutItem">
+									<xf:label ref="REP_ROUT_NM"></xf:label>
+									<xf:value ref="REP_ROUT_ID"></xf:value>
+								</xf:itemset>
+							</xf:choices>
+						</xf:select1>
+					</xf:group>
+					<xf:group class="label" id="" style="">
 						<w2:span class="" id="" label="차량 종류"></w2:span>
 					</xf:group>
 					<xf:group class="search" id="" style="">
 						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false" 
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE1_onviewchange" id="TYPE1" optionOrder="false"
-							ref="data:dma_search.CONTENT1" class="search_type_100" style="width: 200px;" submenuSize="auto" textAlign="center" chooseOptionLabel="-전체-">
+							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE2_onviewchange" id="TYPE2" optionOrder="false"
+							ref="data:dma_search.CONTENT2" class="search_type_100" style="width: 200px;" submenuSize="auto" textAlign="center" chooseOptionLabel="-전체-">
 							<xf:choices>
 								<xf:itemset nodeset="data:dlt_searchitem2">
 									<xf:label ref="VHC_KIND"></xf:label>
@@ -794,7 +814,7 @@
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">
 						<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.VD0202G0_onrowindexchange" ev:oncellclick=""
-							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순서"
+							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순서"
 							sortable="true" rowStatusHeaderValue="상태" overflowX="hidden" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
 							dataList="data:dlt_BRT_CUR_OPER_INFO" ignoreCellClick="false" style="" autoFit="lastColumn" visibleRowNum="" id="VD0202G0"
 							class="cm_grid left" tooltipPositionY="" focusMode="row" noResultMessage="금일 고장건수 없음">
@@ -893,7 +913,7 @@
 					    	</w2:pivot>	 -->
 					    	
 					    						
-								<w2:gridView id="VD0202G1" style="width:98%;height:98%" defaultCellHeight="20" rowNumVisible="true"
+								<w2:gridView id="VD0202G1" style="width:98%;height:98%" defaultCellHeight="20" rowNumVisible="true" 
 								useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
 								overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
 								dataList="data:dlt_BMS_DVC_INFO" class="cm_grid" autoFit="lastColumn" fixedColumnScrollHidden="" ev:oncellclick="scwin.VD0201G1_oncellclick" ev:onscrolly="" ev:onrowindexchange="scwin.VD0202G1_onrowindexchange" focusMove="" focusMode="row">

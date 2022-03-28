@@ -118,6 +118,18 @@
 	scwin.btn_cancel_onclick = function() {
 		com.closePopup();
 	};
+	
+	
+	//다른 셀 클릭해도 radio check
+	scwin.grd_program_oncellclick = function(row,col,colId) {
+		if(col==0)return;
+		if(grd_program.getCellChecked(row,"chk")){
+			grd_program.setCellChecked(row,"chk",false)
+		}
+		else {
+			grd_program.setCellChecked(row,"chk",true)
+		}		
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -142,7 +154,7 @@
 			<xf:group style="" id="" class="popup_content">
 				<w2:gridView id="grd_program" dataList="data:dlt_program" autoFit="allColumn" readOnly="true" style=""
 					useShiftKey="false" scrollByColumn="false" class="cm_grid popup" fixedColumnWithHidden="true"
-					ev:oncelldblclick="scwin.grd_program_oncelldblclick" >
+					ev:oncelldblclick="scwin.grd_program_oncelldblclick" ev:oncellclick="scwin.grd_program_oncellclick" focusMode="row">
 					<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 					<w2:header style="" id="header1">
 						<w2:row style="" id="row1">
