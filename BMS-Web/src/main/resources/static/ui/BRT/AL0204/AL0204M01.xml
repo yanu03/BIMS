@@ -391,7 +391,7 @@
 		
 		gridHeader +='<w2:row style="" id="first_row">';
 		gridHeader +='<w2:column blockSelect="false" readOnly="true" id="chkHeader" style="height:20px" inputType="checkbox" width="42" value="선택" rowSpan="2" sortable="false"></w2:column>';
-		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'OPER_SN'+'" style="height:20px" inputType="text" width="70" value="'+'운행회차'+'" rowSpan="2"></w2:column>';
+		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'OPER_SN'+'" style="height:20px" inputType="text" width="70" value="'+'운행순번'+'" rowSpan="2"></w2:column>';
 		for(var i = 0; i < maxCnt; i++) {
 			var nodeNm = dlt_BRT_DAY_OPER_ALLOC_PL_NODE_INFO.getCellData(i, "NODE_NM");
 			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'NODE_NM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="140" colSpan="2" value="'+nodeNm+'"></w2:column>';
@@ -467,7 +467,7 @@
 		dlt_VIEW_OPER_PL_NODE_INFO.removeAll();
 		
 		gridHeader +='<w2:row style="" id="first_row">';
-		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'OPER_SN'+'" style="height:20px" inputType="text" width="70" value="'+'운행회차'+'" rowSpan="2"></w2:column>';
+		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'OPER_SN'+'" style="height:20px" inputType="text" width="70" value="'+'운행순번'+'" rowSpan="2"></w2:column>';
 		for(var i = 0; i < rowData.length; i++) {
 			var nodeNm = rowData[i].NODE_NM;
 			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'NODE_NM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="140" colSpan="2" value="'+nodeNm+'"></w2:column>';
@@ -788,7 +788,7 @@
 										width="42" value="선택" rowSpan="2" sortable="false">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:40px;" id="column15"
-										value="운행회차" blockSelect="false" displayMode="label" colSpan="" rowSpan="2">
+										value="운행순번" blockSelect="false" displayMode="label" colSpan="" rowSpan="2">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="900" inputType="text" style="height:20px;" id="column14"
 										value="정류소 / 교차로" blockSelect="false" displayMode="label" colSpan="2" rowSpan="">

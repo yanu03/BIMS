@@ -19,4 +19,8 @@ public class VH0502Service extends ServiceSupport{
 		return vh0502Mapper.VH0502G0R0(param);
 	}
 	
+	public List<Map> VH0502SHI0() throws Exception{
+		return vh0502Mapper.VH0502SHI0();
+	}
+	
 }

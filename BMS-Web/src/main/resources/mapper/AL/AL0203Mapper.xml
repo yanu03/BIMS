@@ -135,7 +135,21 @@
 		,#{DPRT_TM}
 		,#{ARRV_TM}
 		,#{UPD_DTM}
-	)
+	)ON DUPLICATE KEY UPDATE
+		OPER_DT = #{OPER_DT}
+		,REP_ROUT_ID = #{REP_ROUT_ID}
+		,ROUT_ID = #{ROUT_ID}
+		,DAY_DIV = #{DAY_DIV}
+		,WAY_DIV = #{WAY_DIV}
+		,COR_ID = #{COR_ID}
+		,OPER_SN = #{OPER_SN}
+		,NODE_ID = #{NODE_ID}
+		,NODE_SN = #{NODE_SN}
+		,ALLOC_NO = #{ALLOC_NO}
+		,NODE_TYPE = #{NODE_TYPE}
+		,DPRT_TM = #{DPRT_TM}
+		,ARRV_TM = #{ARRV_TM}
+		,UPD_DTM = #{UPD_DTM}
 </insert>
 
 <update id="AL0203G0U0" parameterType="Map">

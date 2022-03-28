@@ -125,8 +125,8 @@
 		
 		gcm.DISP_TYPE.SINGLE_GRID, autoOptions);
 
-		dma_search.F_DATE_VH0104 = util.getCurrentDate2(-7);
-		F_DATE_VH0104.setValue(util.getCurrentDate2(-7));
+		dma_search.F_DATE_VH0104 = util.getCurrentDate2();
+		F_DATE_VH0104.setValue(util.getCurrentDate2());
 		
 		dma_search.L_DATE_VH0104 = util.getCurrentDate2();
 		L_DATE_VH0104.setValue(util.getCurrentDate2());
@@ -397,7 +397,7 @@
 							style="width: 120px;float: left;margin-top: 3px;" id="L_DATE_VH0104" renderType="component" renderDiv="true" placeholder="yyyymmdd" calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE_VH0104" ev:onviewchange="scwin.L_DATE_VH0104_onviewchange">
 						</w2:inputCalendar>
 						<xf:group id="" style="margin-left: 10px;" class="radio">
-							<xf:select1 id="calendar_radio" ref="" selectedIndex="2" cols="" appearance="full"
+							<xf:select1 id="calendar_radio" ref="" selectedIndex="1" cols="" appearance="full"
 								style="min-width: 200px;" rows="1" ev:onviewchange="scwin.calendar_radio_onviewchange">
 								<xf:choices>
 									<xf:item>
@@ -440,7 +440,7 @@
 							readOnly="true" keepDefaultColumnWidth="" oddEvenColorDisplay="" rowNumWidth="" summaryAuto="" excludeDeletedRows=""
 							useCtrlOnMultisort="" useFilterList="" useFilterListSync="" sortedIconPosition="" sortable="true" sortOrderReverse=""
 							showSortableUseFilter="" focusMode="row" rowNumStatusUniqueId="" rowNumStatusResize="" ev:onbeforecolumnmove="" userData1=""
-							preventMultisort="" showSortableImage="false" sortEvent="onclick">
+							preventMultisort="" showSortableImage="false" sortEvent="onclick" noResultMessage="기간내 이력 없음">
 							<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header2">
 								<w2:row style="" id="row3">

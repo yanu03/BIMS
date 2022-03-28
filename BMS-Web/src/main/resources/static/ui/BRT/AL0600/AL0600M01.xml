@@ -115,6 +115,7 @@
 						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
 						<w2:column id="DAY_DIV" name="요일구분" dataType="text"></w2:column>
 						<w2:column id="OPER_SN" name="운행순번" dataType="text"></w2:column>
+						<w2:column id="TOTAL_COMP_TM" name="총 비교시간" dataType="text"></w2:column>
 						<w2:column id="ARRV_TM_0" name="도착시간_0" dataType="text"></w2:column>
 						<w2:column id="DPRT_TM_0" name="출발시간_0" dataType="text"></w2:column>
 						<w2:column id="REAL_ARRV_TM_0" name="실제도착시간_0" dataType="text"></w2:column>
@@ -416,7 +417,11 @@
 			Sub1 : { grid : AL0600G1, srchSbm : sub_OPER_ALL_REAL_NODE, keyColumn : "OPER_SN", name : "운행계획 상세" }	
 		 };
 		 
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions);
+		 var mainOptions = {
+	         EXL:scwin.btn_excel_onclick
+	      };
+		 
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainOptions);
 		
 		var subOptions2 = {
 			SEARCH:[{cbFnc:scwin.openPopUpChart,nm:"시공도 보기"}
@@ -463,6 +468,28 @@
 	scwin.onpageunload = function() {
 		
 	};
+	
+	//엑셀 다운로드
+	scwin.btn_excel_onclick = function() {
+		var routNm = dlt_BMS_ROUT_MST.getCellData(AL0600G0.getFocusedRowIndex(), "ROUT_NM");
+		var dayDiv = dlt_BMS_ROUT_MST.getCellData(AL0600G0.getFocusedRowIndex(), "DAY_DIV");
+		if(dayDiv == 'DY001'){
+			dayDiv = '평일'
+		}else if(dayDiv == 'DY002'){
+			dayDiv = '휴일'
+		}
+	
+		var str = routNm + dayDiv + " - 운행계획비교";
+		var options = {
+			fileName : str+".xls", //[defalut: excel.xlsx] 다운로드하려는 파일의 이름으로 필수 입력 값 (지원하는 타입 => xls, xlsx, csv)
+			fileType : "xls",
+			useFooter : true
+		};
+		var infoArr = {};
+		com.gridDataDownLoad(AL0600G1, options, infoArr);
+		
+	};
+	
 	scwin.setGridViewInfo = function() {
 
 		var gridHeader ="", gridBody="";
@@ -487,7 +514,8 @@
 		dlt_VIEW_OPER_PL_NODE_INFO.removeAll();
 		
 		gridHeader +='<w2:row style="" id="first_row">';
-		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'OPER_SN'+'" style="height:20px" inputType="text" width="70" value="'+'운행회차'+'" rowSpan="3"></w2:column>';
+		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'OPER_SN'+'" style="height:20px" inputType="text" width="70" value="'+'운행순번'+'" rowSpan="3"></w2:column>';
+		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'TOTAL_COMP_TM'+'" style="height:20px" inputType="text" width="75" value="'+'총 비교시간'+'" rowSpan="3"></w2:column>';
 		for(var i = 0; i < maxCnt; i++) {
 			var nodeNm = dlt_BRT_OPER_ALLOC_RL_NODE_INFO.getCellData(i, "NODE_NM");
 			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'NODE_NM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="140" colSpan="5" value="'+nodeNm+'"></w2:column>';
@@ -495,13 +523,14 @@
 		gridHeader +='</w2:row>';
 		
 		gridBody += '<w2:column blockSelect="false" id="'+'OPER_SN'+'" style="height:20px" inputType="text" width="70"></w2:column>';
+		gridBody += '<w2:column blockSelect="false" id="'+'TOTAL_COMP_TM'+'" style="height:20px" inputType="text" width="70"></w2:column>';
 
 
 		gridHeader +='<w2:row style="" id="second_row">';
 		for(var i = 0; i < maxCnt; i++) {
 			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'ALLOC_INFO_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="140" colSpan="2" value="운행계획"></w2:column>';
 			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'CHG_INFO_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="140" colSpan="2" value="실제운행결과"></w2:column>';
-			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'COMPARE_TM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="70" colSpan="1" value="비교결과"></w2:column>';
+			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'COMPARE_TM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="75" colSpan="1" value="비교결과"></w2:column>';
 		}
 		gridHeader +='</w2:row>';
 		
@@ -513,7 +542,7 @@
 			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'DPRT_TM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="70" colSpan="'+1+'" value="출발시간"></w2:column>';
 			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'REAL_ARRV_TM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="70" colSpan="'+1+'" value="도착시간"></w2:column>';
 			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'REAL_DPRT_TM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="70" colSpan="'+1+'" value="출발시간"></w2:column>';
-			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'COMPARE_TM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="70" colSpan="'+1+'" value="비교시간"></w2:column>';
+			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'COMPARE_TM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="70" colSpan="'+1+'" value="비교시간(초)"></w2:column>';
 			gridBody += '<w2:column blockSelect="false" id="'+'ARRV_TM_'+i+'" style="height:20px" inputType="text" width=""></w2:column>'
 			gridBody += '<w2:column blockSelect="false" id="'+'DPRT_TM_'+i+'" style="height:20px" inputType="text" width=""></w2:column>'
 			gridBody += '<w2:column blockSelect="false" id="'+'REAL_ARRV_TM_'+i+'" style="height:20px" inputType="text" width=""></w2:column>'
@@ -536,20 +565,46 @@
 			dlt_VIEW_OPER_PL_NODE_INFO.setCellData(idx, "OPER_SN", columnVal);
 			
 			for(j = 0; j < rowCnt; j++) {
-				var nodeStTm = dlt_BRT_OPER_ALLOC_RL_NODE_INFO.getCellData(rowIndex+j, "DPRT_TM");
 				var nodeEdTm = dlt_BRT_OPER_ALLOC_RL_NODE_INFO.getCellData(rowIndex+j, "ARRV_TM");
+				var nodeStTm = dlt_BRT_OPER_ALLOC_RL_NODE_INFO.getCellData(rowIndex+j, "DPRT_TM");
 				dlt_VIEW_OPER_PL_NODE_INFO.setCellData(idx, "ARRV_TM_"+j, nodeEdTm);
 				dlt_VIEW_OPER_PL_NODE_INFO.setCellData(idx, 'DPRT_TM_'+j, nodeStTm);
 				
-				var realNodeStTm = dlt_BRT_OPER_ALLOC_RL_NODE_INFO.getCellData(rowIndex+j, "REAL_DPRT_TM");
 				var realNodeEdTm = dlt_BRT_OPER_ALLOC_RL_NODE_INFO.getCellData(rowIndex+j, "REAL_ARRV_TM");
+				var realNodeStTm = dlt_BRT_OPER_ALLOC_RL_NODE_INFO.getCellData(rowIndex+j, "REAL_DPRT_TM");
 				dlt_VIEW_OPER_PL_NODE_INFO.setCellData(idx, "REAL_ARRV_TM_"+j, realNodeEdTm);
 				dlt_VIEW_OPER_PL_NODE_INFO.setCellData(idx, "REAL_DPRT_TM_"+j, realNodeStTm);
+												
+				//비교시간 계산
+				var operArrHour = parseInt(nodeEdTm.substring(0, 2)) * 60 * 12;
+				var operArrMin = parseInt(nodeEdTm.substring(3, 5)) * 60;
+				var operArrSec = parseInt(nodeEdTm.substring(6));
+				var operArrTotal = operArrHour + operArrMin + operArrSec
 				
+				var operDprHour = parseInt(nodeStTm.substring(0, 2)) * 60 * 12;
+				var operDprMin = parseInt(nodeStTm.substring(3, 5)) * 60;
+				var operDprSec = parseInt(nodeStTm.substring(6));
+				var operDprTotal = operDprHour + operDprMin + operDprSec
 				
-				//비교시간
-				dlt_VIEW_OPER_PL_NODE_INFO.setCellData(idx, "COMPARE_TM_"+j, "-");
+				var realArrHour = parseInt(realNodeEdTm.substring(0, 2)) * 60 * 12;
+				var realArrMin = parseInt(realNodeEdTm.substring(3, 5)) * 60;
+				var realArrSec = parseInt(realNodeEdTm.substring(6));
+				var realArrTotal = realArrHour + realArrMin + realArrSec
 				
+				var realDprHour = parseInt(realNodeStTm.substring(0, 2)) * 60 * 12;
+				var realDprMin = parseInt(realNodeStTm.substring(3, 5)) * 60;
+				var realDprSec = parseInt(realNodeStTm.substring(6));
+				var realDprTotal = realDprHour + realDprMin + realDprSec
+				
+				if(isNaN(operArrTotal) != true && isNaN(operDprTotal) != true && isNaN(realArrTotal) != true && isNaN(realDprTotal) != true){
+					var compTm = (operDprTotal - operArrTotal) - (realDprTotal - realArrTotal);
+					/*if(compTm > 0){
+						compTm = "+" + compTm;
+					}*/
+					dlt_VIEW_OPER_PL_NODE_INFO.setCellData(idx, "COMPARE_TM_"+j, compTm);
+				}else{
+					dlt_VIEW_OPER_PL_NODE_INFO.setCellData(idx, "COMPARE_TM_"+j, "-");
+				}
 			}
 		}
 		
@@ -565,14 +620,58 @@
 		+ gridBody
 		+'</w2:row>'
 		+'</w2:gBody>'
+		
+		+'<w2:footer style="" id="footer2">'
+		+'<w2:row style="" id="row4">'
+		+'<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;" '
+		+'id="column55" value="" blockSelect="false" displayMode="label" colSpan="100" rowSpan="" '
+		+'expression="&quot;데이터 개수 : &quot; + COUNT(&apos;COMP_ID&apos;)" textAlign="left">'
+		+'</w2:column>'
+		+'</w2:row>'
+		+'</w2:footer>'
+		
 		+'</w2:gridView>' ;
 		
 		AL0600G1.setGridStyle(WebSquare.xml.parse( gridStr , true ));
 		autoOptions.Sub1.grid = AL0600G1;
 		AL0600G1.setFixedColumn(1);
 		
-
-		dlt_VIEW_OPER_PL_NODE_INFO.modifyAllStatus("R")
+		//비교결과 색변경, 총 비교시간 계산
+		rowIndex = 0;
+		rowCnt = 0;
+		for(var i = 0; i < rowCntArr.length; i++) { //rowCntArr.length == 총 row 수
+			var totalCompTm = 0;
+			rowIndex += rowCnt;
+			rowCnt =  rowCntArr[i].CNT; //rowCnt == 한 row의 노드 수
+			for(var j = 0; j < rowCnt; j++) {
+				var index = rowIndex+j;
+				var compTm = dlt_VIEW_OPER_PL_NODE_INFO.getCellData(j, "COMPARE_TM_"+j);
+				if(compTm > 0){
+					AL0600G1.setCellColor(i, "COMPARE_TM_"+j, "#0000FF");
+				}else if(compTm < 0){
+					AL0600G1.setCellColor(i, "COMPARE_TM_"+j, "#FF0000");
+				}else if(compTm == 0 || compTm == '-'){
+					AL0600G1.setCellColor(i, "COMPARE_TM_"+j, "#000000");
+				}
+				
+				if(isNaN(compTm) != true){
+					totalCompTm = totalCompTm + compTm;
+				}
+			}
+			
+			dlt_VIEW_OPER_PL_NODE_INFO.setCellData(i, "TOTAL_COMP_TM", totalCompTm);
+			var rowTotalCompTm = dlt_VIEW_OPER_PL_NODE_INFO.getCellData(i, "TOTAL_COMP_TM"); // 총 비교시간
+			
+			if(rowTotalCompTm > 0){
+				AL0600G1.setCellColor(i, "TOTAL_COMP_TM", "#0000FF");
+			}else if(rowTotalCompTm < 0){
+				AL0600G1.setCellColor(i, "TOTAL_COMP_TM", "#FF0000");
+			}else if(rowTotalCompTm == 0 || totalCompTm == '-'){
+				AL0600G1.setCellColor(i, "TOTAL_COMP_TM", "#000000");
+			}
+		}
+		
+		dlt_VIEW_OPER_PL_NODE_INFO.modifyAllStatus("R");
 	};
        
     //빈 그리드 그리기(FOR 엑셀)
@@ -584,7 +683,7 @@
 		dlt_VIEW_OPER_PL_NODE_INFO.removeAll();
 		
 		gridHeader +='<w2:row style="" id="first_row">';
-		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'OPER_SN'+'" style="height:20px" inputType="text" width="70" value="'+'운행회차'+'" rowSpan="2"></w2:column>';
+		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'OPER_SN'+'" style="height:20px" inputType="text" width="70" value="'+'운행순번'+'" rowSpan="2"></w2:column>';
 		for(var i = 0; i < rowData.length; i++) {
 			var nodeNm = rowData[i].NODE_NM;
 			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'NODE_NM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="140" colSpan="2" value="'+nodeNm+'"></w2:column>';
@@ -627,7 +726,7 @@
 		var operSn = dlt_VIEW_OPER_PL_NODE_INFO.getCellData(AL0600G1.getFocusedRowIndex(), "OPER_SN");
 
 		if(com.isEmpty(operSn)){
-			com.alert("운행회차를 선택하고 시공도 보기를 클릭 하시기 바랍니다.");
+			com.alert("운행순번을 선택하고 시공도 보기를 클릭 하시기 바랍니다.");
 			return;
 		}
 
@@ -869,7 +968,7 @@
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row3">
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:40px;" id="column15"
-										value="운행회차" blockSelect="false" displayMode="label" colSpan="" rowSpan="2">
+										value="운행순번" blockSelect="false" displayMode="label" colSpan="" rowSpan="2">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="900" inputType="text" style="height:20px;" id="column14"
 										value="정류소 / 교차로" blockSelect="false" displayMode="label" colSpan="2" rowSpan="">
