@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.tracom.brt.domain.VH0603.VH0603Mapper">
+
+<select id="VH0603G0R0" parameterType="Map" resultType="Map">
+	SELECT				DATE_FORMAT(A.UPD_DTM, '%Y-%m-%d %H:%m:%s') UPD_DTM
+					,	A.CRS_ID
+					,	A.CTR_STS
+					,	A.CTR_MODE
+					,	A.A_PHASE_NO
+					,	A.A_PHASE_TM
+					,	A.B_PHASE_NO
+					,	A.B_PHASE_TM	
+					,	B.CRS_NM
+					
+	FROM				BMS_CRS_SIGOPER_PHASE_INFO_HIS A
+	LEFT JOIN			BMS_CRS_MST B
+		ON				A.CRS_ID = B.CRS_ID							
+
+	<where>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT1)">
+				AND B.CRS_NM LIKE CONCAT('%', #{CONTENT1}, '%')
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(TYPE1)">
+				AND A.CTR_STS = #{TYPE1}
+		</if>			
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(TYPE2)">
+				AND A.CTR_MODE = #{TYPE2}
+		</if>			
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
+			<![CDATA[AND DATE_FORMAT(A.UPD_DTM, '%Y%m%d') >= #{F_DATE}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
+			<![CDATA[AND DATE_FORMAT(A.UPD_DTM, '%Y%m%d') <= #{L_DATE}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
+				AND DATE_FORMAT(A.UPD_DTM, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+		</if>			
+	</where>
+	
+	ORDER BY			A.UPD_DTM DESC
+</select>
+
+</mapper>

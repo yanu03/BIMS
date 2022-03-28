@@ -88,6 +88,8 @@
 						<w2:column id="OPER_STS" name="운행상태" dataType="text"></w2:column>
 						<w2:column id="ALLOC_NO" name="배차" dataType="text"></w2:column>
 						<w2:column id="OPER_SN" name="운행순번" dataType="text"></w2:column>
+						<w2:column id="GPS_X_RAW" name="원GPS_X" dataType="text"></w2:column>
+						<w2:column id="GPS_Y_RAW" name="원GPS_Y" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 			</w2:dataCollection>
@@ -202,104 +204,105 @@
 			
 			switch(eventType) {
 				case "ET001":
-				eventMessage = dlt_BRT_OPER_EVENT_HIS.getCellData(i, "EVE_NODE_NM") + "에 도착하였습니다.";
+				eventMessage = dlt_BRT_OPER_EVENT_HIS.getCellData(i, "EVE_NODE_NM") + "에 도착";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div1");
 				break;
 				
 				case "ET002":
-				eventMessage = dlt_BRT_OPER_EVENT_HIS.getCellData(i, "EVE_NODE_NM") + "에서 출발하였습니다.";
+				eventMessage = dlt_BRT_OPER_EVENT_HIS.getCellData(i, "EVE_NODE_NM") + "에서 출발";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div2");
 				break;
 				
 				case "ET003":
-				eventMessage = "기점"+"("+dlt_BRT_OPER_EVENT_HIS.getCellData(i, 'EVE_NODE_NM')+")"+"에 도착하였습니다.";
+				eventMessage = "기점"+"("+dlt_BRT_OPER_EVENT_HIS.getCellData(i, 'EVE_NODE_NM')+")"+"에 도착";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div3");
 				break;
 				
 				case "ET004":
-				eventMessage = "기점"+"("+dlt_BRT_OPER_EVENT_HIS.getCellData(i, 'EVE_NODE_NM')+")"+"에서 출발하였습니다.";
+				eventMessage = "기점"+"("+dlt_BRT_OPER_EVENT_HIS.getCellData(i, 'EVE_NODE_NM')+")"+"에서 출발";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div4");
 				break;
 				
 				case "ET005":
-				eventMessage = "종점"+"("+dlt_BRT_OPER_EVENT_HIS.getCellData(i, 'EVE_NODE_NM')+")"+"에 도착하였습니다.";
+				eventMessage = "종점"+"("+dlt_BRT_OPER_EVENT_HIS.getCellData(i, 'EVE_NODE_NM')+")"+"에 도착";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div5");
 				break;
 				
 				case "ET006":
-				eventMessage = "종점"+"("+dlt_BRT_OPER_EVENT_HIS.getCellData(i, 'EVE_NODE_NM')+")"+"에서 출발하였습니다.";
+				eventMessage = "종점"+"("+dlt_BRT_OPER_EVENT_HIS.getCellData(i, 'EVE_NODE_NM')+")"+"에서 출발";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div6");
 				break;
 				
 				case "ET007":
-				eventMessage = "현재속도 " + dlt_BRT_OPER_EVENT_HIS.getCellData(i, "CUR_SPD")+ "km/h, 평균 "+ 
-								dlt_BRT_OPER_EVENT_HIS.getCellData(i, "EVT_DATA") + "km/h 입니다.";
+				//eventMessage = "현재속도 " + dlt_BRT_OPER_EVENT_HIS.getCellData(i, "CUR_SPD")+ "km/h, 평균 "+ 
+				eventMessage =  "평균속도 : "+ dlt_BRT_OPER_EVENT_HIS.getCellData(i, "EVT_DATA") + "km/h";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div7");								
 				break;
 				
 				case "ET008":
 				//eventMessage = dlt_BRT_OPER_EVENT_HIS.getCellData(i, "ORGA_NM") + " 음성 방송 출력되었습니다.";
-				eventMessage = "음성 방송 출력되었습니다. " + "("+dlt_BRT_OPER_EVENT_HIS.getCellData(i, "EVT_DATA") +")";
+				eventMessage = "음성 방송 출력" + "("+dlt_BRT_OPER_EVENT_HIS.getCellData(i, "EVT_DATA") +")";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div8");
 				break;
 				
 				case "ET009":
-				eventMessage = "버스 문이 열렸습니다.";
+				eventMessage = "개문";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div9");
 				break;
 				
 				case "ET010":
-				eventMessage = "버스 문이 닫혔습니다.";
+				eventMessage = "폐문";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div10");
 				break;
 				
 				case "ET011":
-				eventMessage = dlt_BRT_OPER_EVENT_HIS.getCellData(i, "EVE_NODE_NM") + "에서 무정차 주행하였습니다.";
+				eventMessage = dlt_BRT_OPER_EVENT_HIS.getCellData(i, "EVE_NODE_NM") + "에서 무정차 주행";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div11");
 				break;
 				
 				case "ET012":
-				eventMessage = "과속 주행하였습니다. 현재속도 " + dlt_BRT_OPER_EVENT_HIS.getCellData(i, "CUR_SPD") + "km/h입니다," ;
+				//eventMessage = "과속 주행하였습니다. 현재속도 " + dlt_BRT_OPER_EVENT_HIS.getCellData(i, "CUR_SPD") + "km/h입니다," ;
+				eventMessage = "과속 주행" ;
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div12");
 				break;
 				
 				case "ET013":
-				eventMessage = "급가속하였습니다.";
+				eventMessage = "급가속";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div13");
 				break;
 				
 				case "ET014":
-				eventMessage = "급감속하였습니다.";
+				eventMessage = "급감속";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div14");
 				break;
 				
 				case "ET015":
-				eventMessage = "급출발하였습니다.";
+				eventMessage = "급출발";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div15");
 				break;
 				
 				case "ET016":
-				eventMessage = "급정지하였습니다.";
+				eventMessage = "급정지";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div16");
 				break;
 				
 				case "ET017":
-				eventMessage = "개문주행하였습니다.";
+				eventMessage = "개문주행";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div17");
 				break;
 				
 				case "ET018":
-				eventMessage = "노선이탈하였습니다.";
+				eventMessage = "노선이탈";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div18");
 				break;
 				
 				case "ET019":
-				eventMessage = "차고지 " + dlt_BRT_OPER_EVENT_HIS.getCellData(i, "EVE_NODE_NM") + "에 도착 하였습니다.";
+				eventMessage = "차고지 " + dlt_BRT_OPER_EVENT_HIS.getCellData(i, "EVE_NODE_NM") + "에 도착";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div19");
 				break;
 				
 				case "ET020":
-				eventMessage = "차고지 " + dlt_BRT_OPER_EVENT_HIS.getCellData(i, "EVE_NODE_NM") + "에서 출발 하였습니다.";
+				eventMessage = "차고지 " + dlt_BRT_OPER_EVENT_HIS.getCellData(i, "EVE_NODE_NM") + "에서 출발";
 				VH0400G0.setCellClass(i, "EVT_TYPE", "color_div20");
 				break;
 			}//end switch
@@ -338,6 +341,11 @@
 		if (fdate > ldate && ldate != ""){
 			com.messagBox("alert", "지정할 수 없는 날짜입니다.",scwin.checkCLoseF(info));
 		}
+		
+		else{
+			calendar_radio.setValue("DIRECT");
+		}		
+		
 	};
 	scwin.checkCLoseF = function(info) {
 		F_DATE.setValue(info.oldValue);
@@ -525,7 +533,7 @@
 			}
 			
 			else if (footerPosition == 'bottom') {
-				result += "무정차 주행 : " + count11+ "건, 문열림 : " + count09 + "건, 문닫힘 : " + count10				
+				result += "무정차 주행 : " + count11+ "건, 개문 : " + count09 + "건, 폐문 : " + count10				
 				result += "건, 급가속 : " + count13 + "건, 급감속 : " + count14 + "건, 급출발 : " + count15 + "건, 급정지 : " + count16;
 				result += "건, 개문주행 : " + count17 + "건, 노선이탈 : "+ count18 + "건, 차고지 출발 : "+ count20 + "건, 차고지 도착 : " + count19 + "건";				
 			}
@@ -676,6 +684,24 @@
 									<w2:column removeBorderStyle="false" width="87" inputType="text" style="height:20px" id="column99"
 										value="운전자명" blockSelect="false" displayMode="label">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="87" inputType="text" style="height:20px" id="column16"
+										value="원GPS_X" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="87" inputType="text" style="height:20px" id="column15"
+										value="원GPS_Y" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="87" inputType="text" style="height:20px" id="column13"
+										value="GPS_X" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="87" inputType="text" style="height:20px" id="column14"
+										value="GPS_Y" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column44"
+										value="현재속도(km/h)" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="95" inputType="text" style="height:20px" id="column18"
+										value="차량진행각도(°)" blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="75" inputType="text" style="height:20px" id="column9"
 										value="배차번호" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -725,11 +751,29 @@
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DRV_NM"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ALLOC_NO"
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="GPS_X_RAW"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="OPER_SN"
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="GPS_Y_RAW"
 										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="GPS_X"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="GPS_Y"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="CUR_SPD"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DRV_ANGLE"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ALLOC_NO"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="OPER_SN"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="EVT_TYPE"
 										value="" blockSelect="false" displayMode="label">
@@ -759,13 +803,13 @@
 							</w2:gBody>
 							<w2:footer id="footer1" style="">
 								<w2:row id="row3" style="">
-									<w2:column blockSelect="false" colSpan="14" displayMode="label"
+									<w2:column blockSelect="false" colSpan="15" displayMode="label"
 										expression="custom(scwin.getFooterDivTop, 'EVT_TYPE')" id="column42" inputType="expression" removeBorderStyle="false"
 										style="height:27px;" textAlign="left" autoFitFilterList="">
 									</w2:column>
 								</w2:row>
 								<w2:row id="row4" style="">
-									<w2:column blockSelect="false" colSpan="14" displayMode="label"
+									<w2:column blockSelect="false" colSpan="15" displayMode="label"
 										expression="custom(scwin.getFooterDivBottom, 'EVT_TYPE')" id="column43" inputType="expression" removeBorderStyle="false"
 										style="height:27px;" textAlign="left" autoFitFilterList="">
 									</w2:column>								

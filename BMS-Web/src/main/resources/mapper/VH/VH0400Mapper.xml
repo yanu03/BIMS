@@ -13,8 +13,8 @@
 					,	A.ROUT_ID
 					,	A.ALLOC_NO
 					,	A.OPER_SN
-					,	A.GPS_X_RAW AS GPS_X
-					,	A.GPS_Y_RAW AS GPS_Y
+					,	A.GPS_X_RAW
+					,	A.GPS_Y_RAW
 					,	A.DRV_ANGLE
 					,	A.GPS_X
 					,	A.GPS_Y

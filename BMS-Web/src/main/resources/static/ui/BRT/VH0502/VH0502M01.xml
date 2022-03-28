@@ -92,11 +92,6 @@
 //			com.searchGrid(VH0502G0, sub_VH0502G0R0);
 //		});
 		com.searchGrid(VH0502G0, sub_VH0502G0R0);
-		
-		com.executeSubmission(sub_repRoutItem);
-		com.executeSubmission(sub_vhcItem);	
-		com.executeSubmission(sub_dsptchDivItem);	
-		
 	};	
 	
 	scwin.onpageunload = function() {
