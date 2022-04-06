@@ -382,7 +382,7 @@
 	}
 
 	function returnData( vData ) {
-		
+
 		if( processMsg != "" ) {
 			hideProcessMessage();
 		}
@@ -459,7 +459,7 @@
 				var codeDataListLength = codeDataList.length;
 				var dataArr = child.split("\",\"");
 				for (var i = 0; i < columnListLength; i++) {
-					if((typeof codeDataList[columnList[i]] !== "undefined") && (codeDataList[columnList[i]].length!=0)){
+					if(codeDataList[columnList[i]]!=null&&(typeof codeDataList[columnList[i]] !== "undefined") && (codeDataList[columnList[i]].length!=0)){
 						var codeArr = codeDataList[columnList[i]];
 						for (var x = 0; x*columnListLength + i < dataArr.length; x++) {
 							for (var y = 0; y < codeArr.length; y++) {
@@ -471,6 +471,20 @@
 						}
 					}
 				}
+				
+				/*for (var i = 0; i < columnListLength; i++) {
+					var columnStr = columnList[i];
+					var underBarIndex = columnStr.lastIndexOf("_");
+					if(columnStr!=null && columnStr.length!=0 && underBarIndex!=-1
+						&&columnStr.substring(underBarIndex+1,columnStr.length)=="TM"){
+						var x = 0;
+						for (x = 0; x*columnListLength + i < dataArr.length; x++) {
+							if(dataArr[x*columnListLength + i].length>5){
+								
+							}
+						} 
+					}
+				}*/
 				child = dataArr.join("\",\"");
 				
 				var jsonArray = {

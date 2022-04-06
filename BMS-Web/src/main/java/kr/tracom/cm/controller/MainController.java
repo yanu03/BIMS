@@ -124,7 +124,9 @@ public class MainController extends ControllerSupport {
 		String ssoId = SsoCrypto.encrypt((String) user.getUserId(), ip);
 		Map resultData = new HashMap();
 		resultData.put("USER_ID", ssoId);
-		resultData.put("SBRT_URL", sbrtUrl);
+		String url = request.getRequestURL().substring(0,request.getRequestURL().lastIndexOf(":")) 
+				+ sbrtUrl.substring(sbrtUrl.lastIndexOf(":"));
+		resultData.put("SBRT_URL", url);
 		result.setData("dma_result", resultData);
 		result.setMsg(Result.STATUS_SUCESS, "성공");
 		request.getSession().invalidate();

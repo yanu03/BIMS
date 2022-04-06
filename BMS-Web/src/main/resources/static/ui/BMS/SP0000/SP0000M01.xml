@@ -161,7 +161,7 @@
 				,{cbFnc:{},nm:"정류소추가",class:"addSttn"},{cbFnc:{},nm:"교차로추가",class:"addCrs"},{cbFnc:{},nm:"선택삭제",class:"del"},
 				{cbFnc:{}, nm:"상",class:"up"},{cbFnc:{},nm:"하",class:"down"},{cbFnc:{},nm:"반영",class:"reflect"},{cbFnc:{},nm:"자동적용",class:"autoApply"}
 				,{cbFnc:{},nm:"시간대별 운행간격",class:"intervalTime"},{cbFnc:{},nm:"신호계획 가져오기",class:"getSigPlan"},{cbFnc:{},nm:"운행계획 보내기",class:"sendOperPlan"}
-				,{cbFnc:{},nm:"운행계획 가져오기",class:"getOperPlan"}
+				,{cbFnc:scwin.btn_report_onclick,nm:"운행계획 가져오기",class:"getOperPlan"}
 			],
 		};    
       com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);	
@@ -174,7 +174,17 @@
 
 	};	
 	
-
+	scwin.btn_report_onclick = function() {
+		var COMP_NM = "삼성";
+		var BUSITYPE_DIV = "ALL";
+		var reportPath = 'sample/sample.crf';
+		var param = 'OPER_DT=2021-12-23'; 
+		var style = 'position:absolute;top:100px;left:15px;right:5px;bottom:5px;width:720px;height:720px;';
+		params = 'reportPath=' + reportPath + '&param=' + param + '&style=' + style;
+		var url = '/report?'+params;
+		window.open(url,"pop","width=1024px,height=900px, scrollbars=yes");
+	};
+	
 	scwin.sub_PI0502G0R0_submitdone = function(e) {
 		com.setFocusedCell(PI0502G0, "ORGA_ID");		
 	};
