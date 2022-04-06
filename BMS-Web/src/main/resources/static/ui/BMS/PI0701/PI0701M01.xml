@@ -459,12 +459,12 @@
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column8"
 										value="상하행구분" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column6"
+									<!-- <w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column6"
 										value="시작정류소명" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column4"
 										value="종료정류소명" blockSelect="false" displayMode="label">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column3"
 										value="비고" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -481,12 +481,12 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="WAY_DIV"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="123" inputType="text" style="height:20px" id="ST_STTN_NM"
+									<!-- <w2:column removeBorderStyle="false" width="123" inputType="text" style="height:20px" id="ST_STTN_NM"
 										value="" blockSelect="false" displayMode="label" textAlign="left">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="98" inputType="text" style="height:20px" id="ED_STTN_NM"
 										value="" blockSelect="false" displayMode="label" textAlign="left">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK"
 										value="" blockSelect="false" displayMode="label" textAlign="left">
 									</w2:column>
