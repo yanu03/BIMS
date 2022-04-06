@@ -85,11 +85,13 @@
 						<w2:column id="B7_LEN" name="B7길이" dataType="text"></w2:column>
 						<w2:column id="B8_SPD" name="B8속도" dataType="text"></w2:column>
 						<w2:column id="B8_LEN" name="B8길이" dataType="text"></w2:column>
+						<w2:column id="CRS_NM" name="교차로명" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_search">
 					<w2:keyInfo>
-						<w2:key id="CONTENT1" name="name1" dataType="text"></w2:key>
+						<w2:key id="CONTENT1" name="name6" dataType="text"></w2:key>
+						<w2:key id="CONTENT2" name="name1" dataType="text"></w2:key>
 						<w2:key id="F_DATE" name="name4" dataType="date"></w2:key>
 						<w2:key id="L_DATE" name="name5" dataType="date"></w2:key>
 						<w2:key id="TYPE1" name="name7" dataType="text" defaultValue="ROUT_MODE"></w2:key>
@@ -116,7 +118,7 @@
 			</xf:submission>
 			<xf:submission id="sub_crsItem" ref="" target="data:json,dlt_crsItem" action="/crs/selectCrsItem" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
-				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				ev:submit="" ev:submitdone="scwin.sub_crsItem_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_grpCrsItem" ref="" target="data:json,dlt_grpCrsItem" action="/crs/selectGrpCrsItem" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
@@ -161,6 +163,7 @@
 		F_DATE.setValue(todaysDate);
 		L_DATE.setValue(todaysDate);
 		
+		com.executeSubmission(sub_grpCrsItem);
 		com.executeSubmission(sub_crsItem);
 		
 	};	
@@ -176,23 +179,52 @@
 	scwin.sub_VH0604G0R0_submitdone = function(e) {
 		com.setFocusedCell(VH0604G0, "UPD_DTM");
 		
-		//교차로우선신호제어방식 결정되면 내부 내용 넣어야 함
-		for (i=0; i<dlt_BMS_CRS_SIGOPER_EVENT_HIS.getDataLength(); i++) {
-			var stopTime = "";
-			var stopTimeMin = "";
-			var stopTimeSec = "";			
-			stopTime = dlt_BMS_CRS_SIGOPER_EVENT_HIS.getCellData(i, "STOP_SEC");
+		for (i=0; i<dlt_BMS_CRS_SIGOPER_TRF_HIS.getDataLength(); i++) {
+			var phaseLen = "";
+			var phaseLenMin = "";
+			var phaseLenSec = "";	
+			var linkPlVal = "";
+			var linkPlValMin = "";
+			var linkPlValSec = "";
+			
+			var crsSts = "";
+			
+			phaseLen = dlt_BMS_CRS_SIGOPER_TRF_HIS.getCellData(i, "PHASE_LEN");
+			linkPlVal = dlt_BMS_CRS_SIGOPER_TRF_HIS.getCellData(i, "LINK_PL_VAL");
 
-			if((parseInt(stopTime) >= 60)) {
-				stopTimeMin = parseInt(stopTime/60) + "분 ";
+			if((parseInt(phaseLen) >= 60)) {
+				phaseLenMin = parseInt(phaseLen/60) + "분 ";
 			}
 			
-			stopTimeSec = parseInt(stopTime%60) + "초";
-			stopTime = stopTimeMin + stopTimeSec;
+			phaseLenSec = parseInt(phaseLen%60) + "초";
+			phaseLen = phaseLenMin + phaseLenSec;
 			
-			dlt_BMS_CRS_SIGOPER_EVENT_HIS.setCellData(i, "STOP_SEC", stopTime);		 	
+			if((parseInt(linkPlVal) >= 60)) {
+				linkPlValMin = parseInt(linkPlVal/60) + "분 ";
+			}
+			
+			linkPlValSec = parseInt(linkPlVal%60) + "초";
+			linkPlVal = linkPlValMin + linkPlValSec;
+			
+			
+			dlt_BMS_CRS_SIGOPER_TRF_HIS.setCellData(i, "PHASE_LEN", phaseLen);		 	
+			dlt_BMS_CRS_SIGOPER_TRF_HIS.setCellData(i, "LINK_PL_VAL", linkPlVal);		
+			
+			
+			crsSts = dlt_BMS_CRS_SIGOPER_TRF_HIS.getCellData(i, "CRS_STS");
+			
+			switch(crsSts) {
+				//정상
+				case "0":
+				VH0604G0.setCellClass(i, "CRS_STS", "cond_normal");
+				break;
+				
+				//전이
+				case "1":
+				VH0604G0.setCellClass(i, "CRS_STS", "cond_neutrality");
+				break;
+			}
 		}
-		
 	};
 
 	scwin.F_DATE_onviewchange = function(info) {
@@ -210,10 +242,12 @@
 	};
 	scwin.checkCLoseF = function(info) {
 		F_DATE.setValue(info.oldValue);
-	}
+	};
+	
 	scwin.checkCLoseL = function(info) {
 		L_DATE.setValue(info.oldValue);
-	}	
+	};	
+	
 	scwin.L_DATE_onviewchange = function(info) {
 		var ldate = L_DATE.getValue();
 		var fdate = F_DATE.getValue();
@@ -221,6 +255,10 @@
 		if (fdate > ldate){
 			com.messagBox("alert", "지정할 수 없는 날짜입니다.",scwin.checkCLoseL(info));
 		}
+		
+		else{
+			calendar_radio.setValue("DIRECT");
+		}		
 	};
 	
 	//라디오 버튼에 따라 날짜 설정
@@ -245,6 +283,10 @@
 		var weekAgoDate = year+month+weekAgoDay;
 		var firstday = year+month+"01";		
 		
+		if(parseInt(weekAgoDay) < 0) {
+			weekAgoDate = firstday;	
+		}			
+		
 		if(info.value == "DIRECT") {
 			F_DATE.setValue();
 			L_DATE.setValue();
@@ -266,8 +308,11 @@
 		}
 	};
 
-	scwin.getEventCount = function(data, dataType, footerPosition, dataColumn) {
+	scwin.getFooterCount = function(data, dataType, footerPosition, dataColumn) {
 		var sum = 0;
+		
+		var stsCount01 = 0;
+		var stsCount02 = 0;
 		
 		var result = "";
 		
@@ -276,19 +321,29 @@
 			
 			for (var i=0; i<data.length; i++) {
 
-				//교차로우선신호제어방식 코드값 결정되면 내부 내용 채워야함			
 				switch(data[i]) {
-				
-				}			
+					//정상
+					case "0":
+					stsCount01++;
+					break;
 					
+					//전이
+					case "1":
+					stsCount02++;
+					break;
+				}			
 			}				
 			
-			result = "총계 : " + sum + "건";				
+			result = "총계 : " + sum + "건, 정상 : " + stsCount01 + "건, 전이 : " + stsCount02 + "건";				
 			
 			return result;
 		}
 	}			
 	
+	
+	scwin.sub_crsItem_submitdone = function(e) {
+		com.searchGrid(VH0604G0, sub_VH0604G0R0);
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -304,7 +359,7 @@
 					<xf:group class="search" id="" style="">
 						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
 							chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
-							ev:onviewchange="" id="autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT1" search="start"
+							ev:onviewchange="" id="autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT2" search="start"
 							selectedData="" style="width: 110px;" submenuSize="auto" textAlign="" useKeywordHighlight="false" visibleRowNum=""
 							nextTabByEnter="" disableEdit="">
 							<w2:choices>
@@ -315,14 +370,14 @@
 							</w2:choices>
 						</w2:autoComplete>						
 					</xf:group>			
-					<xf:group class="label" id="" style="">
+					<xf:group class="label" id="" style="margin-left: 10px;">
 						<w2:span class="" id="" label="교차로명"></w2:span>
 					</xf:group>
 					<xf:group class="search" id="" style="">
 						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
 							chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
-							ev:onviewchange="" id="autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT1" search="start"
-							selectedData="" style="width: 130px;" submenuSize="auto" textAlign="" useKeywordHighlight="false" visibleRowNum=""
+							ev:onviewchange="" id="autoChoiceBox2" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT2" search="start"
+							selectedData="" style="width: 130px;margin-left:" submenuSize="auto" textAlign="" useKeywordHighlight="false" visibleRowNum=""
 							nextTabByEnter="" disableEdit="">
 							<w2:choices>
 								<w2:itemset nodeset="data:dlt_crsItem">
@@ -332,50 +387,25 @@
 							</w2:choices>
 						</w2:autoComplete>
 					</xf:group>
-					<!-- <xf:group class="label" id="" style="margin-left: 10px;">
-						<w2:span class="" id="" label="신호제어상태" style=""></w2:span>
+					<xf:group class="label" id="" style="margin-left: 10px;">
+						<w2:span class="" id="" label="제어기상태" style=""></w2:span>
 					</xf:group>	
 					<xf:group class="search" id="" style="width:">
 						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE2_onviewchange" id="" optionOrder="false"
-							ref="data:dma_search.TYPE1" class="search_type_100" style="width: 125px;" submenuSize="auto" textAlign="center"
-							chooseOptionLabel="-전체-">
+							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="" id="" optionOrder="false" ref="data:dma_search.TYPE1"
+							class="search_type_100" style="width: 125px;" submenuSize="auto" textAlign="center" chooseOptionLabel="-전체-">
 							<xf:choices>
 								<xf:item>
-									<xf:label><![CDATA[OFFLINE]]></xf:label>
+									<xf:label><![CDATA[정상]]></xf:label>
 									<xf:value><![CDATA[0]]></xf:value>
 								</xf:item>
 								<xf:item>
-									<xf:label><![CDATA[ONLINE]]></xf:label>
+									<xf:label><![CDATA[전이]]></xf:label>
 									<xf:value><![CDATA[1]]></xf:value>
 								</xf:item>
 							</xf:choices>
 						</xf:select1>
-					</xf:group>	 -->								
-					<!-- <xf:group class="label" id="" style="margin-left: 10px;">
-						<w2:span class="" id="" label="신호운영모드" style=""></w2:span>
-					</xf:group>	
-					<xf:group class="search" id="" style="width:">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE2_onviewchange" id="" optionOrder="false"
-							ref="data:dma_search.TYPE2" class="search_type_100" style="width: 125px;" submenuSize="auto" textAlign="center"
-							chooseOptionLabel="-전체-">
-							<xf:choices>
-								<xf:item>
-									<xf:label><![CDATA[TOD]]></xf:label>
-									<xf:value><![CDATA[0]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[TRC]]></xf:label>
-									<xf:value><![CDATA[1]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[MAN]]></xf:label>
-									<xf:value><![CDATA[2]]></xf:value>
-								</xf:item>
-							</xf:choices>
-						</xf:select1>
-					</xf:group>	 -->								
+					</xf:group>											
 					<xf:group class="label" id="" style="margin-left: 10px;">
 						<w2:span class="" id="" label="기간"></w2:span>
 					</xf:group>
@@ -437,98 +467,468 @@
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
-									<w2:column removeBorderStyle="false" width="140" inputType="text" style="height:20px" id="column10"
+									<w2:column removeBorderStyle="false" width="140" inputType="text" style="height:20px" id="column72"
 										value="갱신일시" blockSelect="false" displayMode="label">
 									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column9"
-										value="노드아이디" blockSelect="false" displayMode="label">
-									</w2:column> -->
-									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column8"
-										value="대표노선아이디" blockSelect="false" displayMode="label">
-									</w2:column> -->
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column8"
-										value="대표노선명" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column7"
-										value="노선명" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column9"
+									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column71"
 										value="교차로명" blockSelect="false" displayMode="label">
-									</w2:column>									
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column6"
-										value="차량번호" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column3"
-										value="교차로우선신호제어방식" blockSelect="false" displayMode="label">
-									</w2:column>									
-									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column5"
-										value="우선신호제어단계" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column70"
+										value="교차로상태" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column4"
-										value="정류소요구대기시간" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column69"
+										value="교차로그룹ID" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column2"
-										value="교차로우선신호제어현시" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="71" inputType="text" style="height:20px" id="column68"
+										value="현시수" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="140" inputType="text" style="height:20px" id="column1"
-										value="발생일시" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="71" inputType="text" style="height:20px" id="column67"
+										value="주현시번호" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="140" inputType="text" style="height:20px" id="column1"
+									<w2:column removeBorderStyle="false" width="71" inputType="text" style="height:20px" id="column66"
+										value="주기길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="71" inputType="text" style="height:20px" id="column65"
+										value="연동계획값" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column64"
+										value="A1계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column63"
+										value="A2계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column62"
+										value="A3계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column61"
+										value="A4계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column60"
+										value="A5계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column59"
+										value="A6계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column58"
+										value="A7계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column57"
+										value="A8계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column56"
+										value="B1계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column55"
+										value="B2계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column54"
+										value="B3계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column53"
+										value="B4계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column52"
+										value="B5계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column51"
+										value="B6계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column50"
+										value="B7계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column49"
+										value="B8계획현시" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column48"
+										value="A1교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column47"
+										value="A2교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column46"
+										value="A3교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column45"
+										value="A4교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column44"
+										value="A5교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column43"
+										value="A6교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column42"
+										value="A7교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column41"
+										value="A8교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column40"
+										value="B1교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column39"
+										value="B2교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column38"
+										value="B3교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column37"
+										value="B4교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column36"
+										value="B5교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column35"
+										value="B6교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column34"
+										value="B7교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column33"
+										value="B8교통량" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column32"
+										value="A1속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column31"
+										value="A1길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column30"
+										value="A2속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column29"
+										value="A2길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column28"
+										value="A3속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column27"
+										value="A3길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column26"
+										value="A4속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column25"
+										value="A4길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column24"
+										value="A5속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column23"
+										value="A5길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column22"
+										value="A6속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column21"
+										value="A6길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column20"
+										value="A7속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column19"
+										value="A7길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column18"
+										value="A8속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column17"
+										value="A8길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column16"
+										value="B1속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column15"
+										value="B1길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column14"
+										value="B2속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column13"
+										value="B2길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column12"
+										value="B3속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column11"
+										value="B3길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column10"
+										value="B4속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column9"
+										value="B4길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column8"
+										value="B5속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column7"
+										value="B5길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column6"
+										value="B6속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column5"
+										value="B6길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column4"
+										value="B7속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column3"
+										value="B7길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column2"
+										value="B8속도" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column1"
+										value="B8길이" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column999"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="UPD_DTM"
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="UPD_DTM"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="NODE_ID"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column> -->
-									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REP_ROUT_ID"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column> -->
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REP_ROUT_NM"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="ROUT_NM"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="CRS_NM"
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="CRS_NM"
 										value="" blockSelect="false" displayMode="label" textAlign="left">
-									</w2:column>									
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="VHC_NO"
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="select" style="height:20px" id="CRS_STS"
+										value="" blockSelect="false" displayMode="label">
+										<w2:choices>
+											<w2:item>
+												<w2:label><![CDATA[정상]]></w2:label>
+												<w2:value><![CDATA[0]]></w2:value>
+											</w2:item>
+											<w2:item>
+												<w2:label><![CDATA[전이]]></w2:label>
+												<w2:value><![CDATA[1]]></w2:value>
+											</w2:item>
+										</w2:choices>											
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="CRS_GRP_ID"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="CTRL_TYPE"
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="PHASE_CNT"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="MAIN_PHASE_NO"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="PHASE_LEN"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="LINK_PL_VAL"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A1_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A2_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A3_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A4_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A5_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A6_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A7_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A8_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B1_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B2_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B3_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B4_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B5_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B6_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B7_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B8_PL" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A1_TRF"
 										value="" blockSelect="false" displayMode="label">
-									</w2:column>									
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="CTRL_LV"
-										value="" blockSelect="false" displayMode="label" textAlign="right">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="STOP_SEC"
-										value="" blockSelect="false" displayMode="label" textAlign="right">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="CTRL_PHASE_NO"
-										value="" blockSelect="false" displayMode="label" textAlign="right">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="OCR_DTM"
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A2_TRF"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id=""
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A3_TRF"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A4_TRF"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A5_TRF"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A6_TRF"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A7_TRF"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A8_TRF"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B1_TRF"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B2_TRF"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B3_TRF"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B4_TRF"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B5_TRF"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B6_TRF"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B7_TRF"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B8_TRF"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A1_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A1_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A2_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A2_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A3_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A3_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A4_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A4_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A5_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A5_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A6_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A6_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A7_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A7_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A8_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="A8_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B1_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B1_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B2_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B2_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B3_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B3_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B4_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B4_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B5_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B5_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B6_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B6_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B7_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B7_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B8_SPD"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="B8_LEN"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id=""
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
 							</w2:gBody>
 							<w2:footer id="footer1" style="">
 								<w2:row id="row3" style="">
-									<w2:column blockSelect="false" colSpan="14" displayMode="label"
-										expression="custom(scwin.getEventCount, 'CTRL_TYPE')" id="column42" inputType="expression" removeBorderStyle="false"
+									<w2:column blockSelect="false" colSpan="75" displayMode="label"
+										expression="custom(scwin.getFooterCount, 'CRS_STS')" id="column42" inputType="expression" removeBorderStyle="false"
 										style="height:26px;" textAlign="left" autoFitFilterList="">
 									</w2:column>
 								</w2:row>
-							</w2:footer>							
+							</w2:footer>								
 						</w2:gridView>
 					</xf:group>
 				</xf:group><!-- pgm_list end -->
