@@ -187,6 +187,10 @@
 		var todaysDate = year+month+day;
 		var weekAgoDate = year+month+weekAgoDay;
 		var firstday = year+month+"01";		
+
+		if(parseInt(weekAgoDay) < 0) {
+			weekAgoDate = firstday;	
+		}	
 		
 		if(info.value == "DIRECT") {
 			F_DATE.setValue();

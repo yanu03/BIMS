@@ -222,6 +222,10 @@
 		var todaysDate = year+month+day;
 		var weekAgoDate = year+month+weekAgoDay;
 		var firstday = year+month+"01";		
+
+		if(parseInt(weekAgoDay) < 0) {
+			weekAgoDate = firstday;	
+		}	
 		
 		if(info.value == "DIRECT") {
 			F_DATE.setValue();
@@ -310,11 +314,11 @@
 			}				
 			
 			if(footerPosition == 'top') {
-				result = "총계 : " + sum + "건, 정상 : " + stsCount02+ "건, 통신이상 : " + stsCount01 + "건";						
+				result = "총계 : " + sum + "건, 제어기 - 정상 : " + stsCount02+ "건, 통신이상 : " + stsCount01 + "건";						
 			}
 			
 			else if (footerPosition == 'bottom') {
-				result =  "ONLINE : " + count02 + "건, OFFLINE : " + count01 + "건, 전이 : " + count03 + "건"		
+				result =  "신호제어모드 - ONLINE : " + count02 + "건, OFFLINE : " + count01 + "건, 전이 : " + count03 + "건"		
 			}
 			return result;
 		}
