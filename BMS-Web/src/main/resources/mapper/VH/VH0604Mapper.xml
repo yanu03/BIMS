@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.tracom.brt.domain.VH0604.VH0604Mapper">
+
+<select id="VH0604G0R0" parameterType="Map" resultType="Map">
+	SELECT				DATE_FORMAT(A.UPD_DTM, '%Y-%m-%d %H:%m:%s') UPD_DTM
+					,	A.CRS_ID
+					,	A.CRS_STS
+					,	A.CRS_GRP_ID
+					,	A.PHASE_CNT
+					,	A.MAIN_PHASE_NO
+					,	A.PHASE_LEN
+					,	A.LINK_PL_VAL
+					,	A1_PL
+					,	A2_PL
+					,	A3_PL
+					,	A4_PL
+					,	A5_PL
+					,	A6_PL
+					,	A7_PL
+					,	A8_PL
+					,	B1_PL
+					,	B2_PL
+					,	B3_PL
+					,	B4_PL
+					,	B5_PL
+					,	B6_PL
+					,	B7_PL
+					,	B8_PL
+					,	A1_TRF
+					,	A2_TRF
+					,	A3_TRF
+					,	A4_TRF
+					,	A5_TRF
+					,	A6_TRF
+					,	A7_TRF
+					,	A8_TRF
+					,	B1_TRF
+					,	B2_TRF
+					,	B3_TRF
+					,	B4_TRF
+					,	B5_TRF
+					,	B6_TRF
+					,	B7_TRF
+					,	B8_TRF
+					,	A1_SPD
+					,	A1_LEN
+					,	A2_SPD
+					,	A2_LEN
+					,	A3_SPD
+					,	A3_LEN
+					,	A4_SPD
+					,	A4_LEN
+					,	A5_SPD
+					,	A5_LEN
+					,	A6_SPD
+					,	A6_LEN
+					,	A7_SPD
+					,	A7_LEN
+					,	A8_SPD
+					,	A8_LEN
+					,	B1_SPD
+					,	B1_LEN
+					,	B2_SPD
+					,	B2_LEN
+					,	B3_SPD
+					,	B3_LEN
+					,	B4_SPD
+					,	B4_LEN
+					,	B5_SPD
+					,	B5_LEN
+					,	B6_SPD
+					,	B6_LEN
+					,	B7_SPD
+					,	B7_LEN
+					,	B8_SPD	
+					,	B.CRS_NM				
+					
+	FROM				BMS_CRS_SIGOPER_TRF_HIS A	
+	
+	LEFT JOIN			BMS_CRS_MST B	
+		ON				A.CRS_ID = B.CRS_ID						
+
+	<where>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT1)">
+				AND CRS_GRP_ID LIKE CONCAT('%', #{CONTENT1}, '%')
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT2)">
+				AND B.CRS_NM LIKE CONCAT('%', #{CONTENT2}, '%')
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(TYPE1)">
+				AND A.CRS_STS = #{TYPE1}
+		</if>			
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
+			<![CDATA[AND DATE_FORMAT(A.UPD_DTM, '%Y%m%d') >= #{F_DATE}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
+			<![CDATA[AND DATE_FORMAT(A.UPD_DTM, '%Y%m%d') <= #{L_DATE}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
+				AND DATE_FORMAT(A.UPD_DTM, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+		</if>			
+	</where>
+	
+	ORDER BY			A.UPD_DTM DESC
+</select>
+
+</mapper>

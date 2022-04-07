@@ -437,20 +437,25 @@ public class OperPlanService extends ServiceSupport {
 		min_stop_sec = Integer.valueOf(minStopSec);
 		max_stop_sec = Integer.valueOf(maxStopSec);
 
-		am_peak_st_tm = String.valueOf(peakTmMap.get("AM_PEAK_ST_TM")) + ":00";
-		am_peak_ed_tm = String.valueOf(peakTmMap.get("AM_PEAK_ED_TM")) + ":00";
-
-		pm_peak_st_tm = String.valueOf(peakTmMap.get("PM_PEAK_ST_TM")) + ":00";
-		pm_peak_ed_tm = String.valueOf(peakTmMap.get("PM_PEAK_ED_TM")) + ":00";
-
+		if(peakTmMap!=null){
+			if(CommonUtil.notEmpty(peakTmMap.get("AM_PEAK_ST_TM")))
+				am_peak_st_tm = String.valueOf(peakTmMap.get("AM_PEAK_ST_TM")) + ":00";
+			
+			if(CommonUtil.notEmpty(peakTmMap.get("AM_PEAK_ED_TM")))
+				am_peak_ed_tm = String.valueOf(peakTmMap.get("AM_PEAK_ED_TM")) + ":00";
+	
+			if(CommonUtil.notEmpty(peakTmMap.get("PM_PEAK_ST_TM")))
+				pm_peak_st_tm = String.valueOf(peakTmMap.get("PM_PEAK_ST_TM")) + ":00";
+			
+			if(CommonUtil.notEmpty(peakTmMap.get("PM_PEAK_ED_TM")))
+				pm_peak_ed_tm = String.valueOf(peakTmMap.get("PM_PEAK_ED_TM")) + ":00";
+		}
 
 		//변수 초기화
 		acc_avg = (STD_AAC * 0.8f);//기준가속(1.67) 의 80%
 		dec_avg = (STD_DEC * 0.8f); //기준감속(-2.5) 의 80%
 		//acc_avg = 1.4f;  //기준가속(1.67) 의 80%
 		//dec_avg = -2.1f; //기준감속(-2.5) 의 80%
-
-
 
 		//정류장별 정차시간 가져오기
 		sttnList = operPlanMapper.selectAllStopTm(routId);

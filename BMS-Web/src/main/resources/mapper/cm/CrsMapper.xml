@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "Ehttp://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.tracom.cm.domain.Crs.CrsMapper">
+
+<select id="selectCrsItem" resultType="Map">
+	SELECT				CRS_ID
+					,	CRS_NM
+					
+	FROM				BMS_CRS_MST
+</select>
+
+<select id="selectGrpCrsItem" resultType="Map">
+	SELECT				CRS_GRP_ID
+					,	SIG_CTR_STS
+					,	SIG_OPER_MODE
+					
+	FROM				BMS_CRS_GRP_SIGOPER_INFO
+</select>
+	
+</mapper>
