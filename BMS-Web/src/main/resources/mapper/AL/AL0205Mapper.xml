@@ -146,7 +146,7 @@
 		<!--AND A.DAY_DIV = #{DAY_DIV} 
 		 AND A.WAY_DIV = #{WAY_DIV}  -->
 	ORDER BY 
-		A.OPER_SN, A.REP_ROUT_ID DESC, A.DAY_DIV
+		A.OPER_SN, A.DAY_DIV, A.REP_ROUT_ID
 </select>
 
 
@@ -178,7 +178,7 @@
 		GROUP BY
 			A.REP_ROUT_ID, A.DAY_DIV
 		ORDER BY
-			A.DAY_DIV
+			A.DAY_DIV, A.REP_ROUT_ID
 </select>
 
 

@@ -463,8 +463,8 @@
 		var rowCntArr = dlt_BRT_OPER_ALLOC_PL_NODE_CNT.getAllJSON();
 		var repRoutNmList = [];
 		var maxCnt = 0;
-		var dayColSpanNum = 0;
-		var holiColSpanNum = 0;
+		var dayDivLength = 0;
+		var holiDivLength = 0;
 		
 		for(var i = 0; i < rowCntArr.length; i++) {
 			if(maxCnt < rowCntArr[i].CNT)
@@ -482,15 +482,15 @@
 		dlt_VIEW_OPER_PL_NODE_INFO.removeAll();
 		
 		//평일,휴일 노선 수 cnt
-		dayColSpanNum = dlt_BRT_OPER_ALLOC_PL_NODE_ROUT_NM.getMatchedIndex("DAY_DIV", "DY001").length * 3;
-		holiColSpanNum = dlt_BRT_OPER_ALLOC_PL_NODE_ROUT_NM.getMatchedIndex("DAY_DIV", "DY002").length * 3;
+		dayDivLength = dlt_BRT_OPER_ALLOC_PL_NODE_ROUT_NM.getMatchedIndex("DAY_DIV", "DY001").length;
+		holiDivLength = dlt_BRT_OPER_ALLOC_PL_NODE_ROUT_NM.getMatchedIndex("DAY_DIV", "DY002").length;
 		
 		//Header first_row
 		gridHeader +='<w2:row style="" id="first_row">';
 		//gridHeader +='<w2:column blockSelect="false" id="OPER_SN" style="height:20px" inputType="text" width="70" value="'+'운행순번'+'" rowSpan="3"></w2:column>';
-		gridHeader +='<w2:column blockSelect="false" id="DAY" style="height:20px" inputType="text" width="70" value="'+'평일'+'" colSpan="'+dayColSpanNum+'"></w2:column>';
-		if(holiColSpanNum > 0){
-			gridHeader +='<w2:column blockSelect="false" id="HOLY" style="height:20px" inputType="text" width="70" value="'+'휴일'+'" colSpan="'+holiColSpanNum+'"></w2:column>';
+		gridHeader +='<w2:column blockSelect="false" id="DAY" style="height:20px" inputType="text" width="70" value="'+'평일'+'" colSpan="'+dayDivLength * 3+'"></w2:column>';
+		if(holiDivLength > 0){
+			gridHeader +='<w2:column blockSelect="false" id="HOLI" style="height:20px" inputType="text" width="70" value="'+'휴일'+'" colSpan="'+holiDivLength * 3+'"></w2:column>';
 		}
 		gridHeader +='</w2:row>';
 		
@@ -510,7 +510,6 @@
 		//Header third_row
 		gridHeader +='<w2:row style="" id="third_row">';
 		//maxCnt만큼 body 생성
-		
 		for(var i = 0; i < dlt_BRT_OPER_ALLOC_PL_NODE_ROUT_NM.getRowCount(); i++) { //maxCnt에서 -> dlt_BRT_OPER_ALLOC_PL_NODE_ROUT_NM.getRowCount();으로 수정
 			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'ROUT_NM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="75" colSpan="'+1+'" value="노선명"></w2:column>';
 			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'ARRV_TM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="70" colSpan="'+1+'" value="도착시간"></w2:column>';
@@ -521,11 +520,59 @@
 		}
 		gridHeader +='</w2:row>'
 		
-		
 		//Body 데이터 생성
-		var rowIndex = 0;
-		var rowCnt = 0;
-		for(var i = 0; i < rowCntArr.length; i++) { //rowCntArr.length == row개수
+		for(var b = 0; b < repRoutNmList.length; b++){ //repRoutNmList.length == 대표노선 col 개수
+			for(var i = 0; i < rowCntArr.length; i++) { //rowCntArr.length == 전체 row 개수
+				var dayRow = 0;
+				var holRow = 0;
+				
+				dlt_VIEW_OPER_PL_NODE_INFO.insertRow();
+				
+				for(var x = 0; x < rowData.length; x++){
+					var repRoutNm = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(x, "REP_ROUT_NM");
+					var dayDiv = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(x, "DAY_DIV");
+					if(repRoutNmList[b] == repRoutNm && dayDiv == "DY001" && b < dayDivLength){
+						var nodeStTm = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(x, "DPRT_TM");
+						var nodeEdTm = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(x, "ARRV_TM");
+						var routNm = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(x, "ROUT_NM");
+						
+						dlt_VIEW_OPER_PL_NODE_INFO.setCellData(dayRow, "ARRV_TM_"+b, nodeEdTm);
+						dlt_VIEW_OPER_PL_NODE_INFO.setCellData(dayRow, "DPRT_TM_"+b, nodeStTm);
+						dlt_VIEW_OPER_PL_NODE_INFO.setCellData(dayRow, "ROUT_NM_"+b, routNm + "(" + dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(x, "OPER_SN") + ")");
+						dlt_VIEW_OPER_PL_NODE_INFO.modifyRowStatus(dayRow, "R");
+						dayRow++;
+					}
+				}
+				for(var x = 0; x < rowData.length; x++){
+					var repRoutNm = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(x, "REP_ROUT_NM");
+					var dayDiv = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(x, "DAY_DIV");
+					if(repRoutNmList[b] == repRoutNm && dayDiv == "DY002"){
+						var nodeStTm = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(x, "DPRT_TM");
+						var nodeEdTm = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(x, "ARRV_TM");
+						var routNm = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(x, "ROUT_NM");
+						
+						dlt_VIEW_OPER_PL_NODE_INFO.setCellData(holRow, "ARRV_TM_"+dayDivLength, nodeEdTm);
+						dlt_VIEW_OPER_PL_NODE_INFO.setCellData(holRow, "DPRT_TM_"+dayDivLength, nodeStTm);
+						dlt_VIEW_OPER_PL_NODE_INFO.setCellData(holRow, "ROUT_NM_"+dayDivLength, routNm + "(" + dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(x, "OPER_SN") + ")");
+						dlt_VIEW_OPER_PL_NODE_INFO.modifyRowStatus(holRow, "R");
+						holRow++;
+					}
+				
+				}
+			}
+		}
+		
+		//데이터가 없는 row 삭제
+		for(var x = 0; x < dlt_VIEW_OPER_PL_NODE_INFO.getRowCount(); x++){
+			var rowStat = dlt_VIEW_OPER_PL_NODE_INFO.getRowStatus(x);
+			if(rowStat == "C"){
+				dlt_VIEW_OPER_PL_NODE_INFO.removeRange(x, dlt_VIEW_OPER_PL_NODE_INFO.getRowCount()-1);
+				break;
+			}
+		}
+		
+		
+		/*for(var i = 0; i < rowCntArr.length; i++) { //rowCntArr.length == row개수
 			var j = 0;
 			var y = 0;
 			var a = 0;
@@ -538,7 +585,7 @@
 			
 			for(j = 0; j < repRoutNmList.length; j++) { //col개수
 				var repRoutNm = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(rowIndex+j, "REP_ROUT_NM");
-				debugger;
+				
 				for(var x = 0; x < repRoutNmList.length; x++){
 					if(repRoutNmList[a] == repRoutNm){
 						var nodeStTm = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(rowIndex+j, "DPRT_TM");
@@ -562,9 +609,10 @@
 				}
 				
 			}
-		}
+		}*/
+		var footerColSpanNum = dayDivLength * 3 + holiDivLength * 3;
 		
-		//gridView 정보 정의 
+		//gridView 정보 정의
 		//xml 형식을 정의 하면 <w2:gridView 에 xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" 포함 합니다.
 		var gridStr = '<w2:gridView xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" dataList="dlt_VIEW_OPER_PL_NODE_INFO" ev:onafteredit="scwin.AL0205G1_onafteredit" '
 						+ 'scrollByColumn="true" ignoreCellClick="false"  fixedColumnWithHidden="true" id="AL0205G1" ev:onrowindexchange="scwin.AL0205G1_onrowindexchange" class ="cm_grid right" useShiftKey="false" '
@@ -581,7 +629,7 @@
 		+'<w2:footer style="" id="footer2">'
 		+'<w2:row style="" id="row4">'
 		+'<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;" '
-		+'id="column55" value="" blockSelect="false" displayMode="label" colSpan="100" rowSpan="" '
+		+'id="column55" value="" blockSelect="false" displayMode="label" colSpan="'+footerColSpanNum+'" rowSpan="" '
 		+'expression="&quot;데이터 개수 : &quot; + COUNT(&apos;COMP_ID&apos;)" textAlign="left">'
 		+'</w2:column>'
 		+'</w2:row>'
