@@ -606,6 +606,8 @@
 	};
 	
 	scwin.moveCtrlClick = function() {
+		var fcltId = dlt_BMS_FCLT_INFO.getCellData(FM0202G1.getFocusedRowIndex(), "FCLT_ID");
+		
 		scwin.openMenu("시설물 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00060204");		
 		var bac= null;		
 	}
@@ -707,15 +709,15 @@
 									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column56"
 										value="정류소명" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column58"
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column58"
 										value="위도" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column59"
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column59"
 										value="경도" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
+									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
 										value="비고" blockSelect="false" displayMode="label" sortable="false">
-									</w2:column>
+									</w2:column> -->
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody2">
@@ -735,9 +737,9 @@
 									<w2:column removeBorderStyle="false" width="134" inputType="text" style="height:20px" id="GPS_X"
 										value="" blockSelect="false" displayMode="label"  textAlign="right">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK"
+									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK"
 										value="" blockSelect="false" displayMode="label">
-									</w2:column>
+									</w2:column> -->
 								</w2:row>
 							</w2:gBody>
 							<w2:footer id="footer1" style="">

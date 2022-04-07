@@ -140,6 +140,23 @@
 						<w2:column id="ARRV_TM_47" name="도착시간_47" dataType="text"></w2:column><w2:column id="DPRT_TM_47" name="출발시간_47" dataType="text"></w2:column><w2:column id="NODE_SN_47" name="도착시간_47" dataType="text"></w2:column>
 						<w2:column id="ARRV_TM_48" name="도착시간_48" dataType="text"></w2:column><w2:column id="DPRT_TM_48" name="출발시간_48" dataType="text"></w2:column><w2:column id="NODE_SN_48" name="도착시간_48" dataType="text"></w2:column>
 						<w2:column id="ARRV_TM_49" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_49" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_49" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_50" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_50" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_50" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_51" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_51" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_51" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_52" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_52" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_52" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_53" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_53" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_53" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_54" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_54" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_54" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_55" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_55" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_55" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_56" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_56" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_56" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_57" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_57" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_57" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_58" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_58" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_58" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_59" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_59" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_59" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_60" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_60" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_60" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_61" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_61" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_61" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_62" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_62" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_62" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_63" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_63" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_63" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_64" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_64" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_64" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_65" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_65" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_65" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_66" name="도착시간_49" dataType="text"></w2:column><w2:column id="DPRT_TM_66" name="출발시간_49" dataType="text"></w2:column><w2:column id="NODE_SN_66" name="도착시간_49" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_sub_search">
@@ -323,6 +340,7 @@
 		var rowIndex = 0;
 		var rowCnt = 0;
 		
+		debugger;
 		for(var i = 0; i < rowCntArr.length; i++) {
 			var j = 0;
 			rowIndex += rowCnt;
