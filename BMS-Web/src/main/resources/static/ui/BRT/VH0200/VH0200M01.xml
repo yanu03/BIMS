@@ -34,7 +34,6 @@
 						<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
-
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BRT_CUR_CHG_OPER_INFO_HIS" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="OPER_DT" name="운행일" dataType="text"></w2:column>
@@ -468,13 +467,12 @@
 		if(maxCnt==0)maxCnt=30;
 		
 		if(rowData.length == 0 ) {
-			dma_sub_search.set("NODE_TYPE", "NT002"); 
+			//dma_sub_search.set("NODE_TYPE", "NT002"); 
 			com.executeSubmission(sub_MAIN_ROUT_NODE_CPMSTN);
 			return;
 		}
 		
 		dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.removeAll();
-		
 		gridHeader +='<w2:row style="" id="first_row">';
 		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'OPER_SN'+'" style="height:20px" inputType="text" width="60" value="'+'운행순번'+'" rowSpan="3"></w2:column>';
 		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'CHG_CNT'+'" style="height:20px" inputType="text" width="60" value="'+'발생건수'+'" rowSpan="3"></w2:column>';
@@ -516,6 +514,7 @@
 		var chgRow = [];
 		//body데이터 생성
 		for(var i = 0; i < rowCntArr.length; i++) {
+			debugger;
 			var j = 0;
 			rowIndex += rowCnt;
 			rowCnt =  rowCntArr[i].CNT;
@@ -568,7 +567,7 @@
 		+'<w2:footer style="" id="footer2">'
 		+'<w2:row style="" id="row4">'
 		+'<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;" '
-		+'id="column55" value="" blockSelect="false" displayMode="label" colSpan="100" rowSpan="" '
+		+'id="column55" value="" blockSelect="false" displayMode="label" colSpan="200" rowSpan="" '
 		+'expression="&quot;데이터 개수 : &quot; + COUNT(&apos;COMP_ID&apos;)" textAlign="left">'
 		+'</w2:column>'
 		+'</w2:row>'
@@ -700,6 +699,16 @@
 		dma_sub_search.set("OPER_DT", dlt_BRT_CUR_CHG_OPER_INFO_HIS.getCellData(row, "OPER_DT"));
 		dma_sub_search.set("ALLOC_NO", dlt_BRT_CUR_CHG_OPER_INFO_HIS.getCellData(row, "ALLOC_NO"));
 		//dma_sub_search.set("OPER_SN", dlt_BRT_CUR_CHG_OPER_INFO_HIS.getCellData(row, "OPER_SN"));
+		
+		var operDt = dlt_BRT_CUR_CHG_OPER_INFO_HIS.getCellData(VH0200G0.getFocusedRowIndex(), 'OPER_DT');
+		var week = ['일', '월', '화', '수', '목', '금', '토']; 
+		var dayOfWeek = week[new Date(operDt).getDay()]; 
+		
+		if(dayOfWeek == '토' || dayOfWeek == '일'){
+			dma_sub_search.set("DAY_DIV", "DY002");
+		}else{
+			dma_sub_search.set("DAY_DIV", "DY001");
+		}
 		com.executeSubmission(sub_VH0200G1CNT);
 	};
 	
@@ -826,6 +835,10 @@
 		var todaysDate = year+month+day;
 		var weekAgoDate = year+month+weekAgoDay;
 		var firstday = year+month+"01";		
+		
+		if(parseInt(weekAgoDay) < 0) {
+	         weekAgoDate = firstday;   
+	      }
 		
 		if(info.value == "DIRECT") {
 			F_DATE_VH0200.setValue();
