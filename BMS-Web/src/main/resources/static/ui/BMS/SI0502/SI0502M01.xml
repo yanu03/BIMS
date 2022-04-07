@@ -96,7 +96,7 @@
         	</xf:submission>
         	<xf:submission id="sub_SI0502G1S0" ref="data:json,dlt_TRANSFER_INFO" target="data:json,dma_result" action="/si/SI0502G1S0"
         		method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler=""
-        		mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_SI0502G1S0_submitdone" ev:submiterror="" abortTrigger="">
+        		mode="asynchronous" processMsg="저장중입니다..." ev:submit="" ev:submitdone="scwin.sub_SI0502G1S0_submitdone" ev:submiterror="" abortTrigger="">
         	</xf:submission>
         	<xf:submission id="sub_SI0502G1K0" ref="" target="data:json,dma_SEQ_BMS_TRANSFER_INFO_0" action="/si/SI0502G1K0" method="post"
         		mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"

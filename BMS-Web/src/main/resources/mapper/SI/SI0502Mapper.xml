@@ -91,8 +91,8 @@
 			#{TRNS_DIV},
 			#{TRNS_NM},
 			#{WALK_DIST},
-			#{GPS_X},
-			#{GPS_Y},
+			NULLIF(#{GPS_X}, ''),
+			NULLIF(#{GPS_Y}, ''),
 			0,
 			0,
 			#{USE_YN},
@@ -109,8 +109,8 @@
 			TRNS_DIV = #{TRNS_DIV},
 			TRNS_NM = #{TRNS_NM},
 			WALK_DIST = #{WALK_DIST},
-			GPS_X = #{GPS_X},
-			GPS_Y = #{GPS_Y},
+			GPS_X = NULLIF(#{GPS_X}, ''),
+			GPS_Y = NULLIF(#{GPS_Y}, ''),
 			USE_YN = #{USE_YN},
 			REMARK = #{REMARK}
 	where	TRNS_ID = #{TRNS_ID}		
