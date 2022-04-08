@@ -22,6 +22,8 @@ public class VhcService extends ServiceSupport {
 	
 	public List<Map<String, Object>> selectAllocVhcList() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
+		String temp[] = map.get("VHC_ID").toString().replace("[","").replace("]","").replace(" ","").split(",");
+		map.put("VHC_ID", temp);
 		return vhcMapper.selectAllocVhcList(map);
 	}
 	

@@ -3,7 +3,7 @@
 
 <mapper namespace="kr.tracom.cm.domain.Drv.DrvMapper">
 
-<select id="selectDrvList" resultType="Map">
+<select id="selectAllocDrvList" resultType="Map">
 	SELECT
 		A.DRV_ID
 		,A.DRV_NM
@@ -15,6 +15,10 @@
 		ON A.DRV_ID = B.DRV_ID
 	WHERE
 		B.REP_ROUT_ID = #{REP_ROUT_ID}
+		<!-- AND A.DRV_ID NOT IN 
+        <foreach collection="DRV_ID" item="item" index="index"  open="(" close=")" separator=",">
+			#{item}
+		</foreach> -->
 </select>
 	
 </mapper>

@@ -25,6 +25,7 @@
 						<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
 						<w2:key id="USE_YN" name="name3" dataType="text"></w2:key>
 						<w2:key id="REP_ROUT_ID" name="name3" dataType="text"></w2:key>
+						<w2:key id="VHC_ID" name="제외차량ID" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 			</w2:dataCollection>
@@ -51,6 +52,7 @@
 						];
 		
 		dma_search.set("REP_ROUT_ID", scwin.param.data);
+		dma_search.set("VHC_ID", scwin.param.vhcId);
 		com.setCommonDtl(codeOptions, function() {
 				com.searchGrid(vhcListGrid, sub_vhcList);
 		});
@@ -103,6 +105,12 @@
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
 		
 		}
+		debugger;
+		var vhcId = dma_search.get("VHC_ID");
+		for(var x = 0; x < vhcId.length; x++){
+			vhcId[x];
+			//vhcListGrid.setRowColor(rowIndex, color);
+		};
 	};
 	
 	scwin.NullData_onviewchange = function(info) {
@@ -168,20 +176,22 @@
 			</xf:group>
 			<xf:group style="" id="" class="popup_content">
 				<w2:gridView fixedColumnWithHidden="true" dataList="data:dlt_BMS_VHC_MST" useShiftKey="false" readOnly="true" style=""
-					scrollByColumn="false" id="vhcListGrid" autoFit="" class="cm_grid popup" ev:onrowindexchange="scwin.vhcListGrid_onrowindexchange">
+					scrollByColumn="false" id="vhcListGrid" autoFit="lastColumn" class="cm_grid popup" ev:onrowindexchange="scwin.vhcListGrid_onrowindexchange">
 					<w2:header style="" id="header1">
 						<w2:row style="" id="row1">
 							<w2:column blockSelect="true" id="chkHeader" inputType="radio" style="height:20px" value="선택" width="39">
 							</w2:column>
 							<w2:column blockSelect="false" id="column7" inputType="text" style="height:20px" value="차량ID" width="100">
 							</w2:column>
-							<w2:column blockSelect="false" id="column1" inputType="text" style="height:20px" value="차량번호" width="200">
+							<w2:column blockSelect="false" id="column1" inputType="text" style="height:20px" value="차량번호" width="100">
 							</w2:column>
-							<w2:column blockSelect="false" id="column2" inputType="text" style="height:20px" value="권역" width="200">
+							<w2:column blockSelect="false" id="column2" inputType="text" style="height:20px" value="권역" width="150">
 							</w2:column>
-							<w2:column blockSelect="false" id="column3" inputType="text" style="height:20px" value="제조사" width="200">
+							<!-- <w2:column blockSelect="false" id="column3" inputType="text" style="height:20px" value="제조사" width="200">
+							</w2:column> -->
+							<w2:column blockSelect="false" id="column5" inputType="text" style="height:20px" value="운수사명" width="150">
 							</w2:column>
-							<w2:column blockSelect="false" id="column5" inputType="text" style="height:20px" value="운수사명" width="200">
+							<w2:column blockSelect="false" id="column6" inputType="text" style="height:20px" value="" width="100">
 							</w2:column>
 						</w2:row>
 					</w2:header>
@@ -196,9 +206,11 @@
 							</w2:column>
 							<w2:column blockSelect="false" id="AREA" inputType="select" style="height:20px" width="101">
 							</w2:column>
-							<w2:column blockSelect="false" id="MAKER" inputType="text" style="height:20px" width="90" textAlign="">
-							</w2:column>
+							<!-- <w2:column blockSelect="false" id="MAKER" inputType="text" style="height:20px" width="90" textAlign="">
+							</w2:column> -->
 							<w2:column blockSelect="false" id="COMP_NM" inputType="text" style="height:20px" width="90" textAlign="left">
+							</w2:column>
+							<w2:column blockSelect="false" id="" inputType="text" style="height:20px" width="90" textAlign="left">
 							</w2:column>
 						</w2:row>
 					</w2:gBody>

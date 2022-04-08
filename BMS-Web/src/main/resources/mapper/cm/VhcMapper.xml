@@ -42,6 +42,11 @@
 		ON A.COMP_ID = B.COMP_ID
 	WHERE
 		C.REP_ROUT_ID = #{REP_ROUT_ID}
+		<!-- AND C.VHC_ID NOT IN 
+        <foreach collection="VHC_ID" item="item" index="index"  open="(" close=")" separator=",">
+			#{item}
+		</foreach> -->
+		
 </select>
 
 <select id="selectCurOperVhcList" resultType="Map">

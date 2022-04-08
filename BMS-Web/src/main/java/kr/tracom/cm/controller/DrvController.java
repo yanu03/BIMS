@@ -25,9 +25,9 @@ public class DrvController extends ControllerSupport {
 	@Autowired
 	private DrvService drvService;
 	
-	@RequestMapping("/drv/selectDrvList")
-	public @ResponseBody Map<String, Object> selectDrvList() throws Exception {
-		result.setData("dlt_BMS_DRV_MST", drvService.selectDrvList());
+	@RequestMapping("/drv/selectAllocDrvList")
+	public @ResponseBody Map<String, Object> selectAllocDrvList() throws Exception {
+		result.setData("dlt_BMS_DRV_MST", drvService.selectAllocDrvList());
 		return result.getResult();
 	}
 

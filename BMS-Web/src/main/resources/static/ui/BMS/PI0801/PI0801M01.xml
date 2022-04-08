@@ -76,6 +76,7 @@
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_AUDIO_INFO">
 					<w2:keyInfo>
+						<w2:key id="VOC_ID" name="음성ID" dataType="text"></w2:key>
 						<w2:key id="AUDIO_NM" name="오디오명" dataType="text"></w2:key>
 						<w2:key id="AUDIO_EXTENSION" name="확장자" dataType="text"></w2:key>
 					</w2:keyInfo>
@@ -152,7 +153,7 @@
 			</xf:submission>
 			<xf:submission id="sub_PI0801G1S0" ref='data:json,["dlt_BMS_VOC_INFO","dma_AUDIO_INFO"]' target="" action="/pi/PI0801G1S0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				processMsg="저장중입니다..." ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI0801SHI1" ref="" target="data:json,dlt_searchitem" action="/pi/PI0801SHI1" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
@@ -550,7 +551,9 @@
 		
 		if (fileExtension == "wav" || fileExtension == "tts"){
 			var real_fileName = fileName.substring(fileNameIndex+1, fileName.length);
-			
+			var vocId = dlt_BMS_VOC_INFO.getCellData(PI0801G1.getFocusedRowIndex(), "VOC_ID");
+			debugger;
+			dma_AUDIO_INFO.set('VOC_ID', vocId);
 			dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
 			dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
 			
@@ -981,10 +984,10 @@
 											value="재생기간" blockSelect="false" displayMode="label" class="req">
 										</w2:column>
 										<w2:column width="250" style="height:20px;" inputType="text" id="column6" value="한국어 TTS"
-											blockSelect="false" class="req">
+											blockSelect="false" class="">
 										</w2:column>
 										<w2:column width="250" style="height:20px;" inputType="text" id="column7" value="영어 TTS"
-											blockSelect="false" class="req">
+											blockSelect="false" class="">
 										</w2:column>
 										<w2:column width="250" style="height:20px;" inputType="text" id="column8" value="화면표시문구(한글)"
 											blockSelect="false" class="req">
@@ -1033,10 +1036,10 @@
 											blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.playDateDisFormatter">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="KR_TTS" value=""
-											blockSelect="false" displayMode="label" readOnly="true" displayFormatter="" userData1="M" textAlign="left">
+											blockSelect="false" displayMode="label" readOnly="true" displayFormatter="" userData1="" textAlign="left">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="EN_TTS" value=""
-											blockSelect="false" displayMode="label" displayFormatter="" userData1="M" textAlign="left">
+											blockSelect="false" displayMode="label" displayFormatter="" userData1="" textAlign="left">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="SCR_TXT" value=""
 											blockSelect="false" displayMode="label" displayFormatter="" userData1="M" textAlign="left">
@@ -1095,7 +1098,7 @@
 											blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="250" inputType="text" style="height:20px" id="column39" value="한국어 TTS"
-											blockSelect="false" displayMode="label" class="req">
+											blockSelect="false" displayMode="label" class="">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="250" inputType="text" style="height:20px" id="column40" value="영어 TTS"
 											blockSelect="false" displayMode="label">
@@ -1135,10 +1138,10 @@
 											blockSelect="false" displayMode="label" readOnly="true">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="255" inputType="text" style="height:20px" id="KR_TTS" value="" blockSelect="false"
-											displayMode="label" displayFormatter="" textAlign="left" userData1="M">
+											displayMode="label" displayFormatter="" textAlign="left" userData1="">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="255" inputType="text" style="height:20px" id="ER_TTS" value="" blockSelect="false"
-											displayMode="label" displayFormatter="" textAlign="left" userData1="M">
+											displayMode="label" displayFormatter="" textAlign="left" userData1="">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="116" inputType="text" style="height:20px" id="SCR_TXT" value=""
 											blockSelect="false" displayMode="label" readOnly="true" textAlign="left">
@@ -1363,7 +1366,7 @@
 									</xf:group>
 								</xf:group>
 								<xf:group tagname="tr" style="">
-									<xf:group tagname="th" style="vertical-align: top;" class="w2tb_th req">
+									<xf:group tagname="th" style="vertical-align: top;" class="w2tb_th">
 										한국어 TTS
 										<w2:attributes>
 											<w2:scope>row</w2:scope>
@@ -1389,7 +1392,7 @@
 									</xf:group>
 								</xf:group>
 								<xf:group tagname="tr" style="">
-									<xf:group tagname="th" style="vertical-align: top;" class="w2tb_th req">
+									<xf:group tagname="th" style="vertical-align: top;" class="w2tb_th">
 										영어 TTS
 										<w2:attributes>
 											<w2:scope>row</w2:scope>
@@ -1639,7 +1642,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" style="vertical-align: top;" class="w2tb_th req">
+								<xf:group tagname="th" style="vertical-align: top;" class="w2tb_th">
 									한국어 TTS
 									<w2:attributes>
 										<w2:scope>row</w2:scope>

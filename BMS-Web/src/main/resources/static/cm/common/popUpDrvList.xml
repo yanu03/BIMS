@@ -24,11 +24,12 @@
 						<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
 						<w2:key id="USE_YN" name="name3" dataType="text"></w2:key>
 						<w2:key id="REP_ROUT_ID" name="name3" dataType="text"></w2:key>
+						<w2:key id="DRV_ID" name="제외운전자ID" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
-			<xf:submission id="sub_drvList" ref='data:json,dma_search' target="data:json,dlt_BMS_DRV_MST" action="/drv/selectDrvList" method="post"
+			<xf:submission id="sub_drvList" ref='data:json,dma_search' target="data:json,dlt_BMS_DRV_MST" action="/drv/selectAllocDrvList" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_drvList_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -50,6 +51,7 @@
 		
 		
 		dma_search.set("REP_ROUT_ID", scwin.param.data);
+		dma_search.set("DRV_ID", scwin.param.drvId);
 		com.setCommonDtl(codeOptions, function() {
 			com.executeSubmission(sub_drvList);	
 		});
@@ -166,7 +168,7 @@
 			</xf:group>
 			<xf:group style="" id="" class="popup_content">
 				<w2:gridView  fixedColumnWithHidden="true" dataList="data:dlt_BMS_DRV_MST" useShiftKey="false" readOnly="true"
-					style="" scrollByColumn="false" id="drvListGrid" autoFit="" class="cm_grid popup"
+					style="" scrollByColumn="false" id="drvListGrid" autoFit="lastColumn" class="cm_grid popup"
 					ev:onrowindexchange="scwin.drvListGrid_onrowindexchange">
 					<w2:header style="" id="header1">
 						<w2:row style="" id="row1">
@@ -176,13 +178,13 @@
 								width="100">
 							</w2:column>
 							<w2:column blockSelect="false" id="column1" inputType="text" style="height:20px" value="운전자명" 
-								width="200">
+								width="100">
 							</w2:column>
 							<w2:column blockSelect="false" id="column2" inputType="text" style="height:20px" value="버스구분"
 								width="100">
 							</w2:column>
 							<w2:column blockSelect="false" id="column3" inputType="text" style="height:20px" value="비고"
-								width="100">
+								width="100" >
 							</w2:column>
 						</w2:row>
 					</w2:header>
@@ -201,7 +203,7 @@
 								textAlign="">
 							</w2:column>
 							<w2:column blockSelect="false" id="REMARK" inputType="text" style="height:20px" width="90" 
-								textAlign="">
+								textAlign="left">
 							</w2:column>
 						</w2:row>
 					</w2:gBody>

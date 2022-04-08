@@ -63,17 +63,17 @@ public class PI0201Service extends ServiceSupport{
     			if (rowStatus.equals("C")) {
     				iCnt += PI0201Mapper.PI0201G0I0(data);
     				
-    				if((AUDIO_INFO.get("AUDIO_NM")!=null)&&(AUDIO_INFO.get("AUDIO_NM").toString().isEmpty()==false))
+    				if((AUDIO_INFO.get("VOC_ID")!=null)&&(AUDIO_INFO.get("VOC_ID").toString().isEmpty()==false))
 						{
-    						doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("AUDIO_NM").toString());
+    						doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
 						}
     				
     			} else if (rowStatus.equals("U")) {
     				uCnt += PI0201Mapper.PI0201G0U0(data);
    
-    				if((AUDIO_INFO.get("AUDIO_NM")!=null)&&(AUDIO_INFO.get("AUDIO_NM").toString().isEmpty()==false))
+    				if((AUDIO_INFO.get("VOC_ID")!=null)&&(AUDIO_INFO.get("VOC_ID").toString().isEmpty()==false))
 						{
-    						doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("AUDIO_NM").toString());
+    						doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
 						}
                     
     				

@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface DrvMapper {
 	
-	public List<Map<String, Object>> selectDrvList(Map param);
+	public List<Map<String, Object>> selectAllocDrvList(Map param);
 	
 	/*public int updateSttn(Map param);
 	public int updateCrs(Map param);

@@ -159,17 +159,17 @@ public class PI0801Service extends ServiceSupport {
     			if (rowStatus.equals("C")) {
     				iCnt += pi0801Mapper.PI0801G1I0(data);
     				
-    				if((AUDIO_INFO.get("AUDIO_NM")!=null)&&(AUDIO_INFO.get("AUDIO_NM").toString().isEmpty()==false))
+    				if((AUDIO_INFO.get("VOC_ID")!=null)&&(AUDIO_INFO.get("VOC_ID").toString().isEmpty()==false))
 						{
-    						doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("AUDIO_NM").toString());
+    						doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
 						}
     				
     			} else if (rowStatus.equals("U")) {
     				uCnt += pi0801Mapper.PI0801G1U0(data);
    
-    				if((AUDIO_INFO.get("AUDIO_NM")!=null)&&(AUDIO_INFO.get("AUDIO_NM").toString().isEmpty()==false))
+    				if((AUDIO_INFO.get("VOC_ID")!=null)&&(AUDIO_INFO.get("VOC_ID").toString().isEmpty()==false))
 						{
-    						doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("AUDIO_NM").toString());
+    						doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
 						}
                     
     				
@@ -214,7 +214,7 @@ public class PI0801Service extends ServiceSupport {
 			} else if (rowStatus.equals("U")) {
 				uCnt += pi0801Mapper.PI0801G2U0(data);
 				
-                doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("AUDIO_NM").toString());
+                doMoveFile("up/", "audio/", AUDIO_INFO.get("VOC_ID").toString(), AUDIO_INFO.get("VOC_ID").toString());
 			} else if (rowStatus.equals("D")) {
 				dCnt += pi0801Mapper.PI0801G2D0(data);
 			}
