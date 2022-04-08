@@ -67,6 +67,7 @@
 						<w2:column id="PLAY_ED_DT" name="재생종료일" dataType="date"></w2:column>
 						<w2:column id="SN" name="순번" dataType="text"></w2:column>
 						<w2:column id="ORGA_ID" name="편성ID" dataType="text"></w2:column>
+						<w2:column id="VOC_PATH" name="음성경로" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_subsearch">
@@ -232,6 +233,14 @@
 		//$p.$("#audio0").attr("src", path);
 	};
 	
+	
+	scwin.PI0207G2_onrowindexchange = function(row,oldRow) {
+		var path = "/fileUpload/audio/" 
+			+ dlt_VOC_ORGA_LIST.getCellData(PI0207G2.getFocusedRowIndex(), "VOC_ID") + "." + dlt_VOC_ORGA_LIST.getCellData(PI0207G2.getFocusedRowIndex(), "PLAY_TYPE");	
+		
+		//저장된 음성 미리듣기
+		$p.$("#audio0").attr("src", path);
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -521,7 +530,7 @@
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
 								checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_VOC_ORGA_LIST" disabledScrollHidden="" editModeEvent=""
 								editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
-								ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row"
+								ev:onrowindexchange="scwin.PI0207G2_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row"
 								id="PI0207G2" ignoreCellClick="false" ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode=""
 								moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="순번"
 								rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false"

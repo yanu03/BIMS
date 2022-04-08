@@ -18,7 +18,17 @@ public class PI0203Service extends ServiceSupport{
 		
 	public List<Map> PI0203G0R0() throws Exception{
 		Map param = getSimpleDataMap("dma_search");
-		return PI0203Mapper.PI0203G0R0(param);
+		List returnList = PI0203Mapper.PI0203G0R0(param);
+		
+		Map<String, Object> AUDIO_INFO = getSimpleDataMap("dma_AUDIO_INFO");
+		for(Object obj:returnList) {
+			
+			Map<String, Object> temp = (Map<String, Object>)obj;
+			temp.put("VOC_PATH", "/fileUpload/audio/"+AUDIO_INFO.get("AUDIO_NM"));			
+		}
+		
+		
+		return returnList;
 	}
 	
 	public List PI0203SHI0() throws Exception {
@@ -33,7 +43,8 @@ public class PI0203Service extends ServiceSupport{
 		int iCnt = 0;
 		int uCnt = 0;
 		int dCnt = 0;
-		List param = getSimpleList("dlt_BMS_VOC_INFO");
+		
+		List<Map<String, Object>> param = getSimpleList("dlt_BMS_VOC_INFO");
         Map<String, Object> AUDIO_INFO = getSimpleDataMap("dma_AUDIO_INFO");
         
 		for (int i = 0; i < param.size(); i++) {
@@ -42,10 +53,18 @@ public class PI0203Service extends ServiceSupport{
 			
 			if (rowStatus.equals("C")) {
 				iCnt += PI0203Mapper.PI0203G0I0(data);
+				
+				if((AUDIO_INFO.get("VOC_ID")!=null)&&(AUDIO_INFO.get("VOC_ID").toString().isEmpty()==false))
+				{
+					doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
+				}
 			} else if (rowStatus.equals("U")) {
 				uCnt += PI0203Mapper.PI0203G0U0(data);
 				
-                doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("AUDIO_NM").toString());
+				if((AUDIO_INFO.get("VOC_ID")!=null)&&(AUDIO_INFO.get("VOC_ID").toString().isEmpty()==false))
+				{
+					doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
+				}
 			} else if (rowStatus.equals("D")) {
 				dCnt += PI0203Mapper.PI0203G0D0(data);
 			}
