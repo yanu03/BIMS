@@ -340,7 +340,7 @@
 		var rowIndex = 0;
 		var rowCnt = 0;
 		
-		debugger;
+
 		for(var i = 0; i < rowCntArr.length; i++) {
 			var j = 0;
 			rowIndex += rowCnt;
