@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import kr.tracom.bms.ftp.FTPHandler;
@@ -21,6 +22,13 @@ public class CommonService extends ServiceSupport {
 
 	@Autowired
 	FTPHandler ftpHandler;
+	
+	@Value("${fileupload.up.directory}")
+	private String UPLOAD_DIR;
+
+	@Value("${fileupload.code.directory}")
+	private String UPLOAD_CODE_DIR;
+
 	/**
 	 * 헤더메뉴, 사이드메뉴 조회 (로그인 사용자에게 권한이 있는 메뉴만 조회함)
 	 * 
@@ -199,8 +207,9 @@ public class CommonService extends ServiceSupport {
 				iCnt += commonMapper.insertCommonDtl(data);
 				if((data.get("IMG_NM")!=null)&&(data.get("IMG_NM").toString().isEmpty()==false)) {
 					
-					//doMoveFile("up/","common/code/",data.get("IMG_NM").toString(),data.get("CO_CD").toString()+data.get("DL_CD").toString()+data.get("IMG_NM").toString()+".png");
-					doMoveFile("up/","common/code/",data.get("IMG_NM").toString(),data.get("CO_CD").toString()+data.get("DL_CD").toString()+data.get("IMG_NM").toString());
+					//doMoveFile(UPLOAD_DIR,UPLOAD_CODE_DIR,data.get("IMG_NM").toString(),data.get("CO_CD").toString()+data.get("DL_CD").toString()+data.get("IMG_NM").toString()+".png");
+					doMoveFile(UPLOAD_DIR,UPLOAD_CODE_DIR,data.get("IMG_NM").toString(),data.get("CO_CD").toString()+data.get("DL_CD").toString()+data.get("IMG_NM").toString());
+					
 					commonMapper.insertCommonDtlImgPath(data);
 					
 		    		/*  2020-09-29 추가
@@ -223,8 +232,8 @@ public class CommonService extends ServiceSupport {
 					commonMapper.insertCommonDtlImgPath(data);
 					
 					if(data.get("IMG_PATH").equals(data.get("IMG_PATH_ORI")) == false) {
-						doMoveFile("up/","common/code/",data.get("IMG_NM").toString(),data.get("CO_CD").toString()+data.get("DL_CD").toString()+data.get("IMG_NM").toString());
-						//doMoveFile("up/","common/code/",data.get("IMG_NM").toString(),data.get("CO_CD").toString()+data.get("DL_CD").toString()+data.get("IMG_NM").toString()+".png");
+						doMoveFile(UPLOAD_DIR,UPLOAD_CODE_DIR,data.get("IMG_NM").toString(),data.get("CO_CD").toString()+data.get("DL_CD").toString()+data.get("IMG_NM").toString());
+						//doMoveFile(UPLOAD_DIR,UPLOAD_CODE_DIR,data.get("IMG_NM").toString(),data.get("CO_CD").toString()+data.get("DL_CD").toString()+data.get("IMG_NM").toString()+".png");
 						commonMapper.updateCommonDtlImgPath(data);
 					}
 					

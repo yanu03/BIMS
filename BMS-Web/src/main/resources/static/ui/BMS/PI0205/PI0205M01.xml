@@ -131,7 +131,7 @@
 			dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
 			dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
 			
-			dlt_BMS_VOC_INFO.setCellData(PI0205G0.getFocusedRowIndex(), 'VOC_PATH', '/fileUpload/up/'+dma_AUDIO_INFO.get('AUDIO_NM'));
+			dlt_BMS_VOC_INFO.setCellData(PI0205G0.getFocusedRowIndex(), 'VOC_PATH', com.getUploadPath()+dma_AUDIO_INFO.get('AUDIO_NM'));
 			VOC_PATH.submit();
 		
 			/*
@@ -150,6 +150,7 @@
 		var time_audio = document.getElementById("audio0");
 		
 		var path = dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "VOC_PATH");
+		
 		$p.$("#audio0").attr("src", path);
 		
 		time_audio.addEventListener('loadedmetadata', function() {
@@ -165,20 +166,23 @@
 	scwin.PI0205G0_onrowindexchange = function(row, oldRow) {
 		
 		var audioType = dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "PLAY_TYPE");
+		var extension = "";
 		if (audioType == "WAV"){
 			//VOC_PATH.setDisabled(false);
 			KR_TTS.setDisabled(true);
 			playTTS.setDisabled(true);
 			btn_basicPhrase.setDisabled(true);
+			extension = "wav";
 		} else if (audioType == "TTS"){
 			//VOC_PATH.setDisabled(true);
 			KR_TTS.setDisabled(false);
 			playTTS.setDisabled(false);
 			btn_basicPhrase.setDisabled(false);
+			extension = "tts";
 		}
 		
 		var path = dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "VOC_PATH") 
-			+ dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "VOC_ID") + "." + dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "PLAY_TYPE");
+			+ dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "VOC_ID") + "." + extension;
 		//var path = dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "VOC_PATH");	
 		$p.$("#audio0").attr("src", path);		
 		

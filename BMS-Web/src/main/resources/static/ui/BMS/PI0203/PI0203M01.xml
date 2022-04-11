@@ -129,7 +129,7 @@
 			dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
 			dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
 			
-			dlt_BMS_VOC_INFO.setCellData(PI0203G0.getFocusedRowIndex(), 'VOC_PATH', '/fileUpload/up/'+dma_AUDIO_INFO.get('AUDIO_NM'));
+			dlt_BMS_VOC_INFO.setCellData(PI0203G0.getFocusedRowIndex(), 'VOC_PATH', com.getUploadPath()+dma_AUDIO_INFO.get('AUDIO_NM'));
 			VOC_PATH.submit();
 		
 			var path = dlt_BMS_VOC_INFO.getCellData(PI0203G0.getFocusedRowIndex(), "VOC_PATH");

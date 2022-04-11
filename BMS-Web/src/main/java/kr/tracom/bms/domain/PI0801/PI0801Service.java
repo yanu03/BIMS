@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import kr.tracom.bms.domain.PI0801.PI0801Mapper;
 import kr.tracom.bms.ftp.FTPHandler;
 import kr.tracom.cm.support.ServiceSupport;
 import kr.tracom.cm.support.exception.MessageException;
+import kr.tracom.util.CommonUtil;
 import kr.tracom.util.Result;
 
 @Service
@@ -19,6 +21,12 @@ public class PI0801Service extends ServiceSupport {
 	@Autowired
 	private PI0801Mapper pi0801Mapper;
 	
+	@Value("${fileupload.up.directory}")
+	private String UPLOAD_DIR;
+
+	@Value("${fileupload.audio.directory}")
+	private String UPLOAD_AUDIO_DIR;
+
 	@Autowired
 	FTPHandler ftpHandler;
 	
@@ -159,19 +167,19 @@ public class PI0801Service extends ServiceSupport {
     			if (rowStatus.equals("C")) {
     				iCnt += pi0801Mapper.PI0801G1I0(data);
     				
-    				if((AUDIO_INFO.get("VOC_ID")!=null)&&(AUDIO_INFO.get("VOC_ID").toString().isEmpty()==false))
-						{
-    						doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
-						}
-    				
+    				if(CommonUtil.notEmpty(data.get("VOC_ID"))&&CommonUtil.notEmpty(data.get("VOC_NM")))
+					{
+						ftpHandler.uploadVoice(data);
+						//doMoveFile(UPLOAD_DIR, UPLOAD_AUDIO_DIR, AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
+					}
     			} else if (rowStatus.equals("U")) {
     				uCnt += pi0801Mapper.PI0801G1U0(data);
    
-    				if((AUDIO_INFO.get("VOC_ID")!=null)&&(AUDIO_INFO.get("VOC_ID").toString().isEmpty()==false))
-						{
-    						doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
-						}
-                    
+    				if(CommonUtil.notEmpty(data.get("VOC_ID"))&&CommonUtil.notEmpty(data.get("VOC_NM")))
+					{
+    					ftpHandler.uploadVoice(data);
+						//doMoveFile(UPLOAD_DIR, UPLOAD_AUDIO_DIR, AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
+					}
     				
     			} else if (rowStatus.equals("D")) {
     				dCnt += pi0801Mapper.PI0801G1D0(data);
@@ -211,10 +219,16 @@ public class PI0801Service extends ServiceSupport {
 			
 			if (rowStatus.equals("C")) {
 				iCnt += pi0801Mapper.PI0801G2I0(data);
+				if(CommonUtil.notEmpty(data.get("VOC_ID"))&&CommonUtil.notEmpty(data.get("VOC_NM"))) {
+					//doMoveFile(UPLOAD_DIR, UPLOAD_AUDIO_DIR, AUDIO_INFO.get("VOC_ID").toString(), AUDIO_INFO.get("VOC_ID").toString());
+					ftpHandler.uploadVoice(data);
+				}
 			} else if (rowStatus.equals("U")) {
 				uCnt += pi0801Mapper.PI0801G2U0(data);
-				
-                doMoveFile("up/", "audio/", AUDIO_INFO.get("VOC_ID").toString(), AUDIO_INFO.get("VOC_ID").toString());
+				if(CommonUtil.notEmpty(data.get("VOC_ID"))&&CommonUtil.notEmpty(data.get("VOC_NM"))) {
+					//doMoveFile(UPLOAD_DIR, UPLOAD_AUDIO_DIR, AUDIO_INFO.get("VOC_ID").toString(), AUDIO_INFO.get("VOC_ID").toString());
+					ftpHandler.uploadVoice(data);
+				}
 			} else if (rowStatus.equals("D")) {
 				dCnt += pi0801Mapper.PI0801G2D0(data);
 			}

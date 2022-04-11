@@ -1,6 +1,7 @@
 package kr.tracom.util;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
@@ -9,6 +10,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +25,22 @@ public class CommonUtil {
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(CommonUtil.class);
 
+    /**
+     * The extension separator character.
+     * @since 1.4
+     */
+    public static final char EXTENSION_SEPARATOR = '.';
+    
+    /**
+     * The Unix separator character.
+     */
+    private static final char UNIX_SEPARATOR = '/';
+
+    /**
+     * The Windows separator character.
+     */
+    private static final char WINDOWS_SEPARATOR = '\\';
+    
 	/**
 	 * 작성자: 트라콤
 	 * 작성일: 2016. 1. 6.
@@ -561,4 +581,53 @@ public class CommonUtil {
 		}
 		return ipAddress;
 	}
+	
+	public static int getAudioTotalTime(File file) throws Exception {
+		AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+		AudioFormat format = audioInputStream.getFormat();
+		long audioFileLength = file.length();
+		int frameSize = format.getFrameSize();
+		float frameRate = format.getFrameRate();
+		float durationInSeconds = (audioFileLength / (frameSize * frameRate));
+		
+		return (int)durationInSeconds;
+	}
+	
+    public static String getFileName(String path) {
+        if (path == null) {
+            return null;
+        }
+        int index = indexOfLastSeparator(path);
+        return path.substring(index + 1);
+    }
+    
+    public static String getExtension(String filename) {
+        if (filename == null) {
+            return null;
+        }
+        int index = indexOfExtension(filename);
+        if (index == -1) {
+            return "";
+        } else {
+            return filename.substring(index + 1);
+        }
+    }
+    
+    public static int indexOfExtension(String filename) {
+        if (filename == null) {
+            return -1;
+        }
+        int extensionPos = filename.lastIndexOf(EXTENSION_SEPARATOR);
+        int lastSeparator = indexOfLastSeparator(filename);
+        return lastSeparator > extensionPos ? -1 : extensionPos;
+    }
+    
+    public static int indexOfLastSeparator(String filename) {
+        if (filename == null) {
+            return -1;
+        }
+        int lastUnixPos = filename.lastIndexOf(UNIX_SEPARATOR);
+        int lastWindowsPos = filename.lastIndexOf(WINDOWS_SEPARATOR);
+        return Math.max(lastUnixPos, lastWindowsPos);
+    }
 }

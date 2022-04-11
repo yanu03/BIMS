@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,12 @@ public class FM0203Service extends ServiceSupport {
 	
 	@Autowired
 	private FM0203Mapper FM0203Mapper;
+	
+	@Value("${fileupload.up.directory}")
+	private String UPLOAD_DIR;
+	
+	@Value("${fileupload.firmware.directory}")
+	private String UPLOAD_FIRM_DIR;
 
 	public List FM0203G0R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
@@ -29,7 +36,7 @@ public class FM0203Service extends ServiceSupport {
 		
 		for(Object obj:returnList) {
 			Map<String, Object> temp = (Map<String, Object>)obj;
-			temp.put("FILE_PATH", "/fileUpload/firmware/"+temp.get("FILE_NM"));			
+			temp.put("FILE_PATH", UPLOAD_FIRM_DIR+temp.get("FILE_NM"));			
 		}
 		
 		return returnList;
@@ -56,7 +63,7 @@ public class FM0203Service extends ServiceSupport {
 					if((data.get("FILE_NM")!=null)&&(data.get("FILE_NM").toString().isEmpty()==false)
 							&&(data.get("FCLT_ID").equals(data.get("FILE_NM"))==false))
 						{
-							doMoveFile("up/", "firmware/", data.get("FILE_NM").toString(), data.get("FCLT_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString());
+							doMoveFile(UPLOAD_DIR, UPLOAD_FIRM_DIR, data.get("FILE_NM").toString(), data.get("FCLT_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString());
 							data.put("FILE_NM", data.get("FCLT_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString());
 						}
 					
@@ -64,15 +71,13 @@ public class FM0203Service extends ServiceSupport {
 					iCnt += FM0203Mapper.FM0203G0I1(data);
 					uCnt += FM0203Mapper.FM0203G0U0(data);
 					
-					/*
+					
 					//장치 펌웨어 업데이트
 					String mngId = String.valueOf(data.get("MNG_ID"));
-					String fileExt = String.valueOf(fileInfo.get("FILE_EXTENSION"));
-					String fileName = String.valueOf(fileInfo.get("FILE_NM"));
+					String fileExt = String.valueOf(data.get("FILE_EXTENSION"));
+					String fileName = data.get("DVC_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString();
 					
-					//TODO: 이재혁
-					//ftpHandler.uploadFM0203(mngId, "/up/", fileName, fileExt);
-					*/
+					ftpHandler.uploadFM0203(mngId, "/firmware/", fileName, fileExt);
 					
 
 				}

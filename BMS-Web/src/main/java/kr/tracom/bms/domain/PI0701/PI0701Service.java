@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,9 @@ public class PI0701Service extends ServiceSupport {
 	@Autowired
 	private FTPHandler ftpHandler;
 	
+	@Value("${fileupload.up.directory}")
+	private String UPLOAD_DIR;
+
 	public List PI0701G0R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
 		List returnList = pi0701Mapper.PI0701G0R0(map);
@@ -87,7 +91,7 @@ public class PI0701Service extends ServiceSupport {
 					uCnt += 1;
 					if((data.get("FILE_NM")!=null)&&(data.get("FILE_NM").toString().isEmpty()==false)) 
 						{
-							doMoveFile("up/",path,data.get("FILE_NM").toString(), fileNM);
+							doMoveFile(UPLOAD_DIR,path,data.get("FILE_NM").toString(), fileNM);
 						}					
 				 } 
 			}

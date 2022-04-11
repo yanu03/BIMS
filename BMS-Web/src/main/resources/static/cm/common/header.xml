@@ -45,8 +45,12 @@
 						<w2:key id="SSN_USER_ID" name="사용자ID" dataType="text"></w2:key>
 						<w2:key id="SSN_USER_NM" name="사용자명" dataType="text"></w2:key>
 						<w2:key id="SSN_CUR_SYSTEM" name="현재시스템" dataType="text"></w2:key>
-						<w2:key id="SSN_SYSTEM_BIT" name="시스템비트" dataType="text"></w2:key> 현재 계정이 접속할수 있는 시스템
+						<w2:key id="SSN_SYSTEM_BIT" name="시스템비트" dataType="text"></w2:key>
 						<w2:key id="SSN_IS_ADMIN" name="관리자여부" dataType="text"></w2:key>
+						<w2:key id="FILE_ROOT" name="파일루트경로" dataType="text"></w2:key>
+						<w2:key id="FILE_UP" name="파일업로드경로" dataType="text"></w2:key>
+						<w2:key id="UPLOAD_BASE_PATH" name="내부 업로드 베이스 경로" dataType="text"></w2:key>
+						<w2:key id="UPLOAD_PATH" name="내부 업로드 경로" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_programAuthority" saveRemovedData="true">

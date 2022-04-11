@@ -323,7 +323,7 @@
 		var form_file = document.getElementById("file");
 		var filePath = WebSquare.xml.getValue(retXml, "ret/storedFileList");
 		// 실서버 도메인 변경 필요
-		var realPath = "/data/fileUpload/up/";
+		var realPath = com.getUploadPath();
 		form_file.src = realPath + filePath;
 		dlt_BMS_DVC_INFO.setCellData(scwin.idxRowVOC, dlt_BMS_DVC_INFO.getColumnIndex("FILE_PATH"), form_file.src);
 		//doc_audio0.type = "audio/wav";

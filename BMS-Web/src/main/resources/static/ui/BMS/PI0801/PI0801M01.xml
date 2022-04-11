@@ -212,10 +212,10 @@
 		com.executeSubmission(sub_PI0801SHI0);
 		
 		//탭 목록 클릭 이벤트
-		$(".moni_img").find("li").click( function() {
+		$("#PI0801_TAB").find("li").click( function() {
 			var li_id = this.id;
-			$(".moni_img").find("li").removeClass("on");
-			$(".moni_img").find("#"+li_id).addClass("on");
+			$("#PI0801_TAB").find("li").removeClass("on");
+			$("#PI0801_TAB").find("#"+li_id).addClass("on");
 			if(li_id == "li_ledimg") {
 				search_input.setPlaceholder("LED ID 또는 LED명");
 				ledActive = 1;
@@ -427,7 +427,7 @@
 		            com.confirm(yesno_str, function(rtn) {
 		               if (rtn) {          
 			              //com.setSerialNumberToData(PI0801G1, "SN"); 
-		                  com.saveData(PI0801G1,null,sub_PI0801G0S1);
+		                  com.saveData(PI0801G1,null,sub_PI0801G1S0);
 		               }
 		            });
 		         }
@@ -450,7 +450,7 @@
 		            com.confirm(yesno_str, function(rtn) {
 		               if (rtn) {          
 			              //com.setSerialNumberToData(PI0801G1, "SN"); 
-		                  com.saveData(PI0801G2,null,sub_PI0801G0S2);
+		                  com.saveData(PI0801G2,null,sub_PI0801G2S0);
 		               }
 		            });
 		         }
@@ -552,12 +552,11 @@
 		if (fileExtension == "wav" || fileExtension == "tts"){
 			var real_fileName = fileName.substring(fileNameIndex+1, fileName.length);
 			var vocId = dlt_BMS_VOC_INFO.getCellData(PI0801G1.getFocusedRowIndex(), "VOC_ID");
-			debugger;
 			dma_AUDIO_INFO.set('VOC_ID', vocId);
 			dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
 			dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
 			
-			dlt_BMS_VOC_INFO.setCellData(PI0801G1.getFocusedRowIndex(), 'VOC_PATH', '/fileUpload/up/'+dma_AUDIO_INFO.get('AUDIO_NM'));
+			dlt_BMS_VOC_INFO.setCellData(PI0801G1.getFocusedRowIndex(), 'VOC_PATH', com.getUploadPath()+dma_AUDIO_INFO.get('AUDIO_NM'));
 			VOC_PATH.submit();
 		
         }else{
@@ -716,7 +715,7 @@
 			dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
 			dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
 			
-			dlt_BMS_VOC_INFO2.setCellData(PI0801G2.getFocusedRowIndex(), 'VOC_PATH', '/fileUpload/up/'+dma_AUDIO_INFO.get('AUDIO_NM'));
+			dlt_BMS_VOC_INFO2.setCellData(PI0801G2.getFocusedRowIndex(), 'VOC_PATH', com.getUploadPath()+dma_AUDIO_INFO.get('AUDIO_NM'));
 			VOC_PATH2.submit();
 		
 			var path = dlt_BMS_VOC_INFO2.getCellData(PI0801G2.getFocusedRowIndex(), "VOC_PATH");
@@ -859,8 +858,8 @@
 			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
 					<xf:group id="" class="gr_sub_header" style="">
-						<xf:group style="width: 303px;">
-							<ul id="" class="moni_img"  style="margin-bottom: 3px;">
+						<xf:group class="tab_div">
+							<ul id="PI0801_TAB" class="tab_ul"  style="width:303px">
 								<li id="li_ledimg" class="on">
 									<!-- <span class="busimg"></span> -->
 									실내LED
@@ -894,17 +893,11 @@
 					</xf:group>
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">
-						<xf:group id="PI0801T0" class="PI0801T0" style="height: 100%">
-							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
-								dataList="data:dlt_BMS_INNER_LED_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
-								ev:onrowindexchange="scwin.PI0801G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true"
-								id="PI0801G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusHeaderValue=""
-								rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows=""
-								autoFitMinWidth="0" disabledScrollHidden="" editModeEvent="" editModeEventIcon="" checkEditableInputClass="" keyMoveEditMode=""
-								moveKeyEditMode="" moveKeyEditModeAll="" ignoreNonEditableCellTabEnter="" readOnly="true" keepDefaultColumnWidth=""
-								oddEvenColorDisplay="" rowNumWidth="" summaryAuto="" excludeDeletedRows="" useCtrlOnMultisort="" useFilterList=""
-								useFilterListSync="" sortedIconPosition="" sortable="" sortOrderReverse="" showSortableUseFilter="" focusMode="row"
-								rowNumStatusUniqueId="" rowNumStatusResize="" ev:onbeforecolumnmove="" userData1="">
+						<xf:group id="PI0801T0" class="PI0801T0" style="height:100%">
+							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"  style="height:100%"
+								dataList="data:dlt_BMS_INNER_LED_INFO"	ev:onrowindexchange="scwin.PI0801G0_onrowindexchange" fixedColumnWithHidden="true"
+								id="PI0801G0" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
+								scrollByColumn="false" useShiftKey="true" autoFitMinWidth="0" readOnly="true" focusMode="row">
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
@@ -960,11 +953,11 @@
 								</w2:footer>							
 							</w2:gridView>
 						</xf:group> <!-- PI0801T0 -->
-						<xf:group id="PI0801T1" class="PI0801T1" style="height: 100%;display: none;">
+						<xf:group id="PI0801T1" class="PI0801T1" style="display: none; height:100%">
 							<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.PI0801G1_onrowindexchange" ev:oncellclick=""
 								showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순서" sortable="true"
 								rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false"
-								fixedColumnWithHidden="true" dataList="data:dlt_BMS_VOC_INFO" ignoreCellClick="false" style="" autoFit="lastColumn"
+								fixedColumnWithHidden="true" dataList="data:dlt_BMS_VOC_INFO" ignoreCellClick="false" style="height:100%" autoFit="lastColumn"
 								visibleRowNum="" id="PI0801G1" class="cm_grid left" tooltipPositionY="" focusMode="row">
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
@@ -1075,12 +1068,12 @@
 							</w2:gridView>						
 						</xf:group> <!-- PI0801T1 -->
 						
-						<xf:group id="PI0801T2" class="PI0801T2" style="height: 100%;display: none;">
+						<xf:group id="PI0801T2" class="PI0801T2" style="display: none; height:100%">
 							<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin." ev:oncellclick=""
 								showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순서"
 								sortable="true" rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
-								dataList="data:dlt_BMS_VOC_INFO2" ignoreCellClick="false" style="height:100%;" autoFit="lastColumn" visibleRowNum="" id="PI0801G2"
-								class="cm_grid" tooltipPositionY="" focusMode="row">
+								dataList="data:dlt_BMS_VOC_INFO2" ignoreCellClick="false" style="height:100%" autoFit="lastColumn" visibleRowNum="" id="PI0801G2"
+								class="cm_grid left" tooltipPositionY="" focusMode="row">
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row2">
 										<w2:column width="100" style="height:20px;" inputType="text" id="column9" value="음성ID" blockSelect="false"

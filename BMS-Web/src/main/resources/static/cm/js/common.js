@@ -33,6 +33,10 @@ var gcm = {
 
 	CUR_PROGRAM_AUTH : "" ,
 	
+	FILE_UPLOAD_ROOT : "",
+	
+	FILE_UP : "",
+	
 	// 서버 통신 기본 모드 ( "asynchronous" / "synchronous")
 	DEFAULT_OPTIONS_MODE : "asynchronous",
 
@@ -562,6 +566,11 @@ com.getFrameMode = function() {
  */
 com._setProgramAuthority = function() {
 
+	gcm.FILE_UPLOAD_ROOT = $p.top().wfm_header.getWindow().dma_defInfo.get("FILE_UPLOAD_ROOT");
+	gcm.FILE_UP = $p.top().wfm_header.getWindow().dma_defInfo.get("FILE_UP");
+	gcm.UPLOAD_BASE_PATH = $p.top().wfm_header.getWindow().dma_defInfo.get("UPLOAD_BASE_PATH");
+	gcm.UPLOAD_PATH = $p.top().wfm_header.getWindow().dma_defInfo.get("UPLOAD_PATH");
+	
 	var param = com.getParameter();
 	if ((typeof param !== "undefined") && (typeof param.menuCode !== "undefined") && (param.menuCode.trim() !== "")) {
 		var menuCd = param.menuCode;
@@ -8590,4 +8599,15 @@ com.checkGridSave = function(grid,saveSbmObj,str){
 	else {
 		//com.clearGrid(grid);
 	}
+}
+
+com.getFileUploadRootPath = function() {
+	return gcm.FILE_UPLOAD_ROOT;
+}
+
+com.getFileUpPath = function() {
+	return gcm.FILE_UP;
+}
+
+com.getUploadPath = function() {
 }
