@@ -1199,7 +1199,7 @@ public class FTPHandler {
 	public boolean uploadSelectedWAV(Map<String, Object> vo) {
 		String id = (String)vo.get("VOC_ID");
 		String fileName = id + ".wav";
-		String srcFile = CommonUtil.getFileName((String)vo.get("VOC_PATH"));
+		String srcFile = CommonUtil.getFileName((String)vo.get("VOC_TMP_PATH"));
 		
 		try {
 			doMoveFile(UPLOAD_DIR, SELECTED_AUDIO_DIR, srcFile, fileName);
@@ -1400,10 +1400,10 @@ public class FTPHandler {
 	}
 	
 	// 음성파일(WAV) 업로드
-	public boolean uploadVoiceWAV(Map<String, Object> vo) {
+	public boolean uploadVoiceWAV(Map<String, Object> vo) throws Exception {
 		String id = (String)vo.get("VOC_ID");
 
-		String srcFile = CommonUtil.getFileName((String)vo.get("VOC_PATH"));
+		String srcFile = CommonUtil.getFileName((String)vo.get("VOC_TMP_PATH"));
 		
 		String dir = Paths.get(getRootLocalPath(), getCommonAudioPath()).toString();
 		String fileName = id + Constants.VoiceTypes.US + ".wav";
@@ -1438,21 +1438,21 @@ public class FTPHandler {
 		} catch(Exception e) {
 			CommonUtil.unwrapThrowable(e);
 			e.printStackTrace();
-			return false;
+			throw e;
+			//return false;
 		}
 		
 		return true;
 	}
 	
 	// 음성파일(WAV, TTS) 업로드
-	public boolean uploadVoice(Map<String, Object> vo) {
+	public boolean uploadVoice(Map<String, Object> vo) throws Exception {
 		if (vo.get("PLAY_TYPE").equals("TTS")) {
     		uploadVoiceTTS(vo);
     	} else if (vo.get("PLAY_TYPE").equals("WAV")) {
    			uploadVoiceWAV(vo);
     	}
     	
-    	// 노선별 선택 음성일 경우 바로 FTP Sync
 		String routId = (String)vo.get("ROUT_ID");
 		if(routId != null && !routId.equals("")) {
 			try {
@@ -1460,7 +1460,18 @@ public class FTPHandler {
 			} catch (Exception e) {
 				CommonUtil.unwrapThrowable(e);
 				e.printStackTrace();
-				return false;
+				throw e;
+				//return false;
+			}
+		}
+		else {
+			try {
+				processSynchronize(getRootLocalPath() + getCommonAudioPath(), getRootServerPath() + getCommonAudioPath());
+			} catch (Exception e) {
+				CommonUtil.unwrapThrowable(e);
+				e.printStackTrace();
+				throw e;
+				//return false;
 			}
 		}
     	

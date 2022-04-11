@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import kr.tracom.bms.ftp.FTPHandler;
@@ -19,6 +20,12 @@ public class PI0204Service extends ServiceSupport {
 	
 	@Autowired
 	FTPHandler ftpHandler;
+	
+	@Value("${fileupload.selectedAudio.directory}")
+	private String UPLOAD_SELECTED_AUDIO_DIR;
+	
+	@Value("${fileupload.base.path}")
+	private String UPLOAD_BASE_PATH;
 
 	public List<Map> PI0204G0R0() throws Exception {
 		Map param = getSimpleDataMap("dma_search");
@@ -27,7 +34,10 @@ public class PI0204Service extends ServiceSupport {
 		for(Object obj:returnList) {
 			
 			Map<String, Object> temp = (Map<String, Object>)obj;
-			temp.put("VOC_PATH", "/fileUpload/common/selected_audio/"+temp.get("VOC_ID"));			
+			
+			String selectecAudioDir = (UPLOAD_BASE_PATH + UPLOAD_SELECTED_AUDIO_DIR).replaceAll("//", "/");
+			
+			temp.put("VOC_PATH", selectecAudioDir+temp.get("VOC_ID")+".wav");			
 		}
 		
 		return returnList;

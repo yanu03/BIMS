@@ -35,7 +35,17 @@ public class PI0201Service extends ServiceSupport{
 		for(Object obj:returnList) {
 			
 			Map<String, Object> temp = (Map<String, Object>)obj;
-			temp.put("VOC_PATH", "/fileUpload/audio/"+AUDIO_INFO.get("AUDIO_NM"));			
+			//if(CommonUtil.notEmpty(temp.get("VOC_PATH"))) {
+				if("WAV".equals(temp.get("PLAY_TYPE"))){
+					temp.put("VOC_PATH", "/fileUpload/audio/"+AUDIO_INFO.get("AUDIO_NM")+".wav");
+				}
+				else if("TTS".equals(temp.get("PLAY_TYPE"))){
+					temp.put("VOC_PATH", "/fileUpload/audio/"+AUDIO_INFO.get("AUDIO_NM")+".tts");
+				}
+				else {
+					temp.put("VOC_PATH", "/fileUpload/audio/"+AUDIO_INFO.get("AUDIO_NM")+".wav");
+				}
+			//}
 		}
 		
 		return returnList;

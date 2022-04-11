@@ -26,6 +26,9 @@ public class PI0801Service extends ServiceSupport {
 
 	@Value("${fileupload.audio.directory}")
 	private String UPLOAD_AUDIO_DIR;
+	
+	@Value("${fileupload.base.path}")
+	private String UPLOAD_BASE_PATH;	
 
 	@Autowired
 	FTPHandler ftpHandler;
@@ -40,6 +43,31 @@ public class PI0801Service extends ServiceSupport {
 	public List PI0801G1R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
 		List returnList = pi0801Mapper.PI0801G1R0(map);
+
+		Map<String, Object> AUDIO_INFO = getSimpleDataMap("dma_AUDIO_INFO");
+		for(Object obj:returnList) {
+			
+			Map<String, Object> temp = (Map<String, Object>)obj;
+			
+			String audioDir = (UPLOAD_BASE_PATH + UPLOAD_AUDIO_DIR).replaceAll("//", "/");
+			
+			if("WAV".equals(temp.get("PLAY_TYPE"))){
+				temp.put("VOC_PATH", audioDir+temp.get("VOC_ID")+"U.wav");
+			}
+			else if("TTS".equals(temp.get("PLAY_TYPE"))){
+				//추후 TTS 적용되면 수정 예정
+				if(CommonUtil.notEmpty(temp.get("EN_TTS"))){
+					temp.put("VOC_EN_PATH", audioDir+temp.get("VOC_ID")+"E.wav");
+				}
+				
+				if(CommonUtil.notEmpty(temp.get("KR_TTS"))){
+					temp.put("VOC_KR_PATH", audioDir+temp.get("VOC_ID")+"K.wav");
+				}
+			}
+			else {
+				temp.put("VOC_PATH", audioDir+temp.get("AUDIO_NM")+"U.wav");
+			}
+		}
 		
 		return returnList;
 	}
@@ -47,7 +75,28 @@ public class PI0801Service extends ServiceSupport {
 	public List PI0801G2R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
 		List returnList = pi0801Mapper.PI0801G2R0(map);
-		
+		for(Object obj:returnList) {
+			
+			Map<String, Object> temp = (Map<String, Object>)obj;
+			
+			String audioDir = (UPLOAD_BASE_PATH + UPLOAD_AUDIO_DIR).replaceAll("//", "/");
+			if("WAV".equals(temp.get("PLAY_TYPE"))){
+				temp.put("VOC_PATH", audioDir+temp.get("VOC_ID")+"U.wav");
+			}
+			else if("TTS".equals(temp.get("PLAY_TYPE"))){
+				//추후 TTS 적용되면 수정 예정
+				if(CommonUtil.notEmpty(temp.get("EN_TTS"))){
+					temp.put("VOC_EN_PATH", audioDir+temp.get("VOC_ID")+"E.wav");
+				}
+				
+				if(CommonUtil.notEmpty(temp.get("KR_TTS"))){
+					temp.put("VOC_KR_PATH", audioDir+temp.get("VOC_ID")+"K.wav");
+				}
+			}
+			else {
+				temp.put("VOC_PATH", audioDir+temp.get("VOC_ID")+"U.wav");
+			}
+		}
 		return returnList;
 	}
 	

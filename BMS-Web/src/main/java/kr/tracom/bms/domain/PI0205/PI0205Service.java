@@ -24,9 +24,12 @@ public class PI0205Service extends ServiceSupport{
 	
 	@Value("${fileupload.up.directory}")
 	private String UPLOAD_DIR;
-
-	@Value("${fileupload.audio.directory}")
-	private String UPLOAD_AUDIO_DIR;
+	
+	@Value("${fileupload.route.audio.directory}")
+	private String UPLOAD_ROUTE_AUDIO_DIR;
+	
+	@Value("${fileupload.base.path}")
+	private String UPLOAD_BASE_PATH;
 	
 	@Autowired
 	FTPHandler ftpHandler;
@@ -39,7 +42,17 @@ public class PI0205Service extends ServiceSupport{
 		for(Object obj:returnList) {
 			
 			Map<String, Object> temp = (Map<String, Object>)obj;
-			temp.put("VOC_PATH", "/fileUpload/audio/"+AUDIO_INFO.get("AUDIO_NM"));			
+			//temp.put("VOC_PATH", "/fileUpload/audio/"+AUDIO_INFO.get("AUDIO_NM"));
+			String routAudioDir = (UPLOAD_BASE_PATH + UPLOAD_ROUTE_AUDIO_DIR).replaceAll("//", "/");
+			if("WAV".equals(temp.get("PLAY_TYPE"))){
+				temp.put("VOC_PATH", routAudioDir+temp.get("ROUT_ID")+".wav");
+			}
+			else if("TTS".equals(temp.get("PLAY_TYPE"))){
+				temp.put("VOC_PATH", routAudioDir+temp.get("ROUT_ID")+".wav");
+			}
+			else {
+				temp.put("VOC_PATH", routAudioDir+temp.get("ROUT_ID")+"wav");
+			}
 		}
 		
 		return returnList;

@@ -56,9 +56,14 @@ public class MainController extends ControllerSupport {
 	
 	@Value("${fileupload.up.directory}")
 	private String UPLOAD_DIR;
-
+	
+	@Value("${fileupload.audio.directory}")
+	private String AUDIO_DIR;
+	
 	@Value("${fileupload.base.path}")
 	private String UPLOAD_BASE_PATH;
+	
+	
 	
 	
 	@RequestMapping("/main/init")
@@ -88,8 +93,11 @@ public class MainController extends ControllerSupport {
 			}
 			defInfo.put("FILE_UPLOAD_ROOT",fileRoot);
 			defInfo.put("FILE_UP",fileRoot + UPLOAD_DIR);
+			defInfo.put("FILE_AUDIO",fileRoot + AUDIO_DIR);
+			
 			defInfo.put("UPLOAD_BASE_PATH", UPLOAD_BASE_PATH);
 			defInfo.put("UPLOAD_PATH",UPLOAD_BASE_PATH + UPLOAD_DIR);
+			defInfo.put("AUDIO_PATH",UPLOAD_BASE_PATH + AUDIO_DIR);
 
 			
 			int curSystem = (int)user.getCurSystem();

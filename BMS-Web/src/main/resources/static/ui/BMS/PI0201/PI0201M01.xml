@@ -117,12 +117,12 @@
 			var real_fileName = fileName.substring(fileNameIndex+1, fileName.length);
 			var vocId = dlt_BMS_VOC_INFO.getCellData(PI0201G0.getFocusedRowIndex(), "VOC_ID");
 			
-			dma_AUDIO_INFO.set('VOC_ID', vocId+"."+fileExtension);
-			dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
-			dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
+			//dma_AUDIO_INFO.set('VOC_ID', vocId);
+			//dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
+			//dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
 			
-			
-			dlt_BMS_VOC_INFO.setCellData(PI0201G0.getFocusedRowIndex(), 'VOC_PATH', com.getUploadPath()+dma_AUDIO_INFO.get('AUDIO_NM'));
+			dlt_BMS_VOC_INFO.setCellData(PI0201G0.getFocusedRowIndex(), 'VOC_TMP_PATH', com.getUploadPath()+real_fileName);
+			dlt_BMS_VOC_INFO.setCellData(PI0201G0.getFocusedRowIndex(), 'VOC_PATH', com.getAudioPath()+real_fileName);
 			VOC_PATH.submit();
         }else{
 			com.alert("wav, tts 확장자만 업로드 할 수 있습니다.");

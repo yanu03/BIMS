@@ -105,7 +105,7 @@
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
 		
 		}
-		debugger;
+
 		var vhcId = dma_search.get("VHC_ID");
 		for(var x = 0; x < vhcId.length; x++){
 			vhcId[x];

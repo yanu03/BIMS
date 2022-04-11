@@ -37,6 +37,7 @@
 						<w2:column id="UPD_ID" name="갱신ID" dataType="text"></w2:column>
 						<w2:column id="PLAY_DATE" name="재생기간" dataType="text"></w2:column>
 						<w2:column id="VOC_PATH" name="음성경로" dataType="text"></w2:column>
+						<w2:column id="VOC_TMP_PATH" name="음성임시경로" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_search">
@@ -100,7 +101,7 @@
 			//dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
 			//dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
 			
-			dlt_BMS_VOC_INFO.setCellData(PI0204G0.getFocusedRowIndex(), 'VOC_PATH', com.getUploadPath()+real_fileName);
+			dlt_BMS_VOC_INFO.setCellData(PI0204G0.getFocusedRowIndex(), 'VOC_TMP_PATH', com.getUploadPath()+real_fileName);
 			VOC_PATH.submit();
 		
 			/*
@@ -117,7 +118,7 @@
 	scwin.upload0_ondone = function(retXml) {
 		var time_audio = document.getElementById("audio0");
 		
-		var path = dlt_BMS_VOC_INFO.getCellData(PI0204G0.getFocusedRowIndex(), "VOC_PATH");
+		var path = dlt_BMS_VOC_INFO.getCellData(PI0204G0.getFocusedRowIndex(), "VOC_TMP_PATH");
 		
 		$p.$("#audio0").attr("src", path);
 		
@@ -130,24 +131,19 @@
 	
 	scwin.PI0204G0_onrowindexchange = function(row, oldRow) {
 		var audioType = dlt_BMS_VOC_INFO.getCellData(PI0204G0.getFocusedRowIndex(), "PLAY_TYPE");
-		var extension = "";
 		if (audioType == "WAV"){
 			VOC_PATH.setDisabled(false);
 			//KR_TTS.setDisabled(true);
 			//playTTS.setDisabled(true);
 			//btn_basicPhrase.setDisabled(true);
-			extension = "wav";
 		} else if (audioType == "TTS"){
 			VOC_PATH.setDisabled(true);
 			//KR_TTS.setDisabled(false);
 			//playTTS.setDisabled(false);
 			//btn_basicPhrase.setDisabled(false);
-			extension = "tts";
 		}
 		
-		//var path = dlt_BMS_VOC_INFO.getCellData(PI0204G0.getFocusedRowIndex(), "VOC_PATH") 
-		//	+ dlt_BMS_VOC_INFO.getCellData(PI0204G0.getFocusedRowIndex(), "VOC_ID") + "." + extension;
-		var path = dlt_BMS_VOC_INFO.getCellData(PI0204G0.getFocusedRowIndex(), "VOC_PATH")  + "." + extension;	
+		var path = dlt_BMS_VOC_INFO.getCellData(PI0204G0.getFocusedRowIndex(), "VOC_PATH");	
 		$p.$("#audio0").attr("src", path);	
 	};	
 	
