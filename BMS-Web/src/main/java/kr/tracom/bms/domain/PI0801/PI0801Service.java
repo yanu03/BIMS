@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import kr.tracom.bms.domain.PI0801.PI0801Mapper;
 import kr.tracom.bms.ftp.FTPHandler;
 import kr.tracom.cm.support.ServiceSupport;
 import kr.tracom.cm.support.exception.MessageException;
+import kr.tracom.util.CommonUtil;
 import kr.tracom.util.Result;
 
 @Service
@@ -19,6 +21,15 @@ public class PI0801Service extends ServiceSupport {
 	@Autowired
 	private PI0801Mapper pi0801Mapper;
 	
+	@Value("${fileupload.up.directory}")
+	private String UPLOAD_DIR;
+
+	@Value("${fileupload.audio.directory}")
+	private String UPLOAD_AUDIO_DIR;
+	
+	@Value("${fileupload.base.path}")
+	private String UPLOAD_BASE_PATH;	
+
 	@Autowired
 	FTPHandler ftpHandler;
 	
@@ -32,6 +43,31 @@ public class PI0801Service extends ServiceSupport {
 	public List PI0801G1R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
 		List returnList = pi0801Mapper.PI0801G1R0(map);
+
+		Map<String, Object> AUDIO_INFO = getSimpleDataMap("dma_AUDIO_INFO");
+		for(Object obj:returnList) {
+			
+			Map<String, Object> temp = (Map<String, Object>)obj;
+			
+			String audioDir = (UPLOAD_BASE_PATH + UPLOAD_AUDIO_DIR).replaceAll("//", "/");
+			
+			if("WAV".equals(temp.get("PLAY_TYPE"))){
+				temp.put("VOC_PATH", audioDir+temp.get("VOC_ID")+"U.wav");
+			}
+			else if("TTS".equals(temp.get("PLAY_TYPE"))){
+				//추후 TTS 적용되면 수정 예정
+				if(CommonUtil.notEmpty(temp.get("EN_TTS"))){
+					temp.put("VOC_EN_PATH", audioDir+temp.get("VOC_ID")+"E.wav");
+				}
+				
+				if(CommonUtil.notEmpty(temp.get("KR_TTS"))){
+					temp.put("VOC_KR_PATH", audioDir+temp.get("VOC_ID")+"K.wav");
+				}
+			}
+			else {
+				temp.put("VOC_PATH", audioDir+temp.get("AUDIO_NM")+"U.wav");
+			}
+		}
 		
 		return returnList;
 	}
@@ -39,7 +75,28 @@ public class PI0801Service extends ServiceSupport {
 	public List PI0801G2R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
 		List returnList = pi0801Mapper.PI0801G2R0(map);
-		
+		for(Object obj:returnList) {
+			
+			Map<String, Object> temp = (Map<String, Object>)obj;
+			
+			String audioDir = (UPLOAD_BASE_PATH + UPLOAD_AUDIO_DIR).replaceAll("//", "/");
+			if("WAV".equals(temp.get("PLAY_TYPE"))){
+				temp.put("VOC_PATH", audioDir+temp.get("VOC_ID")+"U.wav");
+			}
+			else if("TTS".equals(temp.get("PLAY_TYPE"))){
+				//추후 TTS 적용되면 수정 예정
+				if(CommonUtil.notEmpty(temp.get("EN_TTS"))){
+					temp.put("VOC_EN_PATH", audioDir+temp.get("VOC_ID")+"E.wav");
+				}
+				
+				if(CommonUtil.notEmpty(temp.get("KR_TTS"))){
+					temp.put("VOC_KR_PATH", audioDir+temp.get("VOC_ID")+"K.wav");
+				}
+			}
+			else {
+				temp.put("VOC_PATH", audioDir+temp.get("VOC_ID")+"U.wav");
+			}
+		}
 		return returnList;
 	}
 	
@@ -159,19 +216,19 @@ public class PI0801Service extends ServiceSupport {
     			if (rowStatus.equals("C")) {
     				iCnt += pi0801Mapper.PI0801G1I0(data);
     				
-    				if((AUDIO_INFO.get("VOC_ID")!=null)&&(AUDIO_INFO.get("VOC_ID").toString().isEmpty()==false))
-						{
-    						doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
-						}
-    				
+    				if(CommonUtil.notEmpty(data.get("VOC_ID"))&&CommonUtil.notEmpty(data.get("VOC_NM")))
+					{
+						ftpHandler.uploadVoice(data);
+						//doMoveFile(UPLOAD_DIR, UPLOAD_AUDIO_DIR, AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
+					}
     			} else if (rowStatus.equals("U")) {
     				uCnt += pi0801Mapper.PI0801G1U0(data);
    
-    				if((AUDIO_INFO.get("VOC_ID")!=null)&&(AUDIO_INFO.get("VOC_ID").toString().isEmpty()==false))
-						{
-    						doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
-						}
-                    
+    				if(CommonUtil.notEmpty(data.get("VOC_ID"))&&CommonUtil.notEmpty(data.get("VOC_NM")))
+					{
+    					ftpHandler.uploadVoice(data);
+						//doMoveFile(UPLOAD_DIR, UPLOAD_AUDIO_DIR, AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
+					}
     				
     			} else if (rowStatus.equals("D")) {
     				dCnt += pi0801Mapper.PI0801G1D0(data);
@@ -211,10 +268,16 @@ public class PI0801Service extends ServiceSupport {
 			
 			if (rowStatus.equals("C")) {
 				iCnt += pi0801Mapper.PI0801G2I0(data);
+				if(CommonUtil.notEmpty(data.get("VOC_ID"))&&CommonUtil.notEmpty(data.get("VOC_NM"))) {
+					//doMoveFile(UPLOAD_DIR, UPLOAD_AUDIO_DIR, AUDIO_INFO.get("VOC_ID").toString(), AUDIO_INFO.get("VOC_ID").toString());
+					ftpHandler.uploadVoice(data);
+				}
 			} else if (rowStatus.equals("U")) {
 				uCnt += pi0801Mapper.PI0801G2U0(data);
-				
-                doMoveFile("up/", "audio/", AUDIO_INFO.get("VOC_ID").toString(), AUDIO_INFO.get("VOC_ID").toString());
+				if(CommonUtil.notEmpty(data.get("VOC_ID"))&&CommonUtil.notEmpty(data.get("VOC_NM"))) {
+					//doMoveFile(UPLOAD_DIR, UPLOAD_AUDIO_DIR, AUDIO_INFO.get("VOC_ID").toString(), AUDIO_INFO.get("VOC_ID").toString());
+					ftpHandler.uploadVoice(data);
+				}
 			} else if (rowStatus.equals("D")) {
 				dCnt += pi0801Mapper.PI0801G2D0(data);
 			}

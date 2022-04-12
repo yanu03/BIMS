@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.SystemUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
@@ -46,7 +47,25 @@ public class MainController extends ControllerSupport {
 	
 	@Value("${system.sbrt.url}")
 	private String sbrtUrl;
+	
+	@Value("${fileupload.location}")
+	private String FILE_UPLOAD_ROOT;
 
+	@Value("${windows.fileupload.location}")
+	private String WINDOWS_FILE_UPLOAD_ROOT;
+	
+	@Value("${fileupload.up.directory}")
+	private String UPLOAD_DIR;
+	
+	@Value("${fileupload.audio.directory}")
+	private String AUDIO_DIR;
+	
+	@Value("${fileupload.base.path}")
+	private String UPLOAD_BASE_PATH;
+	
+	
+	
+	
 	@RequestMapping("/main/init")
 	public @ResponseBody Map<String, Object> getInitMainInfo(HttpServletRequest request) {
 		Result result = new Result();
@@ -67,6 +86,19 @@ public class MainController extends ControllerSupport {
 			} else {  
 				defInfo.put(Constants.SSN_IS_ADMIN, "N");
 			}
+			
+			String fileRoot = FILE_UPLOAD_ROOT;
+			if(SystemUtils.IS_OS_WINDOWS) {
+				fileRoot = WINDOWS_FILE_UPLOAD_ROOT;
+			}
+			defInfo.put("FILE_UPLOAD_ROOT",fileRoot);
+			defInfo.put("FILE_UP",fileRoot + UPLOAD_DIR);
+			defInfo.put("FILE_AUDIO",fileRoot + AUDIO_DIR);
+			
+			defInfo.put("UPLOAD_BASE_PATH", UPLOAD_BASE_PATH);
+			defInfo.put("UPLOAD_PATH",UPLOAD_BASE_PATH + UPLOAD_DIR);
+			defInfo.put("AUDIO_PATH",UPLOAD_BASE_PATH + AUDIO_DIR);
+
 			
 			int curSystem = (int)user.getCurSystem();
 			defInfo.put(Constants.SSN_CUR_SYSTEM, curSystem);

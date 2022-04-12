@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,12 @@ public class PI0501Service extends ServiceSupport {
 
 	@Autowired
 	private PI0501Mapper pi0501Mapper;
+	
+	@Value("${fileupload.up.directory}")
+	private String UPLOAD_DIR;
+
+	@Value("${fileupload.video.directory}")
+	private String UPLOAD_VIDEO_DIR;
 	
 	public List PI0501G0R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
@@ -58,7 +65,7 @@ public class PI0501Service extends ServiceSupport {
 					if((data.get("FILE_NM")!=null)&&(data.get("FILE_NM").toString().isEmpty()==false)
 							&&(data.get("VDO_ID").equals(data.get("FILE_NM"))==false))
 						{
-							doMoveFile("up/", "video/", data.get("FILE_NM").toString(), data.get("VDO_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString());
+							doMoveFile(UPLOAD_DIR, UPLOAD_VIDEO_DIR, data.get("FILE_NM").toString(), data.get("VDO_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString());
 							data.put("FILE_NM", data.get("VDO_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString());
 						}	
 					iCnt += pi0501Mapper.PI0501G0I0(data);				
@@ -66,7 +73,7 @@ public class PI0501Service extends ServiceSupport {
 					if((data.get("FILE_NM")!=null)&&(data.get("FILE_NM").toString().isEmpty()==false)
 							&&(data.get("VDO_ID").equals(data.get("FILE_NM"))==false)) 
 						{
-							doMoveFile("up/","video/",data.get("FILE_NM").toString(),data.get("VDO_ID").toString()+ "." + data.get("FILE_EXTENSION").toString());
+							doMoveFile(UPLOAD_DIR, UPLOAD_VIDEO_DIR,data.get("FILE_NM").toString(),data.get("VDO_ID").toString()+ "." + data.get("FILE_EXTENSION").toString());
 							data.put("FILE_NM", data.get("VDO_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString());
 						}	
 					uCnt += pi0501Mapper.PI0501G0U0(data);				

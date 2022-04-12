@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class PI0601Service extends ServiceSupport  {
 
 	@Autowired
 	private PI0601Mapper pi0601Mapper;
+	
+	@Value("${fileupload.up.directory}")
+	private String UPLOAD_DIR;
 	
 	public List PI0601G0R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
@@ -58,14 +62,14 @@ public class PI0601Service extends ServiceSupport  {
 					if((data.get("FILE_NM")!=null)&&(data.get("FILE_NM").toString().isEmpty()==false)
 							&&(data.get("VDO_ID").equals(data.get("FILE_NM"))==false))
 						{
-							doMoveFile("up/","PI0601/",data.get("FILE_NM").toString(),data.get("VDO_ID").toString());
+							doMoveFile(UPLOAD_DIR,"PI0601/",data.get("FILE_NM").toString(),data.get("VDO_ID").toString());
 						}					
 				} else if (rowStatus.equals("U")) {
 					uCnt += pi0601Mapper.PI0601G0U0(data);
 					if((data.get("FILE_NM")!=null)&&(data.get("FILE_NM").toString().isEmpty()==false)
 							&&(data.get("VDO_ID").equals(data.get("FILE_NM"))==false)) 
 						{
-							doMoveFile("up/","PI0601/",data.get("FILE_NM").toString(),data.get("VDO_ID").toString());
+							doMoveFile(UPLOAD_DIR,"PI0601/",data.get("FILE_NM").toString(),data.get("VDO_ID").toString());
 						}					
 				} else if (rowStatus.equals("D")) {
 					dCnt += pi0601Mapper.PI0601G0D0(data);

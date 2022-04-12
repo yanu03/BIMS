@@ -85,7 +85,7 @@
 			</xf:submission>
 			<xf:submission id="sub_PI0201G0S0" ref='data:json,["dlt_BMS_VOC_INFO","dma_AUDIO_INFO"]' target="" action="/pi/PI0201G0S0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="저장중입니다..." ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				processMsg="저장중입니다..." ev:submit="" ev:submitdone="scwin.sub_PI0201G0S0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI0201SHI0" ref="" target="data:json,dlt_searchitem" action="/pi/PI0201SHI0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
@@ -106,6 +106,7 @@
 	$p.executeSubmission(sub_PI0201SHI0);
 	
 	scwin.upload0_onInputValueChange = function(fileName) {
+		
 		// 확장자 추출
 		var lastDot = fileName.lastIndexOf('.'); 
 		var fileExtension = fileName.substring(lastDot+1, fileName.length);
@@ -116,11 +117,12 @@
 			var real_fileName = fileName.substring(fileNameIndex+1, fileName.length);
 			var vocId = dlt_BMS_VOC_INFO.getCellData(PI0201G0.getFocusedRowIndex(), "VOC_ID");
 			
-			dma_AUDIO_INFO.set('VOC_ID', vocId+"."+fileExtension);
-			dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
-			dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
+			//dma_AUDIO_INFO.set('VOC_ID', vocId);
+			//dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
+			//dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
 			
-			dlt_BMS_VOC_INFO.setCellData(PI0201G0.getFocusedRowIndex(), 'VOC_PATH', '/fileUpload/up/'+dma_AUDIO_INFO.get('AUDIO_NM'));
+			dlt_BMS_VOC_INFO.setCellData(PI0201G0.getFocusedRowIndex(), 'VOC_TMP_PATH', com.getUploadPath()+real_fileName);
+			dlt_BMS_VOC_INFO.setCellData(PI0201G0.getFocusedRowIndex(), 'VOC_PATH', com.getAudioPath()+real_fileName);
 			VOC_PATH.submit();
         }else{
 			com.alert("wav, tts 확장자만 업로드 할 수 있습니다.");
@@ -131,6 +133,7 @@
 	
 	scwin.upload0_ondone = function(retXml) {
 		var time_audio = document.getElementById("audio0");
+		
 		
 		var path = dlt_BMS_VOC_INFO.getCellData(PI0201G0.getFocusedRowIndex(), "VOC_PATH");
 		
@@ -150,6 +153,7 @@
 	scwin.PI0201G0_onrowindexchange = function(row, oldRow) {
 		
 		var audioType = dlt_BMS_VOC_INFO.getCellData(PI0201G0.getFocusedRowIndex(), "PLAY_TYPE");
+		var extention = "";
 		if (audioType == "WAV"){
 			//VOC_PATH.setDisabled(false);
 			KR_TTS.setDisabled(true);
@@ -157,7 +161,8 @@
 			playTTS.setDisabled(true);
 			btn_basicPhrase.setDisabled(true);
 			playTTS2.setDisabled(true);
-			btn_basicPhrase2.setDisabled(true);							
+			btn_basicPhrase2.setDisabled(true);
+			extention = "wav";
 		} else if (audioType == "TTS"){
 			//VOC_PATH.setDisabled(true);
 			KR_TTS.setDisabled(false);
@@ -166,9 +171,10 @@
 			btn_basicPhrase.setDisabled(false);
 			playTTS2.setDisabled(false);
 			btn_basicPhrase2.setDisabled(false);
+			extention = "tts";
 		}
 		var path = dlt_BMS_VOC_INFO.getCellData(PI0201G0.getFocusedRowIndex(), "VOC_PATH") 
-			+ dlt_BMS_VOC_INFO.getCellData(PI0201G0.getFocusedRowIndex(), "VOC_ID") + "." + dlt_BMS_VOC_INFO.getCellData(PI0201G0.getFocusedRowIndex(), "PLAY_TYPE");	
+			+ dlt_BMS_VOC_INFO.getCellData(PI0201G0.getFocusedRowIndex(), "VOC_ID") + "." + extention;	
 		
 		//저장된 음성 미리듣기
 		$p.$("#audio0").attr("src", path);
@@ -187,6 +193,10 @@
 	
 	scwin.sub_PI0201G0K0_submitdone = function(e) {
 		var insertIndex = com.addGrid(PI0201G0,dma_SEQ_BMS_VOC_INFO_0,"VOC_ID","VOC_NM");
+	};
+	
+	scwin.sub_PI0201G0S0_submitdone = function(e) {
+		com.saveDone(PI0201G0, sub_PI0201G0R0);
 	};
 	
 	// 음성유형 TTS, WAV 변경 시 음성파일 업로드 disable 처리

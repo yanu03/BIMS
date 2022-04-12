@@ -36,6 +36,7 @@
 						<w2:column id="UPD_ID" name="갱신ID" dataType="text"></w2:column>
 						<w2:column id="PLAY_DATE" name="재생기간" dataType="text"></w2:column>
 						<w2:column id="VOC_PATH" name="음성경로" dataType="text"></w2:column>
+						<w2:column id="VOC_TMP_PATH" name="음성임시경로" dataType="text"></w2:column>
 						<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
 						<w2:column id="WAY_DIV" name="상하행구분" dataType="text"></w2:column>
 					</w2:columnInfo>
@@ -131,7 +132,7 @@
 			dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
 			dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
 			
-			dlt_BMS_VOC_INFO.setCellData(PI0205G0.getFocusedRowIndex(), 'VOC_PATH', '/fileUpload/up/'+dma_AUDIO_INFO.get('AUDIO_NM'));
+			dlt_BMS_VOC_INFO.setCellData(PI0205G0.getFocusedRowIndex(), 'VOC_TMP_PATH', com.getUploadPath()+dma_AUDIO_INFO.get('AUDIO_NM'));
 			VOC_PATH.submit();
 		
 			/*
@@ -149,7 +150,8 @@
 	scwin.upload0_ondone = function(retXml) {
 		var time_audio = document.getElementById("audio0");
 		
-		var path = dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "VOC_PATH");
+		var path = dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "VOC_TMP_PATH");
+		
 		$p.$("#audio0").attr("src", path);
 		
 		time_audio.addEventListener('loadedmetadata', function() {
@@ -177,12 +179,15 @@
 			btn_basicPhrase.setDisabled(false);
 		}
 		
-		var path = dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "VOC_PATH") 
-			+ dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "VOC_ID") + "." + dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "PLAY_TYPE");
+		//var path = dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "VOC_PATH") 
+		//	+ dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "VOC_ID") + "." + extension;
 		//var path = dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "VOC_PATH");	
+		var path = dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "VOC_PATH");		
 		$p.$("#audio0").attr("src", path);		
 		$p.$("#audio0").attr("loop", false);		
 		
+		//$p.$("#audio0").attr("src", path);		
+		//$p.$("#audio0").attr("src", path);	
 	};	
 	
 	

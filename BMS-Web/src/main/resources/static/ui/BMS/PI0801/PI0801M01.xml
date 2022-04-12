@@ -72,6 +72,9 @@
 						<w2:column id="UPD_ID" name="갱신ID" dataType="text"></w2:column>
 						<w2:column id="PLAY_DATE" name="재생기간" dataType="text"></w2:column>
 						<w2:column id="VOC_PATH" name="음성경로" dataType="text"></w2:column>
+						<w2:column id="VOC_KR_PATH" name="음성한글경로" dataType="text"></w2:column>
+						<w2:column id="VOC_EN_PATH" name="음성영어경로" dataType="text"></w2:column>
+						<w2:column id="VOC_TMP_PATH" name="음성임시경로" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_AUDIO_INFO">
@@ -105,6 +108,9 @@
 						<w2:column id="UPD_ID" name="갱신ID" dataType="text"></w2:column>
 						<w2:column id="PLAY_DATE" name="재생기간" dataType="text"></w2:column>
 						<w2:column id="VOC_PATH" name="음성경로" dataType="text"></w2:column>
+						<w2:column id="VOC_KR_PATH" name="음성한글경로" dataType="text"></w2:column>
+						<w2:column id="VOC_EN_PATH" name="음성영어경로" dataType="text"></w2:column>
+						<w2:column id="VOC_TMP_PATH" name="음성임시경로" dataType="text"></w2:column>
 						<w2:column id="TXT_A" name="실내 전광판 문구(윗줄)" dataType="text"></w2:column>
 						<w2:column id="TXT_B" name="실내 전광판 문구(아랫줄)" dataType="text"></w2:column>
 					</w2:columnInfo>
@@ -153,7 +159,7 @@
 			</xf:submission>
 			<xf:submission id="sub_PI0801G1S0" ref='data:json,["dlt_BMS_VOC_INFO","dma_AUDIO_INFO"]' target="" action="/pi/PI0801G1S0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="저장중입니다..." ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				processMsg="저장중입니다..." ev:submit="" ev:submitdone="scwin.sub_PI0801G1S0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI0801SHI1" ref="" target="data:json,dlt_searchitem" action="/pi/PI0801SHI1" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
@@ -212,10 +218,10 @@
 		com.executeSubmission(sub_PI0801SHI0);
 		
 		//탭 목록 클릭 이벤트
-		$(".moni_img").find("li").click( function() {
+		$("#PI0801_TAB").find("li").click( function() {
 			var li_id = this.id;
-			$(".moni_img").find("li").removeClass("on");
-			$(".moni_img").find("#"+li_id).addClass("on");
+			$("#PI0801_TAB").find("li").removeClass("on");
+			$("#PI0801_TAB").find("#"+li_id).addClass("on");
 			if(li_id == "li_ledimg") {
 				search_input.setPlaceholder("LED ID 또는 LED명");
 				ledActive = 1;
@@ -427,7 +433,7 @@
 		            com.confirm(yesno_str, function(rtn) {
 		               if (rtn) {          
 			              //com.setSerialNumberToData(PI0801G1, "SN"); 
-		                  com.saveData(PI0801G1,null,sub_PI0801G0S1);
+		                  com.saveData(PI0801G1,null,sub_PI0801G1S0);
 		               }
 		            });
 		         }
@@ -450,7 +456,7 @@
 		            com.confirm(yesno_str, function(rtn) {
 		               if (rtn) {          
 			              //com.setSerialNumberToData(PI0801G1, "SN"); 
-		                  com.saveData(PI0801G2,null,sub_PI0801G0S2);
+		                  com.saveData(PI0801G2,null,sub_PI0801G2S0);
 		               }
 		            });
 		         }
@@ -471,6 +477,7 @@
 	};	
 	
 	scwin.PI0801G1_onrowindexchange = function(row, oldRow) {
+		debugger;
 		soundFocus = row;
 		var audioType = dlt_BMS_VOC_INFO.getCellData(PI0801G1.getFocusedRowIndex(), "PLAY_TYPE");
 		if (audioType == "WAV"){
@@ -554,12 +561,13 @@
 		if (fileExtension == "wav" || fileExtension == "tts"){
 			var real_fileName = fileName.substring(fileNameIndex+1, fileName.length);
 			var vocId = dlt_BMS_VOC_INFO.getCellData(PI0801G1.getFocusedRowIndex(), "VOC_ID");
-			debugger;
-			dma_AUDIO_INFO.set('VOC_ID', vocId);
-			dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
-			dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
 			
-			dlt_BMS_VOC_INFO.setCellData(PI0801G1.getFocusedRowIndex(), 'VOC_PATH', '/fileUpload/up/'+dma_AUDIO_INFO.get('AUDIO_NM'));
+			//dma_AUDIO_INFO.set('VOC_ID', vocId);
+			//dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
+			//dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
+			
+			dlt_BMS_VOC_INFO.setCellData(PI0801G1.getFocusedRowIndex(), 'VOC_TMP_PATH', com.getUploadPath()+real_fileName);
+			//dlt_BMS_VOC_INFO.setCellData(PI0801G1.getFocusedRowIndex(), 'VOC_PATH', com.getAudioPath());
 			VOC_PATH.submit();
 		
         }else{
@@ -572,7 +580,8 @@
 	scwin.upload0_ondone = function(retXml) {
 		var time_audio = document.getElementById("audio0");
 		
-		var path = dlt_BMS_VOC_INFO.getCellData(PI0801G1.getFocusedRowIndex(), "VOC_PATH");
+		//var path = dlt_BMS_VOC_INFO.getCellData(PI0801G1.getFocusedRowIndex(), "VOC_PATH");
+		var path = dlt_BMS_VOC_INFO.getCellData(PI0801G1.getFocusedRowIndex(), "VOC_TMP_PATH");
 		$p.$("#audio0").attr("src", path);
 		
 		time_audio.addEventListener('loadedmetadata', function() {
@@ -588,6 +597,10 @@
 	scwin.sub_PI0801G1K0_submitdone = function(e) {
 		var insertIndex = com.addGrid(PI0801G1,dma_SEQ_BMS_VOC_INFO_0,"VOC_ID","VOC_NM");
 	};	
+	
+	scwin.sub_PI0801G1S0_submitdone = function(e) {
+		com.saveDone(PI0801G1, sub_PI0801G1R0);
+	};
 	
 	scwin.PLAY_TYPE_onviewchange = function(info) {
 		if (info.newValue == "WAV"){
@@ -610,8 +623,25 @@
 	};
 	
 	//TTS 붙이면 해야함
-	scwin.playTTS_onclick = function(e) {
-		
+	scwin.playKR_TTS_onclick = function(e) {
+		debugger;
+		var path = dlt_BMS_VOC_INFO.getCellData(PI0801G1.getFocusedRowIndex(), "VOC_KR_PATH");		
+		$p.$("#audio0").attr("src", path);			
+	};
+	
+	scwin.playEN_TTS_onclick = function(e) {
+		var path = dlt_BMS_VOC_INFO.getCellData(PI0801G1.getFocusedRowIndex(), "VOC_EN_PATH");		
+		$p.$("#audio0").attr("src", path);			
+	};
+	
+	scwin.playKR_TTS2_onclick = function(e) {
+		var path = dlt_BMS_VOC_INFO.getCellData(PI0801G2.getFocusedRowIndex(), "VOC_KR_PATH");		
+		$p.$("#audio1").attr("src", path);			
+	};
+	
+	scwin.playEN_TTS2_onclick = function(e) {
+		var path = dlt_BMS_VOC_INFO.getCellData(PI0801G2.getFocusedRowIndex(), "VOC_EN_PATH");		
+		$p.$("#audio1").attr("src", path);			
 	};		
 	
 	scwin.btn_basicPhrase_onclick = function(e) {
@@ -704,26 +734,26 @@
 		
 	//기타탭 업로드시 이벤트
 	scwin.upload1_onInputValueChange = function(fileName) {
-		// 확장자 추출
+			// 확장자 추출
 		var lastDot = fileName.lastIndexOf('.'); 
 		var fileExtension = fileName.substring(lastDot+1, fileName.length);
 		
-		//파일명
 		var fileNameIndex = fileName.lastIndexOf('\\');
+		//파일명
 		
 		
 		if (fileExtension == "wav" || fileExtension == "tts"){
 			var real_fileName = fileName.substring(fileNameIndex+1, fileName.length);
+			var vocId = dlt_BMS_VOC_INFO2.getCellData(PI0801G2.getFocusedRowIndex(), "VOC_ID");
 			
-			dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
-			dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
+			//dma_AUDIO_INFO.set('VOC_ID', vocId);
+			//dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
+			//dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
 			
-			dlt_BMS_VOC_INFO2.setCellData(PI0801G2.getFocusedRowIndex(), 'VOC_PATH', '/fileUpload/up/'+dma_AUDIO_INFO.get('AUDIO_NM'));
-			VOC_PATH2.submit();
+			dlt_BMS_VOC_INFO2.setCellData(PI0801G2.getFocusedRowIndex(), 'VOC_TMP_PATH', com.getUploadPath()+real_fileName);
+			//dlt_BMS_VOC_INFO2.setCellData(PI0801G2.getFocusedRowIndex(), 'VOC_PATH', com.getAudioPath());
+			VOC_PATH.submit();
 		
-			var path = dlt_BMS_VOC_INFO2.getCellData(PI0801G2.getFocusedRowIndex(), "VOC_PATH");
-			$p.$("#audio1").attr("src", path);
-            
         }else{
 			com.alert("wav, tts 확장자만 업로드 할 수 있습니다.");
 			VOC_PATH.reset()
@@ -769,14 +799,14 @@
 	scwin.VOC_PATH2_ondone = function(retXml) {
 		var time_audio = document.getElementById("audio1");
 		
-		var path = dlt_BMS_VOC_INFO2.getCellData(PI0801G2.getFocusedRowIndex(), "VOC_PATH");
+		//var path = dlt_BMS_VOC_INFO2.getCellData(PI0801G2.getFocusedRowIndex(), "VOC_PATH");
+		var path = dlt_BMS_VOC_INFO2.getCellData(PI0801G2.getFocusedRowIndex(), "VOC_TMP_PATH");
 		$p.$("#audio1").attr("src", path);
 		
 		time_audio.addEventListener('loadedmetadata', function() {
 			var duration = parseInt(time_audio.duration);
 			dlt_BMS_VOC_INFO2.setCellData(PI0801G2.getFocusedRowIndex(), "PLAY_TM", duration);
-		});				
-				
+		});		
 	};	
 	
 	scwin.PLAY_ST_DT2_onviewchange = function(info) {
@@ -861,8 +891,8 @@
 			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
 					<xf:group id="" class="gr_sub_header" style="">
-						<xf:group style="width: 303px;">
-							<ul id="" class="moni_img"  style="margin-bottom: 3px;">
+						<xf:group class="tab_div">
+							<ul id="PI0801_TAB" class="tab_ul"  style="width:303px">
 								<li id="li_ledimg" class="on">
 									<!-- <span class="busimg"></span> -->
 									실내LED
@@ -896,17 +926,11 @@
 					</xf:group>
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">
-						<xf:group id="PI0801T0" class="PI0801T0" style="height: 100%">
-							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
-								dataList="data:dlt_BMS_INNER_LED_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
-								ev:onrowindexchange="scwin.PI0801G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true"
-								id="PI0801G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusHeaderValue=""
-								rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows=""
-								autoFitMinWidth="0" disabledScrollHidden="" editModeEvent="" editModeEventIcon="" checkEditableInputClass="" keyMoveEditMode=""
-								moveKeyEditMode="" moveKeyEditModeAll="" ignoreNonEditableCellTabEnter="" readOnly="true" keepDefaultColumnWidth=""
-								oddEvenColorDisplay="" rowNumWidth="" summaryAuto="" excludeDeletedRows="" useCtrlOnMultisort="" useFilterList=""
-								useFilterListSync="" sortedIconPosition="" sortable="" sortOrderReverse="" showSortableUseFilter="" focusMode="row"
-								rowNumStatusUniqueId="" rowNumStatusResize="" ev:onbeforecolumnmove="" userData1="">
+						<xf:group id="PI0801T0" class="PI0801T0" style="height:100%">
+							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"  style="height:100%"
+								dataList="data:dlt_BMS_INNER_LED_INFO"	ev:onrowindexchange="scwin.PI0801G0_onrowindexchange" fixedColumnWithHidden="true"
+								id="PI0801G0" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
+								scrollByColumn="false" useShiftKey="true" autoFitMinWidth="0" readOnly="true" focusMode="row">
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
@@ -962,11 +986,11 @@
 								</w2:footer>							
 							</w2:gridView>
 						</xf:group> <!-- PI0801T0 -->
-						<xf:group id="PI0801T1" class="PI0801T1" style="height: 100%;display: none;">
+						<xf:group id="PI0801T1" class="PI0801T1" style="display: none; height:100%">
 							<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.PI0801G1_onrowindexchange" ev:oncellclick=""
 								showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순서" sortable="true"
 								rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false"
-								fixedColumnWithHidden="true" dataList="data:dlt_BMS_VOC_INFO" ignoreCellClick="false" style="" autoFit="lastColumn"
+								fixedColumnWithHidden="true" dataList="data:dlt_BMS_VOC_INFO" ignoreCellClick="false" style="height:100%" autoFit="lastColumn"
 								visibleRowNum="" id="PI0801G1" class="cm_grid left" tooltipPositionY="" focusMode="row">
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
@@ -1077,12 +1101,12 @@
 							</w2:gridView>						
 						</xf:group> <!-- PI0801T1 -->
 						
-						<xf:group id="PI0801T2" class="PI0801T2" style="height: 100%;display: none;">
+						<xf:group id="PI0801T2" class="PI0801T2" style="display: none; height:100%">
 							<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin." ev:oncellclick=""
 								showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순서"
 								sortable="true" rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
-								dataList="data:dlt_BMS_VOC_INFO2" ignoreCellClick="false" style="height:100%;" autoFit="lastColumn" visibleRowNum="" id="PI0801G2"
-								class="cm_grid" tooltipPositionY="" focusMode="row">
+								dataList="data:dlt_BMS_VOC_INFO2" ignoreCellClick="false" style="height:100%" autoFit="lastColumn" visibleRowNum="" id="PI0801G2"
+								class="cm_grid left" tooltipPositionY="" focusMode="row">
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row2">
 										<w2:column width="100" style="height:20px;" inputType="text" id="column9" value="음성ID" blockSelect="false"
@@ -1384,7 +1408,7 @@
 										<xf:textarea id="KR_TTS" style="width: 500px;" ref="data:dlt_BMS_VOC_INFO.KR_TTS" maxlength="200" ev:onviewchange="scwin.KR_TTS_onviewchange" ev:onkeypress="scwin.KR_TTS_onkeypress" ev:onblur="scwin.KR_TTS_onblur"></xf:textarea>
 										
 										<xf:group style="display: contents;position: absolute;margin-left: 10px; float:right;"  id="">
-											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;    margin-top: 20px;    margin-left: 10px;" id="playTTS" ev:onclick="scwin.playTTS_onclick">
+											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;    margin-top: 20px;    margin-left: 10px;" id="playTTS" ev:onclick="scwin.playKR_TTS_onclick">
 												<xf:label><![CDATA[미리듣기]]></xf:label>
 											</xf:trigger>
 											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;    margin-bottom: 10px;    margin-top: 20px;    margin-left: 10px;" id="btn_basicPhrase" ev:onclick="scwin.btn_basicPhrase_onclick">
@@ -1409,7 +1433,7 @@
 				
 										<xf:textarea id="ER_TTS" style="width: 500px;" ref="data:dlt_BMS_VOC_INFO.EN_TTS" maxlength="200" ev:onviewchange="scwin.ER_TTS_onviewchange"></xf:textarea>
 										<xf:group style="display: contents;position: absolute;margin-left: 10px; float:right;"  id="">
-											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px;margin-left: 10px;" id="playTTS2" ev:onclick="scwin.playTTS2_onclick">
+											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px;margin-left: 10px;" id="playTTS2" ev:onclick="scwin.playEN_TTS_onclick">
 												<xf:label><![CDATA[미리듣기]]></xf:label>
 											</xf:trigger>
 											<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px;margin-left: 10px;" id="btn_basicPhrase2" ev:onclick="scwin.btn_basicPhrase2_onclick" disabled="">
@@ -1659,7 +1683,7 @@
 
 									<xf:textarea id="KR_TTS2" style="width: 500px;" ref="data:dlt_BMS_VOC_INFO2.KR_TTS" maxlength="200"></xf:textarea>
 									<xf:group style="display: contents;position: absolute;margin-left: 5px;" id="">
-										<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px; margin-left: 10px;" id="playTTS3" ev:onclick="scwin.playTTS_onclick">
+										<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px; margin-left: 10px;" id="playTTS3" ev:onclick="scwin.playKR_TTS2_onclick">
 											<xf:label><![CDATA[미리듣기]]></xf:label>
 										</xf:trigger>
 										<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px; margin-left: 10px;" id="btn_basicPhrase3" ev:onclick="scwin.btn_basicPhrase3_onclick">
@@ -1684,7 +1708,7 @@
 
 									<xf:textarea id="EN_TTS2" style="width: 500px;" ref="data:dlt_BMS_VOC_INFO2.EN_TTS" maxlength="200"></xf:textarea>
 									<xf:group style="display: contents;position: absolute;margin-left: 5px;" id="">
-										<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px; margin-left: 10px;" id="playTTS4" ev:onclick="scwin.playTTS2_onclick">
+										<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px; margin-left: 10px;" id="playTTS4" ev:onclick="scwin.playEN_TTS2_onclick">
 											<xf:label><![CDATA[미리듣기]]></xf:label>
 										</xf:trigger>
 										<xf:trigger type="button" class="table_btn" style="width: 100px;height: 20px;margin-bottom: 10px;margin-top: 20px; margin-left: 10px;" id="btn_basicPhrase4" ev:onclick="scwin.btn_basicPhrase4_onclick" disabled="">

@@ -18,7 +18,7 @@
 		WHERE
 			VOC_DIV = 'VD005'	
 		<where>
-			<if test="CONTENT != ''">
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT)">	
 				VOC_ID LIKE CONCAT('%',#{CONTENT},'%') OR VOC_NM LIKE CONCAT('%',#{CONTENT},'%')
 			</if>
 		</where>
@@ -50,7 +50,7 @@
     	WHERE
     		VOC_ID = #{VOC_ID}
     		AND
-    		VOC_DIV = 'CD029'
+    		VOC_DIV = 'VD005'
 	</update>
 	
 	<delete id="PI0204G0D0" parameterType="Map">
@@ -66,7 +66,7 @@
     	WHERE
     		VOC_ID = #{VOC_ID}
     		AND
-    		VOC_DIV = 'CD029'
+    		VOC_DIV = 'VD005'
 	</delete>
 	
 	<!-- 
