@@ -22,7 +22,7 @@
 						<w2:column id="OLD_PARAM_KIND" name="전매개변수종류" dataType="text"></w2:column>
 						<w2:column id="DATA_TYPE" name="데이터유형" dataType="text"></w2:column>
 						<w2:column id="DATA_LENGTH" name="데이터길이" dataType="text"></w2:column>
-						<w2:column id="DATA_VAL" name="데이터값" dataType="text"></w2:column>
+						<w2:column id="DATA_VAL" name="설정값" dataType="text"></w2:column>
 						<w2:column id="ATTR1_VAL" name="속성1값" dataType="text"></w2:column>
 						<w2:column id="ATTR2_VAL" name="속성2값" dataType="text"></w2:column>
 						<w2:column id="SCHEDULE_YN" name="스케쥴유무" dataType="text" defaultValue="Y"></w2:column>
@@ -54,6 +54,7 @@
 					<w2:columnInfo>
 						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
 						<w2:column id="PARAM_DIV" name="매개변수구분" dataType="text"></w2:column>
+						<w2:column id="PARAM_KIND" name="매개변수종류" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 			</w2:dataCollection>
@@ -110,6 +111,39 @@
 	
 	scwin.SI0800G0_onrowindexchange = function(row,oldRow) {
 		//com.setFocusedCell(SI0800G0, "DVC_KIND");
+		var dataType = dlt_BMS_DVC_PARAM_CFG_INFO.getCellData(row, "DATA_TYPE");
+		
+		switch (dataType) {
+		case "DT001":
+			//$p.$("#DATA_VAL").attr("allowChar", "");
+			DATA_VAL.setAllowChar("0-9")
+		break;
+		case "DT002":
+			DATA_VAL.setAllowChar("")
+		break;
+		case "DT003":
+			DATA_VAL.setAllowChar("0-9")
+		break;
+		case "DT004":
+			DATA_VAL.setAllowChar("")
+		break;
+		case "DT005":
+			DATA_VAL.setAllowChar("0-9")
+		break;
+		case "DT006":
+			DATA_VAL.setAllowChar("0-9")
+		break;
+		case "DT007":
+			DATA_VAL.setAllowChar("0-9")
+		break;
+		case "DT008":
+			DATA_VAL.setAllowChar("")
+		break;
+		case "DT009":
+			DATA_VAL.setAllowChar("")
+		break;
+		
+		}
 	};
 	
 	scwin.sub_SI0800G0S0_submitdone = function(e) {
@@ -139,6 +173,13 @@
 			autoChoiceBox.setNodeSet("data:dlt_searchitem", "PARAM_DIV", "PARAM_DIV");
 			//검색부분 코드값 변경
 			var codeOptions = [ {code : "PARAM_DIV", compID : "autoChoiceBox" } ];
+			com.setCommonDtl(codeOptions);
+			autoChoiceBox.show("");
+		} else if (info.newValue == "PARAM_KIND") {
+			search_input.hide();
+			autoChoiceBox.setNodeSet("data:dlt_searchitem", "PARAM_KIND", "PARAM_KIND");
+			//검색부분 코드값 변경
+			var codeOptions = [ {code : "PARAM_KIND", compID : "autoChoiceBox" } ];
 			com.setCommonDtl(codeOptions);
 			autoChoiceBox.show("");
 		}
@@ -175,8 +216,42 @@
 		}
 	}
 	
-	
-	
+	//데이터유형 변경 이벤트
+	scwin.DATA_TYPE_onviewchange = function(info) {
+		var dataType = info.newValue;
+		
+		switch (dataType) {
+		case "DT001":
+			//$p.$("#DATA_VAL").attr("allowChar", "");
+			DATA_VAL.setAllowChar("0-9")
+		break;
+		case "DT002":
+			DATA_VAL.setAllowChar("")
+		break;
+		case "DT003":
+			DATA_VAL.setAllowChar("0-9")
+		break;
+		case "DT004":
+			DATA_VAL.setAllowChar("")
+		break;
+		case "DT005":
+			DATA_VAL.setAllowChar("0-9")
+		break;
+		case "DT006":
+			DATA_VAL.setAllowChar("0-9")
+		break;
+		case "DT007":
+			DATA_VAL.setAllowChar("0-9")
+		break;
+		case "DT008":
+			DATA_VAL.setAllowChar("")
+		break;
+		case "DT009":
+			DATA_VAL.setAllowChar("")
+		break;
+		
+		}
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -207,9 +282,13 @@
 									<xf:label><![CDATA[파라미터구분]]></xf:label>
 									<xf:value><![CDATA[PARAM_DIV]]></xf:value>
 								</xf:item>
+								<xf:item>
+									<xf:label><![CDATA[파라미터종류]]></xf:label>
+									<xf:value><![CDATA[PARAM_KIND]]></xf:value>
+								</xf:item>
 							</xf:choices>
 						</xf:select1>
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="장치종류 또는 파라미터구분"></xf:input>
+						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="장치종류 또는 파라미터구분, 종류"></xf:input>
 						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
 							chooseOptionValue="" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange="" ev:onviewchange=""
 							id="autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start" selectedData=""
@@ -384,7 +463,7 @@
 							<xf:group tagname="td" style="" class="w2tb_td">
 								<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
 									disabledClass="w2selectbox_disabled" id="DATA_TYPE" style="width: 148px;" submenuSize="auto"
-									ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_TYPE" chooseOptionLabel="">
+									ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_TYPE" chooseOptionLabel="" ev:onviewchange="scwin.DATA_TYPE_onviewchange">
 									<xf:choices></xf:choices>
 								</xf:select1>
 							</xf:group>
@@ -408,7 +487,7 @@
 							</xf:group>
 							<xf:group tagname="td" class="w2tb_td">
 								<w2:attributes></w2:attributes>
-								<xf:input adjustMaxLength="false" id="" style="width: 144px;text-align: right;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_VAL" allowChar="0-9:."></xf:input>
+								<xf:input adjustMaxLength="false" id="DATA_VAL" style="width: 100%;text-align: right;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_VAL" allowChar=""></xf:input>
 							</xf:group>
 						</xf:group>
 						<xf:group tagname="tr" style="">
@@ -420,7 +499,7 @@
 							</xf:group>
 							<xf:group tagname="td" class="w2tb_td">
 								<w2:attributes></w2:attributes>
-								<xf:input adjustMaxLength="false" id="" style="width: 144px;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.ATTR1_VAL"></xf:input>
+								<xf:input adjustMaxLength="false" id="" style="width: 100%" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.ATTR1_VAL"></xf:input>
 							</xf:group>
 							<xf:group tagname="th" class="w2tb_th">
 								속성2
@@ -430,7 +509,7 @@
 							</xf:group>
 							<xf:group tagname="td" class="w2tb_td">
 								<w2:attributes></w2:attributes>
-								<xf:input adjustMaxLength="false" id="" style="width: 144px;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.ATTR2_VAL"></xf:input>
+								<xf:input adjustMaxLength="false" id="" style="width: 100%" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.ATTR2_VAL"></xf:input>
 							</xf:group>
 						</xf:group>
 						<xf:group tagname="tr" style="">

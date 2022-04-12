@@ -25,13 +25,16 @@
 		BMS_FCLT_PARAM_CFG_INFO
 	<where>
 			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
-				AND (FCLT_KIND LIKE CONCAT('%',#{CONTENT},'%') || PARAM_DIV LIKE CONCAT('%',#{CONTENT},'%'))
+				AND (FCLT_KIND LIKE CONCAT('%',#{CONTENT},'%') || PARAM_DIV LIKE CONCAT('%',#{CONTENT},'%') || PARAM_KIND LIKE CONCAT('%',#{CONTENT},'%'))
 			</if>
 			<if test="TYPE == 'FCLT_KIND'">
 				AND FCLT_KIND LIKE CONCAT('%',#{CONTENT},'%')
 			</if>
 			<if test="TYPE == 'PARAM_DIV'">
 				AND PARAM_DIV LIKE CONCAT('%',#{CONTENT},'%') 
+			</if>
+			<if test="TYPE == 'PARAM_KIND'">
+				AND PARAM_KIND LIKE CONCAT('%',#{CONTENT},'%') 
 			</if>
 	</where>
 	ORDER BY
@@ -63,6 +66,7 @@
 <select id="SI0801SHI0" resultType="Map">
 	SELECT			FCLT_KIND
 					,PARAM_DIV	
+					,PARAM_KIND
 	FROM			BMS_FCLT_PARAM_CFG_INFO
 </select>
 
