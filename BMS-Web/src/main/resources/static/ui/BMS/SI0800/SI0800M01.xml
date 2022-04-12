@@ -116,22 +116,28 @@
 		switch (dataType) {
 		case "DT001":
 			//$p.$("#DATA_VAL").attr("allowChar", "");
-			DATA_VAL.setAllowChar("0-9")
+			DATA_VAL.setAllowChar("0-9");
+			DATA_VAL.setMaxLength(10);
 		break;
 		case "DT002":
 			DATA_VAL.setAllowChar("")
+			DATA_VAL.setMaxLength(20);
 		break;
 		case "DT003":
 			DATA_VAL.setAllowChar("0-9")
+			DATA_VAL.setMaxLength(10);
 		break;
 		case "DT004":
 			DATA_VAL.setAllowChar("")
+			DATA_VAL.setMaxLength(5);
 		break;
 		case "DT005":
 			DATA_VAL.setAllowChar("0-9")
+			DATA_VAL.setMaxLength(20);
 		break;
 		case "DT006":
 			DATA_VAL.setAllowChar("0-9")
+			DATA_VAL.setMaxLength(20);
 		break;
 		case "DT007":
 			DATA_VAL.setAllowChar("0-9")
@@ -141,6 +147,7 @@
 		break;
 		case "DT009":
 			DATA_VAL.setAllowChar("")
+			DATA_VAL.setMaxLength(5);
 		break;
 		
 		}
@@ -223,22 +230,28 @@
 		switch (dataType) {
 		case "DT001":
 			//$p.$("#DATA_VAL").attr("allowChar", "");
-			DATA_VAL.setAllowChar("0-9")
+			DATA_VAL.setAllowChar("0-9");
+			DATA_VAL.setMaxLength(10);
 		break;
 		case "DT002":
 			DATA_VAL.setAllowChar("")
+			DATA_VAL.setMaxLength(20);
 		break;
 		case "DT003":
 			DATA_VAL.setAllowChar("0-9")
+			DATA_VAL.setMaxLength(10);
 		break;
 		case "DT004":
 			DATA_VAL.setAllowChar("")
+			DATA_VAL.setMaxLength(5);
 		break;
 		case "DT005":
 			DATA_VAL.setAllowChar("0-9")
+			DATA_VAL.setMaxLength(20);
 		break;
 		case "DT006":
 			DATA_VAL.setAllowChar("0-9")
+			DATA_VAL.setMaxLength(20);
 		break;
 		case "DT007":
 			DATA_VAL.setAllowChar("0-9")
@@ -248,6 +261,7 @@
 		break;
 		case "DT009":
 			DATA_VAL.setAllowChar("")
+			DATA_VAL.setMaxLength(5);
 		break;
 		
 		}

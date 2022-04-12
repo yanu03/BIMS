@@ -88,12 +88,14 @@ public class SI0801Service extends ServiceSupport{
 					iCnt += si0801Mapper.SI0801G1I0(data);
 					
 					//스케쥴유무 업데이트
-					uCnt += si0801Mapper.SI0801G0U1(data);
+					//uCnt += si0801Mapper.SI0801G0U1(data);
+					
 				} else if (rowStatus.equals("U")) {
 					uCnt += si0801Mapper.SI0801G1U0(data);
 					
 					//스케쥴유무 업데이트
-					uCnt += si0801Mapper.SI0801G0U1(data);
+					//uCnt += si0801Mapper.SI0801G0U1(data);
+					
 				} else if (rowStatus.equals("D")) {
 					dCnt += si0801Mapper.SI0801G1D0(data);
 				} 	
