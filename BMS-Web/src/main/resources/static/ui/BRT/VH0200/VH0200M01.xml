@@ -514,7 +514,6 @@
 		var chgRow = [];
 		//body데이터 생성
 		for(var i = 0; i < rowCntArr.length; i++) {
-
 			var j = 0;
 			rowIndex += rowCnt;
 			rowCnt =  rowCntArr[i].CNT;
@@ -531,8 +530,16 @@
 				
 				var chgDprtTm = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(rowIndex+j, "CHG_DPRT_TM");
 				var chgArrvTm = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(rowIndex+j, "CHG_ARRV_TM");
+				var chgDiv = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(rowIndex+j, "CHG_DIV");
+				
+				if(chgDiv){
+				
+				}else{
+				
+				}
 				dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.setCellData(idx, "CHG_ARRV_TM_"+j, chgArrvTm);
 				dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.setCellData(idx, "CHG_DPRT_TM_"+j, chgDprtTm);
+
 
 				if((com.isEmpty(chgArrvTm)==false)){
 					chgRow[i] = i;
@@ -721,6 +728,7 @@
 	};
 	
 	scwin.sub_VH0200G1R0_submitdone = function(e) {
+		
 		com.setFocusedCell(VH0200G1, "OPER_SN");
 		
 		var rowCnt = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowCount();
@@ -730,10 +738,10 @@
 		var curNodeSn = 0;
 		var newOperSn = 0;
 		var newNodeSn = 0;
-		var chgDivCnt = 0;
+		var chgDivCnt = 1;
+		var chgDiv = 0;
 		
 		for(var i = 0; i < rowCnt; i++){
-			var chgDiv = 0;
 			if(i>= 1) {
 				oldNodeSn = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(i-1, 'NODE_SN');
 				oldOperSn = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(i-1, 'OPER_SN');
@@ -741,22 +749,26 @@
 			
 			curNodeSn = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(i, 'NODE_SN');
 			curOperSn = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(i, 'OPER_SN');
+			chgArrvTm = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(i, 'CHG_ARRV_TM');
 			
-			var rowJson = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowJSON(i);
-			dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setCellData(i, "CHG_DIV", chgDiv);
+			if(chgArrvTm == null || chgArrvTm == ''){
+				dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setCellData(i, "CHG_DIV", chgDiv);
+			}else{
+				dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setCellData(i, "CHG_DIV", chgDiv+1);
+			}
+			//var rowJson = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowJSON(i);
 			//dlt_VIEW_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setRowJSON(i, rowJson, false);
 			
 			if(oldNodeSn != '' && curNodeSn != '' && oldNodeSn >= curNodeSn) {
 				//2번 이상 변경운행 발생
 				if(oldOperSn == curOperSn) {
-					for(var j = 0; j < rowCnt; j++){
+					chgDivCnt++;
+					for(var j = 0; j < i; j++){
 						newNodeSn = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(j, 'NODE_SN');
 						newOperSn = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(j, 'OPER_SN');
 						
 						if(newOperSn != '' && curOperSn != '' && newOperSn == curOperSn && newNodeSn == curNodeSn){
 							dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setRowJSON(j, dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowJSON(i), true);
-							chgDiv++;
-							chgDivCnt = chgDivCnt + chgDiv;
 							dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setCellData(j, "CHG_DIV", chgDivCnt);
 						}
 					}
@@ -794,7 +806,7 @@
 	scwin.F_DATE_VH0200_onviewchange = function(info) {
 		var ldate = L_DATE_VH0200.getValue();
 		var fdate = F_DATE_VH0200.getValue();
-		
+		calendar_radio.setValue("DIRECT");
 		if (fdate > ldate && ldate != ""){
 			com.messagBox("alert", "지정할 수 없는 날짜입니다.",scwin.checkCLoseF(info));
 		}
@@ -808,7 +820,7 @@
 	scwin.L_DATE_VH0200_onviewchange = function(info) {
 		var ldate = L_DATE_VH0200.getValue();
 		var fdate = F_DATE_VH0200.getValue();
-		
+		calendar_radio.setValue("DIRECT");
 		if (fdate > ldate){
 			com.messagBox("alert", "지정할 수 없는 날짜입니다.",scwin.checkCLoseL(info));
 		}

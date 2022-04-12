@@ -79,6 +79,7 @@
 		}
 		
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
+		$p.$("#audio0").attr("loop", false);
 	};
 	
 	

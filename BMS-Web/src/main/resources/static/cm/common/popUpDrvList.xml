@@ -69,6 +69,8 @@
 	
 	scwin.btn_confirm_onclick = function() {
 		var data = drvListGrid.getCheckedJSON("chk");
+		var drvId = dma_search.get("DRV_ID");
+		var chk = false;
 		
 		if(data == null || data == ''){
 			var nullData = [{"DRV_ID" : ''}];
@@ -76,7 +78,23 @@
 			com.closePopup(scwin.closeCallbackFncName, nullData);
 		}
 		else{
-			com.closePopup(scwin.closeCallbackFncName, data);
+			for(var x = 0; x < drvId.length; x++){
+				if(data[0].DRV_ID == drvId[x]){
+					chk = true;
+				}
+			}
+			
+			if(chk){
+				var str = "이미 등록된 운전자입니다. 선택하시겠습니까?";
+				com.confirm(str, function(rtn) {
+				if (rtn) {
+						com.closePopup(scwin.closeCallbackFncName, data);
+					}
+				});
+			}else{
+				com.closePopup(scwin.closeCallbackFncName, data);
+			}
+			
 		}
 		
 	
@@ -107,6 +125,12 @@
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
 		
 		}
+		
+		var drvId = dma_search.get("DRV_ID");
+		for(var x = 0; x < drvId.length; x++){
+			var rowIndex = dlt_BMS_DRV_MST.getMatchedIndex("DRV_ID", drvId[x]);
+			drvListGrid.setRowColor(rowIndex, "blue");
+		};
 	};
 	
 	//데이터 없음 - 그리드 disabled 처리
@@ -123,6 +147,12 @@
 		}
 		
 	};
+	
+	scwin.getFooterDiv = function(data, dataType) {
+		var result = "※하이라이트된 운전자는 이미 등록된 운전자입니다.";
+		
+		return result;
+	};	
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -207,6 +237,14 @@
 							</w2:column>
 						</w2:row>
 					</w2:gBody>
+					<w2:footer id="footer" style="">
+						<w2:row id="row" style="">
+							<w2:column blockSelect="false" colSpan="15" displayMode="label"
+								expression="custom(scwin.getFooterDiv, 'COMMENT')" id="column42" inputType="expression" removeBorderStyle="false"
+								style="height:20px;" textAlign="left" width="1830">
+							</w2:column>
+						</w2:row>
+					</w2:footer>
 				</w2:gridView>
 			</xf:group>
 			<xf:group id="" style="" class="popup_bottom">

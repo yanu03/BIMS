@@ -16,6 +16,7 @@
 						<w2:column id="VHC_NO" name="차량명" dataType="text"></w2:column>
 						<w2:column id="AREA" name="권역" dataType="text"></w2:column>
 						<w2:column id="MAKER" name="제조사" dataType="text"></w2:column>
+						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
 						<w2:column id="COMP_NM" name="운수사명" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
@@ -70,6 +71,8 @@
 	
 	scwin.btn_confirm_onclick = function() {
 		var data = vhcListGrid.getCheckedJSON("chk");
+		var vhcId = dma_search.get("VHC_ID");
+		var chk = false;
 		
 		if(data == null || data == ''){
 			var nullData = [{"VHC_ID" : '', "VHC_NO" : '', "COMP_NM" : ''}];
@@ -77,7 +80,23 @@
 			com.closePopup(scwin.closeCallbackFncName, nullData);
 		}
 		else{
-			com.closePopup(scwin.closeCallbackFncName, data);
+			for(var x = 0; x < vhcId.length; x++){
+				if(data[0].VHC_ID == vhcId[x]){
+					chk = true;
+				}
+			}
+			
+			if(chk){
+				var str = "이미 등록된 차량입니다. 선택하시겠습니까?";
+				com.confirm(str, function(rtn) {
+				if (rtn) {
+						com.closePopup(scwin.closeCallbackFncName, data);
+					}
+				});
+			}else{
+				com.closePopup(scwin.closeCallbackFncName, data);
+			}
+			
 		}
 		
 	};
@@ -92,11 +111,11 @@
 	
 	scwin.sbx_ChoiceBox_onviewchange = function(info) {		
 		if (info.newValue == "ALL") {
-			search_input.setPlaceholder("노드ID 또는 인근장소");
-		} else if (info.newValue == "NODE_ID") {
-			search_input.setPlaceholder("노드ID");
-		} else if (info.newValue == "NODE_NM") {
-			search_input.setPlaceholder("인근장소");
+			search_input.setPlaceholder("차량ID 또는 차량번호");
+		} else if (info.newValue == "VHC_ID") {
+			search_input.setPlaceholder("차량ID");
+		} else if (info.newValue == "VHC_NO") {
+			search_input.setPlaceholder("차량번호");
 		}
 	};
 	
@@ -105,11 +124,10 @@
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
 		
 		}
-		debugger;
 		var vhcId = dma_search.get("VHC_ID");
 		for(var x = 0; x < vhcId.length; x++){
-			vhcId[x];
-			//vhcListGrid.setRowColor(rowIndex, color);
+			var rowIndex = dlt_BMS_VHC_MST.getMatchedIndex("VHC_ID", vhcId[x]);
+			vhcListGrid.setRowColor(rowIndex, "blue");
 		};
 	};
 	
@@ -126,6 +144,12 @@
 		}
 		
 	};
+	
+	scwin.getFooterDiv = function(data, dataType) {
+		var result = "※하이라이트된 차량은 이미 등록된 차량입니다.";
+		
+		return result;
+	};	
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -151,10 +175,6 @@
 								<xf:item>
 									<xf:label><![CDATA[차량번호]]></xf:label>
 									<xf:value><![CDATA[VHC_NO]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[운수사명]]></xf:label>
-									<xf:value><![CDATA[COMP_NM]]></xf:value>
 								</xf:item>
 							</xf:choices>
 						</xf:select1>
@@ -191,7 +211,9 @@
 							</w2:column> -->
 							<w2:column blockSelect="false" id="column5" inputType="text" style="height:20px" value="운수사명" width="150">
 							</w2:column>
-							<w2:column blockSelect="false" id="column6" inputType="text" style="height:20px" value="" width="100">
+							<w2:column blockSelect="false" id="column8" inputType="text" style="height:20px" value="비고" width="150">
+							</w2:column>
+							<w2:column blockSelect="false" id="column6" inputType="text" style="height:20px" value="" width="80">
 							</w2:column>
 						</w2:row>
 					</w2:header>
@@ -210,10 +232,20 @@
 							</w2:column> -->
 							<w2:column blockSelect="false" id="COMP_NM" inputType="text" style="height:20px" width="90" textAlign="left">
 							</w2:column>
+							<w2:column blockSelect="false" id="REMARK" inputType="text" style="height:20px" width="90" textAlign="left">
+							</w2:column>
 							<w2:column blockSelect="false" id="" inputType="text" style="height:20px" width="90" textAlign="left">
 							</w2:column>
 						</w2:row>
 					</w2:gBody>
+					<w2:footer id="footer" style="">
+						<w2:row id="row" style="">
+							<w2:column blockSelect="false" colSpan="15" displayMode="label"
+								expression="custom(scwin.getFooterDiv, 'COMMENT')" id="column42" inputType="expression" removeBorderStyle="false"
+								style="height:20px;" textAlign="left" width="1830">
+							</w2:column>
+						</w2:row>
+					</w2:footer>
 				</w2:gridView>
 			</xf:group>
 			<xf:group id="" style="" class="popup_bottom">

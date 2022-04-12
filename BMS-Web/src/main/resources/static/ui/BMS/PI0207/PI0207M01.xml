@@ -240,6 +240,7 @@
 		
 		//저장된 음성 미리듣기
 		$p.$("#audio0").attr("src", path);
+		$p.$("#audio0").attr("loop", false);
 	};
 	]]></script>
 	</head>

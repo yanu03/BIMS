@@ -144,12 +144,15 @@
 	scwin.onpageload = function() {
 		var autoOptions = {
 			Main : { grid : AL0302G0, srchSbm : sub_AL0302G0R0, srchGrp : pgm_header , keyColumn : "REP_ROUT_ID", focusColumn : "REP_ROUT_NM", name : "운행계획 목록"},
-			Sub2 : { grid : AL0302G1, srchSbm : sub_AL0302G1R0, keyColumn : "ALLOC_NO", savSbm : sub_AL0302G1S0, name : "차량 배차" }
+			Sub1 : { grid : AL0302G1, srchSbm : sub_AL0302G1R0, keyColumn : "ALLOC_NO", savSbm : sub_AL0302G1S0, name : "차량 배차" }
 			//Sub1 : { grid : AL0302G2, srchSbm : sub_AL0302G2R0, keyColumn : "ALLOC_NO", savSbm : sub_AL0302G2S0, name : "차량 배차(일)" }	
 		 };
 		 		
 		 var mainOptions = {
 				SETTING: {cbFnc:scwin.btn_distri_onclick, nm:"배포", class:"setting"}
+				,ADD:{}
+				,DEL:{}
+				,CNL:{}
 			}
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions,mainOptions);		
 

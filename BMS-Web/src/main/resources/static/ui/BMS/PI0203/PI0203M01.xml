@@ -184,6 +184,7 @@
 		
 		//var path = dlt_BMS_VOC_INFO.getCellData(PI0203G0.getFocusedRowIndex(), "VOC_PATH");		
 		$p.$("#audio0").attr("src", path);	
+		$p.$("#audio0").attr("loop", false);	
 	};	
 	
 	scwin.sub_PI0203G0R0_submitdone = function(e) {

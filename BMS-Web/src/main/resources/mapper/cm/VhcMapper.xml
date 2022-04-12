@@ -33,6 +33,7 @@
 		,A.VHC_NO
 		,A.AREA
 		,A.MAKER
+		,A.REMARK
 		,B.COMP_NM
 	FROM
 		BRT_REP_ROUT_VHC_CMPSTN C
@@ -40,8 +41,18 @@
 		ON A.VHC_ID = C.VHC_ID
 		LEFT JOIN BMS_TRANSCOMP_MST B
 		ON A.COMP_ID = B.COMP_ID
-	WHERE
+	<where>	
 		C.REP_ROUT_ID = #{REP_ROUT_ID}
+		<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
+			AND (C.VHC_ID LIKE CONCAT('%',#{CONTENT},'%') || A.VHC_NO LIKE CONCAT('%',#{CONTENT},'%'))
+		</if>
+		<if test="TYPE == 'VHC_ID'">
+			AND C.VHC_ID LIKE CONCAT('%',#{CONTENT},'%')
+		</if>
+		<if test="TYPE == 'VHC_NO'">
+			AND A.VHC_NO LIKE CONCAT('%',#{CONTENT},'%') 
+		</if>
+	</where>
 		<!-- AND C.VHC_ID NOT IN 
         <foreach collection="VHC_ID" item="item" index="index"  open="(" close=")" separator=",">
 			#{item}

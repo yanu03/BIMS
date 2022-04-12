@@ -13,8 +13,18 @@
 		BMS_DRV_MST A
 		INNER JOIN BRT_REP_ROUT_DRV_CMPSTN B
 		ON A.DRV_ID = B.DRV_ID
-	WHERE
+	<where>	
 		B.REP_ROUT_ID = #{REP_ROUT_ID}
+		<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
+			AND (B.DRV_ID LIKE CONCAT('%',#{CONTENT},'%') || A.DRV_NM LIKE CONCAT('%',#{CONTENT},'%'))
+		</if>
+		<if test="TYPE == 'DRV_ID'">
+			AND B.DRV_ID LIKE CONCAT('%',#{CONTENT},'%')
+		</if>
+		<if test="TYPE == 'DRV_NM'">
+			AND A.DRV_NM LIKE CONCAT('%',#{CONTENT},'%') 
+		</if>
+	</where>
 		<!-- AND A.DRV_ID NOT IN 
         <foreach collection="DRV_ID" item="item" index="index"  open="(" close=")" separator=",">
 			#{item}

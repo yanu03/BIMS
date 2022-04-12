@@ -141,7 +141,6 @@
 	
 	//그리드1 검색
 	scwin.btn_sub_move = function() {
-		debugger;
 		if(com.isEmpty(dma_sub_search.get("CONTENT1"))==false){
 			com.gridMove(AL0105G1, "DRV_ID,DRV_NM", dma_sub_search.get("CONTENT1"), AL0105G1.getFocusedRowIndex());
 		}

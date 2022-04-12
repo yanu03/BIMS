@@ -492,6 +492,7 @@
 		}
 		var path = dlt_BMS_VOC_INFO.getCellData(PI0801G1.getFocusedRowIndex(), "VOC_PATH");	
 		$p.$("#audio0").attr("src", path);			
+		$p.$("#audio0").attr("loop", false);			
 		
 	};		
 	
@@ -521,6 +522,7 @@
 		//오디오 세팅
 		var path = dlt_BMS_VOC_INFO.getCellData(PI0801G2.getFocusedRowIndex(), "VOC_PATH");		
 		$p.$("#audio1").attr("src", path);	
+		$p.$("#audio1").attr("loop", false);	
 	};		
 	
 	scwin.sub_PI0801G2R0_submitdone = function(e) {

@@ -348,12 +348,15 @@
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column10"
 										value="도보거리(m)" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column6"
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column11"
+										value="연계ID" blockSelect="false" displayMode="label">
+									</w2:column>
+									<!-- <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column6"
 										value="경도" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column5"
 										value="위도" blockSelect="false" displayMode="label">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column2"
 										value="사용여부" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -376,12 +379,15 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="WALK_DIST" value=""
 										blockSelect="false" displayMode="label" readOnly="false" textAlign="right" maxLength="4">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="GPS_X" value=""
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="" value=""
+										blockSelect="false" displayMode="label" readOnly="false" textAlign="left" maxLength="">
+									</w2:column>
+									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="GPS_X" value=""
 										blockSelect="false" displayMode="label" readOnly="false" textAlign="right">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="GPS_Y" value=""
 										blockSelect="false" displayMode="label" readOnly="false" textAlign="right">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="70" inputType="checkbox" style="height:20px" id="USE_YN" value=""
 										blockSelect="false" displayMode="label" valueType="other" falseValue="N" trueValue="Y">
 									</w2:column>
