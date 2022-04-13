@@ -249,6 +249,8 @@
 
 .grdr_20_a_20_20_a_20_a {display:grid; grid-template-rows: minmax(20px, max-content) auto 20px minmax(20px, max-content) auto 20px auto;}
 
+.grdr_20_2_563 {display:grid; grid-template-rows: minmax(20px, max-content) 2px 563px;}
+
 .required {font-color:red;}
 
 .small_vertical_line{margin-top: 0;margin-bottom: 0;width: 2px;margin-left: 10px;background: url('/cm/images/add/bg_line.png') 0 0;height: 221px;}

@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -63,6 +64,9 @@ public class FTPHandler {
 
 	@Value("${sftp.remote.directory}")
 	private String ROOT_SERVER_PATH;
+	
+	@Value("${sftp.windows.remote.directory}")
+	private String ROOT_WINDOWS_SERVER_PATH;
 
 	@Value("${sftp.linux.local.directory}")
 	private String ROOT_LINUX_LOCAL_PATH;
@@ -510,9 +514,10 @@ public class FTPHandler {
 
 			for (Map<String, Object> routeInfo : routeInfoList) {
 
-				String routeNm = String.valueOf(routeInfo.get("ROUT_NM"));
-				String wayDiv = String.valueOf(routeInfo.get("TXT_VAL1")); // U or D
-				String dvcName = routeNm + wayDiv; // 노선이름+U or D
+				//String routeNm = String.valueOf(routeInfo.get("ROUT_NM"));
+				//String wayDiv = String.valueOf(routeInfo.get("TXT_VAL1")); // U or D
+				//dvcName += dvcName + wayDiv; // 노선이름+U or D
+				String dvcName = String.valueOf(routeInfo.get("DVC_NM"));
 
 				File rearFile = new File(localPath2 + "/R" + dvcName + ".BMP");
 
@@ -1200,6 +1205,7 @@ public class FTPHandler {
 		String id = (String)vo.get("VOC_ID");
 		String fileName = id + ".wav";
 		String srcFile = CommonUtil.getFileName((String)vo.get("VOC_TMP_PATH"));
+		if(srcFile == null)return false;
 		
 		try {
 			doMoveFile(UPLOAD_DIR, SELECTED_AUDIO_DIR, srcFile, fileName);
@@ -1404,6 +1410,7 @@ public class FTPHandler {
 		String id = (String)vo.get("VOC_ID");
 
 		String srcFile = CommonUtil.getFileName((String)vo.get("VOC_TMP_PATH"));
+		if(srcFile == null)return false;
 		
 		String dir = Paths.get(getRootLocalPath(), getCommonAudioPath()).toString();
 		String fileName = id + Constants.VoiceTypes.US + ".wav";
@@ -1749,8 +1756,49 @@ public class FTPHandler {
 	private void processSynchronize(String localPath, String serverPath) throws Exception {
 		LOGGER.info("fileSync: {}, {}", localPath, serverPath);
 
-		setServerDirectory(localPath, serverPath);
-		synchronize(new File(localPath), serverPath);
+		if (SystemUtils.IS_OS_WINDOWS) {
+			File folder1 = new File(localPath);
+			File folder2 = new File(serverPath);
+			copyFolder(folder1,folder2);
+		}
+		else {
+			setServerDirectory(localPath, serverPath);
+			synchronize(new File(localPath), serverPath);
+		}
+	}
+	
+	private void copyFolder(File folder1,File folder2) {
+		File[] ff = folder1.listFiles();
+		for (File file : ff) {
+			File temp = new File(folder2.getAbsolutePath() + File.separator + file.getName());
+			if(file.isDirectory()){
+				temp.mkdir();
+				copyFolder(file, temp);
+			} else {
+				FileInputStream fis = null;
+				FileOutputStream fos = null;
+				try {
+					fis = new FileInputStream(file);
+					fos = new FileOutputStream(temp) ;
+					byte[] b = new byte[4096];
+					int cnt = 0;
+					while((cnt=fis.read(b)) != -1){
+						fos.write(b, 0, cnt);
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally{
+					try {
+						fis.close();
+						fos.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+			}
+		}
 	}
 
 	// 로컬파일 이동
@@ -2057,7 +2105,13 @@ public class FTPHandler {
 	/*********************************************************************************************/
 
 	public String getRootServerPath() {
-		return ROOT_SERVER_PATH;
+		if (SystemUtils.IS_OS_WINDOWS) {
+			return ROOT_WINDOWS_SERVER_PATH;
+		} else if (SystemUtils.IS_OS_LINUX) {
+			return ROOT_SERVER_PATH;
+		} else {
+			return ROOT_SERVER_PATH;
+		}
 	}
 
 	public String getRootLocalPath() {

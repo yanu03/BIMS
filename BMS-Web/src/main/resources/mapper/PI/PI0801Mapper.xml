@@ -176,8 +176,8 @@
 	</delete>
 	
 	<select id="PI0801SHI1" resultType="Map" parameterType="Map">
-		select  VOC_ID, VOC_NM
-		from 	BMS_VOC_INFO
+		SELECT VOC_ID, VOC_NM
+		FROM BMS_VOC_INFO WHERE VOC_DIV = 'VD001'
 	</select>	
 	
 	<select id="PI0801G1K0" resultType="Map">
