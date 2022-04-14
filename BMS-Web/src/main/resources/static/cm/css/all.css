@@ -361,7 +361,7 @@ a:hover,a:active,a:focus{text-decoration:none}
 .innerTab .w2tabcontrol_tabhost .w2tabcontrol_active .w2tabcontrol_tab_left,
 .innerTab .w2tabcontrol_tabhost .w2tabcontrol_active  .w2tabcontrol_tab_right{background:none;}
 
-.innerTab .w2tabcontrol_tabhost li {margin-right: 0; border: 0px; min-width: 0px; height: 100%; line-height: 100%; border-left: none;}
+.innerTab .w2tabcontrol_tabhost li {margin-right: 0; border: 0px; min-width: 0px; height: 100%; line-height: 100%; border-left: 1px solid #d9d9d9;}
 
 .innerTab .w2tabcontrol_tabhost li.w2tabcontrol_active,.innerTab .w2tabcontrol_tabhost li.w2tabcontrol_selected {border-bottom:0px;background:#f7f7f7}
     

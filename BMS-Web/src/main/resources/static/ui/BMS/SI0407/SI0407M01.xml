@@ -362,7 +362,11 @@
 			else if( i < searchInfo[idx].length-1) placeholderStr += ", ";
 		}
 		sbx_ChoiceBox.setSelectedIndex(0);
+		autoChoiceBox.hide();
+		
+		search_input.setValue("");
 		search_input.setPlaceholder(placeholderStr);
+		search_input.show("");
 	}
 	
 	]]></script>
