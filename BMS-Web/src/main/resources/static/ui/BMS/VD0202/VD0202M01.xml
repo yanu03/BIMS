@@ -646,6 +646,7 @@
 	//오픈메뉴
 	scwin.openMenu = function(menuNm, url, menuCode, paramObj, menuType) {
 		// client에서 url 숨기기 메뉴일 경우에는 새 창으로 띄우기 적용 
+		debugger;
 		if (url == "/") {
 			var url = document.location.href + "/";
 			window.open(url, "", "width=1200, height=700, left=450, top=100");
@@ -739,8 +740,13 @@
 	
 	//openMenu클릭 이벤트
 	scwin.moveCtrlClick = function() {
-		scwin.openMenu("차내장치 상태 및 제어","/ui/BMS/VD0204/VD0204M01.xml", "MN00050204", dlt_BMS_DVC_INFO.getCellData(VD0202G1.getFocusedRowIndex(), "DVC_ID"));		
-		var bac= null;		
+		var dvcId = dlt_BMS_DVC_INFO.getCellData(VD0202G1.getFocusedRowIndex(), "DVC_ID");
+		if(dvcId == null || dvcId == ''){
+			com.alert("차내장치를 선택해주세요.");
+		}else{
+			scwin.openMenu("차내장치 상태 및 제어","/ui/BMS/VD0204/VD0204M01.xml", "MN00040202");		
+			var bac= null;
+		}
 	};
 	
 	]]></script>
@@ -800,7 +806,7 @@
 					<xf:group class="label" id="" style="">
 						<w2:span class="" id="" label="검색"></w2:span>
 					</xf:group>
-					<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT3" placeholder="차번"></xf:input>
+					<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT3" placeholder="차량ID 또는 차량번호"></xf:input>
 					</xf:group>
 					<w2:wframe class="" id="wfm_mainBtn" scope="true" src="/cm/common/wf_mainBtn.xml" style=""></w2:wframe>
 				</xf:group>

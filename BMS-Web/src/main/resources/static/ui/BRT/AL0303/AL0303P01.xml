@@ -33,7 +33,7 @@
         	<w2:workflowCollection></w2:workflowCollection>
         	<xf:submission id="sub_AL0303P1R0" ref="data:json,dma_VHC_INFO" target="data:json,dlt_VHC_INFO" action="/al/AL0303P1R0"
         		method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler=""
-        		mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+        		mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_AL0303P1R0_submitdone" ev:submiterror="" abortTrigger="">
         	</xf:submission>
         </xf:model>
         <script type="text/javascript" lazy="false"><![CDATA[
@@ -90,6 +90,10 @@
 			search_input.setPlaceholder("차량명");
 		}
 	};
+	
+	scwin.sub_AL0303P1R0_submitdone = function(e) {
+		
+	};
 	]]></script>
     </head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -126,16 +130,17 @@
 			
 			<xf:group style="" id="" class="popup_content">
 				<w2:gridView  fixedColumnWithHidden="true" dataList="data:dlt_VHC_INFO" useShiftKey="false" readOnly="true"
-					style="width:775px" scrollByColumn="false" id="AL0303P1" autoFit="allColumn" class="cm_grid popup"
+					style="width:775px" scrollByColumn="false" id="AL0303P1" autoFit="lastColumn" class="cm_grid popup"
 					ev:onrowindexchange="scwin.AL0303P1_onrowindexchange">
 					<w2:header style="" id="header1">
 							<w2:row id="row1" style="">
 								<w2:column width="39" inputType="radio" style="height:20px" id="chkHeader" value="선택" blockSelect="false"></w2:column>
-								<w2:column width="70" id="column2" value="차량ID"></w2:column>
-								<w2:column width="70" id="column3" value="차량번호"></w2:column>
-								<w2:column width="70" id="column4" value="운전자ID"></w2:column>
-								<w2:column width="70" id="column5" value="운전자명"></w2:column>
+								<w2:column width="100" id="column2" value="차량ID"></w2:column>
+								<w2:column width="100" id="column3" value="차량번호"></w2:column>
+								<w2:column width="100" id="column4" value="운전자ID"></w2:column>
+								<w2:column width="90" id="column5" value="운전자명"></w2:column>
 								<w2:column width="70" id="column6" value="배차번호"></w2:column>
+								<w2:column width="70" id="column7" value=""></w2:column>
 							</w2:row>
 						</w2:header>
 						<w2:gBody id="gBody1" style="">
@@ -148,6 +153,7 @@
 								<w2:column width="70" id="DRV_ID"></w2:column>
 								<w2:column width="70" id="DRV_NM"></w2:column>
 								<w2:column width="70" id="ALLOC_NO"></w2:column>
+								<w2:column width="70" id=""></w2:column>
 						</w2:row>
 					</w2:gBody>
 				</w2:gridView>

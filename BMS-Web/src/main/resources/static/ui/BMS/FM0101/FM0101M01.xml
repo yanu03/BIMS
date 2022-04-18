@@ -229,17 +229,16 @@
 	}
 	
 	scwin.insertPopupData = function(obj) {
+		debugger;
 		var dLength = obj.length;
 		for (i = 0; i < dLength; i++) {
 			var data = dlt_BMS_FCLT_INFO.getMatchedIndex("FCLT_KIND", obj[i].FCLT_KIND, true);
-			if (data.length == 1) {
-				obj[i].FCLT_ID = dma_subsearch.get("FCLT_ID");
-				obj[i].NODE_ID = dma_subsearch.get("NODE_ID");
-				obj[i].MNG_ID = dlt_BMS_FCLT_INFO.getCellData(FM0101G1.getFocusedRowIndex(), "MNG_ID");
-				obj[i].chk = "0";
-				var idx = dlt_BMS_FCLT_PARAM_CFG_INFO.insertRow();
-				dlt_BMS_FCLT_PARAM_CFG_INFO.setRowJSON(idx, obj[i], true);
-			}
+			obj[i].FCLT_ID = dma_subsearch.get("FCLT_ID");
+			obj[i].NODE_ID = dma_subsearch.get("NODE_ID");
+			obj[i].MNG_ID = dlt_BMS_FCLT_INFO.getCellData(FM0101G1.getFocusedRowIndex(), "MNG_ID");
+			obj[i].chk = "0";
+			var idx = dlt_BMS_FCLT_PARAM_CFG_INFO.insertRow();
+			dlt_BMS_FCLT_PARAM_CFG_INFO.setRowJSON(idx, obj[i], true);
 		}
 		com.setFocusedCell(FM0101G2, "FCLT_KIND");
 		

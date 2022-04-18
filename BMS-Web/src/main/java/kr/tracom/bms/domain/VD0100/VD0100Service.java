@@ -20,10 +20,10 @@ public class VD0100Service extends ServiceSupport {
 	@Autowired
 	private VD0100Mapper vd0100Mapper;
 	
-	public List VD0100G0R0() throws Exception {
+	/*public List VD0100G0R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
 		return vd0100Mapper.VD0100G0R0(map);
-	}
+	}*/
 
 	public List VD0100SHI0() throws Exception {
 		return vd0100Mapper.VD0100SHI0();
@@ -33,17 +33,17 @@ public class VD0100Service extends ServiceSupport {
 		return vd0100Mapper.VD0100SHI1();
 	}
 	
-	public List VD0100G1R0() throws Exception {
+	public List VD0100G0R0() throws Exception {
 		// TODO Auto-generated method stub
 		Map param = getSimpleDataMap("dma_subsearch");
-		return vd0100Mapper.VD0100G1R0(param);
+		return vd0100Mapper.VD0100G0R0(param);
 	}
 
-	public Map VD0100G1K0() throws Exception {
-		return vd0100Mapper.VD0100G1K0(); 
+	public Map VD0100G0K0() throws Exception {
+		return vd0100Mapper.VD0100G0K0(); 
 	}
 	
-	public Map VD0100G1S0() throws Exception {
+	public Map VD0100G0S0() throws Exception {
 		int iCnt = 0;
 		int uCnt = 0;
 		int dCnt = 0;		
@@ -54,22 +54,22 @@ public class VD0100Service extends ServiceSupport {
 				Map data = (Map) param.get(i);
 				String rowStatus = (String) data.get("rowStatus");
 				if (rowStatus.equals("C")) {
-					iCnt += vd0100Mapper.VD0100G1I0(data);
+					iCnt += vd0100Mapper.VD0100G0I0(data);
 					if(data.getOrDefault("MNG_ID", "").toString().length() == 10) {
 						//INSERT
-						vd0100Mapper.VD0100G1I2(data);
+						vd0100Mapper.VD0100G0I2(data);
 					}
 				} else if (rowStatus.equals("U")) {
-					uCnt += vd0100Mapper.VD0100G1U0(data);
+					uCnt += vd0100Mapper.VD0100G0U0(data);
 					if(data.getOrDefault("MNG_ID", "").toString().length() == 10) {
 						//UPDATE
-						vd0100Mapper.VD0100G1U2(data);
+						vd0100Mapper.VD0100G0U2(data);
 					}
 				} else if (rowStatus.equals("D")) {
-					dCnt += vd0100Mapper.VD0100G1D0(data);
+					dCnt += vd0100Mapper.VD0100G0D0(data);
 					if(data.getOrDefault("MNG_ID", "").toString().length() == 10) {
 						//DELETE
-						vd0100Mapper.VD0100G1D2(data);
+						vd0100Mapper.VD0100G0D2(data);
 					}
 				} 
 			}			

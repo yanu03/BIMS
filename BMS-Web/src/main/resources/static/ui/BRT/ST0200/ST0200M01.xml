@@ -719,7 +719,7 @@
 					</xf:group>
 				</xf:group><!-- pgm_list -->
 				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group id="pgm_detail" class="grdr_20_2_1f_20_20_1f" style="">
+				<xf:group id="pgm_detail" class="grdr_20_2_1f_20_1f" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="통계 상세 정보" style=""></w2:textbox>
@@ -763,9 +763,7 @@
 
 					<xf:group id="" class="horizontal_line"></xf:group>
 
-					<xf:group style="" id="" class="label">
-						<w2:span label="단위 : [평균통행속도:km/h]" style="float: left;margin-right: 3px; margin-top:5px;" id=""></w2:span>
-					</xf:group>
+					
 					<xf:group id="ST0200T0" class="" style="position: relative;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_ROUT_AVER_OPER_SP_STAT" vals="AVRG_SPD"
 							rows="OPER_DT,ROUT_NM" cols="STAT_H" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0200" renderMode="compact"
@@ -784,6 +782,7 @@
 							</w2:fieldInfo>
 						</w2:pivot>
 					</xf:group>
+					
 					<xf:group id="ST0200T1" class="" style="position: relative; display: none;visibility:hidden;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_ROUT_AVER_OPER_SP_STAT" vals="AVRG_SPD"
 							rows="ROUT_NM" cols="OPER_DT" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0200_sub" renderMode="compact"
@@ -801,6 +800,9 @@
 								<w2:field id="MIN_SPD" name="최저속도"></w2:field>
 							</w2:fieldInfo>
 						</w2:pivot>
+					</xf:group>
+					<xf:group style="" id="" class="label">
+						<w2:span label="단위 : [평균통행속도:km/h]" style="float: right;margin-right: 3px; margin-top:5px;" id=""></w2:span>
 					</xf:group>
 				</xf:group><!-- pgm_detail -->
 			</xf:group>

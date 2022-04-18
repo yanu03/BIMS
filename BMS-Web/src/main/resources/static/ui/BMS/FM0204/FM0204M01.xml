@@ -326,7 +326,7 @@
 		
 		com.setSubBtn2(wfm_subBtn3, autoOptions, subOptions3);
 		
-		var codeOptions = [ {code : "FCLT_KIND", compID : "FM0204G0:FCLT_KIND"},
+		var codeOptions = [ {code : "FCLT_KIND", compID : "autoChoiceBox2, FM0204G0:FCLT_KIND"},
 							{code : "PARAM_KIND"},
 							{code : "FCLT_COND", compID : "FM0204G0:FCLT_COND"},
 							{code : "LOG_LEVEL", compID : "LOG_LEVEL"}
@@ -415,7 +415,7 @@
 		}
 	};
 	
-	//동적 그리드 함수
+	//동적 그리드 함수(BIT)
 	scwin.setGridViewInfo = function() {
 		var gridHeader ="", gridBody="";
 		var rowData = dlt_BMS_FCLT_COND_PARAM_INFO.getAllJSON();
@@ -427,7 +427,7 @@
 		//헤더 시작
 		gridHeader +='<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택" blockSelect="false" sortable="false"></w2:column>';
 		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_1" value="정류소ID" blockSelect="false" displayMode="label" sortable="true"></w2:column>';
-		gridHeader +='<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="h_colunm_2" value="정류소명" blockSelect="false" displayMode="label"></w2:column>';
+		gridHeader +='<w2:column removeBorderStyle="false" width="160" inputType="text" style="height:20px" id="h_colunm_2" value="정류소명" blockSelect="false" displayMode="label"></w2:column>';
 		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_3" value="시설물ID" blockSelect="false" displayMode="label" sortable="true"></w2:column>';
 		gridHeader +='<w2:column removeBorderStyle="false" width="170" inputType="text" style="height:20px" id="h_colunm_4" value="시설물종류" blockSelect="false" displayMode="label"></w2:column>';
 		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_5" value="시설물상태" blockSelect="false" displayMode="label"></w2:column>';
@@ -877,7 +877,7 @@
 		//헤더 시작
 		//gridHeader +='<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택" blockSelect="false" sortable="false"></w2:column>';
 		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h2_colunm_1" value="정류소ID" blockSelect="false" displayMode="label" sortable="true"></w2:column>';
-		gridHeader +='<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="h2_colunm_2" value="정류소명" blockSelect="false" displayMode="label"></w2:column>';
+		gridHeader +='<w2:column removeBorderStyle="false" width="160" inputType="text" style="height:20px" id="h2_colunm_2" value="정류소명" blockSelect="false" displayMode="label"></w2:column>';
 		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h2_colunm_3" value="시설물ID" blockSelect="false" displayMode="label" sortable="true"></w2:column>';
 		gridHeader +='<w2:column removeBorderStyle="false" width="170" inputType="text" style="height:20px" id="h2_colunm_4" value="시설물종류" blockSelect="false" displayMode="label"></w2:column>';
 		
@@ -1005,12 +1005,27 @@
 						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
 							chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
 							ev:onviewchange="" id="autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT3" search="start"
-							selectedData="" style="" submenuSize="auto" textAlign="center" useKeywordHighlight="false" visibleRowNum="" nextTabByEnter=""
+							selectedData="" style="width:150px" submenuSize="auto" textAlign="center" useKeywordHighlight="false" visibleRowNum="" nextTabByEnter=""
 							disableEdit="">
 							<w2:choices>
 								<w2:itemset nodeset="data:dlt_searchitem">
 									<w2:label ref="NODE_NM"></w2:label>
 									<w2:value ref="NODE_ID"></w2:value>
+								</w2:itemset>
+							</w2:choices>
+						</w2:autoComplete>
+						<xf:group class="label" id="" style="margin-left:10px">
+							<w2:span class="" id="" label="시설물종류" style=""></w2:span>
+						</xf:group>
+						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
+							chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
+							ev:onviewchange="" id="autoChoiceBox2" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT4" search="start"
+							selectedData="" style="width:150px" submenuSize="auto" textAlign="center" useKeywordHighlight="false" visibleRowNum="" nextTabByEnter=""
+							disableEdit="">
+							<w2:choices>
+								<w2:itemset nodeset="data:dlt_fcltKindItem">
+									<w2:label ref="FCLT_KIND"></w2:label>
+									<w2:value ref="FCLT_KIND"></w2:value>
 								</w2:itemset>
 							</w2:choices>
 						</w2:autoComplete>

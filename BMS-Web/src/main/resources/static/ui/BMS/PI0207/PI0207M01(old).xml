@@ -70,11 +70,9 @@
 						<w2:column id="VOC_PATH" name="음성경로" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
-				<w2:dataMap baseNode="map" id="dma_sub_search">
+				<w2:dataMap baseNode="map" id="dma_subsearch">
 					<w2:keyInfo>
 						<w2:key id="ORGA_ID" name="편성ID" dataType="text"></w2:key>
-						<w2:key id="CONTENT1" name="" dataType="text"></w2:key>
-						<w2:key id="CONTENT2" name="" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 			</w2:dataCollection>
@@ -99,7 +97,7 @@
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_PI0207G2R0" ref="data:json,dma_sub_search" target="data:json,dlt_VOC_ORGA_LIST" action="/pi/PI0207G2R0" method="post" mediatype="application/json" encoding="UTF-8"
+			<xf:submission id="sub_PI0207G2R0" ref="data:json,dma_subsearch" target="data:json,dlt_VOC_ORGA_LIST" action="/pi/PI0207G2R0" method="post" mediatype="application/json" encoding="UTF-8"
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -115,8 +113,7 @@
 			Main : { grid : PI0207G0, frm : PI0207F0, srchSbm : sub_PI0207G0R0, savSbm : sub_PI0207G0S0, keySbm : sub_PI0207G0K0
 					, srchGrp : pgm_header, keyColumn : "ORGA_ID", focusColumn : "ORGA_NM", name :  "편성 목록"},
 			Sub1 : { grid : PI0207G2, srchSbm : sub_PI0207G2R0, savSbm : sub_PI0207G2S0, name :  "음성 목록"}
-		 };	
-		
+		 };		
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID_FORM, autoOptions);		 
 
 		var codeOptions = [ {code : "FILE_TYPE", compID : "PI0207G1:FILE_TYPE, PI0207G2:FILE_TYPE" } ];	
@@ -125,20 +122,11 @@
 			com.searchGrid(PI0207G0, sub_PI0207G0R0);
 		});	
 
-		var subOptions = {
-			SEARCH: {cbFnc:scwin.btn_sub_move, nm:"조회",class:"search"}
-		};
-		
-		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);
-
-		var subOptions2 = {
-		   	SAVE:[{cbFnc:scwin.btn_up_onclick, nm:"상",class:"up"},{cbFnc:scwin.btn_down_onclick,nm:"하",class:"down"}]
-		   		,SEARCH: {cbFnc:scwin.btn_sub_move2, nm:"조회",class:"search"}
-		   	};
-		
-		com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions2);	
+      var subOptions = {
+         SAVE:[{cbFnc:scwin.btn_up_onclick, nm:"상",class:"up"},{cbFnc:scwin.btn_down_onclick,nm:"하",class:"down"}
+               ]};
       
-      	
+      com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);	
 	
 		com.executeSubmission(sub_PI0207SHI0);		 
 		com.executeSubmission(sub_PI0207G1R0);		 
@@ -148,19 +136,6 @@
 
 	};	
 	
-	//그리드1 조회
-	scwin.btn_sub_move = function() {
-		if(com.isEmpty(dma_sub_search.get("CONTENT1"))==false){
-			com.gridMove(PI0207G1, "VOC_ID,VOC_NM", dma_sub_search.get("CONTENT1"), PI0207G1.getFocusedRowIndex());
-		}
-	};
-	
-	//그리드2 조회
-	scwin.btn_sub_move2 = function() {
-		if(com.isEmpty(dma_sub_search.get("CONTENT2"))==false){
-			com.gridMove(PI0207G2, "VOC_ID,VOC_NM", dma_sub_search.get("CONTENT2"), PI0207G2.getFocusedRowIndex());
-		}
-	};
 
 	scwin.sub_PI0207G0R0_submitdone = function(e) {
 		com.setFocusedCell(PI0207G0, "ORGA_ID");		
@@ -175,7 +150,7 @@
 	};
 	
 	scwin.PI0207G0_onrowindexchange = function(row,oldRow) {
-		var focusOption = {keyMap : dma_sub_search};
+		var focusOption = {keyMap : dma_subsearch};
 		com.changeDualGrid(PI0207G0, PI0207G2, sub_PI0207G2S0, sub_PI0207G2R0, focusOption, row, oldRow);		
 	};
 	
@@ -195,7 +170,7 @@
 				dlt_VOC_ORGA_LIST.setCellData(insertIndex, "PLAY_ST_DT", data.PLAY_ST_DT);
 				dlt_VOC_ORGA_LIST.setCellData(insertIndex, "PLAY_ED_DT", data.PLAY_ED_DT);
 				dlt_VOC_ORGA_LIST.setCellData(insertIndex, "SN", insertIndex);
-				dlt_VOC_ORGA_LIST.setCellData(insertIndex, "ORGA_ID", dma_sub_search.get("ORGA_ID"));
+				dlt_VOC_ORGA_LIST.setCellData(insertIndex, "ORGA_ID", dma_subsearch.get("ORGA_ID"));
 			}
 		}
 		
@@ -259,22 +234,13 @@
 	};
 	
 	
-	scwin.PI0207G1_onrowindexchange = function(row,oldRow) {
-		var path = "/fileUpload/audio/" 
-			+ dlt_VOC_INFO.getCellData(PI0207G1.getFocusedRowIndex(), "VOC_ID") + "." + dlt_VOC_INFO.getCellData(PI0207G1.getFocusedRowIndex(), "PLAY_TYPE");	
-		
-		//저장된 음성 미리듣기
-		$p.$("#audio0").attr("src", path);
-		$p.$("#audio0").attr("loop", false);
-	};
-	
 	scwin.PI0207G2_onrowindexchange = function(row,oldRow) {
 		var path = "/fileUpload/audio/" 
 			+ dlt_VOC_ORGA_LIST.getCellData(PI0207G2.getFocusedRowIndex(), "VOC_ID") + "." + dlt_VOC_ORGA_LIST.getCellData(PI0207G2.getFocusedRowIndex(), "PLAY_TYPE");	
 		
 		//저장된 음성 미리듣기
-		$p.$("#audio1").attr("src", path);
-		$p.$("#audio1").attr("loop", false);
+		$p.$("#audio0").attr("src", path);
+		$p.$("#audio0").attr("loop", false);
 	};
 	]]></script>
 	</head>
@@ -328,6 +294,7 @@
 			</xf:group>
 
 			<xf:group id="pgm_content" class="pgm_content grdc_4f_20_6f" style="">
+
 				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
 					<xf:group class="defaultbox" id="" style="">
 						<w2:textbox class="df_tt fl" id="" label="편성 목록" style=""></w2:textbox>
@@ -393,8 +360,7 @@
 
 				</xf:group>
 				<xf:group id="" class="vertical_line"></xf:group>
-				
-				<xf:group class="pgm_detail grdr_20_2_115_20_a">
+				<xf:group class="pgm_detail grdr_20_2_130_20_20_2_a">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="편성 정보" style=""></w2:textbox>
@@ -438,10 +404,10 @@
 									<w2:attributes></w2:attributes>
 									<xf:input allowChar="" customModelFormatter="" customModelUnformatter="" dataType="text" disabled="true"
 										displayFormatter="com.transPhone" id="VIDEO_COUNT" maskFormat="" maxlength="13" minByteLength=""
-										ref="data:dlt_VOC_ORGA_INFO.AUDIO_COUNT" style="width:100px;height: 21px;text-align: right;" validator="">
+										ref="data:dlt_VOC_ORGA_INFO.AUDIO_COUNT" style="width:100px;height: 21px;" validator="">
 									</xf:input>
 								</xf:group>
-								<xf:group class="w2tb_th" style="" tagname="th">총&amp;nbsp;재생시간(초)</xf:group>
+								<xf:group class="w2tb_th" style="" tagname="th">총&amp;nbsp;재생시간</xf:group>
 								<xf:group class="w2tb_td" style="" tagname="td">
 									<w2:attributes>
 										<w2:colspan>1</w2:colspan>
@@ -449,7 +415,7 @@
 									</w2:attributes>
 									<xf:input allowChar="" customModelFormatter="" customModelUnformatter="" dataType="text" disabled="true"
 										displayFormatter="com.transPhone" id="TOTAL_TIME" maskFormat="" maxlength="13" minByteLength=""
-										ref="data:dlt_VOC_ORGA_INFO.TOTAL_TIME" style="width:100px;height: 21px; text-align: right;" validator="">
+										ref="data:dlt_VOC_ORGA_INFO.TOTAL_TIME" style="width:100px;height: 21px;" validator="">
 									</xf:input>
 								</xf:group>
 							</xf:group><xf:group tagname="tr" style="">
@@ -465,108 +431,91 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:textarea adjustMaxLength="" class="" disabled="" id="REMARK" mandatory="" ref="data:dlt_VOC_ORGA_INFO.REMARK"
-										style="width:100%;height: 50px;" maxlength="200">
+										style="width:100%;height: 70px;" maxlength="200">
 									</xf:textarea>
 								</xf:group>
 							</xf:group>
 						</xf:group>
 					</xf:group>
-					
 					<xf:group id="" class="horizontal_line">
 					</xf:group>
-					
-					<xf:group id="pgm_content2" class="pgm_content grdc_5f_70_5f" style="">
-						<xf:group id="pgm_list2" class="pgm_list grdr_20_2_30_a" style="">
-							<xf:group id="" class="gr_sub_header" style="">
-								<xf:group class="defaultbox" id="" style="">
-									<w2:textbox class="df_tt fl" id="" label="정류소 음성 목록" style=""></w2:textbox>
-								</xf:group>
-							</xf:group>
-							<xf:group class="" id="" style="">
-							</xf:group>
-							<xf:group id="" class="gr_sub_header" style="">
-								<xf:group class="gr_sub_search" id="" style="">
-									<xf:group class="label" id="" style="">
-										<w2:span class="" id="" label="찾기"></w2:span>
-									</xf:group>
-									<xf:group class="search" id="" style="">
-										<xf:input id="search_sub_input" class="search_input" style="width:130px;" ref="data:dma_sub_search.CONTENT1" placeholder="음성ID 또는 음성명"></xf:input>
-									</xf:group>
-									<xf:group style="" id="">
-										<audio controls="" style="width: 180px;height: 25px; margin-left: 20px; float:left" id="audio0" preload="" muted="" loop=""
-											autoplay="" ref="" src="">
-										</audio>
-									</xf:group>
-									<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
-								</xf:group>
-							</xf:group>
-							<xf:group id="">
-								<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
-									checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_VOC_INFO" disabledScrollHidden="" editModeEvent=""
-									editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
-									ev:onrowindexchange="scwin.PI0207G1_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row"
-									id="PI0207G1" ignoreCellClick="false" ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode=""
-									moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="순번"
-									rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false"
-									rowStatusWidth="40" scrollByColumn="false" showSortableUseFilter="" sortOrderReverse="" sortable="" sortedIconPosition="" style=""
-									summaryAuto="" useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true" visibleRowNum="" wheelRows="">
-									<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
-									<w2:header style="" id="header1">
-										<w2:row style="" id="row1">
-											<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column10"
-												value="음성ID" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="250" inputType="text" style="height:20px" id="column9"
-												value="음성명" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column6"
-												value="재생유형" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column3"
-												value="재생시간(초)" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column7"
-												value="재생시작일" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column2"
-												value="재생종료일" blockSelect="false" displayMode="label">
-											</w2:column>
-										</w2:row>
-									</w2:header>
-									<w2:gBody style="" id="gBody1">
-										<w2:row style="" id="row2">
-											<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:20px" id="VOC_ID"
-												value="" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="192" inputType="text" style="height:20px" id="VOC_NM"
-												value="" blockSelect="false" displayMode="label" textAlign="left">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PLAY_TYPE"
-												value="" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PLAY_TM"
-												value="" blockSelect="false" displayMode="label" textAlign="right">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PLAY_ST_DT"
-												value="" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PLAY_ED_DT"
-												value="" blockSelect="false" displayMode="label">
-											</w2:column>
-										</w2:row>
-									</w2:gBody>
-									<w2:footer style="" id="footer1">
-										<w2:row style="" id="row3">
-											<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;"
-												id="column42" value="" blockSelect="false" displayMode="label" colSpan="15" rowSpan=""
-												expression="&quot;데이터 개수 : &quot; + COUNT(&apos;COMP_ID&apos;)" textAlign="left">
-											</w2:column>
-										</w2:row>
-									</w2:footer>
-								</w2:gridView>
+					<xf:group id="" class="gr_sub_header" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl" id="" label="음성 목록" style=""></w2:textbox>
+							<xf:group style="float:right; margin-right:200px" id="">
+								<audio controls="" style="width: 250px;height: 25px;" id="audio0" preload="" muted="" loop=""
+								autoplay="" ref="" src="">
+								</audio>
 							</xf:group>
 						</xf:group>
-
+						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
+					</xf:group>
+					<xf:group class="" id="" style="">
+					</xf:group>
+					<xf:group id="" class="pgm_detail2 grdc_5f_70_5f" style="">
+						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
+							checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_VOC_INFO" disabledScrollHidden="" editModeEvent=""
+							editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
+							ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row"
+							id="PI0207G1" ignoreCellClick="false" ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode=""
+							moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="순번"
+							rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false"
+							rowStatusWidth="40" scrollByColumn="false" showSortableUseFilter="" sortOrderReverse="" sortable="" sortedIconPosition="" style=""
+							summaryAuto="" useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true" visibleRowNum="" wheelRows="">
+							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
+							<w2:header style="" id="header1">
+								<w2:row style="" id="row1">
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column10"
+										value="음성ID" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="250" inputType="text" style="height:20px" id="column9"
+										value="음성명" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column6"
+										value="재생유형" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column3"
+										value="재생시간(초)" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column7"
+										value="재생시작일" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column2"
+										value="재생종료일" blockSelect="false" displayMode="label">
+									</w2:column>
+								</w2:row>
+							</w2:header>
+							<w2:gBody style="" id="gBody1">ㄴ
+								<w2:row style="" id="row2">
+									<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:20px" id="VOC_ID"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="192" inputType="text" style="height:20px" id="VOC_NM"
+										value="" blockSelect="false" displayMode="label" textAlign="left">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PLAY_TYPE"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PLAY_TM"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PLAY_ST_DT"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PLAY_ED_DT"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+								</w2:row>
+							</w2:gBody>
+							<w2:footer style="" id="footer1">
+								<w2:row style="" id="row3">
+									<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;"
+										id="column42" value="" blockSelect="false" displayMode="label" colSpan="15" rowSpan=""
+										expression="&quot;데이터 개수 : &quot; + COUNT(&apos;COMP_ID&apos;)" textAlign="left">
+									</w2:column>
+								</w2:row>
+							</w2:footer>							
+						</w2:gridView>
 						<xf:group style="position: relative; text-align: center;">
 							<xf:group style="position: absolute; top: 50%; transform: translate(0px, -30px);">
 								<w2:anchor class="btn_com right" id="btn_grid_add" outerDiv="" style="" ev:onclick="scwin.btn_grid_add_onclick">
@@ -578,101 +527,72 @@
 							</xf:group>
 						</xf:group>
 						
-						<xf:group id="pgm_list3" class="pgm_list grdr_20_2_30_a" style="">
-							<xf:group id="" class="gr_sub_header" style="">
-								 <xf:group class="defaultbox" id="" style="">
-									<w2:textbox class="df_tt fl" id="" label="음성 편성 목록" style=""></w2:textbox>
-								</xf:group> 
-								
-								<!--<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>-->
-							</xf:group>
-							
-							<xf:group class="" id="" style=""></xf:group>
-							
-							<xf:group id="" class="gr_sub_header" style="">
-								<xf:group class="gr_sub_search" id="" style="">
-									<xf:group class="label" id="" style="">
-										<w2:span class="" id="" label="찾기"></w2:span>
-									</xf:group>
-									<xf:group class="search" id="" style="">
-										<xf:input id="search_sub_input2" class="search_input" style="width:130px;" ref="data:dma_sub_search.CONTENT2" placeholder="음성ID 또는 음성명"></xf:input>
-									</xf:group>
-									<xf:group style="" id="">
-										<audio controls="" style="width: 120px;height: 25px; margin-left: 10px; float: left;" id="audio1" preload="" muted="" loop=""
-											autoplay="" ref="" src="">
-										</audio>
-									</xf:group>
-									<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
-								</xf:group>
-							</xf:group>
-							<xf:group>
-								<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
-									checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_VOC_ORGA_LIST" disabledScrollHidden="" editModeEvent=""
-									editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
-									ev:onrowindexchange="scwin.PI0207G2_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row"
-									id="PI0207G2" ignoreCellClick="false" ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode=""
-									moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="순번"
-									rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false"
-									rowStatusWidth="40" scrollByColumn="false" showSortableUseFilter="" sortOrderReverse="" sortable="" sortedIconPosition="" style=""
-									summaryAuto="" useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true" visibleRowNum="" wheelRows="">
-									<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
-									<w2:header style="" id="header1">
-										<w2:row style="" id="row1">
-											<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column8"
-												value="음성ID" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="250" inputType="text" style="height:20px" id="column7"
-												value="음성명" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column6"
-												value="재생유형" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column5"
-												value="재생시간(초)" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column4"
-												value="재생시작일" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column3"
-												value="재생종료일" blockSelect="false" displayMode="label">
-											</w2:column>
-										</w2:row>
-									</w2:header>
-									<w2:gBody style="" id="gBody1">
-										<w2:row style="" id="row2">
-											<w2:column removeBorderStyle="false" width="137" inputType="text" style="height:20px" id="VOC_ID"
-												value="" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="209" inputType="text" style="height:20px" id="VOC_NM"
-												value="" blockSelect="false" displayMode="label" textAlign="left">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="109" inputType="text" style="height:20px" id="PLAY_TYPE"
-												value="" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PLAY_TM"
-												value="" blockSelect="false" displayMode="label" textAlign="right">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PLAY_ST_DT"
-												value="" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PLAY_ED_DT"
-												value="" blockSelect="false" displayMode="label">
-											</w2:column>
-										</w2:row>
-									</w2:gBody>
-									<w2:footer style="" id="footer1">
-										<w2:row style="" id="row3">
-											<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;"
-												id="column42" value="" blockSelect="false" displayMode="label" colSpan="15" rowSpan=""
-												expression="&quot;재생시간 : &quot; + SUM('PLAY_TM') + &quot; 초&quot;" textAlign="left">
-											</w2:column>
-										</w2:row>
-									</w2:footer>								
-								</w2:gridView>
-							</xf:group>
-							
-						</xf:group><!-- end pgm_list2 -->
-					</xf:group> <!-- end pgm_content2 -->
+						<xf:group>
+							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
+								checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_VOC_ORGA_LIST" disabledScrollHidden="" editModeEvent=""
+								editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
+								ev:onrowindexchange="scwin.PI0207G2_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row"
+								id="PI0207G2" ignoreCellClick="false" ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode=""
+								moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="순번"
+								rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false"
+								rowStatusWidth="40" scrollByColumn="false" showSortableUseFilter="" sortOrderReverse="" sortable="" sortedIconPosition="" style=""
+								summaryAuto="" useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true" visibleRowNum="" wheelRows="">
+								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
+								<w2:header style="" id="header1">
+									<w2:row style="" id="row1">
+										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column8"
+											value="음성ID" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="250" inputType="text" style="height:20px" id="column7"
+											value="음성명" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column6"
+											value="재생유형" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column5"
+											value="재생시간(초)" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column4"
+											value="재생시작일" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column3"
+											value="재생종료일" blockSelect="false" displayMode="label">
+										</w2:column>
+									</w2:row>
+								</w2:header>
+								<w2:gBody style="" id="gBody1">
+									<w2:row style="" id="row2">
+										<w2:column removeBorderStyle="false" width="137" inputType="text" style="height:20px" id="VOC_ID"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="209" inputType="text" style="height:20px" id="VOC_NM"
+											value="" blockSelect="false" displayMode="label" textAlign="left">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="109" inputType="text" style="height:20px" id="PLAY_TYPE"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PLAY_TM"
+											value="" blockSelect="false" displayMode="label" textAlign="right">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PLAY_ST_DT"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PLAY_ED_DT"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+									</w2:row>
+								</w2:gBody>
+								<w2:footer style="" id="footer1">
+									<w2:row style="" id="row3">
+										<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;"
+											id="column42" value="" blockSelect="false" displayMode="label" colSpan="15" rowSpan=""
+											expression="&quot;재생시간 : &quot; + SUM('PLAY_TM') + &quot; 초&quot;" textAlign="left">
+										</w2:column>
+									</w2:row>
+								</w2:footer>								
+							</w2:gridView>
+						</xf:group>
+					</xf:group> <!-- end pgm_detail2 -->
 				</xf:group> <!--end pgm_detail-->
 			</xf:group> <!-- end content --> 
 		</xf:group> <!-- end container -->

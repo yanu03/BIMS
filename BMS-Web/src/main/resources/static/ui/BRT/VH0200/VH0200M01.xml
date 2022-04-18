@@ -477,7 +477,7 @@
 		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'OPER_SN'+'" style="height:20px" inputType="text" width="60" value="'+'운행순번'+'" rowSpan="3"></w2:column>';
 		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'CHG_CNT'+'" style="height:20px" inputType="text" width="60" value="'+'발생건수'+'" rowSpan="3"></w2:column>';
 		for(var i = 0; i < maxCnt; i++) {
-			var nodeNm = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(i, "NODE_NM");
+			var nodeNm = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(i, "NODE_NM") + ' (' + dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(i, "ACCRU_LEN") + ')'
 			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'NODE_NM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="140" colSpan="4" value="'+nodeNm+'"></w2:column>';
 		}
 		gridHeader +='</w2:row>';
@@ -532,13 +532,13 @@
 				var chgArrvTm = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(rowIndex+j, "CHG_ARRV_TM");
 				var chgDiv = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(rowIndex+j, "CHG_DIV");
 				
-				if(chgDiv){
-				
+				if(chgDiv > 0){
+					dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.setCellData(idx, "CHG_ARRV_TM_"+j, chgArrvTm + ' (' +chgDiv+')');
+					dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.setCellData(idx, "CHG_DPRT_TM_"+j, chgDprtTm + ' (' +chgDiv+')');
 				}else{
-				
+					dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.setCellData(idx, "CHG_ARRV_TM_"+j, chgArrvTm);
+					dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.setCellData(idx, "CHG_DPRT_TM_"+j, chgDprtTm);
 				}
-				dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.setCellData(idx, "CHG_ARRV_TM_"+j, chgArrvTm);
-				dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.setCellData(idx, "CHG_DPRT_TM_"+j, chgDprtTm);
 
 
 				if((com.isEmpty(chgArrvTm)==false)){
@@ -664,12 +664,21 @@
 			}
 		}
 	
-		//var routId = dlt_BMS_ROUT_MST.getCellData(VH0200G0.getFocusedRowIndex(), "ROUT_ID");
-		//var dayDiv = dlt_BMS_ROUT_MST.getCellData(VH0200G0.getFocusedRowIndex(), "DAY_DIV");
-		//var routNm = dlt_BMS_ROUT_MST.getCellData(VH0200G0.getFocusedRowIndex(), "ROUT_NM");
+		var vhcNo = dlt_BRT_CUR_CHG_OPER_INFO_HIS.getCellData(VH0200G0.getFocusedRowIndex(), "VHC_NO");
+		var operDt = dlt_BRT_CUR_CHG_OPER_INFO_HIS.getCellData(VH0200G0.getFocusedRowIndex(), "OPER_DT");
+		var routNm = dlt_BRT_CUR_CHG_OPER_INFO_HIS.getCellData(VH0200G0.getFocusedRowIndex(), "ROUT_NM");
 		var operSn = dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.getCellData(VH0200G1.getFocusedRowIndex(), "OPER_SN");
 		
-		 var data = { data4 : operSn, data5:transData, data6:realData, callbackFn : "" };
+		//vh0200g1에서 선택한 row의 변경운행 횟수 가져와서 차트팝업으로 넘겨주기
+		for(var x = 0; x < dlt_CHG_CNT.getRowCount(); x++){
+			if(dlt_CHG_CNT.getCellData(x, "OPER_SN") == dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.getCellData(VH0200G1.getFocusedRowIndex(), "OPER_SN")){
+				var chgCntJson = new Array();
+				chgCntJson.push(dlt_CHG_CNT.getRowJSON(x)); 
+				break;
+			}	
+		}
+		
+		 var data = { data : vhcNo, data2 : operDt, data3 : routNm, data4 : operSn, data5:transData, data6:chgCntJson, callbackFn : "" };
          var options = { id : "VH0200P0",
          				 width : "1600px",
          				 height : "800px",
@@ -738,11 +747,11 @@
 		var curNodeSn = 0;
 		var newOperSn = 0;
 		var newNodeSn = 0;
-		var chgDivCnt = 1;
-		var chgDiv = 0;
+		
 		
 		for(var i = 0; i < rowCnt; i++){
-			if(i>= 1) {
+			var chgDiv = 0;
+			if(i >= 1) {
 				oldNodeSn = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(i-1, 'NODE_SN');
 				oldOperSn = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(i-1, 'OPER_SN');
 			}
@@ -756,20 +765,17 @@
 			}else{
 				dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setCellData(i, "CHG_DIV", chgDiv+1);
 			}
-			//var rowJson = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowJSON(i);
-			//dlt_VIEW_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setRowJSON(i, rowJson, false);
 			
+			//2번 이상 변경운행 발생
 			if(oldNodeSn != '' && curNodeSn != '' && oldNodeSn >= curNodeSn) {
-				//2번 이상 변경운행 발생
 				if(oldOperSn == curOperSn) {
-					chgDivCnt++;
 					for(var j = 0; j < i; j++){
 						newNodeSn = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(j, 'NODE_SN');
 						newOperSn = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(j, 'OPER_SN');
-						
 						if(newOperSn != '' && curOperSn != '' && newOperSn == curOperSn && newNodeSn == curNodeSn){
+							dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setCellData(i, "CHG_DIV", dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(j, "CHG_DIV"));
 							dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setRowJSON(j, dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowJSON(i), true);
-							dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setCellData(j, "CHG_DIV", chgDivCnt);
+							dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setCellData(j, "CHG_DIV", dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(j, "CHG_DIV") + 1);
 						}
 					}
 					dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.removeRow(i);

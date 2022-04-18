@@ -173,13 +173,11 @@
 		F_DATE.setValue(util.getCurrentDate2());
 		
 		dma_param_AL0305G1.L_DATE = util.getCurrentDate2();
-		L_DATE.setValue(util.getCurrentDate2());
+		L_DATE.setValue(util.getCurrentDate2(7));
 		
 		TYPE1.setValue('RR00000002');
-		//TYPE2.setValue('DY001');
 		
 		dma_param_AL0305G1.set("REP_ROUT_ID", 'RR00000002')
-		//dma_param_AL0305G1.set("DAY_DIV", TYPE2.getValue())
 		dma_param_AL0305G1.set("F_DATE", F_DATE.getValue())
 		dma_param_AL0305G1.set("L_DATE", L_DATE.getValue())
 		
@@ -337,7 +335,9 @@
 		
 		if(col == 2){
 			if((operDt.getFullYear() < today.getFullYear()) || (operDt.getMonth()+1 <= today.getMonth()+1 && operDt.getDate() < today.getDate())){
-				com.confirm(str, function(rtn) {
+				com.alert("지난 날짜입니다.");
+				
+				/*com.confirm(str, function(rtn) {
 				if (rtn) {
 						var vhcId = [];
 						var rowCnt = dlt_BRT_OPER_DT_ALLOC_PL_MST.getRowCount();
@@ -354,7 +354,7 @@
 									modal : true};
 						com.openPopup("/cm//common/popUpVhcList.xml", opt, data);
 					}
-				});
+				});*/
 			}else{
 				
 				var vhcId = [];
@@ -378,7 +378,9 @@
 		}
 		else if(col == 4){
 			if((operDt.getFullYear() < today.getFullYear()) || (operDt.getMonth()+1 <= today.getMonth()+1 && operDt.getDate() < today.getDate())){
-				com.confirm(str, function(rtn) {
+				com.alert("지난 날짜입니다.");
+				
+				/*com.confirm(str, function(rtn) {
 				if (rtn) {
 						var drvId = [];
 						var rowCnt = dlt_BRT_OPER_DT_ALLOC_PL_MST.getRowCount();
@@ -395,7 +397,7 @@
 									modal : true};
 						com.openPopup("/cm//common/popUpDrvList.xml", opt, data);
 					}
-				});
+				});*/
 			}else{
 				var drvId = [];
 				var rowCnt = dlt_BRT_OPER_DT_ALLOC_PL_MST.getRowCount();
@@ -416,7 +418,9 @@
 		}
 		else if(col == 5){
 			if((operDt.getFullYear() < today.getFullYear()) || (operDt.getMonth()+1 <= today.getMonth()+1 && operDt.getDate() < today.getDate())){
-				com.confirm(str, function(rtn) {
+				com.alert("지난 날짜입니다.");
+				
+				/*com.confirm(str, function(rtn) {
 				if (rtn) {
 						var drvId = [];
 						var rowCnt = dlt_BRT_OPER_DT_ALLOC_PL_MST.getRowCount();
@@ -433,7 +437,7 @@
 									modal : true};
 						com.openPopup("/cm//common/popUpDrvList.xml", opt, data);
 					}
-				});
+				});*/
 			}else{
 				var drvId = [];
 				var rowCnt = dlt_BRT_OPER_DT_ALLOC_PL_MST.getRowCount();
@@ -454,7 +458,9 @@
 		}
 		else if(col == 7){
 			if((operDt.getFullYear() < today.getFullYear()) || (operDt.getMonth()+1 <= today.getMonth()+1 && operDt.getDate() < today.getDate())){
-				com.confirm(str, function(rtn) {
+				com.alert("지난 날짜입니다.");
+				
+				/*com.confirm(str, function(rtn) {
 				if (rtn) {
 						var drvId = [];
 						var rowCnt = dlt_BRT_OPER_DT_ALLOC_PL_MST.getRowCount();
@@ -471,7 +477,7 @@
 									modal : true};
 						com.openPopup("/cm//common/popUpDrvList.xml", opt, data);
 					}
-				});
+				});*/
 			}else{
 				var drvId = [];
 				var rowCnt = dlt_BRT_OPER_DT_ALLOC_PL_MST.getRowCount();
@@ -491,6 +497,8 @@
 			}
 		}
 	};
+	
+	
 	
 	//찾기 버튼 콜백함수
 	scwin.searchVhcCallbackG2 = function(obj) {

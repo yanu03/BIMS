@@ -66,8 +66,8 @@
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_searchitem2" saveRemovedData="true">
 					<w2:columnInfo>
-						<w2:column id="ORG_ID" name="기관ID" dataType="text"></w2:column>
-						<w2:column id="ORG_NM" name="기관명" dataType="text"></w2:column>
+						<w2:column id="PARTNER_ID" name="기관ID" dataType="text"></w2:column>
+						<w2:column id="PARTNER_NM" name="기관명" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_searchitem3" saveRemovedData="true">
@@ -496,8 +496,8 @@
 										ref="">
 										<w2:choices>
 											<w2:itemset nodeset="data:dlt_searchitem2">
-												<w2:label ref="ORG_NM"></w2:label>
-												<w2:value ref="ORG_ID"></w2:value>
+												<w2:label ref="PARTNER_NM"></w2:label>
+												<w2:value ref="PARTNER_ID"></w2:value>
 											</w2:itemset>
 										</w2:choices>
 									</w2:column>
@@ -589,13 +589,13 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="-선택-"
-										direction="auto" disabled="false" disabledClass="w2selectbox_disabled" displayMode="label" id="ORG_NM" labelWidthAuto=""
-										mandatory="true" optionOrder="" ev:onchange="scwin.ORG_NM_onchange" ref="data:dlt_BMS_FCLT_INFO.MAKER" renderType="component"
+										direction="auto" disabled="false" disabledClass="w2selectbox_disabled" displayMode="label" id="PARTNER_NM" labelWidthAuto=""
+										mandatory="true" optionOrder="" ev:onchange="scwin.PARTNER_NM_onchange" ref="data:dlt_BMS_FCLT_INFO.MAKER" renderType="component"
 										style="height:24px;width: 160px;" submenuSize="auto">
 										<xf:choices>
 											<xf:itemset nodeset="data:dlt_searchitem2">
-												<xf:label ref="ORG_NM"></xf:label>
-												<xf:value ref="ORG_ID"></xf:value>
+												<xf:label ref="PARTNER_NM"></xf:label>
+												<xf:value ref="PARTNER_ID"></xf:value>
 											</xf:itemset>
 										</xf:choices>
 									</xf:select1>

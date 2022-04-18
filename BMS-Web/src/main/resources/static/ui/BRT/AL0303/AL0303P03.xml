@@ -10,11 +10,14 @@
         		<data xmlns="" />
         	</xf:instance>
         	<w2:dataCollection baseNode="map">
-        		<w2:dataList baseNode="list" repeatNode="map" id="dlt_VHC_INFO" saveRemovedData="true">
+        		<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_VHC_MST" saveRemovedData="true">
         			<w2:columnInfo>
         				<w2:column id="chk" name="선택" dataType="text"></w2:column>
         				<w2:column id="VHC_ID" name="차량ID" dataType="date"></w2:column>
         				<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
+        				<w2:column id="AREA" name="권역" dataType="text"></w2:column>
+        				<w2:column id="MAKER" name="제조사" dataType="text"></w2:column>
+        				<w2:column id="COMP_NM" name="운수사명" dataType="text"></w2:column>
         			</w2:columnInfo>
         		</w2:dataList>
         		<w2:dataMap baseNode="map" id="dma_VHC_INFO">
@@ -24,9 +27,16 @@
         				<w2:key id="CONTENT" name="name3" dataType="text"></w2:key>
         			</w2:keyInfo>
         		</w2:dataMap>
+        		<w2:dataMap baseNode="map" id="dma_search">
+        			<w2:keyInfo>
+        				<w2:key id="VHC_ID" name="차량ID" dataType="date"></w2:key>
+        				<w2:key id="TYPE" name="name2" dataType="text"></w2:key>
+        				<w2:key id="CONTENT" name="name3" dataType="text"></w2:key>
+        			</w2:keyInfo>
+        		</w2:dataMap>
         	</w2:dataCollection>
         	<w2:workflowCollection></w2:workflowCollection>
-        	<xf:submission id="sub_AL0303P3R0" ref="data:json,dma_VHC_INFO" target="data:json,dlt_VHC_INFO" action="/al/AL0303P3R0"
+        	<xf:submission id="sub_AL0303P3R0" ref="data:json,dma_search" target="data:json,dlt_BMS_VHC_MST" action="/vhc/selectVhcList"
         		method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler=""
         		mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
         	</xf:submission>
@@ -41,8 +51,18 @@
 		[
 			{userStr:"조회", auth: gcm.BTN.SEARCH, cbFnc: scwin.btn_search_onclick}
 		];
+		
+		
+		var codeOptions = [ {code : "AREA", compID : "AL0303P3:AREA" }
+                   
+                 ];      
+   
+      com.setCommonDtl(codeOptions, function() {
+         com.searchGrid(AL0303P3, sub_AL0303P3R0);
+      });   
+		
 		com.setMainBtn3(wfm_mainBtn, btnOptions);
-		com.executeSubmission(sub_AL0303P3R0);				
+		//com.executeSubmission(sub_AL0303P3R0);				
 	};
 	
 	scwin.onpageunload = function() {
@@ -120,14 +140,18 @@
 			</xf:group>
 			
 			<xf:group style="" id="" class="popup_content">
-				<w2:gridView  fixedColumnWithHidden="true" dataList="data:dlt_VHC_INFO" useShiftKey="false" readOnly="true"
-					style="width:775px" scrollByColumn="false" id="AL0303P3" autoFit="allColumn" class="cm_grid popup"
+				<w2:gridView  fixedColumnWithHidden="true" dataList="data:dlt_BMS_VHC_MST" useShiftKey="false" readOnly="true"
+					style="width:775px" scrollByColumn="false" id="AL0303P3" autoFit="lastColumn" class="cm_grid popup"
 					ev:onrowindexchange="scwin.AL0303P3_onrowindexchange">
 					<w2:header style="" id="header1">
 							<w2:row id="row1" style="">
 								<w2:column width="39" inputType="radio" style="height:20px" id="chkHeader" value="선택" blockSelect="false"></w2:column>
-								<w2:column width="70" id="column2" value="차량ID"></w2:column>
-								<w2:column width="70" id="column3" value="차량번호"></w2:column>
+								<w2:column width="100" id="column2" value="차량ID"></w2:column>
+								<w2:column width="100" id="column3" value="차량번호"></w2:column>
+								<w2:column width="150" id="column3" value="권역"></w2:column>
+								<w2:column width="150" id="column3" value="제조사"></w2:column>
+								<w2:column width="150" id="column3" value="운수사명"></w2:column>
+								<w2:column width="50" id="column3" value=""></w2:column>
 							</w2:row>
 						</w2:header>
 						<w2:gBody id="gBody1" style="">
@@ -137,6 +161,10 @@
 								</w2:column>
 								<w2:column width="70" id="VHC_ID"></w2:column>
 								<w2:column width="70" id="VHC_NO"></w2:column>
+								<w2:column width="70" id="AREA" textAlign="left" inputType="select"></w2:column>
+								<w2:column width="70" id="MAKER" textAlign="left"></w2:column>
+								<w2:column width="70" id="COMP_NM" textAlign="left"></w2:column>
+								<w2:column width="70" id=""></w2:column>
 						</w2:row>
 					</w2:gBody>
 				</w2:gridView>

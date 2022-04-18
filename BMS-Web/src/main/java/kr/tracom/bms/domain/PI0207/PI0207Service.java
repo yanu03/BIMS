@@ -74,7 +74,7 @@ public class PI0207Service extends ServiceSupport {
 	
 	
 	public List PI0207G2R0() throws Exception {
-		Map<String, Object> map = getSimpleDataMap("dma_subsearch");
+		Map<String, Object> map = getSimpleDataMap("dma_sub_search");
 		return pi0207Mapper.PI0207G2R0(map);
 	}
 	

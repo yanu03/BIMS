@@ -125,12 +125,13 @@
 			Sub1 : { grid : SI0801G1, srchSbm : sub_SI0801G1R0, savSbm : sub_SI0801G1S0, name :  "스케쥴 상세"}
 		};											//KeyColumn 비고 바꿔야 한다. 그리드 포커스 때문에 키컬럼을 remark로 했음
 		
-		var mainOptions = {SAVE:scwin.saveGrid}
+		var mainOptions = {SAVE:scwin.saveGrid, SETTING:{}}
 		
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID_FORM, autoOptions,mainOptions);
 		
 		var subOptions = {
-			ADD:scwin.addSubGrid, DEL:{}, CNL:{}
+			ADD:scwin.addSubGrid, DEL:{}, CNL:{},
+			SETTING:[{cbFnc:scwin.subGridUp, nm:"상",class:"up"},{cbFnc:scwin.subGridDown,nm:"하",class:"down"}]
 		};
 		
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);
@@ -145,6 +146,20 @@
 		com.executeSubmission(sub_SI0801SHI0);
 		
 	};	
+	
+	scwin.subGridUp = function(){
+		var idx = SI0801G1.getFocusedRowIndex();
+		com.getGridViewDataList(SI0801G1).rowMoveUp(idx);
+		dlt_BMS_FCLT_SCH_INFO.setCellData(idx, "SN", idx+1);
+		dlt_BMS_FCLT_SCH_INFO.setCellData(idx-1, "SN", idx);
+	}
+	
+	scwin.subGridDown = function(){
+		var idx = SI0801G1.getFocusedRowIndex();
+		com.getGridViewDataList(SI0801G1).rowMoveDown(idx);
+		dlt_BMS_FCLT_SCH_INFO.setCellData(idx+1, "SN", idx+2);
+		dlt_BMS_FCLT_SCH_INFO.setCellData(idx, "SN", idx+1);
+	}
 	
 	//서브 추가버튼
 	scwin.addSubGrid = function(){
@@ -536,7 +551,7 @@
 										value="데이터길이" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column32"
-										value="설정값" blockSelect="false" displayMode="label">
+										value="데이터값" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column width="100" style="height:20px;" inputType="text" id="column28" value="사용여부"
 										blockSelect="false">
@@ -683,7 +698,7 @@
 								</xf:input>
 							</xf:group>
 							<xf:group tagname="th" class="w2tb_th">
-								설정값
+								데이터값
 								<w2:attributes>
 									<w2:scope>row</w2:scope>
 								</w2:attributes>
@@ -816,7 +831,7 @@
 											value="종료시간(시:분)" blockSelect="false" displayMode="label" class="req">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="column10"
-											value="설정값" blockSelect="false" displayMode="label" sortable="true">
+											value="데이터값" blockSelect="false" displayMode="label" sortable="true">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column8"
 											value="비고" blockSelect="false" displayMode="label" >

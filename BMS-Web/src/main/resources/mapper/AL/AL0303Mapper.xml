@@ -184,6 +184,8 @@
 		SELECT 
 			DRV_ID
 			,DRV_NM
+			,BUS_DIV
+			,REMARK
 		FROM
 			BMS_DRV_MST
 		<where>

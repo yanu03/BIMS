@@ -135,7 +135,7 @@
 		
 		 routMap.initMap("map_AL0303", {width:"100%"
 			, height:"100%"
-			, onClick: null
+			, onClick: scwin.onClickMap
 			, nodeChangeCb: null
 			, draggable: false
 		});
@@ -145,9 +145,9 @@
 	
 	
 	//맵 클릭 이벤트
-	/*scwin.onClickMap = function(e) {
+	scwin.onClickMap = function(e) {
 		routMap.changeLocVehicleByClick("map_AL0303", AL0303G0, AL0303G0.getFocusedRowIndex(),e);
-	}*/
+	}
 	
 	scwin.sbx_ChoiceBox_onviewchange = function(info) {		
 		if (info.newValue == "ALL") {
@@ -168,8 +168,6 @@
 	scwin.sub_AL0303G0R0_submitdone = function(e) {
 		com.setFocusedCell(AL0303G0, "RPC_ID");
 	};
-	
-	
 	
 	scwin.GRP_VHC_NO_onclick = function(e) {
 		var data = {callbackFn : "scwin.GRP_VHC_NO_callback" };
@@ -362,6 +360,10 @@
 	scwin.INCDNT_ID_onfocus = function(e) {
 		scwin.INCDNT_ID_SEARCH_onclick();
 	};
+	
+	scwin.alertHelpIncdnt = function(){
+		com.alert("※ 돌발 정보를 가져올 시 노선명, 발생일시, 원차량, 원운전자, 돌발좌표 값들이 자동으로 연결됩니다.");
+	}
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -513,7 +515,7 @@
 				</xf:group><!-- pgm_list -->
 
 				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_280_20_20_2_a" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_250_20_20_2_a" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="대체차량 상세 정보" style=""></w2:textbox>
@@ -535,13 +537,32 @@
 								<xf:group style="" class="w2tb_th req" tagname="th">대체ID</xf:group>
 								<xf:group style="" class="w2tb_td" tagname="td">
 									<w2:attributes>
-										<w2:colspan>3</w2:colspan>
+										<w2:colspan>1</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:input adjustMaxLength="false" id="" style="width: 144px;"
 										ref="data:dlt_BRT_RPC_VHC_INFO.RPC_ID" disabled="true">
 									</xf:input>
 								</xf:group>
+								<xf:group style="" class="w2tb_th" tagname="th">
+									돌발ID
+									<w2:anchor id="" title="돌발" style="" ev:onclick="scwin.alertHelpIncdnt" class="ico_help mr5" outerDiv="false">
+										<xf:label></xf:label>
+									</w2:anchor>
+								</xf:group>
+								<xf:group style="" class="w2tb_td" tagname="td">
+									<w2:attributes>
+										<w2:colspan>1</w2:colspan>
+										<w2:rowspan>1</w2:rowspan>
+									</w2:attributes>
+									<xf:input id="INCDNT_ID" class="" chooseOption="true" style="width: 100px;"
+										allOption="" disabled="" ev:onfocus="scwin.INCDNT_ID_onfocus" ref="data:dlt_BRT_RPC_VHC_INFO.INCDNT_ID" >
+									</xf:input>
+									<xf:image class="btn" ev:onclick="scwin.INCDNT_ID_SEARCH_onclick" id="INCDNT_ID_SEARCH" longdesc=""
+										src="/cm/images/inc/icon_search.gif" style="width:21px;height:23px;margin-left:5px;">
+									</xf:image>
+								</xf:group>
+								
 								<!--  <xf:group style="" class="w2tb_th" tagname="th">돌발ID</xf:group>
 								<xf:group style="" class="w2tb_td" tagname="td">
 									<w2:attributes>
@@ -570,39 +591,13 @@
 										src="/cm/images/inc/icon_search.gif" style="width:21px;height:23px;margin-left:5px;">
 									</xf:image>
 								</xf:group>
-								<xf:group style="" class="w2tb_th" tagname="th">돌발ID</xf:group>
-								<xf:group style="" class="w2tb_td" tagname="td">
-									<w2:attributes>
-										<w2:colspan>1</w2:colspan>
-										<w2:rowspan>1</w2:rowspan>
-									</w2:attributes>
-									<xf:input id="INCDNT_ID" class="" chooseOption="true" style="width: 100px;"
-										allOption="" disabled="" ev:onfocus="scwin.INCDNT_ID_onfocus" ref="data:dlt_BRT_RPC_VHC_INFO.INCDNT_ID" >
-									</xf:input>
-									<xf:image class="btn" ev:onclick="scwin.INCDNT_ID_SEARCH_onclick" id="INCDNT_ID_SEARCH" longdesc=""
-										src="/cm/images/inc/icon_search.gif" style="width:21px;height:23px;margin-left:5px;">
-									</xf:image>
-								</xf:group>
-							</xf:group>
-							<xf:group style="" tagname="tr">
-								<xf:group style="" class="w2tb_th req" tagname="th">운행일</xf:group>
-								<xf:group style="" class="w2tb_td" tagname="td">
-									<!-- <w2:attributes>
-										<w2:colspan>3</w2:colspan>
-										<w2:rowspan>1</w2:rowspan>
-										</w2:attributes> -->
-									<w2:inputCalendar footerDiv="false" id="" style="width: 150px;height: 23px;" renderDiv="true"
-										focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component"
-										ref="data:dlt_BRT_RPC_VHC_INFO.OPER_DT" class="req">
-									</w2:inputCalendar>
-									<xf:group class="w2tb_th req" style="" tagname="th">발생일시</xf:group>
+								<xf:group class="w2tb_th req" style="" tagname="th">발생일시</xf:group>
 									<xf:group class="w2tb_td" style="" tagname="td">
 										<w2:inputCalendar calendarValueType="yearMonthDateTimeSec" focusOnDateSelect="false"
 											footerDiv="false" class="req" id="" ref="data:dlt_BRT_RPC_VHC_INFO.OCR_DTM" renderDiv="true" renderType="component"
 											rightAlign="false" style="width: 150px;height: 23px;">
 										</w2:inputCalendar>
 									</xf:group>
-								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
 								<xf:group tagname="th" style="" class="w2tb_th req">원차량</xf:group>

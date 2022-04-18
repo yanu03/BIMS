@@ -353,7 +353,7 @@
 							<xf:group style="" tagname="tr">
 								<xf:group style="" class="w2tb_th" tagname="th">전화번호</xf:group>
 								<xf:group style="" class="w2tb_td" tagname="td">
-									<xf:input disabled="" id="PHONE" ref="data:dlt_BMS_PARTNER_MST.PHONE" refSync="" style="" initValue="" allowChar="0-9" maxlength="13" customModelFormatter="com.transPhone" displayFormatter="com.transPhone"></xf:input>
+									<xf:input disabled="" id="PHONE" ref="data:dlt_BMS_PARTNER_MST.PHONE" refSync="" style="" initValue="" allowChar="0-9-" maxlength="13" customModelFormatter="com.transPhone" displayFormatter="com.transPhone"></xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" tagname="th">이메일</xf:group>
 								<xf:group class="w2tb_td" tagname="td">

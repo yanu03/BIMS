@@ -15,6 +15,8 @@
         				<w2:column id="chk" name="선택" dataType="text"></w2:column>
         				<w2:column id="DRV_ID" name="운전자ID" dataType="date"></w2:column>
         				<w2:column id="DRV_NM" name="운전자명" dataType="text"></w2:column>
+        				<w2:column id="BUS_DIV" name="버스구분" dataType="text"></w2:column>
+        				<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
         			</w2:columnInfo>
         		</w2:dataList>
         		<w2:dataMap baseNode="map" id="dma_BMS_DRV_MST">
@@ -41,8 +43,17 @@
 		[
 			{userStr:"조회", auth: gcm.BTN.SEARCH, cbFnc: scwin.btn_search_onclick}
 		];
+		
+		var codeOptions = [ {code : "BUS_DIV", compID : "AL0303P2:BUS_DIV" }
+                   
+                 ];      
+   
+	      com.setCommonDtl(codeOptions, function() {
+	         com.searchGrid(AL0303P2, sub_AL0303P2R0);
+	      });   
+	      
 		com.setMainBtn3(wfm_mainBtn, btnOptions);
-		com.executeSubmission(sub_AL0303P2R0);				
+		//com.executeSubmission(sub_AL0303P2R0);				
 	};
 	
 	scwin.onpageunload = function() {
@@ -121,13 +132,15 @@
 			
 			<xf:group style="" id="" class="popup_content">
 				<w2:gridView  fixedColumnWithHidden="true" dataList="data:dlt_BMS_DRV_MST" useShiftKey="false" readOnly="true"
-					style="width:775px" scrollByColumn="false" id="AL0303P2" autoFit="allColumn" class="cm_grid popup"
+					style="width:775px" scrollByColumn="false" id="AL0303P2" autoFit="lastColumn" class="cm_grid popup"
 					ev:onrowindexchange="scwin.AL0303P2_onrowindexchange">
 					<w2:header style="" id="header1">
 							<w2:row id="row1" style="">
 								<w2:column width="39" inputType="radio" style="height:20px" id="chkHeader" value="선택" blockSelect="false"></w2:column>
-								<w2:column width="70" id="column2" value="운전자ID"></w2:column>
-								<w2:column width="70" id="column3" value="운전자명"></w2:column>
+								<w2:column width="100" id="column1" value="운전자ID"></w2:column>
+								<w2:column width="90" id="column2" value="운전자명"></w2:column>
+								<w2:column width="90" id="column3" value="버스구분"></w2:column>
+								<w2:column width="70" id="column4" value="비고"></w2:column>
 							</w2:row>
 						</w2:header>
 						<w2:gBody id="gBody1" style="">
@@ -137,6 +150,8 @@
 								</w2:column>
 								<w2:column width="70" id="DRV_ID"></w2:column>
 								<w2:column width="70" id="DRV_NM"></w2:column>
+								<w2:column width="70" id="BUS_DIV" inputType="select"></w2:column>
+								<w2:column width="70" id="REMARK" textAlign="left"></w2:column>
 						</w2:row>
 					</w2:gBody>
 				</w2:gridView>

@@ -142,6 +142,7 @@
 .grdr_2_a {display:grid; grid-template-rows: 2px auto;}
 .grdr_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(20px, max-content) auto;}
 .grdr_20_2_30_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px minmax(30px, max-content) auto;}
+.grdr_20_2_50_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px minmax(50px, max-content) auto;}
 .grdr_20_2_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px auto;}
 .grdr_20_2_110_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 110px auto;}
 .grdr_20_2_140_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 140px auto;}
@@ -230,6 +231,8 @@
 .grdr_20_200_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 200px 20px minmax(20px, max-content) auto;}
 .grdr_20_2_200_20_20_2_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 200px 20px minmax(20px, max-content) 2px auto;}
 .grdr_20_2_130_20_20_2_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 130px 20px minmax(20px, max-content) 2px auto;}
+.grdr_20_2_115_20_20_2_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 115px 20px minmax(20px, max-content) 2px auto;}
+.grdr_20_2_115_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 115px 20px auto;}
 .grdr_25_a_20_20_a {display:grid; grid-template-rows: minmax(25px, max-content) auto 20px minmax(20px, max-content) auto;}
 .grdr_20_a_20_20_a_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) auto minmax(20px, max-content) minmax(20px, max-content) auto minmax(20px, max-content) minmax(20px, max-content) auto;}
 

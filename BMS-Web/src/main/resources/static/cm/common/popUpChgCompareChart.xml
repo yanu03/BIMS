@@ -17,7 +17,7 @@
 					<w2:column id="OCR_DTM" name="운행일" dataType="text"></w2:column>
 					<w2:column id="OPER_SN" name="운행순번" dataType="text"></w2:column>
 					<w2:column id="NODE_ID" name="노드아이디" dataType="text"></w2:column>
-					<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
+					<w2:column id="ACCRU_LEN" name="노드명" dataType="text"></w2:column>
 					<w2:column id="NODE_SN" name="노드순번" dataType="text"></w2:column>
 					<w2:column id="ALLOC_NO" name="배차번호" dataType="text"></w2:column>
 					<w2:column id="ROUT_ID" name="노선아이디" dataType="text"></w2:column>
@@ -33,6 +33,7 @@
 					<w2:column id="WAY_ASC_NM" name="상행명" dataType="text"></w2:column>
 					<w2:column id="WAY_DESC_NM" name="하행명" dataType="text"></w2:column>
 					<w2:column id="ACCRU_LEN" name="누적길이" dataType="text"></w2:column>
+					<w2:column id="CHG_DIV" name="변경구분" dataType="text"></w2:column>
 				</w2:columnInfo>
 			</w2:dataList>
 			<w2:dataMap baseNode="map" id="dma_sub_search">
@@ -41,8 +42,16 @@
 					<w2:key id="ROUT_ID" name="노선ID" dataType="text"></w2:key>
 					<w2:key id="ROUT_NM" name="노선명" dataType="text"></w2:key>
 					<w2:key id="OPER_SN" name="운행순번" dataType="text"></w2:key>
+					<w2:key id="OPER_DT" name="운행일" dataType="text"></w2:key>
+					<w2:key id="VHC_NO" name="차량번호" dataType="text"></w2:key>
 				</w2:keyInfo>
 			</w2:dataMap>
+			<w2:dataList baseNode="list" repeatNode="map" id="dlt_CHG_CNT" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="CHG_CNT" name="변경운행횟수" dataType="number" defaultValue="0"></w2:column>
+						<w2:column id="OPER_SN" name="운행순번" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
 		</w2:dataCollection>
 		<w2:workflowCollection></w2:workflowCollection>
 	</xf:model>
@@ -59,15 +68,12 @@
 		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
 		
 		dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setJSON(scwin.param.data5, true);
-		//dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setJSON(scwin.param.data6, true);
+		dlt_CHG_CNT.setJSON(scwin.param.data6, true);
 		
-		dma_sub_search.set("ROUT_ID", scwin.param.data);
-		dma_sub_search.set("DAY_DIV", scwin.param.data2);
-		dma_sub_search.set("ROUT_NM", scwin.param.data3);
-		dma_sub_search.set("OPER_SN", scwin.param.data4);
-		
-		
-		dma_sub_search.set("OPER_SN", dma_sub_search.get("OPER_SN")+'회차');
+		dma_sub_search.set("VHC_NO", scwin.param.data);
+		dma_sub_search.set("OPER_DT", scwin.param.data2);
+		dma_sub_search.set("ROUT_NM", " "+scwin.param.data3);
+		dma_sub_search.set("OPER_SN", " "+scwin.param.data4);
 		
 		scwin.DrawChart();		
 	};
@@ -75,6 +81,8 @@
 	scwin.onpageunload = function() {
 		
 	};
+	
+	
 	
 	scwin.sub_AL0203G0P0_submitdone = function(e) {
 	
@@ -89,11 +97,28 @@
 	function date_ascending(a, b) {
        return a - b;
     };
-	
+    
+    scwin.getRandomColor = function(_isAlpha) {
+		  var r = getRand(0, 255),
+		  g = getRand(0, 255),
+		  b = getRand(0, 255),
+		  a = 0.8;
+		
+		  var rgb = _isAlpha ? 'rgba' : 'rgb';
+		  rgb += '(' + r + ',' + g + ',' + b + ',' + a + ')';
+		
+		  return rgb;
+		
+		  // Return random number from in to max
+		  function getRand(min, max) {
+		    if (min >= max) return false;
+		    return ~~(Math.random() * (max - min + 1)) + min;
+		  };
+	};
 
 	var CharData = function(){
 		this.seriesname = {};
-		this.fill = {};
+		this.fill = 'false'; 
 		this.backgroundColor = {};
 		this.borderColor = {};
 		this.data = [];
@@ -101,10 +126,14 @@
 		this.pointBorderWidth = {}; //포인터 width
 		this.tension = {};	//곡선 or 직선
 		this.pointRadius = {};	//포인트 반지름 0일 경우 포인트 안그려짐
+		this.pointHitRadius = {};	//호버 했을때 영역
 	}
+	
+	var color = ["rgba(226,85,81,0.8)","rgba(226,137,85,0.8)","rgba(226,207,83,0.8)","rgba(174,226,85,0.8)","rgba(104,226,85,0.8)","rgba(85,85,137,0.8)"
+					,"rgba(85,226,207,0.8)","rgba(85,174,226,0.8)","rgba(85,104,226,0.8)","rgba(137,85,226,0.8)","rgba(207,85,226,0.8)","rgba(226,85,151,0.8)"
+		];
 
 	scwin.DrawChart = function(){
-		
 		var datasets = new Array();
 		var transData = new Array();
 		var i = 0;
@@ -115,10 +144,11 @@
 		var jsonData = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getAllJSON();
 		//var rlAllJson = dlt_BRT_OPER_ALLOC_RL_NODE_INFO.getAllJSON();
 		
+		
+		//운행계획 데이터 생성
 		var data = new Array();
 		for(var y = 0; y < jsonData.length; y++){
 			var label = jsonData[y].OPER_SN + "회차";
-			//var updDtm = jsonData[y].UPD_DTM;
 			var updDtm = util.getCurrentDate3();
 			var operSn = jsonData[y].OPER_SN;
 			var arrvTm = jsonData[y].ARRV_TM;
@@ -126,51 +156,57 @@
 			var accruLen = jsonData[y].ACCRU_LEN;
 			var nodeType = jsonData[y].NODE_TYPE;
 			
-			if(nodeType=='NT002'){
+			//if(nodeType=='NT002'){
 				var categoryJson = new Object();
 				
 				categoryJson.x = new Date(updDtm+' '+arrvTm);
 				categoryJson.y = accruLen;
 				data.push(categoryJson);
 				
-			}
+			//}
 			
-			if((nodeType=='NT002')&&(arrvTm!=dprtTm)){
+			//if((nodeType=='NT002')&&(arrvTm!=dprtTm)){
 				var categoryJson = new Object();
 			
 				categoryJson.x = new Date(updDtm+' '+dprtTm);
 				categoryJson.y = accruLen;
 				data.push(categoryJson);
-			}
+			//}
 			
 		};
 
 		var charData = new CharData();
 		
 		charData.data = data;
-		charData.label = label+" 운행계획";
+		//charData.label = label+" 운행계획";
+		charData.label = "운행계획";
 		
-		charData.backgroundColor = 'rgba(0, 0, 255, 0.5)';
-		charData.borderColor = 'rgba(0, 0, 255, 0.5)';
+		charData.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+		charData.borderColor = 'rgba(0, 0, 0, 0.7)';
 		charData.borderWidth = 1;
 		charData.pointBorderWidth = 1;
 		charData.tension = 0;
 		charData.pointRadius = 1;
+		charData.pointHitRadius = 20;
 		
 		datasets.push(charData);
 		
+		
+		
+		//변경운행 데이터 생성 한줄
 		var data = new Array();
 		for(var y = 0; y < jsonData.length; y++){
 			var label = jsonData[y].OPER_SN + "회차";
-			//var updDtm = jsonData[y].UPD_DTM;
+			var yAxisID = jsonData[y].NODE_NM;
 			var updDtm = util.getCurrentDate3();
 			var operSn = jsonData[y].OPER_SN;
 			var arrvTm = jsonData[y].CHG_ARRV_TM;
 			var dprtTm = jsonData[y].CHG_DPRT_TM;
 			var accruLen = jsonData[y].ACCRU_LEN;
 			var nodeType = jsonData[y].NODE_TYPE;
+			var chgDiv = jsonData[y].CHG_DIV;
 			
-			if(nodeType=='NT002'){
+			if(arrvTm != '' && dprtTm != ''){
 				var categoryJson = new Object();
 				
 				categoryJson.x = new Date(updDtm+' '+arrvTm);
@@ -179,7 +215,7 @@
 				
 			}
 			
-			if((nodeType=='NT002')&&(arrvTm!=dprtTm)){
+			if(arrvTm != '' && dprtTm != ''){
 				var categoryJson = new Object();
 			
 				categoryJson.x = new Date(updDtm+' '+dprtTm);
@@ -189,20 +225,92 @@
 			
 		};
 		
+		var annotation = {
+			type:"line",
+			borderColor:"red",
+			borderWidth:"1",
+			label:{
+				backgroundColor:'black',
+				content:"변경운행 시점",
+				enabled:true
+			},
+			scaleID:"y",
+			value: "2367"
+		};
+		
 		var charData = new CharData();
 		
 		charData.data = data;
-		charData.label = label+" 변경운행";
+		//charData.label = firstChg +"번째 "+label+" 변경운행";
+		charData.label = "변경운행";
 		
-		charData.backgroundColor = 'rgba(255, 99, 132, 1)';
-		charData.borderColor = 'rgba(255, 99, 132, 1)';
+		charData.backgroundColor = scwin.getRandomColor();
+		charData.borderColor = charData.backgroundColor;
+		
 		charData.borderWidth = 1;
 		charData.pointBorderWidth = 1;
 		charData.tension = 0;
 		charData.pointRadius = 1;
+		charData.pointHitRadius = 20;
 		
 		datasets.push(charData);
-	
+		
+		
+		//변경운행 데이터 생성 여러줄
+		/*var chgCnt = dlt_CHG_CNT.getCellData(0, "CHG_CNT");
+		var firstChg = 1;
+		for(var x = 0; x < chgCnt; x++){
+			var data = new Array();
+			for(var y = 0; y < jsonData.length; y++){
+				var label = jsonData[y].OPER_SN + "회차";
+				var yAxisID = jsonData[y].NODE_NM;
+				var updDtm = util.getCurrentDate3();
+				var operSn = jsonData[y].OPER_SN;
+				var arrvTm = jsonData[y].CHG_ARRV_TM;
+				var dprtTm = jsonData[y].CHG_DPRT_TM;
+				var accruLen = jsonData[y].ACCRU_LEN;
+				var nodeType = jsonData[y].NODE_TYPE;
+				var chgDiv = jsonData[y].CHG_DIV;
+				
+				if(chgDiv == firstChg){
+					if(arrvTm != '' && dprtTm != ''){
+						var categoryJson = new Object();
+						
+						categoryJson.x = new Date(updDtm+' '+arrvTm);
+						categoryJson.y = accruLen;
+						data.push(categoryJson);
+						
+					}
+					
+					if(arrvTm != '' && dprtTm != ''){
+						var categoryJson = new Object();
+					
+						categoryJson.x = new Date(updDtm+' '+dprtTm);
+						categoryJson.y = accruLen;
+						data.push(categoryJson);
+					}
+				
+				}
+			};
+			
+			var charData = new CharData();
+			
+			charData.data = data;
+			//charData.label = firstChg +"번째 "+label+" 변경운행";
+			charData.label = firstChg +"번째 "+" 변경운행";
+			
+			charData.backgroundColor = scwin.getRandomColor();
+			charData.borderColor = charData.backgroundColor;
+			
+			charData.borderWidth = 1;
+			charData.pointBorderWidth = 1;
+			charData.tension = 0;
+			charData.pointRadius = 1;
+			charData.pointHitRadius = 20;
+			
+			datasets.push(charData);
+			firstChg++;
+		}*/
 		
 		var ctx = document.getElementById('myChart');
 		var myChart = new Chart(ctx, {
@@ -240,7 +348,27 @@
 				          unit: 'minute'
 				        }
 				      }]
-			        }
+			        },
+			         plugins: {
+				      autocolors: false,
+				      annotation: {
+				        annotations: {
+					        mode:"horizontal",
+				           	type:"line",
+							borderColor:"red",
+							borderWidth:"1",
+							scaleID: 'y-axis-0',
+							label:{
+								backgroundColor:'black',
+								content:"변경운행 시점",
+								enabled:true
+							},
+							//value:2367
+							yMin:2367,
+							yMax:2367
+				        }
+				      }
+				    }
 			        
 			    }
 			});
@@ -253,8 +381,21 @@
 	 		<xf:group id="popup_header" style="" class="popup_header">
 	 			<xf:group class="gr_search" id="" style="">
 	 				<xf:group class="label" id="" style="">
+	 					<w2:span class="" id="" label="운행일 : " ref=""></w2:span>
+	 					<w2:span class="" id="" label="" ref="data:dma_sub_search.OPER_DT"></w2:span>
+	 				</xf:group>
+	 				<xf:group class="label" id="" style="">
+	 					<w2:span class="" id="" label="노선명 : " ref=""></w2:span>
 	 					<w2:span class="" id="" label="" ref="data:dma_sub_search.ROUT_NM"></w2:span>
+	 				</xf:group>
+	 				<xf:group class="label" id="" style="">
+	 					<w2:span class="" id="" label="차량번호 : " ref=""></w2:span>
+	 					<w2:span class="" id="" label="" ref="data:dma_sub_search.VHC_NO"></w2:span>
+	 				</xf:group>
+	 				<xf:group class="label" id="" style="">
+	 					<w2:span class="" id="" label="운행순번 : " ref=""></w2:span>
 	 					<w2:span class="" id="" label="" ref="data:dma_sub_search.OPER_SN"></w2:span>
+	 					<w2:span class="" id="" label="회차" ref=""></w2:span>
 	 				</xf:group>
 	 			</xf:group>
 	 		</xf:group>
