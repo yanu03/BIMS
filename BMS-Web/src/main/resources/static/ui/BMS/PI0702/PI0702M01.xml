@@ -21,6 +21,7 @@
 						<w2:column id="ST_STTN_NM" name="기점명" dataType="date"></w2:column>
 						<w2:column id="ED_STTN_ID" name="종점ID" dataType="text"></w2:column>
 						<w2:column id="ED_STTN_NM" name="종점명" dataType="number"></w2:column>
+						<w2:column id="DVC_NM" name="장치노선명" dataType="number"></w2:column>
 						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>

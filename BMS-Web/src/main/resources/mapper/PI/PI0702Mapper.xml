@@ -10,6 +10,7 @@
 					,ST_STTN_NM
 					,ED_STTN_ID
 					,ED_STTN_NM
+					,DVC_NM
 					,REMARK
 					
 		FROM		BMS_ROUT_MST
@@ -218,6 +219,7 @@
 			, A.REP_ROUT_NM
 			, A.ROUT_NM
 			, A.WAY_DIV
+			, A.DVC_NM
 			, B.TXT_VAL1
 		FROM BMS_ROUT_MST A
 			LEFT JOIN BMS_DL_CD_INFO B ON A.WAY_DIV = B.DL_CD AND B.CO_CD = 'WAY_DIV'
