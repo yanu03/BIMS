@@ -283,7 +283,7 @@
 		var weekAgoDate = year+month+weekAgoDay;
 		var firstday = year+month+"01";		
 		
-		if(parseInt(weekAgoDay) < 0) {
+		if(parseInt(weekAgoDay) <= 0) {
 			weekAgoDate = firstday;	
 		}			
 		

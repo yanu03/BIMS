@@ -2427,9 +2427,9 @@ com._openPopup = function(url, opt, data) {
 		alwaysOnTop : opt.alwaysOnTop || false,
 		useModalStack : (opt.useModalStack == false) ? false : true,
 		resizable : (opt.resizable == false) ? false : true,
-		useMaximize : opt.useMaximize || false
+		useMaximize : opt.useMaximize || false,
+		useIFrame : opt.useIFrame || false
 	};
-
 	$p.openPopup(url, options);
 };
 

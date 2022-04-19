@@ -50,15 +50,15 @@ public class MO0201Controller extends ControllerSupport {
 	
 	@RequestMapping("/mo/MO0201G3R0")
 	public @ResponseBody Map<String, Object> MO0201G3R0() throws Exception {
-		result.setData("dlt_BMS_ROUT_MST", mo0201Service.MO0201G3R0());
+		result.setData("dlt_BRT_DSPTCH_LOG", mo0201Service.MO0201G3R0());
 		return result.getResult();
 	}
 	
-	@RequestMapping("/mo/MO0201G4R0")
-	public @ResponseBody Map<String, Object> MO0201G4R0() throws Exception {
-		result.setData("dlt_BMS_NODE_MST2", mo0201Service.MO0201G4R0());
+	@RequestMapping("/mo/MO0201P1R0")
+	public @ResponseBody Map<String, Object> MO0201P1R0() throws Exception {
+		result.setData("dlt_BMS_DVC_INFO", mo0201Service.MO0201P1R0());
 		return result.getResult();
-	}
+	}	
 	
 	@RequestMapping("/mo/selectCategory2")
 	public @ResponseBody Map<String, Object> selectCategory() throws Exception {
@@ -85,12 +85,6 @@ public class MO0201Controller extends ControllerSupport {
 		return result.getResult();
 	}	
 	
-	@RequestMapping("/mo/MO0201P0R0")
-	public @ResponseBody Map<String, Object> MO0201P0R0() throws Exception {
-		result.setData("dlt_BRT_OPER_INST_MSG_MST", mo0201Service.MO0201P0R0());
-		return result.getResult();
-	}
-	
 	@RequestMapping("/mo/MO0201SCK1")
 	public @ResponseBody Map<String, Object> MO0201SCK1() throws Exception {		
 		
@@ -104,23 +98,11 @@ public class MO0201Controller extends ControllerSupport {
 		return result.getResult();
 	}
 	
-	@RequestMapping("/mo/MO0201G6R0")
-	public @ResponseBody Map<String, Object> MO0201G6R0() throws Exception {
-		result.setData("dlt_FCLT_COND_LOG", mo0201Service.MO0201G6R0());
-		return result.getResult();
-	}
-	
 	@RequestMapping("/mo/MO0201G7R0")
 	public @ResponseBody Map<String, Object> MO0201G7R0() throws Exception {
 		result.setData("dlt_FCLT_COND_LOG2", mo0201Service.MO0201G7R0());
 		return result.getResult();
 	}
-	
-	@RequestMapping("/mo/MO0201G8R0")
-	public @ResponseBody Map<String, Object> MO0201G8R0() throws Exception {
-		result.setData("dlt_BMS_ROUT_MST2", mo0201Service.MO0201G8R0());
-		return result.getResult();
-	}	
 	
 	@RequestMapping("/mo/selectCommuMap2")
 	public @ResponseBody Map<String, Object> selectCommuMap() throws Exception {

@@ -303,6 +303,77 @@
 		}   	
 	}
 	
+	scwin.save_onclick = function () {
+		
+		if(ledActive){
+		      var idx = PI0801G0.getModifiedIndex().length;
+		   
+		      if (idx == 0) {
+		         if((typeof str == "undefined") || (str.trim() == ""))
+		            str = "저장할 데이터가 없습니다";
+		            com.alert(str);
+		         return false;
+		      }
+		   
+		      if (com.validateGridView(PI0801G0)) {
+		         if (idx > 0) {
+		            var yesno_str = com.strModifiedCnt(PI0801G0) + "의 데이터가 저장됩니다. \n 진행하시겠습니까?";
+		            com.confirm(yesno_str, function(rtn) {
+		               if (rtn) {          
+			              com.setSerialNumberToData(PI0801G0, "SN"); 
+		                  com.saveData(PI0801G0,null,sub_PI0801G0S0);
+		               }
+		            });
+		         }
+		      }		
+		}	
+		
+		if(soundActive){
+		      var idx = PI0801G1.getModifiedIndex().length;
+		   
+		      if (idx == 0) {
+		         if((typeof str == "undefined") || (str.trim() == ""))
+		            str = "저장할 데이터가 없습니다";
+		            com.alert(str);
+		         return false;
+		      }
+		   
+		      if (com.validateGridView(PI0801G1)) {
+		         if (idx > 0) {
+		            var yesno_str = com.strModifiedCnt(PI0801G1) + "의 데이터가 저장됩니다. \n 진행하시겠습니까?";
+		            com.confirm(yesno_str, function(rtn) {
+		               if (rtn) {          
+			              //com.setSerialNumberToData(PI0801G1, "SN"); 
+		                  com.saveData(PI0801G1,null,sub_PI0801G1S0);
+		               }
+		            });
+		         }
+		      }		
+		}
+					
+		if(etcActive){
+		      var idx = PI0801G2.getModifiedIndex().length;
+		   
+		      if (idx == 0) {
+		         if((typeof str == "undefined") || (str.trim() == ""))
+		            str = "저장할 데이터가 없습니다";
+		            com.alert(str);
+		         return false;
+		      }
+		   
+		      if (com.validateGridView(PI0801G1)) {
+		         if (idx > 0) {
+		            var yesno_str = com.strModifiedCnt(PI0801G2) + "의 데이터가 저장됩니다. \n 진행하시겠습니까?";
+		            com.confirm(yesno_str, function(rtn) {
+		               if (rtn) {          
+			              //com.setSerialNumberToData(PI0801G1, "SN"); 
+		                  com.saveData(PI0801G2,null,sub_PI0801G2S0);
+		               }
+		            });
+		         }
+		      }		
+		}			
+		
 	scwin.save_led_onclick = function () {
 		var idx = PI0801G0.getModifiedIndex().length;
 		if (idx == 0) {

@@ -77,6 +77,12 @@ public class MO0201Service extends ServiceSupport{
 		return mo0201Mapper.MO0201G3R0(param);
 	}
 	
+	public List MO0201P1R0() throws Exception {
+		// TODO Auto-generated method stub
+		Map param = getSimpleDataMap("dma_sub_search");
+		return mo0201Mapper.MO0201P1R0(param);
+	}
+	
 	public List selectCategory() throws Exception {
 		// TODO Auto-generated method stub
 		Map param = getSimpleDataMap("dma_search");
@@ -117,10 +123,6 @@ public class MO0201Service extends ServiceSupport{
 		return null;
 	}	
 	
-	public List MO0201P0R0() throws Exception{
-		return mo0201Mapper.MO0201P0R0();
-	}
-	
 	//메시지 전송 소켓
 	public List<Map> MO0201SCK1() throws Exception{
 		
@@ -153,29 +155,14 @@ public class MO0201Service extends ServiceSupport{
 		return null;
 	}	
 	
-	public List MO0201G4R0() throws Exception{
-		Map param = getSimpleDataMap("dma_sub_search2");
-		return mo0201Mapper.MO0201G4R0(param);
-	}
-	
 	public List MO0201G5R0() throws Exception{
 		Map param = getSimpleDataMap("dma_search");
 		return mo0201Mapper.MO0201G5R0(param);
 	}
 	
-	public List MO0201G6R0() throws Exception{
-		Map param = getSimpleDataMap("dma_search");
-		return mo0201Mapper.MO0201G6R0(param);
-	}
-	
 	public List MO0201G7R0() throws Exception{
 		Map param = getSimpleDataMap("dma_search");
 		return mo0201Mapper.MO0201G7R0(param);
-	}
-	
-	public List MO0201G8R0() throws Exception{
-		Map param = getSimpleDataMap("dma_sub_search3");
-		return mo0201Mapper.MO0201G8R0(param);
 	}
 	
 	public List selectCommuMap() throws Exception{
