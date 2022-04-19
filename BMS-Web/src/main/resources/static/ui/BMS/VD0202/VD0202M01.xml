@@ -336,66 +336,69 @@
 			
 			var dvc_kind = dlt_BMS_DVC_INFO.getCellData(i, "DVC_KIND");
 			var dvc_cond = dlt_BMS_DVC_INFO.getCellData(i, "DVC_COND");
-			switch (dvc_kind){
-				case "DK001":
-					imgSrc = "/cm/images/bms/OBE_normal.png";
+			var coordsData = dlt_BMS_DVC_INFO.getCellData(i, "DVC_COORDS");
+						
+			if(coordsData != null && coordsData != "") {						
+				switch (dvc_kind){
+					case "DK001":
+						imgSrc = "/cm/images/bms/OBE_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/OBE_abnormal.png";					
+						break;
+					case "DK002":
+						imgSrc = "/cm/images/bms/drvTerminal_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/drvTerminal_abnormal.png";
+						break;
+					case "DK003":
+						imgSrc = "/cm/images/bms/psgGuide_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/psgGuide_abnormal.png";
+						break;
+					case "DK004":
+						imgSrc = "/cm/images/bms/routMap_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/routMap_abnormal.png";
+						break;
+					case "DK005":
+						imgSrc = "/cm/images/bms/keyPad_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/keyPad_abnormal.png";
+						break;
+					
+					//행선지 정면
+					case "DK006":
+					case "DK007":
+						imgSrc = "/cm/images/bms/desGuide_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/desGuide_abnormal.png";
+						break;
+					//행선지 측면	
+					case "DK008":
+					case "DK009":
+					case "DK012":
+						imgSrc = "/cm/images/bms/desGuide_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/desGuide_abnormal.png";
+						break;
+					//행선지 후면	
+					case "DK013":
+						imgSrc = "/cm/images/bms/desGuide_normal.png";
 					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/OBE_abnormal.png";					
-					break;
-				case "DK002":
-					imgSrc = "/cm/images/bms/drvTerminal_normal.png";
-					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/drvTerminal_abnormal.png";
-					break;
-				case "DK003":
-					imgSrc = "/cm/images/bms/psgGuide_normal.png";
-					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/psgGuide_abnormal.png";
-					break;
-				case "DK004":
-					imgSrc = "/cm/images/bms/routMap_normal.png";
-					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/routMap_abnormal.png";
-					break;
-				case "DK005":
-					imgSrc = "/cm/images/bms/keyPad_normal.png";
-					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/keyPad_abnormal.png";
-					break;
-				
-				//행선지 정면
-				case "DK006":
-				case "DK007":
-					imgSrc = "/cm/images/bms/desGuide_normal.png";
-					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/desGuide_abnormal.png";
-					break;
-				//행선지 측면	
-				case "DK008":
-				case "DK009":
-				case "DK012":
-					imgSrc = "/cm/images/bms/desGuide_normal.png";
-					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/desGuide_abnormal.png";
-					break;
-				//행선지 후면	
-				case "DK013":
-					imgSrc = "/cm/images/bms/desGuide_normal.png";
-				if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/desGuide_abnormal.png";	
-					break;
-				//태그리스	
-				case "DK011":
-					imgSrc = "/cm/images/bms/tag_normal.png";
-					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/tag_abnormal.png";
-					break;				
+							imgSrc = "/cm/images/bms/desGuide_abnormal.png";	
+						break;
+					//태그리스	
+					case "DK011":
+						imgSrc = "/cm/images/bms/tag_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/tag_abnormal.png";
+						break;				
+				}
 			}
 			
-			if (imgSrc != "" || imgSrc != null){
+			if (imgSrc != null && imgSrc != ""){
 				
-				var coordsData = dlt_BMS_DVC_INFO.getCellData(i, "DVC_COORDS");
-				if(coordsData != null || coordsData != "") {
+				if(coordsData != null && coordsData != "") {
 					var coordsSplit = coordsData.split(",");
 					var topCoords = coordsSplit[0];
 					var leftCoords = coordsSplit[1];
@@ -504,6 +507,7 @@
 //	};
 	
 	scwin.sub_VD0202SHI1_submitdone = function(e) {
+		TYPE1.setValue("RR00000002");
 		com.searchGrid(VD0202G0, sub_VD0202G0R0);		
 	};
 	
@@ -534,68 +538,72 @@
 				VD0202G1.setCellClass(i, "DVC_CTR", "hideData");
 				VD0202G1.setCellClass(i, "PK001", "hideData");
 			}
+			
 			var dvc_kind = dlt_BMS_DVC_INFO.getCellData(i, "DVC_KIND");
 			var dvc_cond = dlt_BMS_DVC_INFO.getCellData(i, "DVC_COND");
-			switch (dvc_kind){
-				case "DK001":
-					imgSrc = "/cm/images/bms/OBE_normal.png";
+			var coordsData = dlt_BMS_DVC_INFO.getCellData(i, "DVC_COORDS");
+			
+			if(coordsData != null && coordsData != "") {			
+				switch (dvc_kind){
+					case "DK001":
+						imgSrc = "/cm/images/bms/OBE_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/OBE_abnormal.png";					
+						break;
+					case "DK002":
+						imgSrc = "/cm/images/bms/drvTerminal_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/drvTerminal_abnormal.png";
+						break;
+					case "DK003":
+						imgSrc = "/cm/images/bms/psgGuide_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/psgGuide_abnormal.png";
+						break;
+					case "DK004":
+						imgSrc = "/cm/images/bms/routMap_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/routMap_abnormal.png";
+						break;
+					case "DK005":
+						imgSrc = "/cm/images/bms/keyPad_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/keyPad_abnormal.png";
+						break;
+					
+					//행선지 정면
+					case "DK006":
+					case "DK007":
+						imgSrc = "/cm/images/bms/desGuide_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/desGuide_abnormal.png";
+						break;
+					//행선지 측면	
+					case "DK008":
+					case "DK009":
+					case "DK012":
+						imgSrc = "/cm/images/bms/desGuide_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/desGuide_abnormal.png";
+						break;
+					//행선지 후면	
+					case "DK013":
+						imgSrc = "/cm/images/bms/desGuide_normal.png";
 					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/OBE_abnormal.png";					
-					break;
-				case "DK002":
-					imgSrc = "/cm/images/bms/drvTerminal_normal.png";
-					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/drvTerminal_abnormal.png";
-					break;
-				case "DK003":
-					imgSrc = "/cm/images/bms/psgGuide_normal.png";
-					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/psgGuide_abnormal.png";
-					break;
-				case "DK004":
-					imgSrc = "/cm/images/bms/routMap_normal.png";
-					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/routMap_abnormal.png";
-					break;
-				case "DK005":
-					imgSrc = "/cm/images/bms/keyPad_normal.png";
-					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/keyPad_abnormal.png";
-					break;
-				
-				//행선지 정면
-				case "DK006":
-				case "DK007":
-					imgSrc = "/cm/images/bms/desGuide_normal.png";
-					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/desGuide_abnormal.png";
-					break;
-				//행선지 측면	
-				case "DK008":
-				case "DK009":
-				case "DK012":
-					imgSrc = "/cm/images/bms/desGuide_normal.png";
-					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/desGuide_abnormal.png";
-					break;
-				//행선지 후면	
-				case "DK013":
-					imgSrc = "/cm/images/bms/desGuide_normal.png";
-				if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/desGuide_abnormal.png";	
-					break;
-				//태그리스	
-				case "DK011":
-					imgSrc = "/cm/images/bms/tag_normal.png";
-					if(dvc_cond == "DC021")
-						imgSrc = "/cm/images/bms/tag_abnormal.png";
-					break;				
+							imgSrc = "/cm/images/bms/desGuide_abnormal.png";	
+						break;
+					//태그리스	
+					case "DK011":
+						imgSrc = "/cm/images/bms/tag_normal.png";
+						if(dvc_cond == "DC021")
+							imgSrc = "/cm/images/bms/tag_abnormal.png";
+						break;				
+				}
 			}
 			
-			if (imgSrc != "" || imgSrc != null){
+			if (imgSrc != null && imgSrc != ""){
 				
-				var coordsData = dlt_BMS_DVC_INFO.getCellData(i, "DVC_COORDS");
-				if(coordsData != null || coordsData != "") {
+				if(coordsData != null && coordsData != "") {
 					var coordsSplit = coordsData.split(",");
 					var topCoords = coordsSplit[0];
 					var leftCoords = coordsSplit[1];

@@ -152,7 +152,7 @@
 			</xf:submission>
 			<xf:submission id="sub_PI0801G1S0" ref='data:json,["dlt_BMS_VOC_INFO","dma_AUDIO_INFO"]' target="" action="/pi/PI0801G1S0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				processMsg="저장중입니다..." ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI0801SHI1" ref="" target="data:json,dlt_searchitem" action="/pi/PI0801SHI1" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
@@ -181,9 +181,6 @@
 	var soundActive = 0;
 	var etcActive = 0;	
 	
-	//해야할 남은것들!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	//지점음성 레이아웃 뭉개지는거 고쳐야함
-	//업로드 이벤트같은 로직 추가안했음
 	scwin.onpageload = function() {
 		var autoOptions = {
 			Main : { grid : PI0801G0, frm : PI0801F0, srchSbm : sub_PI0801G0R0, savSbm : sub_PI0801G0S0, keySbm : sub_PI0801G0K0,
@@ -426,7 +423,7 @@
 		            com.confirm(yesno_str, function(rtn) {
 		               if (rtn) {          
 			              //com.setSerialNumberToData(PI0801G1, "SN"); 
-		                  com.saveData(PI0801G1,null,sub_PI0801G0S1);
+		                  com.saveData(PI0801G1,null,sub_PI0801G1S0);
 		               }
 		            });
 		         }
@@ -449,7 +446,7 @@
 		            com.confirm(yesno_str, function(rtn) {
 		               if (rtn) {          
 			              //com.setSerialNumberToData(PI0801G1, "SN"); 
-		                  com.saveData(PI0801G2,null,sub_PI0801G0S2);
+		                  com.saveData(PI0801G2,null,sub_PI0801G2S0);
 		               }
 		            });
 		         }
