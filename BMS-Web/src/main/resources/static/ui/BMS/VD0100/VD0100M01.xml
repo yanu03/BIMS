@@ -315,6 +315,7 @@
 	 * 같은 레벨의 노트에 메뉴를 추가한다.
 	 */
 	scwin.equalLevel = function() {
+		debugger;
 		var focusedRowIndex = VD0100G0.getFocusedRealRowIndex();
 		var parentMenuCd = dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "PARENT_ID");
 		var rowIndexArr = dlt_BMS_DVC_INFO.getMatchedIndex("PARENT_ID", parentMenuCd, true, 0, dlt_BMS_DVC_INFO.getTotalRow());
@@ -441,7 +442,6 @@
 		
 		var parentId = dlt_BMS_DVC_INFO.getCellData(row, "PARENT_ID");
 		
-		debugger;
 		if(parentId != null && parentId != ''){
 			PARENT_YN.setValue("Y");
 			PARENT_ID10.setDisabled(false);
@@ -579,7 +579,7 @@
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column2"
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column3"
 										value="차량ID" blockSelect="false" displayMode="label" sortable="true" class="">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column4"
@@ -625,7 +625,7 @@
 									</w2:column>
 									<w2:column id="ORG_ID" blockSelect="false" readOnly="true" style="height:20px;" width=""
 										inputType="select" displayMode="label" textAlign="left" chooseOption="false" chooseOptionLabel="" checkboxLabelFormatter=""
-										allOption="" ref="" userData1="M">
+										allOption="" ref="" userData1="">
 										<w2:choices>
 											<w2:itemset nodeset="data:dlt_searchitem2">
 												<w2:label ref="PARTNER_NM"></w2:label>

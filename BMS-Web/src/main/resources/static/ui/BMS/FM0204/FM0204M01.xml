@@ -409,7 +409,7 @@
 				FM0204G0.setCellClass(i, "FCLT_COND", "cond_abnormal");
 			}
 			//정상
-			else if (dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND") == "FC020") {
+			else if (dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(i, "FCLT_COND") == "FC020") {
 				FM0204G0.setCellClass(i, "FCLT_COND", "cond_normal");
 			}
 		}
@@ -575,7 +575,16 @@
 				}
 				break;
 			case 'PK010':
-				T0_PK010.setDisabled(false);
+				T0_PK010_AUTO.setDisabled(false);
+				T0_PK010_DIS.setDisabled(false);
+				T0_PK010_REC.setDisabled(false);
+				T0_PK010_DIS.setOpacity(1);
+				T0_PK010_REC.setOpacity(1);
+				if(autoYn[i] == 'Y'){
+					T0_PK010_AUTO.setValue(1);
+				}else{
+					T0_PK010_AUTO.setValue(0);
+				}
 				break;
 			case 'PK011':
 				LOG_LEVEL.setDisabled(false);

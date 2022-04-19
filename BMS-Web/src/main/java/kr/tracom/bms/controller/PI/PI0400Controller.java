@@ -35,4 +35,10 @@ public class PI0400Controller extends ControllerSupport{
 		result.setData("dlt_BMS_LIVING_LOG", PI0400Service.PI0400G2R0());
 		return result.getResult();
 	}	
+	
+	@RequestMapping("/pi/selectIntgInfo")
+	public @ResponseBody Map<String, Object> selectIntgInfo() throws Exception {
+		result.setData("dlt_BMS_INTG_MST", PI0400Service.selectIntgInfo());
+		return result.getResult();
+	}
 }

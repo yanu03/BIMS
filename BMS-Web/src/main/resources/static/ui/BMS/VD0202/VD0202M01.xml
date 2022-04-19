@@ -642,11 +642,21 @@
 	//15분마다 장치상태 리로드함
 	var period = 1000 * 60 * 15;
 	setInterval(reloadDvcCond, period);
-
+	
+	//openMenu클릭 이벤트
+	scwin.moveCtrlClick = function() {
+		var dvcId = dlt_BMS_DVC_INFO.getCellData(VD0202G1.getFocusedRowIndex(), "DVC_ID");
+		if(dvcId == null || dvcId == ''){
+			com.alert("차내장치를 선택해주세요.");
+		}else{
+			scwin.openMenu("차내장치 상태 및 제어","/ui/BMS/VD0204/VD0204M01.xml", "MN00040202",dvcId);		
+			var bac= null;
+		}
+	};
+	
 	//오픈메뉴
 	scwin.openMenu = function(menuNm, url, menuCode, paramObj, menuType) {
 		// client에서 url 숨기기 메뉴일 경우에는 새 창으로 띄우기 적용 
-		debugger;
 		if (url == "/") {
 			var url = document.location.href + "/";
 			window.open(url, "", "width=1200, height=700, left=450, top=100");
@@ -663,10 +673,9 @@
 				url = "/" + url;
 			}
 			url = gcm.CONTEXT_PATH + url;
-			
 			if ((typeof paramObj !== "undefined") && (paramObj !== null)) {
 				data = {};
-				data.param = paramObj;
+				data.paramObj = paramObj;
 			} else {
 				data = {};
 			}
@@ -698,7 +707,7 @@
 					title : menuNm,
 					dataObject : {
 						type : "json", 
-						name : "paramData", 
+						name : "param", 
 						data : data
 					}
 				};
@@ -738,16 +747,15 @@
 		}
 	};
 	
-	//openMenu클릭 이벤트
-	scwin.moveCtrlClick = function() {
-		var dvcId = dlt_BMS_DVC_INFO.getCellData(VD0202G1.getFocusedRowIndex(), "DVC_ID");
-		if(dvcId == null || dvcId == ''){
-			com.alert("차내장치를 선택해주세요.");
-		}else{
-			scwin.openMenu("차내장치 상태 및 제어","/ui/BMS/VD0204/VD0204M01.xml", "MN00040202");		
-			var bac= null;
+	
+	scwin.displayFormatter = function(obj){
+		if(obj == 'Y'){
+			return '예'
+		}else if(obj == 'N'){
+			return '아니요'
 		}
-	};
+	}
+	
 	
 	]]></script>
 	</head>
@@ -779,7 +787,7 @@
 					<xf:group class="search" id="" style="">
 						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false" 
 							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE2_onviewchange" id="TYPE2" optionOrder="false"
-							ref="data:dma_search.CONTENT2" class="search_type_100" style="width: 200px;" submenuSize="auto" textAlign="center" chooseOptionLabel="-전체-">
+							ref="data:dma_search.CONTENT2" class="search_type_100" style="width: 150px;" submenuSize="auto" textAlign="center" chooseOptionLabel="-전체-">
 							<xf:choices>
 								<xf:itemset nodeset="data:dlt_searchitem2">
 									<xf:label ref="VHC_KIND"></xf:label>
@@ -936,8 +944,11 @@
 											id="column1" value="장치종류" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
-											id="column9" value="리셋" blockSelect="false" displayMode="label">
+											id="column18" value="제어여부" blockSelect="false" displayMode="label">
 										</w2:column>
+										<!-- <w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
+											id="column9" value="리셋" blockSelect="false" displayMode="label">
+										</w2:column> -->
 										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:25px"
 											id="column2" value="전원(ON/OFF)" blockSelect="false" displayMode="label">
 										</w2:column>
@@ -1002,9 +1013,12 @@
 										<w2:column removeBorderStyle="false" width="125" inputType="select" style="height:25px" 
 											id="DVC_KIND" value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="145" inputType="button" style="height:25px"
-											id="PK001" value="리셋" blockSelect="false" displayMode="label">
+										<w2:column removeBorderStyle="false" width="145" inputType="text" style="height:25px"
+											id="CTR_YN" value="" blockSelect="false" displayMode="label" displayFormatter="scwin.displayFormatter">
 										</w2:column>
+										<!-- <w2:column removeBorderStyle="false" width="145" inputType="button" style="height:25px"
+											id="PK001" value="리셋" blockSelect="false" displayMode="label">
+										</w2:column> -->
 										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
 											id="PK002" value="" blockSelect="false" displayMode="label">
 										</w2:column>

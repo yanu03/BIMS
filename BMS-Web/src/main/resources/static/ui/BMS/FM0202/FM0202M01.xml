@@ -514,7 +514,6 @@
 	//오픈메뉴
 	scwin.openMenu = function(menuNm, url, menuCode, paramObj, menuType) {
 		// client에서 url 숨기기 메뉴일 경우에는 새 창으로 띄우기 적용 
-		
 		if (url == "/") {
 			var url = document.location.href + "/";
 			window.open(url, "", "width=1200, height=700, left=450, top=100");
@@ -531,9 +530,9 @@
 				url = "/" + url;
 			}
 			url = gcm.CONTEXT_PATH + url;
-			
 			if ((typeof paramObj !== "undefined") && (paramObj !== null)) {
-				data = paramObj;
+				data = {};
+				data.paramObj = paramObj;
 			} else {
 				data = {};
 			}
@@ -611,7 +610,7 @@
 		if(fcltId == null || fcltId == ''){
 			com.alert("시설물을 선택해주세요.");
 		}else{
-			scwin.openMenu("시설물 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00060204", fcltId);		
+			scwin.openMenu("시설물 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040202",fcltId);		
 			var bac= null;		
 		}
 	}

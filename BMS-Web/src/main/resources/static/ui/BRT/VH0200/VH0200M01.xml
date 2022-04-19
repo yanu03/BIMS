@@ -942,10 +942,10 @@
 						</xf:group>
 						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
 							style="width:120px; margin-right: 10px; float: left;margin-top: 3px;" id="F_DATE_VH0200" renderType="component" renderDiv="true"
-							calendarValueType="yearMonthDate" ref="data:dma_search.F_DATE_VH0200" ev:onviewchange="scwin.F_DATE_VH0200_onviewchange">
+							calendarValueType="yearMonthDate" ref="data:dma_search.F_DATE_VH0200" ev:onviewchange="scwin.F_DATE_VH0200_onviewchange" placeholder="yyyymmdd">
 						</w2:inputCalendar>
 						<w2:span label="~" style="float: left;margin-right: 10px;margin-top: 5px;" id=""></w2:span>
-						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false" placeholder="yyyymmdd"
 							style="width: 120px;float: left;margin-top: 3px;" id="L_DATE_VH0200" renderType="component" renderDiv="true" calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE_VH0200" ev:onviewchange="scwin.L_DATE_VH0200_onviewchange">
 						</w2:inputCalendar>
 						<xf:group id="" style="margin-left: 10px;" class="radio">
