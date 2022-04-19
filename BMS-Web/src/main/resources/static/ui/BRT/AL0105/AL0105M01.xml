@@ -141,7 +141,6 @@
 	
 	//그리드1 검색
 	scwin.btn_sub_move = function() {
-		debugger;
 		if(com.isEmpty(dma_sub_search.get("CONTENT1"))==false){
 			com.gridMove(AL0105G1, "DRV_ID,DRV_NM", dma_sub_search.get("CONTENT1"), AL0105G1.getFocusedRowIndex());
 		}
@@ -355,16 +354,16 @@
 					</xf:group>
 					<xf:group></xf:group>
 					<xf:group id="" class="gr_sub_header" style="">
-							<xf:group class="gr_sub_search" id="" style="">
-								<xf:group class="label" id="" style="">
-									<w2:span class="" id="" label="찾기"></w2:span>
-								</xf:group>
-								<xf:group class="search" id="" style="">
-									<xf:input id="search_sub_input" class="search_input" style="width:auto;" ref="data:dma_sub_search.CONTENT1" placeholder="운전자ID 또는 운전자명"></xf:input>
-								</xf:group>
-								<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
+						<xf:group class="gr_sub_search" id="" style="">
+							<xf:group class="label" id="" style="">
+								<w2:span class="" id="" label="찾기"></w2:span>
 							</xf:group>
+							<xf:group class="search" id="" style="">
+								<xf:input id="search_sub_input" class="search_input" style="width:auto;" ref="data:dma_sub_search.CONTENT1" placeholder="운전자ID 또는 운전자명"></xf:input>
+							</xf:group>
+							<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 						</xf:group>
+					</xf:group>
 					<xf:group id="" class="pgm_detail2" style="">
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
 							checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_DRV_MST" disabledScrollHidden="" editModeEvent=""

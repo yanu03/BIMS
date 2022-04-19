@@ -23,10 +23,12 @@
 					<w2:columnInfo>
 						<w2:column id="OCR_DTM" name="발생일시" dataType="date"></w2:column>
 						<w2:column id="CLOSE_DTM" name="종료일시" dataType="date"></w2:column>
+						<w2:column id="INCDNT_RES_ID" name="돌발대응ID" dataType="text"></w2:column>
 						<w2:column id="INCDNT_TYPE" name="돌발유형" dataType="text"></w2:column>
 						<w2:column id="INCDNT_RES_TYPE" name="돌발대응유형" dataType="text"></w2:column>
 						<w2:column id="PROG_DIV" name="진행구분" dataType="text"></w2:column>
 						<w2:column id="INCDNT_SPC_HIS" name="돌발상세내역" dataType="text"></w2:column>
+						<w2:column id="REMARK" name="돌발대응내용" dataType="text"></w2:column>
 						<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
 						<w2:column id="LINK_NM" name="발생링크" dataType="text"></w2:column>
 						<w2:column id="UPD_DTM" name="수집일시" dataType="date"></w2:column>
@@ -49,8 +51,8 @@
 						<w2:key id="TYPE" name="name1" dataType="text"></w2:key>
 						<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
 						<w2:key id="USE_YN" name="name3" dataType="text"></w2:key>
-						<w2:key id="CLCT_DT" name="발생일시" dataType="text"></w2:key>
-						<w2:key id="CLOSE_DT" name="종료일시" dataType="text"></w2:key>
+						<w2:key id="F_DATE" name="발생일시" dataType="text"></w2:key>
+						<w2:key id="L_DATE" name="종료일시" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_grgSearchItem" saveRemovedData="true">
@@ -85,6 +87,12 @@
 					];
 		com.setCommonDtl(codeOptions);
 		
+		dma_search.F_DATE = util.getCurrentDate2();
+		F_DATE.setValue(util.getCurrentDate2());
+		
+		dma_search.L_DATE = util.getCurrentDate2();
+		L_DATE.setValue(util.getCurrentDate2());
+		
 		$p.executeSubmission(sub_MO0302G0R0);
 		$p.executeSubmission(sub_MO0302SHI0);
 
@@ -110,10 +118,14 @@
 		} else if (info.newValue == "INCDNT_TYPE") {
 			search_input.hide();
 			acb_autoChoiceBox.setNodeSet("data:dlt_grgSearchItem", "INCDNT_TYPE", "INCDNT_TYPE");
+			var codeOptions = [ {code : "INCDNT_TYPE", compID : "acb_autoChoiceBox" } ];
+			com.setCommonDtl(codeOptions);
 			acb_autoChoiceBox.show("");
 		} else if (info.newValue == "PROG_DIV") {
 			search_input.hide();
 			acb_autoChoiceBox.setNodeSet("data:dlt_grgSearchItem", "PROG_DIV", "PROG_DIV");
+			var codeOptions = [ {code : "PROG_DIV", compID : "acb_autoChoiceBox" } ];
+			com.setCommonDtl(codeOptions);
 			acb_autoChoiceBox.show("");
 		}
 	};
@@ -121,6 +133,79 @@
 	/*scwin.MO0302G0_onrowindexchange = function(row, oldRow) {
 		com.changeSingleGrid(MO0302G0, row, oldRow);
 	};*/
+	
+	scwin.F_DATE_onviewchange = function(info) {
+		var ldate = L_DATE.getValue();
+		var fdate = F_DATE.getValue();
+		calendar_radio.setValue("DIRECT");
+		if (fdate > ldate && ldate != ""){
+			com.messagBox("alert", "지정할 수 없는 날짜입니다.",scwin.checkCLoseF(info));
+		}
+	};
+	
+	scwin.L_DATE_onviewchange = function(info) {
+		var ldate = L_DATE0.getValue();
+		var fdate = F_DATE.getValue();
+		calendar_radio.setValue("DIRECT");
+		if (fdate > ldate){
+			com.messagBox("alert", "지정할 수 없는 날짜입니다.",scwin.checkCLoseL(info));
+		}
+	};
+	
+	scwin.checkCLoseF = function(info) {
+		F_DATE.setValue(info.oldValue);
+	}
+	
+	scwin.checkCLoseL = function(info) {
+		L_DATE.setValue(info.oldValue);
+	}	
+	
+	//라디오 버튼에 따라 날짜 설정
+	scwin.calendar_radio_onviewchange = function(info) {
+		var date = new Date();
+		var year = date.getFullYear().toString();
+		var month = (date.getMonth()+1).toString();
+		var day = date.getDate().toString();
+		var zero = 0;
+		
+		//글자수 맞추기
+		if(day.length == 1){
+			day = zero + day;
+		}
+		
+		if(month.length == 1){
+			month = zero + month;
+		}
+		
+		var weekAgoDay = parseInt(day) - 7;
+		var todaysDate = year+month+day;
+		var weekAgoDate = year+month+weekAgoDay;
+		var firstday = year+month+"01";		
+		
+		if(parseInt(weekAgoDay) <= 0) {
+	         weekAgoDate = firstday;   
+	      }
+		
+		if(info.value == "DIRECT") {
+			F_DATE.setValue();
+			L_DATE.setValue();
+		}
+		
+		else if(info.value == "TODAY") {
+			F_DATE.setValue(todaysDate);
+			L_DATE.setValue(todaysDate);	
+		}
+		
+		else if(info.value == "WEEK") {
+			F_DATE.setValue(weekAgoDate);
+			L_DATE.setValue(todaysDate);			
+		}
+		
+		else if(info.value == "MONTH") {
+			F_DATE.setValue(firstday);
+			L_DATE.setValue(todaysDate);				
+		}
+	};
 ]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -164,19 +249,50 @@
 								</w2:itemset>
 							</w2:choices>
 						</w2:autoComplete>
-						<xf:group style="" id="">
-							<w2:span label="발생일시 : " style="float: left;margin-left: 15px; margin-top:2px;" id=""></w2:span>
-							<w2:inputCalendar footerDiv="false" id="" style="width: 150px;height: 23px;float: left;margin-left: 10px;"
-								renderDiv="true" focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component"
-								ref="data:dma_search.CLCT_DT">
-							</w2:inputCalendar>
-							<w2:span label="~" style="float: left;margin-right: 5px;margin-left: 5px;" id=""></w2:span>
-							<w2:inputCalendar footerDiv="false" id="" style="width: 150px;height: 23px;float: left;margin-right: 5px;"
-								renderDiv="true" focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component"
-								ref="data:dma_search.CLOSE_DT">
-							</w2:inputCalendar>
-							
+						<xf:group class="label" id="" style="margin-left: 10px;">
+							<w2:span class="" id="" label="발생일시"></w2:span>
 						</xf:group>
+						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+							style="width:120px; margin-right: 10px; float: left;margin-top: 3px;" id="F_DATE" renderType="component" renderDiv="true"
+							calendarValueType="yearMonthDate" ref="data:dma_search.F_DATE" ev:onviewchange="scwin.F_DATE_onviewchange">
+						</w2:inputCalendar>
+						<w2:span label="~" style="float: left;margin-right: 10px;margin-top: 5px;" id=""></w2:span>
+						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+							style="width: 120px;float: left;margin-top: 3px;" id="L_DATE" renderType="component" renderDiv="true" 
+							calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange">
+						</w2:inputCalendar>
+						<xf:group id="" style="margin-left: 10px;" class="radio">
+							<xf:select1 id="calendar_radio" ref="" selectedIndex="1" cols="" appearance="full"
+								style="margin-light: 10px;min-width: 200px;" rows="1" ev:onviewchange="scwin.calendar_radio_onviewchange">
+								<xf:choices>
+									<xf:item>
+										<xf:label><![CDATA[직접입력]]></xf:label>
+										<xf:value><![CDATA[DIRECT]]></xf:value>
+									</xf:item>
+									<xf:item>
+										<xf:label><![CDATA[금일]]></xf:label>
+										<xf:value><![CDATA[TODAY]]></xf:value>
+									</xf:item>
+									<xf:item>
+										<xf:label><![CDATA[일주일]]></xf:label>
+										<xf:value><![CDATA[WEEK]]></xf:value>
+									</xf:item>
+									<xf:item>
+										<xf:label><![CDATA[1개월]]></xf:label>
+										<xf:value><![CDATA[MONTH]]></xf:value>
+									</xf:item>
+								</xf:choices>
+							</xf:select1>
+						</xf:group>
+						<!-- <w2:inputCalendar footerDiv="false" id="" style="width: 150px;height: 23px;float: left;margin-left: 10px;"
+							renderDiv="true" focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component"
+							ref="data:dma_search.F_DATE">
+						</w2:inputCalendar>
+						<w2:span label="~" style="float: left;margin-right: 5px;margin-left: 5px;" id=""></w2:span>
+						<w2:inputCalendar footerDiv="false" id="" style="width: 150px;height: 23px;float: left;margin-right: 5px;"
+							renderDiv="true" focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component"
+							ref="data:dma_search.CLOSE_DT">
+						</w2:inputCalendar> -->
 					</xf:group>
 					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
@@ -199,13 +315,16 @@
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:22px;" id="column17" value="돌발대응ID"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="104" inputType="text" style="height:22px;" id="column11" value="차량번호"
+										blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="136" inputType="text" style="height:22px;" id="column16" value="발생일시"
 										blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="136" inputType="text" style="height:22px;" id="column15" value="종료일시"
-										blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="104" inputType="text" style="height:22px;" id="column11" value="차량번호"
 										blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="64" inputType="text" style="height:22px;" id="column14" value="돌발유형"
@@ -217,30 +336,36 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:22px;" id="column49" value="진행여부"
 										blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="250" inputType="text" style="height:22px;" id="column12" value="돌발상세내역"
+									<w2:column removeBorderStyle="false" width="500" inputType="text" style="height:22px;" id="column12" value="돌발상세내용"
 										blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="300" inputType="text" style="height:22px;" id="column10" value="발생링크"
+									<w2:column removeBorderStyle="false" width="500" inputType="text" style="height:22px;" id="column12" value="돌발대응내용"
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="300" inputType="text" style="height:22px;" id="column10" value="발생링크명"
 										blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="136" inputType="text" style="height:22px;" id="column9" value="갱신일시"
 										blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:22px;" id="column3" value="비고"
+									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:22px;" id="column3" value="비고"
 										blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
+									<w2:column removeBorderStyle="false" width="136" inputType="text" style="height:20px" id="INCDNT_RES_ID" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="104" inputType="text" style="height:20px" id="VHC_NO" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="136" inputType="text" style="height:20px" id="OCR_DTM" value=""
 										blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="186" inputType="text" style="height:20px" id="CLOSE_DTM" value=""
 										blockSelect="false" displayMode="label" userData1="M">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="104" inputType="text" style="height:20px" id="VHC_NO" value=""
-										blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="64" inputType="select" style="height:20px" id="INCDNT_TYPE" value=""
 										blockSelect="false" displayMode="label" userData1="M">
@@ -254,13 +379,16 @@
 									<w2:column removeBorderStyle="false" width="103" inputType="text" style="height:20px" id="INCDNT_DETAIL" value=""
 										blockSelect="false" displayMode="label" textAlign="left">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="103" inputType="text" style="height:20px" id="REMARK" value=""
+										blockSelect="false" displayMode="label" textAlign="left">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="144" inputType="text" style="height:20px" id="LINK_NM" value=""
 										blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="UPD_DTM" value=""
 										blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK" value=""
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="" value=""
 										blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>

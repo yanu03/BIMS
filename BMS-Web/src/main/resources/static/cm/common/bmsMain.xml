@@ -106,7 +106,7 @@
 	
 	//오픈메뉴
 	scwin.openMenu = function(menuNm, url, menuCode, paramObj, menuType) {
-
+		debugger;
 		// client에서 url 숨기기 메뉴일 경우에는 새 창으로 띄우기 적용 
 		if (url == "/") {
 			var url = document.location.href + "/";

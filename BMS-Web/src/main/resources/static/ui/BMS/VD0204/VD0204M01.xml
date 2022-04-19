@@ -275,7 +275,7 @@
 							{code : "ROUT_TYPE", compID : "VD0204G0:ROUT_TYPE"},
 							{code : "VHC_TYPE", compID : "VD0204G0:VHC_TYPE"},
 							{code : "VHC_FUEL", compID : "VD0204G0:VHC_FUEL"},
-							{code : "DVC_KIND", compID : "VD0204G1:DVC_KIND"},
+							{code : "DVC_KIND", compID : "autoChoiceBox2, VD0204G1:DVC_KIND"},
 							{code : "INST_LOC", compID : "VD0204G1:INST_LOC"},
 							{code : "PARAM_KIND"},
 							{code : "LOG_LEVEL", compID : "LOG_LEVEL"}
@@ -721,12 +721,27 @@
 						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
 							chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
 							ev:onviewchange="" id="autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT3" search="start"
-							selectedData="" style="" submenuSize="auto" textAlign="center" useKeywordHighlight="false" visibleRowNum="" nextTabByEnter=""
+							selectedData="" style="width: 150px;" submenuSize="auto" textAlign="center" useKeywordHighlight="false" visibleRowNum="" nextTabByEnter=""
 							disableEdit="">
 							<w2:choices>
 								<w2:itemset nodeset="data:dlt_vhcItem">
 									<w2:label ref="VHC_NO"></w2:label>
 									<w2:value ref="VHC_ID"></w2:value>
+								</w2:itemset>
+							</w2:choices>
+						</w2:autoComplete>
+						<xf:group class="label" id="" style="margin-left:10px;">
+							<w2:span class="" id="" label="장치종류" style=""></w2:span>
+						</xf:group>
+						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
+							chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
+							ev:onviewchange="" id="autoChoiceBox2" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT4" search="start"
+							selectedData="" style="width: 150px;" submenuSize="auto" textAlign="center" useKeywordHighlight="false" visibleRowNum="" nextTabByEnter=""
+							disableEdit="">
+							<w2:choices>
+								<w2:itemset nodeset="data:dlt_dvcKindItem">
+									<w2:label ref="DVC_KIND"></w2:label>
+									<w2:value ref="DVC_KIND"></w2:value>
 								</w2:itemset>
 							</w2:choices>
 						</w2:autoComplete>

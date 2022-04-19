@@ -86,6 +86,7 @@
 			DATE_FORMAT(PLAY_ED_DT, '%Y%m%d') PLAY_ED_DT
 			
 	from 	sbrt.BMS_VOC_INFO
+	where	VOC_DIV = 'VD001'
 </select>
 
 <select id="PI0207G2R0" resultType="Map" parameterType="Map">

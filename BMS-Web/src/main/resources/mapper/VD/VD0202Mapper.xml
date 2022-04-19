@@ -22,7 +22,7 @@
 				AND B.VHC_KIND = #{CONTENT2}
 			</if>
 			<if test="CONTENT3 != null and CONTENT3 != ''">
-				AND	B.VHC_NO LIKE CONCAT('%', #{CONTENT3}, '%')
+				AND	(B.VHC_NO LIKE CONCAT('%', #{CONTENT3}, '%') OR B.VHC_ID LIKE CONCAT('%', #{CONTENT3}, '%'))
 			</if>	
 		</where>
 		<!-- ORDER BY		A.REP_ROUT_ID, A.ROUT_ID -->

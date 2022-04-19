@@ -52,6 +52,7 @@
 				</w2:dataMap>
 				<w2:dataMap baseNode="map" id="dma_AUDIO_INFO">
 					<w2:keyInfo>
+						<w2:key id="VOC_ID" name="음성ID" dataType="text"></w2:key>
 						<w2:key id="AUDIO_NM" name="오디오명" dataType="text"></w2:key>
 						<w2:key id="AUDIO_EXTENSION" name="확장자" dataType="text"></w2:key>
 					</w2:keyInfo>
@@ -84,7 +85,7 @@
 			</xf:submission>
 			<xf:submission id="sub_PI0201G0S0" ref='data:json,["dlt_BMS_VOC_INFO","dma_AUDIO_INFO"]' target="" action="/pi/PI0201G0S0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="저장중입니다..." ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				processMsg="저장중입니다..." ev:submit="" ev:submitdone="scwin.sub_PI0201G0S0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI0201SHI0" ref="" target="data:json,dlt_searchitem" action="/pi/PI0201SHI0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
@@ -105,23 +106,24 @@
 	$p.executeSubmission(sub_PI0201SHI0);
 	
 	scwin.upload0_onInputValueChange = function(fileName) {
+		
 		// 확장자 추출
 		var lastDot = fileName.lastIndexOf('.'); 
 		var fileExtension = fileName.substring(lastDot+1, fileName.length);
 		
 		var fileNameIndex = fileName.lastIndexOf('\\');
 		//파일명
-		
-		
 		if (fileExtension == "wav" || fileExtension == "tts"){
 			var real_fileName = fileName.substring(fileNameIndex+1, fileName.length);
+			var vocId = dlt_BMS_VOC_INFO.getCellData(PI0201G0.getFocusedRowIndex(), "VOC_ID");
 			
-			dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
-			dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
+			//dma_AUDIO_INFO.set('VOC_ID', vocId);
+			//dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
+			//dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
 			
-			dlt_BMS_VOC_INFO.setCellData(PI0201G0.getFocusedRowIndex(), 'VOC_PATH', '/fileUpload/up/'+dma_AUDIO_INFO.get('AUDIO_NM'));
+			dlt_BMS_VOC_INFO.setCellData(PI0201G0.getFocusedRowIndex(), 'VOC_TMP_PATH', com.getUploadPath()+real_fileName);
+			dlt_BMS_VOC_INFO.setCellData(PI0201G0.getFocusedRowIndex(), 'VOC_PATH', com.getAudioPath()+real_fileName);
 			VOC_PATH.submit();
-		
         }else{
 			com.alert("wav, tts 확장자만 업로드 할 수 있습니다.");
 			VOC_PATH.reset()
@@ -132,7 +134,10 @@
 	scwin.upload0_ondone = function(retXml) {
 		var time_audio = document.getElementById("audio0");
 		
+		
 		var path = dlt_BMS_VOC_INFO.getCellData(PI0201G0.getFocusedRowIndex(), "VOC_PATH");
+		
+		//미저장(up) 음성 미리듣기
 		$p.$("#audio0").attr("src", path);
 		
 		time_audio.addEventListener('loadedmetadata', function() {
@@ -148,6 +153,7 @@
 	scwin.PI0201G0_onrowindexchange = function(row, oldRow) {
 		
 		var audioType = dlt_BMS_VOC_INFO.getCellData(PI0201G0.getFocusedRowIndex(), "PLAY_TYPE");
+		var extention = "";
 		if (audioType == "WAV"){
 			//VOC_PATH.setDisabled(false);
 			KR_TTS.setDisabled(true);
@@ -155,7 +161,8 @@
 			playTTS.setDisabled(true);
 			btn_basicPhrase.setDisabled(true);
 			playTTS2.setDisabled(true);
-			btn_basicPhrase2.setDisabled(true);							
+			btn_basicPhrase2.setDisabled(true);
+			extention = "wav";
 		} else if (audioType == "TTS"){
 			//VOC_PATH.setDisabled(true);
 			KR_TTS.setDisabled(false);
@@ -163,10 +170,16 @@
 			playTTS.setDisabled(false);
 			btn_basicPhrase.setDisabled(false);
 			playTTS2.setDisabled(false);
-			btn_basicPhrase2.setDisabled(false);							
+			btn_basicPhrase2.setDisabled(false);
+			extention = "tts";
 		}
-		var path = dlt_BMS_VOC_INFO.getCellData(PI0201G0.getFocusedRowIndex(), "VOC_PATH");	
-		$p.$("#audio0").attr("src", path);			
+		var path = dlt_BMS_VOC_INFO.getCellData(PI0201G0.getFocusedRowIndex(), "VOC_PATH") 
+			+ dlt_BMS_VOC_INFO.getCellData(PI0201G0.getFocusedRowIndex(), "VOC_ID") + "." + extention;	
+		
+		//저장된 음성 미리듣기
+		$p.$("#audio0").attr("src", path);
+		//반복재생 제거
+		$p.$("#audio0").attr("loop", false);
 		
 	};	
 	
@@ -180,6 +193,10 @@
 	
 	scwin.sub_PI0201G0K0_submitdone = function(e) {
 		var insertIndex = com.addGrid(PI0201G0,dma_SEQ_BMS_VOC_INFO_0,"VOC_ID","VOC_NM");
+	};
+	
+	scwin.sub_PI0201G0S0_submitdone = function(e) {
+		com.saveDone(PI0201G0, sub_PI0201G0R0);
 	};
 	
 	// 음성유형 TTS, WAV 변경 시 음성파일 업로드 disable 처리
@@ -415,10 +432,10 @@
 										value="재생기간" blockSelect="false" displayMode="label" class="req">
 									</w2:column>
 									<w2:column width="250" style="height:20px;" inputType="text" id="column6" value="한국어TTS"
-										blockSelect="false" class="req">
+										blockSelect="false" class="">
 									</w2:column>
 									<w2:column width="250" style="height:20px;" inputType="text" id="column7" value="영어TTS"
-										blockSelect="false" class="req">
+										blockSelect="false" class="">
 									</w2:column>
 									<w2:column width="250" style="height:20px;" inputType="text" id="column8" value="화면표시문구(한글)"
 										blockSelect="false" class="req">
@@ -470,10 +487,10 @@
 										blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.playDateDisFormatter">
 									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="KR_TTS" value=""
-										blockSelect="false" displayMode="label" readOnly="true" displayFormatter="" userData1="M" textAlign="left">
+										blockSelect="false" displayMode="label" readOnly="true" displayFormatter="" userData1="" textAlign="left">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="EN_TTS" value=""
-										blockSelect="false" displayMode="label" displayFormatter="" userData1="M" textAlign="left">
+										blockSelect="false" displayMode="label" displayFormatter="" userData1="" textAlign="left">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="SCR_TXT" value=""
 										blockSelect="false" displayMode="label" displayFormatter="" userData1="M" textAlign="left">
@@ -606,7 +623,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" style="vertical-align: top;" class="w2tb_th req">
+								<xf:group tagname="th" style="vertical-align: top;" class="w2tb_th">
 									한국어 TTS
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
@@ -632,7 +649,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" style="vertical-align: top;" class="w2tb_th req">
+								<xf:group tagname="th" style="vertical-align: top;" class="w2tb_th">
 									영어 TTS
 									<w2:attributes>
 										<w2:scope>row</w2:scope>

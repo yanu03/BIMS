@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import kr.tracom.bms.domain.PI0203.PI0203Mapper;
 import kr.tracom.cm.support.ServiceSupport;
+import kr.tracom.util.CommonUtil;
 
 @Service
 public class PI0203Service extends ServiceSupport{
@@ -16,6 +18,13 @@ public class PI0203Service extends ServiceSupport{
 	@Autowired
 	private PI0203Mapper PI0203Mapper;
 		
+	@Value("${fileupload.up.directory}")
+	private String UPLOAD_DIR;
+	
+	@Value("${fileupload.audio.directory}")
+	private String UPLOAD_AUDIO_DIR;
+
+
 	public List<Map> PI0203G0R0() throws Exception{
 		Map param = getSimpleDataMap("dma_search");
 		return PI0203Mapper.PI0203G0R0(param);
@@ -44,8 +53,9 @@ public class PI0203Service extends ServiceSupport{
 				iCnt += PI0203Mapper.PI0203G0I0(data);
 			} else if (rowStatus.equals("U")) {
 				uCnt += PI0203Mapper.PI0203G0U0(data);
-				
-                doMoveFile("up/", "audio/", AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("AUDIO_NM").toString());
+				if(CommonUtil.notEmpty(AUDIO_INFO.get("AUDIO_NM"))&&CommonUtil.notEmpty(AUDIO_INFO.get("VOC_ID"))) {
+					doMoveFile(UPLOAD_DIR, UPLOAD_AUDIO_DIR, AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
+				}
 			} else if (rowStatus.equals("D")) {
 				dCnt += PI0203Mapper.PI0203G0D0(data);
 			}

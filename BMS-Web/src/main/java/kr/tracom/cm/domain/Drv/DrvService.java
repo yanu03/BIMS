@@ -15,9 +15,11 @@ public class DrvService extends ServiceSupport {
 	@Autowired
 	private DrvMapper drvMapper;
 
-	public List<Map<String, Object>> selectDrvList() throws Exception {
+	public List<Map<String, Object>> selectAllocDrvList() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
-		return drvMapper.selectDrvList(map);
+		String temp[] = map.get("DRV_ID").toString().replace("[","").replace("]","").replace(" ","").split(",");
+		map.put("DRV_ID", temp);
+		return drvMapper.selectAllocDrvList(map);
 	}
 	
 	/*public List<Map<String, Object>> selectRoutList() throws Exception {

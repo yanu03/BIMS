@@ -347,6 +347,7 @@
 						<w2:key id="WAY_DIV" name="상하행구분" dataType="text"></w2:key>
 						<w2:key id="OPER_SN_LIST" name="운행순번목록" dataType="text"></w2:key>
 						<w2:key id="BRT_TARGET_COR_LIST" name="코스목록" dataType="text"></w2:key>
+						<w2:key id="COR_ID" name="코스ID" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataMap baseNode="map" id="dma_save">
@@ -354,6 +355,12 @@
 						<w2:key id="TYPE" name="유형" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
+				<w2:dataList id="dlt_COR_CNT" baseNode="list" saveRemovedData="true" repeatNode="map" ev:oncelldatachange="">
+					<w2:columnInfo>
+						<w2:column id="COR_ID" name="코스아이디" dataType="text"></w2:column>
+						<w2:column id="CNT" name="노선카운트" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
 			<xf:submission id="sub_AL0202G0R0" ref="data:json,dma_search" target="data:json,dlt_BRT_OPER_PL_MST"
@@ -388,6 +395,10 @@
 			</xf:submission>
 			
 			<xf:submission id="sub_operPlanList" ref='data:json,dma_sub_search' target='data:json,[{"id":"dlt_BRT_OPER_PL_ROUT_INFO_ASC"},{"id":"dlt_BRT_OPER_PL_ROUT_INFO_DESC"}]' action="/operPlan/selectOperPlanRout2" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
+				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_selectCorCnt" ref='' target='data:json,dlt_COR_CNT' action="/AL/selectCorCnt" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -475,6 +486,7 @@
 			com.searchGrid(AL0202G0, sub_AL0202G0R0);
 		});
 		com.executeSubmission(sub_AL0202SHI0);
+		com.executeSubmission(sub_selectCorCnt);
 	};
 
 	scwin.onpageunload = function() {
@@ -1956,14 +1968,31 @@
 		for(var i = 0; i < rowCntArr.length; i++) {
 			rowIndex += rowCnt;
 			rowCnt =  rowCntArr[i].CNT;
+			var underLine = true;
+			var underLineCnt = 1;
+			var oldCorId;
 			for(var j = 0; j < rowCnt; j++) {
 				var index = rowIndex+j;
 				for(var x = 4; x < columnNmArr2.length; x++) {
 					var color = dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(index, "COR_COLOR");
-
 					AL0202G1.setCellColor(i*2, columnNmArr2[x]+'_'+j, color);
 					AL0202G1.setCellColor(i*2+1, columnNmArr2[x]+'_'+j, color);
+					
+					var corId = dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(index, "COR_ID");
+					var corCnt = dlt_COR_CNT.getMatchedJSON("COR_ID", corId)[0].CNT;
+					
+					if(x == 4 && underLine == true && underLineCnt == 1){
+						//$('#mf_tac_layout_contents_MN00020202_body_AL0202G1_cell_0_2').children().css({'text-decoration':'underline', 'text-underline-position':'under'});
+						//AL0202G1.setCellColor(i*2, columnNmArr2[x]+'_'+j, 'red');
+						underLine = false;
+						underLineCnt++;
+					}else if(x == 4 && underLineCnt == corCnt){
+						underLine = true;
+						underLineCnt = 1;
+					}
 				}
+				
+				
 			}
 
 		}

@@ -69,13 +69,14 @@
 				</w2:dataMap>
 				<w2:dataMap baseNode="map" id="dma_AUDIO_INFO">
 					<w2:keyInfo>
+						<w2:key id="VOC_ID" name="음성ID" dataType="text"></w2:key>
 						<w2:key id="AUDIO_NM" name="오디오명" dataType="text"></w2:key>
 						<w2:key id="AUDIO_EXTENSION" name="확장자" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>				
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
-			<xf:submission id="sub_PI0203G0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_VOC_INFO" action="/pi/PI0203G0R0"
+			<xf:submission id="sub_PI0203G0R0" ref='data:json,["dma_search","dma_AUDIO_INFO"]' target='data:json,dlt_BMS_VOC_INFO' action="/pi/PI0203G0R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI0203G0R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -122,11 +123,13 @@
 		
 		if (fileExtension == "wav" || fileExtension == "tts"){
 			var real_fileName = fileName.substring(fileNameIndex+1, fileName.length);
+			var vocId = dlt_BMS_VOC_INFO.getCellData(PI0203G0.getFocusedRowIndex(), "VOC_ID");
 			
+			dma_AUDIO_INFO.set('VOC_ID', vocId+"."+fileExtension);
 			dma_AUDIO_INFO.set('AUDIO_NM', real_fileName);
 			dma_AUDIO_INFO.set('AUDIO_EXTENSION', fileExtension);
 			
-			dlt_BMS_VOC_INFO.setCellData(PI0203G0.getFocusedRowIndex(), 'VOC_PATH', '/fileUpload/up/'+dma_AUDIO_INFO.get('AUDIO_NM'));
+			dlt_BMS_VOC_INFO.setCellData(PI0203G0.getFocusedRowIndex(), 'VOC_PATH', com.getUploadPath()+dma_AUDIO_INFO.get('AUDIO_NM'));
 			VOC_PATH.submit();
 		
 			var path = dlt_BMS_VOC_INFO.getCellData(PI0203G0.getFocusedRowIndex(), "VOC_PATH");
@@ -136,6 +139,20 @@
 			com.alert("wav, tts 확장자만 업로드 할 수 있습니다.");
 			VOC_PATH.reset()
 		}
+	};
+	
+	scwin.upload0_ondone = function(retXml) {
+		var time_audio = document.getElementById("audio0");
+		
+		var path = dlt_BMS_VOC_INFO.getCellData(PI0203G0.getFocusedRowIndex(), "VOC_PATH");
+		//미저장(up) 음성 미리듣기
+		$p.$("#audio0").attr("src", path);
+		
+		time_audio.addEventListener('loadedmetadata', function() {
+			var duration = parseInt(time_audio.duration);
+			dlt_BMS_VOC_INFO.setCellData(PI0203G0.getFocusedRowIndex(), "PLAY_TM", duration);
+		});				
+				
 	};
 	
 	scwin.PI0203G0_onrowindexchange = function(row, oldRow) {
@@ -161,8 +178,13 @@
 		}	
 		
 		//오디오 세팅
-		var path = dlt_BMS_VOC_INFO.getCellData(PI0203G0.getFocusedRowIndex(), "VOC_PATH");		
+		
+		var path = dlt_BMS_VOC_INFO.getCellData(PI0203G0.getFocusedRowIndex(), "VOC_PATH") 
+			+ dlt_BMS_VOC_INFO.getCellData(PI0203G0.getFocusedRowIndex(), "VOC_ID") + "." + dlt_BMS_VOC_INFO.getCellData(PI0203G0.getFocusedRowIndex(), "PLAY_TYPE");
+		
+		//var path = dlt_BMS_VOC_INFO.getCellData(PI0203G0.getFocusedRowIndex(), "VOC_PATH");		
 		$p.$("#audio0").attr("src", path);	
+		$p.$("#audio0").attr("loop", false);	
 	};	
 	
 	scwin.sub_PI0203G0R0_submitdone = function(e) {
@@ -248,18 +270,7 @@
 	};	
 	
 	
-	scwin.VOC_PATH_ondone = function(retXml) {
-		var time_audio = document.getElementById("audio0");
-		
-		var path = dlt_BMS_VOC_INFO.getCellData(PI0203G0.getFocusedRowIndex(), "VOC_PATH");
-		$p.$("#audio0").attr("src", path);
-		
-		time_audio.addEventListener('loadedmetadata', function() {
-			var duration = parseInt(time_audio.duration);
-			dlt_BMS_VOC_INFO.setCellData(PI0203G0.getFocusedRowIndex(), "PLAY_TM", duration);
-		});				
-				
-	};
+	
 	
 	scwin.PLAY_ST_DT_onviewchange = function(info) {
 		
@@ -370,7 +381,7 @@
 										blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="250" inputType="text" style="height:20px" id="column39" value="한국어 TTS"
-										blockSelect="false" displayMode="label" class="req">
+										blockSelect="false" displayMode="label" class="">
 									</w2:column>
 									<w2:column width="250" style="height:20px;" inputType="text" id="column28" value="화면 표시 문구(한글)" blockSelect="false">
 									</w2:column>
@@ -407,7 +418,7 @@
 										blockSelect="false" displayMode="label" readOnly="true">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="255" inputType="text" style="height:20px" id="KR_TTS" value="" blockSelect="false"
-										displayMode="label" displayFormatter="" textAlign="left" userData1="M">
+										displayMode="label" displayFormatter="" textAlign="left" userData1="">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="116" inputType="text" style="height:20px" id="SCR_TXT" value=""
 										blockSelect="false" displayMode="label" readOnly="true" textAlign="left">
@@ -525,13 +536,13 @@
 									</w2:attributes>
 									<w2:upload imageStyle="position:absolute;vertical-align:middle;word-wrap:break-word"
 										inputStyle="vertical-align:middle;word-wrap:break-word" style="width: 272px;height: 23px;" id="VOC_PATH" inputClass=""
-										ev:onInputValueChange="scwin.upload0_onInputValueChange" ev:ondone="scwin.VOC_PATH_ondone" accept=".wav,.tts" title="" type=""
+										ev:onInputValueChange="scwin.upload0_onInputValueChange" ev:ondone="scwin.upload0_ondone" accept=".wav,.tts" title="" type=""
 										disabled="" class="">
 									</w2:upload>
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" style="vertical-align: top;" class="w2tb_th req">
+								<xf:group tagname="th" style="vertical-align: top;" class="w2tb_th">
 									한국어 TTS
 									<w2:attributes>
 										<w2:scope>row</w2:scope>

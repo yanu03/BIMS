@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,13 @@ public class SI0300Service extends ServiceSupport{
 	
 	@Autowired
 	FTPHandler ftpHandler;
+	
+	@Value("${fileupload.up.directory}")
+	private String UPLOAD_DIR;
+
+	@Value("${fileupload.employee.directory}")
+	private String UPLOAD_EMPLOYEE_DIR;
+
 	
 	public List SI0300G0R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
@@ -62,7 +70,7 @@ public class SI0300Service extends ServiceSupport{
 							&&(data.get("DRV_ID").equals(data.get("FILE_NM"))==false)) {
 						
 						
-						doMoveFile("up/","common/employee/",data.get("FILE_NM").toString(),data.get("DRV_ID").toString()+".png");
+						doMoveFile(UPLOAD_DIR, UPLOAD_EMPLOYEE_DIR,data.get("FILE_NM").toString(),data.get("DRV_ID").toString()+".png");
 						
 						
 			    		/*  2020-09-29 추가
@@ -70,8 +78,8 @@ public class SI0300Service extends ServiceSupport{
 			    		 */
 						String imgFileName = data.get("DRV_ID").toString();
 						String pngExtName = ".png";
-						doCopyFile("common/employee/", "common/employee/", imgFileName+pngExtName, imgFileName+".jpg");
-						doCopyFile("common/employee/", "common/employee/", imgFileName+pngExtName, imgFileName+"_CERTI.jpg");
+						doCopyFile(UPLOAD_EMPLOYEE_DIR, UPLOAD_EMPLOYEE_DIR, imgFileName+pngExtName, imgFileName+".jpg");
+						doCopyFile(UPLOAD_EMPLOYEE_DIR, UPLOAD_EMPLOYEE_DIR, imgFileName+pngExtName, imgFileName+"_CERTI.jpg");
 						
 						//ftp sync
 						ftpHandler.uploadSI0300();
@@ -81,7 +89,7 @@ public class SI0300Service extends ServiceSupport{
 					uCnt += si0300Mapper.SI0300G0U0(data);
 					if((data.get("FILE_NM")!=null)&&(data.get("FILE_NM").toString().isEmpty()==false)
 							&&(data.get("DRV_ID").equals(data.get("FILE_NM"))==false)) {
-						doMoveFile("up/","common/employee/",data.get("FILE_NM").toString(),data.get("DRV_ID").toString()+".png");
+						doMoveFile(UPLOAD_DIR,UPLOAD_EMPLOYEE_DIR,data.get("FILE_NM").toString(),data.get("DRV_ID").toString()+".png");
 						
 						
 						/*  2020-09-29 추가
@@ -89,8 +97,8 @@ public class SI0300Service extends ServiceSupport{
 			    		 */
 						String imgFileName = data.get("DRV_ID").toString();
 						String pngExtName = ".png";
-						doCopyFile("common/employee/", "common/employee/", imgFileName+pngExtName, imgFileName+".jpg");
-						doCopyFile("common/employee/", "common/employee/", imgFileName+pngExtName, imgFileName+"_CERTI.jpg");
+						doCopyFile(UPLOAD_EMPLOYEE_DIR, UPLOAD_EMPLOYEE_DIR, imgFileName+pngExtName, imgFileName+".jpg");
+						doCopyFile(UPLOAD_EMPLOYEE_DIR, UPLOAD_EMPLOYEE_DIR, imgFileName+pngExtName, imgFileName+"_CERTI.jpg");
 						
 						//ftp sync
 						ftpHandler.uploadSI0300();

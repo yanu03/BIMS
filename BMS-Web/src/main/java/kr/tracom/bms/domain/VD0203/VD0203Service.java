@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,12 @@ public class VD0203Service extends ServiceSupport {
 	
 	@Autowired
 	private VD0203Mapper VD0203Mapper;
+	
+	@Value("${fileupload.up.directory}")
+	private String UPLOAD_DIR;
+	
+	@Value("${fileupload.firmware.directory}")
+	private String UPLOAD_FIRM_DIR;
 
 	public List VD0203G0R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
@@ -63,7 +70,7 @@ public class VD0203Service extends ServiceSupport {
 					if((data.get("FILE_NM")!=null)&&(data.get("FILE_NM").toString().isEmpty()==false)
 							&&(data.get("DVC_ID").equals(data.get("FILE_NM"))==false))
 						{
-							doMoveFile("up/", "firmware/", data.get("FILE_NM").toString(), data.get("DVC_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString());
+							doMoveFile(UPLOAD_DIR, UPLOAD_FIRM_DIR, data.get("FILE_NM").toString(), data.get("DVC_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString());
 							data.put("FILE_NM", data.get("DVC_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString());
 						}
 					

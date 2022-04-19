@@ -77,7 +77,7 @@
 			<w2:workflowCollection></w2:workflowCollection>
 			<xf:submission id="sub_PI0400G0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_WEAT_INFO" action="/pi/PI0400G0R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI0400G0R0_submitdone" ev:submiterror="" abortTrigger="">
+				processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_PI0400G0R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI0400G1R0" ref="data:json,dma_search" target="data:json,dlt_BMS_ATMO_INFO" action="/pi/PI0400G1R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"

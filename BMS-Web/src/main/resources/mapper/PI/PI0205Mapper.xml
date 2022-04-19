@@ -20,6 +20,7 @@
 		    ON R.ROUT_ID = V.ROUT_ID
 		<where>
 			<!-- VOC_DIV = 'VD001'-->
+			R.USE_YN = 'Y'
 			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
 				AND R.ROUT_ID LIKE CONCAT('%',#{CONTENT},'%') || R.ROUT_NM LIKE CONCAT('%',#{CONTENT},'%') 
 			</if>

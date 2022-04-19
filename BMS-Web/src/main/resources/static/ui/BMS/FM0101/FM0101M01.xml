@@ -229,17 +229,16 @@
 	}
 	
 	scwin.insertPopupData = function(obj) {
+		debugger;
 		var dLength = obj.length;
 		for (i = 0; i < dLength; i++) {
 			var data = dlt_BMS_FCLT_INFO.getMatchedIndex("FCLT_KIND", obj[i].FCLT_KIND, true);
-			if (data.length == 1) {
-				obj[i].FCLT_ID = dma_subsearch.get("FCLT_ID");
-				obj[i].NODE_ID = dma_subsearch.get("NODE_ID");
-				obj[i].MNG_ID = dlt_BMS_FCLT_INFO.getCellData(FM0101G1.getFocusedRowIndex(), "MNG_ID");
-				obj[i].chk = "0";
-				var idx = dlt_BMS_FCLT_PARAM_CFG_INFO.insertRow();
-				dlt_BMS_FCLT_PARAM_CFG_INFO.setRowJSON(idx, obj[i], true);
-			}
+			obj[i].FCLT_ID = dma_subsearch.get("FCLT_ID");
+			obj[i].NODE_ID = dma_subsearch.get("NODE_ID");
+			obj[i].MNG_ID = dlt_BMS_FCLT_INFO.getCellData(FM0101G1.getFocusedRowIndex(), "MNG_ID");
+			obj[i].chk = "0";
+			var idx = dlt_BMS_FCLT_PARAM_CFG_INFO.insertRow();
+			dlt_BMS_FCLT_PARAM_CFG_INFO.setRowJSON(idx, obj[i], true);
 		}
 		com.setFocusedCell(FM0101G2, "FCLT_KIND");
 		
@@ -462,7 +461,7 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
 										value="비고" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
+									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
 										value="5" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
@@ -470,7 +469,7 @@
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
 										value="" blockSelect="false" displayMode="label" sortable="false">
-									</w2:column>
+									</w2:column> -->
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody2">
@@ -493,7 +492,7 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="image" style="height:20px;" id="5"
+									<!-- <w2:column removeBorderStyle="false" width="70" inputType="image" style="height:20px;" id="5"
 										value="" blockSelect="false" displayMode="label" imageSrc="/cm/images/bms/AIRTUBE_normal.png" imageHeight="30" imageWidth="30" imageClickFunction="">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="image" style="height:20px" id="6"
@@ -501,7 +500,7 @@
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id=""
 										value="" blockSelect="false" displayMode="label">
-									</w2:column>
+									</w2:column> -->
 								</w2:row>
 							</w2:gBody>
 							<w2:footer id="footer1" style="">

@@ -75,11 +75,17 @@
 	
 </select>
 
-<select id="FM0100SHI1" resultType="Map">
+<!-- <select id="FM0100SHI1" resultType="Map">
 	SELECT			ORG_ID
 					,ORG_NM
 	FROM	  		BMS_ORG_MST
 	WHERE			ORG_DIV = 'OD008'
+</select> -->
+
+<select id="FM0100SHI1" resultType="Map">
+	SELECT			PARTNER_ID
+					,PARTNER_NM
+	FROM	  		BMS_PARTNER_MST
 </select>
 
 <select id="FM0100SHI2" resultType="Map">

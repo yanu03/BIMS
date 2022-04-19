@@ -235,6 +235,7 @@
 		ON A.REP_ROUT_ID = F.REP_ROUT_ID AND A.ALLOC_NO = F.ALLOC_NO
 		LEFT JOIN BRT_DAY_DRV_ALLOC_INFO H
 		ON F.REP_ROUT_ID = H.REP_ROUT_ID AND F.ALLOC_NO = H.ALLOC_NO  
+		
 	<where>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(REP_ROUT_ID)">
 			A.REP_ROUT_ID = #{REP_ROUT_ID}
@@ -242,20 +243,26 @@
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(DAY_DIV)">
 			AND A.DAY_DIV = #{DAY_DIV}
 		</if>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_OPERDATE)">
-			AND B.OPER_DT BETWEEN #{F_OPERDATE} AND #{L_OPERDATE} AND H.OPER_DT BETWEEN #{F_OPERDATE} AND #{L_OPERDATE}
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE)">
+			AND B.OPER_DT BETWEEN #{F_DATE} AND #{L_DATE} AND H.OPER_DT BETWEEN #{F_DATE} AND #{L_DATE}
 		</if>
 	</where>
-	<!--  WHERE
-		A.REP_ROUT_ID = #{REP_ROUT_ID}
-	AND 
-		A.DAY_DIV = #{DAY_DIV}
-	AND
-		B.OPER_DT BETWEEN #{F_OPERDATE} AND #{L_OPERDATE}-->
+	
+	<!-- <where>
+		<if test="REP_ROUT_ID != 'all' and REP_ROUT_ID != null and REP_ROUT_ID != ''">
+			A.REP_ROUT_ID = #{REP_ROUT_ID}
+		</if>
+		<if test="DAY_DIV != 'all' and DAY_DIV != null and DAY_DIV != ''">
+			AND A.DAY_DIV = #{DAY_DIV}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE)">
+			AND B.OPER_DT BETWEEN #{F_DATE} AND #{L_DATE} AND H.OPER_DT BETWEEN #{F_DATE} AND #{L_DATE}
+		</if>
+	</where> -->
 	GROUP BY
-		B.OPER_DT, A.ALLOC_NO
+		A.REP_ROUT_ID,A.ALLOC_NO, B.OPER_DT
 	ORDER BY
-		B.OPER_DT, A.ALLOC_NO
+		B.OPER_DT, A.REP_ROUT_ID, A.DAY_DIV, A.ALLOC_NO
 </select>
 
 </mapper>

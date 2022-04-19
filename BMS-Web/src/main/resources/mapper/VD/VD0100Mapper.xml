@@ -3,7 +3,7 @@
 
 <mapper namespace="kr.tracom.bms.domain.VD0100.VD0100Mapper">
 
-<select id="VD0100G0R0" resultType="Map">
+<!-- <select id="VD0100G0R0" resultType="Map">
 	SELECT 			A.VHC_ID
 					,A.COMP_ID
 					,B.COMP_NM
@@ -42,7 +42,7 @@
 			VHC_ID LIKE CONCAT('%',#{CONTENT},'%') 
 		</if>
 	</where>
-</select>
+</select> -->
 	
 <select id="VD0100SHI0" resultType="Map">
 	SELECT			VHC_ID
@@ -51,14 +51,14 @@
 </select>
 	
 <select id="VD0100SHI1" resultType="Map">
-	SELECT			ORG_ID
-					,ORG_NM
-	FROM	  		BMS_ORG_MST
-	WHERE			ORG_DIV = 'OD008'
+	SELECT			PARTNER_ID
+					,PARTNER_NM
+	FROM	  		BMS_PARTNER_MST
 </select>	
 	
-<select id="VD0100G1R0" resultType="Map">
+<select id="VD0100G0R0" resultType="Map">
 	SELECT 			A.VHC_ID
+					,F.VHC_NO
 					,A.DVC_ID
 					,A.ORG_ID
 					,A.DVC_KIND
@@ -68,9 +68,6 @@
 					,A.PARENT_ID
 					,A.DVC_IP
 					,A.MNG_ID	
-<!-- 					,A.DVC_TYPE
-					,A.DEV_SERIAL_NO
-					,A.MODEL_NM -->
 					,A.USE_YN
 					,A.CTR_YN
 					,A.CLSFCTN_ID
@@ -91,15 +88,17 @@
 	LEFT JOIN		BMS_DL_CD_INFO E
 	ON				A.INST_LOC = E.DL_CD
 	AND				E.CO_CD = 'INST_LOC'
+	LEFT JOIN	 	BMS_VHC_MST F
+	ON				A.VHC_ID = F.VHC_ID
 	
-	WHERE			A.VHC_ID = #{VHC_ID}
+
 </select>
 
-<select id="VD0100G1K0" resultType="Map">
+<select id="VD0100G0K0" resultType="Map">
 	SELECT CONCAT('DV', LPAD(NEXTVAL(SEQ_BMS_DVC_INFO_0), 8, '0')) AS 'SEQ'
 </select>
 
-<insert id="VD0100G1I0" parameterType="Map">
+<insert id="VD0100G0I0" parameterType="Map">
 	INSERT INTO		BMS_DVC_INFO	
 					(
 						VHC_ID
@@ -125,7 +124,7 @@
 	VALUES			(
 						#{VHC_ID}
 						,#{DVC_ID}
-						,#{ORG_ID}
+						,#{PARTNER_ID}
 						,#{DVC_KIND}
 						,#{DVC_COORDS}
 						,#{INST_LOC}
@@ -148,10 +147,10 @@
 						
 </insert>
 
-<update id="VD0100G1U0" parameterType="Map">
+<update id="VD0100G0U0" parameterType="Map">
 	UPDATE			BMS_DVC_INFO
 	SET				VHC_ID = #{VHC_ID}
-					,ORG_ID = #{ORG_ID}
+					,ORG_ID = #{PARTNER_ID}
 					,DVC_KIND = #{DVC_KIND}
 					,DVC_COORDS = #{DVC_COORDS}
 					,INST_LOC = #{INST_LOC}
@@ -169,14 +168,14 @@
 	WHERE			DVC_ID = #{DVC_ID}							 	
 </update>
 
-<delete id="VD0100G1D0" parameterType="Map">
+<delete id="VD0100G0D0" parameterType="Map">
 	DELETE FROM 	BMS_DVC_INFO
 	WHERE			DVC_ID = #{DVC_ID}
 </delete>
 
 
 <!-- plf 테이블에 삽입 20211018 jh -->
-<insert id="VD0100G1I2" parameterType="Map">
+<insert id="VD0100G0I2" parameterType="Map">
 	INSERT INTO PLF_IMP_DEV_MST (
 								  IMP_ID
 								, IMP_NM
@@ -217,7 +216,7 @@
 </insert>
 
 <!-- plf 테이블 업데이트 20211018 jh -->
-<update id="VD0100G1U2" parameterType="Map">
+<update id="VD0100G0U2" parameterType="Map">
 	UPDATE
 		PLF_IMP_DEV_MST
 	SET
@@ -236,7 +235,7 @@
 </update>
 
 <!-- plf 테이블 삭제 20211018 jh -->
-<delete id="VD0100G1D2" parameterType="Map">
+<delete id="VD0100G0D2" parameterType="Map">
 	DELETE FROM PLF_IMP_DEV_MST
 	WHERE IMP_ID = #{MNG_ID};
 	

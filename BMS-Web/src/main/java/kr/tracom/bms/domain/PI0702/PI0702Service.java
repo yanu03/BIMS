@@ -76,9 +76,11 @@ public class PI0702Service extends ServiceSupport {
 					//예약해야할노선리스트			
 					for(Map<String, Object> route : list_param) {
 						
-						String routeId = String.valueOf(map.get("ROUT_ID"));
+						String routeId = String.valueOf(route.get("ROUT_ID"));
 						Map<String, Object> routeInfo= pi0702Mapper.selectRouteInfo(routeId);
-						route.put( "TXT_VAL1", String.valueOf(routeInfo.get("TXT_VAL1")) ); //U or D //list_param 의 값을 변경
+						if(route!=null && routeInfo!=null) {
+							route.put( "TXT_VAL1", String.valueOf(routeInfo.get("TXT_VAL1")) ); //U or D //list_param 의 값을 변경
+						}
 
 						//local temp -> local vehicle 폴더로 복사
 						ftpHandler.reserveDst(routeInfo, dlist);
