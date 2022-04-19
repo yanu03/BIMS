@@ -20,7 +20,7 @@ public interface MO0201Mapper {
 	
 	public List MO0201G3R0(Map param);
 	
-	public List MO0201G4R0(Map param);
+	public List MO0201P1R0(Map param);
 	
 	public List selectCategory(Map param);
 	
@@ -32,11 +32,7 @@ public interface MO0201Mapper {
 	
 	public List MO0201G5R0(Map param);
 	
-	public List MO0201G6R0(Map param);
-	
 	public List MO0201G7R0(Map param);
-	
-	public List MO0201G8R0(Map param);
 	
 	public List selectCommuMap();
 	

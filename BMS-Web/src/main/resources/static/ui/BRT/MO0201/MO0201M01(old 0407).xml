@@ -39,9 +39,6 @@
 						<w2:column id="EVT_TYPE" name="이벤트타입" dataType="text"></w2:column>
 						<w2:column id="NEXT_NODE_TYPE" name="다음노드유형" dataType="text"></w2:column>
 						<w2:column id="NODE_NM" name="이전노드명" dataType="text"></w2:column>
-						<w2:column id="VHC_KIND" name="차량종류" dataType="text"></w2:column>
-						<w2:column id="EVT_YN" name="이벤트 표시" dataType="text" defaultValue="1"></w2:column>
-						<w2:column id="DSPTCH_YN" name="디스패치 표시" dataType="text" defaultValue="1"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_search">
@@ -56,9 +53,6 @@
 						<w2:key id="VHC_ID" name="차량ID" dataType="text"></w2:key>
 						<w2:key id="ROUT_ID" name="노선ID" dataType="text"></w2:key>
 						<w2:key id="NODE_ID" name="노드ID" dataType="text"></w2:key>
-						<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
-						<w2:key id="COR_ID" name="코스ID" dataType="text"></w2:key>
-						<w2:key id="ROUT_IDS" name="노선IDS" dataType="text"></w2:key>						
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_repRoutItem" saveRemovedData="true">
@@ -155,6 +149,30 @@
 						<w2:column id="PHASE_NO" name="현시번호" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_VHC_MST" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="VHC_ID" name="차량아이디" dataType="text"></w2:column>
+						<w2:column id="COMP_ID" name="운수사아이디" dataType="text"></w2:column>
+						<w2:column id="AREA" name="권역" dataType="text"></w2:column>
+						<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
+						<w2:column id="CHAS_NO" name="차대번호" dataType="text"></w2:column>
+						<w2:column id="MAKER" name="제조사" dataType="text"></w2:column>
+						<w2:column id="RELS_DT" name="출고일자" dataType="text"></w2:column>
+						<w2:column id="MODEL_NM" name="모델명" dataType="text"></w2:column>
+						<w2:column id="VHC_KIND" name="차량종류" dataType="text"></w2:column>
+						<w2:column id="ROUT_TYPE" name="노선유형" dataType="text"></w2:column>
+						<w2:column id="VHC_TYPE" name="차량유형" dataType="text"></w2:column>
+						<w2:column id="VHC_FUEL" name="차량연료" dataType="text"></w2:column>
+						<w2:column id="VHC_STS" name="버스상태" dataType="text"></w2:column>
+						<w2:column id="PSG_CNT" name="승차인원" dataType="text"></w2:column>
+						<w2:column id="SPARE_YN" name="예비차여부" dataType="text"></w2:column>
+						<w2:column id="SCRAP_YN" name="대폐차여부" dataType="text"></w2:column>
+						<w2:column id="APPL_ST_DT" name="적용시작일" dataType="text"></w2:column>
+						<w2:column id="APPL_ED_DT" name="적용종료일" dataType="text"></w2:column>
+						<w2:column id="USE_YN" name="사용여부" dataType="text"></w2:column>
+						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_searchitem2" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="ROUT_ID" name="name1" dataType="text"></w2:column>
@@ -177,26 +195,26 @@
 						<w2:column id="USE_YN" name="사용여부" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
-				<!-- <w2:dataList baseNode="list" repeatNode="map" id="dlt_FCLT_COND_LOG" saveRemovedData="true">정류소 시설물
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_FCLT_COND_LOG" saveRemovedData="true"><!-- 정류소 시설물 -->
 					<w2:columnInfo>
-					<w2:column id="SEND_DATE" name="전송일시" dataType="text"></w2:column>
-					<w2:column id="FCLT_COND" name="시설물상태" dataType="text"></w2:column>
-					<w2:column id="FCLT_KIND" name="시설물종류" dataType="text"></w2:column>
-					<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
-					<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
-					<w2:column id="NODE_ID" name="노드아이디" dataType="text"></w2:column>
+						<w2:column id="SEND_DATE" name="전송일시" dataType="text"></w2:column>
+						<w2:column id="FCLT_COND" name="시설물상태" dataType="text"></w2:column>
+						<w2:column id="FCLT_KIND" name="시설물종류" dataType="text"></w2:column>
+						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
+						<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
+						<w2:column id="NODE_ID" name="노드아이디" dataType="text"></w2:column>
 					</w2:columnInfo>
-					</w2:dataList>
-					<w2:dataList baseNode="list" repeatNode="map" id="dlt_FCLT_COND_LOG2" saveRemovedData="true">교차로 시설물
+				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_FCLT_COND_LOG2" saveRemovedData="true"><!-- 교차로 시설물 -->
 					<w2:columnInfo>
-					<w2:column id="SEND_DATE" name="전송일시" dataType="text"></w2:column>
-					<w2:column id="FCLT_COND" name="시설물상태" dataType="text"></w2:column>
-					<w2:column id="FCLT_KIND" name="시설물종류" dataType="text"></w2:column>
-					<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
-					<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
-					<w2:column id="NODE_ID" name="노드아이디" dataType="text"></w2:column>
+						<w2:column id="SEND_DATE" name="전송일시" dataType="text"></w2:column>
+						<w2:column id="FCLT_COND" name="시설물상태" dataType="text"></w2:column>
+						<w2:column id="FCLT_KIND" name="시설물종류" dataType="text"></w2:column>
+						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
+						<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
+						<w2:column id="NODE_ID" name="노드아이디" dataType="text"></w2:column>
 					</w2:columnInfo>
-					</w2:dataList> -->
+				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_LINK_MST" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="LINK_ID" name="링크아이디" dataType="text"></w2:column>
@@ -255,47 +273,55 @@
 						<w2:column id="UPD_ID" name="갱신아이디" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_NODE_MST2" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="NODE_ID" name="노드ID" dataType="text"></w2:column>
+						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
+						<w2:column id="GPS_X" name="GPS_X좌표" dataType="text"></w2:column>
+						<w2:column id="GPS_Y" name="GPS_Y좌표" dataType="text"></w2:column>
+						<w2:column id="NODE_SN" name="노드순번" dataType="text"></w2:column>
+						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_sub_search2"><!-- 선택노선 경유 정류소 Select용 ROUT_ID -->
 					<w2:keyInfo>
 						<w2:key id="ROUT_ID" name="name1" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ROUT_MST2" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
+						<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
+						<w2:column id="ROUT_TYPE" name="노선유형" dataType="text"></w2:column>
+						<w2:column id="STTN_CNT" name="정류소수" dataType="text"></w2:column>
+						<w2:column id="ROUT_LEN" name="노선거리" dataType="text"></w2:column>
+						<w2:column id="CURVATURE" name="굴곡도" dataType="text"></w2:column>
+						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
+						<w2:column id="STTN_ID" name="정류장ID" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ETA_INFO" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="REMAIN_TM" name="남은도착시간" dataType="text"></w2:column>
+						<w2:column id="REMAIN_STTN" name="남은정류장수" dataType="text"></w2:column>
+						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
+						<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>		
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_SOONETA_INFO" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="REMAIN_TM" name="남은도착시간" dataType="text"></w2:column>
+						<w2:column id="REMAIN_STTN" name="남은정류장수" dataType="text"></w2:column>
+						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
+						<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
+						<w2:column id="VHC_TYPE" name="차량유형" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>						
 				<w2:dataMap baseNode="map" id="dma_sub_search3">
 					<w2:keyInfo>
 						<w2:key id="STTN_ID" name="name1" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BRT_DSPTCH_LOG" saveRemovedData="true">
-					<w2:columnInfo>
-						<w2:column id="VHC_ID" name="차량ID" dataType="text"></w2:column>
-						<w2:column id="DSPTCH_DIV" name="디스패치구분" dataType="text"></w2:column>
-						<w2:column id="DSPTCH_CONTS" name="디스패치내용" dataType="text"></w2:column>
-						<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
-						<w2:column id="REP_ROUT_ID" name="대표노선ID" dataType="text"></w2:column>
-						<w2:column id="REP_ROUT_NM" name="대표노선명" dataType="text"></w2:column>
-						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
-						<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
-						<w2:column id="SEND_DATE" name="전송일시" dataType="text"></w2:column>
-					</w2:columnInfo>
-				</w2:dataList>
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ROUT_NODE_DISP_VW" saveRemovedData="true">
-					<w2:columnInfo>
-						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
-						<w2:column id="NODE_ID" name="노드ID" dataType="text"></w2:column>
-						<w2:column id="NODE_SN" name="노드순번" dataType="number" defaultValue="0"></w2:column>
-						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
-						<w2:column id="NODE_TYPE" name="노드유형" dataType="text"></w2:column>
-						<w2:column id="LINK_ID" name="링크ID" dataType="text"></w2:column>
-						<w2:column id="STTN_ID" name="정류소ID" dataType="text"></w2:column>
-						<w2:column id="STTN_NO" name="정류소번호" dataType="text"></w2:column>
-						<w2:column id="CRS_ID" name="교차로ID" dataType="text"></w2:column>
-						<w2:column id="GPS_X" name="경도" dataType="text"></w2:column>
-						<w2:column id="GPS_Y" name="위도" dataType="text"></w2:column>
-						<w2:column id="ROUT_LEN" name="노선거리" dataType="number" defaultValue="0"></w2:column>
-						<w2:column id="AREA" name="권역" dataType="text"></w2:column>
-						<w2:column id="MORN_STD" name="집중모니터링기준" dataType="text"></w2:column>
-					</w2:columnInfo>
-				</w2:dataList>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
 			<xf:submission id="sub_MO0201G0R0" ref="data:json,dma_search" target="data:json,dlt_BRT_CUR_OPER_INFO" action="/mo/MO0201G0R0"
@@ -334,6 +360,7 @@
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
+
 			<!-- 신호등 위치 -->
 			<xf:submission id="sub_selectSigOper" ref="data:json,dma_search" target="data:json,dlt_BMS_ROUT_NODE_CMPSTN4"
 				action="/mo/selectSigOper2" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
@@ -352,35 +379,27 @@
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_MO0201G3R0" ref="data:json,dma_search" target="data:json,dlt_BRT_DSPTCH_LOG" action="/mo/MO0201G3R0"
+			<xf:submission id="sub_MO0201G3R0" ref="data:json,dma_search" target="data:json,dlt_BMS_ROUT_MST" action="/mo/MO0201G3R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="" ev:submit="" ev:submitdone="scwin.sub_MO0201G3R0_submitdone" ev:submiterror="" abortTrigger="">
+				processMsg="조회 중입니다..." ev:submit="" ev:submitdone="scwin.sub_MO0201G3R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_selectNodeDispListByRepRout" ref="data:json,dma_search" target="data:json,dlt_BMS_ROUT_NODE_DISP_VW" action="/rout/selectNodeDispListByRepRout" method="post"
-				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="조회 중입니다..."
-				ev:submit="" ev:submitdone="scwin.sub_selectNodeDispListByRepRout_submitdone" ev:submiterror="" abortTrigger="">
+			<xf:submission id="sub_MO0201G8R0" ref="data:json,dma_sub_search3" target="data:json,dlt_BMS_ROUT_MST2" action="/mo/MO0201G8R0" method="post" mediatype="application/json" encoding="UTF-8"
+				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
+				ev:submiterror="" abortTrigger="">
 			</xf:submission>
 		</xf:model>
 
 		<style type='text/css'>
-		.w2tabcontrol_container{position: absolute; left:0; top:35px; right:0; bottom:0px; border:none; float:none; height:auto !important; border-top:1px solid #c4cad6;}
+		.MO0201T0 .w2tabcontrol_container{position: absolute; left:0; top:35px; right:0; bottom:0px; border:none; float:none; height:auto !important; border-top:1px solid #c4cad6;}
 		</style>
 
 		<script type="text/javascript" lazy="false"><![CDATA[
-	//디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨
-	//디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨
-	//디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨
-	//디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨디스패치해야됨
-	//속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨
-	//속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨
-	//속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨속도 차트 추가해야됨
-	
 	var gbMap = null;
 	scwin.onpageload = function() {
 		scwin.connect();
 		
 		 var autoOptions = {
-			Main : { grid : MO0201G0, srchSbm : sub_MO0201G0R0, keyColumn : "ROUT_ID", srchGrp : pgm_header, name : "노선 목록"}
+			Main : { grid : MO0201G3, srchSbm : sub_MO0201G3R0, keyColumn : "ROUT_ID", srchGrp : pgm_header, name : "노선 목록"}
 			
 		 };
 		 
@@ -408,8 +427,7 @@
 				//onMarkerClick: scwin.onClickMapCrs				
 		},map);
 		
-		var codeOptions = [ {code : "OPER_STS", compID : "MO0201G0:OPER_STS"},
-							{code : "DISPATCH_DIV", compID : "MO0201G3:DSPTCH_DIV" }
+		var codeOptions = [ {code : "OPER_STS", compID : "MO0201G0:OPER_STS"}
 		 ];			
 		 
 		com.setCommonDtl(codeOptions);
@@ -478,14 +496,6 @@
 		});	
 		
 		//마커 우클릭 관련
-		//버스 상세정보
-		$("#map_MO0201").on("click", ".busInfo", function(e) {
-			e.stopPropagation();
-			scwin.businfo_onclick();
-			routMap.removeRightClickOverlay("map_MO0201_vehicle");
-		});		
-		
-		//메시지 전송
 		$("#map_MO0201").on("click", ".dispatchMessage", function(e) {
 			e.stopPropagation();
 			scwin.dispatch_onclick();
@@ -502,88 +512,14 @@
 		
 		com.executeSubmission(sub_selectCommuMap);
 		com.executeSubmission(sub_selectSigPeriod);
-		
-		
-		//맵 하단 캔버스 관련
-		//차량 위치 매핑문제 때문에 보류 전자노선도 모니터링 우선 작업 필요
-		var canvas = $("#canvas")[0];
-		var ctx = canvas.getContext("2d");
-		var x = 0;
-		var x2 = 0;
-		var y = 0;
-		var y2 = 0;
-		
-		ctx.beginPath();
-		ctx.font = "11px 맑은고딕";
-		x = 40;
-		y = 90;
-		ctx.moveTo(x, y);
-		ctx.fillText("새롬동.나성동", x-20, y+20);
-		x += 200;
-		x2 = x+10;
-		y2 = y;
-		ctx.lineTo(x, y);
-		ctx.fillText("한솔동", x-5, y+20);
-		x += 200;
-		ctx.lineTo(x, y);
-		ctx.fillText("세종고속시외버스터미널(지상)", x-50, y+20);
-		//x += 200;
-		ctx.lineTo(x, y);
-		ctx.fillText("세종고속시외버스터미널(지하)", x-50, y-55);
-		x += 200;
-		ctx.lineTo(x, y);
-		ctx.fillText("대평동", x-5, y+20);
-		x += 200;
-		ctx.lineTo(x, y);
-		ctx.fillText("보람동.대평동", x-20, y+20);
-		x += 200;
-		ctx.lineTo(x, y);
-		ctx.fillText("세종시청.교육청.시의회", x-50, y+20);
-		x += 200;
-		ctx.lineTo(x, y);
-		ctx.fillText("소담동", x-10, y+20);
-		ctx.stroke();
-		
-		ctx.beginPath();
-		ctx.moveTo(x2, y2);
-		y2 -= 40;
-		ctx.lineTo(x2, y2);
-		x2 += 200;
-		ctx.lineTo(x2, y2);
-		x2 += 200;
-		ctx.lineTo(x2, y2);
-		ctx.lineTo(x2, y2+40);
-		ctx.stroke();
-
-		var img = new Image();
-		img.src = "/cm/images/tmap/busstop.png";
-		img.onload = function() {
-			x = 40;
-			y = 80;
-			ctx.drawImage(img, x, y);	
-			x += 200;
-			ctx.drawImage(img, x, y);
-			x += 200;	
-			ctx.drawImage(img, x, y);
-			x2 = x;
-			y2 = y-40;
-			ctx.drawImage(img, x2, y2);
-			x += 200;	
-			ctx.drawImage(img, x, y);
-			x += 200;	
-			ctx.drawImage(img, x, y);
-			x += 200;	
-			ctx.drawImage(img, x, y);
-			x += 200;	
-			ctx.drawImage(img, x, y);
-			x += 200;	
-			ctx.drawImage(img, x, y);
-			
-		}		
-		///////////////end 캔버스 관련///////////////////////
-		
 	};	//end onpageload
 	
+	var busFocus = 0;
+	var sttnFocus = 0;
+	var crossFocus = 0;
+	var busActive = 1;
+	var sttnActive = 0;
+	var crossActive = 0;
 	var sigTimeout = null;
 		
 	scwin.connect = function() {
@@ -611,11 +547,7 @@
 		
 		var attrId = jsonObj.ATTR_ID;
 		var dataList = jsonObj.LIST;
-		
-		var canvas = $("#canvas")[0];
-		var ctx = canvas.getContext("2d");	
-		var busImg = new Image();
-		busImg.src = "/cm/images/tmap/busstop.png";
+		var nodeId = dlt_BMS_ROUT_NODE_CMPSTN2.getCellData(MO0201G1.getFocusedRowIndex(), "NODE_ID");
 		
 		//attrId = 2022 : 정류소별 차량 도착 정보
 		if(attrId == 2022){
@@ -628,14 +560,13 @@
 		// ㄴ REMAIN_TM => 남은시간(초)
 		// ㄴ REMAIN_STTN => 몇 정류소 전
 			
-		//	if(attrId == 2022 && nodeId == jsonObj.STTN_ID){
-		//		MO0201T0_setTable(dataList);
-		//	}			
+			if(attrId == 2022 && nodeId == jsonObj.STTN_ID){
+				MO0201T0_setTable(dataList);
+			}			
 		}
 		
 		//attrId = 4014 : 실시간 차량 위치 정보
 		else if(attrId == 4014){
-			debugger;
 				//payload.body >>>> {"GPS_Y":36.484005,"ATTR_ID":4014,"DVC_ID":"DV00000002","GPS_X":127.25973,"VHC_ID":"VH00000002"}		
 		
 		//jsonObj.VHC_ID => 차량아이디
@@ -645,6 +576,7 @@
 		//content = jsonObj.VHC_ID + "," + jsonObj.GPS_X + ", " + jsonObj.GPS_Y;
 			try {
 		//		setTimeout(function() {
+				
 					var curIndexArr = dlt_BRT_CUR_OPER_INFO.getMatchedIndex("VHC_ID", jsonObj.VHC_ID);
 					
 					if(curIndexArr.length != 0) {
@@ -660,142 +592,12 @@
 			}	
 		}
 		
-		//운행 이벤트
-		else if (attrId == 4012) {
-			try {
-				var eventCode = jsonObj.EVT_CODE;			
-				routMap.mapInfo["map_MO0201_vehicle"].isEvent = "on";			
-				
-				
-				//정류소 도착
-				if(eventCode == "ET001") {
-					routMap.mapInfo["map_MO0201_vehicle"].divEvent = "ET001";
-					busImg.onload = function() {
-						x = 40;
-						y = 80;
-						ctx.drawImage(img, x, y);	
-						x += 200;
-						ctx.drawImage(img, x, y);
-						x += 200;	
-						ctx.drawImage(img, x, y);
-						x2 = x;
-						y2 = y-40;
-						ctx.drawImage(img, x2, y2);
-						x += 200;	
-						ctx.drawImage(img, x, y);
-						x += 200;	
-						ctx.drawImage(img, x, y);
-						x += 200;	
-						ctx.drawImage(img, x, y);
-						x += 200;	
-						ctx.drawImage(img, x, y);
-						x += 200;	
-						ctx.drawImage(img, x, y);
-						
-					}					
-				}
-				//정류소 출발
-				else if(eventCode == "ET002") {
-					routMap.mapInfo["map_MO0201_vehicle"].divEvent = "ET002";
-				}
-				
-				else{
-					routMap.mapInfo["map_MO0201_vehicle"].divEvent = "ETC";	
-				}
-				
-				routMap.showVehicleClickOverlay("map_MO0201_vehicle", dlt_BRT_CUR_OPER_INFO.getAllJSON(),
-				dlt_BRT_CUR_OPER_INFO.getCellData(MO0201G0.getFocusedRowIndex(), "VHC_ID"), MO0201G0, "Y", jsonObj.VHC_ID);					
-			} catch (e) {
-				console.log("[scwin.onMessageReceived] Exception :: " + e.message);					
-			}
-					
-		}
-		
-		//디스패치
-		else if (attrId == 4020) {
-			try {
-				dlt_BRT_DSPTCH_LOG.insertRow(0);
-				
-				var today = new Date();   
-				var hours = leadingZeros(today.getHours(), 2);
-				var minutes = leadingZeros(today.getMinutes(), 2); 
-				var seconds = leadingZeros(today.getSeconds(), 2); 
-				var timeResult = hours + ':' + minutes + ':' + seconds
-				dlt_BRT_DSPTCH_LOG.setCellData(0, "SEND_DATE", timeResult);
-				dlt_BRT_DSPTCH_LOG.setCellData(0, "ROUT_NM", jsonObj.ROUT_NM);
-				dlt_BRT_DSPTCH_LOG.setCellData(0, "VHC_NO", jsonObj.VHC_NO);
-				dlt_BRT_DSPTCH_LOG.setCellData(0, "DSPTCH_DIV", jsonObj.DSPTCH_DIV);								
-				
-				var dsptchDiv = jsonObj.DSPTCH_DIV;
-				var dsptchConts = jsonObj.MESSAGE;
-				var dsptchKind = jsonObj.DSPTCH_KIND;				
-				var contsResult = "";
-				
-				var min = "";
-				var sec = "";			
-				
-				//디스패치가 일반메시지가 아닐경우	
-				if(parseInt(dsptchConts) != "undefined" && dsptchDiv != "DP001") {
-					if(Math.abs(parseInt(dsptchConts) >= 60)) {
-						 min = Math.abs(parseInt(dsptchConts/60)) + "분 ";
-					}
-					 sec = Math.abs(parseInt(dsptchConts%60)) + "초 ";
-					
-					//운행중 디스패치일 경우 
-					if(dsptchDiv == "DP002") {
-						if(dsptchKind == "DK001") {
-							contsResult = "정상 운행중입니다.";
-						}
-						else if(dsptchKind == "DK002") {
-							contsResult = min + sec + "느립니다."; 
-						}
-						else if(dsptchKind == "DK003") {
-							contsResult = min + sec + "빠릅니다."; 
-						}
-					}
-					
-					//정차중 디스패치일 경우
-					else if(dsptchDiv == "DP003") {
-						contsResult = min + sec + "정차하세요.";	
-					}
-					dlt_BRT_DSPTCH_LOG.setCellData(0, "DSPTCH_CONTS", contsResult);			
-				} 
-				
-				//디스패치 메시지가 일반메시지일 경우
-				else if(parseInt(dsptchConts) == "undefined" || dsptchDiv == "DP001") {
-					dlt_BRT_DSPTCH_LOG.setCellData(0, "DSPTCH_CONTS", jsonObj.MESSAGE);	
-				}
-				
-				routMap.mapInfo["map_MO0201_vehicle"].isDsptch = "on";
-				dlt_BRT_CUR_OPER_INFO.setCellData(curIndexArr[0], "MESSAGE", jsonObj.MESSAGE);			
-				
-				var dsptchDiv = jsonObj.DSPTCH_DIV;	
-				
-				if (dsptchDiv == "DP001") { //일반메시지
-					routMap.mapInfo["map_MO0201_vehicle"].divDsptch = "DP001";
-				} else if (dsptchDiv == "DP002") { //운행중디스패치
-					routMap.mapInfo["map_MO0201_vehicle"].divDsptch = "DP002";
-				} else if (dsptchDiv == "DP003") { //정차중디스패치
-					routMap.mapInfo["map_MO0201_vehicle"].divDsptch = "DP003";
-				}
-					
-				routMap.showVehicleClickOverlay("map_MO0201_vehicle", dlt_BRT_CUR_OPER_INFO.getAllJSON(),
-				dlt_BRT_CUR_OPER_INFO.getCellData(MO0201G0.getFocusedRowIndex(), "VHC_ID"), MO0201G0, "Y");													
-					
-			}
-			
-			catch(e) {
-				console.log("[scwin.onMessageReceived] Exception :: " + e.message);					
-			}
-		}
-	
-		
 	};
 			
 	scwin.MO0201G0_onrowindexchange = function(row,oldRow) {
 		//gbMap.setLevel(4);
-		//com.executeSubmission(sub_selectNodeListByRepRout);		 
-		com.executeSubmission(sub_selectNodeDispListByRepRout);		 
+		busFocus = row;		 
+		com.executeSubmission(sub_selectNodeListByRepRout);		 
 		 			
 	};
 	
@@ -816,20 +618,23 @@
 			}
 		}			
 		
-		com.setFocusedCell(MO0201G0, "VHC_NO");
+		com.setFocusedCell(MO0201G0, "VHC_ID");
+		//scwin.updateStatusBus();
 		routMap.showVehicleClickOverlay("map_MO0201_vehicle", dlt_BRT_CUR_OPER_INFO.getAllJSON(),
-				dlt_BRT_CUR_OPER_INFO.getCellData(MO0201G0.getFocusedRowIndex(), "VHC_ID"), MO0201G0, "Y");		
+				dlt_BRT_CUR_OPER_INFO.getCellData(MO0201G0.getFocusedRowIndex(), "VHC_ID"), MO0201G0);		
 	};
 	
 	scwin.sub_MO0201SHI0_submitdone = function(e) {
 		TYPE1.setValue("RR00000002");		
 		$p.executeSubmission(sub_MO0201SHI1);
-		com.searchGrid(MO0201G0, sub_MO0201G0R0);
+		//com.searchGrid(MO0201G0, sub_MO0201G0R0);
 		com.searchGrid(MO0201G3, sub_MO0201G3R0);
+		
 	};
 		
 	scwin.TYPE1_onviewchange = function(info) {
 		$p.executeSubmission(sub_MO0201SHI1);
+		com.searchGrid(MO0201G3, sub_MO0201G3R0);
 	};
 	
 	scwin.sub_selectNodeListByRepRout_submitdone = function(e) {
@@ -843,19 +648,21 @@
 	
 	scwin.sub_MO0201SHI1_submitdone = function(e) {
 		com.searchGrid(MO0201G0, sub_MO0201G0R0);
-		com.searchGrid(MO0201G3, sub_MO0201G3R0);
 		com.executeSubmission(sub_MO0201G1R0);
 		com.executeSubmission(sub_MO0201G2R0);
-		//com.executeSubmission(sub_selectNodeListByRepRout);			
-		com.executeSubmission(sub_selectNodeDispListByRepRout);			
+		com.executeSubmission(sub_selectNodeListByRepRout);			
 	};
 	
 	scwin.TYPE2_onviewchange = function(info) {
+		//노선그리드로 선택시 이벤트 안타는 이슈 있음
+		var selectedRoutId = info.newValue
+		var curIndexArr = dlt_BMS_ROUT_MST.getMatchedIndex("ROUT_ID", selectedRoutId);
+		MO0201G3.setFocusedCell(curIndexArr[0], "ROUT_ID");
+		
 		com.searchGrid(MO0201G0, sub_MO0201G0R0);
 		com.executeSubmission(sub_MO0201G1R0);
 		com.executeSubmission(sub_MO0201G2R0);
-		//com.executeSubmission(sub_selectNodeListByRepRout);			
-		com.executeSubmission(sub_selectNodeDispListByRepRout);			
+		com.executeSubmission(sub_selectNodeListByRepRout);			
 	};
 	
 	scwin.sub_selectCategory_submitdone = function(e) {
@@ -971,8 +778,19 @@
 		//탭, 그리드없이 마커 찍기	
 		routMap.showMarkerListNoGrid("map_MO0201_sttn", dlt_BMS_ROUT_NODE_CMPSTN2.getAllJSON());	
 		
-		//com.setFocusedCell(MO0201G1, "NODE_ID");		
+		com.setFocusedCell(MO0201G1, "NODE_ID");		
 		
+		//정류소 상태
+		for (i=0; i<dlt_BMS_ROUT_NODE_CMPSTN2.getDataLength(); i++) {
+			//고장
+			if (dlt_BMS_ROUT_NODE_CMPSTN2.getCellData(i, "COND_ERROR") == "CE001") {
+				MO0201G1.setCellClass(i, "COND_ERROR", "cond_abnormal");
+			}
+			//정상
+			else if (dlt_BMS_ROUT_NODE_CMPSTN2.getCellData(i, "COND_ERROR") == "CE002") {
+				MO0201G1.setCellClass(i, "COND_ERROR", "cond_normal");
+			}
+		}			
 	};
 	
 	scwin.onClickMap = function(mapId) {
@@ -1127,6 +945,11 @@
 		}//end if
 	}
 	
+	scwin.btn_sub_move = function() {
+		com.gridMove(MO0201G3, "ROUT_ID", dma_search.get("CONTENT3"), MO0201G3.getFocusedRowIndex());
+		
+	}
+	
 	scwin.dispatch_onclick = function() {
 		var data = { VHC_ID : dlt_BRT_CUR_OPER_INFO.getCellData(MO0201G0.getFocusedRowIndex(), "VHC_ID"), 
 					 callbackFn : ""} 
@@ -1139,21 +962,6 @@
 		};
 		
 		com.openPopup(("/ui/BRT/MO0201/MO0201P01.xml"), options, data);
-	}
-	
-	scwin.businfo_onclick = function() {
-		var data = { VHC_ID : dlt_BRT_CUR_OPER_INFO.getCellData(MO0201G0.getFocusedRowIndex(), "VHC_ID"), 
-					 VHC_KIND : dlt_BRT_CUR_OPER_INFO.getCellData(MO0201G0.getFocusedRowIndex(), "VHC_KIND"),
-					 callbackFn : ""} 
-		var options = {
-			id : "MO0201P02",
-			popupName : "버스 상세정보",
-			type : "browserPopup",
-			width : 1380,
-			height : 720			
-		};
-		
-		com.openPopup(("/ui/BRT/MO0201/MO0201P02.xml"), options, data);
 	}
 
 	scwin.MO0201G5_onrowindexchange = function(row,oldRow) {
@@ -1191,24 +999,185 @@
 //		}, dlt_SIG_PERIOD.getCellData(0, "SIG_PERIOD"));
 //	};
 	
-	scwin.sub_MO0201G2R0_submitdone = function(e) {
-		routMap.showMarkerListNoGrid("map_MO0201_crs", dlt_BMS_ROUT_NODE_CMPSTN3.getAllJSON());			
+	scwin.sub_MO0201G3R0_submitdone = function(e) {
+		com.setFocusedCell(MO0201G3, "ROUT_ID");
 	};
 	
-	scwin.sub_MO0201G3R0_submitdone = function(e) {
+	scwin.MO0201G3_onrowindexchange = function(row, oldRow) {
+		var routId = dlt_BMS_ROUT_MST.getCellData(row, "ROUT_ID")
+		TYPE2.setValue(routId);
+		dma_sub_search2.set("ROUT_ID", routId);
+	}
+	
+	//정류장별 차량 도착 정보 테이블 생성
+	MO0201T0_setTable = function(dataList){
+		var param = com.getParameter();
+		dlt_BMS_ETA_INFO.removeAll();
+		dlt_BMS_SOONETA_INFO.removeAll();
+		var tableStr = '';
+		var tableBody = '';
+		var talbeId = '';
+		var vhcImgSrc = '';
 		
-	};
+		//테이블 소스 시작
+		tableStr = '<table id="mf_tac_layout_contents_MN00090201_body_MO0201T0" style="" class="w2group w2tb bit_tb">'
+					+'<caption id="mf_tac_layout_contents_MN00090201_body_wq_uuid_505" class="w2group "></caption>'
+					+'<colgroup id="mf_tac_layout_contents_MN00090201_body_wq_uuid_506" class="w2group ">'
+					+'<col id="mf_tac_layout_contents_MN00090201_body_wq_uuid_507" style="width:50.00%;" class="w2group ">'
+					+'<col id="mf_tac_layout_contents_MN00090201_body_wq_uuid_508" style="width:25.00%" class="w2group ">'
+					+'<col id="mf_tac_layout_contents_MN00090201_body_wq_uuid_508" style="width:25.00%" class="w2group ">'
+					+'</colgroup>'
+					+'<tbody>';
+		
+		if(dataList.length != 0){
+			//순서 맞추기
+			dataList.sort(function(a,b) {
+				return parseFloat(a.REMAIN_TM) - parseFloat(b.REMAIN_TM);
+			});
+			
+			var j = 0;
+			for(var i = 0; i < dataList.length; i++){
+				//초 -> 분으로 변경. 0분 이하면 잠시후 도착
+				dataList[i].REMAIN_TM = parseInt((dataList[i].REMAIN_TM%3600)/60) + '분';
+				
+				if(dataList[i].REMAIN_TM != '0분'){
+					dlt_BMS_ETA_INFO.insertRow();
+					dlt_BMS_ETA_INFO.setCellData(j, "ROUT_NM", dataList[i].ROUT_NM);
+					dlt_BMS_ETA_INFO.setCellData(j, "REMAIN_TM", dataList[i].REMAIN_TM);
+					dlt_BMS_ETA_INFO.setCellData(j, "REMAIN_STTN", dataList[i].REMAIN_STTN  + '전');
+					j++;
+				}else if(dataList[i].REMAIN_TM == '0분'){
+					dlt_BMS_SOONETA_INFO.insertRow();
+					dlt_BMS_SOONETA_INFO.setCellData(i, "ROUT_NM", dataList[i].ROUT_NM);
+				}
+			}
+			
+			//보내는게 1개
+			if(dataList.length == 1){
+				tableBody += '<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
+					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+					+dlt_BMS_ETA_INFO.getCellData(0, "ROUT_NM")
+					+'</span>'
+					+'</td>'
+					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px; color: yellow;" class="w2span ">'
+					+dlt_BMS_ETA_INFO.getCellData(0, "REMAIN_STTN")
+					+'</span>'
+					+'</td>'
+					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_518" style="border-color: black;  text-align: right;" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 15px;text-align: right;color: green;" class="w2span ">'
+					+dlt_BMS_ETA_INFO.getCellData(0, "REMAIN_TM")
+					+'</span>'
+					+'</td>'
+					+'</tr>'
+					
+					+'<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_512" class="w2group">'
+					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_513" style="border-color: black; border-bottom-color:yellow" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_516" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
 
-	scwin.sub_selectNodeDispListByRepRout_submitdone = function(e) {
-		com.executeSubmission(sub_selectCategory);
-		routMap.showRoute("map_MO0201", dlt_BMS_ROUT_NODE_DISP_VW.getAllJSON(), null, "ONLYLINE");
+					+'</span>'
+					+'</td>'
+					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_513" style="border-color: black; border-bottom-color:yellow" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_516" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+
+					+'</span>'
+					+'</td>'
+					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_518" style="border-color: black; border-bottom-color:yellow; text-align: right;" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 15px;text-align: right;color: green;" class="w2span ">'
+
+					+'</span>'
+					+'</td>'
+					+'</tr>'
+			
+				tableBody +='<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
+							+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: yellow; border-right-color:yellow;" class="w2group w2tb_td w2tb_noTH" scope="row" colspan="3" rowspan="1">'
+							+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+							+"곧도착 : " + dlt_BMS_SOONETA_INFO.getCellData(0, "ROUT_NM");
+							+'</span>'
+							+'</td>'
+							+'</tr>';
+			}
+			//보내는게 2개 이상이면 동적으로 그리기
+			else if(dataList.length > 1){
+				for(var i = 0; i < dataList.length; i++){
+					if(dlt_BMS_ETA_INFO.getCellData(i, "REMAIN_TM") != '0분'){
+						tableBody += '<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
+									+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
+									+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+									+dlt_BMS_ETA_INFO.getCellData(i, "ROUT_NM")
+									+'</span>'
+									+'</td>'
+									+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
+									+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px; color: yellow;" class="w2span ">'
+									+dlt_BMS_ETA_INFO.getCellData(i, "REMAIN_STTN")
+									+'</span>'
+									+'</td>'
+									+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_518" style="border-color: black;  text-align: right;" class="w2group w2tb_td w2tb_noTH">'
+									+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 15px;text-align: right;color: green;" class="w2span ">'
+									+dlt_BMS_ETA_INFO.getCellData(i, "REMAIN_TM")
+									+'</span>'
+									+'</td>'
+									+'</tr>'
+					}
+				
+				}
+				//곧도착 2개 이상..
+				tableBody +='<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
+							+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: yellow; border-right-color:yellow; border-top-style:double;" class="w2group w2tb_td w2tb_noTH" scope="row" colspan="3" rowspan="1">'
+							+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+							+"곧도착 : " + dlt_BMS_SOONETA_INFO.getCellData(0, "ROUT_NM");
+							+'</span>'
+							+'</td>'
+							+'</tr>';
+			}
+			
+		}
+		//데이터가 없다면 빈 테이블 그리기
+		else if(dataList.length == 0){
+			tableBody += '<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
+					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+					+'</span>'
+					+'</td>'
+					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px; color: yellow;" class="w2span ">'
+					+'</span>'
+					+'</td>'
+					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_518" style="border-color: black;  text-align: right;" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 15px;text-align: right;color: green;" class="w2span ">'
+					+'</span>'
+					+'</td>'
+					+'</tr>'
+					
+					+'<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
+					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; border-bottom-color:yellow" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+					+'</span>'
+					+'</td>'
+					
+					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_518" style="border-color: black; border-bottom-color:yellow; text-align: right;" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 15px;text-align: right;color: green;" class="w2span ">'
+					+'</span>'
+					+'</td>'
+					+'</tr>'
+					
+			tableBody +='<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
+					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: yellow; border-right-color:yellow;" class="w2group w2tb_td w2tb_noTH" scope="row" colspan="3" rowspan="1">'
+					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+					+"곧도착 : "
+					+'</span>'
+					+'</td>'
+					+'</tr>';
+		}
 		
-		routMap.showVehicleClickOverlay("map_MO0201_vehicle", dlt_BRT_CUR_OPER_INFO.getAllJSON(),
-				dlt_BRT_CUR_OPER_INFO.getCellData(MO0201G0.getFocusedRowIndex(), "VHC_ID"), MO0201G0);	
+		tableStr += tableBody + '</tbody></table>';
 		
-		
-		com.executeSubmission(sub_MO0201G1R0);
-		com.executeSubmission(sub_MO0201G2R0);		
+		$("#mf_tac_layout_contents_"+param.menuCode+"_body_MO0201T0").html(tableStr);
+	}	
+	
+	scwin.sub_MO0201G2R0_submitdone = function(e) {
+		routMap.showMarkerListNoGrid("map_MO0201_crs", dlt_BMS_ROUT_NODE_CMPSTN3.getAllJSON());			
 	};
 	]]></script>
 	</head>
@@ -1256,180 +1225,170 @@
 					<w2:wframe class="" id="wfm_mainBtn" scope="true" src="/cm/common/wf_mainBtn.xml" style=""></w2:wframe>
 				</xf:group>
 			</xf:group>
-			<!-- <xf:group id="pgm_content" class="pgm_content grdc_600_20_a" style="" >	 -->		
-			<xf:group id="pgm_content" class="pgm_content grdc_a_20_850" style="" >			
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_350_20_a" style="">
-					<xf:group class="defaultbox" id="" style="">
-						<w2:textbox class="df_tt fl" id="" label="운행차량" style=""></w2:textbox>
-					</xf:group>
-					<xf:group></xf:group>
-					<xf:group adaptive="layout" class="w2tb" id="" style="">
-							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="MO0201G0" class="cm_grid leftL"
-								autoFitMinWidth="0" dataList="data:dlt_BRT_CUR_OPER_INFO" ev:onrowindexchange="scwin.MO0201G0_onrowindexchange"
-								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="true"
-								rowNumHeaderValue="" rowNumVisible="false" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" 
-								useShiftKey="true" noResultMessage="금일 운행차량 없음">							
+			<xf:group id="pgm_list" class="pgm_list" style="">
+				<xf:group id="" style="position:relative">
+					<xf:group id="" style="position: absolute;width: 100%;height: 695px;">
+					<div id="map_MO0201" style="">
+						<ul id="category_map_MO0201" class="category" style="left: 610px;">
+				   		 </ul>							
+					   	 <div class="map-type" style="z-index: 10000;">
+					   	 	<div>
+								<a href="javascript:void(0)" class="map-type-01 active" onclick="routMap.addOverMapType('map_MO0201',kakao.maps.MapTypeId.ROADMAP);" title="일반지도">
+									<span class="maptype1-text active">일반지도</span>
+								</a>
+								<a href="javascript:void(0)" class="map-type-02" onclick="routMap.addOverMapType('map_MO0201',kakao.maps.MapTypeId.SKYVIEW);" title="위성지도">
+									<span class="maptype2-text">위성지도</span>
+								</a>
+								<a href="javascript:void(0)" class="map-type-03" title="소통지도">
+									<span class="maptype3-text">소통지도</span>
+								</a>
+							</div>		
+					   	 </div>
+						<xf:group id="brt_div" class="pgm_detail" style="z-index: 10000;position: absolute;right: 52px;margin-top: 245px;margin-right: -20px;display: none;visibility: hidden;width: 140px;height: 399px;">
+							<xf:group style="width: 100%; height:100%" id="bit_img">
+								<xf:group id="" class="brt_bit" style="background-size: cover; height: 393px; position: relative;"></xf:group>
+							</xf:group>
+							<xf:group style="" id=""></xf:group>
+							<xf:group style="position: absolute;top: 30%;left: 14%;width: 100px;text-align: center;">
+								<w2:span label="정류소명" style="color: white;font-size: 12px;" id=""
+									ref="data:dlt_BMS_ROUT_NODE_CMPSTN2.NODE_NM">
+								</w2:span>
+							</xf:group>
+							<xf:group style="position: absolute; top: 40%; left: 7%; text-align: center; width: 118px;">
+								<w2:span label="" style="color: white;font-size: 10px;"
+										 id="" ref="data:dlt_BMS_ROUT_NODE_CMPSTN2.NODE_ID">
+								</w2:span>
+							</xf:group>
+							<!-- <xf:group>
+								<w2:span label="NODE_ID" style="color: white;font-size: 14px;text-align: center;" id=""
+									ref="data:dlt_BMS_ROUT_NODE_CMPSTN2.NODE_ID">
+								</w2:span>
+							</xf:group> -->
+							<xf:group style="" id=""></xf:group>
+							<xf:group tagname="table" style="" id="MO0203T0" class="w2tb bit_tb"></xf:group>
+						</xf:group>						   	 	 											
+					</div>
+				</xf:group>							
+					<!-- <xf:group style="width: 303px;">
+						<ul id="" class="moni_img"  style="margin-bottom: 3px;">
+							<li id="li_busimg" class="on">
+								<span class="busimg"></span>
+								노선
+							</li>
+							<li id="li_crossimg" class="">
+								<span class="crossimg"></span>
+								교차로
+							</li>
+							<li id="li_sttnimg" class="">
+								<span class="sttnimg"></span>
+								정류소
+							</li>
+						</ul>
+					</xf:group> -->
+					<xf:group id="MO0201T0" style="position: absolute;z-index: 5;width: 600px;">
+						<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.MO0201G3_onrowindexchange"
+							ev:oncellclick="" showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="true" scrollByColumn="false"
+							rowNumHeaderValue="순서" sortable="false" rowStatusHeaderValue="상태" overflowX="hidden" overflowY="scroll" rowStatusVisible="false"
+							fixedColumnWithHidden="true" dataList="data:dlt_BMS_ROUT_MST" ignoreCellClick="false" style="height:212px;"
+							autoFit="lastColumn" visibleRowNum="" id="MO0201G3" class="cm_grid left" tooltipPositionY="" focusMode="row">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px" id="column11"
-										value="노선명" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
+										id="column4" value="노선ID" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:25px" id="column6"
-										value="차량번호" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
+										id="column5" value="노선명" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="column10"
-										value="속도(km/h)" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
+										id="column6" value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px" id="column2"
-										value="이벤트 표시" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="85" inputType="text" style="height:25px" id="column1"
-										value="디스패치 표시" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="column0"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="65" inputType="text" style="height:20px" id="column5"
-										value="위도" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="65" inputType="text" style="height:20px" id="column8"
-										value="경도" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column9"
-										value="운행상태" blockSelect="false" displayMode="label">
-									</w2:column> -->
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="ROUT_NM"
-										value="" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
+										id="ROUT_ID" value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="138" inputType="text" style="height:25px" id="VHC_NO"
-										value="" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
+										id="ROUT_NM" value="" blockSelect="false" displayMode="label" textAlign="left">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="CUR_SPD"
-										value="" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
+										id="" value="" blockSelect="false" displayMode="label">
 									</w2:column>
-				    				<w2:column falseValue="0" defaultValue="" trueValue="1" width="70" readOnly="false" style="height:25px"
-				    					inputType="checkbox" id="EVT_YN" blockSelect="false">
-				    				</w2:column>
-				    				<w2:column falseValue="0" defaultValue="" trueValue="1" width="70" readOnly="false" style="height:25px"
-				    					inputType="checkbox" id="DSPTCH_YN" blockSelect="false">
-				    				</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id=""
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="GPS_Y"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="GPS_X"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="OPER_STS" value=""
-										blockSelect="false" displayMode="label">
-									</w2:column> -->
 								</w2:row>
 							</w2:gBody>
-						</w2:gridView>										
-					</xf:group>
-					<xf:group id="" class="horizontal_line"></xf:group>
-					<xf:group id="pgm_subList" class="pgm_list grdr_20_2_a" style="">
-						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="Dispatch" style=""></w2:textbox>
-						</xf:group>
-						<xf:group></xf:group>
-						<xf:group id="" class="" style="">
-							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="MO0201G3" class="cm_grid leftL"
-								autoFitMinWidth="0" dataList="data:dlt_BRT_DSPTCH_LOG" ev:onrowindexchange=""
-								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="true"
-								rowNumHeaderValue="" rowNumVisible="false" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false"
-								useShiftKey="true" noResultMessage="금일 Dispatch 없음">
+						</w2:gridView>
+						<xf:group id="" class="pgm_subList grdr_20_2_a" style="">
+							<xf:group class="defaultbox" id="" style="margin-top: 5px;background: #ffffff85">
+								<w2:textbox class="df_tt fl" id="" label="운행차량" style=""></w2:textbox>
+							</xf:group>
+							<xf:group></xf:group>
+							<xf:group adaptive="layout" class="w2tb" id="" style="">
+							<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.MO0201G0_onrowindexchange" ev:oncellclick=""
+								showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순서"
+								sortable="false" rowStatusHeaderValue="상태" overflowX="hidden" overflowY="scroll" rowStatusVisible="false"
+								fixedColumnWithHidden="true" dataList="data:dlt_BRT_CUR_OPER_INFO" ignoreCellClick="false" style="height:410px;width: 400px;"
+								autoFit="lastColumn" visibleRowNum="" id="MO0201G0" class="cm_grid left" tooltipPositionY="" focusMode="row">
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
-										<w2:column removeBorderStyle="false" width="140" inputType="text" style="height:25px" id="column2"
-											value="전송일시" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px" id="column1"
+										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column11"
 											value="노선명" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:25px" id="column5"
+										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column6"
 											value="차량번호" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:25px" id="column7"
-											value="구분" blockSelect="false" displayMode="label">
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column10"
+											value="속도(km/h)" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="column6"
-											value="디스패치 내용" blockSelect="false" displayMode="label">
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column12"
+											value="이벤트" blockSelect="false" displayMode="label">
 										</w2:column>
+										
+										<!-- <w2:column removeBorderStyle="false" width="65" inputType="text" style="height:20px" id="column5"
+											value="위도" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="65" inputType="text" style="height:20px" id="column8"
+											value="경도" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column9"
+											value="운행상태" blockSelect="false" displayMode="label">
+										</w2:column> -->
 									</w2:row>
 								</w2:header>
 								<w2:gBody style="" id="gBody1">
 									<w2:row style="" id="row2">
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="SEND_DATE"
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="ROUT_NM"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="ROUT_NM"
+										<w2:column removeBorderStyle="false" width="138" inputType="text" style="height:20px" id="VHC_NO"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="VHC_NO"
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="CUR_SPD"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:25px" id="DSPTCH_DIV"
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id=""
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px"
-											id="DSPTCH_CONTS" value="" blockSelect="false" displayMode="label" textAlign="left">
+										<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="GPS_Y"
+											value="" blockSelect="false" displayMode="label">
 										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="GPS_X"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="OPER_STS" value=""
+											blockSelect="false" displayMode="label">
+										</w2:column> -->
 									</w2:row>
 								</w2:gBody>
-							</w2:gridView>
-						</xf:group>
-					</xf:group><!-- pgm_subList -->											
+							</w2:gridView>										
+							</xf:group>
+						</xf:group>	
+					</xf:group> <!-- MO0201T0 -->
+					
 				</xf:group>	
-				<xf:group id="" class="vertical_line"></xf:group>
-				<div id="map_MO0201" style="">
-					<ul id="category_map_MO0201" class="category" style="">
-			   		 </ul>							
-				   	 <!-- <div class="map-type" style="z-index: 10000;">
-				   	 	<div>
-							<a href="javascript:void(0)" class="map-type-01 active" onclick="routMap.addOverMapType('map_MO0201',kakao.maps.MapTypeId.ROADMAP);" title="일반지도">
-								<span class="maptype1-text active">일반지도</span>
-							</a>
-							<a href="javascript:void(0)" class="map-type-02" onclick="routMap.addOverMapType('map_MO0201',kakao.maps.MapTypeId.SKYVIEW);" title="위성지도">
-								<span class="maptype2-text">위성지도</span>
-							</a>
-							<a href="javascript:void(0)" class="map-type-03" title="소통지도">
-								<span class="maptype3-text">소통지도</span>
-							</a>
-						</div>		
-				   	 </div> -->
-					<xf:group id="brt_div" class="pgm_detail" style="z-index: 10000;position: absolute;right: 52px;margin-top: 245px;margin-right: -20px;display: none;visibility: hidden;width: 140px;height: 399px;">
-						<xf:group style="width: 100%; height:100%" id="bit_img">
-							<xf:group id="" class="brt_bit" style="background-size: cover; height: 393px; position: relative;"></xf:group>
-						</xf:group>
-						<xf:group style="" id=""></xf:group>
-						<xf:group style="position: absolute;top: 30%;left: 14%;width: 100px;text-align: center;">
-							<w2:span label="정류소명" style="color: white;font-size: 12px;" id=""
-								ref="data:dlt_BMS_ROUT_NODE_CMPSTN2.NODE_NM">
-							</w2:span>
-						</xf:group>
-						<xf:group style="position: absolute; top: 40%; left: 7%; text-align: center; width: 118px;">
-							<w2:span label="" style="color: white;font-size: 10px;"
-									 id="" ref="data:dlt_BMS_ROUT_NODE_CMPSTN2.NODE_ID">
-							</w2:span>
-						</xf:group>
-						<xf:group style="" id=""></xf:group>
-						<xf:group tagname="table" style="" id="MO0203T0" class="w2tb bit_tb"></xf:group>
-					</xf:group>
-					<xf:group id="routeMap" style="z-index: 10000; position: absolute;background: white;bottom: 0px;width: 100%;">
-						<canvas id="canvas" width="1270" height="150">
-						</canvas>						
-					</xf:group>						   	 	 											
-				</div>			
-			</xf:group>
+			</xf:group><!-- pgm_sublist end -->
 		</xf:group> <!-- end container -->
 	</body>
 </html>

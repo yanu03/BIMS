@@ -45,6 +45,7 @@
 						,   B.ROUT_NM
 						,   C.CHAS_NO
 						,   C.MAKER
+						,	C.VHC_KIND
 						,   D.DRV_NM
 						,   E.COMP_NM
 						,	A.PRV_PLCE_NM
@@ -207,69 +208,46 @@
 	</select>	
 	
 	<select id="MO0201G3R0" resultType="Map">
-		SELECT			ROUT_ID
-					,	REP_ROUT_ID
-					,	INT_ROUT_ID
-					,	PUB_ROUT_ID
-					,	REP_ROUT_NM
-					,	ROUT_NM
-					,	ROUT_TYPE
-					,	ROUT_DIV
-					,	DVC_NM
-					,	RSV_ROUT_YN
-					,	ST_STTN_ID
-					,	ST_STTN_NM
-					,	ST_STTN_ENM
-					,	ED_STTN_ID
-					,	ED_STTN_ENM
-					,	ED_STTN_NM
-					,	RET_STTN_ID
-					,	RET_STTN_NM
-					,	RET_STTN_ENM
-					,	STTN_CNT
-					,	ROUT_LEN
-					,	ROUT_STRT_LEN
-					,	CURVATURE
-					,	JIT_DSPCH_YN
-					,	LIC_VHC_CNT
-					,	SPR_VHC_CNT
-					,	APPL_ST_DT
-					,	APPL_ED_DT
-					,	WAY_DIV
-					,	USER_WAY_DIV
-					,	WAY_INFO
-					,	AREA
-					,	SHAPE_DIV
-					,	HOLI_YN
-					,	USE_YN
-					,	DEL_YN
-					,	REMARK
-					,	UPD_DTM
-					,	UPD_ID
-					
-		FROM 			BMS_ROUT_MST
-		WHERE			DEL_YN = 'N'
-		<if test="CONTENT1 != 'all'">
-			AND			REP_ROUT_ID = #{CONTENT1}	
-		</if>				
-	
+		SELECT			A.VHC_ID
+					,	A.VHC_NO
+					,	A.ROUT_ID
+					,	A.ROUT_NM
+					,	A.REP_ROUT_ID
+					,	A.REP_ROUT_NM
+					,	A.DSPTCH_DIV
+						<![CDATA[ 
+						,CASE WHEN A.DSPTCH_DIV = 'DP002' THEN
+								CASE WHEN A.DSPTCH_CONTS>0 THEN
+										TIME_FORMAT(SEC_TO_TIME(A.DSPTCH_CONTS), '%i분 %s초 느립니다.')
+									WHEN A.DSPTCH_CONTS<0 THEN
+										TIME_FORMAT(SEC_TO_TIME(A.DSPTCH_CONTS), '%i분 %s초 빠릅니다.')
+									ELSE '정상 운행중입니다.'
+								END
+							WHEN  A.DSPTCH_DIV = 'DP003' THEN
+								TIME_FORMAT(SEC_TO_TIME(A.DSPTCH_CONTS), '%i분 %s초 빠릅니다.')
+							ELSE A.DSPTCH_CONTS
+						END AS DSPTCH_CONTS
+						]]>					
+					<!-- ,	A.DSPTCH_CONTS -->
+					,	DATE_FORMAT(A.SEND_DATE, '%Y-%m-%d %H:%i:%s') SEND_DATE
+					<!-- ,	DATE_FORMAT(A.SEND_DATE, '%H:%i:%s') SEND_DATE -->
+		
+		FROM			BRT_DSPTCH_LOG	A 
+		
+		WHERE			DATE_FORMAT(A.SEND_DATE, '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT1)">
+					AND A.REP_ROUT_ID = #{CONTENT1}
+			</if>
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT2)">
+					AND A.ROUT_ID = #{CONTENT2}
+			</if>			
+		
+		ORDER BY		A.SEND_DATE DESC
 	</select>
 	
-	<select id="MO0201G4R0" resultType="Map">
-		SELECT 				A.NODE_ID 
-						,	A.NODE_NM
-						,	A.GPS_X 
-						,	A.GPS_Y
-						,	B.NODE_SN
-						,	B.ROUT_ID
-								
-		FROM 				BMS_NODE_MST A 
-		INNER JOIN 			BMS_ROUT_NODE_CMPSTN B 
-		ON 					A.NODE_ID = B.NODE_ID 
-		AND 				B.NODE_TYPE = 'NT002'
-		WHERE 				B.ROUT_ID = #{ROUT_ID}
-		ORDER BY 			B.NODE_SN
-	</select>
+	<select id="MO0201P1R0" resultType="Map" parameterType="Map">
+		CALL	PROC_DVC_MONITOR(#{VHC_ID})
+	</select>	
 	
 	<select id="selectCategory" resultType="Map">
 		SELECT 			A.NODE_ID
@@ -381,87 +359,6 @@
 		AND				DL_CD = 'SY014'
 	</select>
 	
-	<select id="MO0201P0R0" resultType="Map">
-	
-		SELECT			MSG_ID
-					,	MSG_NM
-					,	MSG_CONTS
-					
-		FROM			BRT_OPER_INST_MSG_MST			
-	
-	</select>
-	
-	<select id="MO0201G5R0" resultType="Map" parameterType="Map">
-		SELECT			DATE_FORMAT(A.SEND_DATE, '%H:%i:%s') SEND_DATE				
-					,	A.FCLT_COND
-					,	B.FCLT_KIND
-					,	C.NODE_NM
-					,	C.NODE_ID
-					,	D.ROUT_NM
-					
-		FROM	  		BMS_FCLT_COND_LOG A
-		LEFT JOIN	  	BMS_FCLT_INFO B
-			ON			A.MNG_ID = B.MNG_ID
-		LEFT JOIN	  	BMS_ROUT_NODE_CMPSTN C
-			ON			B.NODE_ID = C.NODE_ID
-		LEFT JOIN	  	BMS_ROUT_MST D
-			ON			C.ROUT_ID = D.ROUT_ID
-			
-		WHERE 			C.NODE_TYPE = 'NT002' 	
-		AND				DATE_FORMAT(SEND_DATE, '%Y-%m-%d') = CURDATE() 
-		<if test="CONTENT1 != 'all'">
-			AND D.REP_ROUT_ID = #{CONTENT1}
-		</if>
-		<if test="CONTENT2 != ''">
-			AND D.ROUT_ID = #{CONTENT2}
-		</if>
-		<if test="CONTENT3 != null and CONTENT3 != ''">
-			AND (C.NODE_ID LIKE CONCAT('%',#{CONTENT3},'%') || C.NODE_NM LIKE CONCAT('%',#{CONTENT3},'%'))
-		</if>
-		
-		GROUP BY		A.SEND_DATE, A.MNG_ID 									
-		ORDER BY		A.SEND_DATE DESC
-				
-	</select>
-	
-	<select id="MO0201G6R0" resultType="Map" parameterType="Map">
-	
-	</select>
-	
-	<!--  교차로 시설물 상태 -> 우선신호 발생이력 수정 전
-		
-	<select id="MO0201G7R0" resultType="Map" parameterType="Map">
-		SELECT			DATE_FORMAT(A.SEND_DATE, '%H:%i:%s') SEND_DATE				
-					,	A.FCLT_COND
-					,	B.FCLT_KIND
-					,	C.NODE_NM
-					,	C.NODE_ID
-					,	D.ROUT_NM
-					
-		FROM	  		BMS_FCLT_COND_LOG A
-		LEFT JOIN	  	BMS_FCLT_INFO B
-			ON			A.MNG_ID = B.MNG_ID
-		LEFT JOIN	  	BMS_ROUT_NODE_CMPSTN C
-			ON			B.NODE_ID = C.NODE_ID
-		LEFT JOIN	  	BMS_ROUT_MST D
-			ON			C.ROUT_ID = D.ROUT_ID
-			
-		WHERE 			C.NODE_TYPE = 'NT001' 	
-		AND				DATE_FORMAT(SEND_DATE, '%Y-%m-%d') = CURDATE() 
-		<if test="CONTENT1 != 'all'">
-			AND D.REP_ROUT_ID = #{CONTENT1}
-		</if>
-		<if test="CONTENT2 != ''">
-			AND D.ROUT_ID = #{CONTENT2}
-		</if>
-		<if test="CONTENT3 != null and CONTENT3 != ''">
-			AND (C.NODE_ID LIKE CONCAT('%',#{CONTENT3},'%') || C.NODE_NM LIKE CONCAT('%',#{CONTENT3},'%'))
-		</if>
-		
-		GROUP BY		A.SEND_DATE, A.MNG_ID 									
-		ORDER BY		A.SEND_DATE DESC		
-	</select> -->
-	
 	<select id="MO0201G7R0" resultType="Map" parameterType="Map">
 		SELECT			DATE_FORMAT(A.SEND_DATE, '%H:%i:%s') SEND_DATE				
 					,	A.FCLT_COND
@@ -492,25 +389,6 @@
 		GROUP BY		A.SEND_DATE, A.MNG_ID 									
 		ORDER BY		A.SEND_DATE DESC		
 	</select>	
-	
-	<select id="MO0201G8R0" resultType="Map" parameterType="Map">
-		SELECT 			A.ROUT_ID, 
-						A.ROUT_NM, 
-						A.ROUT_TYPE, 
-						A.STTN_CNT, 
-						A.ROUT_LEN, 
-						A.CURVATURE, 
-						A.REMARK, 
-						B.STTN_ID
-								
-		FROM 			BMS_ROUT_MST A 
-		INNER JOIN BMS_ROUT_NODE_CMPSTN B 
-		ON A.ROUT_ID = B.ROUT_ID 
-		AND A.DEL_YN !="Y" 
-		AND B.NODE_TYPE != 'NT006'
-		WHERE B.STTN_ID = #{STTN_ID}		
-	
-	</select>
 	
 	<select id="selectCommuMap" resultType="Map">
 		SELECT 	 		A.LINK_ID
