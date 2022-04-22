@@ -101,12 +101,46 @@
 						<w2:key id="PROG_CD" name="프로그램코드" dataType="text"></w2:key>
 						<w2:key id="PROG_CD_IDS" name="제외프로그램코드" dataType="text"></w2:key>
 						<w2:key id="USER_ID" name="사용자아이디" dataType="text"></w2:key>
+						<w2:key id="ORG_ID" name="조직아이디" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataList id="dlt_memberSearchItem" baseNode="list" saveRemovedData="true" repeatNode="map">
 					<w2:columnInfo>
 						<w2:column id="USER_ID" name="name1" dataType="text"></w2:column>
 						<w2:column id="USER_NM" name="name2" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataList id="dlt_orgAuthProgram" baseNode="list" saveRemovedData="true" repeatNode="map" ev:oncelldatachange="">
+					<w2:columnInfo>
+						<!-- <w2:column id="chk" name="선택" dataType="text" ignoreStatus="true"></w2:column> -->
+						<w2:column id="ORG_ID" name="유저아이디" dataType="text"></w2:column>
+						<w2:column id="PROG_CD" name="프로그램코드" dataType="text"></w2:column>
+						<w2:column id="PROG_NM" name="프로그램명" dataType="text"></w2:column>
+						<w2:column id="PROG_GRP_CD" name="프로그램그룹명" dataType="text"></w2:column>
+						<w2:column id="PROG_PH" name="프로그램소스경로" dataType="text"></w2:column>
+						<w2:column id="PROGRAM_GROUP_NM" name="프로그램그룹이름" dataType="text"></w2:column>
+						<w2:column id="USE_YN" name="사용여부" dataType="text"></w2:column>
+						<w2:column id="AUTH_CHECK" name="권한체크여부" dataType="text"></w2:column>
+						<w2:column id="SCH_AH" name="조회권한여부" dataType="text"></w2:column>
+						<w2:column id="SAV_AH" name="저장권한여부" dataType="text"></w2:column>
+						<w2:column id="GEX_AH" name="엑셀폼다운권한여부" dataType="text"></w2:column>
+						<w2:column id="IEX_AH" name="엑셀입력권한여부" dataType="text"></w2:column>
+						<w2:column id="EXL_AH" name="엑셀권한여부" dataType="text"></w2:column>
+						<!-- <w2:column id="DEL_AH" name="삭제권한여부" dataType="text"></w2:column>
+						<w2:column id="FN1_AH" name="추가권한여부" dataType="text"></w2:column>
+						<w2:column id="FN2_AH" name="닫기권한여부" dataType="text"></w2:column> -->
+						<w2:column id="FN3_AH" name="예약권한여부" dataType="text"></w2:column>
+						<w2:column id="FN4_AH" name="실행권한여부" dataType="text"></w2:column>
+						<w2:column id="FN5_AH" name="확정권한여부" dataType="text"></w2:column>
+						<w2:column id="FN6_AH" name="설정권한여부" dataType="text"></w2:column>
+						<w2:column id="FN7_AH" name="초기화권한여부" dataType="text"></w2:column>
+						<w2:column id="FN8_AH" name="기능키8권한여부" dataType="text"></w2:column>
+						<w2:column id="HELP_AH" name="도움말권한여부" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataList id="dlt_programCode" baseNode="list" saveRemovedData="true" repeatNode="map">
+					<w2:columnInfo>
+						<w2:column id="PROG_CD" name="name1" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 			</w2:dataCollection>
@@ -133,6 +167,10 @@
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="저장중 입니다..." ev:submit="" ev:submitdone="scwin.sbm_saveProgram_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
+			<xf:submission id="sbm_searchOrgAuthProgram" ref="data:json,dma_program" target="data:json,dlt_orgAuthProgram" action="/program/searchOrgAuthProgram" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit=""
+				ev:submitdone="scwin.sbm_searchOrgAuthProgram_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
 		</xf:model>
 		<script type="text/javascript" lazy="false"><![CDATA[
 	/**
@@ -150,13 +188,13 @@
 		
 		//추가, 삭제, 취소 버튼 안보이게 설정
 		var mainOptions ={
-			ADD:{}, DEL:{},CNL:{}
+			ADD:{}, DEL:{},CNL:{},SETTING:{}
 		} 
 		
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID, autoOptions,mainOptions);
 		
 		var subOptions = {
-			ADD: scwin.btn_addProgramAuthority_onclick, DEL:{}, CNL:{}, EXL:{}, SAVE:{}
+			ADD: {cbFnc:scwin.btn_addProgramAuthority_onclick,nm:"추가",class:"add"}, DEL:{}, CNL:{}, EXL:{}, SAVE:{}, SETTING:{cbFnc:scwin.getOrgInfo,nm:"조직 권한 가져오기",class:"setting"}
 		};
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);	
 		
@@ -175,6 +213,45 @@
 	scwin.onpageunload = function() {
 
 	};
+	
+	
+	/**
+	 * 조직 권한 가져오는 함수.
+	 */
+	scwin.getOrgInfo = function(){
+		var row = grd_memberBasic.getFocusedRowIndex();
+		var orgId = dlt_memberBasic.getCellData(row, "ORG_ID");
+		var orgNm = dlt_memberOrganization.getMatchedJSON("ORG_ID", orgId)[0].ORG_NM
+		
+		if(orgId != null && orgId != ''){
+			var str = orgNm + " 의 권한을 가져오시겠습니까?";
+			
+			com.confirm(str, function(rtn) {
+				if (rtn) {
+					dma_program.set("ORG_ID", orgId);
+					com.executeSubmission(sbm_searchOrgAuthProgram);
+				}	
+			});
+	
+		}else {
+			com.alert("사용자를 선택해주세요.");
+		}
+		
+	};
+	
+	/**
+	 * 조직 권한 콜백 메소드
+	 */
+	scwin.sbm_searchOrgAuthProgram_submitdone = function(e) {
+		dlt_userAuthProgram.setJSON(dlt_orgAuthProgram.getAllJSON(), false);
+		
+		/*for(var x = 0; x < dlt_orgAuthProgram.getRowCount(); x++){
+			dlt_programCode.setCellData(x, "PROG_CD", dlt_orgAuthProgram.getCellData(x, "PROG_CD"));
+		}
+		
+		com.excludeItemsByGrid(grd_program, dlt_programCode.getColData("PROG_CD") ,PROG_CD);*/
+	};
+	
 	
 	/**
 	 * 사용자정보 조회 콜백 메소드
@@ -307,6 +384,8 @@
 			acb_autoChoiceBox.show("");
 		}
 	};
+	
+	
 	
 	]]></script>
 	</head>
@@ -461,7 +540,7 @@
 										value="프로그램명" displayMode="label" class="req" colSpan="" rowSpan="2">
 									</w2:column>
 									<w2:column id="column26" blockSelect="false" width="200" inputType="text" value="프로그램소스경로"
-										textAlign="left" style="height:40px;" colSpan="" rowSpan="2">
+										textAlign="" style="height:40px;" colSpan="" rowSpan="2">
 									</w2:column>
 									<!-- <w2:column id="column24" blockSelect="false" width="60" inputType="text" value="사용여부" 
 										style="height:20px;">

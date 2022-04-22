@@ -157,13 +157,13 @@
 	scwin.sbx_ChoiceBox_onviewchange = function(info) {		
 		if (info.newValue == "ALL") {
 			search_input.setValue("");
-			search_input.setPlaceholder("권한코드 또는 권한명");
-		} else if (info.newValue == "AUTH_CD") {
+			search_input.setPlaceholder("프로그램코드 또는 프로그램명");
+		} else if (info.newValue == "PROG_CD") {
 			search_input.setValue("");
-			search_input.setPlaceholder("권한코드");
-		} else if (info.newValue == "AUTH_NM") {
+			search_input.setPlaceholder("프로그램코드");
+		} else if (info.newValue == "PROG_NM") {
 			search_input.setValue("");
-			search_input.setPlaceholder("권한명");
+			search_input.setPlaceholder("프로그램명");
 		}
 	};
 	
@@ -188,16 +188,16 @@
 									<xf:value><![CDATA[ALL]]></xf:value>
 								</xf:item>
 								<xf:item>
-									<xf:label><![CDATA[권한코드]]></xf:label>
-									<xf:value><![CDATA[AUTH_CD]]></xf:value>
+									<xf:label><![CDATA[프로그램코드]]></xf:label>
+									<xf:value><![CDATA[PROG_CD]]></xf:value>
 								</xf:item>
 								<xf:item>
-									<xf:label><![CDATA[권한명]]></xf:label>
-									<xf:value><![CDATA[AUTH_NM]]></xf:value>
+									<xf:label><![CDATA[프로그램명]]></xf:label>
+									<xf:value><![CDATA[PROG_NM]]></xf:value>
 								</xf:item>
 							</xf:choices>
 						</xf:select1>
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="권한코드 또는 권한명"></xf:input>
+						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="프로그램코드 또는 프로그램명"></xf:input>
 					</xf:group>
 					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
