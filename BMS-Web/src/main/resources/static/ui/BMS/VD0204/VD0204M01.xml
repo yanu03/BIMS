@@ -251,6 +251,8 @@
 	var checkBoxClick = false;
 	
 	scwin.onpageload = function() {
+		
+	
 		autoOptions = {
 			Main : { grid : VD0204G0, srchSbm : sub_VD0204G0R0, srchGrp : pgm_header, keyColumn : "VHC_ID", focusColumn : "VHC_NO", name :  "차량 목록"},
 			Sub1 : { grid : VD0204G1, srchSbm : sub_VD0204G1R0, name :  "장치 목록"}
@@ -337,8 +339,7 @@
 	//PARAM_KIND헤더 동적으로 가져오는 서브미션 콜백 메소드
 	scwin.sub_VD0204G0R1_submitdone = function(e) {
 		scwin.setGridViewInfo();
-		com.setFocusedCell(VD0204G0, "VHC_ID");
-		dlt_BMS_DVC_COND_PARAM_INFO.setCellData(0, 'chk', '1');
+		
 	};
 	
 	//동적 그리드 함수
@@ -402,7 +403,7 @@
 							+'autoFit="lastColumn" class="cm_grid left" dataList="data:dlt_BMS_DVC_COND_PARAM_INFO" ev:oncellclick="scwin.VD0204G0_oncellclick" '
 							+'ev:onrowindexchange="scwin.VD0204G0_onrowindexchange" fixedColumnWithHidden="true" id="VD0204G0" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" '
 							+'rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" autoFitMinWidth="0" readOnly="true" '
-							+'sortable="false" focusMode="row" showSortableImage="true" sortEvent="onclick" ev:onheaderclick="scwin.VD0204G0_onheaderclick" mergeCol = "VHC_ID, VHC_NO" mergeCells = "byrestriccol">';
+							+'sortable="false" focusMode="row" showSortableImage="true" sortEvent="onclick" ev:onheaderclick="scwin.VD0204G0_onheaderclick" mergeCol = "" mergeCells = "">';
 		gridStr += '<w2:header style="" id="header2">'
 		+ '<w2:row style="" id="row3">'
 		+ gridHeader
@@ -421,6 +422,21 @@
 		VD0204G0.setGridStyle(WebSquare.xml.parse(gridStr , true ));
 		//dlt_BMS_DVC_COND_PARAM_INFO.removeAll();
 		autoOptions.Main.grid = VD0204G0;
+		
+		//'차내장치 모니터링'에서 받는 파라미터가 있다면 focus주기
+		if(com.isEmpty(com.getParameter("paramObj")) == false){
+			var index = dlt_BMS_DVC_COND_PARAM_INFO.getMatchedIndex("DVC_ID", com.getParameter("paramObj"))
+			if(index.length > 0){
+				VD0204G0.setFocusedCell(index[0], "VHC_ID")
+				dlt_BMS_DVC_COND_PARAM_INFO.setCellData(index[0], 'chk', '1');
+			}else{
+				com.setFocusedCell(VD0204G0, "VHC_ID");
+				dlt_BMS_DVC_COND_PARAM_INFO.setCellData(0, 'chk', '1');
+			}
+		}else{
+			com.setFocusedCell(VD0204G0, "VHC_ID");
+			dlt_BMS_DVC_COND_PARAM_INFO.setCellData(0, 'chk', '1');
+		}
 
 	};
 	
@@ -657,7 +673,7 @@
 							+'ev:onrowindexchange="scwin.VD0204G2_onrowindexchange" fixedColumnWithHidden="true" id="VD0204G2" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" '
 							+'rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" autoFitMinWidth="0" readOnly="true" '
 							+'sortable="false" focusMode="row" showSortableImage="true" sortEvent="onclick" ev:onheaderclick="scwin.VD0204G2_onheaderclick" '
-							+'mergeCol = "VHC_ID, VHC_NO" mergeCells = "byrestriccol">';
+							+'mergeCol = "" mergeCells = "">';
 		gridStr += '<w2:header style="" id="header2">'
 		+ '<w2:row style="" id="row3">'
 		+ gridHeader

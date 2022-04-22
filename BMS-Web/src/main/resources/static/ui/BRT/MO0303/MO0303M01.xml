@@ -85,6 +85,7 @@
 						<w2:column id="OLD_ROUT_ID" name="name23" dataType="text"></w2:column>
 						<w2:column id="OLD_OCR_DTM" name="name32" dataType="text"></w2:column>
 						<w2:column id="INCDNT_RES_YN" name="돌발 대응여부" dataType="text"></w2:column>
+						<w2:column id="WAY_DIV" name="상하행" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BRT_INCDNT_RES_INFO" saveRemovedData="true">
@@ -167,6 +168,7 @@
 		var mainOptions = {
 			//PLAY : scwin.btn_play_onclick
 			PLAY : {cbFnc:scwin.btn_play_onclick, nm:"돌발 메시지 전송", class:"share"}
+			,SETTING : {cbFnc:scwin.btn_move_rpc, nm:"대체차량 이력관리 이동", class:"send"}
 		};
 		 
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID_FORM, autoOptions, mainOptions);		 
@@ -218,6 +220,108 @@
 
 	};	
 	
+	scwin.btn_move_rpc = function(){
+		var rowJson = dlt_BRT_INCDNT_INFO.getRowJSON(MO0303G0.getFocusedRowIndex());
+		if(rowJson.INCDNT_ID != ''){
+			scwin.openMenu("대체차량 이력관리","/ui/BRT/AL0303/AL0303M01.xml", "MN00070604", rowJson);
+		}else{
+			com.alert("돌발상황 목록 선택후 대체차량 이력관리로 이동할 수 있습니다. ");
+		}
+	}
+	
+	
+	//오픈메뉴
+	scwin.openMenu = function(menuNm, url, menuCode, paramObj, menuType) {
+		// client에서 url 숨기기 메뉴일 경우에는 새 창으로 띄우기 적용 
+		if (url == "/") {
+			var url = document.location.href + "/";
+			window.open(url, "", "width=1200, height=700, left=450, top=100");
+		} else {
+			menuCode = menuCode || "";
+			var layout = $p.top().scwin.getLayoutId();
+			var tmpUrl;
+			var menuCodeParm = menuCode;
+			var frameMode;	// "wframe", "iframe"
+			var favStatus;
+			var data;
+
+			if (url.indexOf("/") !== 0) {
+				url = "/" + url;
+			}
+			url = gcm.CONTEXT_PATH + url;
+			
+			if ((typeof paramObj !== "undefined") && (paramObj !== null)) {
+				data = paramObj;
+			} else {
+				data = {};
+			}
+			
+			data.menuNm = menuNm;
+			data.menuCode = menuCode;
+			data.favStatus = favStatus;
+			data.menuType = menuType;
+			
+			var _closable = true;
+			
+			var frameMode = "";
+			if (layout == "T") {
+				var tabObj = { closable : _closable, //main 페이지를 제외하고 탭 닫기 기능 제공
+							   openAction : "select", // exist 는 기존 탭을 갱신, new 는 항상 새로, select는 동일 id 가 존재하면 선택, last: 기존 tab을 마지막 tab으로 이동후 선택
+							   label : menuNm };
+				
+				if (com.getFrameMode()  === "wframe") {
+					frameMode = "wframePreload";
+				} else {
+					frameMode = "iframe";
+				}
+				
+				var contObj = {
+					frameMode : frameMode,
+					scope : true,
+					src : url,
+					alwaysDraw : false,
+					title : menuNm,
+					dataObject : {
+						type : "json", 
+						name : "param", 
+						data : data
+					}
+				};
+				var tabComp = $w.getComponentById("mf_tac_layout");
+				tabComp.addTab(menuCode, tabObj, contObj);
+
+				// tabObj의 openAction의 last값의 동작 특이 사항으로 선택이 되지 않은 경우 선택하는 로직 추가
+				if (tabComp.getSelectedTabID() !== menuCode) {
+					var tabIndex = tabComp.getTabIndex(menuCode);
+					if (tabIndex) {
+						tabComp.setSelectedTabIndex(tabIndex);
+					}
+				}
+			} else if (layout == "M") {
+				if (com.getFrameMode() === "wframe") {
+					frameMode = "wframe";
+				} else {
+					frameMode = "iframe";
+				}
+				
+				var options = {
+					title : menuNm,
+					src : url,
+					windowTitle : menuNm,
+					windowId : menuCode,
+					openAction : "existWindow",
+					frameMode : frameMode,
+					dataObject : { 
+						type : "json", 
+						name : "param", 
+						data : data
+					}
+				}
+				var wdcComp = $w.getComponentById("mf_wdc_main");
+				wdcComp.createWindow(options);
+			}
+		}
+	};
 
 	scwin.sub_MO0303G0R0_submitdone = function(e) {
 		for (i=0; i<dlt_BRT_INCDNT_INFO.getDataLength(); i++) {
@@ -309,6 +413,7 @@
 	scwin.ROUT_NM_SEARCH_callback = function(obj) {
 		dlt_BRT_INCDNT_INFO.setCellData(MO0303G0.getFocusedRowIndex(), "ROUT_ID", obj[0].ROUT_ID);
 		dlt_BRT_INCDNT_INFO.setCellData(MO0303G0.getFocusedRowIndex(), "ROUT_NM", obj[0].ROUT_NM);
+		dlt_BRT_INCDNT_INFO.setCellData(MO0303G0.getFocusedRowIndex(), "WAY_DIV", obj[0].WAY_DIV);
 	}		
 	
 	scwin.VHC_NO_onfocus = function(e) {
@@ -338,6 +443,7 @@
 		dlt_BRT_INCDNT_INFO.setCellData(MO0303G0.getFocusedRowIndex(), "LINK_ID", obj[0].LINK_ID);
 		dlt_BRT_INCDNT_INFO.setCellData(MO0303G0.getFocusedRowIndex(), "ROUT_NM", obj[0].ROUT_NM);
 		dlt_BRT_INCDNT_INFO.setCellData(MO0303G0.getFocusedRowIndex(), "VHC_NO", obj[0].VHC_NO);
+		dlt_BRT_INCDNT_INFO.setCellData(MO0303G0.getFocusedRowIndex(), "WAY_DIV", obj[0].WAY_DIV);
 	}		
 	
 	scwin.DRV_NM_onfocus = function(e) {
