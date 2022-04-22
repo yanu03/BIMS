@@ -29,6 +29,11 @@ public interface AL0303Mapper {
 	
 	public Map AL0303G0K0();
 	
+	public String selectWayDiv(Map routId);
+	
+	public void updateCurAllocPlInfo(Map param);
+	
+	
 	
 	/*
 	public List<Map> PI0205G0R0(Map param);

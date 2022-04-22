@@ -56,6 +56,9 @@
 		SELECT CONCAT('RI', LPAD(NEXTVAL(SEQ_BRT_RPC_VHC_INFO_0), 8, '0')) AS 'SEQ'
 	</select>
 	
+	
+	
+	
 
 	<select id="AL0303SHI0" resultType="Map" parameterType="Map">
 		select  DATE_FORMAT(OCR_DTM, '%Y-%m-%d') AS OCR_DTM, RPC_VHC_ID
@@ -261,6 +264,26 @@
 	</select>
 
 
+	<!-- WAY_DIV -->
+	<select id="selectWayDiv" resultType="String">
+		SELECT 
+			WAY_DIV
+		FROM
+			BMS_ROUT_MST
+		WHERE
+			ROUT_ID = #{ROUT_ID}
+	</select>
+	
+	<update id="updateCurAllocPlInfo" parameterType="Map">
+		UPDATE 
+			BRT_CUR_ALLOC_PL_INFO
+		SET	
+			OPER_VHC_ID = #{RPC_VHC_ID}
+		WHERE 
+			REP_ROUT_ID = #{REP_ROUT_ID} 
+			AND ALLOC_NO = #{ALLOC_NO} 
+			AND VHC_ID = #{GRP_VHC_ID}
+	</update>
 
 <!--
 

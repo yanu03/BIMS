@@ -28,6 +28,7 @@
         				<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
         				<w2:column id="GPS_X" name="돌발GPS_X좌표" dataType="text"></w2:column>
         				<w2:column id="GPS_Y" name="돌발GPS_Y좌표" dataType="text"></w2:column>
+        				<w2:column id="WAY_DIV" name="상하행" dataType="text"></w2:column>
         			</w2:columnInfo>
         		</w2:dataList>
         		<w2:dataMap baseNode="map" id="dma_VHC_INFO">
