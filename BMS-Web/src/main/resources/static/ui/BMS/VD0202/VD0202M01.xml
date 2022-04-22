@@ -30,7 +30,8 @@
 					<w2:keyInfo>
 						<w2:key id="CONTENT1" name="name1" dataType="text"></w2:key>
 						<w2:key id="CONTENT2" name="name2" dataType="text"></w2:key>
-						<w2:key id="CONTENT3" name="name2" dataType="text"></w2:key>
+						<w2:key id="CONTENT3" name="name3" dataType="text"></w2:key>
+						<w2:key id="CONTENT4" name="name4" dataType="text"></w2:key>
 						<w2:key id="VHC_ID" name="차량ID" dataType="text"></w2:key>
 						<w2:key id="ROUT_ID" name="노선ID" dataType="text"></w2:key>
 					</w2:keyInfo>
@@ -64,12 +65,39 @@
 						<w2:column id="PK003" name="화면(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK004" name="사운드 음량" dataType="text"></w2:column>
 						<w2:column id="PK005" name="LCD 휘도" dataType="text"></w2:column>
+						<w2:column id="PK006" name="히터(ON/OFF)" dataType="text"></w2:column>
+						<w2:column id="PK007" name="FAN(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK008" name="커맨드" dataType="text"></w2:column>
+						<w2:column id="PK009" name="BIT 캡쳐" dataType="text"></w2:column>
+						<w2:column id="PK010" name="BIT 영상 녹화" dataType="text"></w2:column>
 						<w2:column id="PK011" name="로그레벨" dataType="text"></w2:column>
 						<w2:column id="PK012" name="IP/PORT" dataType="text"></w2:column>
 						<w2:column id="PK013" name="통신" dataType="text"></w2:column>
 						<w2:column id="PK014" name="AP" dataType="text"></w2:column>
 						<w2:column id="PK015" name="GPS" dataType="text"></w2:column>
+						<w2:column id="PK016" name="집중모니터링 여부" dataType="text"></w2:column>
+						<w2:column id="PK017" name="정주기 주기" dataType="text"></w2:column>
+						<w2:column id="PK018" name="배터리" dataType="text"></w2:column>
+						<w2:column id="PK019" name="" dataType="text"></w2:column>
+						<w2:column id="PK020" name="" dataType="text"></w2:column>
+						<w2:column id="PK021" name="" dataType="text"></w2:column>
+						<w2:column id="PK022" name="" dataType="text"></w2:column>
+						<w2:column id="PK023" name="" dataType="text"></w2:column>
+						<w2:column id="PK024" name="" dataType="text"></w2:column>
+						<w2:column id="PK025" name="" dataType="text"></w2:column>
+						<w2:column id="PK026" name="" dataType="text"></w2:column>
+						<w2:column id="PK027" name="" dataType="text"></w2:column>
+						<w2:column id="PK028" name="" dataType="text"></w2:column>
+						<w2:column id="PK029" name="" dataType="text"></w2:column>
+						<w2:column id="PK030" name="" dataType="text"></w2:column>
+						<w2:column id="PK031" name="" dataType="text"></w2:column>
+						<w2:column id="PK032" name="" dataType="text"></w2:column>
+						<w2:column id="PK033" name="" dataType="text"></w2:column>
+						<w2:column id="PK034" name="" dataType="text"></w2:column>
+						<w2:column id="PK035" name="" dataType="text"></w2:column>
+						<w2:column id="PK036" name="" dataType="text"></w2:column>
+						<w2:column id="PK037" name="" dataType="text"></w2:column>
+						<w2:column id="PK038" name="" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_repRoutItem" saveRemovedData="true">
@@ -163,8 +191,8 @@
 		};		
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);
 
-//		VD0202G0.mergeCol(2,false);
-//		VD0202G0.mergeCells("byrestriccol");
+		//VD0202G0.mergeCol(2,false);
+		//VD0202G0.mergeCells("byrestriccol");
 		
 		com.executeSubmission(sub_VD0202SHI0);	
 		
@@ -309,7 +337,7 @@
 	
 	
 	scwin.sub_VD0202SHI0_submitdone = function(e) {
-		com.searchGrid(VD0202G0, sub_VD0202G0R0);
+		//com.searchGrid(VD0202G0, sub_VD0202G0R0);
 		$p.executeSubmission(sub_VD0202SHI1);
 	};
 	
@@ -507,7 +535,7 @@
 //	};
 	
 	scwin.sub_VD0202SHI1_submitdone = function(e) {
-		TYPE1.setValue("RR00000002");
+		//TYPE1.setValue("RR00000002");
 		com.searchGrid(VD0202G0, sub_VD0202G0R0);		
 	};
 	
@@ -803,11 +831,11 @@
 								</xf:itemset>
 							</xf:choices>
 						</xf:select1>
-						<xf:group class="label" id="" style="">
-						<!-- <w2:span class="" id="" label="노선"></w2:span> -->
+						<!--<xf:group class="label" id="" style="">
+						<w2:span class="" id="" label="노선"></w2:span>
 					</xf:group>
 					<xf:group class="search" id="" style="">
-						<!-- <xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+						 <xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
 							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE2_onviewchange" id="TYPE2"
 							optionOrder="false" ref="data:dma_search.CONTENT2" class="search_type_100" style="" submenuSize="auto" textAlign="left"
 							chooseOptionLabel="-선택-">
@@ -817,12 +845,20 @@
 									<xf:value ref="ROUT_ID"></xf:value>
 								</xf:itemset>
 							</xf:choices>
-						</xf:select1> -->
-					</xf:group>
+						</xf:select1> 
+					</xf:group>-->
 					<xf:group class="label" id="" style="">
 						<w2:span class="" id="" label="검색"></w2:span>
 					</xf:group>
-					<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT3" placeholder="차량ID 또는 차량번호"></xf:input>
+					<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT3" placeholder="차량ID 또는 차량번호">
+					</xf:input>
+					<xf:group class="label" id="" style="margin-left:10px">
+						<w2:span class="" id="" label="운행일"></w2:span>
+					</xf:group>
+					<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+						style="width:120px; margin-right: 10px; float: left;margin-top: 3px;" id="CONTENT4" renderType="component" renderDiv="true"
+						calendarValueType="yearMonthDate" ref="data:dma_search.CONTENT4" ev:onviewchange="scwin.CONTENT4_onviewchange" placeholder="yyyymmdd">
+					</w2:inputCalendar>
 					</xf:group>
 					<w2:wframe class="" id="wfm_mainBtn" scope="true" src="/cm/common/wf_mainBtn.xml" style=""></w2:wframe>
 				</xf:group>

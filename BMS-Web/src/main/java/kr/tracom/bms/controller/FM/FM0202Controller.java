@@ -30,6 +30,12 @@ public class FM0202Controller extends ControllerSupport {
 		return result.getResult();
 	}
 	
+	@RequestMapping("/fm/FM0202G0R1")
+	public @ResponseBody Map<String, Object> FM0202G0R1() throws Exception {
+		result.setData("dlt_PARAM_KIND", fm0202Service.FM0202G0R1());
+		return result.getResult();
+	}
+	
 	@RequestMapping("/fm/FM0202SHI0")
 	public @ResponseBody Map<String, Object> fm0202SHI0() throws Exception {
 		result.setData("dlt_searchitem", fm0202Service.fm0202SHI0());

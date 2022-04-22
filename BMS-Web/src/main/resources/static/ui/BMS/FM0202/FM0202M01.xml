@@ -25,8 +25,6 @@
 						<w2:column id="FILE_NM" name="파일명" dataType="text"></w2:column>
 						<w2:column id="GPS_X" name="GPS_X좌표" dataType="text"></w2:column>
 						<w2:column id="GPS_Y" name="GPS_Y좌표" dataType="text"></w2:column>
-						<w2:column id="TM_X" name="TM_X좌표" dataType="text"></w2:column>
-						<w2:column id="TM_Y" name="TM_Y좌표" dataType="text"></w2:column>
 						<w2:column id="FCLT_IP" name="시설IP" dataType="text"></w2:column>
 						<w2:column id="REL_KIND" name="관계종류" dataType="text"></w2:column>
 						<w2:column id="REL_ID" name="관계아이디" dataType="text"></w2:column>
@@ -41,6 +39,44 @@
 						<w2:column id="SEND_DATE" name="갱신일시" dataType="text"></w2:column>
 						<w2:column id="CTR_YN" name="제어여부" dataType="text"></w2:column>
 						<w2:column id="FCLT_COORDS" name="시설물위치좌표" dataType="text"></w2:column>
+						<w2:column id="PK001" name="리셋" dataType="text"></w2:column>
+						<w2:column id="PK002" name="전원(ON/OFF)" dataType="text"></w2:column>
+						<w2:column id="PK003" name="화면(ON/OFF)" dataType="text"></w2:column>
+						<w2:column id="PK004" name="사운드 음량" dataType="text"></w2:column>
+						<w2:column id="PK005" name="LCD 휘도" dataType="text"></w2:column>
+						<w2:column id="PK006" name="히터(ON/OFF)" dataType="text"></w2:column>
+						<w2:column id="PK007" name="FAN(ON/OFF)" dataType="text"></w2:column>
+						<w2:column id="PK008" name="커맨드" dataType="text"></w2:column>
+						<w2:column id="PK009" name="BIT 캡쳐" dataType="text"></w2:column>
+						<w2:column id="PK010" name="BIT 영상 녹화" dataType="text"></w2:column>
+						<w2:column id="PK011" name="로그레벨" dataType="text"></w2:column>
+						<w2:column id="PK012" name="IP/PORT" dataType="text"></w2:column>
+						<w2:column id="PK013" name="통신" dataType="text"></w2:column>
+						<w2:column id="PK014" name="AP" dataType="text"></w2:column>
+						<w2:column id="PK015" name="GPS" dataType="text"></w2:column>
+						<w2:column id="PK016" name="집중모니터링 여부" dataType="text"></w2:column>
+						<w2:column id="PK017" name="정주기 주기" dataType="text"></w2:column>
+						<w2:column id="PK018" name="배터리" dataType="text"></w2:column>
+						<w2:column id="PK019" name="" dataType="text"></w2:column>
+						<w2:column id="PK020" name="" dataType="text"></w2:column>
+						<w2:column id="PK021" name="" dataType="text"></w2:column>
+						<w2:column id="PK022" name="" dataType="text"></w2:column>
+						<w2:column id="PK023" name="" dataType="text"></w2:column>
+						<w2:column id="PK024" name="" dataType="text"></w2:column>
+						<w2:column id="PK025" name="" dataType="text"></w2:column>
+						<w2:column id="PK026" name="" dataType="text"></w2:column>
+						<w2:column id="PK027" name="" dataType="text"></w2:column>
+						<w2:column id="PK028" name="" dataType="text"></w2:column>
+						<w2:column id="PK029" name="" dataType="text"></w2:column>
+						<w2:column id="PK030" name="" dataType="text"></w2:column>
+						<w2:column id="PK031" name="" dataType="text"></w2:column>
+						<w2:column id="PK032" name="" dataType="text"></w2:column>
+						<w2:column id="PK033" name="" dataType="text"></w2:column>
+						<w2:column id="PK034" name="" dataType="text"></w2:column>
+						<w2:column id="PK035" name="" dataType="text"></w2:column>
+						<w2:column id="PK036" name="" dataType="text"></w2:column>
+						<w2:column id="PK037" name="" dataType="text"></w2:column>
+						<w2:column id="PK038" name="" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_search">
@@ -66,6 +102,8 @@
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_NODE_MST" saveRemovedData="true">
 					<w2:columnInfo>
+						<w2:column id="REP_ROUT_NM" name="대표노선명" dataType="text"></w2:column>
+						<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
 						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
 						<w2:column id="NODE_ID" name="노드ID" dataType="text"></w2:column>
 						<w2:column id="NODE_SN" name="노드순번" dataType="number" defaultValue="0"></w2:column>
@@ -82,6 +120,7 @@
 						<w2:column id="MORN_STD" name="집중모니터링기준" dataType="text"></w2:column>
 						<w2:column id="COND_ERROR" name="비정상여부" dataType="text"></w2:column>
 						<w2:column id="STTN_FCLT_TYPE" name="정류소시설유형" dataType="text"></w2:column>
+						<w2:column id="STTN_NO" name="정류소번호" dataType="text"></w2:column>
 					</w2:columnInfo>
 					<w2:data use="false">
 						<w2:row></w2:row>
@@ -105,6 +144,13 @@
 						<w2:column id="ROUT_NM" name="name2" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
+				<!-- PARAM_KIND 데이터리스트 -->
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_PARAM_KIND" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="PARAM_KIND" name="매개변수종류" dataType="text"></w2:column>
+					</w2:columnInfo>
+					<w2:data use="false"></w2:data>
+				</w2:dataList>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
 			<xf:submission id="sub_FM0202G0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_NODE_MST" action="/fm/FM0202G0R0"
@@ -114,6 +160,10 @@
 			<xf:submission id="sub_FM0202G1R0" ref="data:json,dma_sub_search" target='data:json,dlt_BMS_FCLT_INFO' action="/fm/FM0202G1R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="" ev:submit="" ev:submitdone="scwin.sub_FM0202G1R0_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_FM0202G0R1" ref="" target="data:json,dlt_PARAM_KIND" action="/fm/FM0202G0R1" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
+				ev:submit="" ev:submitdone="scwin.sub_FM0202G0R1_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_FM0202SHI0" ref="" target="data:json,dlt_repRoutItem" action="/repRout/selectRepRoutItem" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
@@ -145,9 +195,8 @@
 	var param = com.getParameter();
 	scwin.onpageload = function() {
 		 var autoOptions = {
-			Main : { grid : FM0202G0, srchSbm : sub_FM0202G0R0, keyColumn : "NODE_ID", srchGrp : pgm_header, name : "정류장 목록",
-						focusColumn : "NODE_NM"},
-			Sub1 : { grid : FM0202G1, srchSbm : sub_FM0202G1R0, name : "시설물 상태 및 제어"}
+			Main : { grid : FM0202G0, srchSbm : sub_FM0202G0R0, keyColumn : "NODE_ID", srchGrp : pgm_header, name : "정류장 목록", focusColumn : "NODE_NM"}
+			,Sub1 : { grid : FM0202G1, srchSbm : sub_FM0202G1R0, name : "시설물 상태 및 제어"}
 		 };
 		 
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID, autoOptions);
@@ -160,18 +209,17 @@
 				
 		
 		var codeOptions = [ {code : "NODE_TYPE", compID : "FM0202G0:NODE_TYPE" },
-							{code : "FCLT_KIND", compID : "FM0202G1:FCLT_KIND"},
+							{code : "PARAM_KIND", compID : "PARAM_KIND"},
 							{code : "INST_LOC", compID : "FM0202G1:INST_LOC"},
-							{code : "FCLT_COND", compID : "FM0202G1:FCLT_COND"}
 		 ];			
 		 
 		com.setCommonDtl(codeOptions);
 
-		FM0202G0.mergeCol(2,false);
+		FM0202G0.mergeCol(3,false);
 		FM0202G0.mergeCells("byrestriccol");
-		$p.executeSubmission(sub_FM0202SHI0);	
-		$p.executeSubmission(sub_FM0202SHI1);
-		$p.executeSubmission(sub_FM0202SHI2);	
+		com.executeSubmission(sub_FM0202SHI0);	
+		com.executeSubmission(sub_FM0202SHI1);
+		com.executeSubmission(sub_FM0202SHI2);	
 		
 	};	
 	
@@ -226,11 +274,7 @@
 				var fcltCond = dataList[i].FCLT_COND;
 			}
 		}
-		
-		
 		//var content = jsonObj.content;
-		
-		
 		//console.log('Connected: ' + content);
 		var rowData2 = dlt_BRT_CUR_OPER_INFO.getCellData(FM0202G0.getFocusedRowIndex(), "VHC_ID")
 		var rowData = dlt_BRT_CUR_OPER_INFO.getAllJSON()[FM0202G0.getFocusedRowIndex()];
@@ -243,11 +287,39 @@
 		$("#mf_tac_layout_contents_MN00050202_body_message").append("<tr><td>" + message + "</td></tr>");
 	}	
 	
+	scwin.sub_FM0202SHI0_submitdone = function(e) {
+		//TYPE1.setValue("RR00000002");
+		com.executeSubmission(sub_FM0202SHI3);		
+		//com.searchGrid(FM0202G0, sub_FM0202G0R0);
+	};
+	
+	scwin.sub_FM0202SHI3_submitdone = function(e) {
+		com.searchGrid(FM0202G0, sub_FM0202G0R0);
+	};
+	
+	scwin.sub_FM0202G0R0_submitdone = function(e) {
+		if (dlt_BMS_NODE_MST.getAllJSON().length > 0) {
+			FM0202G0.setFocusedCell(0, "NODE_ID");
+			//com.setFocusedCell(FM0202G0, "NODE_ID");
+			var routID = dlt_BMS_NODE_MST.getCellData(FM0202G0.getFocusedRowIndex(), "ROUT_ID");			
+			dma_sub_search.set("ROUT_ID", routID);
+		} else {
+			dma_sub_search.set("ROUT_ID", null);
+			dma_sub_search.set("NODE_ID", null);
+			com.executeSubmission(sub_FM0202G1R0);
+		}			
+	};
+	
+	
 	scwin.FM0202G0_onrowindexchange = function(row,oldRow) {
 		var focusOption = {keyMap : dma_sub_search};
 		var routID = dlt_BMS_NODE_MST.getCellData(FM0202G0.getFocusedRowIndex(), "ROUT_ID");
 		dma_sub_search.set("ROUT_ID", routID);
 		com.changeDualGrid(FM0202G0, FM0202G1, null, sub_FM0202G1R0, focusOption, row, oldRow);	
+		
+		//dma_sub_search.set("NODE_ID", dlt_BMS_NODE_MST.getCellData(row, "NODE_ID"));
+		//com.executeSubmission(sub_FM0202G1R0);
+		
 		
 		//메뉴코드용
 		var param = com.getParameter();
@@ -259,41 +331,14 @@
 		}
 	};
 	
-	scwin.sub_FM0202G0R0_submitdone = function(e) {
-		if (dlt_BMS_NODE_MST.getAllJSON().length > 0) {
-			FM0202G0.setFocusedCell(0, "NODE_ID");
-			//com.setFocusedCell(FM0202G0, "NODE_ID");
-			var routID = dlt_BMS_NODE_MST.getCellData(FM0202G0.getFocusedRowIndex(), "ROUT_ID");			
-			dma_sub_search.set("ROUT_ID", routID);
-			
-		} else {
-			dma_sub_search.set("ROUT_ID", null);
-			dma_sub_search.set("NODE_ID", null);
-			$p.executeSubmission(sub_FM0202G1R0);
-		}			
-		
-		
-
-	};
-	
-	scwin.sub_FM0202SHI0_submitdone = function(e) {
-		TYPE1.setValue("RR00000002");
-		
-		$p.executeSubmission(sub_FM0202SHI3);		
-		com.searchGrid(FM0202G0, sub_FM0202G0R0);
-	};
-	
-	
-	function imgOnclick(id){
-		
-		//var fcltId = $('#'+id).closest('div').attr('id');
-		var rowIndex = dlt_BMS_FCLT_INFO.getMatchedIndex("FCLT_ID", id);
-		
-		FM0202G1.setFocusedCell(rowIndex, "FCLT_ID", false);
-		
-	}
-	
 	scwin.sub_FM0202G1R0_submitdone = function(e) {
+		com.executeSubmission(sub_FM0202G0R1);
+	};
+	
+	scwin.sub_FM0202G0R1_submitdone = function(e) {
+		//동적 그리드 시작
+		scwin.setGridViewInfo();
+		
 		var str = ""
 		var imgSrc = ""
 		var imgId = ""
@@ -320,17 +365,17 @@
 			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
 			var fcltCond = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND");
 			
-			if(fcltKind == 'FK001' && fcltCond == 'FC020'){
+			if((fcltKind == 'FK001' && fcltCond == 'FC020')|| fcltCond == ''){
 				imgSrc = "/cm/images/bms/BIT_RED_normal.png";
-			}else if(fcltKind == 'FK001' && fcltCond == 'FC021'){
+			}else if((fcltKind == 'FK001' && fcltCond == 'FC021') || fcltCond == ''){
 				imgSrc = "/cm/images/bms/BIT_RED_abnormal.png";
 			}else if((fcltKind == 'FK004' && fcltCond == 'FC020') || fcltCond == ''){
 				imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
 			}else if((fcltKind == 'FK004' && fcltCond == 'FC021') || fcltCond == ''){
 				imgSrc = "/cm/images/bms/AIRTUBE_abnormal.png";
-			}else if(fcltKind == 'FK005' && fcltCond == 'FC020'){
+			}else if((fcltKind == 'FK005' && fcltCond == 'FC020') || fcltCond == ''){
 				imgSrc = "/cm/images/bms/AIRCON_normal.png";
-			}else if(fcltKind == 'FK005' && fcltCond == 'FC021'){
+			}else if((fcltKind == 'FK005' && fcltCond == 'FC021') || fcltCond == ''){
 				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
 			}
 			
@@ -364,8 +409,102 @@
 			oriFcltWidth[i] = document.getElementById(fcltId+'img').width;
 			oriFcltHeight[i] = document.getElementById(fcltId+'img').height;
 		}
+	};
+	
+	//동적 그리드 함수
+	scwin.setGridViewInfo = function() {
+		var gridHeader ="", gridBody=""; 
+		var rowData = dlt_BMS_FCLT_INFO.getAllJSON();
+		var paramKindJson = dlt_PARAM_KIND.getAllJSON();
+		var rowCntParamKind = dlt_PARAM_KIND.getRowCount();
+		
+		//헤더 시작
+		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_5" value="시설물상태" blockSelect="false" displayMode="label"></w2:column>';
+		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_3" value="시설물ID" blockSelect="false" displayMode="label" sortable="true"></w2:column>';
+		gridHeader +='<w2:column removeBorderStyle="false" width="170" inputType="text" style="height:20px" id="h_colunm_4" value="시설물종류" blockSelect="false" displayMode="label"></w2:column>';
+		
+		//동적 헤더 시작
+		for(var i = 0; i < rowCntParamKind; i++) {
+			var paramKind = dlt_PARAM_KIND.getCellData(i, "PARAM_KIND");
+			
+			if(paramKind != '' && paramKind != 'PK001'){
+				var dlCd = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD");
+				var dlCdNm = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD_NM");
+				
+				gridHeader +='<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="h_colunm'+i+3+'" value="'+dlCdNm+'" blockSelect="false" displayMode="label"></w2:column>';
+				gridHeader +='<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="h_colunm'+i+4+'" value="'+dlCdNm+'자동'+'" blockSelect="false" displayMode="label"></w2:column>';
+			}
+			
+		}
+		
+		//바디 시작
+		gridBody += '<w2:column removeBorderStyle="false" width="117" inputType="select" style="height:20px" id="FCLT_COND" value="" blockSelect="false" displayMode="label"></w2:column>';
+		gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="FCLT_ID" value="" blockSelect="false" displayMode="label"></w2:column>';
+		gridBody += '<w2:column removeBorderStyle="false" width="117" inputType="select" style="height:20px" id="FCLT_KIND" value="" blockSelect="false" displayMode="label"></w2:column>';
+		
+		//동적 바디 시작
+		for(var i = 0; i < rowCntParamKind; i++) {
+			var paramKind = dlt_PARAM_KIND.getCellData(i, "PARAM_KIND");
+			var dlCd = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD");
+			var dlCdNm = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD_NM");
+			var displayForMatter = '';
+			
+			if(dlCd == 'PK002' || dlCd == 'PK003' || dlCd == 'PK006' || dlCd == 'PK007'){
+				displayForMatter = 'scwin.onOffDisFormatter'; //데이터유형이 ON/OFF인 경우 displayformaatter 추가
+			}
+			
+			if(paramKind != '' && paramKind != 'PK001'){
+				gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'" value="" blockSelect="false" displayMode="label" displayFormatter="'+displayForMatter+'"></w2:column>';
+				gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'_AUTO_YN'+'" value="" blockSelect="false" displayMode="label" displayFormatter="scwin.AutoDisFormatter"></w2:column>';
+			}
+		}
+		
+		//gridView 정보 정의 
+		//xml 형식을 정의 하면 <w2:gridView 에 xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" 포함 합니다.
+		var gridStr = '<w2:gridView xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" '
+							+'autoFit="lastColumn" class="cm_grid left" dataList="data:dlt_BMS_FCLT_INFO" ev:oncellclick="scwin.FM0202G1_oncellclick" '
+							+'ev:onrowindexchange="scwin.FM0202G1_onrowindexchange" fixedColumnWithHidden="true" id="FM0202G1" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" '
+							+'rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" autoFitMinWidth="0" readOnly="true" '
+							+'sortable="false" focusMode="row" showSortableImage="true" sortEvent="onclick" ev:onheaderclick="scwin.FM0202G1_onheaderclick">';
+		gridStr += '<w2:header style="" id="header2">'
+		+ '<w2:row style="" id="row3">'
+		+ gridHeader
+		+'<w2:column removeBorderStyle="false" width="170" inputType="text" style="height:20px" id="h_colunm_5" value="" blockSelect="false" displayMode="label"></w2:column>'
+		+'</w2:row>'
+		+'</w2:header>'
+		+'<w2:gBody style="" id="gBody2">'
+		+'<w2:row id="row2" style="">'
+		+ gridBody
+		+'<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px" id="" value="" blockSelect="false" displayMode="label"></w2:column>'
+		+'</w2:row>'
+		+'</w2:gBody>';
+		gridStr += '<w2:footer id="footer1" style=""><w2:row id="row3" style=""><w2:column blockSelect="false" colSpan="30" displayMode="label" expression="&quot;데이터 개수 : &quot; + COUNT(\'COMP_ID\')" id="column42" inputType="expression" removeBorderStyle="false" style="height:20px;" textAlign="left" width="2386"></w2:column></w2:row></w2:footer>';
+		gridStr += '</w2:gridView>';
+
+		FM0202G1.setGridStyle(WebSquare.xml.parse(gridStr , true ));
+		//dlt_BMS_FCLT_COND_PARAM_INFO.removeAll();
+		//autoOptions.Sub1.grid = FM0202G1;
+		scwin.commonCode();
 		
 	};
+	
+	scwin.commonCode = function(){
+		var codeOptions = [ 
+							{code : "FCLT_KIND", compID : "FM0202G1:FCLT_KIND"}
+							,{code : "FCLT_COND", compID : "FM0202G1:FCLT_COND"}
+		 ];			
+		 
+		com.setCommonDtl(codeOptions);
+	}
+	
+	function imgOnclick(id){
+		
+		//var fcltId = $('#'+id).closest('div').attr('id');
+		var rowIndex = dlt_BMS_FCLT_INFO.getMatchedIndex("FCLT_ID", id);
+		
+		FM0202G1.setFocusedCell(rowIndex, "FCLT_ID", false);
+		
+	}
 	
 	//window resize함수
 	/*window.addEventListener('resize', function(){
@@ -410,7 +549,6 @@
 	
 	scwin.FM0202G1_onrowindexchange = function(row,oldRow) {
 		var param = com.getParameter();
-		//$('#mf_tac_layout_contents_'+param.menuCode+'_body_STTN_IMG').remove();
 		
 		var str = ""
 		var imgSrc = ""
@@ -424,17 +562,17 @@
 			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
 			var fcltCond = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND");
 			
-			if(fcltKind == 'FK001' && fcltCond == 'FC020'){
+			if((fcltKind == 'FK001' && fcltCond == 'FC020')|| fcltCond == ''){
 				imgSrc = "/cm/images/bms/BIT_RED_normal.png";
-			}else if(fcltKind == 'FK001' && fcltCond == 'FC021'){
+			}else if((fcltKind == 'FK001' && fcltCond == 'FC021') || fcltCond == ''){
 				imgSrc = "/cm/images/bms/BIT_RED_abnormal.png";
 			}else if((fcltKind == 'FK004' && fcltCond == 'FC020') || fcltCond == ''){
 				imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
 			}else if((fcltKind == 'FK004' && fcltCond == 'FC021') || fcltCond == ''){
 				imgSrc = "/cm/images/bms/AIRTUBE_abnormal.png";
-			}else if(fcltKind == 'FK005' && fcltCond == 'FC020'){
+			}else if((fcltKind == 'FK005' && fcltCond == 'FC020') || fcltCond == ''){
 				imgSrc = "/cm/images/bms/AIRCON_normal.png";
-			}else if(fcltKind == 'FK005' && fcltCond == 'FC021'){
+			}else if((fcltKind == 'FK005' && fcltCond == 'FC021') || fcltCond == ''){
 				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
 			}
 			
@@ -451,17 +589,17 @@
 		var fcltCond = dlt_BMS_FCLT_INFO.getCellData(row, "FCLT_COND");
 		
 		//이미지 변경
-		if(fcltKind == 'FK001' && fcltCond == 'FC020'){
+		if((fcltKind == 'FK001' && fcltCond == 'FC020')|| fcltCond == ''){
 				$('#'+fcltID).children('img').attr("src", '/cm/images/bms/BIT_RED_normal_selected.png');
-			}else if(fcltKind == 'FK001' && fcltCond == 'FC021'){
+			}else if((fcltKind == 'FK001' && fcltCond == 'FC021')|| fcltCond == ''){
 				$('#'+fcltID).children('img').attr("src", '/cm/images/bms/BIT_RED_abnormal_selected.png');
 			}else if((fcltKind == 'FK004' && fcltCond == 'FC020') || fcltCond == ''){
 				$('#'+fcltID).children('img').attr("src", '/cm/images/bms/AIRTUBE_normal_selected.png');
 			}else if((fcltKind == 'FK004' && fcltCond == 'FC021') || fcltCond == ''){
 				$('#'+fcltID).children('img').attr("src", '/cm/images/bms/AIRTUBE_abnormal_selected.png');
-			}else if(fcltKind == 'FK005' && fcltCond == 'FC020'){
+			}else if((fcltKind == 'FK005' && fcltCond == 'FC020')|| fcltCond == ''){
 				$('#'+fcltID).children('img').attr("src", '/cm/images/bms/AIRCON_normal_selected.png');
-			}else if(fcltKind == 'FK005' && fcltCond == 'FC021'){
+			}else if((fcltKind == 'FK005' && fcltCond == 'FC021')|| fcltCond == ''){
 				$('#'+fcltID).children('img').attr("src", '/cm/images/bms/AIRCON_abnormal_selected.png');
 			}
 		
@@ -497,10 +635,6 @@
 	scwin.TYPE1_onviewchange = function(info) {
 		$p.executeSubmission(sub_FM0202SHI3);	
 		
-	};
-	
-	scwin.sub_FM0202SHI3_submitdone = function(e) {
-		com.searchGrid(FM0202G0, sub_FM0202G0R0);
 	};
 		
 	scwin.TYPE2_onviewchange = function(info) {
@@ -610,10 +744,12 @@
 		if(fcltId == null || fcltId == ''){
 			com.alert("시설물을 선택해주세요.");
 		}else{
-			scwin.openMenu("시설물 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040202",fcltId);		
+			scwin.openMenu("시설물 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040202",fcltId);
 			var bac= null;		
 		}
 	}
+	
+	
 	
 	]]></script>
 	</head>
@@ -628,10 +764,9 @@
 						<w2:span class="" id="" label="대표 노선"></w2:span>
 					</xf:group>
 					<xf:group class="search" id="" style="">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE1_onviewchange" id="TYPE1"
-							optionOrder="false" ref="data:dma_search.CONTENT1" class="search_type_100" style="" submenuSize="auto" textAlign="left"
-							chooseOptionLabel="-선택-">
+						<xf:select1 allOption="true" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE1_onviewchange" id="TYPE1" optionOrder="false"
+							ref="data:dma_search.CONTENT1" class="search_type_100" style="" submenuSize="auto" textAlign="" chooseOptionLabel="-선택-">
 							<xf:choices>
 								<xf:itemset nodeset="data:dlt_repRoutItem">
 									<xf:label ref="REP_ROUT_NM"></xf:label>
@@ -643,9 +778,9 @@
 						<w2:span class="" id="" label="노선"></w2:span>
 					</xf:group>
 					<xf:group class="search" id="" style="">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+						<xf:select1 allOption="true" appearance="minimal" chooseOption="" direction="auto" disabled="false"
 							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE2_onviewchange" id="TYPE2" optionOrder="false"
-							ref="data:dma_search.CONTENT2" class="search_type_100" style="" submenuSize="auto" textAlign="left" chooseOptionLabel="-선택-">
+							ref="data:dma_search.CONTENT2" class="search_type_100" style="" submenuSize="auto" textAlign="" chooseOptionLabel="-선택-">
 							<xf:choices>
 								<xf:itemset nodeset="data:dlt_searchitem4">
 									<xf:label ref="ROUT_NM"></xf:label>
@@ -676,7 +811,8 @@
 					<xf:group class="label" id="" style="">
 						<w2:span class="" id="" label="검색"></w2:span>
 					</xf:group>
-					<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT3" placeholder="정류소ID 또는 정류소명"></xf:input>
+					<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT3" placeholder="정류소ID 또는 정류소명">
+					</xf:input>
 					</xf:group>
 					<w2:wframe class="" id="wfm_mainBtn" scope="true" src="/cm/common/wf_mainBtn.xml" style=""></w2:wframe>
 				</xf:group>
@@ -703,20 +839,23 @@
 							<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header2">
 								<w2:row style="" id="row3">
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column61"
+									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column61"
 										value="정류소ID" blockSelect="false" displayMode="label">
 									</w2:column>
 									<!--  <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column57"
 										value="노드타입" blockSelect="false" displayMode="label">
 									</w2:column>-->
-									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column56"
-										value="정류소명" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="180" inputType="text" style="height:20px" id="column56"
+										value="정류소명" blockSelect="false" displayMode="label" sortable="false">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column1"
+										value="정류소번호" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column58"
-										value="위도" blockSelect="false" displayMode="label" sortable="false">
+										value="대표노선명" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column59"
-										value="경도" blockSelect="false" displayMode="label" sortable="false">
+										value="노선명" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
 									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
 										value="비고" blockSelect="false" displayMode="label" sortable="false">
@@ -734,11 +873,14 @@
 									<w2:column removeBorderStyle="false" width="161" inputType="text" style="height:20px" id="NODE_NM"
 										value="" blockSelect="false" displayMode="label" textAlign="left">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="GPS_Y"
-										value="" blockSelect="false" displayMode="label"  textAlign="right">
+									<w2:column removeBorderStyle="false" width="161" inputType="text" style="height:20px" id="STTN_NO"
+										value="" blockSelect="false" displayMode="label" textAlign="right">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="134" inputType="text" style="height:20px" id="GPS_X"
-										value="" blockSelect="false" displayMode="label"  textAlign="right">
+									<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="REP_ROUT_NM"
+										value="" blockSelect="false" displayMode="label"  textAlign="">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="134" inputType="text" style="height:20px" id="ROUT_NM"
+										value="" blockSelect="false" displayMode="label"  textAlign="">
 									</w2:column>
 									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK"
 										value="" blockSelect="false" displayMode="label">

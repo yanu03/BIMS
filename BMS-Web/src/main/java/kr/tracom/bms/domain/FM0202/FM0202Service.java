@@ -24,6 +24,10 @@ public class FM0202Service extends ServiceSupport{
 		return fm0202Mapper.fm0202G1R0(param);
 	}
 	
+	public List FM0202G0R1() throws Exception {
+		return fm0202Mapper.FM0202G0R1();
+	}
+	
 	public List<Map> fm0202SHI0() throws Exception{
 		return fm0202Mapper.fm0202SHI0();
 	}
