@@ -655,12 +655,12 @@
 	scwin.openPopUpChart = function(){
 		var jsonData = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getAllJSON();
 		var transData = new Array();
-		var realData = new Array();
+		//var realData = new Array();
 		
 		for(var j=0; j<dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowCount(); j++){
 			if(jsonData[j].OPER_SN  == dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.getCellData(VH0200G1.getFocusedRowIndex(), "OPER_SN")){
 				transData.push(dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowJSON(j));
-				realData.push(dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowJSON(j));
+				//realData.push(dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowJSON(j));
 			}
 		}
 	

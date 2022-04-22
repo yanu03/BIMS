@@ -17,6 +17,7 @@
 					<w2:column id="OCR_DTM" name="운행일" dataType="text"></w2:column>
 					<w2:column id="OPER_SN" name="운행순번" dataType="text"></w2:column>
 					<w2:column id="NODE_ID" name="노드아이디" dataType="text"></w2:column>
+					<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
 					<w2:column id="ACCRU_LEN" name="노드명" dataType="text"></w2:column>
 					<w2:column id="NODE_SN" name="노드순번" dataType="text"></w2:column>
 					<w2:column id="ALLOC_NO" name="배차번호" dataType="text"></w2:column>
@@ -59,8 +60,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
 	<script src='https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js'></script>
+	 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation.js"></script>
 	<script type="text/javascript" lazy="false"><![CDATA[
-
+	
+	
 	scwin.onpageload = function() {
 		
 		scwin.param = com.getParameter();
@@ -76,6 +79,7 @@
 		dma_sub_search.set("OPER_SN", " "+scwin.param.data4);
 		
 		scwin.DrawChart();		
+		
 	};
 	
 	scwin.onpageunload = function() {
@@ -127,11 +131,8 @@
 		this.tension = {};	//곡선 or 직선
 		this.pointRadius = {};	//포인트 반지름 0일 경우 포인트 안그려짐
 		this.pointHitRadius = {};	//호버 했을때 영역
+		this.segment;	
 	}
-	
-	var color = ["rgba(226,85,81,0.8)","rgba(226,137,85,0.8)","rgba(226,207,83,0.8)","rgba(174,226,85,0.8)","rgba(104,226,85,0.8)","rgba(85,85,137,0.8)"
-					,"rgba(85,226,207,0.8)","rgba(85,174,226,0.8)","rgba(85,104,226,0.8)","rgba(137,85,226,0.8)","rgba(207,85,226,0.8)","rgba(226,85,151,0.8)"
-		];
 
 	scwin.DrawChart = function(){
 		var datasets = new Array();
@@ -191,10 +192,10 @@
 		
 		datasets.push(charData);
 		
-		
-		
 		//변경운행 데이터 생성 한줄
-		var data = new Array();
+		/*var data = new Array();
+		var color = [];
+		var x = 0;
 		for(var y = 0; y < jsonData.length; y++){
 			var label = jsonData[y].OPER_SN + "회차";
 			var yAxisID = jsonData[y].NODE_NM;
@@ -223,19 +224,18 @@
 				data.push(categoryJson);
 			}
 			
-		};
-		
-		var annotation = {
-			type:"line",
-			borderColor:"red",
-			borderWidth:"1",
-			label:{
-				backgroundColor:'black',
-				content:"변경운행 시점",
-				enabled:true
-			},
-			scaleID:"y",
-			value: "2367"
+			if(chgDiv == 1){
+				color[x] = 'rgba(255, 0, 0, 1)'
+				x++;
+				color[x] = 'rgba(255, 0, 0, 1)'
+				x++;
+			}else if(chgDiv == 2){
+				color[x] = 'rgba(0, 0, 255, 1)'
+				x++;
+				color[x] = 'rgba(0, 0, 255, 1)'
+				x++;
+			}
+			
 		};
 		
 		var charData = new CharData();
@@ -244,26 +244,33 @@
 		//charData.label = firstChg +"번째 "+label+" 변경운행";
 		charData.label = "변경운행";
 		
-		charData.backgroundColor = scwin.getRandomColor();
-		charData.borderColor = charData.backgroundColor;
+		charData.backgroundColor = 'rgba(255, 0, 0, 1)';
+		charData.borderColor = color
 		
 		charData.borderWidth = 1;
-		charData.pointBorderWidth = 1;
+		charData.pointBorderWidth = 2;
 		charData.tension = 0;
 		charData.pointRadius = 1;
 		charData.pointHitRadius = 20;
 		
-		datasets.push(charData);
 		
+		datasets.push(charData);*/
+		
+		var color = ["rgb(226,85,81)","rgb(226,137,85)","rgb(226,207,83)","rgb(174,226,85)","rgb(104,226,85)","rgb(85,85,137)"
+					,"rgb(85,226,207)","rgb(85,174,226)","rgb(85,104,226)","rgb(137,85,226)","rgb(207,85,226)","rgb(226,85,151)"
+		];
 		
 		//변경운행 데이터 생성 여러줄
-		/*var chgCnt = dlt_CHG_CNT.getCellData(0, "CHG_CNT");
+		var chgCnt = dlt_CHG_CNT.getCellData(0, "CHG_CNT");
 		var firstChg = 1;
+		var oldY = 0;
 		for(var x = 0; x < chgCnt; x++){
+			var firstNodeNm;
+			var lastNodeNm;
 			var data = new Array();
 			for(var y = 0; y < jsonData.length; y++){
 				var label = jsonData[y].OPER_SN + "회차";
-				var yAxisID = jsonData[y].NODE_NM;
+				//var yAxisID = jsonData[y].NODE_NM;
 				var updDtm = util.getCurrentDate3();
 				var operSn = jsonData[y].OPER_SN;
 				var arrvTm = jsonData[y].CHG_ARRV_TM;
@@ -279,7 +286,6 @@
 						categoryJson.x = new Date(updDtm+' '+arrvTm);
 						categoryJson.y = accruLen;
 						data.push(categoryJson);
-						
 					}
 					
 					if(arrvTm != '' && dprtTm != ''){
@@ -289,18 +295,26 @@
 						categoryJson.y = accruLen;
 						data.push(categoryJson);
 					}
-				
+					
+					if(oldY >= y){
+						firstNodeNm = jsonData[y].NODE_NM;
+					}else{
+						lastNodeNm = jsonData[y].NODE_NM;
+					}
+					
+					oldY = y;
 				}
 			};
-			
+			oldY += 1;
+						
 			var charData = new CharData();
 			
 			charData.data = data;
-			//charData.label = firstChg +"번째 "+label+" 변경운행";
-			charData.label = firstChg +"번째 "+" 변경운행";
+			//charData.label = firstChg +"번째 "+" 변경운행";
+			charData.label = "(" + firstNodeNm + "~" + lastNodeNm + ")" + " 변경운행";
 			
-			charData.backgroundColor = scwin.getRandomColor();
-			charData.borderColor = charData.backgroundColor;
+			charData.backgroundColor = color[x];
+			charData.borderColor = color[x];
 			
 			charData.borderWidth = 1;
 			charData.pointBorderWidth = 1;
@@ -308,37 +322,17 @@
 			charData.pointRadius = 1;
 			charData.pointHitRadius = 20;
 			
-			datasets.push(charData);
+			if(charData.data.length > 0){
+				datasets.push(charData);
+			}
 			firstChg++;
-		}*/
+		}
 		
 		var ctx = document.getElementById('myChart');
 		var myChart = new Chart(ctx, {
 			    type: 'line',
 				data: {
 					datasets
-				    /*datasets: [{
-					      label: '운행계획',
-					      data: [{
-					        x: new Date(2021, 10, 19, 03, 24, 20),
-					        y: 1
-					      }, {
-					        x: new Date(2021, 10, 19, 4, 24, 0),
-					        y: 10
-					      }
-					      ]
-					    },
-					    {
-					      label: '실제운행',
-					      data: [{
-					        x: new Date(2021, 10, 19, 3, 28, 0),
-					        y: 2
-					      }, {
-					        x: new Date(2021, 10, 19, 4, 24, 0),
-					        y: 11
-					      }]
-					    }
-					    ]*/
 				  },
 			    options: {
 			        scales: {
@@ -349,30 +343,31 @@
 				        }
 				      }]
 			        },
-			         plugins: {
-				      autocolors: false,
-				      annotation: {
-				        annotations: {
-					        mode:"horizontal",
-				           	type:"line",
-							borderColor:"red",
-							borderWidth:"1",
-							scaleID: 'y-axis-0',
-							label:{
-								backgroundColor:'black',
-								content:"변경운행 시점",
-								enabled:true
-							},
-							//value:2367
-							yMin:2367,
-							yMax:2367
-				        }
-				      }
-				    }
+			        annotation:{
+			        	annotations:[
+			        		{
+			        			drawTime: "afterDatasetsDraw"
+			        			,id:"hline"
+			        			,type:"line"
+			        			,mode:"horizontal"
+			        			,scaleID:"y-axis-0"
+			        			,value: 2367
+			        			,borderColor: "black"
+			        			,borderWidth: 5
+			        			,label: {
+					              backgroundColor: "red",
+					              content: "Test Label",
+					              enabled: true
+					            }
+			        			
+			        		}
+			        	]
+			        }
 			        
 			    }
 			});
 	}
+	
 	
 	]]></script>
 	</head>
