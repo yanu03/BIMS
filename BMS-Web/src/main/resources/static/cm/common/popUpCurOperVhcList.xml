@@ -33,6 +33,7 @@
 						<w2:column id="DRV_NM" name="name20" dataType="text"></w2:column>
 						<w2:column id="LINK_NM" name="name21" dataType="text"></w2:column>
 						<w2:column id="NODE_NM" name="name22" dataType="text"></w2:column>
+						<w2:column id="WAY_DIV" name="상하행" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_search">

@@ -88,7 +88,7 @@
 	FROM			BMS_DVC_HIS
 	
 	WHERE			DVC_ID = #{DVC_ID}
-	ORDER BY		SN					
+	ORDER BY		APLY_DATE DESC				
 </select>
 
 <select id="VD0300G3R0" resultType="Map">
@@ -101,6 +101,7 @@
 	
 	WHERE			MNG_ID = #{MNG_ID}
 	AND				DVC_COND = 'DC021'
+	ORDER BY		SEND_DATE DESC
 </select>
 
 

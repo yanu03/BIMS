@@ -102,6 +102,7 @@
 				,	A.UPD_DTM
 				,	B.REP_ROUT_NM
 				,	C.ROUT_NM
+				,	C.WAY_DIV
 				,	D.DRV_NM
 				,	E.LINK_NM
 				,	F.NODE_NM

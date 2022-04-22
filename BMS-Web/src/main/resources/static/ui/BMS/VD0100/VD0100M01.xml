@@ -153,11 +153,11 @@
 		
 		com.executeSubmission(sub_VD0100SHI0);
 		
-		VD0100G0.mergeCol(2,false);
+		/*VD0100G0.mergeCol(2,false);
 		VD0100G0.mergeCol(3,false);
 		VD0100G0.mergeCol(4,false);
 		VD0100G0.mergeCol(5,false);
-		VD0100G0.mergeCells("byrestriccol");
+		VD0100G0.mergeCells("byrestriccol");*/
 	};
 
 	scwin.onpageunload = function() {
