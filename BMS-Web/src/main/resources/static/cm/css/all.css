@@ -1108,7 +1108,7 @@ ul.question li a:hover {font-weight:bold;}
 
 .sttnInfopopup {
     background: #fff;
-    position: relative;
+    position: absolute;
 /*     bottom: 57px;
     left:2px; */
     bottom: 35px;
@@ -1123,9 +1123,10 @@ ul.question li a:hover {font-weight:bold;}
     width: 190px;
 }
 
+
 .busInfoPopup {
     background: #fff;
-    position: relative;
+    position: absolute;
 /*     bottom: 57px;
     left:2px; */
     bottom: 42px;
@@ -1140,13 +1141,39 @@ ul.question li a:hover {font-weight:bold;}
     /* width: 190px; */
 }
 
+.bustraffic {
+	left: 0px;
+    top: 10px;
+    z-index: 10000000;	
+}
+
+.event_type {
+    margin-right: 40px;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+#overlay_tbody th{
+	font-size: 10px;
+}
+
+#overlay_tbody td{
+    font-size: 10px;
+    padding: 5px;
+    white-space: break-spaces;
+}
+
+#overlay_tbody div{
+	width : 80px;
+}
+
 .dsptchMessagePopup {
     background: #fff;
-    position: relative;
+    position: absolute;
 /*     bottom: 57px;
     left:2px; */
     bottom: 42px;
-    left: -122px;
+    left: -180px;
     border-radius: 6px;
     border: 1px solid #ccc;
     border-bottom: 2px solid #ddd;
@@ -1154,7 +1181,7 @@ ul.question li a:hover {font-weight:bold;}
     /* position: absolute;
     left: 761px;
     top: 407px;	 */
-    width: 250px;	
+    width: 361px;	
 }
 
 .sttnInfopopup.clickoverlay:after {
