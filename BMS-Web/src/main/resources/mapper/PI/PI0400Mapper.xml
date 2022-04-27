@@ -3,27 +3,46 @@
 <mapper namespace="kr.tracom.bms.domain.PI0400.PI0400Mapper">
 
 	<select id="PI0400G0R0" resultType="Map" parameterType="Map">
-		SELECT DATE_FORMAT(NOTI_DT, '%Y-%m-%d %H:%i') NOTI_DT, SKY_COND, TEMPC, TEMP_MINI,TEMP_HIGH, HUMI, 
-		RAIN_PRO, RAINFALL, DATE_FORMAT(UPD_DTM, '%Y-%m-%d %H:%i') UPD_DTM 
-		FROM BMS_WEAT_INFO
+		SELECT 
+			DATE_FORMAT(NOTI_DT, '%Y-%m-%d %H:%i') NOTI_DT, 
+			SKY_COND, 
+			TEMPC, 
+			TEMP_MINI,
+			TEMP_HIGH, 
+			HUMI, 
+			RAIN_PRO, 
+			RAINFALL, 
+			DATE_FORMAT(UPD_DTM, '%Y-%m-%d %H:%i') UPD_DTM 
+		FROM 
+			BMS_WEAT_INFO
 		<where>
 				<if test="CONTENT != ''">
 					DATE_FORMAT(NOTI_DT,'%Y%m') = #{CONTENT}
 				</if>
 		</where>
-		ORDER BY NOTI_DT DESC
+		ORDER BY 
+			NOTI_DT DESC
 	</select>
 	
 	<select id="PI0400G1R0" resultType="Map" parameterType="Map">
-		SELECT DATE_FORMAT(MEAS_DT, '%Y-%m-%d %H:%i') MEAS_DT, DUSTC, SDUSTC, SDC, CMC, 
-		OZONEC, NDC, DATE_FORMAT(UPD_DTM, '%Y-%m-%d %H:%i') UPD_DTM 
-		FROM BMS_ATMO_INFO
+		SELECT 
+			DATE_FORMAT(MEAS_DT, '%Y-%m-%d %H:%i') MEAS_DT, 
+			DUSTC,
+			SDUSTC, 
+			SDC, 
+			CMC, 
+			OZONEC, 
+			NDC, 
+			DATE_FORMAT(UPD_DTM, '%Y-%m-%d %H:%i') UPD_DTM 
+		FROM 
+			BMS_ATMO_INFO
 		<where>
 			<if test="CONTENT != ''">
 				DATE_FORMAT(MEAS_DT,'%Y%m') = #{CONTENT}
 			</if>
 		</where>
-		ORDER BY MEAS_DT DESC
+		ORDER BY 
+			MEAS_DT DESC
 	</select>
 	
 <select id="PI0400G2R0" resultType="Map" parameterType="Map">
@@ -44,6 +63,28 @@
       LEFT OUTER JOIN BMS_VHC_MST V 
       ON DV.VHC_ID = V.VHC_ID
      ORDER BY
-     	 LIV.SEND_DT
+     	 LIV.SEND_DT DESC
 	</select>
+	
+<select id="selectIntgInfo" resultType="Map">
+	SELECT 
+		A.INTG_ID,
+	    A.INTG_NM,
+	    A.INTG_ENM,
+	    A.INTG_TYPE,
+	    A.INTG_URL,
+	    A.INTG_API_KEY,
+	    A.ID,
+	    A.PWD,
+	    A.REMARK,
+	    A.UPD_DTM,
+	    A.UPD_ID
+	FROM 
+		BMS_INTG_MST A
+	WHERE
+		INTG_ID IN ('IT00000001', 'IT00000002') <!-- 기상, 대기 -->
+	ORDER BY
+		A.INTG_ID
+</select>
+
 </mapper>

@@ -655,12 +655,12 @@
 	scwin.openPopUpChart = function(){
 		var jsonData = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getAllJSON();
 		var transData = new Array();
-		var realData = new Array();
+		//var realData = new Array();
 		
 		for(var j=0; j<dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowCount(); j++){
 			if(jsonData[j].OPER_SN  == dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.getCellData(VH0200G1.getFocusedRowIndex(), "OPER_SN")){
 				transData.push(dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowJSON(j));
-				realData.push(dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowJSON(j));
+				//realData.push(dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowJSON(j));
 			}
 		}
 	
@@ -942,10 +942,10 @@
 						</xf:group>
 						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
 							style="width:120px; margin-right: 10px; float: left;margin-top: 3px;" id="F_DATE_VH0200" renderType="component" renderDiv="true"
-							calendarValueType="yearMonthDate" ref="data:dma_search.F_DATE_VH0200" ev:onviewchange="scwin.F_DATE_VH0200_onviewchange">
+							calendarValueType="yearMonthDate" ref="data:dma_search.F_DATE_VH0200" ev:onviewchange="scwin.F_DATE_VH0200_onviewchange" placeholder="yyyymmdd">
 						</w2:inputCalendar>
 						<w2:span label="~" style="float: left;margin-right: 10px;margin-top: 5px;" id=""></w2:span>
-						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false" placeholder="yyyymmdd"
 							style="width: 120px;float: left;margin-top: 3px;" id="L_DATE_VH0200" renderType="component" renderDiv="true" calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE_VH0200" ev:onviewchange="scwin.L_DATE_VH0200_onviewchange">
 						</w2:inputCalendar>
 						<xf:group id="" style="margin-left: 10px;" class="radio">

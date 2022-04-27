@@ -28,4 +28,8 @@ public class PI0400Service extends ServiceSupport{
 		Map param = getSimpleDataMap("dma_search");
 		return PI0400Mapper.PI0400G2R0(param);
 	}
+	
+	public List<Map> selectIntgInfo() throws Exception{
+		return PI0400Mapper.selectIntgInfo();
+	}
 }

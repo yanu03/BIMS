@@ -59,6 +59,7 @@
 						<w2:column id="INCDNT_ID" name="돌발아이디" dataType="text"></w2:column>
 						<w2:column id="REP_ROUT_NM" name="대표노선명" dataType="text"></w2:column>
 						<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
+						<w2:column id="WAY_DIV" name="상하행" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ROUT_NODE_DISP_VW" saveRemovedData="true">
@@ -90,6 +91,11 @@
 						<w2:key id="SEQ" name="SEQ" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
+				<w2:dataMap baseNode="map" id="dma_selectSeq">
+					<w2:keyInfo>
+						<w2:key id="SEQ" name="SEQ" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
 			<xf:submission id="sub_AL0303G0R0" ref='data:json,dma_search' target="data:json,dlt_BRT_RPC_VHC_INFO" action="/al/AL0303G0R0"
@@ -111,6 +117,10 @@
 			</xf:submission>
 			<xf:submission id="sub_AL0303G0K0" ref="" target="data:json,dma_SEQ_BRT_RPC_VHC_INFO_0" action="/al/AL0303G0K0" method="post" mediatype="application/json"
 				encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_AL0303G0K0_submitdone"
+				ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_AL0303G0K1" ref="" target="data:json,dma_selectSeq" action="/al/AL0303G0K1" method="post" mediatype="application/json"
+				encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.dma_selectSeq_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
 		</xf:model>
@@ -141,6 +151,8 @@
 		});
 		
 		$p.executeSubmission(sub_AL0303SHI0);
+		
+		
 	};
 	
 	
@@ -167,6 +179,65 @@
 	
 	scwin.sub_AL0303G0R0_submitdone = function(e) {
 		com.setFocusedCell(AL0303G0, "RPC_ID");
+		
+		//돌발에서 넘어온 데이터가 있는지 체크
+		var param = com.getParameter();
+		if(!param.INCDNT_ID == false){
+			com.executeSubmission(sub_AL0303G0K1);
+		}
+		
+	};
+	
+	//돌발에서 넘어온 데이터 삽입
+	scwin.dma_selectSeq_submitdone = function(e) {
+		var param = com.getParameter();
+		if(!param.INCDNT_ID == false){
+			var index = dlt_BRT_RPC_VHC_INFO.getRowCount();
+			dlt_BRT_RPC_VHC_INFO.setRowJSON(index, param);
+			dlt_BRT_RPC_VHC_INFO.setCellData(index, "RPC_ID", dma_selectSeq.get("SEQ"));
+			dlt_BRT_RPC_VHC_INFO.setCellData(index, "GRP_VHC_ID", param.VHC_ID);
+			dlt_BRT_RPC_VHC_INFO.setCellData(index, "GRP_VHC_NO", param.VHC_NO);
+			dlt_BRT_RPC_VHC_INFO.setCellData(index, "GRP_DRV_ID", param.DRV_ID);
+			dlt_BRT_RPC_VHC_INFO.setCellData(index, "GRP_DRV_NM", param.DRV_NM);
+			AL0303G0.setFocusedCell(index, "RPC_ID");
+		}
+	};
+	
+	scwin.sub_AL0303G0K0_submitdone = function(e) {
+		com.addGridForm(AL0303G0, AL0303F0, dma_SEQ_BRT_RPC_VHC_INFO_0, "RPC_ID", "RPC_ID");
+	};
+	
+	scwin.AL0303G0_onrowindexchange = function(row, oldRow) {
+   		var vhcId = dlt_BRT_RPC_VHC_INFO.getCellData(row, "GRP_VHC_ID");
+   		var routID = dlt_BRT_RPC_VHC_INFO.getCellData(row, "ROUT_ID");
+   		
+   		dma_sub_search.set("VHC_ID", vhcId);
+   		dma_sub_search.set("ROUT_ID", routID);
+		com.executeSubmission(sub_AL0303G1R0);
+   };
+	
+	scwin.sub_AL0303G1R0_submitdone = function(e) {
+		var allJson = dlt_BMS_ROUT_NODE_DISP_VW.getAllJSON();
+		
+		if(allJson != '' && allJson != null){
+			routMap.showRoute("map_AL0303", allJson);
+		}else{
+			/*routMap.deleteLine("map_AL0303");
+			routMap.removeBusMarkers("map_AL0303");
+			routMap.removeMarkers("map_AL0303");
+			routMap.removeAllBusOverlay("map_AL0303");*/
+			routMap.initDisplay("map_AL0303");
+			routMap.initBus("map_AL0303");
+		}	
+		
+		var curIndex = AL0303G0.getFocusedRowIndex();
+		var rowData = dlt_BRT_RPC_VHC_INFO.getCellData(curIndex, "GRP_VHC_ID");
+		var jsonObj = dlt_BRT_RPC_VHC_INFO.getRowJSON(curIndex);
+		
+		if(rowData != '' && rowData != null && jsonObj.GPS_X != '' && jsonObj.GPS_Y != ''){
+			routMap.showVehicle2("map_AL0303", jsonObj, rowData, AL0303G0, 0,0);
+		}
+		
 	};
 	
 	scwin.GRP_VHC_NO_onclick = function(e) {
@@ -210,6 +281,7 @@
 		
 		dlt_BRT_RPC_VHC_INFO.setCellData(AL0303G0.getFocusedRowIndex(), "REP_ROUT_ID", obj[0].REP_ROUT_ID);
 		dlt_BRT_RPC_VHC_INFO.setCellData(AL0303G0.getFocusedRowIndex(), "ROUT_ID", obj[0].ROUT_ID);
+		dlt_BRT_RPC_VHC_INFO.setCellData(AL0303G0.getFocusedRowIndex(), "WAY_DIV", obj[0].WAY_DIV);
 		ROUT_NM.setValue(obj[0].ROUT_NM);
 		
 		var routId = dlt_BRT_RPC_VHC_INFO.getCellData(AL0303G0.getFocusedRowIndex(), "ROUT_ID");
@@ -275,48 +347,13 @@
 		scwin.RPC_VHC_NO_onclick();
 	};
 	
-	scwin.AL0303G0_onrowindexchange = function(row, oldRow) {
-		
-   		var vhcId = dlt_BRT_RPC_VHC_INFO.getCellData(row, "GRP_VHC_ID");
-   		var routID = dlt_BRT_RPC_VHC_INFO.getCellData(row, "ROUT_ID");
-   		
-   		dma_sub_search.set("VHC_ID", vhcId);
-   		dma_sub_search.set("ROUT_ID", routID);
-		com.executeSubmission(sub_AL0303G1R0);
-   };
-	
-	scwin.sub_AL0303G1R0_submitdone = function(e) {
-		
-		var allJson = dlt_BMS_ROUT_NODE_DISP_VW.getAllJSON();
-		
-		if(allJson != '' && allJson != null){
-			routMap.showRoute("map_AL0303", allJson);
-		}else{
-			/*routMap.deleteLine("map_AL0303");
-			routMap.removeBusMarkers("map_AL0303");
-			routMap.removeMarkers("map_AL0303");
-			routMap.removeAllBusOverlay("map_AL0303");*/
-			routMap.initDisplay("map_AL0303");
-			routMap.initBus("map_AL0303");
-		}	
-		
-		var curIndex = AL0303G0.getFocusedRowIndex();
-		var rowData = dlt_BRT_RPC_VHC_INFO.getCellData(curIndex, "GRP_VHC_ID");
-		var jsonObj = dlt_BRT_RPC_VHC_INFO.getRowJSON(curIndex);
-		
-		if(rowData != '' && rowData != null && jsonObj.GPS_X != '' && jsonObj.GPS_Y != ''){
-			routMap.showVehicle2("map_AL0303", jsonObj, rowData, AL0303G0, 0,0);
-		}
-	};
 	
 	scwin.OCR_TM_onviewchange = function(info) {
 		var data = com.transTime2(info.newValue);
 		OCR_TM.setValue(data);
 	};
 	
-	scwin.sub_AL0303G0K0_submitdone = function(e) {
-		com.addGridForm(AL0303G0, AL0303F0, dma_SEQ_BRT_RPC_VHC_INFO_0, "RPC_ID", "RPC_ID");
-	};
+	
 	
 	scwin.sub_AL0303G0S0_submitdone = function(e) {
 		com.executeSubmission(sub_AL0303G0R0);
@@ -364,6 +401,8 @@
 	scwin.alertHelpIncdnt = function(){
 		com.alert("※ 돌발 정보를 가져올 시 노선명, 발생일시, 원차량, 원운전자, 돌발좌표 값들이 자동으로 연결됩니다.");
 	}
+	
+	
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">

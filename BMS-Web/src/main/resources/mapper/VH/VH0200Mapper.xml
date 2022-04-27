@@ -27,7 +27,7 @@ FROM
 	LEFT OUTER JOIN BMS_ROUT_MST C
 	ON A.ROUT_ID = C.ROUT_ID
 <where>
-	A.OCR_NODE_TYPE = 'NT002'
+	(A.OCR_NODE_TYPE = 'NT002' OR A.OCR_NODE_TYPE = 'NT001')
 	<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT1)">
 			AND A.REP_ROUT_ID = #{CONTENT1}
 	</if>

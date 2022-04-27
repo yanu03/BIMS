@@ -10,14 +10,28 @@ import org.springframework.stereotype.Service;
 
 import kr.tracom.cm.support.ServiceSupport;
 import kr.tracom.cm.support.exception.MessageException;
+import kr.tracom.platform.attribute.common.AtBrtAction;
+import kr.tracom.platform.attribute.common.AtTimeStamp;
+import kr.tracom.platform.net.config.TimsConfig;
+import kr.tracom.platform.net.protocol.TimsMessage;
+import kr.tracom.platform.net.protocol.TimsMessageBuilder;
+import kr.tracom.platform.service.TService;
+import kr.tracom.platform.service.config.KafkaTopics;
+import kr.tracom.tims.handler.ActionRequest;
+import kr.tracom.tims.kafka.KafkaProducer;
 import kr.tracom.util.DateUtil;
 import kr.tracom.util.Result;
 
 @Service
 public class AL0303Service extends ServiceSupport{
 
+	private static final int Map = 0;
+
 	@Autowired
 	private AL0303Mapper AL0303Mapper;
+	
+	 @Autowired
+	 KafkaProducer kafkaProducer;
 	
 	public List AL0303G0R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
@@ -50,8 +64,55 @@ public class AL0303Service extends ServiceSupport{
 				String rowStatus = (String) data.get("rowStatus");
 				if(rowStatus.equals("C")) {
 					iCnt += AL0303Mapper.AL0303G0I0(data);
+	                  AtBrtAction brtRequest = new AtBrtAction();
+	                  
+	                  String wayDiv = AL0303Mapper.selectWayDiv(data);
+	                  
+	                  String actionData = (String) data.get("REP_ROUT_ID")+","+data.get("OPER_DT")+","+data.get("ALLOC_NO")+","+
+	                		  						wayDiv+","+data.get("GRP_VHC_ID")+","+data.get("RPC_VHC_ID");
+
+	                   brtRequest.setTimeStamp(new AtTimeStamp(DateUtil.now("yyyyMMddHHmmssSSS")));
+	                   brtRequest.setActionCode(AtBrtAction.changeBusOccur);
+	                   brtRequest.setData("");
+	                   brtRequest.setReserved(actionData);
+	
+	                     
+	                     TimsConfig timsConfig = TService.getInstance().getTimsConfig();
+	                     TimsMessageBuilder builder = new TimsMessageBuilder(timsConfig);
+	                     TimsMessage tMessage = builder.actionRequest(brtRequest);
+	                     
+	                     
+	                     kafkaProducer.sendKafka(KafkaTopics.T_BRT, tMessage, ""); 
+	                     
+	                     //BRT_CUR_ALLOC_PL_INFO 운행 차량아이디 변경
+	                     AL0303Mapper.updateCurAllocPlInfo(data);
+
+					
 				}else if (rowStatus.equals("U")) {
 					uCnt += AL0303Mapper.AL0303G0U0(data);
+					AtBrtAction brtRequest = new AtBrtAction();
+	                  
+					String wayDiv = AL0303Mapper.selectWayDiv(data);
+					
+	                  String actionData = (String) data.get("REP_ROUT_ID")+","+data.get("OPER_DT")+","+data.get("ALLOC_NO")+","+
+	                		  						wayDiv+","+data.get("GRP_VHC_ID")+","+data.get("RPC_VHC_ID");
+
+	                   brtRequest.setTimeStamp(new AtTimeStamp(DateUtil.now("yyyyMMddHHmmssSSS")));
+	                   brtRequest.setActionCode(AtBrtAction.changeBusOccur);
+	                   brtRequest.setData("");
+	                   brtRequest.setReserved(actionData);
+	
+	                     
+	                     TimsConfig timsConfig = TService.getInstance().getTimsConfig();
+	                     TimsMessageBuilder builder = new TimsMessageBuilder(timsConfig);
+	                     TimsMessage tMessage = builder.actionRequest(brtRequest);
+	                     
+	                     
+	                     kafkaProducer.sendKafka(KafkaTopics.T_BRT, tMessage, "");
+	                     
+	                   //BRT_CUR_ALLOC_PL_INFO 운행 차량아이디 변경
+	                     AL0303Mapper.updateCurAllocPlInfo(data);
+					
 				}else if (rowStatus.equals("D")) { 
 					dCnt += AL0303Mapper.AL0303G0D0(data); 
 				}

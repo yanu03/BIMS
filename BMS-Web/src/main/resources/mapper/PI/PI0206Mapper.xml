@@ -55,6 +55,7 @@
 			,DATE_FORMAT(D.RSV_DT, '%Y-%m-%d') RSV_DT
 			,IF(A.USE_YN = 'Y', '사용', NULL) USE_YN
 			,E.COMP_NM
+			,(SELECT COUNT(*) FROM BMS_VOC_RSV_RST_INFO VRR WHERE VRR.COMPLETE_YN = 'N' AND VRR.MNG_ID = C.MNG_ID) AS RSV_CNT
 		FROM 
 		 	BMS_VHC_MST A 
 			LEFT JOIN BMS_DVC_INFO B 
@@ -71,9 +72,9 @@
 		<if test="CONTENT != null and CONTENT != ''">
 			AND	A.VHC_NO LIKE CONCAT('%',#{CONTENT},'%')
 		</if>				
-		GROUP BY 
+		GROUP BY
 			A.VHC_ID
-		ORDER BY 
+		ORDER BY
 			A.VHC_ID
 	</select>
 	
@@ -142,7 +143,8 @@
 			,IF(VHC.USE_YN = 'Y', '사용', NULL) USE_YN
 			,VHC.REMARK	
 			,DATE_FORMAT(RSV.RSV_DT, '%Y-%m-%d') RSV_DT
-			,IF(RST.COMPLETE_YN = 'N', '예약중', '예약종료') RSV_STATE					
+			,IF(RST.COMPLETE_YN = 'N', '예약중', '예약종료') RSV_STATE
+			,RSV.RSV_ID		
 		FROM		
 			BMS_VHC_MST VHC
 			LEFT JOIN BMS_DVC_INFO DVC
@@ -161,11 +163,17 @@
 		<if test="RSV_STATE == '예약종료'">
 			AND RST.COMPLETE_YN = 'Y'
 		</if>			
-		<if test="RSV_DT != null">
-			AND DATE_FORMAT(RSV.RSV_DT, '%Y%m') = ${RSV_DT}
-		</if>	
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
+			<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m') >= #{F_DATE}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
+			<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m') <= #{L_DATE}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
+			AND DATE_FORMAT(RSV.RSV_DT, '%Y%m') BETWEEN #{F_DATE} AND #{L_DATE}
+		</if>
 		ORDER BY
-			RSV.RSV_DT
+			RSV.RSV_DT DESC
 	</select>
 	
 	<select id="PI0206G1R1" resultType="Map">

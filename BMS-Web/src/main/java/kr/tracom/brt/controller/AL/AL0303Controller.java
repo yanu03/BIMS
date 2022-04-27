@@ -74,6 +74,12 @@ public class AL0303Controller extends ControllerSupport {
 		return result.getResult();
 	}
 	
+	@RequestMapping("/al/AL0303G0K1")
+	public @ResponseBody Map<String, Object> AL0303G0K1() throws Exception {
+		result.setData("dma_selectSeq", AL0303Service.AL0303G0K0());
+		return result.getResult();
+	}
+	
 	/*
 	@RequestMapping("/pi/PI0205G0R0")
 	public @ResponseBody Map<String, Object> PI0205G0R0() throws Exception {

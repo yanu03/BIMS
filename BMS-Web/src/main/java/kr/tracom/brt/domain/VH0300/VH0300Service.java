@@ -61,7 +61,7 @@ public class VH0300Service extends ServiceSupport {
 	
 	public List VH0300G1R0() throws Exception {
 		// TODO Auto-generated method stub
-		Map param = getSimpleDataMap("dma_param_VH0300G1");
+		Map param = getSimpleDataMap("dma_search");
 		return vh0300Mapper.VH0300G1R0(param);
 	}
 	 	
