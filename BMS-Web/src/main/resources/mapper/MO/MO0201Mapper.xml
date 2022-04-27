@@ -235,6 +235,8 @@
 		FROM			BRT_DSPTCH_LOG	A 
 		
 		WHERE			DATE_FORMAT(A.SEND_DATE, '%Y/%m/%d') = DATE_FORMAT(NOW(), '%Y/%m/%d')
+		AND				A.SEND_GPS_X BETWEEN 120 AND 130
+		AND				A.SEND_GPS_Y BETWEEN 30 AND 40		
 			<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT1)">
 					AND A.REP_ROUT_ID = #{CONTENT1}
 			</if>

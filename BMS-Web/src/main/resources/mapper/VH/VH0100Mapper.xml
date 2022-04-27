@@ -21,7 +21,7 @@
 					ELSE '정상 운행중입니다.'
 				END
 			WHEN  A.DSPTCH_DIV = 'DP003' THEN
-				TIME_FORMAT(SEC_TO_TIME(A.DSPTCH_CONTS), '%i분 %s초 빠릅니다.')
+				TIME_FORMAT(SEC_TO_TIME(A.DSPTCH_CONTS), '%i분 %s초 정차하세요.')
 			ELSE A.DSPTCH_CONTS
 		END AS DSPTCH_CONTS
 		]]>
