@@ -171,6 +171,7 @@
 		// }
 		);	
 
+		MO0203G0.mergeCol(2,false);
 		MO0203G0.mergeCells("byrestriccol");
 		$p.executeSubmission(sub_MO0203SHI0);	
 		$p.executeSubmission(sub_MO0203SHI1);
@@ -441,11 +442,10 @@
 		var dataList = jsonObj.LIST;
 		var nodeId = dlt_BMS_NODE_MST.getCellData(MO0203G0.getFocusedRowIndex(), "NODE_ID");
 		
-		//attrId = 2022 : 정류장별 차량 도착 정보
+		//attrId = 4015 : 정류장별 차량 도착 정보
 		if(attrId == 2022 && nodeId == jsonObj.STTN_ID){
 			MO0203T0_setTable(dataList);
 		}
-		
 		//attrId = 4014 : 실시간 차량 위치 정보
 		else if(attrId == 4014){
 			
@@ -568,8 +568,8 @@
 				</xf:group>
 			</xf:group>
 
-			<xf:group id="pgm_content" class="pgm_content grdc_500_20_a" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_500_20_900_20_a" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_2_400_20_a" style="">
 					<xf:group class="defaultbox" id="" style="">
 						<w2:textbox class="df_tt fl" id="" label="정류소 목록" style=""></w2:textbox>
 					</xf:group>
@@ -589,21 +589,33 @@
 							<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header2">
 								<w2:row style="" id="row3">
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column61"
+										value="정류소ID" blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column56"
 										value="정류소명" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column1"
 										value="정류소상태" blockSelect="false" displayMode="label">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
+										value="비고" blockSelect="false" displayMode="label" sortable="false">
+									</w2:column>
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody2">
 								<w2:row style="" id="row4">
+									<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="NODE_ID"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="161" inputType="text" style="height:20px" id="NODE_NM"
 										value="" blockSelect="false" displayMode="label" textAlign="left">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="161" inputType="select" style="height:20px" id="COND_ERROR"
 										value="" blockSelect="false" displayMode="label" textAlign="">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK"
+										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
 							</w2:gBody>
@@ -617,6 +629,85 @@
 							</w2:footer>
 						</w2:gridView>
 					</xf:group>
+					<xf:group id="" class="horizontal_line"></xf:group>
+					<xf:group id="pgm_sub_subList" class="pgm_sub_subList grdr_20_2_a" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl" id="" label="정류소 정보" style=""></w2:textbox>
+						</xf:group>
+						<xf:group></xf:group>
+						<xf:group style="overflow:auto; position:relative;" id="">
+						<xf:group adaptive="layout" class="w2tb tb" id="MO0203F0" style="position:absolute" tagname="table">
+							<w2:attributes>
+								<w2:summary></w2:summary>
+							</w2:attributes>
+							<xf:group tagname="colgroup">
+								<xf:group style="width:120px;" tagname="col"></xf:group>
+								<xf:group style="" tagname="col"></xf:group>
+								<xf:group style="width:120px;" tagname="col"></xf:group>
+								<xf:group style="" tagname="col"></xf:group>
+							</xf:group>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" style="" class="w2tb_th">정류소ID</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<xf:input adjustMaxLength="false" id="" style="height: 21px;"
+										ref="data:dlt_BMS_NODE_MST.NODE_ID" maxlength="10" disabled="true">
+									</xf:input>
+								</xf:group>
+								<xf:group style="" class="w2tb_th" tagname="th">정류소명</xf:group>
+								<xf:group style="" class="w2tb_td" tagname="td">
+									<xf:input adjustMaxLength="false" id="" style="height: 21px;"
+										ref="data:dlt_BMS_NODE_MST.NODE_NM" maxlength="10" readOnly="true">
+									</xf:input>
+								</xf:group>
+							</xf:group>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" style="" class="w2tb_th">표준정류소ID</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<xf:input adjustMaxLength="false" id="" style="height: 21px;"
+										ref="data:dlt_BMS_NODE_MST.MOCK_NODE_ID" maxlength="10" readOnly="">
+									</xf:input>
+								</xf:group>
+								<xf:group style="" class="w2tb_th" tagname="th">영문정류소명</xf:group>
+								<xf:group style="" class="w2tb_td" tagname="td">
+									<xf:input adjustMaxLength="false" id="" style="height: 21px;"
+										ref="data:dlt_BMS_NODE_MST.NODE_ENM" maxlength="20" readOnly="">
+									</xf:input>
+								</xf:group>
+							</xf:group>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" style="" class="w2tb_th">위도</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<xf:input adjustMaxLength="false" id="" style="height: 21px;"
+										ref="data:dlt_BMS_NODE_MST.GPS_X" maxlength="16" allowChar="0-9" readOnly="true">
+									</xf:input>
+								</xf:group>
+								<xf:group style="" class="w2tb_th" tagname="th">경도</xf:group>
+								<xf:group style="" class="w2tb_td" tagname="td">
+									<xf:input adjustMaxLength="false" id="" style="height: 21px;"
+										ref="data:dlt_BMS_NODE_MST.GPS_Y" maxlength="16" allowChar="0-9" readOnly="true">
+									</xf:input>
+								</xf:group>
+							</xf:group>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" class="w2tb_th" style="height: 90px;vertical-align: top;" id="" tabIndex="">
+									비고
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" class="w2tb_td">
+									<w2:attributes>
+										<w2:colspan>3</w2:colspan>
+										<w2:rowspan>1</w2:rowspan>
+									</w2:attributes>
+									<xf:textarea id="DETAILS" style="width: 100%;height: 100%;" ref="data:dlt_BRT_OPER_VIOLT_HIS.JUDG_DESC"
+										maxlength="2000" readOnly="">
+									</xf:textarea>
+								</xf:group>
+							</xf:group>
+						</xf:group>
+						</xf:group>
+					</xf:group><!-- end pgm_subList -->
 				</xf:group><!-- pgm_list end -->
 				
 				<xf:group id="" class="vertical_line"></xf:group>
@@ -624,34 +715,38 @@
 				<xf:group id="pgm_detail" class="pgm_detail grdr_20_a" style="">
 					<xf:group class="gr_map_header" id="" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="정류소 목록(map)" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl" id="" label="지도" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					<xf:group id="" style="">
 						<div id="map_MO0203" style="overflow:hidden;">
 							<ul id="category_map_MO0203" class="category"></ul>
 						</div>
-				
-						<xf:group id="brt_div" class="pgm_detail" style="z-index: 10000;position: absolute;right: 52px;margin-top: 245px;margin-right: -20px;display: none;visibility: hidden;width: 140px;height: 399px;">
-							<xf:group style="width: 100%; height:100%" id="bit_img">
-								<xf:group id="" class="brt_bit" style="background-size: cover; height: 393px; position: relative;"></xf:group>
-							</xf:group>
-							<xf:group style="" id=""></xf:group>
-							<xf:group style="position: absolute;top: 30%;left: 14%;width: 100px;text-align: center;">
-								<w2:span label="정류소명" style="color: white;font-size: 12px;" id=""
-									ref="data:dlt_BMS_ROUT_NODE_CMPSTN2.NODE_NM">
-								</w2:span>
-							</xf:group>
-							<xf:group style="position: absolute; top: 40%; left: 7%; text-align: center; width: 118px;">
-								<w2:span label="" style="color: white;font-size: 10px;"
-										 id="" ref="data:dlt_BMS_ROUT_NODE_CMPSTN2.NODE_ID">
-								</w2:span>
-							</xf:group>
-							<xf:group style="" id=""></xf:group>
-							<xf:group tagname="table" style="" id="MO0203T0" class="w2tb bit_tb"></xf:group>
-						</xf:group>								
-						
 					</xf:group>
+				</xf:group><!-- pgm_detail end -->
+				
+				<xf:group id="" class="vertical_line"></xf:group>
+				
+				<xf:group id="pgm_subDetail" class="pgm_detail grdr_20_2_200_25_20_20_50_a" style="">
+					<xf:group class="gr_map_header" id="" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl" id="" label="BIT" style=""></w2:textbox>
+						</xf:group>
+					</xf:group>
+					<xf:group style="width: 100%; height:100%" id="bit_img">
+						<xf:group id="" class="brt_bit" style=""></xf:group>
+					</xf:group>
+					<xf:group style="" id=""></xf:group>
+					<w2:span label="정류소명" style="color: white;font-size: 15px;text-align: center;" id=""
+						ref="data:dlt_BMS_NODE_MST.NODE_NM">
+					</w2:span>
+					<w2:span label="" style="color: white;font-size: 14px;text-align: center;" id="" ref="data:dlt_BMS_NODE_MST.NODE_ENM">
+					</w2:span>
+					<w2:span label="NODE_ID" style="color: white;font-size: 14px;text-align: center;" id=""
+						ref="data:dma_NODE_ID.NODE_ID">
+					</w2:span>
+					<xf:group style="" id=""></xf:group>
+					<xf:group tagname="table" style="" id="MO0203T0" class="w2tb bit_tb"></xf:group>
 				</xf:group><!-- pgm_detail end -->
 			</xf:group><!-- end content -->
 		</xf:group><!-- end container -->

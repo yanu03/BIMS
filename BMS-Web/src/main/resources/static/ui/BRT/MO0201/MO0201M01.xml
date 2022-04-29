@@ -42,6 +42,8 @@
 						<w2:column id="VHC_KIND" name="차량종류" dataType="text"></w2:column>
 						<w2:column id="EVT_YN" name="이벤트 표시" dataType="text" defaultValue="1"></w2:column>
 						<w2:column id="DSPTCH_YN" name="디스패치 표시" dataType="text" defaultValue="1"></w2:column>
+						<w2:column id="DSPTCH_KIND" name="디스패치종류" dataType="text"></w2:column>
+						<w2:column id="DSPTCH_DIV" name="디스패치구분" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_search">
@@ -611,7 +613,44 @@
 		
 		var attrId = jsonObj.ATTR_ID;
 		var dataList = jsonObj.LIST;
+		var repRoutItem = dma_search.get("CONTENT1");
+		var checkRepRout = 0;
+		var routItem = dma_search.get("CONTENT2");
+		var routItemString = dma_search.get("CONTENT3");
+	
+		//GPS값 튈 경우 아무 동작도 안되게 처리
+		if(typeof(jsonObj.GPS_X) != "undefined" && typeof(jsonObj.GPS_Y) != "undefined"){
+			if (jsonObj.GPS_X<120 || jsonObj.GPS_Y>130) {
+				return;	
+			}
+			if (jsonObj.GPS_Y<30 || jsonObj.GPS_Y>40) {
+				return;	
+			}
+		}	
 		
+		if (repRoutItem != "") {
+			//소켓 데이터에 대표노선이 없어 대표노선에 포함된 노선 ID들과 비교			
+			for(var i=0; i<dlt_searchitem2.getDataLength(); i++) {
+				var routItemOfList = dlt_searchitem2.getCellData(i, "ROUT_ID");		
+				if(routItemOfList == jsonObj.ROUT_ID) {
+					checkRepRout = 1;	
+				}	
+			}
+			if (checkRepRout == 0){
+				return;
+			}
+		}	
+		
+		if (routItem != "") {
+			if(routItem != jsonObj.ROUT_ID) {
+				return;
+			}		
+		}
+		
+		if (routItemString != "") {
+				
+		}			
+				
 		var canvas = $("#canvas")[0];
 		var ctx = canvas.getContext("2d");	
 		var busImg = new Image();
@@ -635,7 +674,6 @@
 		
 		//attrId = 4014 : 실시간 차량 위치 정보
 		else if(attrId == 4014){
-			debugger;
 				//payload.body >>>> {"GPS_Y":36.484005,"ATTR_ID":4014,"DVC_ID":"DV00000002","GPS_X":127.25973,"VHC_ID":"VH00000002"}		
 		
 		//jsonObj.VHC_ID => 차량아이디
@@ -665,7 +703,7 @@
 			try {
 				var eventCode = jsonObj.EVT_CODE;			
 				routMap.mapInfo["map_MO0201_vehicle"].isEvent = "on";			
-				
+				dlt_BRT_CUR_OPER_INFO.setRowJSON(curIndexArr[0], jsonObj, true);			
 				
 				//정류소 도착
 				if(eventCode == "ET001") {
@@ -778,7 +816,8 @@
 				} else if (dsptchDiv == "DP003") { //정차중디스패치
 					routMap.mapInfo["map_MO0201_vehicle"].divDsptch = "DP003";
 				}
-					
+				
+				dlt_BRT_CUR_OPER_INFO.setRowJSON(curIndexArr[0], jsonObj, true);					
 				routMap.showVehicleClickOverlay("map_MO0201_vehicle", dlt_BRT_CUR_OPER_INFO.getAllJSON(),
 				dlt_BRT_CUR_OPER_INFO.getCellData(MO0201G0.getFocusedRowIndex(), "VHC_ID"), MO0201G0, "Y");													
 					
