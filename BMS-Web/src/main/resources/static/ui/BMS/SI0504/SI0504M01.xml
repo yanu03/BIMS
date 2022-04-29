@@ -75,6 +75,7 @@
 						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
 						<w2:column id="HOLI_YN" name="휴일노선여부" dataType="text" defaultValue="N"></w2:column>
 						<w2:column id="PUB_ROUT_ID" name="공공연계아이디" dataType="text"></w2:column>
+						<w2:column id="ROAT_TM" name="기준시간" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_TRANSCOMP_MST" saveRemovedData="true">
@@ -393,6 +394,10 @@
    scwin.alertHelpBend = function() {
 		com.alert("※ 굴곡도 : 노선의 굴곡정도를 의미하며, 노선의 통행거리와 직선거리(기점-회차지)의 비율입니다. 굴곡도가 1에 가까울수록 통행시간,비용 등에서 최적화된 노선으로 볼 수 있습니다.");
 	};
+	
+	scwin.alertHelpRoat = function() {
+		com.alert("※ 기준시간 : 노선의 교대시간을 의미합니다. 예) 14:30");
+	};
    ]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -582,7 +587,7 @@
 
 				</xf:group>
 				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_320_20_a" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_350_20_a" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="노선 부가정보" style=""></w2:textbox>
@@ -780,6 +785,30 @@
 										mandatory="" maskFormat="" ref="data:dlt_BMS_ROUT_MST.SPR_VHC_CNT" style="width:100%;text-align: right;" validateOnInput="false"
 										validator="">
 									</xf:input>
+								</xf:group>
+							</xf:group>
+							<xf:group style="" tagname="tr">
+								<xf:group tagname="td" class="w2tb_th">
+									기준시간
+									<w2:attributes></w2:attributes>
+									<w2:anchor id="" title="기준시간" style="" ev:onclick="scwin.alertHelpRoat" class="ico_help mr5" outerDiv="false">
+										<xf:label></xf:label>
+									</w2:anchor>
+								</xf:group>
+								<xf:group tagname="td" class="w2tb_td">
+									<w2:attributes>
+									</w2:attributes>
+									<xf:input adjustMaxLength="" allowChar="0-9:" class="" disabled="" id="ROAT_TM" initValue="" ioFormat=""
+										mandatory="" maskFormat="" ref="data:dlt_BMS_ROUT_MST.ROAT_TM" style="width:100%;text-align: right;" validateOnInput="false"
+										validator="" maxlength="5">
+									</xf:input>
+								</xf:group>
+								<xf:group tagname="td" class="w2tb_th">
+									<w2:attributes></w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" class="w2tb_td">
+									<w2:attributes>
+									</w2:attributes>
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">

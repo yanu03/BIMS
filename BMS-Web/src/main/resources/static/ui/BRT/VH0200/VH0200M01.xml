@@ -322,10 +322,55 @@
 						<w2:column id="DPRT_TM_49" name="출발시간_49" dataType="text"></w2:column>
 						<w2:column id="CHG_ARRV_TM_49" name="실제도착시간_49" dataType="text"></w2:column>
 						<w2:column id="CHG_DPRT_TM_49" name="실제출발시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_50" name="도착시간_50" dataType="text"></w2:column>
+						<w2:column id="DPRT_TM_50" name="출발시간_50" dataType="text"></w2:column>
+						<w2:column id="CHG_ARRV_TM_50" name="실제도착시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_DPRT_TM_50" name="실제출발시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_51" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="DPRT_TM_51" name="출발시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_ARRV_TM_51" name="실제도착시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_DPRT_TM_51" name="실제출발시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_52" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="DPRT_TM_52" name="출발시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_ARRV_TM_52" name="실제도착시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_DPRT_TM_52" name="실제출발시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_53" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="DPRT_TM_53" name="출발시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_ARRV_TM_53" name="실제도착시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_DPRT_TM_53" name="실제출발시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_54" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="DPRT_TM_54" name="출발시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_ARRV_TM_54" name="실제도착시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_DPRT_TM_54" name="실제출발시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_55" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="DPRT_TM_55" name="출발시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_ARRV_TM_55" name="실제도착시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_DPRT_TM_55" name="실제출발시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_56" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="DPRT_TM_56" name="출발시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_ARRV_TM_56" name="실제도착시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_DPRT_TM_56" name="실제출발시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_57" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="DPRT_TM_57" name="출발시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_ARRV_TM_57" name="실제도착시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_DPRT_TM_57" name="실제출발시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_58" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="DPRT_TM_58" name="출발시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_ARRV_TM_58" name="실제도착시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_DPRT_TM_58" name="실제출발시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_59" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="DPRT_TM_59" name="출발시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_ARRV_TM_59" name="실제도착시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_DPRT_TM_59" name="실제출발시간_49" dataType="text"></w2:column>
+						<w2:column id="ARRV_TM_60" name="도착시간_49" dataType="text"></w2:column>
+						<w2:column id="DPRT_TM_60" name="출발시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_ARRV_TM_60" name="실제도착시간_49" dataType="text"></w2:column>
+						<w2:column id="CHG_DPRT_TM_60" name="실제출발시간_49" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_sub_search">
 					<w2:keyInfo>
+						<w2:key id="REP_ROUT_ID" name="대표노선명" dataType="text"></w2:key>
 						<w2:key id="DAY_DIV" name="요일구분" dataType="text"></w2:key>
 						<w2:key id="ROUT_ID" name="노선ID" dataType="text"></w2:key>
 						<w2:key id="NODE_TYPE" name="노드유형" dataType="text"></w2:key>
@@ -550,7 +595,7 @@
 			}
 		}
 		
-		//발생건수
+		//변경운행 발생건수
 		var cntRowCnt = dlt_CHG_CNT.getRowCount();
 		for(var x = 0; x < cntRowCnt; x++){
 			var operSn = dlt_CHG_CNT.getCellData(x, "OPER_SN");
@@ -574,7 +619,7 @@
 		+'<w2:footer style="" id="footer2">'
 		+'<w2:row style="" id="row4">'
 		+'<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;" '
-		+'id="column55" value="" blockSelect="false" displayMode="label" colSpan="200" rowSpan="" '
+		+'id="column55" value="" blockSelect="false" displayMode="label" colSpan="300" rowSpan="" '
 		+'expression="&quot;데이터 개수 : &quot; + COUNT(&apos;COMP_ID&apos;)" textAlign="left">'
 		+'</w2:column>'
 		+'</w2:row>'
@@ -584,7 +629,7 @@
 		
 		VH0200G1.setGridStyle(WebSquare.xml.parse( gridStr , true ));
 		autoOptions.Sub1.grid = VH0200G1;
-		VH0200G1.setFixedColumn(1);
+		VH0200G1.setFixedColumn(2);
 		
 		dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.modifyAllStatus("R");
 		
@@ -667,6 +712,7 @@
 		var vhcNo = dlt_BRT_CUR_CHG_OPER_INFO_HIS.getCellData(VH0200G0.getFocusedRowIndex(), "VHC_NO");
 		var operDt = dlt_BRT_CUR_CHG_OPER_INFO_HIS.getCellData(VH0200G0.getFocusedRowIndex(), "OPER_DT");
 		var routNm = dlt_BRT_CUR_CHG_OPER_INFO_HIS.getCellData(VH0200G0.getFocusedRowIndex(), "ROUT_NM");
+		var allocNo = dlt_BRT_CUR_CHG_OPER_INFO_HIS.getCellData(VH0200G0.getFocusedRowIndex(), "ALLOC_NO");
 		var operSn = dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.getCellData(VH0200G1.getFocusedRowIndex(), "OPER_SN");
 		
 		//vh0200g1에서 선택한 row의 변경운행 횟수 가져와서 차트팝업으로 넘겨주기
@@ -678,10 +724,10 @@
 			}	
 		}
 		
-		 var data = { data : vhcNo, data2 : operDt, data3 : routNm, data4 : operSn, data5:transData, data6:chgCntJson, callbackFn : "" };
+		 var data = { data : vhcNo, data2 : operDt, data3 : routNm, data4 : operSn, data5:transData, data6:chgCntJson, data7:allocNo, callbackFn : "" };
          var options = { id : "VH0200P0",
-         				 width : "1600px",
-         				 height : "800px",
+         				 width : "1800px",
+         				 height : "900px",
                          popupName : "변경 운행 시공도", 
                          modal : true};
 		
@@ -729,6 +775,7 @@
 	};
 	
 	scwin.sub_VH0200G1CNT_submitdone = function(e) {
+		dma_sub_search.set("REP_ROUT_ID", dlt_BRT_CUR_CHG_OPER_INFO_HIS.getCellData(VH0200G0.getFocusedRowIndex(), "REP_ROUT_ID"));
 		com.executeSubmission(sub_VH0200G2CNT);
 	};
 	
@@ -740,6 +787,7 @@
 		
 		com.setFocusedCell(VH0200G1, "OPER_SN");
 		
+		//변경 운행 데이터 합치기
 		var rowCnt = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowCount();
 		var oldNodeSn = 0;
 		var oldOperSn = 0;
@@ -747,7 +795,6 @@
 		var curNodeSn = 0;
 		var newOperSn = 0;
 		var newNodeSn = 0;
-		
 		
 		for(var i = 0; i < rowCnt; i++){
 			var chgDiv = 0;
@@ -784,6 +831,7 @@
 			}
 		}
 		dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.modifyAllStatus("R");
+		
 		//동적그리드 함수
 		scwin.setGridViewInfo();
 	};

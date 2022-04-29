@@ -364,7 +364,7 @@
 		//gridView 정보 정의 
 		//xml 형식을 정의 하면 <w2:gridView 에 xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" 포함 합니다.
 		var gridStr = '<w2:gridView xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" dataList="dlt_VIEW_OPER_PL_NODE_INFO" ev:onafteredit="scwin.AL0203G1_onafteredit" '
-						+ 'scrollByColumn="true" ignoreCellClick="false"  fixedColumnWithHidden="true" id="AL0203G1" ev:onrowindexchange="scwin.AL0203G1_onrowindexchange" class ="cm_grid right" useShiftKey="false" '
+						+ 'scrollByColumn="true" ignoreCellClick="false"  fixedColumnWithHidden="true" fixedColumn="2" id="AL0203G1" ev:onrowindexchange="scwin.AL0203G1_onrowindexchange" class ="cm_grid right" useShiftKey="false" '
 						+ ' ev:oncellclick="scwin.AL0203G1_oncellclick" mergeCells="byrestriccol" focusMode="row" mergeCol="OPER_SN, WAY_DIV" >'
 		+ '<w2:header id="header1" style="text-align:left">'
 		+ gridHeader
@@ -378,7 +378,7 @@
 		
 		AL0203G1.setGridStyle(WebSquare.xml.parse( gridStr , true ));
 		autoOptions.Sub1.grid = AL0203G1;
-		AL0203G1.setFixedColumn(1);
+		AL0203G1.setFixedColumn(2);
 		
 
 		dlt_VIEW_OPER_PL_NODE_INFO.modifyAllStatus("R")

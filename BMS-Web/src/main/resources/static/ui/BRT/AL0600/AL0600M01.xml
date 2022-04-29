@@ -704,7 +704,7 @@
 		
 		AL0600G1.setGridStyle(WebSquare.xml.parse( gridStr , true ));
 		autoOptions.Sub1.grid = AL0600G1;
-		AL0600G1.setFixedColumn(1);
+		AL0600G1.setFixedColumn(2);
 		
 		//비교결과 색변경, 총 비교시간 계산
 		rowIndex = 0;
@@ -715,7 +715,7 @@
 			rowCnt =  rowCntArr[i].CNT; //rowCnt == 한 row의 노드 수
 			for(var j = 0; j < rowCnt; j++) {
 				var index = rowIndex+j;
-				var compTm = dlt_VIEW_OPER_PL_NODE_INFO.getCellData(j, "COMPARE_TM_"+j);
+				var compTm = dlt_VIEW_OPER_PL_NODE_INFO.getCellData(i, "COMPARE_TM_"+j);
 				if(compTm > 0){
 					AL0600G1.setCellColor(i, "COMPARE_TM_"+j, "#0000FF");
 				}else if(compTm < 0){

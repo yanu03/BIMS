@@ -240,16 +240,117 @@
 	};
 	
 	/**
-	 * 조직 권한 콜백 메소드
+	 * 조직 권한 가져오는 서브미션 서브밋던 메소드
 	 */
 	scwin.sbm_searchOrgAuthProgram_submitdone = function(e) {
-		dlt_userAuthProgram.setJSON(dlt_orgAuthProgram.getAllJSON(), false);
+		var rowCnt = dlt_orgAuthProgram.getRowCount();
 		
-		/*for(var x = 0; x < dlt_orgAuthProgram.getRowCount(); x++){
-			dlt_programCode.setCellData(x, "PROG_CD", dlt_orgAuthProgram.getCellData(x, "PROG_CD"));
+		var userAuthCheck;
+		var userSchAh;
+		var userSavAh;
+		var userGexAh;
+		var userIexAh;
+		var userExlAh;
+		var userFn3Ah;
+		var userFn4Ah;
+		var userFn5Ah;
+		var userFn6Ah;
+		var userFn7Ah;
+		var userFn8Ah;
+		var userHelpAh;
+		
+		var orgAuthCheck;
+		var orgSchAh;
+		var orgSavAh;
+		var orgGexAh;
+		var orgIexAh;
+		var orgExlAh;
+		var orgFn3Ah;
+		var orgFn4Ah;
+		var orgFn5Ah;
+		var orgFn6Ah;
+		var orgFn7Ah;
+		var orgFn8Ah;
+		var orgHelpAh;
+		
+		for(var x = 0; x < rowCnt; x++){
+			var orgProgCd = dlt_orgAuthProgram.getCellData(x, "PROG_CD");
+			var index = dlt_userAuthProgram.getMatchedIndex("PROG_CD", orgProgCd);
+			
+			if(index.length > 0){
+				userAuthCheck = dlt_userAuthProgram.getCellData(x, "AUTH_CHECK");
+				userSchAh = dlt_userAuthProgram.getCellData(x, "SCH_AH");
+				userSavAh = dlt_userAuthProgram.getCellData(x, "SAV_AH");
+				userGexAh = dlt_userAuthProgram.getCellData(x, "GEX_AH");
+				userIexAh = dlt_userAuthProgram.getCellData(x, "IEX_AH");
+				userExlAh = dlt_userAuthProgram.getCellData(x, "EXL_AH");
+				userFn3Ah = dlt_userAuthProgram.getCellData(x, "FN3_AH");
+				userFn4Ah = dlt_userAuthProgram.getCellData(x, "FN4_AH");
+				userFn5Ah = dlt_userAuthProgram.getCellData(x, "FN5_AH");
+				userFn6Ah = dlt_userAuthProgram.getCellData(x, "FN6_AH");
+				userFn7Ah = dlt_userAuthProgram.getCellData(x, "FN7_AH");
+				userFn8Ah = dlt_userAuthProgram.getCellData(x, "FN8_AH");
+				userHelpAh = dlt_userAuthProgram.getCellData(x, "HELP_AH");
+				
+				orgAuthCheck = dlt_orgAuthProgram.getCellData(x, "AUTH_CHECK");
+				orgSchAh = dlt_orgAuthProgram.getCellData(x, "SCH_AH");
+				orgSavAh = dlt_orgAuthProgram.getCellData(x, "SAV_AH");
+				orgGexAh = dlt_orgAuthProgram.getCellData(x, "GEX_AH");
+				orgIexAh = dlt_orgAuthProgram.getCellData(x, "IEX_AH");
+				orgExlAh = dlt_orgAuthProgram.getCellData(x, "EXL_AH");
+				orgFn3Ah = dlt_orgAuthProgram.getCellData(x, "FN3_AH");
+				orgFn4Ah = dlt_orgAuthProgram.getCellData(x, "FN4_AH");
+				orgFn5Ah = dlt_orgAuthProgram.getCellData(x, "FN5_AH");
+				orgFn6Ah = dlt_orgAuthProgram.getCellData(x, "FN6_AH");
+				orgFn7Ah = dlt_orgAuthProgram.getCellData(x, "FN7_AH");
+				orgFn8Ah = dlt_orgAuthProgram.getCellData(x, "FN8_AH");
+				orgHelpAh = dlt_orgAuthProgram.getCellData(x, "HELP_AH");
+				
+				if((userAuthCheck == 'N' || userAuthCheck == '') && orgAuthCheck == 'Y'){
+					dlt_userAuthProgram.setCellData(x, "AUTH_CHECK", "Y");
+				}
+				if((userSchAh == 'N' || userSchAh == '') && orgSchAh == 'Y'){
+					dlt_userAuthProgram.setCellData(x, "SCH_AH", "Y");
+				}
+				if((userSavAh == 'N' || userSavAh == '') && orgSavAh == 'Y'){
+					dlt_userAuthProgram.setCellData(x, "SAV_AH", "Y");
+				}
+				if((userGexAh == 'N' || userGexAh == '') && orgGexAh == 'Y'){
+					dlt_userAuthProgram.setCellData(x, "GEX_AH", "Y");
+				}
+				if((userIexAh == 'N' || userIexAh == '') && orgIexAh == 'Y'){
+					dlt_userAuthProgram.setCellData(x, "IEX_AH", "Y");
+				}
+				if((userExlAh == 'N' || userExlAh == '') && orgExlAh == 'Y'){
+					dlt_userAuthProgram.setCellData(x, "EXL_AH", "Y");
+				}
+				if((userFn3Ah == 'N' || userFn3Ah == '') && orgFn3Ah == 'Y'){
+					dlt_userAuthProgram.setCellData(x, "FN3_AH", "Y");
+				}
+				if((userFn4Ah == 'N' || userFn4Ah == '') && orgFn4Ah == 'Y'){
+					dlt_userAuthProgram.setCellData(x, "FN4_AH", "Y");
+				}
+				if((userFn5Ah == 'N' || userFn5Ah == '') && orgFn5Ah == 'Y'){
+					dlt_userAuthProgram.setCellData(x, "FN5_AH", "Y");
+				}
+				if((userFn6Ah == 'N' || userFn6Ah == '') && orgFn6Ah == 'Y'){
+					dlt_userAuthProgram.setCellData(x, "FN6_AH", "Y");
+				}
+				if((userFn7Ah == 'N' || userFn7Ah == '') && orgFn7Ah == 'Y'){
+					dlt_userAuthProgram.setCellData(x, "FN7_AH", "Y");
+				}
+				if((userFn8Ah == 'N' || userFn8Ah == '') && orgFn8Ah == 'Y'){
+					dlt_userAuthProgram.setCellData(x, "FN8_AH", "Y");
+				}
+				if((userHelpAh == 'N' || userHelpAh == '') && orgHelpAh == 'Y'){
+					dlt_userAuthProgram.setCellData(x, "HELP_AH", "Y");
+				}
+				
+			}else{
+				dlt_userAuthProgram.setRowJSON(x, dlt_orgAuthProgram.getRowJSON(x), false);
+			}
+			
 		}
-		
-		com.excludeItemsByGrid(grd_program, dlt_programCode.getColData("PROG_CD") ,PROG_CD);*/
 	};
 	
 	

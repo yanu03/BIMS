@@ -212,7 +212,7 @@
 		//$("#FM0300_TAB").attr("style", "width:200px; height:26px;  float:left");
 		FM0300G3.hide();
 		
-		//탭 목록 클릭 이벤트 (탭 컨트롤로 바꿔야함)
+		//탭 목록 클릭 이벤트
 		$("#FM0300_TAB").find("li").click( function() {
 			var li_id = this.id;
 			$("#FM0300_TAB").find("li").removeClass("on");
@@ -221,13 +221,11 @@
 			if(li_id == "li_FCLT_HIS") {
 				FM0300G2.show("");
 				FM0300G3.hide();
-				com.checkGridSave(FM0300G3, sub_FM0300G3S0);
 			}
 			else if(li_id == "li_FCLT_COND") {
 				FM0300G2.hide();
 				FM0300G3.show("");
 				//com.setFocusedCell(PI0400G1, "UPD_DTM");
-				com.checkGridSave(FM0300G2, sub_FM0300G2S0);
 			}
 		});
 	};

@@ -6370,3 +6370,17 @@ readers do not read off random characters that represent icons */
 .bit_tb {
 margin-right: 130px; margin-left: 130px; background-color: black;color: white;border-color: black;height: 200px;
 }
+
+.scrolling-container {
+    overflow-x:auto;
+    overflow-y:auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* .high_chart {
+    max-width: 1800px;
+    min-width: 1000px;
+    width: 1280px;
+    height: 720px;
+    margin: 1em auto;
+} */

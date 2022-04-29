@@ -45,6 +45,7 @@
 					<w2:key id="OPER_SN" name="운행순번" dataType="text"></w2:key>
 					<w2:key id="OPER_DT" name="운행일" dataType="text"></w2:key>
 					<w2:key id="VHC_NO" name="차량번호" dataType="text"></w2:key>
+					<w2:key id="ALLOC_NO" name="배차번호" dataType="text"></w2:key>
 				</w2:keyInfo>
 			</w2:dataMap>
 			<w2:dataList baseNode="list" repeatNode="map" id="dlt_CHG_CNT" saveRemovedData="true">
@@ -77,6 +78,7 @@
 		dma_sub_search.set("OPER_DT", scwin.param.data2);
 		dma_sub_search.set("ROUT_NM", " "+scwin.param.data3);
 		dma_sub_search.set("OPER_SN", " "+scwin.param.data4);
+		dma_sub_search.set("ALLOC_NO", " "+scwin.param.data7);
 		
 		scwin.DrawChart();		
 		
@@ -131,8 +133,11 @@
 		this.tension = {};	//곡선 or 직선
 		this.pointRadius = {};	//포인트 반지름 0일 경우 포인트 안그려짐
 		this.pointHitRadius = {};	//호버 했을때 영역
-		this.segment;	
 	}
+	
+	var color = ["rgb(226,85,81)","rgb(226,137,85)","rgb(226,207,83)","rgb(174,226,85)","rgb(104,226,85)","rgb(85,85,137)"
+					,"rgb(85,226,207)","rgb(85,174,226)","rgb(85,104,226)","rgb(137,85,226)","rgb(207,85,226)","rgb(226,85,151)"
+		];
 
 	scwin.DrawChart = function(){
 		var datasets = new Array();
@@ -144,7 +149,6 @@
 		var rowCount = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getRowCount();
 		var jsonData = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getAllJSON();
 		//var rlAllJson = dlt_BRT_OPER_ALLOC_RL_NODE_INFO.getAllJSON();
-		
 		
 		//운행계획 데이터 생성
 		var data = new Array();
@@ -187,8 +191,8 @@
 		charData.borderWidth = 1;
 		charData.pointBorderWidth = 1;
 		charData.tension = 0;
-		charData.pointRadius = 1;
-		charData.pointHitRadius = 20;
+		charData.pointRadius = 1.3;
+		charData.pointHitRadius = 5;
 		
 		datasets.push(charData);
 		
@@ -250,15 +254,12 @@
 		charData.borderWidth = 1;
 		charData.pointBorderWidth = 2;
 		charData.tension = 0;
-		charData.pointRadius = 1;
-		charData.pointHitRadius = 20;
+		charData.pointRadius = 1.3;
+		charData.pointHitRadius = 5;
 		
 		
 		datasets.push(charData);*/
 		
-		var color = ["rgb(226,85,81)","rgb(226,137,85)","rgb(226,207,83)","rgb(174,226,85)","rgb(104,226,85)","rgb(85,85,137)"
-					,"rgb(85,226,207)","rgb(85,174,226)","rgb(85,104,226)","rgb(137,85,226)","rgb(207,85,226)","rgb(226,85,151)"
-		];
 		
 		//변경운행 데이터 생성 여러줄
 		var chgCnt = dlt_CHG_CNT.getCellData(0, "CHG_CNT");
@@ -319,8 +320,8 @@
 			charData.borderWidth = 1;
 			charData.pointBorderWidth = 1;
 			charData.tension = 0;
-			charData.pointRadius = 1;
-			charData.pointHitRadius = 20;
+			charData.pointRadius = 1.3;
+			charData.pointHitRadius = 5;
 			
 			if(charData.data.length > 0){
 				datasets.push(charData);
@@ -335,33 +336,27 @@
 					datasets
 				  },
 			    options: {
+				    responsive:true, //차트 크기 변경
 			        scales: {
 			           xAxes: [{
 				        type: 'time',
 				        time: {
-				          unit: 'minute'
-				        }
-				      }]
-			        },
-			        annotation:{
-			        	annotations:[
-			        		{
-			        			drawTime: "afterDatasetsDraw"
-			        			,id:"hline"
-			        			,type:"line"
-			        			,mode:"horizontal"
-			        			,scaleID:"y-axis-0"
-			        			,value: 2367
-			        			,borderColor: "black"
-			        			,borderWidth: 5
-			        			,label: {
-					              backgroundColor: "red",
-					              content: "Test Label",
-					              enabled: true
-					            }
-			        			
-			        		}
-			        	]
+				          unit: 'minute' //minute, second
+				          ,unitStepSize: 3 //x축 시간 간격 (분)
+				        },
+				        /*scaleLabel: {
+					        display: true,
+					        labelString: '시간',
+					        fontSize: 16
+					      }*/
+				      }],
+				       yAxes: [{
+					      scaleLabel: {
+					        display: true,
+					        labelString: '거리(m)',
+					        fontSize: 16
+					      }
+					    }]
 			        }
 			        
 			    }
@@ -388,10 +383,16 @@
 	 					<w2:span class="" id="" label="" ref="data:dma_sub_search.VHC_NO"></w2:span>
 	 				</xf:group>
 	 				<xf:group class="label" id="" style="">
+	 					<w2:span class="" id="" label="배처번호 : " ref=""></w2:span>
+	 					<w2:span class="" id="" label="" ref="data:dma_sub_search.ALLOC_NO"></w2:span>
+	 					<w2:span class="" id="" label="번" ref=""></w2:span>
+	 				</xf:group>
+	 				<xf:group class="label" id="" style="">
 	 					<w2:span class="" id="" label="운행순번 : " ref=""></w2:span>
 	 					<w2:span class="" id="" label="" ref="data:dma_sub_search.OPER_SN"></w2:span>
 	 					<w2:span class="" id="" label="회차" ref=""></w2:span>
 	 				</xf:group>
+	 				
 	 			</xf:group>
 	 		</xf:group>
 	 		<xf:group style="" id="" class="popup_content">
@@ -399,6 +400,7 @@
 		 				style="width: auto; height: 100%;" id="CHART" ref="" labelNode="" valueNode="" seriesNode="" dataList="" dataTypeFormatter="">
 		 			</w2:fusionchart>-->
 		 			<canvas id="myChart" height="120"></canvas>
+		 			<!-- <canvas id="myChart" width="4000" height="700"></canvas> -->
 	 		</xf:group>
 	 	</xf:group>
 	 </body>
