@@ -1145,7 +1145,7 @@ routMap.showBusMarker = function(mapId, data, idx, focusIdx, busGrid) {
  * @param focusIdx : 포커스 index
  * @param busGrid : 버스 그리드
  */
-routMap.showBusMarkerClickOverlay = function(mapId, data, idx, focusIdx, busGrid, gridChk, socketVhcId) {
+routMap.showBusMarkerClickOverlay = function(mapId, data, idx, focusIdx, busGrid) {
 	// 마커 이미지의 이미지 크기 입니다
 	var imageSize = new kakao.maps.Size(35, 35); 
 	var markerImage = null;
@@ -1199,39 +1199,15 @@ routMap.showBusMarkerClickOverlay = function(mapId, data, idx, focusIdx, busGrid
 		//routMap.showClickBusOverlay(mapId, data, idx, focusIdx, marker);
 	
 	if(routMap.mapInfo[mapId].isDsptch == "on") {
-		
-		//그리드 체크 기능을 통한 디스패치 표시
-		if(typeof(gridChk) != "undefined" && gridChk == "Y") {
-			if (typeof(data.DSPTCH_YN) != "undefined") {
-				if (data.DSPTCH_YN = "1" && socketVhcId == data.VHC_ID)
-					routMap.showDsptchOverlay(mapId, data, idx, focusIdx, marker);			
-			}
+		if(idx == focusIdx) {
+			routMap.showDsptchOverlay(mapId, data, idx, focusIdx, marker);
 		}
-		
-		//focus된 차량만 디스패치 표시
-		else {
-			if(idx == focusIdx) {
-				routMap.showDsptchOverlay(mapId, data, idx, focusIdx, marker);
-			}
-		}
-		
 	}
 	
 	if(routMap.mapInfo[mapId].isEvent == "on") {
-		
-		if(typeof(gridChk) != "undefined" && gridChk == "Y") {
-			if (typeof(data.EVT_YN) != "undefined") {
-				if (data.EVT_YN = "1" && socketVhcId == data.VHC_ID)
-					routMap.showEventOverlay(mapId, data, idx, focusIdx, marker);		
-			}			
+		if(idx == focusIdx) {
+			routMap.showEventOverlay(mapId, data, idx, focusIdx, marker);
 		}
-		
-		else {
-			if(idx == focusIdx) {
-				routMap.showEventOverlay(mapId, data, idx, focusIdx, marker);
-			}
-		}
-		
 	}
 	
 	marker.setMap(routMap.mapInfo[mapId].map); //Marker가 표시될 Map 설정.
@@ -1270,7 +1246,7 @@ routMap.showBusMarkerClickOverlay = function(mapId, data, idx, focusIdx, busGrid
 		
 		if(typeof busGrid != "undefined") {
 			//routMap.focusNode(mapId, busGrid,idx);
-			busGrid.setFocusedCell(idx,"VHC_NO");
+			busGrid.setFocusedCell(idx,"VHC_ID");
 		}
 		
 		routMap.mapInfo[mapId].onMarkerClick(idx, mapId);		
@@ -1280,6 +1256,8 @@ routMap.showBusMarkerClickOverlay = function(mapId, data, idx, focusIdx, busGrid
 	kakao.maps.event.addListener(marker, 'rightclick', function() {
 //		var position2 = new kakao.maps.LatLng(36.482456, 127.297272);
 //		routMap.mapInfo[mapId].busOverArr[idx].setPosition(position2);
+		
+		
 		routMap.removeRightClickOverlay(mapId);
 		
 		var rightClickOverlay = null;
@@ -1287,9 +1265,9 @@ routMap.showBusMarkerClickOverlay = function(mapId, data, idx, focusIdx, busGrid
 	
 		rightClickMsg += '<div class="rightclickoverlay" style="cursor: default;">'
 		rightClickMsg += '<div class="contextWrap">'
-		rightClickMsg += '    <a data-id="here" href="javascript:void(0)" class="busInfo" onclick="">'
+		/*rightClickMsg += '    <a data-id="here" href="javascript:void(0)" class="busInfo" onclick="">'
 		rightClickMsg += '	            <span class="text">버스 상세정보</span>'
-		rightClickMsg += '     </a>'
+		rightClickMsg += '     </a>'*/
 		rightClickMsg += '      <a data-id="newplace" href="javascript:void(0)" class="dispatchMessage">'
 		rightClickMsg += '         <span class="text">메시지 전송</span>'
 		rightClickMsg += '      </a>'
@@ -1299,14 +1277,14 @@ routMap.showBusMarkerClickOverlay = function(mapId, data, idx, focusIdx, busGrid
 		rightClickOverlay = new kakao.maps.CustomOverlay({
 			content: rightClickMsg,
 			position: marker.getPosition(),
-			zIndex : 999
+			zIndex : zIndex
 		});		
 	
 		routMap.mapInfo[mapId].rightClickOverlay = rightClickOverlay;
 		rightClickOverlay.setMap(routMap.mapInfo[mapId].map);	
 		
 		if(typeof busGrid != "undefined") {
-			busGrid.setFocusedCell(idx,"VHC_NO");
+			busGrid.setFocusedCell(idx,"VHC_ID");
 		}		
 		
 	}); //end rightclick
@@ -1860,7 +1838,7 @@ routMap.showEventOverlay = function(mapId, data, idx, focusIdx, marker) {
 	var zIndex = 100000;
 	var eventMsg = "";
 	var stopTime = 0;
-	var nodeType = "";
+	var prevNodeType = "";
 	var nextNodeType = "";
 	var min = "";
 	var sec = "";
@@ -5283,7 +5261,7 @@ routMap.showVehicle3 = function(mapId, json, grid) {
  * @param vhc_id : 차량 id
  * @param grid : 대상 그리드
  */
-routMap.showVehicleClickOverlay = function(mapId, list, vhc_id, grid, gridChk, socketVhcId) {
+routMap.showVehicleClickOverlay = function(mapId, list, vhc_id, grid) {
 	var focusIdx = -1;
 	
 	routMap.initBus(mapId);
@@ -5298,10 +5276,10 @@ routMap.showVehicleClickOverlay = function(mapId, list, vhc_id, grid, gridChk, s
 			
 			if(list[i].VHC_ID == vhc_id){
 				focusIdx = i;
-				routMap.showBusMarkerClickOverlay(mapId, list[i], i, focusIdx, grid, gridChk, socketVhcId);
+				routMap.showBusMarkerClickOverlay(mapId, list[i], i, focusIdx, grid);
 			}
 			else {
-				routMap.showBusMarkerClickOverlay(mapId, list[i], i, focusIdx, grid, gridChk, socketVhcId);
+				routMap.showBusMarkerClickOverlay(mapId, list[i], i, focusIdx, grid);
 			}
 			
 		}
@@ -5392,7 +5370,6 @@ routMap.drawPolygon = function(mapId, data, name) {
 		routMap.mapInfo[mapId].polygons.push(polygon);
 		
 		if(typeof name !== "undefined"){
-			
 			var center = routMap.mapInfo[mapId].map.getCenter(); 
 			var content = '<div class="map_info">' + 
 				'<div class="map_title">' + '차고지 : ' + name + '</div>' +
@@ -5593,33 +5570,6 @@ routMap.showCommuMap = function(mapId, list) {
 		
 	}
 }
-
-routMap.addressSearch = function(mapId, address) {
-	var geocoder = new kakao.maps.services.Geocoder();
-	var coords = null;
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch(
-		address,
-		function(result, status) {
-	
-			// 정상적으로 검색이 완료됐으면
-			if (status === kakao.maps.services.Status.OK) {
-	
-				coords = new kakao.maps.LatLng(result[0].y,
-						result[0].x);
-	
-	
-				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-				routMap.mapInfo[mapId].map.setCenter(coords);
-			}
-		}); 
-	
-}
-
-routMap.setCenter = function(mapId, lat, lon) {
-	routMap.mapInfo[mapId].map.setCenter(new kakao.maps.LatLng(lat, lon));
-}
-
 /*
 routMap.showLink = function(mapId, list) {
 	//routMap.initDisplay(mapId);
@@ -5823,3 +5773,4 @@ function getDistanceToLine2(x, y, x1, y1, x2, y2) {
 		}
 	}
 }
+
