@@ -35,6 +35,7 @@
 					<w2:column id="WAY_DESC_NM" name="하행명" dataType="text"></w2:column>
 					<w2:column id="ACCRU_LEN" name="누적길이" dataType="text"></w2:column>
 					<w2:column id="CHG_DIV" name="변경구분" dataType="text"></w2:column>
+					<w2:column id="OCR_NODE_TYPE" name="발생노드유형" dataType="text"></w2:column>
 				</w2:columnInfo>
 			</w2:dataList>
 			<w2:dataMap baseNode="map" id="dma_sub_search">
@@ -154,32 +155,59 @@
 		var data = new Array();
 		for(var y = 0; y < jsonData.length; y++){
 			var label = jsonData[y].OPER_SN + "회차";
-			var updDtm = util.getCurrentDate3();
 			var operSn = jsonData[y].OPER_SN;
-			var arrvTm = jsonData[y].ARRV_TM;
-			var dprtTm = jsonData[y].DPRT_TM;
+			
+			if(jsonData[y].ARRV_TM.substring(0,2) == '24' || jsonData[y].ARRV_TM.substring(0,2) == '25' || jsonData[y].ARRV_TM.substring(0,2) == '26'){
+				
+				var nextDay = new Date(dma_sub_search.get("OPER_DT"));
+				nextDay.setDate(nextDay.getDate() +1).toLocaleString();
+				var day = nextDay.getDate().toString();
+				var year = nextDay.getFullYear().toString();
+				var month = nextDay.getMonth()+1;
+				if(month.toString().length == '1'){
+					month = '0'+month
+				}
+				var newNextDate = year+'-'+month+'-'+day
+				var updDtm = newNextDate;
+				
+				if(jsonData[y].ARRV_TM.substring(0,2) == '24'){
+					var jsonArrvTm = jsonData[y].ARRV_TM.replace("24", "00");
+					var jsonDprtTm = jsonData[y].DPRT_TM.replace("24", "00");
+				}else if(jsonData[y].ARRV_TM.substring(0,2) == '25'){
+					var jsonArrvTm = jsonData[y].ARRV_TM.replace("25", "01");
+					var jsonDprtTm = jsonData[y].DPRT_TM.replace("25", "01");
+				}else if(jsonData[y].ARRV_TM.substring(0,2) == '26'){
+					var jsonArrvTm = jsonData[y].ARRV_TM.replace("26", "02");
+					var jsonDprtTm = jsonData[y].DPRT_TM.replace("26", "02");
+				}
+				
+				var arrvTm = newNextDate+' '+jsonArrvTm
+				var dprtTm = newNextDate+' '+jsonDprtTm
+				
+			}else{
+				var updDtm = dma_sub_search.get("OPER_DT");
+				var arrvTm = dma_sub_search.get("OPER_DT")+' '+jsonData[y].ARRV_TM;
+				var dprtTm = dma_sub_search.get("OPER_DT")+' '+jsonData[y].DPRT_TM;
+			}
+			
 			var accruLen = jsonData[y].ACCRU_LEN;
 			var nodeType = jsonData[y].NODE_TYPE;
 			
-			//if(nodeType=='NT002'){
-				var categoryJson = new Object();
-				
-				categoryJson.x = new Date(updDtm+' '+arrvTm);
-				categoryJson.y = accruLen;
-				data.push(categoryJson);
-				
-			//}
+			var categoryJson = new Object();
+			categoryJson.x = new Date(arrvTm);
+			categoryJson.y = accruLen;
+			categoryJson.NODE_NM = jsonData[y].NODE_NM;;
+			data.push(categoryJson);
 			
-			//if((nodeType=='NT002')&&(arrvTm!=dprtTm)){
-				var categoryJson = new Object();
-			
-				categoryJson.x = new Date(updDtm+' '+dprtTm);
-				categoryJson.y = accruLen;
-				data.push(categoryJson);
-			//}
+		
+			var categoryJson = new Object();
+			categoryJson.x = new Date(dprtTm);
+			categoryJson.y = accruLen;
+			categoryJson.NODE_NM = jsonData[y].NODE_NM;;
+			data.push(categoryJson);
 			
 		};
-
+		
 		var charData = new CharData();
 		
 		charData.data = data;
@@ -196,14 +224,15 @@
 		
 		datasets.push(charData);
 		
-		//변경운행 데이터 생성 한줄
-		/*var data = new Array();
+		/*변경운행 데이터 생성 한줄
+		var data = new Array();
 		var color = [];
 		var x = 0;
 		for(var y = 0; y < jsonData.length; y++){
 			var label = jsonData[y].OPER_SN + "회차";
 			var yAxisID = jsonData[y].NODE_NM;
-			var updDtm = util.getCurrentDate3();
+			//var updDtm = util.getCurrentDate3();
+			var updDtm = dma_sub_search.get("OPER_DT");
 			var operSn = jsonData[y].OPER_SN;
 			var arrvTm = jsonData[y].CHG_ARRV_TM;
 			var dprtTm = jsonData[y].CHG_DPRT_TM;
@@ -271,11 +300,44 @@
 			var data = new Array();
 			for(var y = 0; y < jsonData.length; y++){
 				var label = jsonData[y].OPER_SN + "회차";
-				//var yAxisID = jsonData[y].NODE_NM;
-				var updDtm = util.getCurrentDate3();
 				var operSn = jsonData[y].OPER_SN;
+				if(jsonData[y].CHG_ARRV_TM.substring(0,2) == '24' || jsonData[y].CHG_ARRV_TM.substring(0,2) == '25' || jsonData[y].CHG_ARRV_TM.substring(0,2) == '26'){
+				
+					var nextDay = new Date(dma_sub_search.get("OPER_DT"));
+					nextDay.setDate(nextDay.getDate() +1).toLocaleString();
+					var day = nextDay.getDate().toString();
+					var year = nextDay.getFullYear().toString();
+					var month = nextDay.getMonth()+1;
+					if(month.toString().length == '1'){
+						month = '0'+month
+					}
+					var newNextDate = year+'-'+month+'-'+day
+					var updDtm = newNextDate;
+					
+					if(jsonData[y].CHG_ARRV_TM.substring(0,2) == '24'){
+						var jsonArrvTm = jsonData[y].CHG_ARRV_TM.replace("24", "00");
+						var jsonDprtTm = jsonData[y].CHG_DPRT_TM.replace("24", "00");
+					}else if(jsonData[y].ARRV_TM.substring(0,2) == '25'){
+						var jsonArrvTm = jsonData[y].CHG_ARRV_TM.replace("25", "01");
+						var jsonDprtTm = jsonData[y].CHG_DPRT_TM.replace("25", "01");
+					}else if(jsonData[y].ARRV_TM.substring(0,2) == '26'){
+						var jsonArrvTm = jsonData[y].CHG_ARRV_TM.replace("26", "02");
+						var jsonDprtTm = jsonData[y].CHG_DPRT_TM.replace("26", "02");
+					}
+					
+					var arrvTm = newNextDate+' '+jsonArrvTm
+					var dprtTm = newNextDate+' '+jsonDprtTm
+					
+				}else{
+					var updDtm = dma_sub_search.get("OPER_DT");
+					var arrvTm = dma_sub_search.get("OPER_DT")+' '+jsonData[y].CHG_ARRV_TM;
+					var dprtTm = dma_sub_search.get("OPER_DT")+' '+jsonData[y].CHG_DPRT_TM;
+				}
+				
+				/*var updDtm = dma_sub_search.get("OPER_DT");
 				var arrvTm = jsonData[y].CHG_ARRV_TM;
-				var dprtTm = jsonData[y].CHG_DPRT_TM;
+				var dprtTm = jsonData[y].CHG_DPRT_TM;*/
+				
 				var accruLen = jsonData[y].ACCRU_LEN;
 				var nodeType = jsonData[y].NODE_TYPE;
 				var chgDiv = jsonData[y].CHG_DIV;
@@ -284,7 +346,7 @@
 					if(arrvTm != '' && dprtTm != ''){
 						var categoryJson = new Object();
 						
-						categoryJson.x = new Date(updDtm+' '+arrvTm);
+						categoryJson.x = new Date(arrvTm);
 						categoryJson.y = accruLen;
 						data.push(categoryJson);
 					}
@@ -292,7 +354,7 @@
 					if(arrvTm != '' && dprtTm != ''){
 						var categoryJson = new Object();
 					
-						categoryJson.x = new Date(updDtm+' '+dprtTm);
+						categoryJson.x = new Date(dprtTm);
 						categoryJson.y = accruLen;
 						data.push(categoryJson);
 					}
@@ -328,7 +390,6 @@
 			}
 			firstChg++;
 		}
-		
 		var ctx = document.getElementById('myChart');
 		var myChart = new Chart(ctx, {
 			    type: 'line',
@@ -341,8 +402,11 @@
 			           xAxes: [{
 				        type: 'time',
 				        time: {
-				          unit: 'minute' //minute, second
+				         unit: 'minute' //minute, second, day, hour
 				          ,unitStepSize: 3 //x축 시간 간격 (분)
+				          ,displayFormats:{
+				          	quarter: 'HH MM'
+				          } 
 				        },
 				        /*scaleLabel: {
 					        display: true,
@@ -357,10 +421,18 @@
 					        fontSize: 16
 					      }
 					    }]
+			        },
+			        tooltips:{
+			        	callbacks:{
+			        		label: function(tooltipItem, data){
+			        			return '노드명' + " : " + data.NODE_NM[tooltipItem.index];
+			        		}
+			        	}
 			        }
 			        
 			    }
 			});
+			debugger;
 	}
 	
 	

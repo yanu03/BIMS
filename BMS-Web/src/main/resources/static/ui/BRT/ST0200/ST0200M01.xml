@@ -725,7 +725,7 @@
 				<xf:group id="pgm_detail" class="grdr_20_2_30_1f_20_1f" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="통계 상세 정보" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl" id="" label="비교 상세 정보" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					<xf:group></xf:group><!-- margin -->

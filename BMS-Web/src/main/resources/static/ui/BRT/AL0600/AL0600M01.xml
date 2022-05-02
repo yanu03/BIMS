@@ -476,7 +476,6 @@
 				errorHandler="" customHandler="" mode="asynchronous" processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_OPER_ALL_REAL_NODE_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 		</xf:model>
-
 		<script type="text/javascript" lazy="false"><![CDATA[
 	var autoOptions = {};
 
@@ -681,7 +680,7 @@
 		//gridView 정보 정의 
 		//xml 형식을 정의 하면 <w2:gridView 에 xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" 포함 합니다.
 		var gridStr = '<w2:gridView xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" dataList="dlt_VIEW_OPER_PL_NODE_INFO" focusMode="row" '
-						+ 'scrollByColumn="true" id="AL0600G1" ev:onrowindexchange="scwin.AL0600G1_onrowindexchange" class ="cm_grid right" fixedColumnWithHidden="true" useShiftKey="false" mergeCells="byrestriccol" readOnly="true" mergeCol="OPER_SN, WAY_DIV" >'
+						+ 'scrollByColumn="true" id="AL0600G1" ev:onrowindexchange="scwin.AL0600G1_onrowindexchange" class ="cm_grid right AL0600G0" fixedColumnWithHidden="true" useShiftKey="false" mergeCells="byrestriccol" readOnly="true" mergeCol="OPER_SN, WAY_DIV" >'
 		+ '<w2:header id="header1" style="text-align:left">'
 		+ gridHeader
 		+'</w2:header>'
