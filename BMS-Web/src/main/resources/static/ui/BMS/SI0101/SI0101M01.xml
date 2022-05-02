@@ -145,14 +145,22 @@
 		};
 		
 		var mainOptions = {
-			SAVE : scwin.btn_save_onclick
+			SAVE : scwin.btn_save_onclick,
+			SEARCH : {}
 		};
 		
 		var codeOptions = [ {code : "OWNER_TYPE", compID : "SI0101G0:OWNER_TYPE, OWNER_TYPE" } ];
 		
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions, codeOptions);
 				
-		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);		
+		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);	
+		
+
+		var mainSrhOptions = {
+		};		
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainSrhOptions, codeOptions);
+		
+					
 		
 		com.setCommonDtl(codeOptions, function(){
 			com.searchGrid(SI0101G0, sub_SI0101G0R0);
@@ -174,7 +182,10 @@
 	scwin.onpageunload = function() {
 
 	};
-					
+		
+	scwin.search_cb = function() {
+
+	};
 	scwin.sub_SI0101G0R0_submitdone = function(e) {
 		//com.setExlUpdate(SI0101G0, false); //엑셀 업데이트 초기화
 		var sCode = com.getResultCode(e);
@@ -386,6 +397,7 @@
 	}
 
 	scwin.sub_SI0101P0R0_submitdone = function(e) {
+
 		var GPS_X = dlt_BMS_GRG_MST.getCellData(SI0101G0.getFocusedRowIndex(), "GPS_X") 
 		var GPS_Y = dlt_BMS_GRG_MST.getCellData(SI0101G0.getFocusedRowIndex(), "GPS_Y")	
 				
@@ -431,6 +443,7 @@
 	}
 	
 	scwin.btn_search_onclick = function() {
+
 		var options = {
 			id : "SI0101P02",
 			popupName : "주소 검색",
@@ -438,7 +451,7 @@
 		};
 		
 		var data = { callbackFn : "scwin.insertAddr",
-					menuCode : scwin.param.menuCode
+					menuCode : $p.parent().com.getParameter().menuCode
 		};
 		
 		com.openPopup(("/ui/BMS/SI0101/SI0101P02.xml"), options, data);
@@ -458,69 +471,86 @@
 	}
 	
 	scwin.insertAddr = function(cooldinate) {
-		
+
 		var row = SI0101G0.getFocusedRowIndex();
 		
-		dlt_BMS_GRG_MST.setCellData(row, "GPS_X", cooldinate.substr(0, 10));
-		dlt_BMS_GRG.setCellData(row, "GPS_Y", cooldinate.substr(16, 24));
+		var cooldinates = cooldinate.split(',');
+		if(cooldinates.length==2){
+			dlt_BMS_GRG_MST.setCellData(row, "GPS_X", cooldinates[0]);
+			dlt_BMS_GRG_MST.setCellData(row, "GPS_Y", cooldinates[1]);
+			routMap.setCenter("map_SI0101", cooldinates[1],cooldinates[0]);
+		}
 	};		
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-			<xf:group id="pgm_header" class="pgm_header" style="">
-				<xf:group id="" style="" class="gr_search">
-					<xf:group id="" style="" class="label">
-							<w2:span id="" class="" label="검색 항목"></w2:span>
+		
+			<xf:group id="" class="grdc_2f_8f" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:group id="" style="" class="search">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="sbx_ChoiceBox"
-							optionOrder="false" ref="data:dma_search.TYPE" style="" class="search_type" submenuSize="auto"
-							textAlign="left">
-							<xf:choices>
-								<xf:item>
-									<xf:label><![CDATA[전체]]></xf:label>
-									<xf:value><![CDATA[ALL]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[차고지ID]]></xf:label>
-									<xf:value><![CDATA[GRG_ID]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[차고지명]]></xf:label>
-									<xf:value><![CDATA[GRG_NM]]></xf:value>
-								</xf:item>
-							</xf:choices>
-						</xf:select1>
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="차고지 ID 또는 차고지 명"></xf:input>
-						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
-							chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange="" ev:onviewchange=""
-							id="acb_autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start" selectedData=""
-							style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false"
-							visibleRowNum="">
-							<w2:choices>
-								<w2:itemset nodeset="data:dlt_grgSearchItem">
-									<w2:label ref="GRG_ID"></w2:label>
-									<w2:value ref="GRG_ID"></w2:value>
-								</w2:itemset>
-							</w2:choices>
-						</w2:autoComplete>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group>
-			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
+		
+			<xf:group id="pgm_content" class="pgm_content grdc_5f_0_5f" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="차고지 목록" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl list ico-list" id="" label="차고지 목록" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
-					<xf:group></xf:group>
+					
+					<xf:group id="" class="" style="">
+						<xf:group id="" style="" class="gr_search">
+							<xf:group id="" style="" class="label">
+									<w2:span id="" class="" label="검색 항목"></w2:span>
+							</xf:group>
+							<xf:group id="" style="" class="search">
+								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="sbx_ChoiceBox"
+									optionOrder="false" ref="data:dma_search.TYPE" style="" class="search_type" submenuSize="auto"
+									textAlign="left">
+									<xf:choices>
+										<xf:item>
+											<xf:label><![CDATA[전체]]></xf:label>
+											<xf:value><![CDATA[ALL]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[차고지ID]]></xf:label>
+											<xf:value><![CDATA[GRG_ID]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[차고지명]]></xf:label>
+											<xf:value><![CDATA[GRG_NM]]></xf:value>
+										</xf:item>
+									</xf:choices>
+								</xf:select1>
+								<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="차고지 ID 또는 차고지 명"></xf:input>
+								<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
+									chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange="" ev:onviewchange=""
+									id="acb_autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start" selectedData=""
+									style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false"
+									visibleRowNum="">
+									<w2:choices>
+										<w2:itemset nodeset="data:dlt_grgSearchItem">
+											<w2:label ref="GRG_ID"></w2:label>
+											<w2:value ref="GRG_ID"></w2:value>
+										</w2:itemset>
+									</w2:choices>
+								</w2:autoComplete>
+							</xf:group>
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>							
+						</xf:group>
+					</xf:group>
+				
 					<xf:group id="" class="" style="">							
 						<w2:gridView id="SI0101G0" rowNumVisible="true"
 							useShiftKey="true" scrollByColumn="false" owNumHeaderValue="순번" sortable="true" 
@@ -648,15 +678,15 @@
 						</w2:gridView>
 					</xf:group>
 				</xf:group>
-				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_1f_20_20_1f" style="">
+				<xf:group id="" class=""></xf:group>
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_1f_1f bms_box_wrap" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="차고지 상세 정보" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl view ico-view" id="" label="차고지 상세 정보" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					<xf:group class="" id="" style=""></xf:group>
-					<xf:group class="" id="" style="overflow: auto; position:relative; border-bottom: 1px solid #b0b2b1;">
+					<xf:group class="" id="" style="overflow: auto; position:relative; border-bottom: 1px solid #e0e0e0;">
 						<xf:group class="w2tb tb" id="SI0100F0" style="width:100%; position:absolute;" tagname="table">
 							<w2:attributes>
 								<w2:summary></w2:summary>
@@ -882,16 +912,17 @@
 							</xf:group>
 						</xf:group>
 					</xf:group> <!-- end SI0101F0 -->
-					<xf:group id="" class="horizontal_line"></xf:group>
-					<xf:group id="" class="gr_sub_header" style="">
-						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="지도" style=""></w2:textbox>
+					<xf:group style="padding:10px; background-color: #f7f7f7; display: grid; grid-template-rows: 30px minmax(250px, max-content); border-bottom:1px solid #b0b2b1">
+						<xf:group id="" class="gr_sub_header" style="">
+							<xf:group class="defaultbox icon-map" id="" style="font-weight:800">
+								지도
+							</xf:group>
+							<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 						</xf:group>
-						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
-					</xf:group>
-					<xf:group id="" class="" style="">
-						<div id="map_SI0101" style="overflow:hidden;"></div>
-					</xf:group>										
+						<xf:group id="" class="" style="">
+							<div id="map_SI0101" style="overflow:hidden;"></div>
+						</xf:group>	
+					</xf:group>									
 				</xf:group>				
 			</xf:group>
 		</xf:group>

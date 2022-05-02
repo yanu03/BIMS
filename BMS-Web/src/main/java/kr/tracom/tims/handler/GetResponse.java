@@ -36,7 +36,7 @@ public class GetResponse {
             	case BrtAtCode.TRAFFIC_LIGHT_STATUS_RESPONSE:
             		AtTrafficLightStatusResponse lightStatus = (AtTrafficLightStatusResponse)atMessage.getAttrData();
             		
-            		//logger.info("현시정보 : {}", lightStatus);
+            		logger.info("현시정보 : {}", lightStatus);
             		
             		break;
             

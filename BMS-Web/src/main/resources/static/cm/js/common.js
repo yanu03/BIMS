@@ -2430,6 +2430,7 @@ com._openPopup = function(url, opt, data) {
 		useMaximize : opt.useMaximize || false,
 		useIFrame : opt.useIFrame || false
 	};
+
 	$p.openPopup(url, options);
 };
 
@@ -5110,6 +5111,125 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
 								}
 								else{
 									com.closeTab(main.grid);
+								}
+							}
+						}
+					}
+					
+					if(i == gcm.BTN.SEARCH.nm){
+
+						if ((typeof main.srchGrp !== "undefined")&&(main.srchGrp !== null)){
+							com.setEnterKeyEvent(main.srchGrp, item.cbFnc);
+						}
+					}
+					mainBtn.bind("onclick", item.cbFnc);
+				}
+			}
+		} catch (e) {
+			
+		}
+	}
+	return gcm.BTN;
+};
+
+
+com.setMainSrhBtn = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
+	
+	var programAuthority = gcm.CUR_PROGRAM_AUTH;
+	com.enableDisp(autoOpt);
+	
+	com.initGridInfo(autoOpt); //그리드 항목명 저장
+	
+	if(programAuthority.AUTH_CHECK != 'Y')return;
+	
+	wfm_mainBtn.getWindow().btn_main_srch_generator.removeAll();
+	
+	for(var i in gcm.BTN){
+		try {
+			if(i!="SEARCH")continue;
+			var item = gcm.BTN[i];
+			if(eval("programAuthority."+item.value) == "Y"){
+				
+				if ((typeof usrOpt !== "undefined")&&(usrOpt !== null)&&
+						((typeof eval("usrOpt."+i) === "function")||(typeof usrOpt[i] !== "undefined"))) {
+					var main = autoOpt.Main;
+					if (typeof eval("usrOpt."+i) === "function") {
+						var tmpParentIdx = wfm_mainBtn.getWindow().btn_main_srch_generator.insertChild();
+						var mainBtn = wfm_mainBtn.getWindow().btn_main_srch_generator.getChild(tmpParentIdx, "btn_main");
+						var str = item.str;
+						mainBtn.setValue(str);
+						mainBtn.addClass(item.class);
+						mainBtn.bind("onclick", eval("usrOpt."+i));
+						if ((i == gcm.BTN.SEARCH.nm)&&(typeof main.srchGrp !== "undefined")&&(main.srchGrp !== null)){
+							com.setEnterKeyEvent(main.srchGrp, eval("usrOpt."+i));
+						}
+					}
+					else if((typeof eval(usrOpt[i].cbFnc) === "function")||(typeof usrOpt[i].nm !== "undefined")
+							||(typeof usrOpt[i].class !== "undefined")){
+						var tmpParentIdx = wfm_mainBtn.getWindow().btn_main_srch_generator.insertChild();
+						var mainBtn = wfm_mainBtn.getWindow().btn_main_srch_generator.getChild(tmpParentIdx, "btn_main");
+						if(typeof eval(usrOpt[i].cbFnc) === "function"){
+							mainBtn.bind("onclick", eval(usrOpt[i].cbFnc));
+							if ((i == gcm.BTN.SEARCH.nm)&&(typeof main.srchGrp !== "undefined")&&(main.srchGrp !== null)){
+								com.setEnterKeyEvent(main.srchGrp, eval(usrOpt[i].cbFnc));
+							}
+						}
+						if(usrOpt[i].nm !== "undefined"){
+							mainBtn.setValue(usrOpt[i].nm);
+						}
+						if(usrOpt[i].class !== "undefined"){
+							mainBtn.addClass(usrOpt[i].class);
+						}
+					}
+					else{
+						
+					}
+				}
+				else if((typeof autoOpt !== "undefined")&&(autoOpt !== null)){
+					var tmpParentIdx = wfm_mainBtn.getWindow().btn_main_srch_generator.insertChild();
+					var mainBtn = wfm_mainBtn.getWindow().btn_main_srch_generator.getChild(tmpParentIdx, "btn_main");
+					var str = item.str;
+					mainBtn.setValue(str);
+					mainBtn.addClass(item.class);
+					
+					var main = autoOpt.Main;
+				
+					if( type == gcm.DISP_TYPE.SINGLE_GRID){ //단일 그리드
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+								com.searchGrid(main.grid, main.srchSbm , main.savSbm);
+							}
+						}
+					}
+					else if( type == gcm.DISP_TYPE.SINGLE_GRID_FORM){ //단일 그리드와 폼
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+								com.searchGridForm(main.grid, null, main.srchSbm , main.savSbm);
+							}
+						}
+					}
+					else if( type == gcm.DISP_TYPE.DUAL_GRID){ //듀얼 그리드
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.searchDualGrid(main.grid, sub.grid, null, main.srchSbm, main.savSbm, main.allSavSbm, sub.savSbm)
+								}
+								else{
+									com.searchGrid(main.grid, main.srchSbm , main.savSbm);
+								}
+							}
+						}
+					}
+					else if( type == gcm.DISP_TYPE.DUAL_GRID2){ //듀얼 그리드 에서 서브그리드만 저장
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.searchDualGrid(main.grid, sub.grid, null, main.srchSbm, main.savSbm, main.allSavSbm, sub.savSbm)
+								}
+								else{
+									com.searchGrid(main.grid, main.srchSbm , main.savSbm);
 								}
 							}
 						}

@@ -1256,6 +1256,7 @@ public class OperPlanService extends ServiceSupport {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+			logger.error("{}", e);
 		}
 		
 		return chgPlList;

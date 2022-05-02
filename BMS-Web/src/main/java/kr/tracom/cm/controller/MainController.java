@@ -185,7 +185,7 @@ public class MainController extends ControllerSupport {
 	
 	@RequestMapping("/bm/bmsMainF1")
 	public @ResponseBody Map<String, Object> bmsMainF1() throws Exception {
-		result.setData("dma_BMS_WEAT_INFO", mainService.bmsMainF1());
+		result.setData("dma_BMS_ATMO_INFO", mainService.bmsMainF1());
 		return result.getResult();
 	}
 	
