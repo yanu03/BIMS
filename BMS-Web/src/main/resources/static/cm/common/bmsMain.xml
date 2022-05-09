@@ -31,6 +31,10 @@
 						<w2:key id="SKY_COND" name="하늘상태" dataType="text"></w2:key>
 						<w2:key id="TEMPC" name="온도" dataType="text"></w2:key>
 						<w2:key id="HUMI" name="습도" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+				<w2:dataMap baseNode="list" repeatNode="map" id="dma_BMS_ATMO_INFO" saveRemovedData="true">
+					<w2:keyInfo>
 						<w2:key id="DUSTC" name="미세먼지농도" dataType="text"></w2:key>
 						<w2:key id="OZONEC" name="오존농도" dataType="text"></w2:key>
 						<w2:key id="NDC" name="이산화질소농도" dataType="text"></w2:key>
@@ -38,6 +42,7 @@
 						<w2:key id="SDC" name="아황산가스농도" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
+				
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
 			->
@@ -53,7 +58,7 @@
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_bmsMainF0R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_bmsMainF1R0" ref="" target="data:json,dma_BMS_WEAT_INFO" action="/bm/bmsMainF1" method="post"
+			<xf:submission id="sub_bmsMainF1R0" ref="" target="data:json,dma_BMS_ATMO_INFO" action="/bm/bmsMainF1" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_bmsMainF1R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -106,6 +111,7 @@
 	
 	//오픈메뉴
 	scwin.openMenu = function(menuNm, url, menuCode, paramObj, menuType) {
+
 		// client에서 url 숨기기 메뉴일 경우에는 새 창으로 띄우기 적용 
 		if (url == "/") {
 			var url = document.location.href + "/";
@@ -232,15 +238,15 @@
 			sunny_blur.setValue("눈");
 		}
 		imagePath = "url(" + tPath + fData +"_MAIN.png" + ")";
-		$(".bms_cont_left li.weather_temp ul li:first-child").css({"background": imagePath});
+		$(".bms_cont_up li.weather_temp ul li:first-child").css({"background": imagePath});
 	};
 	
 	scwin.sub_bmsMainF1R0_submitdone = function(e) {
-		var dustc = dma_BMS_WEAT_INFO.get("DUSTC");
-		var ozon = dma_BMS_WEAT_INFO.get("OZONEC");
-		var ndc = dma_BMS_WEAT_INFO.get("NDC");
-		var cmc = dma_BMS_WEAT_INFO.get("CMC");
-		var sdc = dma_BMS_WEAT_INFO.get("SDC");
+		var dustc = dma_BMS_ATMO_INFO.get("DUSTC");
+		var ozon = dma_BMS_ATMO_INFO.get("OZONEC");
+		var ndc = dma_BMS_ATMO_INFO.get("NDC");
+		var cmc = dma_BMS_ATMO_INFO.get("CMC");
+		var sdc = dma_BMS_ATMO_INFO.get("SDC");
 		
 		var imagePath = "";
 		if(dustc >= 0 && dustc < 31){
@@ -256,7 +262,7 @@
 			fine_dust_status.setValue("매우나쁨");
 			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
 		}
-		$(".bms_cont_right li.fine_dust ul li.air_icon").css({"background": imagePath});
+		$(".bms_cont_down li.fine_dust ul li.air_icon").css({"background": imagePath});
 		
 		if(ozon >= 0 && ozon < 0.030){
 			ozone_status.setValue("좋음");
@@ -271,7 +277,7 @@
 			ozone_status.setValue("매우나쁨");
 			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
 		}
-		$(".bms_cont_right li.ozone ul li.air_icon").css({"background": imagePath});
+		$(".bms_cont_down li.ozone ul li.air_icon").css({"background": imagePath});
 		
 		if(ndc >= 0 && ndc < 0.03){
 			nitrogen_dioxide_status.setValue("좋음");
@@ -286,7 +292,7 @@
 			nitrogen_dioxide_status.setValue("매우나쁨");
 			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
 		}
-		$(".bms_cont_right li.nitrogen_dioxide ul li.air_icon").css({"background": imagePath});
+		$(".bms_cont_down li.nitrogen_dioxide ul li.air_icon").css({"background": imagePath});
 		
 		if(cmc >= 0 && cmc < 2){
 			carbon_monoxide_status.setValue("좋음");
@@ -301,7 +307,7 @@
 			carbon_monoxide_status.setValue("매우나쁨");
 			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
 		}
-		$(".bms_cont_right li.carbon_monoxide ul li.air_icon").css({"background": imagePath});
+		$(".bms_cont_down li.carbon_monoxide ul li.air_icon").css({"background": imagePath});
 		
 		if(sdc >= 0 && sdc < 0.02){
 			sulfur_dioxide_status.setValue("좋음");
@@ -316,18 +322,16 @@
 			sulfur_dioxide_status.setValue("매우나쁨");
 			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
 		}
-		$(".bms_cont_right li.sulfur_dioxide ul li.air_icon").css({"background": imagePath});
+		$(".bms_cont_down li.sulfur_dioxide ul li.air_icon").css({"background": imagePath});
 	};
 	
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdc_main_container" style="">
-			<xf:group id="" class="" style=""></xf:group>
 			<xf:group id="pgm_main" class="pgm_main grdc_bms_main" style="">
 				<xf:group id="" class="grdc_bms_main_content" style="">
 					<xf:group id="" class="grdc_bms_main_left" style="">
-						<xf:group id="" class="" style=""></xf:group>
 						<xf:group id="" class="bms_visual" style="">
 							<xf:group id="" class="bms_main_link" style="">
 								<xf:group class="" id="31" style="" tagname="ul">
@@ -369,14 +373,13 @@
 					</xf:group>
 					<xf:group id="" class="" style=""></xf:group>
 					<xf:group id="" class="grdc_bms_main_right" style="">
-						<xf:group id="" class="" style="">
+						<xf:group id="" class="bms_box_wrap bms_weather" style="">
 							<xf:group id="" class="grdr_20_5_320" style="">
-								<xf:group class="defaultbox" id="" style="">
-									<w2:textbox class="df_tt fl" id="" label="오늘의 날씨" style=""></w2:textbox>
-								</xf:group>
-								<xf:group></xf:group>
-								<xf:group id="" class="grdc_45f_25_55f bms_cont_wrap" style="">
-									<xf:group style="" id="" class="bms_cont_left">
+								<xf:group id="" class="" style="">
+									<xf:group style="" id="" class="bms_cont_up">
+										<xf:group class="defaultbox" id="" style="">
+											<w2:textbox class="df_tt fl" id="" label="오늘의 날씨" style=""></w2:textbox>
+										</xf:group>
 										<xf:group style="" id="" class="bms_cont_lst" tagname="ul">
 											<xf:group style="" id="" class="weather_temp" tagname="li">
 												<xf:group tagname="ul">
@@ -397,7 +400,7 @@
 												<xf:group tagname="ul">
 													<xf:group tagname="li"></xf:group>
 													<xf:group class="repeat" tagname="li">
-														<w2:textbox label="습도" style="" id="" tagname="strong"></w2:textbox>
+														<w2:textbox label="습도" style="" id="" tagname="strong" class="blind"></w2:textbox>
 													</xf:group>
 													<xf:group tagname="li">
 														<w2:anchor outerDiv="false" class="count" style="" id="humidity" ref="data:dma_BMS_WEAT_INFO.HUMI" disabled="true">
@@ -409,8 +412,7 @@
 											</xf:group>
 										</xf:group>
 									</xf:group>
-									<xf:group id="" class="small_vertical_line" style=""></xf:group>
-									<xf:group style="" id="" class="bms_cont_right">
+									<xf:group style="" id="" class="bms_cont_down">
 										<xf:group style="" id="" class="bms_cont_lst" tagname="ul">
 											<xf:group style="" id="" class="fine_dust" tagname="li">
 												<xf:group tagname="ul">
@@ -418,7 +420,7 @@
 														<w2:textbox label="미세먼지" style="" id="" tagname="strong"></w2:textbox>
 													</xf:group>
 													<xf:group tagname="li">
-														<w2:anchor outerDiv="false" class="count" style="" id="fine_dust_val" ref="data:dma_BMS_WEAT_INFO.DUSTC" disabled="true">
+														<w2:anchor outerDiv="false" class="count" style="" id="fine_dust_val" ref="data:dma_BMS_ATMO_INFO.DUSTC" disabled="true">
 															<xf:label><![CDATA[77]]></xf:label>
 														</w2:anchor>
 														<w2:textbox label="㎍/m³" style="" id="" tagname="strong"></w2:textbox>
@@ -436,7 +438,7 @@
 														<w2:textbox label="오존 " style="" id="" tagname="strong"></w2:textbox>
 													</xf:group>
 													<xf:group tagname="li">
-														<w2:anchor outerDiv="false" class="count" style="" id="ozone_val" ref="data:dma_BMS_WEAT_INFO.OZONEC" disabled="true">
+														<w2:anchor outerDiv="false" class="count" style="" id="ozone_val" ref="data:dma_BMS_ATMO_INFO.OZONEC" disabled="true">
 															<xf:label><![CDATA[77]]></xf:label>
 														</w2:anchor>
 														<w2:textbox label="㎍/m³" style="" id="" tagname="strong"></w2:textbox>
@@ -454,7 +456,7 @@
 														<w2:textbox label="이산화질소" style="" id="" tagname="strong"></w2:textbox>
 													</xf:group>
 													<xf:group tagname="li">
-														<w2:anchor outerDiv="false" class="count" style="" id="nitrogen_dioxide_val" ref="data:dma_BMS_WEAT_INFO.NDC" disabled="true">
+														<w2:anchor outerDiv="false" class="count" style="" id="nitrogen_dioxide_val" ref="data:dma_BMS_ATMO_INFO.NDC" disabled="true">
 															<xf:label><![CDATA[77]]></xf:label>
 														</w2:anchor>
 														<w2:textbox label="ppm" style="" id="" tagname="strong"></w2:textbox>
@@ -472,7 +474,7 @@
 														<w2:textbox label="일산화탄소" style="" id="" tagname="strong"></w2:textbox>
 													</xf:group>
 													<xf:group tagname="li">
-														<w2:anchor outerDiv="false" class="count" style="" id="carbon_monoxide_val" ref="data:dma_BMS_WEAT_INFO.CMC" disabled="true">
+														<w2:anchor outerDiv="false" class="count" style="" id="carbon_monoxide_val" ref="data:dma_BMS_ATMO_INFO.CMC" disabled="true">
 															<xf:label><![CDATA[77]]></xf:label>
 														</w2:anchor>
 														<w2:textbox label="ppm" style="" id="" tagname="strong"></w2:textbox>
@@ -490,7 +492,7 @@
 														<w2:textbox label="아황산가스" style="" id="" tagname="strong"></w2:textbox>
 													</xf:group>
 													<xf:group tagname="li">
-														<w2:anchor outerDiv="false" class="count" style="" id="sulfur_dioxide_val" ref="data:dma_BMS_WEAT_INFO.SDC" disabled="true">
+														<w2:anchor outerDiv="false" class="count" style="" id="sulfur_dioxide_val" ref="data:dma_BMS_ATMO_INFO.SDC" disabled="true">
 															<xf:label><![CDATA[77]]></xf:label>
 														</w2:anchor>
 														<w2:textbox label="ppm" style="" id="" tagname="strong"></w2:textbox>
@@ -509,9 +511,9 @@
 						</xf:group>
 						<xf:group id="" class="" style=""></xf:group>
 						<xf:group id="" class="grdc_bms_main_right_content" style="">
-							<xf:group id="" class="grdr_20_5_350" style="">
+							<xf:group id="" class="grdr_20_5_350 bms_box_wrap" style="">
 								<xf:group class="defaultbox" id="" style="">
-									<w2:textbox class="df_tt fl" id="" label="운행차량" style=""></w2:textbox>
+									<w2:textbox class="df_tt fl bus" id="" label="운행차량" style=""></w2:textbox>
 								</xf:group>
 								<xf:group></xf:group>
 								<xf:group id="" class="" style="">
@@ -561,9 +563,9 @@
 								</xf:group>
 							</xf:group>
 							<xf:group></xf:group>
-							<xf:group id="" class="grdr_20_5_350" style="">
+							<xf:group id="" class="grdr_20_5_350 bms_box_wrap" style="">
 								<xf:group class="defaultbox" id="" style="">
-									<w2:textbox class="df_tt fl" id="" label="뉴스" style=""></w2:textbox>
+									<w2:textbox class="df_tt fl news" id="" label="뉴스" style=""></w2:textbox>
 								</xf:group>
 								<xf:group></xf:group>
 								<xf:group id="" class="" style="">

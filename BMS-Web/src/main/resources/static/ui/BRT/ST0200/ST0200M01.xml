@@ -140,7 +140,7 @@
 	};
 	
 	scwin.sub_ST0200SHI0_submitdone = function(e) {
-		TYPE10.setValue("RR00000002");
+		//TYPE10.setValue("RR00000002");
 		com.searchGrid(ST0200G0, sub_ST0200G0R0);
 	};
 	
@@ -251,6 +251,9 @@
 		  };
 	};
 	
+	var color = ["rgb(226,85,81)","rgb(226,137,85)","rgb(226,207,83)","rgb(174,226,85)","rgb(104,226,85)","rgb(85,85,137)"
+					,"rgb(85,226,207)","rgb(85,174,226)","rgb(85,104,226)","rgb(137,85,226)","rgb(207,85,226)","rgb(226,85,151)"
+		];
 	
 	var CharData = function(){
 		this.seriesname = {};
@@ -311,7 +314,7 @@
 				
 			};
 		var charData = new CharData();
-		var rgb = scwin.getRandomColor();
+		var rgb = color[i];
 		
 		charData.data = data;
 		charData.label = label;
@@ -340,7 +343,7 @@
 				  },
 			  options: {
 			       // responsive: true
-			        maintainAspectRatio: false
+			        maintainAspectRatio: false,
 			    }
 			});
 	
@@ -392,7 +395,7 @@
 				
 			};
 		
-		var rgb = scwin.getRandomColor();
+		var rgb = color[i];
 		
 		charData.data = data;
 		charData.label = label;
@@ -483,7 +486,7 @@
 				
 			};
 		var charData = new CharData();
-		var rgb = scwin.getRandomColor();
+		var rgb = color[i];
 		
 		charData.data = data;
 		charData.label = label;
@@ -660,7 +663,7 @@
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
 							dataList="data:dlt_BMS_ROUT_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.ST0200G0_oncellclick" ev:oneditkeyup=""
 							ev:onkeyup="" ev:onrowindexchange="scwin.ST0200G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange=""
-							fixedColumnWithHidden="true" id="ST0200G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true"
+							fixedColumnWithHidden="true" id="ST0200G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="false"
 							rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true"
 							visibleRowNum="" wheelRows="" autoFitMinWidth="0" disabledScrollHidden="" editModeEvent="" editModeEventIcon=""
 							checkEditableInputClass="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll="" ignoreNonEditableCellTabEnter=""
@@ -719,44 +722,48 @@
 					</xf:group>
 				</xf:group><!-- pgm_list -->
 				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group id="pgm_detail" class="grdr_20_2_1f_20_1f" style="">
+				<xf:group id="pgm_detail" class="grdr_20_2_30_1f_20_1f" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="통계 상세 정보" style=""></w2:textbox>
-							<w2:span label="조회구분" style="margin-right: 3px; margin-left: 15px; margin-top:5px;" id=""></w2:span>
-							<xf:select1 id="SELECT_DIV" chooseOption="" style="width: 100px;height: 21px;" submenuSize="auto" allOption="" disabled="false"
-								direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled" ref="" ev:onviewchange="scwin.SELECT_DIV_onviewchange">
-								<xf:choices>
-									<xf:item>
-										<xf:label><![CDATA[시간대별]]></xf:label>
-										<xf:value><![CDATA[TIME]]></xf:value>
-									</xf:item>
-									<xf:item>
-										<xf:label><![CDATA[일별]]></xf:label>
-										<xf:value><![CDATA[DAY]]></xf:value>
-									</xf:item>
-									<xf:item>
-										<xf:label><![CDATA[월별]]></xf:label>
-										<xf:value><![CDATA[MONTH]]></xf:value>
-									</xf:item>
-								</xf:choices>
-							</xf:select1>
-							<w2:span label="일시" style="margin-right: 3px; margin-left: 15px; margin-top:5px;" id=""></w2:span>
-							<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
-								style="width:120px; margin-right: 10px; margin-top: 3px;" id="F_DATE" renderType="component" renderDiv="true"
-								calendarValueType="yearMonthDate" ref="data:dma_sub_search.F_DATE" ev:onviewchange="scwin.F_DATE_onviewchange" minYear="2000"
-								maxYear="2025">
-							</w2:inputCalendar>
-							<w2:span label="~" style="margin-right: 10px;margin-top: 5px;" id=""></w2:span>
-							<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
-								style="width: 120px;margin-top: 3px;" id="L_DATE" renderType="component" renderDiv="true" calendarValueType="yearMonthDate"
-								ref="data:dma_sub_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange">
-							</w2:inputCalendar>
+							<w2:textbox class="df_tt fl" id="" label="비교 상세 정보" style=""></w2:textbox>
 						</xf:group>
-						<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
 					<xf:group></xf:group><!-- margin -->
-
+					<xf:group class="gr_sub_search" id="" style="">
+						<xf:group class="label" id="" style="">
+							<w2:span label="조회구분" style="margin-right: 3px; " id=""></w2:span>
+						</xf:group>
+						<xf:select1 id="SELECT_DIV" chooseOption="" style="width: 100px;height: 21px; float: left; margin-top: 2px;" submenuSize="auto" allOption="" disabled="false"
+							direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled" ref="" ev:onviewchange="scwin.SELECT_DIV_onviewchange">
+							<xf:choices>
+								<xf:item>
+									<xf:label><![CDATA[시간대별]]></xf:label>
+									<xf:value><![CDATA[TIME]]></xf:value>
+								</xf:item>
+								<xf:item>
+									<xf:label><![CDATA[일별]]></xf:label>
+									<xf:value><![CDATA[DAY]]></xf:value>
+								</xf:item>
+								<xf:item>
+									<xf:label><![CDATA[월별]]></xf:label>
+									<xf:value><![CDATA[MONTH]]></xf:value>
+								</xf:item>
+							</xf:choices>
+						</xf:select1>
+						<xf:group class="label" id="" style="">
+							<w2:span label="일시" style="margin-right: 3px; margin-left: 15px;" id=""></w2:span>
+						</xf:group>
+						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+							style="width:120px; margin-right: 10px; " id="F_DATE" renderType="component" renderDiv="true"
+							calendarValueType="yearMonthDate" ref="data:dma_sub_search.F_DATE" ev:onviewchange="scwin.F_DATE_onviewchange" minYear="2000"
+							maxYear="2025">
+						</w2:inputCalendar>
+						<w2:span label="~" style="margin-right: 10px;" id=""></w2:span>
+						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+							style="width: 120px;margin-top: 3px;" id="L_DATE" renderType="component" renderDiv="true" calendarValueType="yearMonthDate"
+							ref="data:dma_sub_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange">
+						</w2:inputCalendar>
+					</xf:group>
 					<xf:group style="position:relative;" id="" class="">
 						<canvas id="chart_ST0200" style="position:absolute;"></canvas>
 					</xf:group>

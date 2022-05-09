@@ -5429,6 +5429,7 @@ routMap.drawPolygon = function(mapId, data, name) {
 		routMap.mapInfo[mapId].polygons.push(polygon);
 		
 		if(typeof name !== "undefined"){
+			
 			var center = routMap.mapInfo[mapId].map.getCenter(); 
 			var content = '<div class="map_info">' + 
 				'<div class="map_title">' + '차고지 : ' + name + '</div>' +
@@ -5629,6 +5630,33 @@ routMap.showCommuMap = function(mapId, list) {
 		
 	}
 }
+
+routMap.addressSearch = function(mapId, address) {
+	var geocoder = new kakao.maps.services.Geocoder();
+	var coords = null;
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch(
+		address,
+		function(result, status) {
+	
+			// 정상적으로 검색이 완료됐으면
+			if (status === kakao.maps.services.Status.OK) {
+	
+				coords = new kakao.maps.LatLng(result[0].y,
+						result[0].x);
+	
+	
+				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+				routMap.mapInfo[mapId].map.setCenter(coords);
+			}
+		}); 
+	
+}
+
+routMap.setCenter = function(mapId, lat, lon) {
+	routMap.mapInfo[mapId].map.setCenter(new kakao.maps.LatLng(lat, lon));
+}
+
 /*
 routMap.showLink = function(mapId, list) {
 	//routMap.initDisplay(mapId);
@@ -5832,4 +5860,3 @@ function getDistanceToLine2(x, y, x1, y1, x2, y2) {
 		}
 	}
 }
-

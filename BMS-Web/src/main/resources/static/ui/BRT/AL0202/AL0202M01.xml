@@ -472,13 +472,14 @@
 		var codeOptions = [{code : "DAY_DIV",compID : "AL0202G0:DAY_DIV"},{code : "WAY_DIV",compID : "AL0202G1:WAY_DIV"}];
 
 		var subOptions = {
-		
+			
 			SAVE:[{cbFnc:scwin.btn_init,nm:"초기화",class:"autoApply"},
 				{cbFnc:scwin.btn_sub_sel_mult_course,nm:"배차 코스 선택",class:"search"},
 				{cbFnc:scwin.btn_reInstall,nm:"재구성",class:"autoApply"},
 				{cbFnc:scwin.btn_add_cell,nm:"추가",class:"add"},
 				{cbFnc:scwin.btn_del_cell,nm:"셀 삭제",class:"del"}
 			]
+			//SETTING:{cbFnc:scwin.popUp_chart,nm:"배차 시각화",class:"setting"}
 		};
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);
 
@@ -492,6 +493,20 @@
 	scwin.onpageunload = function() {
 
 	};
+	
+	//팝업 차트
+	/*scwin.popUp_chart = function(){
+		var jsonData = dlt_OPER_ALLOC_PL_ROUT_INFO.getAllJSON();
+		
+		var data = { jsonData: jsonData,callbackFn : "" };
+		 var options = { id : "allocChart",
+         				width : "1800px",
+         				height : "900px",
+                         popupName : "배차 시각화", 
+                         modal : true};
+		
+		com.openPopup("/cm/common/popUpAllocChart.xml", options, data);
+	}*/
 
 	scwin.btn_save_onclick = function(){
 		var idx = dlt_OPER_ALLOC_PL_ROUT_INFO.getModifiedData().length;

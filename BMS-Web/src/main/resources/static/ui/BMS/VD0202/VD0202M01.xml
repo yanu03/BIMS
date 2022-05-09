@@ -879,14 +879,14 @@
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column9"
+										value="대표노선명" blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column7"
 										value="차량ID" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column6"
 										value="차량번호" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column9"
-										value="대표노선명" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column8"
 										value="차량종류" blockSelect="false" displayMode="label">
@@ -898,13 +898,13 @@
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REP_ROUT_NM"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="VHC_ID"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="VHC_NO"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REP_ROUT_NM"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="VHC_KIND"
