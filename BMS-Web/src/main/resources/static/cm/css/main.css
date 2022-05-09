@@ -529,6 +529,7 @@ background-color: #EBEBEB;
 	height: 720px;
 	width: 600px;
 	box-sizing: border-box;
+	border-radius: 5px;
 	/* width: 100%;
 	height: 100vh;
 	background-image: url('/cm/images/inc/brt_visual.png');
@@ -880,4 +881,3 @@ background-color: #EBEBEB;
    background-position: top;
    position: relative;	
 	}
-}

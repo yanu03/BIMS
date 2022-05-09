@@ -511,7 +511,7 @@
 						</xf:group>
 						<xf:group id="" class="" style=""></xf:group>
 						<xf:group id="" class="grdc_bms_main_right_content" style="">
-							<xf:group id="" class="grdr_20_5_350 bms_box_wrap" style="">
+							<xf:group id="" class="grdr_20_5_280 bms_box_wrap" style="">
 								<xf:group class="defaultbox" id="" style="">
 									<w2:textbox class="df_tt fl bus" id="" label="운행차량" style=""></w2:textbox>
 								</xf:group>
@@ -563,7 +563,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group></xf:group>
-							<xf:group id="" class="grdr_20_5_350 bms_box_wrap" style="">
+							<xf:group id="" class="grdr_20_5_280 bms_box_wrap" style="">
 								<xf:group class="defaultbox" id="" style="">
 									<w2:textbox class="df_tt fl news" id="" label="뉴스" style=""></w2:textbox>
 								</xf:group>

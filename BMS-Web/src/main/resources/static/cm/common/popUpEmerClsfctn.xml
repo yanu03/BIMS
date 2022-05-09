@@ -270,7 +270,7 @@
 				
 			</xf:group>
 			<xf:group id="" style="" class="popup_bottom">
-				<w2:anchor id="btn_confirm" style="" ev:onclick="scwin.btn_confirm_onclick" class="btn_cm">
+				<w2:anchor id="btn_confirm" style="" ev:onclick="scwin.btn_confirm_onclick" class="btn_cm confirm">
 					<xf:label><![CDATA[확인]]></xf:label>
 				</w2:anchor>
 				<w2:anchor id="btn_cancel" style="" ev:onclick="scwin.btn_cancel_onclick" class="btn_cm" outerDiv="">
