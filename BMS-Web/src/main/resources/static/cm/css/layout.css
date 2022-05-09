@@ -9,8 +9,8 @@
 				gap: 5px 0px;
 				}
 .pgm_navi { overflow:hidden; height:40px }
-.pgm_header {overflow:hidden;/* height:40px */}
-.pgm_content { gap: 0px 5px; margin-bottom: 5px }
+.pgm_header {overflow:hidden;/* height:40px */; margin-top: 8px;}
+.pgm_content { gap: 0px 5px; margin-top: 4px; margin-bottom: 5px }
 .pgm_content2 { width:1280px;gap: 0px 5px; margin-bottom: 5px }
 .pgm_main { gap: 0px 5px; margin-bottom: 10px }
 .pgm_list { gap: 2px 0px; }
@@ -179,7 +179,7 @@
 .grdr_20_2_280_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(280px, max-content) minmax(20px, max-content) minmax(20px, max-content) auto;} /* 왼쪽그리드 하단 */
 .grdr_20_2_170_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(170px, max-content) minmax(20px, max-content) minmax(20px, max-content) auto;}
 .grdr_20_2_1f_20_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
-.grdr_20_2_1f_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr 1fr;} /* 왼쪽그리드 하단 */
+.grdr_20_2_1f_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 340px 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_4f_20_20_6f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 4fr minmax(20px, max-content) minmax(20px, max-content) 6fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_6f_20_20_4f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 6fr minmax(20px, max-content) minmax(20px, max-content) 4fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_1f_20_20_1f_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) minmax(20px, max-content) 1fr auto;} /* 왼쪽그리드 하단 */
@@ -297,7 +297,7 @@
 .gr_map_header .defaultbox{float:left; position:relative; margin-right: 7px;}
 .gr_map_header .check{float:left; position:absolute; margin-top: 3px; min-width: 200px;}
 
-.gr_sub_search{position:relative;padding: 8px 21px;margin:0;border:1px solid #ced4d9;border-top: 2px solid #333333;background:#f7f7f7;margin-bottom:10px;height:23px;}
+.gr_sub_search{position:relative;padding: 8px 21px;margin:0; border-top: 1px solid #CED4D9; background:#F2F3F6;margin-bottom:10px;height:23px;}
 .gr_sub_search .label{float:left;position:relative;margin-top: 4px;margin-right: 7px;font-weight: bold;}
 .gr_sub_search .search_select{width: 200px;height: 21px;margin-top: 1px;float:left;}
 .gr_sub_search .search_input{width: 210px;height: 21px;margin-top: 1px;float:left;}
