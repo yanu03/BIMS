@@ -484,7 +484,7 @@
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
 		
 			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
 				<xf:group id="pgm_header_left" class="pgm_header_left" style="">

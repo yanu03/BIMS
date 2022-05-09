@@ -359,11 +359,11 @@
 					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group><!-- pgm_header -->
-			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_1f_20_1f" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_1f_1f" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_2_1f_1f bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="노드 목록" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl list" id="" label="노드 목록" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					<xf:group></xf:group>
@@ -434,13 +434,10 @@
 							</w2:footer>
 						</w2:gridView>
 					</xf:group>
-					
-					<xf:group id="" class="horizontal_line">
-					</xf:group>
 					<xf:group id="" class="pgm_list grdr_20_2_a" style="">
-					<xf:group id="" class="gr_sub_header" style="">
+					<xf:group id="" class="gr_sub_header" style="margin-top:20px">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="시설물 목록" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl list" id="" label="시설물 목록" style=""></w2:textbox>
 						</xf:group>
 						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
@@ -554,13 +551,10 @@
 					</xf:group>					
 				</xf:group><!-- pgm_list -->
 				</xf:group>
-				
-				<xf:group id="" class="vertical_line">
-				</xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_290_20_a" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_290_20_a bms_box_wrap" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="시설물 정보" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl view" id="" label="시설물 정보" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					<xf:group id="" class="" style=""></xf:group>

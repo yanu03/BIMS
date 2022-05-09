@@ -498,7 +498,7 @@
 						<w2:treeview id="SI0600T0" dataType="listed" tooltipGroupClass="false" style="height:100%" labelclass=""
 							ev:onchange="scwin.SI0600T0_onchange" dynamicAppend="true" >
 							<w2:itemset nodeset="data:dlt_EMER_CLSFCTN_MST">
-								<w2:label ref="CLSFCTN_NM" style="border:1px solid red"></w2:label>
+								<w2:label ref="CLSFCTN_NM"></w2:label>
 								<w2:value ref="CLSFCTN_ID"></w2:value>`
 								<w2:depth ref="LEVEL"></w2:depth>
 								<w2:folder ref=""></w2:folder>
@@ -513,7 +513,7 @@
 						</w2:treeview>
 					</xf:group>
 				</xf:group><!-- pgm_list -->
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_220_20_20_a bms_box_wrap" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_240_20_a bms_box_wrap" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl view" id="" label="분류 상세 정보" style=""></w2:textbox>
@@ -612,7 +612,6 @@
 							</xf:group>
 						</xf:group>
 					</xf:group>
-					<xf:group id="" class="horizontal_line"></xf:group>
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl list" id="" label="담당자 목록" style=""></w2:textbox>
