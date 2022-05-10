@@ -39,7 +39,7 @@ public class FM0204Controller extends ControllerSupport {
 	
 	@RequestMapping("/fm/FM0204G1R0")
 	public @ResponseBody Map<String, Object> FM0204G1R0() throws Exception {
-		result.setData("dlt_MGR_PROC_HIS", FM0204Service.FM0204G1R0());
+		result.setData("dlt_PLF_IMP_VER_INFO", FM0204Service.FM0204G1R0());
 		return result.getResult();
 	}
 	

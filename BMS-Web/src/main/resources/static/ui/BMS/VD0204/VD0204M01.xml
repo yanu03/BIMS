@@ -134,7 +134,7 @@
 				</w2:dataList>
 
 				<!-- 프로세스 데이터리스트 -->
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_MGR_PROC_HIS" saveRemovedData="true">
+				<!-- <w2:dataList baseNode="list" repeatNode="map" id="dlt_MGR_PROC_HIS" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="LAST_DTM" name="" dataType="text"></w2:column>
 						<w2:column id="REG_DTM" name="" dataType="text"></w2:column>
@@ -150,6 +150,24 @@
 						<w2:column id="START_DTM" name="시작시각" dataType="text"></w2:column>
 						<w2:column id="BUILD_DTM" name="" dataType="text"></w2:column>
 						<w2:column id="UPDATE_DTM" name="" dataType="text"></w2:column>
+					</w2:columnInfo>
+					<w2:data use="false"></w2:data>
+				</w2:dataList> -->
+				
+				<!-- 프로세스 데이터리스트 -->
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_PLF_IMP_VER_INFO" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="LAST_DTM" name="" dataType="text"></w2:column>
+						<w2:column id="IMP_ID" name="" dataType="text"></w2:column>
+						<w2:column id="PRCS_NM" name="프로세스명" dataType="text"></w2:column>
+						<w2:column id="PRCS_IDX" name="" dataType="text"></w2:column>
+						<w2:column id="VER_TOTAL" name="버전통합" dataType="text"></w2:column>
+						<w2:column id="VER_HIGH" name="" dataType="text"></w2:column>
+						<w2:column id="VER_MID" name="" dataType="text"></w2:column>
+						<w2:column id="VER_LOW" name="" dataType="text"></w2:column>
+						<w2:column id="ST_DTM" name="시작시각" dataType="text"></w2:column>
+						<w2:column id="BLD_DTM" name="" dataType="text"></w2:column>
+						<w2:column id="UPD_DTM" name="" dataType="text"></w2:column>
 					</w2:columnInfo>
 					<w2:data use="false"></w2:data>
 				</w2:dataList>
@@ -217,7 +235,7 @@
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_VD0204G1R0" ref="data:json,dma_subsearch" target="data:json,dlt_MGR_PROC_HIS" action="/vd/VD0204G1R0"
+			<xf:submission id="sub_VD0204G1R0" ref="data:json,dma_subsearch" target="data:json,dlt_PLF_IMP_VER_INFO" action="/vd/VD0204G1R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="" ev:submit="" ev:submitdone="scwin.sub_VD0204G1R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -731,7 +749,7 @@
 			<xf:group id="pgm_header" class="pgm_header" style="">
 				<xf:group id="" style="" class="gr_search">
 					<xf:group id="" style="" class="search">
-						<xf:group class="label" id="" style="">
+						<!-- <xf:group class="label" id="" style="">
 							<w2:span class="" id="" label="차량번호" style=""></w2:span>
 						</xf:group>
 						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
@@ -745,8 +763,8 @@
 									<w2:value ref="VHC_ID"></w2:value>
 								</w2:itemset>
 							</w2:choices>
-						</w2:autoComplete>
-						<xf:group class="label" id="" style="margin-left:10px;">
+						</w2:autoComplete> -->
+						<xf:group class="label" id="" style="">
 							<w2:span class="" id="" label="장치종류" style=""></w2:span>
 						</xf:group>
 						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
@@ -828,7 +846,7 @@
 							<xf:group id="" class="" style=""></xf:group>
 							<xf:group id="" class="" style="">
 								<w2:gridView autoFit="lastColumn" autoFitMinWidth="0" checkEditableInputClass="" class="cm_grid right"
-									dataList="data:dlt_MGR_PROC_HIS" ev:oncellclick="scwin.VD0204G1_oncellclick" ev:onrowindexchange="scwin.VD0204G1_onrowindexchange"
+									dataList="data:dlt_PLF_IMP_VER_INFO" ev:oncellclick="scwin.VD0204G1_oncellclick" ev:onrowindexchange="scwin.VD0204G1_onrowindexchange"
 									fixedColumnWithHidden="true" focusMode="row" id="VD0204G1" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="순번"
 									rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowStatusVisible="false" scrollByColumn="false" sortable="false"
 									useShiftKey="true" sortEvent="onclick" mergeCells="">
@@ -841,12 +859,12 @@
 											<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px"
 												id="column3" value="관리ID" blockSelect="false" displayMode="label" sortable="true" class="">
 											</w2:column>
-											<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
+											<!-- <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
 												id="column1" value="CPU" blockSelect="false" displayMode="label" class="">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
 												id="column10" value="MEMORY" blockSelect="false" displayMode="label" class="">
-											</w2:column>
+											</w2:column> -->
 											<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
 												id="column8" value="버전" blockSelect="false" displayMode="label" class="">
 											</w2:column>
@@ -867,28 +885,28 @@
 									<w2:gBody style="" id="gBody1">
 										<w2:row style="" id="row2">
 											<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
-												id="PROC_NAME" value="" blockSelect="false" displayMode="label">
+												id="PRCS_NM" value="" blockSelect="false" displayMode="label">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
 												id="IMP_ID" value="" blockSelect="false" displayMode="label">
 											</w2:column>
-											<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
+											<!-- <w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
 												id="CPU_USG" value="" blockSelect="false" displayMode="label">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="128" inputType="text" style="height:20px"
 												id="MEM_USG" value="" blockSelect="false" displayMode="label">
-											</w2:column>
+											</w2:column> -->
 											<w2:column removeBorderStyle="false" width="109" inputType="text" style="height:20px"
 												id="VER_TOTAL" value="" blockSelect="false" displayMode="label">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="86" inputType="text" style="height:20px"
-												id="START_DTM" value="" blockSelect="false" displayMode="label" textAlign="">
+												id="ST_DTM" value="" blockSelect="false" displayMode="label" textAlign="">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px"
 												id="LAST_DTM" value="" blockSelect="false" displayMode="label" textAlign="">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px"
-												id="BUILD_DTM" value="" blockSelect="false" displayMode="label" textAlign="">
+												id="BLD_DTM" value="" blockSelect="false" displayMode="label" textAlign="">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px"
 												id="" value="" blockSelect="false" displayMode="label" textAlign="">

@@ -70,24 +70,24 @@
 <!-- 프로세스 조회-->
 <select id="FM0204G1R0" resultType="Map">
 	SELECT 			DATE_FORMAT(LAST_DTM, '%Y-%m-%d %H:%i:%s') LAST_DTM
-					,DATE_FORMAT(REG_DTM, '%Y-%m-%d %H:%i:%s') REG_DTM
+					<!-- ,DATE_FORMAT(REG_DTM, '%Y-%m-%d %H:%i:%s') REG_DTM -->
 					,IMP_ID
-					,PROC_NAME
-					,PROC_INDEX
+					,PRCS_NM
+					,PRCS_IDX
 					,CONCAT(VER_HIGH, '.', VER_MID, '.', VER_LOW) AS VER_TOTAL
 					,VER_HIGH
 					,VER_MID
 					,VER_LOW
-					,CPU_USG
-					,MEM_USG
-					,DATE_FORMAT(START_DTM, '%Y-%m-%d %H:%i:%s') START_DTM
-					,DATE_FORMAT(BUILD_DTM, '%Y-%m-%d %H:%i:%s') BUILD_DTM
-					,DATE_FORMAT(UPDATE_DTM, '%Y-%m-%d %H:%i:%s') UPDATE_DTM
+					<!-- ,CPU_USG
+					,MEM_USG -->
+					,DATE_FORMAT(ST_DTM, '%Y-%m-%d %H:%i:%s') ST_DTM
+					,DATE_FORMAT(BLD_DTM, '%Y-%m-%d %H:%i:%s') BLD_DTM
+					,DATE_FORMAT(UPD_DTM, '%Y-%m-%d %H:%i:%s') UPD_DTM
 					
-	FROM			MGR_PROC_HIS
+	FROM			PLF_IMP_VER_INFO
 	
 	WHERE			IMP_ID = #{MNG_ID}
-	GROUP BY		IMP_ID, PROC_NAME
+	GROUP BY		IMP_ID, PRCS_NM
 </select>
 
 
