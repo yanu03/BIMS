@@ -1186,7 +1186,7 @@
 					 callbackFn : ""} 
 		var options = {
 			id : "MO0201P02",
-			popupName : "버스 상세정보",
+			popupName : "버스 상태정보",
 			type : "browserPopup",
 			width : 1380,
 			height : 720			
