@@ -20,7 +20,6 @@ import kr.tracom.platform.attribute.brt.AtBusArrivalInfoItem;
 import kr.tracom.platform.attribute.brt.AtBusInfo;
 import kr.tracom.platform.attribute.brt.AtBusOperEvent;
 import kr.tracom.platform.attribute.brt.AtDispatch;
-import kr.tracom.platform.common.util.CommonUtil;
 import kr.tracom.platform.net.protocol.TimsMessage;
 import kr.tracom.platform.net.protocol.attribute.AtMessage;
 import kr.tracom.platform.net.protocol.payload.PlEventRequest;
@@ -29,6 +28,7 @@ import kr.tracom.tims.OperDtUtil;
 import kr.tracom.tims.domain.CurInfoMapper;
 import kr.tracom.tims.domain.HistoryMapper;
 import kr.tracom.tims.domain.TimsMapper;
+import kr.tracom.util.CommonUtil;
 import kr.tracom.ws.WsClient;
 
 public class EventThread extends Thread{
