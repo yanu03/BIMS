@@ -8745,3 +8745,176 @@ com.getUploadPath = function() {
 com.getAudioPath = function() {
 	return gcm.AUDIO_PATH;
 }
+
+/**
+* 라디오 버튼에 따라 inputCalendar 동작
+* @param F_DATE : 시작 기간 inputCalendar Id
+* @param L_DATE : 종료 기간 inputCalendar Id
+* @param info : websquare에서 onviewchange시 제공하는 radio 정보
+*/
+com.setCalendarRadioChange = function(F_DATE, L_DATE, info) {
+	var date = new Date();
+	var year = date.getFullYear().toString();
+	var month = (date.getMonth()+1).toString();
+	var day = date.getDate().toString();
+	var zero = 0;
+	
+	//글자수 맞추기
+	if(day.length == 1){
+		day = zero + day;
+	}
+	
+	if(month.length == 1){
+		month = zero + month;
+	}
+			
+	var weekAgoDate = new Date(date.setDate(date.getDate() - 7));
+	var weekAgoYear = weekAgoDate.getFullYear().toString();
+	var weekAgoMonth = (weekAgoDate.getMonth()+1).toString();
+	var weekAgoDay = weekAgoDate.getDate().toString();
+	if(weekAgoDay.length == 1){
+		weekAgoDay = zero + weekAgoDay;
+	}
+	
+	if(weekAgoMonth.length == 1){
+		weekAgoMonth = zero + weekAgoMonth;
+	}		
+	
+	
+	date = new Date();
+	var monthAgoDate = new Date(date.setMonth(date.getMonth() - 1));
+	var monthAgoYear = monthAgoDate.getFullYear().toString();
+	var monthAgoMonth = (monthAgoDate.getMonth()+1).toString();
+	var monthAgoDay = monthAgoDate.getDate().toString();		
+	if(monthAgoDay.length == 1){
+		monthAgoDay = zero + monthAgoDay;
+	}
+	
+	if(monthAgoMonth.length == 1){
+		monthAgoMonth = zero + monthAgoMonth;
+	}			
+	
+	var todaysDate = year+month+day;
+	weekAgoDate = weekAgoYear + weekAgoMonth + weekAgoDay;
+	monthAgoDate = monthAgoYear + monthAgoMonth + monthAgoDay;		
+	
+	if(info.value == "DIRECT") {
+		F_DATE.setValue();
+		L_DATE.setValue();
+	}
+	
+	else if(info.value == "TODAY") {
+		F_DATE.setValue(todaysDate);
+		L_DATE.setValue(todaysDate);	
+	}
+	
+	else if(info.value == "WEEK") {
+		F_DATE.setValue(weekAgoDate);
+		L_DATE.setValue(todaysDate);			
+	}
+	
+	else if(info.value == "MONTH") {
+		F_DATE.setValue(monthAgoDate);
+		L_DATE.setValue(todaysDate);				
+	}	
+}
+
+/**
+* 새 메뉴를 열음
+* @param menuNm : 메뉴명
+* @param url : 메뉴 xml url
+* @param menuCode : 메뉴 코드값
+* @param paramObj : 전달할 파라미터값
+* @param menuType : 
+*/
+com.openMenu = function(menuNm, url, menuCode, paramObj, menuType) {
+	// client에서 url 숨기기 메뉴일 경우에는 새 창으로 띄우기 적용 
+	if (url == "/") {
+		var url = document.location.href + "/";
+		window.open(url, "", "width=1200, height=700, left=450, top=100");
+	} else {
+		menuCode = menuCode || "";
+		var layout = $p.top().scwin.getLayoutId();
+		var tmpUrl;
+		var menuCodeParm = menuCode;
+		var frameMode;	// "wframe", "iframe"
+		var favStatus;
+		var data;
+
+		if (url.indexOf("/") !== 0) {
+			url = "/" + url;
+		}
+		url = gcm.CONTEXT_PATH + url;
+		if ((typeof paramObj !== "undefined") && (paramObj !== null)) {
+			data = {};
+			data.paramObj = paramObj;
+		} else {
+			data = {};
+		}
+		
+		data.menuNm = menuNm;
+		data.menuCode = menuCode;
+		data.favStatus = favStatus;
+		data.menuType = menuType;
+		
+		var _closable = true;
+		
+		var frameMode = "";
+		if (layout == "T") {
+			var tabObj = { closable : _closable, //main 페이지를 제외하고 탭 닫기 기능 제공
+						   openAction : "select", // exist 는 기존 탭을 갱신, new 는 항상 새로, select는 동일 id 가 존재하면 선택, last: 기존 tab을 마지막 tab으로 이동후 선택
+						   label : menuNm };
+			
+			if (com.getFrameMode()  === "wframe") {
+				frameMode = "wframePreload";
+			} else {
+				frameMode = "iframe";
+			}
+			
+			var contObj = {
+				frameMode : frameMode,
+				scope : true,
+				src : url,
+				alwaysDraw : false,
+				title : menuNm,
+				dataObject : {
+					type : "json", 
+					name : "param", 
+					data : data
+				}
+			};
+			var tabComp = $w.getComponentById("mf_tac_layout");
+			tabComp.addTab(menuCode, tabObj, contObj);
+
+			// tabObj의 openAction의 last값의 동작 특이 사항으로 선택이 되지 않은 경우 선택하는 로직 추가
+			if (tabComp.getSelectedTabID() !== menuCode) {
+				var tabIndex = tabComp.getTabIndex(menuCode);
+				if (tabIndex) {
+					tabComp.setSelectedTabIndex(tabIndex);
+				}
+			}
+		} else if (layout == "M") {
+			if (com.getFrameMode() === "wframe") {
+				frameMode = "wframe";
+			} else {
+				frameMode = "iframe";
+			}
+			
+			var options = {
+				title : menuNm,
+				src : url,
+				windowTitle : menuNm,
+				windowId : menuCode,
+				openAction : "existWindow",
+				frameMode : frameMode,
+				dataObject : { 
+					type : "json", 
+					name : "param", 
+					data : data
+				}
+			}
+			var wdcComp = $w.getComponentById("mf_wdc_main");
+			wdcComp.createWindow(options);
+		}
+	}
+};

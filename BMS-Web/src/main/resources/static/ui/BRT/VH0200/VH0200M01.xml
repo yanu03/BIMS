@@ -882,49 +882,7 @@
 	
 	//라디오 버튼에 따라 날짜 설정
 	scwin.calendar_radio_onviewchange = function(info) {
-		var date = new Date();
-		var year = date.getFullYear().toString();
-		var month = (date.getMonth()+1).toString();
-		var day = date.getDate().toString();
-		var zero = 0;
-		
-		//글자수 맞추기
-		if(day.length == 1){
-			day = zero + day;
-		}
-		
-		if(month.length == 1){
-			month = zero + month;
-		}
-		
-		var weekAgoDay = parseInt(day) - 7;
-		var todaysDate = year+month+day;
-		var weekAgoDate = year+month+weekAgoDay;
-		var firstday = year+month+"01";		
-		
-		if(parseInt(weekAgoDay) <= 0) {
-	         weekAgoDate = firstday;   
-	      }
-		
-		if(info.value == "DIRECT") {
-			F_DATE_VH0200.setValue();
-			L_DATE_VH0200.setValue();
-		}
-		
-		else if(info.value == "TODAY") {
-			F_DATE_VH0200.setValue(todaysDate);
-			L_DATE_VH0200.setValue(todaysDate);	
-		}
-		
-		else if(info.value == "WEEK") {
-			F_DATE_VH0200.setValue(weekAgoDate);
-			L_DATE_VH0200.setValue(todaysDate);			
-		}
-		
-		else if(info.value == "MONTH") {
-			F_DATE_VH0200.setValue(firstday);
-			L_DATE_VH0200.setValue(todaysDate);				
-		}
+		com.setCalendarRadioChange(F_DATE_VH0200, L_DATE_VH0200, info);
 	};
 	
 	
