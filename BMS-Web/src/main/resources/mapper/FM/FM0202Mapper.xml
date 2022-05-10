@@ -49,9 +49,10 @@
 			<if test="CONTENT4 != ''">
 				AND A.NODE_TYPE = #{CONTENT4}				
 			</if>
-		<!-- GROUP BY
-			A.NODE_ID -->
-		ORDER BY		E.NODE_SN					
+		GROUP BY
+			A.NODE_ID
+		ORDER BY
+			G.REP_ROUT_ID, E.NODE_SN					
 	</select>
 	
 <!-- 수정전  시설물 목록

@@ -955,7 +955,7 @@
 										<xf:input adjustMaxLength="false" id="input2" style="" type="number"></xf:input>
 									</xf:group>
 								</xf:group>
-								<xf:group tagname="tr" style="">
+								<!-- <xf:group tagname="tr" style="">
 									<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
 										로그레벨
 										<w2:attributes>
@@ -995,7 +995,7 @@
 									<xf:group tagname="td" class="w2tb_td">
 										<w2:attributes></w2:attributes>
 									</xf:group>
-								</xf:group>
+								</xf:group> -->
 							</xf:group>
 							</xf:group>
 						</xf:group>

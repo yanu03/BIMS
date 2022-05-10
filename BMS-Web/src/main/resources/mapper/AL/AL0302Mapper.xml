@@ -22,8 +22,9 @@
 		LEFT JOIN BMS_STTN_MST D
 		ON A.ED_STTN_ID = D.STTN_ID
 	<where>
+		B.USE_YN = 'Y' AND B.DEL_YN = 'N'
 		<if test="CONTENT1 == 'all'">
-			A.REP_ROUT_ID LIKE CONCAT('%',#{CONTENT3},'%')
+			AND A.REP_ROUT_ID LIKE CONCAT('%',#{CONTENT3},'%')
 		</if>
 		<if test="CONTENT1 != 'all'">
 			AND A.REP_ROUT_ID = #{CONTENT1}

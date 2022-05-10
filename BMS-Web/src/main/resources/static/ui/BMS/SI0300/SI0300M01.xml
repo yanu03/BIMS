@@ -90,7 +90,11 @@
 				   }
 		 };
 		 
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions);
+		var mainOptions = {
+			DEL : scwin.deleteDrv
+		}
+		
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
 		
 		var codeOptions = [ {code : "BUS_DIV", compID : "BUS_DIV, SI0300G0:BUS_DIV" },
 							{code : "EPLY_YN", compID : "EPLY_YN, SI0300G0:EPLY_YN" }														
@@ -108,6 +112,24 @@
 		
 	};
 	
+	scwin.deleteDrv = function(){
+		var rows = SI0300G0.getAllFocusedRowIndex();
+		if(rows.length > 0){
+			var count = rows.length;
+			var str = "해당 운전자의 배차 정보도 함께 삭제됩니다. 삭제하시겠습니까?";
+			
+			if(count > 0) {
+				com.confirm(str, function(rtn) {
+					if (rtn) {
+						com.delGrid(SI0300G0);
+					}	
+				});
+			}
+		
+		}else {
+			com.alert("삭제할 운전자를 선택해주세요.");
+		}
+	}
 	
 	scwin.sub_SI0300G0R0_submitdone = function(e) {
 		var sCode = com.getResultCode(e);

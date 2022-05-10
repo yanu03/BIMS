@@ -26,7 +26,7 @@
 					,	A.EVT_TYPE
 					,	A.EVT_DATA
 					,	A.STOP_TM
-					,	DATE_FORMAT(A.OCR_DTM, '%H:%i:%s') OCR_DTM
+					,	DATE_FORMAT(A.OCR_DTM, '%Y-%m-%d %H:%i:%s') OCR_DTM
 					<!--  ,   MAX(CASE A.EVT_DATA )-->
 					,	B.NODE_NM AS EVE_NODE_NM
 					,	B.NODE_TYPE

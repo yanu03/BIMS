@@ -164,6 +164,7 @@
 	
 	// <- 버튼
 	scwin.btn_grid_del_onclick = function() {
+		debugger;
 		var focusIdxs = AL0104G2.getAllFocusedRowIndex();
 		var count = focusIdxs.length;
 		if (count > 0) {
@@ -175,7 +176,9 @@
 				dlt_BMS_VHC_MST.setCellData(insertIndex, "REP_ROUT_ID", dma_sub_search.get("REP_ROUT_ID"));
 			}
 		}
+		//dlt_BRT_REP_ROUT_VHC_CMPSTN.removeRows(focusIdxs);
 		com.delGrid2(AL0104G2);
+		AL0104G2.removeFocusedCell();
 	};
 
 	scwin.sub_AL0104G2S0_submitdone = function(e) {

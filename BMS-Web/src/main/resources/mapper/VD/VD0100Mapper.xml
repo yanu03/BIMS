@@ -90,7 +90,7 @@
 	ON				A.INST_LOC = E.DL_CD
 	AND				E.CO_CD = 'INST_LOC'
 ORDER BY
-	F.VHC_ID
+	F.VHC_ID, A.DVC_ID
 	
 
 </select>

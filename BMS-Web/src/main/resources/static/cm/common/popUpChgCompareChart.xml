@@ -62,7 +62,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script>
 	<script src='https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js'></script>
-	 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation.js"></script>
 	<script type="text/javascript" lazy="false"><![CDATA[
 	
 	
@@ -72,16 +71,17 @@
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
 		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
 		
-		dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setJSON(scwin.param.data5, true);
-		dlt_CHG_CNT.setJSON(scwin.param.data6, true);
+		dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.setJSON(scwin.param.transData, true);
+		dlt_CHG_CNT.setJSON(scwin.param.chgCntJson, true);
 		
-		dma_sub_search.set("VHC_NO", scwin.param.data);
-		dma_sub_search.set("OPER_DT", scwin.param.data2);
-		dma_sub_search.set("ROUT_NM", " "+scwin.param.data3);
-		dma_sub_search.set("OPER_SN", " "+scwin.param.data4);
-		dma_sub_search.set("ALLOC_NO", " "+scwin.param.data7);
+		dma_sub_search.set("VHC_NO", scwin.param.vhcNo);
+		dma_sub_search.set("OPER_DT", scwin.param.operDt);
+		dma_sub_search.set("ROUT_NM", " "+scwin.param.routNm);
+		dma_sub_search.set("OPER_SN", " "+scwin.param.operSn);
+		dma_sub_search.set("ALLOC_NO", " "+scwin.param.allocNo);
 		
 		scwin.DrawChart();		
+		
 		
 	};
 	
@@ -196,14 +196,14 @@
 			var categoryJson = new Object();
 			categoryJson.x = new Date(arrvTm);
 			categoryJson.y = accruLen;
-			categoryJson.NODE_NM = jsonData[y].NODE_NM;;
+			categoryJson.NODE_NM = jsonData[y].NODE_NM;
 			data.push(categoryJson);
 			
 		
 			var categoryJson = new Object();
 			categoryJson.x = new Date(dprtTm);
 			categoryJson.y = accruLen;
-			categoryJson.NODE_NM = jsonData[y].NODE_NM;;
+			categoryJson.NODE_NM = jsonData[y].NODE_NM;
 			data.push(categoryJson);
 			
 		};
@@ -343,24 +343,27 @@
 				var chgDiv = jsonData[y].CHG_DIV;
 				
 				if(chgDiv == firstChg){
-					if(arrvTm != '' && dprtTm != ''){
+					if(com.isEmpty(jsonData[y].CHG_ARRV_TM)==false){
 						var categoryJson = new Object();
 						
 						categoryJson.x = new Date(arrvTm);
 						categoryJson.y = accruLen;
+						categoryJson.NODE_NM = jsonData[y].NODE_NM;
 						data.push(categoryJson);
 					}
 					
-					if(arrvTm != '' && dprtTm != ''){
+					if(com.isEmpty(jsonData[y].CHG_DPRT_TM)==false){
 						var categoryJson = new Object();
 					
 						categoryJson.x = new Date(dprtTm);
 						categoryJson.y = accruLen;
+						categoryJson.NODE_NM = jsonData[y].NODE_NM;
 						data.push(categoryJson);
 					}
 					
 					if(oldY >= y){
 						firstNodeNm = jsonData[y].NODE_NM;
+						lastNodeNm = jsonData[y].NODE_NM;
 					}else{
 						lastNodeNm = jsonData[y].NODE_NM;
 					}
@@ -390,6 +393,7 @@
 			}
 			firstChg++;
 		}
+		
 		var ctx = document.getElementById('myChart');
 		var myChart = new Chart(ctx, {
 			    type: 'line',
@@ -425,14 +429,20 @@
 			        tooltips:{
 			        	callbacks:{
 			        		label: function(tooltipItem, data){
-			        			return '노드명' + " : " + data.NODE_NM[tooltipItem.index];
+								var index = tooltipItem.index
+								var dataSetIndex = tooltipItem.datasetIndex
+			        			return '노드명 : ' + data.datasets[dataSetIndex].data[index].NODE_NM;
+			        		},
+			        		footer: function(tooltipItem, data){
+			        			return '거리(m) : ' + tooltipItem[0].yLabel
 			        		}
 			        	}
 			        }
 			        
 			    }
 			});
-			debugger;
+			
+	
 	}
 	
 	
@@ -451,10 +461,6 @@
 	 					<w2:span class="" id="" label="" ref="data:dma_sub_search.ROUT_NM"></w2:span>
 	 				</xf:group>
 	 				<xf:group class="label" id="" style="">
-	 					<w2:span class="" id="" label="차량번호 : " ref=""></w2:span>
-	 					<w2:span class="" id="" label="" ref="data:dma_sub_search.VHC_NO"></w2:span>
-	 				</xf:group>
-	 				<xf:group class="label" id="" style="">
 	 					<w2:span class="" id="" label="배처번호 : " ref=""></w2:span>
 	 					<w2:span class="" id="" label="" ref="data:dma_sub_search.ALLOC_NO"></w2:span>
 	 					<w2:span class="" id="" label="번" ref=""></w2:span>
@@ -463,6 +469,10 @@
 	 					<w2:span class="" id="" label="운행순번 : " ref=""></w2:span>
 	 					<w2:span class="" id="" label="" ref="data:dma_sub_search.OPER_SN"></w2:span>
 	 					<w2:span class="" id="" label="회차" ref=""></w2:span>
+	 				</xf:group>
+	 				<xf:group class="label" id="" style="">
+	 					<w2:span class="" id="" label="차량번호 : " ref=""></w2:span>
+	 					<w2:span class="" id="" label="" ref="data:dma_sub_search.VHC_NO"></w2:span>
 	 				</xf:group>
 	 				
 	 			</xf:group>

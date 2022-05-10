@@ -163,22 +163,24 @@
 				var accruLen = transData[y].ACCRU_LEN;
 				var nodeType = transData[y].NODE_TYPE;
 				
-				if(nodeType=='NT002'){
+				//if(nodeType=='NT002'){
 					var categoryJson = new Object();
 					
 					categoryJson.x = new Date(updDtm+' '+arrvTm);
 					categoryJson.y = accruLen;
+					categoryJson.NODE_NM = jsonData[y].NODE_NM;
 					data.push(categoryJson);
 					
-				}
+				//}
 				
-				if((nodeType=='NT002')&&(arrvTm!=dprtTm)){
+				//if((nodeType=='NT002')&&(arrvTm!=dprtTm)){
 					var categoryJson = new Object();
 				
 					categoryJson.x = new Date(updDtm+' '+dprtTm);
 					categoryJson.y = accruLen;
+					categoryJson.NODE_NM = jsonData[y].NODE_NM;
 					data.push(categoryJson);
-				}
+				//}
 				
 			};
 
@@ -204,44 +206,34 @@
 			    type: 'line',
 				data: {
 					datasets
-				    /*datasets: [{
-					      label: '2호차',
-					      data: [{
-					        x: new Date(2021, 10, 19, 03, 24, 20),
-					        y: 1
-					      }, {
-					        x: new Date(2021, 10, 19, 4, 24, 0),
-					        y: 10
-					      }
-					      ]
-					    },
-					    {
-					      label: '3호차',
-					      data: [{
-					        x: new Date(2021, 10, 19, 3, 28, 0),
-					        y: 2
-					      }, {
-					        x: new Date(2021, 10, 19, 4, 24, 0),
-					        y: 11
-					      }]
-					    }
-					    ]*/
 				  },
 			    options: {
 			        scales: {
 			           xAxes: [{
 				        type: 'time',
 				        time: {
-				          unit: 'minute'
+				          unit: 'minute',
+				          unitStepSize: 3 //x축 시간 간격 (분)
 				        }
 				      }],
-				      
 				      yAxes : [{
-					      	
 							color: 'rgba(166, 201, 226, 1)',
 							lineWidth:3
 					
 				      }]
+			        },
+			        tooltips:{
+			        	callbacks:{
+			        		label: function(tooltipItem, data){
+								var index = tooltipItem.index
+								var dataSetIndex = tooltipItem.datasetIndex
+			        			return '노드명' + " : " + data.datasets[dataSetIndex].data[index].NODE_NM;
+			        		},
+			        		footer: function(tooltipItem, data){
+			        			
+			        			return '거리(m) : ' + tooltipItem[0].yLabel
+			        		}
+			        	}
 			        }
 			    }
 			});

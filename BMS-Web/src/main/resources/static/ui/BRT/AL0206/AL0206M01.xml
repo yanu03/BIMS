@@ -226,7 +226,9 @@
 					//1교대 데이터
 					if(rotaCnt == corCnt){
 						oldRotaCnt = false;
+						rotaCnt = 1;
 					}else{
+						oldRotaCnt = true;
 						rotaCnt += 1;
 					}
 					
@@ -295,8 +297,13 @@
 	                style: {
 	                    cursor: 'default',
 	                    pointerEvents: 'none',
-	                	fontSize:9
+	                	fontSize:10,
+	                	color: 'white', //폰트 컬러
+	                	//textShadow : '1px 0px 0px black',
+	                	fontFamily : 'Malgun Gothic',
+	                	textOutline : 'black' //글씨 테두리 컬러
 	                },
+	                allowOverlap:true,
 	            },
 		    };
 		  });
@@ -313,7 +320,8 @@
 		var highChart = new Highcharts.ganttChart(ctx, {
 		  series: series,
 		  chart: {
-		    height: 640
+		  	width:1900,
+		    height: 680
 		  },
 		  title: {
 		    text: TYPE1.getText()+' 배차시각화('+TYPE2.getText()+')'
@@ -323,7 +331,7 @@
 		  },
 		  xAxis: [{
 		      grid: {
-		        cellHeight: 40
+		        cellHeight: 30
 		      },
 		      currentDateIndicator: false,
 		      dateTimeLabelFormats: {

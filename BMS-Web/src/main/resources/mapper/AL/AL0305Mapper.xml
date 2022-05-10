@@ -201,14 +201,45 @@
 		REP_ROUT_ID = #{REP_ROUT_ID}
 	AND
 		ALLOC_NO = #{ALLOC_NO}
-	AND
-		DAY_DIV = #{DAY_DIV}
+	<!-- AND
+		DAY_DIV = #{DAY_DIV} -->
 	AND
 		OPER_DT = #{OPER_DT}
 </update>
 
 <select id="AL0305G0R0" resultType="Map" parameterType="Map">
-	SELECT A.REP_ROUT_ID
+<!-- 일별 배차 관리 쿼리 수정 2022-05-09 -->
+SELECT B.REP_ROUT_ID
+	       ,B.ALLOC_NO
+	       ,B.VHC_ID
+	       ,DATE_FORMAT(B.OPER_DT, '%Y-%m-%d') OPER_DT
+	       ,D.VHC_NO
+	       ,E.COMP_NM
+	       ,H.DRV_ID
+			,H.SEC_DRV_ID
+			,H.THR_DRV_ID
+			,(SELECT DRV_NM FROM BMS_DRV_MST WHERE DRV_ID = H.DRV_ID) DRV_NM
+			,(SELECT DRV_NM FROM BMS_DRV_MST WHERE DRV_ID = H.SEC_DRV_ID) SEC_DRV_NM
+			,(SELECT DRV_NM FROM BMS_DRV_MST WHERE DRV_ID = H.THR_DRV_ID) THR_DRV_NM
+			,H.SEC_TRAN_TM
+			,H.THR_TRAN_TM
+	FROM 
+		BRT_DAY_ALLOC_PL_INFO B
+		LEFT JOIN BMS_VHC_MST D
+		ON B.VHC_ID = D.VHC_ID
+		LEFT JOIN BMS_TRANSCOMP_MST E
+		ON D.COMP_ID = E.COMP_ID
+		LEFT JOIN BRT_DAY_DRV_ALLOC_INFO H
+		ON B.REP_ROUT_ID = H.REP_ROUT_ID 
+		AND B.ALLOC_NO = H.ALLOC_NO
+		AND B.OPER_DT = H.OPER_DT
+	WHERE
+		B.REP_ROUT_ID = #{REP_ROUT_ID}
+		AND (B.OPER_DT BETWEEN #{F_DATE} AND #{L_DATE})
+	ORDER BY
+		B.OPER_DT, B.REP_ROUT_ID, B.ALLOC_NO
+
+	<!-- SELECT A.REP_ROUT_ID
 	       ,A.DAY_DIV
 	       ,A.ALLOC_NO
 	       ,B.VHC_ID
@@ -247,22 +278,10 @@
 			AND B.OPER_DT BETWEEN #{F_DATE} AND #{L_DATE} AND H.OPER_DT BETWEEN #{F_DATE} AND #{L_DATE}
 		</if>
 	</where>
-	
-	<!-- <where>
-		<if test="REP_ROUT_ID != 'all' and REP_ROUT_ID != null and REP_ROUT_ID != ''">
-			A.REP_ROUT_ID = #{REP_ROUT_ID}
-		</if>
-		<if test="DAY_DIV != 'all' and DAY_DIV != null and DAY_DIV != ''">
-			AND A.DAY_DIV = #{DAY_DIV}
-		</if>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE)">
-			AND B.OPER_DT BETWEEN #{F_DATE} AND #{L_DATE} AND H.OPER_DT BETWEEN #{F_DATE} AND #{L_DATE}
-		</if>
-	</where> -->
 	GROUP BY
 		A.REP_ROUT_ID,A.ALLOC_NO, B.OPER_DT
 	ORDER BY
-		B.OPER_DT, A.REP_ROUT_ID, A.DAY_DIV, A.ALLOC_NO
+		B.OPER_DT, A.REP_ROUT_ID, A.DAY_DIV, A.ALLOC_NO -->
 </select>
 
 </mapper>

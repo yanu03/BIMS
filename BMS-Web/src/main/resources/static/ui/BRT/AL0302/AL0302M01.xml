@@ -432,12 +432,12 @@
 			
 			var data = { data: repRoutId, vhcId:vhcId, callbackFn : "scwin.searchVhcCallback" };
 					   	 
-			var opt = { id : "popUpVhcList", 
+			var opt = { id : "popUpAllocVhcList", 
 						popupName : "차량번호 검색",
 						//width : 600,
 						//height : 500,
 						modal : true};
-			com.openPopup("/cm/common/popUpVhcList.xml", opt, data);
+			com.openPopup("/cm/common/popUpAllocVhcList.xml", opt, data);
 				
 		}
 		else if(col == 4){
@@ -534,12 +534,12 @@
 		if(col == 1){
 			var data = { data: repRoutId,callbackFn : "scwin.searchVhcCallbackG2" };
 					   	 
-			var opt = { id : "popUpVhcList", 
+			var opt = { id : "popUpAllocVhcList", 
 						popupName : "차량번호 검색",
 						//width : 600,
 						//height : 500,
 						modal : true};
-			com.openPopup("/cm//common/popUpVhcList.xml", opt, data);
+			com.openPopup("/cm//common/popUpAllocVhcList.xml", opt, data);
 				
 		}
 		else if(col == 3){

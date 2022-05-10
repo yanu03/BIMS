@@ -352,7 +352,7 @@
 			com.searchGrid(FM0204G0, sub_FM0204G0R0);
 		});
 						 
-		com.executeSubmission(sub_nodeItem);	
+		com.executeSubmission(sub_nodeItem);
 		
 		//$("#FM0204_TAB").attr("style", "width:200px; height:26px; margin-left: 10px; float:left");
 		//$("#mf_tac_layout_contents_MN00060204_body_pgm_list2").css("display", "none");
@@ -382,6 +382,8 @@
 				com.executeSubmission(sub_FM0204G2R0);
 			}
 		});
+		
+		
 		
 	};
 
@@ -426,6 +428,10 @@
 				FM0204G0.setCellClass(i, "FCLT_COND", "cond_normal");
 			}
 		}
+		
+		FM0204G0.mergeCol(0,false);
+		FM0204G0.mergeCells("byrestriccol");
+		
 	};
 	
 	//동적 그리드 함수(BIT)
@@ -900,6 +906,9 @@
 	scwin.sub_FM0204G2R1_submitdone = function(e) {
 		scwin.setTagGridViewInfo();
 		com.setFocusedCell(FM0204G2, "NODE_ID");
+		
+		//FM0204G2.mergeCol(0,false);
+		FM0204G2.mergeCells("byrestriccol");
 	};
 	
 	//동적 그리드 함수 (에어튜브)
@@ -1036,7 +1045,7 @@
 			<xf:group id="pgm_header" class="pgm_header" style="">
 				<xf:group id="" style="" class="gr_search">
 					<xf:group id="" style="" class="search">
-						<xf:group class="label" id="" style="">
+						<!-- <xf:group class="label" id="" style="">
 							<w2:span class="" id="" label="정류소명" style=""></w2:span>
 						</xf:group>
 						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
@@ -1050,7 +1059,7 @@
 									<w2:value ref="NODE_ID"></w2:value>
 								</w2:itemset>
 							</w2:choices>
-						</w2:autoComplete>
+						</w2:autoComplete> -->
 						<xf:group class="label" id="" style="margin-left:10px">
 							<w2:span class="" id="" label="시설물종류" style=""></w2:span>
 						</xf:group>
@@ -1074,7 +1083,7 @@
 			<xf:group id="pgm_content" class="pgm_content grdr_20_a" style="">
 				<xf:group id="" class="tab_div" style="">
 					<ul id="FM0204_TAB" class="tab_ul" style="width:200px">
-						<li id="li_bit" class="on">BIT</li>
+						<li id="li_bit" class="on">시설물</li>
 						<li id="li_airtube" class="">에어튜브</li>
 					</ul>
 				</xf:group>

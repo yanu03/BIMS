@@ -37,6 +37,7 @@
 						<w2:key id="PARAM_ECPT_IDS_DIV" name="제외파라미터" dataType="text"></w2:key>
 						<w2:key id="DVC_KIND" name="장치종류" dataType="text"></w2:key>
 						<w2:key id="VHC_ID" name="차량아이디" dataType="text"></w2:key>
+						<w2:key id="DVC_ID" name="장치아이디" dataType="text"></w2:key>
 						<w2:key id="TYPE" name="TYPE" dataType="text"></w2:key>
 						<w2:key id="CONTENT" name="CONTENT" dataType="text"></w2:key>
 					</w2:keyInfo>
@@ -63,6 +64,7 @@
 		scwin.param = com.getParameter();
 		dma_search.set("DVC_KIND" , scwin.param.data.DVC_KIND);
 		dma_search.set("VHC_ID" , scwin.param.data.VHC_ID);
+		dma_search.set("DVC_ID" , scwin.param.data.DVC_ID);
 		dma_search.set("PARAM_ECPT_IDS" , scwin.param.data.PARAM_ECPT_IDS);
 		dma_search.set("PARAM_ECPT_IDS_DIV" , scwin.param.data.PARAM_ECPT_IDS_DIV);
 		

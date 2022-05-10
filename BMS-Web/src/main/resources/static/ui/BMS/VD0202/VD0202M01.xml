@@ -979,71 +979,47 @@
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:25px"
-											id="column4" value="장치상태" blockSelect="false" displayMode="label">
+											id="column1" value="장치상태" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:25px"
-											id="column3" value="장치ID" blockSelect="false" displayMode="label">
+											id="column2" value="장치ID" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="180" inputType="text" style="height:25px"
-											id="column1" value="장치종류" blockSelect="false" displayMode="label">
+											id="column3" value="장치종류" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
-											id="column18" value="제어여부" blockSelect="false" displayMode="label">
+											id="column4" value="제어여부" blockSelect="false" displayMode="label">
 										</w2:column>
 										<!-- <w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
 											id="column9" value="리셋" blockSelect="false" displayMode="label">
 										</w2:column> -->
 										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:25px"
-											id="column2" value="전원(ON/OFF)" blockSelect="false" displayMode="label">
+											id="column5" value="전원(ON/OFF)" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:25px"
-											id="column11" value="화면(ON/OFF)" blockSelect="false" displayMode="label">
+											id="column6" value="화면(ON/OFF)" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:25px"
+											id="column7" value="집중모니터링 여부" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
-											id="column7" value="사운드 음량" blockSelect="false" displayMode="label">
+											id="column8" value="정주기 주기" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:25px"
+											id="column9" value="통신(ON/OFF)" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
-											id="column10" value="LCD 휘도" blockSelect="false" displayMode="label">
+											id="column10" value="로그레벨" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
-											id="column8" value="커맨드" blockSelect="false" displayMode="label">
+											id="column11" value="IP/PORT" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
-											id="column12" value="로그레벨" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
-											id="column13" value="IP/PORT" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
-											id="column14" value="통신" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
-											id="column15" value="AP" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px"
-											id="column16" value="GPS" blockSelect="false" displayMode="label">
+											id="column12" value="GPS" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:25px"
-											id="column17" value="비고" blockSelect="false" displayMode="label">
+											id="column13" value="비고" blockSelect="false" displayMode="label">
 										</w2:column>
-										<!-- <w2:column removeBorderStyle="false" width="150" inputType="text" style="height:25px"
-											id="column9" value="장치위치" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:25px"
-											id="column2" value="제조사" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:25px"
-											id="column11" value="관리ID" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px"
-											id="column7" value="제어" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="140" inputType="text" style="height:25px"
-											id="column10" value="갱신일시" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:25px"
-											id="column8" value="비고" blockSelect="false" displayMode="label">
-										</w2:column> -->
 									</w2:row>
 								</w2:header>
 								<w2:gBody style="" id="gBody1">
@@ -1070,16 +1046,13 @@
 											id="PK003" value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
-											id="PK004" value="" blockSelect="false" displayMode="label">
+											id="PK016" value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
-											id="PK005" value="" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="145" inputType="select" style="height:25px"
-											id="PK008" value="" blockSelect="false" displayMode="label">
+											id="PK017" value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
-											id="PK011" value="" blockSelect="false" displayMode="label">
+											id="PK013" value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
 											id="PK012" value="" blockSelect="false" displayMode="label">
@@ -1088,32 +1061,11 @@
 											id="PK013" value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
-											id="PK014" value="" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
 											id="PK015" value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
 											id="REMARK" value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<!-- <w2:column removeBorderStyle="false" width="145" inputType="select" style="height:25px"
-											id="INST_LOC" value="" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
-											id="ORG_NM" value="" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
-											id="MNG_ID" value="" blockSelect="false" displayMode="label" textAlign="left">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="83" inputType="button" style="height:25px"
-											id="DVC_CTR" value="제어" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
-											id="SEND_DATE" value="" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:25px"
-											id="REMARK" value="" blockSelect="false" displayMode="label" textAlign="left">
-										</w2:column> -->
 									</w2:row>
 								</w2:gBody>
 								<w2:footer id="footer1" style="">

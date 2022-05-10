@@ -9,6 +9,7 @@
 		,A.VHC_NO
 		,A.AREA
 		,A.MAKER
+		,A.REMARK
 		,B.COMP_NM
 	FROM
 		BMS_VHC_MST A

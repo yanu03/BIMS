@@ -199,7 +199,7 @@
 			,Sub1 : { grid : FM0202G1, srchSbm : sub_FM0202G1R0, name : "시설물 상태 및 제어"}
 		 };
 		 
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID, autoOptions);
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions);
 				
 		var subOptions = {
 			SEARCH:[{cbFnc:scwin.moveCtrlClick,nm:"상태 및 제어",class:"gear"}]
@@ -312,13 +312,13 @@
 	
 	
 	scwin.FM0202G0_onrowindexchange = function(row,oldRow) {
-		var focusOption = {keyMap : dma_sub_search};
-		var routID = dlt_BMS_NODE_MST.getCellData(FM0202G0.getFocusedRowIndex(), "ROUT_ID");
+		//var focusOption = {keyMap : dma_sub_search};
+		var routID = dlt_BMS_NODE_MST.getCellData(row, "ROUT_ID");
 		dma_sub_search.set("ROUT_ID", routID);
-		com.changeDualGrid(FM0202G0, FM0202G1, null, sub_FM0202G1R0, focusOption, row, oldRow);	
+		//com.changeDualGrid(FM0202G0, FM0202G1, null, sub_FM0202G1R0, focusOption, row, oldRow);	
 		
-		//dma_sub_search.set("NODE_ID", dlt_BMS_NODE_MST.getCellData(row, "NODE_ID"));
-		//com.executeSubmission(sub_FM0202G1R0);
+		dma_sub_search.set("NODE_ID", dlt_BMS_NODE_MST.getCellData(row, "NODE_ID"));
+		com.executeSubmission(sub_FM0202G1R0);
 		
 		
 		//메뉴코드용

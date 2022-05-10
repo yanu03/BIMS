@@ -201,6 +201,7 @@
 			}
 		}
 		com.delGrid2(AL0105G2);
+		AL0105G2.removeFocusedCell();
 	};
 
 	scwin.sub_AL0105G2S0_submitdone = function(e) {

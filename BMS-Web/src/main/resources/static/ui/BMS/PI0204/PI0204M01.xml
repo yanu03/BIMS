@@ -166,7 +166,7 @@
 		var table = '<tr>';
 		
 		for(i = 0; i < list.length; i++){
-			var SCR_TXT = list[i].SCR_TXT;
+			var SCR_TXT = list[i].VOC_ID;
 			if(SCR_TXT == undefined || SCR_TXT == null){
 				SCR_TXT = "";
 			}
@@ -201,7 +201,7 @@
 	
 	function ddClick(num){
 	//	com.setFocusedCell(PI0204G0, "VOC_NUM");
-		PI0204G0.setFocusedCell(num, "VOC_NUM");
+		PI0204G0.setFocusedCell(num, "VOC_NM");
 }
 	
 	scwin.sub_PI0204G0K0_submitdone = function(e) {

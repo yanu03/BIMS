@@ -585,7 +585,6 @@
 					dlt_VIEW_CUR_OPER_ALLOC_PL_NODE_INFO_HIS.setCellData(idx, "CHG_DPRT_TM_"+j, chgDprtTm);
 				}
 
-
 				if((com.isEmpty(chgArrvTm)==false)){
 					chgRow[i] = i;
 				}
@@ -724,7 +723,7 @@
 			}	
 		}
 		
-		 var data = { data : vhcNo, data2 : operDt, data3 : routNm, data4 : operSn, data5:transData, data6:chgCntJson, data7:allocNo, callbackFn : "" };
+		 var data = { vhcNo : vhcNo, operDt : operDt, routNm : routNm, operSn : operSn, transData:transData, chgCntJson:chgCntJson, allocNo:allocNo, callbackFn : "" };
          var options = { id : "VH0200P0",
          				 width : "1800px",
          				 height : "900px",
