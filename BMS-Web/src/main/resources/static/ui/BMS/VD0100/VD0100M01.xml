@@ -139,7 +139,7 @@
 	<script type="text/javascript" lazy="false"><![CDATA[
 	scwin.onpageload = function() {
 		var autoOptions = {
-			Main : { grid : VD0100G0, frm : VD0100F0, srchSbm : sub_VD0100G0R0, srchGrp : pgm_header, keyColumn : "DVC_ID",
+			Main : { grid : VD0100G0, frm : VD0100F0, srchSbm : sub_VD0100G0R0, savSbm : sub_VD0100G0S0, srchGrp : pgm_header, keyColumn : "DVC_ID",
 					 focusColumn : "VHC_ID", name :  "장치 목록", keySbm : sub_VD0100G0K0}
 			//Sub1 : { grid : VD0100G0, srchSbm : sub_VD0100G0R0, savSbm : sub_VD0100G0S0,  keySbm : sub_VD0100G0K0, name :  "장치 목록"}
 		 };
@@ -149,8 +149,13 @@
 			,SAVE: scwin.saveDvc
 		};*/
 		
-		//com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions);
+		var mainOptions = {
+			ADD: com.addGrid2
+			
+		};
+		
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
+		//com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions);
 		
 		
 		com.executeSubmission(sub_VD0100SHI0);
@@ -165,6 +170,24 @@
 	scwin.onpageunload = function() {
 
 	};
+	
+	com.addGrid2 = function(){
+		com.executeSubmission(sub_VD0100G0K0);
+	};
+	
+	//키값 추가 submission done
+	scwin.sub_VD0100G0K0_submitdone = function(e) {
+		//com.addGridForm(VD0100G0, VD0100F0, dma_SEQ_BMS_DVC_INFO_0, "DVC_ID", "DVC_ID");
+		
+		var data = com.getGridViewDataList(VD0100G0);
+		var insertIndex = data.insertRow(VD0100G0.getBottomRowIndex());
+		
+		VD0100G0.setFocusedCell(insertIndex, 'VHC_ID', true);
+		data.setCellData(insertIndex, "DVC_ID", dma_SEQ_BMS_DVC_INFO_0.get("SEQ"));
+		
+		//장치 추가 버튼 클릭
+		//scwin.btn_addDvc_onclick();
+	};	
 	
 	scwin.sub_VD0100SHI0_submitdone = function(e) {
 		com.executeSubmission(sub_VD0100SHI1);	
@@ -401,13 +424,7 @@
 		com.saveDone(VD0100G0,sub_VD0100G0R0);
 	};
 	
-	//키값 추가 submission done
-	scwin.sub_VD0100G0K0_submitdone = function(e) {
-		com.addGridForm(VD0100G0, VD0100F0, dma_SEQ_BMS_DVC_INFO_0, "DVC_ID", "DVC_ID");
-		
-		//장치 추가 버튼 클릭
-		//scwin.btn_addDvc_onclick();
-	};	
+	
 	
 	scwin.sub_VD0100G0S0_submitdone = function(e) {
 		var sCode = com.getResultCode(e);
@@ -520,6 +537,14 @@
 			PARENT_ID10.setValue("");
 		}else{
 			PARENT_ID10.setDisabled(false);
+		}
+	};
+	
+	scwin.DVC_KIND_onviewchange = function(info) {
+		if(info.newValue == 'DK001'){
+			dlt_BMS_DVC_INFO.setCellData(VD0100G0.getFocusedRowIndex(), "LEVEL", 1);
+		}else{
+			dlt_BMS_DVC_INFO.setCellData(VD0100G0.getFocusedRowIndex(), "LEVEL", 2);
 		}
 	};
 	]]></script>
@@ -753,7 +778,7 @@
 									<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="-선택-"
 										direction="auto" disabled="false" disabledClass="w2selectbox_disabled" displayMode="label" id="DVC_KIND" labelWidthAuto=""
 										mandatory="true" optionOrder="" ref="data:dlt_BMS_DVC_INFO.DVC_KIND" renderType="component" style="height:24px; width:160px;"
-										submenuSize="auto">
+										submenuSize="auto" ev:onviewchange="scwin.DVC_KIND_onviewchange">
 										<xf:choices></xf:choices>
 									</xf:select1>
 								</xf:group>

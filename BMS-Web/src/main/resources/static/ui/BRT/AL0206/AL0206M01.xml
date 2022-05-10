@@ -72,6 +72,8 @@
 						<w2:column id="WAY_DESC_NM" name="하행명" dataType="text"></w2:column>
 						<w2:column id="VHC_ID" name="차량아이디" dataType="text"></w2:column>
 						<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
+						<w2:column id="SEC_VHC_ID" name="차량아이디" dataType="text"></w2:column>
+						<w2:column id="SEC_VHC_NO" name="차량번호" dataType="text"></w2:column>
 						<w2:column id="DRV_ID" name="운전자아이디" dataType="text"></w2:column>
 						<w2:column id="DRV_NM" name="운전자명" dataType="text"></w2:column>
 						<w2:column id="SEC_DRV_ID" name="2교대운전자아이디" dataType="text"></w2:column>
@@ -191,8 +193,9 @@
 				
 				if(roatTmSec <= routStTmSec && oldRotaCnt == false){
 					//2교대 데이터
-					carsDataRota.ALLOC_NO = String(dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(rowIndex+y, "ALLOC_NO")) //+10 배차번호
-					carsDataRota.vhcNo = dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(rowIndex+y, "VHC_NO");
+					carsDataRota.ALLOC_NO = dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(rowIndex+y, "ALLOC_NO") + rowCntArr.length //+10 배차
+					carsDataRota.REAL_ALLOC_NO = dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(rowIndex+y, "ALLOC_NO");
+					carsDataRota.vhcNo = dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(rowIndex+y, "SEC_VHC_NO");
 					carsDataRota.current = 0;
 					
 					if(dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(rowIndex+y, "WAY_DIV") == 'WD001'){
@@ -201,7 +204,7 @@
 						dealsDataRota.rentedTo = dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(rowIndex+y, "WAY_DESC_NM");
 					}
 					
-					dealsDataRota.vhcNo = dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(rowIndex+y, "VHC_NO");
+					dealsDataRota.vhcNo = dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(rowIndex+y, "SEC_VHC_NO");
 					dealsDataRota.drvNm = dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(rowIndex+y, "SEC_DRV_NM");
 					dealsDataRota.color = dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(rowIndex+y, "COR_COLOR");
 					dealsDataRota.routNm = dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(rowIndex+y, "ROUT_NM");
@@ -308,7 +311,8 @@
 		    };
 		  });
 		  return {
-		    name: car.ALLOC_NO,
+		    name: "배차 : " + car.ALLOC_NO,
+		    alloc: "B"+car.ALLOC_NO,
 		    data: data,
 		    current: car.deals[car.current],
 		  };
@@ -355,10 +359,10 @@
 		      borderWidth: 1,
 		      columns: [{
 		        title: {
-		          text: '배차번호'
+		          text: '배차'
 		        },
 		        categories: map(series, function(s) {
-		          return s.name;
+		          return s.alloc;
 		        })
 		      }, {
 		        title: {

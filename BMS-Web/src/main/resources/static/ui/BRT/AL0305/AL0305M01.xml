@@ -71,6 +71,7 @@
 						<w2:column id="VHC_ID" name="차량ID" dataType="text"></w2:column>
 						<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
 						<w2:column id="COMP_NM" name="운수사명" dataType="text"></w2:column>
+						
 						<w2:column id="DRV_NM" name="운전자명" dataType="text"></w2:column>
 						<w2:column id="SEC_DRV_NM" name="2교대운전자명" dataType="text"></w2:column>
 						<w2:column id="THR_DRV_NM" name="3교대운전자명" dataType="text"></w2:column>
@@ -90,6 +91,9 @@
 						<w2:column id="VHC_ID" name="차량ID" dataType="text"></w2:column>
 						<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
 						<w2:column id="COMP_NM" name="운수사명" dataType="text"></w2:column>
+						<w2:column id="SEC_VHC_ID" name="2교대차량ID" dataType="text"></w2:column>
+						<w2:column id="SEC_VHC_NO" name="2교대차량번호" dataType="text"></w2:column>
+						<w2:column id="SEC_COMP_NM" name="2교대운수사명" dataType="text"></w2:column>
 						<w2:column id="DRV_NM" name="운전자명" dataType="text"></w2:column>
 						<w2:column id="SEC_DRV_NM" name="2교대운전자명" dataType="text"></w2:column>
 						<w2:column id="THR_DRV_NM" name="3교대운전자명" dataType="text"></w2:column>
@@ -153,7 +157,8 @@
 		 	ADD:{disp:"hide"},
 			//ADD: {cbFnc:scwin.btn_distri_onclick, nm:"배포", class : "setting"},
 			DEL: {disp:"hide"},
-			EXL:scwin.btn_excel_onclick
+			EXL:scwin.btn_excel_onclick,
+			SETTING:{cbFnc:scwin.direct_reflec_onclick, nm:"즉시반영", class : "setting"}
 		}
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions);		
 
@@ -192,6 +197,11 @@
 	
 	scwin.onpageunload = function() {
 		
+	};
+	
+	//즉시반영 클릭 이벤트
+	scwin.direct_reflec_onclick = function(){
+		com.alert("즉시반영 이벤트입니다.");
 	};
 	
 	//엑셀 다운로드
@@ -439,20 +449,20 @@
 					}
 				});*/
 			}else{
-				var drvId = [];
+				var vhcId = [];
 				var rowCnt = dlt_BRT_OPER_DT_ALLOC_PL_MST.getRowCount();
 				var jsonData = dlt_BRT_OPER_DT_ALLOC_PL_MST.getAllJSON();
 				for(var x = 0; x < rowCnt; x++){
-					drvId.push(jsonData[x].DRV_ID);
+					vhcId.push(jsonData[x].SEC_VHC_ID);
 				};
-				var data = { data:repRoutId, drvId:drvId, callbackFn : "scwin.searchDrv2CallbackG2" };
+				var data = { data: repRoutId, vhcId:vhcId,callbackFn : "scwin.searchVhc2CallbackG2" };
 						   	 
-				var opt = { id : "popUpDrvList", 
-							popupName : "운전자 검색",
+				var opt = { id : "popUpAllocVhcList", 
+							popupName : "차량번호 검색",
 							//width : 600,
 							//height : 500,
 							modal : true};
-				com.openPopup("/cm//common/popUpDrvList.xml", opt, data);
+				com.openPopup("/cm//common/popUpAllocVhcList.xml", opt, data);
 			
 			}
 		}
@@ -483,9 +493,9 @@
 				var rowCnt = dlt_BRT_OPER_DT_ALLOC_PL_MST.getRowCount();
 				var jsonData = dlt_BRT_OPER_DT_ALLOC_PL_MST.getAllJSON();
 				for(var x = 0; x < rowCnt; x++){
-					drvId.push(jsonData[x].DRV_ID);
+					drvId.push(jsonData[x].SEC_DRV_ID);
 				};
-				var data = { data:repRoutId, drvId:drvId, callbackFn : "scwin.searchDrv3CallbackG2" };
+				var data = { data:repRoutId, drvId:drvId, callbackFn : "scwin.searchDrv2CallbackG2" };
 						   	 
 				var opt = { id : "popUpDrvList", 
 							popupName : "운전자 검색",
@@ -509,6 +519,17 @@
 		dlt_BRT_OPER_DT_ALLOC_PL_MST.setCellData(AL0305G0.getFocusedRowIndex(), "VHC_ID", vhcId);
 		dlt_BRT_OPER_DT_ALLOC_PL_MST.setCellData(AL0305G0.getFocusedRowIndex(), "VHC_NO", vhcNo);
 		dlt_BRT_OPER_DT_ALLOC_PL_MST.setCellData(AL0305G0.getFocusedRowIndex(), "COMP_NM", compNm);
+	};
+	
+	//찾기 버튼 콜백함수
+	scwin.searchVhc2CallbackG2 = function(obj) {
+		var vhcId =obj[0].VHC_ID;
+		var vhcNo =obj[0].VHC_NO;
+		var compNm =obj[0].COMP_NM;
+		
+		dlt_BRT_OPER_DT_ALLOC_PL_MST.setCellData(AL0305G0.getFocusedRowIndex(), "SEC_VHC_ID", vhcId);
+		dlt_BRT_OPER_DT_ALLOC_PL_MST.setCellData(AL0305G0.getFocusedRowIndex(), "SEC_VHC_NO", vhcNo);
+		dlt_BRT_OPER_DT_ALLOC_PL_MST.setCellData(AL0305G0.getFocusedRowIndex(), "SEC_COMP_NM", compNm);
 	};
 	
 	//찾기 버튼 콜백함수
@@ -764,39 +785,36 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:40px;" id="column19"
 										value="배차번호" blockSelect="false" displayMode="label" colSpan="" rowSpan="2">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:40px;" id="column18"
-										value="차량번호" blockSelect="false" displayMode="label" colSpan="" rowSpan="2">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:40px;" id="column17"
-										value="운수사" blockSelect="false" displayMode="label" colSpan="" rowSpan="2">
-									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px;" id="column16"
-										value="1교대운전자" blockSelect="false" displayMode="label">
+										value="오전" blockSelect="false" displayMode="label" colSpan="3">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px;" id="column15"
-										value="2교대운전자" blockSelect="false" displayMode="label" colSpan="2" rowSpan="">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px;" id="column14"
-										value="3교대운전자" blockSelect="false" displayMode="label" colSpan="2" rowSpan="">
+										value="오후" blockSelect="false" displayMode="label" colSpan="4" rowSpan="">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px;" id="column13"
 										value="" blockSelect="false" displayMode="label" colSpan="1" rowSpan="2">
 									</w2:column>
 								</w2:row>
 								<w2:row style="" id="row1">
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:40px;" id="column18"
+										value="차량번호" blockSelect="false" displayMode="label" colSpan="" >
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:40px;" id="column17"
+										value="운수사" blockSelect="false" displayMode="label" colSpan="" >
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column8"
 										value="운전자명" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:40px;" id="column18"
+										value="차량번호" blockSelect="false" displayMode="label" colSpan="" >
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:40px;" id="column17"
+										value="운수사" blockSelect="false" displayMode="label" colSpan="" >
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column5"
 										value="운전자명" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column6"
-										value="교대시각" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column1"
-										value="운전자명" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column2"
+									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column6"
 										value="교대시각" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
@@ -820,20 +838,27 @@
 										value="" blockSelect="false" displayMode="label" readOnly="" imageSrc="/cm/images/inc/btn_search.png" imageHeight="20"
 										imageWidth="20">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="textImage" style="height:20px"
-										id="SEC_DRV_NM" value="" blockSelect="false" displayMode="label" readOnly="" textAlign="" imageSrc="/cm/images/inc/btn_search.png"
+									<w2:column removeBorderStyle="false" width="100" inputType="textImage" style="height:20px" id="SEC_VHC_NO"
+										value="" blockSelect="false" displayMode="label" readOnly="" imageSrc="/cm/images/inc/btn_search.png" imageHeight="20"
+										imageWidth="20">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="SEC_COMP_NM"
+										value="" blockSelect="false" displayMode="label" readOnly="" textAlign="left" disabled="true">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="100" inputType="textImage" style="height:20px" id="SEC_DRV_NM" 
+										value="" blockSelect="false" displayMode="label" readOnly="" textAlign="" imageSrc="/cm/images/inc/btn_search.png"
 										imageHeight="20" imageWidth="20">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="SEC_TRAN_TM"
 										value="" blockSelect="false" displayMode="label" readOnly="" textAlign="" maxLength="5">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="textImage" style="height:20px"
+									<!-- <w2:column removeBorderStyle="false" width="100" inputType="textImage" style="height:20px"
 										id="THR_DRV_NM" value="" blockSelect="false" displayMode="label" readOnly="" textAlign="" imageSrc="/cm/images/inc/btn_search.png"
 										imageHeight="20" imageWidth="20">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="THR_TRAN_TM"
 										value="" blockSelect="false" displayMode="label" readOnly="" maxLength="5">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id=""
 										value="" blockSelect="false" displayMode="label" readOnly="" maxLength="5">
 									</w2:column>
