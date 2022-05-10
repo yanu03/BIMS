@@ -199,6 +199,14 @@
 	
 	scwin.sub_SI0503G0R0_submitdone = function(e) {
 		com.setFocusedCell(SI0503G0, "CRS_ID");
+		
+		//'노선 경로 관리'에서 받는 파라미터가 있다면 focus주기
+		if(com.isEmpty(com.getParameter("paramObj")) == false){
+			var index = dlt_BMS_CRS_MST.getMatchedIndex("CRS_ID", com.getParameter("paramObj"))
+			if(index.length > 0){
+				SI0503G0.setFocusedCell(index[0], "CRS_ID")
+			}
+		}			
 	};
 	
 	scwin.sub_SI0503G0S0_submitdone = function(e) {

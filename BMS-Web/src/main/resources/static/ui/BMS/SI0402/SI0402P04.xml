@@ -70,9 +70,8 @@
 				,keyColumn : "CRS_ID", focusColumn : "CRS_NM", name :  "교차로명"}
 		};
 		var popupOptions = {
-			SEARCH: {}
-			//ADD: {},
-			//SAVE: {}
+			SEARCH: {},
+			SAVE : {cbFnc:scwin.goToCrsMst, nm:"[교차로 관리]열기",class:"Intg"}	
 		};
 		com.setPopupBtn(wfm_mainBtn, popupOptions, autoOptions);
 		
@@ -153,7 +152,16 @@
 		}
 	};
 	
-	]]></script>
+	scwin.goToCrsMst = function() {
+		var crsId = dlt_BMS_CRS_MST.getCellData(SI0402P3.getFocusedRowIndex(), "CRS_ID");
+		if(crsId == null || crsId == ''){
+			com.openMenu("교차로 관리","/ui/BMS/SI0503/SI0503M01.xml", "MN00010608");
+			com.closePopup(scwin.closeCallbackFncName);
+		}else{
+			com.openMenu("교차로 관리","/ui/BMS/SI0503/SI0503M01.xml", "MN00010608", crsId);		
+			com.closePopup(scwin.closeCallbackFncName);
+		}		
+	}]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group class="popup_container grdr_36_a_40" id="popup_container" style="">
@@ -171,12 +179,12 @@
 			
 			<xf:group style="" id="" class="popup_content">
 				<w2:gridView  fixedColumnWithHidden="true" dataList="data:dlt_BMS_CRS_MST" useShiftKey="false" readOnly="true"
-					style="width:775px" scrollByColumn="false" id="SI0402P3" autoFit="allColumn" class="cm_grid popup" focusMode="row"
+					style="width:775px" scrollByColumn="false" id="SI0402P3" autoFit="lastColumn" class="cm_grid popup" focusMode="row"
 					ev:onrowindexchange="scwin.SI0402P3_onrowindexchange">
 					<w2:header style="" id="header1">
 						<w2:row style="" id="row1">
 							<w2:column width="101" inputType="text" style="height:20px" id="column1" value="교차로ID" blockSelect="false"></w2:column>
-							<w2:column width="101" inputType="text" style="height:20px" id="column2" value="교차로명" blockSelect="false"></w2:column>
+							<w2:column width="200" inputType="text" style="height:20px" id="column2" value="교차로명" blockSelect="false"></w2:column>
 							<w2:column width="101" inputType="text" style="height:20px" id="column3" value="경도" blockSelect="false"></w2:column>
 							<w2:column width="101" inputType="text" style="height:20px" id="column4" value="위도" blockSelect="false"></w2:column>
 							<w2:column width="101" inputType="text" style="height:20px" id="column5" value="교차로종류" blockSelect="false"></w2:column>
@@ -186,7 +194,7 @@
 						<w2:gBody id="gBody1" style="">
 							<w2:row id="row2" style="">
 								<w2:column width="" inputType="text" style="height:20px" id="CRS_ID" blockSelect="false"></w2:column>
-								<w2:column width="" inputType="text" style="height:20px" id="CRS_NM" blockSelect="false"></w2:column>
+								<w2:column width="" inputType="text" style="height:20px" id="CRS_NM" blockSelect="false" textAlign="left"></w2:column>
 								<w2:column width="" inputType="text" style="height:20px" id="GPS_X" blockSelect="false"></w2:column>
 								<w2:column width="" inputType="text" style="height:20px" id="GPS_Y" blockSelect="false"></w2:column>
 								<w2:column blockSelect="false" displayMode="label" eventPriority="oneditend" id="CRS_KIND"

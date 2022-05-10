@@ -49,7 +49,7 @@
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_MOCK_LINK" saveRemovedData="true">
 					<w2:columnInfo>
-						<w2:column id="MOCK_LINK_ID" name="표준링크아이디" dataType="text"></w2:column>
+						<w2:column id="MOCK_LINK_ID" name="표준링크ID" dataType="text"></w2:column>
 						<w2:column id="F_NODE" name="시작노드ID" dataType="text"></w2:column>
 						<w2:column id="F_NODE_NAME" name="시작노드명" dataType="text"></w2:column>						
 						<w2:column id="T_NODE" name="종료노드ID" dataType="text"></w2:column>
@@ -431,7 +431,7 @@
 
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="SI0407G0" class="cm_grid tab"
 								autoFitMinWidth="0" dataList="data:dlt_BMS_MOCK_NODE" ev:onrowindexchange="scwin.SI0407G0_onrowindexchange"
-								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="false"
+								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="true" readOnly="false"
 								rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false"
 								useShiftKey="true">
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
@@ -514,13 +514,13 @@
 							<w2:content alwaysDraw="false" class="innerTabContent" id="content4">
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="SI0407G1" class="cm_grid tab" ev:onchange="scwin.SI0407G1_onchange"
 								autoFitMinWidth="0" dataList="data:dlt_BMS_MOCK_LINK" ev:onrowindexchange="scwin.SI0407G1_onrowindexchange"
-								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="false"
+								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="true" readOnly="false"
 								rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true">
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column11"
-											value="표준링크아이디" blockSelect="false" displayMode="label">
+											value="표준링크ID" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column12"
 											value="시작노드" blockSelect="false" displayMode="label">
@@ -573,7 +573,7 @@
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column28"
 											value="도로길이" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column29"
+										<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column29"
 											value="비고" blockSelect="false" displayMode="label">
 										</w2:column>
 									</w2:row>
@@ -593,7 +593,7 @@
 											</w2:choices>										
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px"
-											id="F_NODE_NAME" value="" blockSelect="false" displayMode="label" readOnly="true">
+											id="F_NODE_NAME" value="" blockSelect="false" displayMode="label" readOnly="true" textAlign="left">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="T_NODE" value=""
 											blockSelect="false" displayMode="label" textAlign="left">
@@ -605,7 +605,7 @@
 											</w2:choices>											
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px"
-											id="T_NODE_NAME" value="" blockSelect="false" displayMode="label" readOnly="true">
+											id="T_NODE_NAME" value="" blockSelect="false" displayMode="label" readOnly="true" textAlign="left">
 										</w2:column>										
 										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="LANES"
 											value="" blockSelect="false" displayMode="label" defaultValue="1" dataType="number">
@@ -653,7 +653,7 @@
 								</w2:gBody>
 								<w2:footer id="footer3" style="">
 									<w2:row id="row4" style="">
-										<w2:column blockSelect="false" colSpan="17" displayMode="label"
+										<w2:column blockSelect="false" colSpan="20" displayMode="label"
 											expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
 											style="height:20px;" textAlign="left" width="1830">
 										</w2:column>

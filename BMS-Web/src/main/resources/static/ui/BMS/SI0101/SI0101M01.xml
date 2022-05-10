@@ -132,7 +132,7 @@
  * @date 2022-01-11
  * @author 양현우
  */
- 
+
 	var isEdit = false;
 	scwin.onpageload = function() {
 		var autoOptions = {
@@ -177,6 +177,7 @@
 		
 		map.setLevel(3);
 		//com.setExlUpdate(SI0101G0, false); //엑셀 업데이트 초기화
+ 
 	};
 
 	scwin.onpageunload = function() {
@@ -192,6 +193,15 @@
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
 			com.setFocusedCell(SI0101G0, "GRG_NM");
 		}
+		
+		//'노선 경로 관리'에서 받는 파라미터가 있다면 focus주기
+		if(com.isEmpty(com.getParameter("paramObj")) == false){
+			var index = dlt_BMS_GRG_MST.getMatchedIndex("GRG_ID", com.getParameter("paramObj"))
+			if(index.length > 0){
+				SI0101G0.setFocusedCell(index[0], "GRG_ID")
+			}
+		}		
+		
 	};
 	
 	/**

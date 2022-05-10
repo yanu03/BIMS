@@ -74,12 +74,13 @@
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
 		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
 		
-    		var autoOptions = {
+   		var autoOptions = {
 			Main : { grid : SI0402P5, srchSbm : sub_SI0402P5R0, keyColumn : "GRG_ID",
 					 focusColumn : "GRG_NM", name :  "차고지명"}
 		};
 		var popupOptions = {
-			SEARCH: {}
+			SEARCH: {},
+			SAVE : {cbFnc:scwin.goToGrgMst, nm:"[차고지 관리]열기",class:"Intg"}	
 		};
 		com.setPopupBtn(wfm_mainBtn, popupOptions, autoOptions);
 		
@@ -129,6 +130,17 @@
 		}
 	};
 	
+	scwin.goToGrgMst = function() {
+		var grgId = dlt_BMS_GRG_MST.getCellData(SI0402P5.getFocusedRowIndex(), "GRG_ID");
+		if(grgId == null || grgId == ''){
+			com.openMenu("차고지 관리","/ui/BMS/SI0101/SI0101M01.xml", "MN00010101");
+			com.closePopup(scwin.closeCallbackFncName);
+		}else{
+			com.openMenu("차고지 관리","/ui/BMS/SI0101/SI0101M01.xml", "MN00010101", grgId);		
+			com.closePopup(scwin.closeCallbackFncName);
+		}		
+	}
+	
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -142,6 +154,7 @@
 						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="차고지ID 또는 차고지명"></xf:input>
 					</xf:group>
 					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group>
 			
@@ -154,7 +167,7 @@
 							<w2:column width="70" inputType="text" style="height:20px" id="column1" value="차고지ID" blockSelect="false"></w2:column>
 							<w2:column width="150" inputType="text" style="height:20px" id="column2" value="차고지명" blockSelect="false"></w2:column>
 							<w2:column width="50" inputType="text" style="height:20px" id="column3" value="소유형태" blockSelect="false"></w2:column>
-							<w2:column width="200" inputType="text" style="height:20px" id="column3" value="주소" blockSelect="false"></w2:column>
+							<w2:column width="200" inputType="text" style="height:20px" id="column4" value="주소" blockSelect="false"></w2:column>
 							<!-- <w2:column width="101" inputType="text" style="height:20px" id="column4" value="전화번호" blockSelect="false"></w2:column> -->
 							<w2:column width="70" inputType="text" style="height:20px" id="column5" value="경도" blockSelect="false"></w2:column>
 							<w2:column width="70" inputType="text" style="height:20px" id="column6" value="위도" blockSelect="false"></w2:column>
@@ -163,9 +176,9 @@
 						<w2:gBody id="gBody1" style="">
 							<w2:row id="row2" style="">
 								<w2:column width="" inputType="text" style="height:20px" id="GRG_ID" blockSelect="false"></w2:column>
-								<w2:column width="" inputType="text" style="height:20px" id="GRG_NM" blockSelect="false"></w2:column>
+								<w2:column width="" inputType="text" style="height:20px" id="GRG_NM" blockSelect="false" textAlign="left"></w2:column>
 								<w2:column width="" inputType="select" style="height:20px" id="OWNER_TYPE" blockSelect="false"></w2:column>
-								<w2:column width="" inputType="text" style="height:20px" id="ADDR" blockSelect="false"></w2:column>
+								<w2:column width="" inputType="text" style="height:20px" id="ADDR" blockSelect="false" textAlign="left"></w2:column>
 								<!-- <w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="PHONE" value=""
 									blockSelect="false" displayMode="label">
 								</w2:column> -->
