@@ -316,7 +316,6 @@
 	 * 같은 레벨의 노트에 메뉴를 추가한다.
 	 */
 	scwin.equalLevel = function() {
-		debugger;
 		var focusedRowIndex = VD0100G0.getFocusedRealRowIndex();
 		var parentMenuCd = dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "PARENT_ID");
 		var rowIndexArr = dlt_BMS_DVC_INFO.getMatchedIndex("PARENT_ID", parentMenuCd, true, 0, dlt_BMS_DVC_INFO.getTotalRow());

@@ -237,7 +237,7 @@
 		}else if(fData == "SC008"){
 			sunny_blur.setValue("눈");
 		}
-		imagePath = "url(" + tPath + fData +"_MAIN.png" + ")";
+		imagePath = "url(" + tPath + fData +"_MAIN.svg" + ")";
 		$(".bms_cont_up li.weather_temp ul li:first-child").css({"background": imagePath});
 	};
 	
@@ -251,76 +251,76 @@
 		var imagePath = "";
 		if(dustc >= 0 && dustc < 31){
 			fine_dust_status.setValue("좋음");
-			imagePath = "url(/cm/images/bms/good_icon.PNG)";
+			imagePath = "url(/cm/images/bms/good_icon.svg)";
 		}else if(dustc >= 31 && dustc < 81){
 			fine_dust_status.setValue("보통");
-			imagePath = "url(/cm/images/bms/normal_icon.PNG)";
+			imagePath = "url(/cm/images/bms/normal_icon.svg)";
 		}else if(dustc >= 81 && dustc < 151){
 			fine_dust_status.setValue("나쁨");
-			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
+			imagePath = "url(/cm/images/bms/bad_icon.svg)";
 		}else if(dustc > 150){
 			fine_dust_status.setValue("매우나쁨");
-			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
+			imagePath = "url(/cm/images/bms/bad_icon.svg)";
 		}
 		$(".bms_cont_down li.fine_dust ul li.air_icon").css({"background": imagePath});
 		
 		if(ozon >= 0 && ozon < 0.030){
 			ozone_status.setValue("좋음");
-			imagePath = "url(/cm/images/bms/good_icon.PNG)";
+			imagePath = "url(/cm/images/bms/good_icon.svg)";
 		}else if(ozon >= 0.030 && ozon < 0.090){
 			ozone_status.setValue("보통");
-			imagePath = "url(/cm/images/bms/normal_icon.PNG)";
+			imagePath = "url(/cm/images/bms/normal_icon.svg)";
 		}else if(ozon >= 0.090 && ozon < 0.150){
 			ozone_status.setValue("나쁨");
-			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
+			imagePath = "url(/cm/images/bms/bad_icon.svg)";
 		}else if(ozon > 0.150){
 			ozone_status.setValue("매우나쁨");
-			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
+			imagePath = "url(/cm/images/bms/bad_icon.svg)";
 		}
 		$(".bms_cont_down li.ozone ul li.air_icon").css({"background": imagePath});
 		
 		if(ndc >= 0 && ndc < 0.03){
 			nitrogen_dioxide_status.setValue("좋음");
-			imagePath = "url(/cm/images/bms/good_icon.PNG)";
+			imagePath = "url(/cm/images/bms/good_icon.svg)";
 		}else if(ndc >= 0.03 && ndc < 0.06){
 			nitrogen_dioxide_status.setValue("보통");
-			imagePath = "url(/cm/images/bms/normal_icon.PNG)";
+			imagePath = "url(/cm/images/bms/normal_icon.svg)";
 		}else if(ndc >= 0.061 && ndc < 0.2){
 			nitrogen_dioxide_status.setValue("나쁨");
-			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
+			imagePath = "url(/cm/images/bms/bad_icon.svg)";
 		}else if(ndc > 0.201){
 			nitrogen_dioxide_status.setValue("매우나쁨");
-			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
+			imagePath = "url(/cm/images/bms/bad_icon.svg)";
 		}
 		$(".bms_cont_down li.nitrogen_dioxide ul li.air_icon").css({"background": imagePath});
 		
 		if(cmc >= 0 && cmc < 2){
 			carbon_monoxide_status.setValue("좋음");
-			imagePath = "url(/cm/images/bms/good_icon.PNG)";
+			imagePath = "url(/cm/images/bms/good_icon.svg)";
 		}else if(cmc >= 2.01 && cmc < 9){
 			carbon_monoxide_status.setValue("보통");
-			imagePath = "url(/cm/images/bms/normal_icon.PNG)";
+			imagePath = "url(/cm/images/bms/normal_icon.svg)";
 		}else if(cmc >= 9.01 && cmc < 15){
 			carbon_monoxide_status.setValue("나쁨");
-			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
+			imagePath = "url(/cm/images/bms/bad_icon.svg)";
 		}else if(cmc > 15.01){
 			carbon_monoxide_status.setValue("매우나쁨");
-			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
+			imagePath = "url(/cm/images/bms/bad_icon.svg)";
 		}
 		$(".bms_cont_down li.carbon_monoxide ul li.air_icon").css({"background": imagePath});
 		
 		if(sdc >= 0 && sdc < 0.02){
 			sulfur_dioxide_status.setValue("좋음");
-			imagePath = "url(/cm/images/bms/good_icon.PNG)";
+			imagePath = "url(/cm/images/bms/good_icon.svg)";
 		}else if(sdc >= 0.021 && sdc < 0.05){
 			sulfur_dioxide_status.setValue("보통");
-			imagePath = "url(/cm/images/bms/normal_icon.PNG)";
+			imagePath = "url(/cm/images/bms/normal_icon.svg)";
 		}else if(sdc >= 0.051 && sdc < 0.15){
 			sulfur_dioxide_status.setValue("나쁨");
-			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
+			imagePath = "url(/cm/images/bms/bad_icon.svg)";
 		}else if(sdc > 0.151){
 			sulfur_dioxide_status.setValue("매우나쁨");
-			imagePath = "url(/cm/images/bms/bad_icon.PNG)";
+			imagePath = "url(/cm/images/bms/bad_icon.svg)";
 		}
 		$(".bms_cont_down li.sulfur_dioxide ul li.air_icon").css({"background": imagePath});
 	};
@@ -511,7 +511,7 @@
 						</xf:group>
 						<xf:group id="" class="" style=""></xf:group>
 						<xf:group id="" class="grdc_bms_main_right_content" style="">
-							<xf:group id="" class="grdr_20_5_350 bms_box_wrap" style="">
+							<xf:group id="" class="grdr_20_5_280 bms_box_wrap" style="">
 								<xf:group class="defaultbox" id="" style="">
 									<w2:textbox class="df_tt fl bus" id="" label="운행차량" style=""></w2:textbox>
 								</xf:group>
@@ -563,7 +563,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group></xf:group>
-							<xf:group id="" class="grdr_20_5_350 bms_box_wrap" style="">
+							<xf:group id="" class="grdr_20_5_280 bms_box_wrap" style="">
 								<xf:group class="defaultbox" id="" style="">
 									<w2:textbox class="df_tt fl news" id="" label="뉴스" style=""></w2:textbox>
 								</xf:group>

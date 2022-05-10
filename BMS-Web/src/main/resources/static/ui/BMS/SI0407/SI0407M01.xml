@@ -421,7 +421,7 @@
 				</xf:group>
 			</xf:group>
 			<xf:group id="pgm_content" class="pgm_content grdc_a" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_a" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_a bms_box_wrap" style="">
 					<xf:group id="" style="position:relative; height: 618px" class="">
 						<w2:tabControl useTabKeyOnly="true" id="tabControl" useMoveNextTabFocus="false" useConfirmMessage="false" class="innerTab"
 							confirmTrueAction="exist" confirmFalseAction="new" alwaysDraw="false" style="width: 100%;" tabScroll="" tableRender="" tabPosition=""

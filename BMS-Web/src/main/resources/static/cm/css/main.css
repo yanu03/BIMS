@@ -529,6 +529,7 @@ background-color: #EBEBEB;
 	height: 720px;
 	width: 600px;
 	box-sizing: border-box;
+	border-radius: 5px;
 	/* width: 100%;
 	height: 100vh;
 	background-image: url('/cm/images/inc/brt_visual.png');
@@ -584,7 +585,7 @@ background-color: #EBEBEB;
 	position: absolute;
 	bottom:35px;
 	left: 50%;
-    transform: translateX(calc(-50% + -60px));
+    transform: translateX(calc(-50% + -40px));
 	width: 150px;
 	height: 150px;
 	background-color: #ffffff;
@@ -593,7 +594,7 @@ background-color: #EBEBEB;
 	position: absolute;
 	bottom: 40px;
 	left: 50%;
-    transform: translateX(30px);
+    transform: translateX(40px);
     width: 100%;
 }
 .bms_weather .bms_cont_up .weather_temp > ul > li:nth-child(2) > strong {
@@ -619,11 +620,10 @@ background-color: #EBEBEB;
 .bms_weather .bms_cont_up .weather_humid > ul > li:nth-child(1) {
 	position: absolute;
 	top:40px;
-	right: 36px;
+	right: 33px;
 	width: 15px;
 	height: 15px;
-	background-color: #ffffff;
-	background:url(/cm/images/bms/humidity_icon.PNG) no-repeat left top;
+	background:url(/cm/images/bms/humidity_icon.svg) no-repeat left top;
 }
 .bms_weather .bms_cont_up .weather_humid > ul > li:nth-child(3) {
 	position: absolute;
@@ -647,6 +647,7 @@ background-color: #EBEBEB;
 .bms_weather .bms_cont_down > ul {
 	display: grid;
 	height: 100%;
+	align-content: space-between;
 }
 .bms_weather .bms_cont_down > ul > li > ul {
 	position: relative;
@@ -673,8 +674,8 @@ background-color: #EBEBEB;
 	content: '';
 	display: block;
 	background-color: #ffffff;
-	width: 30px;
-	height: 30px;
+	width: 33px;
+	height: 33px;
 }
 
 
@@ -835,7 +836,7 @@ background-color: #EBEBEB;
 .bms_cont_left li ul {position:relative;overflow:hidden;height:100px;/* border: 1px solid #ced4d9; */box-sizing: border-box;padding: 22px; margin: 5px 0px 5px 5px;}
 .bms_cont_left li ul li{position:absolute;left: 160px;top: 34px;font-size: 22px;}
 .bms_cont_left li.weather_temp ul li:first-child{left: 20px;width:60px;height: 60px;margin: 0;top: 20px;}
-.bms_cont_left li.weather_humid ul li:first-child{left: 33px;width:60px;height: 60px;background:url(/cm/images/bms/humidity_icon.PNG) no-repeat left top;margin: 0;top: 27px;}
+.bms_cont_left li.weather_humid ul li:first-child{left: 33px;width:60px;height: 60px;background:url(/cm/images/bms/humidity_icon.svg) no-repeat left top;margin: 0;top: 27px;}
 .bms_cont_left li ul li.repeat{left: 88px;font-size: 22px;margin: 0;top: 38px;}
 .bms_cont_left li ul li .count{margin-left:20px;font-size: 33px;font-weight: bold;}
 .bms_cont_left li ul li strong{font-size:15px;vertical-align: top;margin: 2px 0 0 0;display: inline-block;}
@@ -880,4 +881,3 @@ background-color: #EBEBEB;
    background-position: top;
    position: relative;	
 	}
-}

@@ -25,7 +25,7 @@
 		        height : 558,
 	            oncomplete: function(data) {
 		            $p.parent().ADDR.setValue(data.address);
-	         	debugger;
+
 	            geocoder.addressSearch(data.address, function(results, status) {
                     // 정상적으로 검색이 완료됐으면
                     if (status === kakao.maps.services.Status.OK) {

@@ -2380,10 +2380,12 @@ routMap.showMarker = function(mapId, data, idx, focusIdx, grid) {
 
 	}
 	else if (routMap.mapInfo[mapId].isShowIncdnt == "on"){
+		imageSize = new kakao.maps.Size(19, 19);
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/incdnt.png", imageSize);
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/incdnt_selected.png", imageSize);
 	}
 	else if (routMap.mapInfo[mapId].isShowViolt == "on"){
+		imageSize = new kakao.maps.Size(19, 19);
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/violt.png", imageSize);
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/violt_selected.png", imageSize);
 	}
@@ -2576,6 +2578,41 @@ routMap.showMarker = function(mapId, data, idx, focusIdx, grid) {
 			}
 		}
 	});
+	
+	kakao.maps.event.addListener(marker, 'rightclick', function() {
+		routMap.removeRightClickOverlay(mapId);
+		
+		var rightClickOverlay = null;
+		var rightClickMsg = "";
+		var focusCell = "";
+		
+		switch(data.NODE_TYPE) {
+			case routMap.NODE_TYPE.BUSSTOP:
+				rightClickMsg += '<div class="rightclickoverlay" style="cursor: default;">'
+				rightClickMsg += '<div class="contextWrap">'
+				rightClickMsg += '    <a data-id="here" href="javascript:void(0)" class="sttnInfo" onclick="">'
+				rightClickMsg += '	            <span class="text">정류소 상태정보</span>'
+				rightClickMsg += '     </a>'
+		        rightClickMsg += '  	</div>	'
+		        rightClickMsg += '  </div>	';
+		        focusCell = "VHC_NO";
+				break;
+		}
+		
+		rightClickOverlay = new kakao.maps.CustomOverlay({
+			content: rightClickMsg,
+			position: marker.getPosition(),
+			zIndex : 999
+		});		
+	
+		routMap.mapInfo[mapId].rightClickOverlay = rightClickOverlay;
+		rightClickOverlay.setMap(routMap.mapInfo[mapId].map);	
+		
+		if(typeof grid != "undefined") {
+			grid.setFocusedCell(idx, focusCell);
+		}		
+		
+	}); //end rightclick
 	
 	/*kakao.maps.event.addListener(marker, 'dragstart', function() {
 		overlay.setMap(null);

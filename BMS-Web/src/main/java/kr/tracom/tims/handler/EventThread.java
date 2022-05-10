@@ -20,6 +20,7 @@ import kr.tracom.platform.attribute.brt.AtBusArrivalInfoItem;
 import kr.tracom.platform.attribute.brt.AtBusInfo;
 import kr.tracom.platform.attribute.brt.AtBusOperEvent;
 import kr.tracom.platform.attribute.brt.AtDispatch;
+import kr.tracom.platform.common.util.CommonUtil;
 import kr.tracom.platform.net.protocol.TimsMessage;
 import kr.tracom.platform.net.protocol.attribute.AtMessage;
 import kr.tracom.platform.net.protocol.payload.PlEventRequest;
@@ -154,8 +155,11 @@ public class EventThread extends Thread{
                     
                 	AtBusInfo busInfo = (AtBusInfo)atMessage.getAttrData();
                 	
+                	
                 	//insert to BRT_CUR_OPER_INFO
                 	Map<String, Object> busInfoMap = busInfo.toMap();
+                	
+                	if(CommonUtil.empty(busInfoMap.get("VHC_ID")))break;
 
                 	try {
                 		insertCurOperInfo(busInfoMap);
@@ -179,6 +183,7 @@ public class EventThread extends Thread{
                 	wsDataMap.put("ROUT_NM", busInfoMap.get("ROUT_NM"));
                 	wsDataMap.put("VHC_NO", busInfoMap.get("BUS_NO"));
                 	
+					wsDataMap.put("CUR_SPD", busInfoMap.get("SPEED"));
                 	wsDataMap.put("VHC_ID", vhcInfo.get("VHC_ID"));
                 	wsDataMap.put("DVC_ID", vhcInfo.get("DVC_ID"));
                 	wsDataMap.put("GPS_X", busInfoMap.get("LONGITUDE"));
@@ -252,6 +257,9 @@ public class EventThread extends Thread{
 
                 	 try {
                 		 //현재운행정보도 업데이트
+                		 
+                		 if(CommonUtil.empty(busEventMap.get("VHC_ID")))break;
+                		 
                 		 insertCurOperInfo(busEventMap);
                 	 } catch (DuplicateKeyException e) {
                  		//logger.error("", e);
@@ -312,22 +320,22 @@ public class EventThread extends Thread{
                          logger.info("운행위반 발생!! [IMP ID : " + busEvent.getImpId() + "]");
                          
                          try {
-                        	 paramMap = new HashMap<>();
-                        	 paramMap.put("COL", "DL_CD");
-                        	 paramMap.put("CO_CD", "VIOLT_TYPE");
-                        	 paramMap.put("COL3", "NUM_VAL4");
-                        	 paramMap.put("COL_VAL3", (int)eventCode);
-                        	 eventCd = commonMapper.selectDlCdCol(paramMap);
-                        	 
-                        	 paramMap.put("COL", "DL_CD_NM");
-                        	 paramMap.put("CO_CD", "VIOLT_TYPE");
+							paramMap = new HashMap<>();
+							paramMap.put("COL", "DL_CD");
+							paramMap.put("CO_CD", "OPER_EVT_TYPE");
+							paramMap.put("COL3", "NUM_VAL4");
+							paramMap.put("COL_VAL3", (int) eventCode);
+							eventCd = commonMapper.selectDlCdCol(paramMap);
+
+							paramMap.put("COL", "DL_CD_NM");
+							paramMap.put("CO_CD", "OPER_EVT_TYPE");
                         	 paramMap.put("COL3", "NUM_VAL4");
                         	 paramMap.put("COL_VAL3", (int)eventCode);
                         	 eventType = commonMapper.selectDlCdCol(paramMap);
                         	 
                     		 //historyMapper.insertOperVioltHistory(busEventMap); //운행위반이력 insert는 SBRT에서 함                    		 
                     	 } catch (Exception e) {
-                    		 logger.error("", e);
+                    		 // logger.error("", e);
                     	 }
                          
                          
@@ -414,7 +422,7 @@ public class EventThread extends Thread{
                  	
                  	wsDataMap.put("EVT_CODE", eventCd);
                  	wsDataMap.put("EVT_TYPE", eventType);
-                 	wsDataMap.put("SPEED", busEventMap.get("SPEED"));
+					wsDataMap.put("CUR_SPD", busEventMap.get("SPEED"));
                  	wsDataMap.put("EVT_DATA", busEventMap.get("EVENT_DATA"));
                 	
                 	
@@ -431,6 +439,7 @@ public class EventThread extends Thread{
                 	String vhcNo = "";
                 	String dpDiv = "";
                 	String dpLv = "";
+					String drvId = "";
                 	
                 	logger.info("디스패치 수신. {}", dispatch);
                 	
@@ -463,6 +472,7 @@ public class EventThread extends Thread{
                 		
                 			routId = String.valueOf(curInfo.get("ROUT_ID"));
                 			routNm = String.valueOf(curInfo.get("ROUT_NM"));
+						drvId = String.valueOf(curInfo.get("DRV_ID"));
                 			
 	                		//디스패치 이력 넣기      
 	                		//디스패치 구분코드 가져오기
@@ -485,6 +495,7 @@ public class EventThread extends Thread{
 	                		dispatchLog.put("SEND_DATE", udpDtm);
 	                		dispatchLog.put("DSPTCH_DIV", dpDiv);
 	                		dispatchLog.put("DSPTCH_KIND", dpLv);
+						dispatchLog.put("DRV_ID", drvId);
 	                		dispatchLog.put("DSPTCH_CONTS", dispatch.getMessage());
 	                		
 	                		//historyMapper.insertDispatchHistory(dispatchLog); //이력 insert는 SBRT에서 함
