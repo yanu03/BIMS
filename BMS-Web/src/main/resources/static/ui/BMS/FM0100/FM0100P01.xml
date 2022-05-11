@@ -56,7 +56,7 @@
 		if(dma_searchitem.get("STTN_FCLT_TYPE") == 'ST002'){
 			document.getElementById(STTN_IMG.getID()).className = "ST002_station_1";
 		}else if(dma_searchitem.get("STTN_FCLT_TYPE") == 'ST003'){
-			document.getElementById(STTN_IMG.getID()).className = "ST003_station";
+			document.getElementById(STTN_IMG.getID()).className = "ST003_station_1";
 		}else{
 			document.getElementById(STTN_IMG.getID()).className = "ST002_station_1";
 		}
@@ -237,7 +237,7 @@
 		var imgId = ""
 		
 		if(info.newValue == 'ST003'){
-			document.getElementById(STTN_IMG.getID()).className = "ST003_station";
+			document.getElementById(STTN_IMG.getID()).className = "ST003_station_1";
 			
 			/*if(dma_searchitem.get("FCLT_KIND") == 'FK001'){
 				str += '<div id="" style="position: absolute; top:100px; left:100px" class="w2group " onclick="onclickBIT(this.style.top, this.style.left)"><input type="radio" name="test" tabindex="0" id="" class="w2trigger " value="BIT"></div>'
@@ -251,7 +251,7 @@
 			}*/
 			
 		}else{
-			document.getElementById(STTN_IMG.getID()).className = 'ST002_station';
+			document.getElementById(STTN_IMG.getID()).className = 'ST002_station_1';
 			
 			/*if(dma_searchitem.get("FCLT_KIND") == 'FK001'){
 				str += '<div id="" style="position: absolute; top:100px; left:1100px" class="w2group " onclick="onclickBIT(this.style.top, this.style.left)"><input type="radio" name="test" tabindex="0" id="" class="w2trigger " value="BIT"></div>'

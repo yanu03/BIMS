@@ -223,19 +223,6 @@
 		
 	};	
 	
-//	$(function () {
-//		$( "#connect" ).click(function() { connect(); });
-//		$( "#disconnect" ).click(function() { disconnect(); });
-//		
-//		$("form").on('submit', function (e) {
-//			e.preventDefault();
-//		});
-//		$( "#send" ).click(function() { sendMessage(); });
-//	
-//		connect();
-//	
-//	});	
-//	
 	function connect() {
 		var socket = new SockJS('/websocket');
 		stompClient = Stomp.over(socket);
@@ -299,10 +286,10 @@
 	
 	scwin.sub_FM0202G0R0_submitdone = function(e) {
 		if (dlt_BMS_NODE_MST.getAllJSON().length > 0) {
-			FM0202G0.setFocusedCell(0, "NODE_ID");
-			//com.setFocusedCell(FM0202G0, "NODE_ID");
 			var routID = dlt_BMS_NODE_MST.getCellData(FM0202G0.getFocusedRowIndex(), "ROUT_ID");			
 			dma_sub_search.set("ROUT_ID", routID);
+			FM0202G0.setFocusedCell(0, "NODE_ID");
+			//com.setFocusedCell(FM0202G0, "NODE_ID");
 		} else {
 			dma_sub_search.set("ROUT_ID", null);
 			dma_sub_search.set("NODE_ID", null);
@@ -313,19 +300,17 @@
 	
 	scwin.FM0202G0_onrowindexchange = function(row,oldRow) {
 		//var focusOption = {keyMap : dma_sub_search};
-		var routID = dlt_BMS_NODE_MST.getCellData(row, "ROUT_ID");
-		dma_sub_search.set("ROUT_ID", routID);
 		//com.changeDualGrid(FM0202G0, FM0202G1, null, sub_FM0202G1R0, focusOption, row, oldRow);	
-		
+
+		dma_sub_search.set("ROUT_ID", dlt_BMS_NODE_MST.getCellData(row, "ROUT_ID"));
 		dma_sub_search.set("NODE_ID", dlt_BMS_NODE_MST.getCellData(row, "NODE_ID"));
 		com.executeSubmission(sub_FM0202G1R0);
-		
 		
 		//메뉴코드용
 		var param = com.getParameter();
 		
 		if(dlt_BMS_NODE_MST.getCellData(row, "STTN_FCLT_TYPE") == 'ST003'){
-			document.getElementById(STTN_IMG.getID()).className = "ST003_station";
+			document.getElementById(STTN_IMG.getID()).className = "ST003_station_1"; //폐쇄형
 		}else{
 			document.getElementById(STTN_IMG.getID()).className = 'ST002_station_1';
 		}
@@ -401,14 +386,14 @@
 			}
 		}
 		
-		oriBgWidth = document.getElementById(STTN_IMG.getID()).offsetWidth;
+		/*oriBgWidth = document.getElementById(STTN_IMG.getID()).offsetWidth;
 		oriBgHeight = document.getElementById(STTN_IMG.getID()).offsetHeight;
 		
 		for(var i = 0; i < dlt_BMS_FCLT_INFO.getRowCount(); i++){
 			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
 			oriFcltWidth[i] = document.getElementById(fcltId+'img').width;
 			oriFcltHeight[i] = document.getElementById(fcltId+'img').height;
-		}
+		}*/
 	};
 	
 	//동적 그리드 함수
@@ -497,8 +482,8 @@
 		com.setCommonDtl(codeOptions);
 	}
 	
+	//이미지 클릭 이벤트
 	function imgOnclick(id){
-		
 		//var fcltId = $('#'+id).closest('div').attr('id');
 		var rowIndex = dlt_BMS_FCLT_INFO.getMatchedIndex("FCLT_ID", id);
 		
@@ -744,7 +729,7 @@
 		if(fcltId == null || fcltId == ''){
 			com.alert("시설물을 선택해주세요.");
 		}else{
-			scwin.openMenu("시설물 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040202",fcltId);
+			scwin.openMenu("시설물 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",fcltId);
 			var bac= null;		
 		}
 	}
@@ -839,6 +824,12 @@
 							<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header2">
 								<w2:row style="" id="row3">
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column58"
+										value="대표노선명" blockSelect="false" displayMode="label" sortable="false">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column59"
+										value="노선명" blockSelect="false" displayMode="label" sortable="false">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column61"
 										value="정류소ID" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -851,19 +842,19 @@
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column1"
 										value="정류소번호" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column58"
-										value="대표노선명" blockSelect="false" displayMode="label" sortable="false">
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
+										value="" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column59"
-										value="노선명" blockSelect="false" displayMode="label" sortable="false">
-									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column55"
-										value="비고" blockSelect="false" displayMode="label" sortable="false">
-									</w2:column> -->
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody2">
 								<w2:row style="" id="row4">
+									<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="REP_ROUT_NM"
+										value="" blockSelect="false" displayMode="label"  textAlign="">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="134" inputType="text" style="height:20px" id="ROUT_NM"
+										value="" blockSelect="false" displayMode="label"  textAlign="">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="NODE_ID"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -876,15 +867,9 @@
 									<w2:column removeBorderStyle="false" width="161" inputType="text" style="height:20px" id="STTN_NO"
 										value="" blockSelect="false" displayMode="label" textAlign="right">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="REP_ROUT_NM"
-										value="" blockSelect="false" displayMode="label"  textAlign="">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="134" inputType="text" style="height:20px" id="ROUT_NM"
-										value="" blockSelect="false" displayMode="label"  textAlign="">
-									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK"
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id=""
 										value="" blockSelect="false" displayMode="label">
-									</w2:column> -->
+									</w2:column>
 								</w2:row>
 							</w2:gBody>
 							<w2:footer id="footer1" style="">
@@ -905,17 +890,17 @@
 						</xf:group>
 						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-					
 					<!-- 정류소 이미지 -->
 					<xf:group style="overflow:auto; position:relative;" id="">
 						<xf:group style="" id="STTN_IMG" class=""></xf:group>
 					</xf:group>
 					
 					<xf:group id="" class="horizontal_line"></xf:group>
-					<xf:group class="defaultbox" id="" style="">
 					
+					<xf:group class="defaultbox" id="" style="">
 						<w2:textbox class="df_tt fl view" id="" label="시설물 상태 및 제어" style=""></w2:textbox>
 					</xf:group>
+					
 					<xf:group id="" class="" style="">
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
 							checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_FCLT_INFO" disabledScrollHidden="" editModeEvent=""

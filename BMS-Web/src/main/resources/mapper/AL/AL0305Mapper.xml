@@ -43,6 +43,7 @@
 	SELECT B.REP_ROUT_ID
 	       ,B.ALLOC_NO
 	       ,B.VHC_ID
+	       ,B.SEC_VHC_ID
 	       ,DATE_FORMAT(B.OPER_DT, '%Y-%m-%d') OPER_DT
 	       ,D.VHC_NO
 	       ,A.VHC_NO AS SEC_VHC_NO

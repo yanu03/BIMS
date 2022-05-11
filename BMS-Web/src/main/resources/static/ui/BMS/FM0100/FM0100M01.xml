@@ -312,6 +312,16 @@
 		scwin.btn_searchMro_onclick();		
 	};
 	
+	scwin.useYnDisplayFormatter = function(data){
+		if(data == ""){
+			return "";
+		}else if(data == 'Y'){
+			return "예";
+		}else if(data == 'N'){
+			return "아니요";
+		}
+	}
+	
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -523,17 +533,7 @@
 									</w2:column>
 									<w2:column width="70" id="INST_DT">
 									</w2:column>
-									<w2:column width="70" id="USE_YN">
-										<xf:choices>
-											<xf:item>
-												<xf:label><![CDATA[사용]]></xf:label>
-												<xf:value><![CDATA[Y]]></xf:value>
-											</xf:item>
-											<xf:item>
-												<xf:label><![CDATA[미사용]]></xf:label>
-												<xf:value><![CDATA[N]]></xf:value>
-											</xf:item>
-										</xf:choices>
+									<w2:column width="70" id="USE_YN" displayFormatter="scwin.useYnDisplayFormatter">
 									</w2:column>
 									<w2:column width="70" id="REMARK" textAlign="left">
 									</w2:column>
