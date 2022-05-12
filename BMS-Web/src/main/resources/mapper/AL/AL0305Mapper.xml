@@ -19,6 +19,10 @@
 		OPER_DT = #{OPER_DT}
 </update>
 
+<update id="makeCurAllocPlInfo">
+	CALL PROC_MAKE_CUR_ALLOC_PL_INFO();
+</update>
+
 <update id="AL0305G0U1" parameterType="Map">
 	UPDATE
 		BRT_DAY_DRV_ALLOC_INFO

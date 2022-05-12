@@ -135,6 +135,11 @@
 				errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_AL0305G0S0_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
+			<xf:submission id="sub_AL0305G0SEND" ref='data:json,{"action":"modified","id":"dlt_BRT_OPER_DT_ALLOC_PL_MST"}'
+				target="data:json,dma_result" action="/al/AL0305G0SEND" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+				errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_AL0305G0SEND_submitdone"
+				ev:submiterror="" abortTrigger="">
+			</xf:submission>
 			<xf:submission id="sub_AL0305SHI0" ref="" target="data:json,dlt_repRoutItem" action="/repRout/selectRepRoutItem" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_AL0305SHI0_submitdone" ev:submiterror="" abortTrigger="">
@@ -201,7 +206,11 @@
 	
 	//즉시반영 클릭 이벤트
 	scwin.direct_reflec_onclick = function(){
-		com.alert("즉시반영 이벤트입니다.");
+		com.confirm("운영에 즉시 반영 하시겠습니까?", function(rtn) {
+			if (rtn) {
+				com.executeSubmission(sub_AL0305G0SEND);
+			}
+		});
 	};
 	
 	//엑셀 다운로드
@@ -614,6 +623,11 @@
 	scwin.sub_AL0305G0S0_submitdone = function(e) {
 		com.saveDone(AL0305G0, sub_AL0305G0R0);
 	};
+	
+	scwin.sub_AL0305G0S0_submitdone = function(e) {
+		
+	};
+	
 	
 	scwin.sub_AL0305G1S1_submitdone = function(e) {
 		com.saveDone(AL0305G1, sub_AL0305G1R0);

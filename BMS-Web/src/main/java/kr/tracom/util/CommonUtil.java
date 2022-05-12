@@ -21,6 +21,11 @@ import javax.sound.sampled.AudioSystem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 
 public class CommonUtil {
 
@@ -648,4 +653,59 @@ public class CommonUtil {
         }
         return today.substring(0, 10);
     }
+    
+    public static String listToJson(List<Map<String, Object>> list) {
+    	ObjectMapper mapper = new ObjectMapper(); 
+    	String jsonString="";
+    	try { 
+    		jsonString = mapper.writeValueAsString(list); 
+    	} catch (IOException e)
+    	{ 
+    		e.printStackTrace();
+    	}
+    	return jsonString;
+    }
+    
+    public static List<Map<String, Object>> jsonTolist(String jsonString) {
+    	ObjectMapper mapper = new ObjectMapper();
+    	List<Map<String, Object>> data = null;
+		try {
+			data = mapper.readValue(jsonString, new TypeReference<List<Map<String, Object>>>(){});
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return data;
+    }    
+    
+    public static String mapToJson(Map<String, Object> map) {
+    	ObjectMapper mapper = new ObjectMapper(); 
+    	String jsonString="";
+    	try { 
+    		jsonString = mapper.writeValueAsString(map); 
+    	} catch (IOException e)
+    	{ 
+    		e.printStackTrace();
+    	}
+    	return jsonString;
+    }
+
+    public static Map<String, Object> jsonToMap(String jsonString) {
+    	ObjectMapper mapper = new ObjectMapper();
+    	Map<String, Object> data = null;
+		try {
+			data = mapper.readValue(jsonString, new TypeReference<Map<String, Object>>(){});
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	return data;
+    }    
 }
+
