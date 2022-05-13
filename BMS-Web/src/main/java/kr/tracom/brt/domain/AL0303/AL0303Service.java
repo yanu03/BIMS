@@ -19,6 +19,7 @@ import kr.tracom.platform.service.TService;
 import kr.tracom.platform.service.config.KafkaTopics;
 import kr.tracom.tims.handler.ActionRequest;
 import kr.tracom.tims.kafka.KafkaProducer;
+import kr.tracom.util.CommonUtil;
 import kr.tracom.util.DateUtil;
 import kr.tracom.util.Result;
 
@@ -68,9 +69,11 @@ public class AL0303Service extends ServiceSupport{
 	                  
 	                  String wayDiv = AL0303Mapper.selectWayDiv(data);
 	                  
-	                  String actionData = (String) data.get("REP_ROUT_ID")+","+data.get("OPER_DT")+","+data.get("ALLOC_NO")+","+
-	                		  						wayDiv+","+data.get("GRP_VHC_ID")+","+data.get("RPC_VHC_ID");
+	                  //String actionData = (String) data.get("REP_ROUT_ID")+","+data.get("OPER_DT")+","+data.get("ALLOC_NO")+","+
+	                	//	  						wayDiv+","+data.get("GRP_VHC_ID")+","+data.get("RPC_VHC_ID");
 
+	                   data.put("WAY_DIV", wayDiv);
+	                   String actionData = CommonUtil.mapToJson(data);
 	                   brtRequest.setTimeStamp(new AtTimeStamp(DateUtil.now("yyyyMMddHHmmssSSS")));
 	                   brtRequest.setActionCode(AtBrtAction.changeBusOccur);
 	                   brtRequest.setData("");
