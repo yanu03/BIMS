@@ -77,6 +77,46 @@
 						<w2:column id="PK036" name="" dataType="text"></w2:column>
 						<w2:column id="PK037" name="" dataType="text"></w2:column>
 						<w2:column id="PK038" name="" dataType="text"></w2:column>
+						<w2:column id="PK039" name="" dataType="text"></w2:column>
+						<w2:column id="PK001_AUTO_YN" name="리셋" dataType="text"></w2:column>
+						<w2:column id="PK002_AUTO_YN" name="전원(ON/OFF)" dataType="text"></w2:column>
+						<w2:column id="PK003_AUTO_YN" name="화면(ON/OFF)" dataType="text"></w2:column>
+						<w2:column id="PK004_AUTO_YN" name="사운드 음량" dataType="text"></w2:column>
+						<w2:column id="PK005_AUTO_YN" name="LCD 휘도" dataType="text"></w2:column>
+						<w2:column id="PK006_AUTO_YN" name="히터(ON/OFF)" dataType="text"></w2:column>
+						<w2:column id="PK007_AUTO_YN" name="FAN(ON/OFF)" dataType="text"></w2:column>
+						<w2:column id="PK008_AUTO_YN" name="커맨드" dataType="text"></w2:column>
+						<w2:column id="PK009_AUTO_YN" name="BIT 캡쳐" dataType="text"></w2:column>
+						<w2:column id="PK010_AUTO_YN" name="BIT 영상 녹화" dataType="text"></w2:column>
+						<w2:column id="PK011_AUTO_YN" name="로그레벨" dataType="text"></w2:column>
+						<w2:column id="PK012_AUTO_YN" name="IP/PORT" dataType="text"></w2:column>
+						<w2:column id="PK013_AUTO_YN" name="통신" dataType="text"></w2:column>
+						<w2:column id="PK014_AUTO_YN" name="AP" dataType="text"></w2:column>
+						<w2:column id="PK015_AUTO_YN" name="GPS" dataType="text"></w2:column>
+						<w2:column id="PK016_AUTO_YN" name="집중모니터링 여부" dataType="text"></w2:column>
+						<w2:column id="PK017_AUTO_YN" name="정주기 주기" dataType="text"></w2:column>
+						<w2:column id="PK018_AUTO_YN" name="배터리" dataType="text"></w2:column>
+						<w2:column id="PK019_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK020_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK021_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK022_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK023_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK024_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK025_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK026_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK027_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK028_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK029_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK030_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK031_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK032_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK033_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK034_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK035_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK036_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK037_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK038_AUTO_YN" name="" dataType="text"></w2:column>
+						<w2:column id="PK039_AUTO_YN" name="" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_search">
@@ -161,7 +201,7 @@
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="" ev:submit="" ev:submitdone="scwin.sub_FM0202G1R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_FM0202G0R1" ref="" target="data:json,dlt_PARAM_KIND" action="/fm/FM0202G0R1" method="post"
+			<xf:submission id="sub_FM0202G0R1" ref="data:json,dma_sub_search" target="data:json,dlt_PARAM_KIND" action="/fm/FM0202G0R1" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_FM0202G0R1_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -171,11 +211,11 @@
 			</xf:submission>
 			<xf:submission id="sub_FM0202SHI1" ref="" target="data:json,dlt_searchitem2" action="/fm/FM0202SHI1" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
-				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				ev:submit="" ev:submitdone="scwin.sub_FM0202SHI1_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_FM0202SHI2" ref="" target="data:json,dlt_searchitem3" action="/fm/FM0202SHI2" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
-				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				ev:submit="" ev:submitdone="scwin.sub_FM0202SHI2_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_FM0202SHI3" ref="data:json,dma_search" target="data:json,dlt_searchitem4" action="/fm/FM0202SHI3" method="post" mediatype="application/json" encoding="UTF-8"
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_FM0202SHI3_submitdone"
@@ -192,10 +232,10 @@
 	var oriBgHeight = null;
 	var oriFcltWidth = [];
 	var oriFcltHeight = [];
-	var param = com.getParameter();
+	//var param = com.getParameter();
 	scwin.onpageload = function() {
 		 var autoOptions = {
-			Main : { grid : FM0202G0, srchSbm : sub_FM0202G0R0, keyColumn : "NODE_ID", srchGrp : pgm_header, name : "정류장 목록", focusColumn : "NODE_NM"}
+			Main : { grid : FM0202G0, srchSbm : sub_FM0202G0R0, keyColumn : "NODE_ID", srchGrp : pgm_header, name : "정류장 목록", focusColumn : "NODE_ID"}
 			,Sub1 : { grid : FM0202G1, srchSbm : sub_FM0202G1R0, name : "시설물 상태 및 제어"}
 		 };
 		 
@@ -206,24 +246,16 @@
 		};		
 		
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);		
-				
-		
-		var codeOptions = [ {code : "NODE_TYPE", compID : "FM0202G0:NODE_TYPE" },
-							{code : "PARAM_KIND", compID : "PARAM_KIND"},
-							{code : "INST_LOC", compID : "FM0202G1:INST_LOC"},
-		 ];			
-		 
-		com.setCommonDtl(codeOptions);
 
 		FM0202G0.mergeCol(3,false);
 		FM0202G0.mergeCells("byrestriccol");
 		com.executeSubmission(sub_FM0202SHI0);	
-		com.executeSubmission(sub_FM0202SHI1);
-		com.executeSubmission(sub_FM0202SHI2);	
+		//com.executeSubmission(sub_FM0202SHI1);
+		//com.executeSubmission(sub_FM0202SHI2);	
 		
 	};	
 	
-	function connect() {
+	/*function connect() {
 		var socket = new SockJS('/websocket');
 		stompClient = Stomp.over(socket);
 		
@@ -272,12 +304,18 @@
 	
 	function showMessage(message) {
 		$("#mf_tac_layout_contents_MN00050202_body_message").append("<tr><td>" + message + "</td></tr>");
-	}	
+	}	*/
 	
 	scwin.sub_FM0202SHI0_submitdone = function(e) {
-		//TYPE1.setValue("RR00000002");
-		com.executeSubmission(sub_FM0202SHI3);		
-		//com.searchGrid(FM0202G0, sub_FM0202G0R0);
+		com.executeSubmission(sub_FM0202SHI1);		
+	};
+	
+	scwin.sub_FM0202SHI1_submitdone = function(e) {
+		com.executeSubmission(sub_FM0202SHI2);	
+	};
+	
+	scwin.sub_FM0202SHI2_submitdone = function(e) {
+		com.executeSubmission(sub_FM0202SHI3);	
 	};
 	
 	scwin.sub_FM0202SHI3_submitdone = function(e) {
@@ -285,7 +323,16 @@
 	};
 	
 	scwin.sub_FM0202G0R0_submitdone = function(e) {
-		if (dlt_BMS_NODE_MST.getAllJSON().length > 0) {
+		var codeOptions = [ {code : "NODE_TYPE", compID : "FM0202G0:NODE_TYPE" },
+							{code : "PARAM_KIND", compID : "PARAM_KIND"},
+							{code : "INST_LOC", compID : "FM0202G1:INST_LOC"},
+		 ];			
+		 
+		com.setCommonDtl(codeOptions);
+	
+		com.setFocusedCell(FM0202G0, "NODE_ID");
+	
+		/*if (dlt_BMS_NODE_MST.getAllJSON().length > 0) {
 			var routID = dlt_BMS_NODE_MST.getCellData(FM0202G0.getFocusedRowIndex(), "ROUT_ID");			
 			dma_sub_search.set("ROUT_ID", routID);
 			FM0202G0.setFocusedCell(0, "NODE_ID");
@@ -294,7 +341,7 @@
 			dma_sub_search.set("ROUT_ID", null);
 			dma_sub_search.set("NODE_ID", null);
 			com.executeSubmission(sub_FM0202G1R0);
-		}			
+		}*/
 	};
 	
 	
@@ -307,13 +354,13 @@
 		com.executeSubmission(sub_FM0202G1R0);
 		
 		//메뉴코드용
-		var param = com.getParameter();
+		//var param = com.getParameter();
 		
-		if(dlt_BMS_NODE_MST.getCellData(row, "STTN_FCLT_TYPE") == 'ST003'){
+		/*if(dlt_BMS_NODE_MST.getCellData(row, "STTN_FCLT_TYPE") == 'ST003'){
 			document.getElementById(STTN_IMG.getID()).className = "ST003_station_1"; //폐쇄형
 		}else{
 			document.getElementById(STTN_IMG.getID()).className = 'ST002_station_1';
-		}
+		}*/
 	};
 	
 	scwin.sub_FM0202G1R0_submitdone = function(e) {
@@ -323,77 +370,6 @@
 	scwin.sub_FM0202G0R1_submitdone = function(e) {
 		//동적 그리드 시작
 		scwin.setGridViewInfo();
-		
-		var str = ""
-		var imgSrc = ""
-		var imgId = ""
-		
-		var param = com.getParameter();
-		
-		//시설물상태에 따라 클래스(백그라운드 색) 설정
-		for (i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++) {
-			//비정상
-			if (dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND") == "FC021") {
-				FM0202G1.setCellClass(i, "FCLT_COND", "cond_abnormal");
-			}
-			//정상
-			else if (dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND") == "FC020") {
-				FM0202G1.setCellClass(i, "FCLT_COND", "cond_normal");
-			}
-		}
-		
-		for (i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++) {
-			var coord = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COORDS").split(',');
-			var top = coord[0];
-			var left = coord[1];
-			var fcltKind = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_KIND");
-			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
-			var fcltCond = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND");
-			
-			if((fcltKind == 'FK001' && fcltCond == 'FC020')|| fcltCond == ''){
-				imgSrc = "/cm/images/bms/BIT_RED_normal.png";
-			}else if((fcltKind == 'FK001' && fcltCond == 'FC021') || fcltCond == ''){
-				imgSrc = "/cm/images/bms/BIT_RED_abnormal.png";
-			}else if((fcltKind == 'FK004' && fcltCond == 'FC020') || fcltCond == ''){
-				imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
-			}else if((fcltKind == 'FK004' && fcltCond == 'FC021') || fcltCond == ''){
-				imgSrc = "/cm/images/bms/AIRTUBE_abnormal.png";
-			}else if((fcltKind == 'FK005' && fcltCond == 'FC020') || fcltCond == ''){
-				imgSrc = "/cm/images/bms/AIRCON_normal.png";
-			}else if((fcltKind == 'FK005' && fcltCond == 'FC021') || fcltCond == ''){
-				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
-			}
-			
-			str += '<div id="'+fcltId+'" style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
-			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
-			str += '</div>'
-			
-		}
-		
-		$('#'+STTN_IMG.getID()).html(str);
-		
-		
-		var fclt_ctrindex = FM0202G1.getColumnIndex("FCLT_CTR");
-		var param = com.getParameter();
-		
-		for(var i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++){
-			var ctr_yn = dlt_BMS_FCLT_INFO.getCellData(i, "CTR_YN");
-			if(ctr_yn == 'N'){
-				
-				//FM0202G1.setDisabled("cell", i, "FCLT_CTR", true);
-	            //제어 버튼 안보이게 처리
-	            FM0202G1.setCellClass(i, "FCLT_CTR", "hideData");
-			}
-		}
-		
-		/*oriBgWidth = document.getElementById(STTN_IMG.getID()).offsetWidth;
-		oriBgHeight = document.getElementById(STTN_IMG.getID()).offsetHeight;
-		
-		for(var i = 0; i < dlt_BMS_FCLT_INFO.getRowCount(); i++){
-			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
-			oriFcltWidth[i] = document.getElementById(fcltId+'img').width;
-			oriFcltHeight[i] = document.getElementById(fcltId+'img').height;
-		}*/
 	};
 	
 	//동적 그리드 함수
@@ -471,7 +447,96 @@
 		//autoOptions.Sub1.grid = FM0202G1;
 		scwin.commonCode();
 		
+		//이미지 생성 함수
+		scwin.makeImage();
+		
 	};
+	
+	//이미지 생성 함수
+	scwin.makeImage = function(){
+		var str = ""
+		var imgSrc = ""
+		var imgId = ""
+		
+		//var param = com.getParameter();
+		
+		//시설물상태에 따라 클래스(백그라운드 색) 설정
+		for (i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++) {
+			//비정상
+			if (dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND") == "FC021") {
+				FM0202G1.setCellClass(i, "FCLT_COND", "cond_abnormal");
+			}
+			//정상
+			else if (dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND") == "FC020") {
+				FM0202G1.setCellClass(i, "FCLT_COND", "cond_normal");
+			}
+		}
+		
+		for (i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++) {
+			var coord = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COORDS").split(',');
+			var top = coord[0];
+			var left = coord[1];
+			var fcltKind = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_KIND");
+			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
+			var fcltCond = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND");
+			
+			if((fcltKind == 'FK001' && fcltCond == 'FC020')|| fcltCond == ''){
+				imgSrc = "/cm/images/bms/BIT_RED_normal.png";
+			}else if((fcltKind == 'FK001' && fcltCond == 'FC021') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/BIT_RED_abnormal.png";
+			}else if((fcltKind == 'FK004' && fcltCond == 'FC020') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
+			}else if((fcltKind == 'FK004' && fcltCond == 'FC021') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/AIRTUBE_abnormal.png";
+			}else if((fcltKind == 'FK005' && fcltCond == 'FC020') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/AIRCON_normal.png";
+			}else if((fcltKind == 'FK005' && fcltCond == 'FC021') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
+			}
+			
+			//시설물 이미지
+			str += '<div id="'+fcltId+'" style="z-index: 1; position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
+			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			str += '</div>'
+			
+		}
+		
+		//정류소 이미지
+		if(dlt_BMS_NODE_MST.getCellData(FM0202G0.getFocusedRowIndex(), "STTN_FCLT_TYPE") == 'ST003'){
+			var imgSrc = "/cm/images/bms/ST003_1.png"
+		}else{
+			var imgSrc = "/cm/images/bms/ST002_2.jpg"
+		}
+		
+		var nodeId = dlt_BMS_NODE_MST.getCellData(FM0202G0.getFocusedRowIndex(), "NODE_ID");
+		
+		str += '<img xmlns="http://www.w3.org/1999/xhtml" style="position:absolute; cursor:default" src="'+imgSrc+'" id="'+nodeId+'img'+'">';
+		
+		$('#'+STTN_IMG.getID()).html(str);
+		
+		
+		var fclt_ctrindex = FM0202G1.getColumnIndex("FCLT_CTR");
+		//var param = com.getParameter();
+		
+		for(var i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++){
+			var ctr_yn = dlt_BMS_FCLT_INFO.getCellData(i, "CTR_YN");
+			if(ctr_yn == 'N'){
+				
+				//FM0202G1.setDisabled("cell", i, "FCLT_CTR", true);
+	            //제어 버튼 안보이게 처리
+	            FM0202G1.setCellClass(i, "FCLT_CTR", "hideData");
+			}
+		}
+		
+		/*oriBgWidth = document.getElementById(STTN_IMG.getID()).offsetWidth;
+		oriBgHeight = document.getElementById(STTN_IMG.getID()).offsetHeight;
+		
+		for(var i = 0; i < dlt_BMS_FCLT_INFO.getRowCount(); i++){
+			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
+			oriFcltWidth[i] = document.getElementById(fcltId+'img').width;
+			oriFcltHeight[i] = document.getElementById(fcltId+'img').height;
+		}*/
+	}
 	
 	scwin.commonCode = function(){
 		var codeOptions = [ 
@@ -488,7 +553,6 @@
 		var rowIndex = dlt_BMS_FCLT_INFO.getMatchedIndex("FCLT_ID", id);
 		
 		FM0202G1.setFocusedCell(rowIndex, "FCLT_ID", false);
-		
 	}
 	
 	//window resize함수
@@ -533,7 +597,7 @@
 	});*/
 	
 	scwin.FM0202G1_onrowindexchange = function(row,oldRow) {
-		var param = com.getParameter();
+		//var param = com.getParameter();
 		
 		var str = ""
 		var imgSrc = ""
@@ -561,11 +625,22 @@
 				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
 			}
 			
-			str += '<div id="'+fcltId+'"style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
+			str += '<div id="'+fcltId+'"style="z-index: 1;position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
 			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
 			str += '</div>'
 			
 		}
+		
+		//정류소 이미지
+		if(dlt_BMS_NODE_MST.getCellData(FM0202G0.getFocusedRowIndex(), "STTN_FCLT_TYPE") == 'ST003'){
+			var imgSrc = "/cm/images/bms/ST003_1.png"
+		}else{
+			var imgSrc = "/cm/images/bms/ST002_2.jpg"
+		}
+		
+		var nodeId = dlt_BMS_NODE_MST.getCellData(FM0202G0.getFocusedRowIndex(), "NODE_ID");
+		
+		str += '<img xmlns="http://www.w3.org/1999/xhtml" style="position:absolute; cursor:default" src="'+imgSrc+'" id="'+nodeId+'img'+'">';
 		
 		$('#'+STTN_IMG.getID()).html(str);
 		
@@ -732,8 +807,26 @@
 			scwin.openMenu("시설물 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",fcltId);
 			var bac= null;		
 		}
+	};
+	
+	//데이터유형이 자동여부인 경우 disformatter 추가 함수
+	scwin.AutoDisFormatter = function(data){
+		if(data == ""){
+			return "";
+		}else if(data == 'Y'){
+			return "예";
+		}else if(data == 'N'){
+			return "아니요";
+		}
+	};
+	
+	function reloadFcltCond() {
+  		com.executeSubmission(sub_FM0202G1R0);
 	}
 	
+	//15분마다 시설물상태 리로드함
+	var period = 1000 * 60 * 15;
+	setInterval(reloadFcltCond, period);
 	
 	
 	]]></script>
@@ -890,10 +983,9 @@
 						</xf:group>
 						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
+					
 					<!-- 정류소 이미지 -->
-					<xf:group style="overflow:auto; position:relative;" id="">
-						<xf:group style="" id="STTN_IMG" class=""></xf:group>
-					</xf:group>
+					<xf:group style="overflow:auto; position:relative;" id="STTN_IMG" class=""></xf:group>
 					
 					<xf:group id="" class="horizontal_line"></xf:group>
 					

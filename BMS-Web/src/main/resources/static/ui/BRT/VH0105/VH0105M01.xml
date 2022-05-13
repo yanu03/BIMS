@@ -268,6 +268,9 @@
 		}
 		
 		var weekAgoDay = parseInt(day) - 7;
+		if(weekAgoDay.toString.length == 1){
+			weekAgoDay = zero + weekAgoDay.toString();
+		}
 		var todaysDate = year+month+day;
 		var weekAgoDate = year+month+weekAgoDay;
 		var firstday = year+month+"01";		

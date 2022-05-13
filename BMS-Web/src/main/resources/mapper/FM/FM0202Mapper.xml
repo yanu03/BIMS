@@ -102,15 +102,16 @@
 	SELECT 
 		A.PARAM_KIND
 	FROM 
-		BMS_FCLT_PARAM_CFG_INFO A
+		BMS_FCLT_PARAM_INFO A
 	WHERE 
-		A.FCLT_KIND != 'FK004' AND A.PARAM_DIV = 'PD003'
+		A.PARAM_DIV = 'PD003'
+		AND A.NODE_ID = #{NODE_ID}
 	GROUP BY
 		PARAM_KIND
 </select>
 	
 	<select id="fm0202G1R0" resultType="Map" parameterType="Map">
-		CALL	PROC_FCLT_MONITOR(#{NODE_ID})
+		CALL	PROC_FCLT_MONITOR2(#{NODE_ID})
 	</select>
 	
 	<select id="fm0202SHI0" resultType="Map">

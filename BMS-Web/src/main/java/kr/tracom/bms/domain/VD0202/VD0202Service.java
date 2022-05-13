@@ -25,6 +25,11 @@ public class VD0202Service extends ServiceSupport{
 		return VD0202Mapper.VD0202G1R0(param);
 	}
 	
+	public List<Map> VD0202G1R1() throws Exception{
+		Map param = getSimpleDataMap("dma_sub_search");
+		return VD0202Mapper.VD0202G1R1(param);
+	}
+	
 	public List<Map> VD0202SHI1() throws Exception{
 		Map param = getSimpleDataMap("dma_search");
 		return VD0202Mapper.VD0202SHI1(param);

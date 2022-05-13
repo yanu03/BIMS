@@ -224,8 +224,6 @@
 							var startDate = startDateValue.slice(0,4) + '-' + startDateValue.slice(4, 6) + '-' + startDateValue.slice(6,8)
 							var lastDate = lastDateValue.slice(0,4) + '-' + lastDateValue.slice(4, 6) + '-' + lastDateValue.slice(6,8)
 							
-							//var regex = RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
-							//if(!(regex.test(startDate) && regex.test(lastDate))) return "Not Date Format";
 							var relDt = [];
 							var curDate = new Date(startDate);
 							while(curDate <= new Date(lastDate)) {
@@ -252,8 +250,10 @@
 							
 							dlt_BRT_ALLOC_PL_MST.setJSON(popup_param[1]);
 							if(dma_param_AL0302G1.get("relDt").length != 0){
+								var fDate = com.transDate(F_DATE.getValue(), 'dash');
+								var lDate = com.transDate(L_DATE.getValue(), 'dash');
 								var repRoutNm = dlt_BRT_OPER_PL_MST.getCellData(AL0302G0.getFocusedRowIndex(), "REP_ROUT_NM");
-								var str = repRoutNm + "대표노선에 해당 차량과 운전자를 배포 하시겠습니까?";
+								var str = repRoutNm + "에 해당 차량과 운전자를 배포 하시겠습니까?" + " 배포일 : " + fDate + "~" + lDate
 								
 								com.confirm(str, function(rtn) {
 									if (rtn) {
@@ -290,8 +290,6 @@
 					var startDate = startDateValue.slice(0,4) + '-' + startDateValue.slice(4, 6) + '-' + startDateValue.slice(6,8)
 					var lastDate = lastDateValue.slice(0,4) + '-' + lastDateValue.slice(4, 6) + '-' + lastDateValue.slice(6,8)
 					
-					//var regex = RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
-					//if(!(regex.test(startDate) && regex.test(lastDate))) return "Not Date Format";
 					var relDt = [];
 					var curDate = new Date(startDate);
 					while(curDate <= new Date(lastDate)) {
@@ -318,9 +316,10 @@
 					
 					dlt_BRT_ALLOC_PL_MST.setJSON(popup_param[1]);
 					if(dma_param_AL0302G1.get("relDt").length != 0){
+						var fDate = com.transDate(F_DATE.getValue(), 'dash');
+						var lDate = com.transDate(L_DATE.getValue(), 'dash');
 						var repRoutNm = dlt_BRT_OPER_PL_MST.getCellData(AL0302G0.getFocusedRowIndex(), "REP_ROUT_NM");
-						var str = repRoutNm + "대표노선에 해당 차량과 운전자를 배포 하시겠습니까?";
-						
+						var str = repRoutNm + "에 해당 차량과 운전자를 배포 하시겠습니까?" + " 배포일 : " + fDate + "~" + lDate
 						com.confirm(str, function(rtn) {
 							if (rtn) {
 								com.executeSubmission(sub_AL0302G1S1);
@@ -908,9 +907,9 @@
 							<xf:group class="label" id="" style="">
 								<w2:span class="" id="" label="배포방법" style="margin-left: 10px;"></w2:span>
 							</xf:group>
-							<xf:select1 id="REL_WAY" chooseOption="" style="width: 100px;height: 21px; margin-top: 2px;float: left;" submenuSize="auto"
-								allOption="" disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled" chooseOptionLabel=""
-								ref="">
+							<xf:select1 id="REL_WAY" chooseOption="" style="width: 100px;height: 21px; margin-top: 2px;float: left;"
+								submenuSize="auto" allOption="" disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled"
+								chooseOptionLabel="" ref="">
 								<xf:choices>
 									<xf:item>
 										<xf:label><![CDATA[고정]]></xf:label>
@@ -926,6 +925,9 @@
 									</xf:item>
 								</xf:choices>
 							</xf:select1>
+							<xf:group style="margin-top:3px;" id="">
+								<w2:span class="" id="" label="*배포 날짜와 방법을 선택해주세요." style="margin-left: 10px; "></w2:span>
+							</xf:group>
 							<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 						</xf:group>
 					</xf:group>

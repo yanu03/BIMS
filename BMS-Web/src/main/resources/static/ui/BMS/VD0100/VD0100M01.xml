@@ -829,7 +829,7 @@
 							</xf:group>
 							<xf:group tagname="tr" style="">
 								<xf:group tagname="th" class="w2tb_th">
-									부모여부
+									상위장치 여부
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
 									</w2:attributes>
@@ -875,7 +875,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group class="w2tb_th" style="" tagname="th">부모장치</xf:group>
+								<xf:group class="w2tb_th" style="" tagname="th">상위장치</xf:group>
 								<xf:group class="w2tb_td" style="" tagname="td">
 									<w2:attributes>
 										<w2:colspan>1</w2:colspan>

@@ -73,7 +73,7 @@
 		<xf:group class="" id="group5" style="position: relative;height:105px;">
 			<xf:group class="" id="group6" style="position: relative;height:80px;">
 				<w2:scrollView class="" id="scrollView2" style="position: relative;height:80px;" bounce="" horizontalScroll="" showHorizontalScroll="" showVerticalScroll="" verticalScroll="">
-					<w2:textbox id="tbx_message" label="" style="position: relative;padding:10px;" />
+					<w2:textbox id="tbx_message" label="" style="position: relative;padding:10px;"/>
 				</w2:scrollView>
 			</xf:group>
 			<xf:group class="" id="grp_button" style="text-align: center;" >			

@@ -12,9 +12,13 @@
         	<w2:dataCollection baseNode="map">
         		<w2:dataMap baseNode="map" id="dma_search">
         			<w2:keyInfo>
-        				<w2:key id="TYPE" name="name1" dataType="text"></w2:key>
         				<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
         				<w2:key id="USE_YN" name="name3" dataType="text"></w2:key>
+        				<w2:key id="F_DATE" name="name4" dataType="text"></w2:key>
+        				<w2:key id="L_DATE" name="name5" dataType="text"></w2:key>
+        				<w2:key id="ROUT_ID" name="name6" dataType="text"></w2:key>
+        				<w2:key id="TYPE" name="name7" dataType="text" defaultValue="ROUT_MODE"></w2:key>
+        				<w2:key id="TYPE2" name="name7" dataType="text"></w2:key>
         			</w2:keyInfo>
         		</w2:dataMap>
         		<w2:dataMap baseNode="map" id="dma_result">
@@ -78,6 +82,24 @@
         				<w2:key id="VHC_NO" name="차량번호" dataType="text"></w2:key>
         			</w2:keyInfo>
         		</w2:dataMap>
+        		<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ROUT_NODE_CMPSTN" saveRemovedData="true"><!-- 맵 노선 그리기용 -->
+					<w2:columnInfo>
+						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
+						<w2:column id="NODE_ID" name="노드ID" dataType="text"></w2:column>
+						<w2:column id="NODE_SN" name="노드순번" dataType="number" defaultValue="0"></w2:column>
+						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
+						<w2:column id="NODE_TYPE" name="노드유형" dataType="text"></w2:column>
+						<w2:column id="LINK_ID" name="링크ID" dataType="text"></w2:column>
+						<w2:column id="STTN_ID" name="정류소ID" dataType="text"></w2:column>
+						<w2:column id="STTN_NO" name="정류소번호" dataType="text"></w2:column>
+						<w2:column id="CRS_ID" name="교차로ID" dataType="text"></w2:column>
+						<w2:column id="GPS_X" name="경도" dataType="text"></w2:column>
+						<w2:column id="GPS_Y" name="위도" dataType="text"></w2:column>
+						<w2:column id="ROUT_LEN" name="노선거리" dataType="number" defaultValue="0"></w2:column>
+						<w2:column id="AREA" name="권역" dataType="text"></w2:column>
+						<w2:column id="MORN_STD" name="집중모니터링기준" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
         	</w2:dataCollection>
         	<w2:workflowCollection></w2:workflowCollection>
         	<!-- <xf:submission id="sub_VI0100G0R0" ref="data:json,dma_search" target="data:json,dlt_BRT_DAY_ALLOC_PL_INFO" action="/vi/VI0100G0R0"
@@ -85,7 +107,7 @@
         		mode="asynchronous" processMsg="조회 중입니다..." ev:submit="" ev:submitdone="scwin.sub_VI0100G0R0_submitdone" ev:submiterror=""
         		abortTrigger="">
         	</xf:submission> -->
-        	<xf:submission id="sub_VI0100G1R0" ref="data:json,dma_param_VI0100G1" target="data:json,dlt_BRT_OPER_VIOLT_HIS"
+        	<xf:submission id="sub_VI0100G1R0" ref="data:json,dma_search" target="data:json,dlt_BRT_OPER_VIOLT_HIS"
         		action="/vi/VI0100G1R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
         		customHandler="" mode="asynchronous" processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_VI0100G1R0_submitdone" ev:submiterror="" abortTrigger="">
         	</xf:submission>
@@ -98,6 +120,11 @@
         		mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
         		processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
         	</xf:submission>
+        	<xf:submission id="sub_selectNodeListByRepRout" ref="data:json,dma_search" target="data:json,dlt_BMS_ROUT_NODE_CMPSTN"
+				action="/rout/selectNodeListByRepRout" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+				errorHandler="" customHandler="" mode="asynchronous" processMsg="조회 중입니다.." ev:submit="" ev:submitdone="scwin.sub_selectNodeListByRepRout_submitdone"
+				ev:submiterror="" abortTrigger="">
+			</xf:submission>
         </xf:model>
         <script type="text/javascript" lazy="false"><![CDATA[
         
@@ -107,7 +134,12 @@
 						keyColumn : "OCR_DTM", focusColumn : "OCR_DTM",  name : "위반 관리 목록" }	
 		 };
 		 		
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions );		
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions );
+
+		F_DATE.setValue(util.getCurrentDate2());
+		dma_search.set("F_DATE", util.getCurrentDate2());
+		L_DATE.setValue(util.getCurrentDate2());
+		dma_search.set("L_DATE", util.getCurrentDate2());
 
 		var codeOptions = [ 
 							{code : "VIOLT_TYPE", compID : "VIOLT_TYPE, VI0100G1:VIOLT_TYPE" }
@@ -139,20 +171,23 @@
 	
 	scwin.sub_VI0100G1R0_submitdone = function(e) {
 		com.setFocusedCell(VI0100G1, "OCR_DTM");
-		
-		if(dlt_BRT_OPER_VIOLT_HIS.getRowCount() > 0){
-			var jsonObj = dlt_BRT_OPER_VIOLT_HIS.getRowJSON(VI0100G1.getFocusedRowIndex());
-			routMap.showVehicle3("map_VI0100", jsonObj, VI0100G1);
-		}
 	};
 	
 	scwin.VI0100G1_onrowindexchange = function(row,oldRow) {
-		//dlt_BRT_OPER_VIOLT_HIS.setCellData(row, "VHC_NO", dlt_BRT_DAY_ALLOC_PL_INFO.getCellData(VI0100G0.getFocusedRowIndex(), "VHC_NO"))
-		var jsonObj = dlt_BRT_OPER_VIOLT_HIS.getRowJSON(row);
+		dma_search.set("ROUT_ID", dlt_BRT_OPER_VIOLT_HIS.getCellData(VI0100G1.getFocusedRowIndex(), "ROUT_ID"));
+		com.executeSubmission(sub_selectNodeListByRepRout);			
+	};
+	
+	scwin.sub_selectNodeListByRepRout_submitdone = function(e) {
+		var focusIdx = VI0100G1.getFocusedRowIndex();
+		var focusDataList = dlt_BRT_OPER_VIOLT_HIS.getRowJSON(focusIdx);
 		
-		//차량 단일 마커
-		if(dlt_BRT_OPER_VIOLT_HIS.getCellData(row, "GPS_X") != ''){
-			routMap.showVehicle3("map_VI0100", jsonObj, VI0100G1);
+		routMap.showRoute("map_VI0100", dlt_BMS_ROUT_NODE_CMPSTN.getAllJSON(), null, "ONLYLINE");
+		
+		var gps = dlt_BRT_OPER_VIOLT_HIS.getCellData(VI0100G1.getFocusedRowIndex(), "GPS_X");
+		
+		if(gps != '' && gps != '0'){
+			routMap.showVehicle3("map_VI0100", focusDataList, VI0100G1);
 		}
 		
 	};
@@ -217,13 +252,57 @@
 		scwin.btn_searchNode_onclick();		
 	};
 	
-	
-	
-	scwin.OCR_DTM_SELECT_onviewchange = function(info) {
-		dma_param_VI0100G1.set("OCR_DTM", info.newValue);
+	//라디오 버튼에 따라 날짜 설정
+	scwin.calendar_radio_onviewchange = function(info) {
+		var date = new Date();
+		var year = date.getFullYear().toString();
+		var month = (date.getMonth()+1).toString();
+		var day = date.getDate().toString();
+		var zero = 0;
 		
-		//$p.executeSubmission(sub_VI0100G1R0);
+		
+		//글자수 맞추기
+		if(day.length == 1){
+			day = zero + day;
+		}
+		
+		if(month.length == 1){
+			month = zero + month;
+		}
+		
+		var weekAgoDay = parseInt(day) - 7;
+		if(weekAgoDay.toString.length == 1){
+			weekAgoDay = zero + weekAgoDay.toString();
+		}
+		var todaysDate = year+month+day;
+		var weekAgoDate = year+month+weekAgoDay;
+		var firstday = year+month+"01";		
+		
+		if(parseInt(weekAgoDay) <= 0) {
+	         weekAgoDate = firstday;
+	    }
+		
+		if(info.value == "DIRECT") {
+			F_DATE.setValue();
+			L_DATE.setValue();
+		}
+		
+		else if(info.value == "TODAY") {
+			F_DATE.setValue(todaysDate);
+			L_DATE.setValue(todaysDate);	
+		}
+		
+		else if(info.value == "WEEK") {
+			F_DATE.setValue(weekAgoDate);
+			L_DATE.setValue(todaysDate);			
+		}
+		
+		else if(info.value == "MONTH") {
+			F_DATE.setValue(firstday);
+			L_DATE.setValue(todaysDate);				
+		}
 	};
+	
 	]]></script>
     </head>
     <body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -239,7 +318,7 @@
 					<xf:group id="" style="" class="search">
 						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
 							ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" disabledClass="w2selectbox_disabled" displayMode="label" id="TYPE"
-							optionOrder="false" ref="data:dma_search.TYPE" class="search_type_100" submenuSize="auto"
+							optionOrder="false" ref="data:dma_search.TYPE2" class="search_type_100" submenuSize="auto"
 							textAlign="left">
 							<xf:choices>
 								<xf:item>
@@ -271,9 +350,38 @@
 						<xf:group id="" style="margin-left:10px;" class="label">
 							<w2:span id="" class="" label="발생일시 : "></w2:span>
 						</xf:group>
-						<w2:inputCalendar footerDiv="false" id="OCR_DTM_SELECT" style="width: 130px;height: 23px; margin-top:2px; float: left;" renderDiv="true"
-							focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component" ev:onviewchange="scwin.OCR_DTM_SELECT_onviewchange">
+						<w2:inputCalendar footerDiv="false" id="F_DATE" style="width: 130px;height: 23px; margin-top:2px; float: left;" renderDiv="true"
+							focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component" 
+							ref="data:dma_search.F_DATE">
 						</w2:inputCalendar>
+						<w2:span id="" class="" label="~" style="float:left; margin-left:3px; margin-right:3px; margin-top:2px;"></w2:span>
+						<w2:inputCalendar footerDiv="false" id="L_DATE" style="width: 130px;height: 23px; margin-top:2px; float: left;" renderDiv="true"
+							focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component" 
+							ref="data:dma_search.L_DATE">
+						</w2:inputCalendar>
+						<xf:group id="" style="margin-left: 10px;" class="radio">
+							<xf:select1 id="calendar_radio" ref="" selectedIndex="1" cols="" appearance="full"
+								style="min-width: 200px;" rows="1" ev:onviewchange="scwin.calendar_radio_onviewchange">
+								<xf:choices>
+									<xf:item>
+										<xf:label><![CDATA[직접입력]]></xf:label>
+										<xf:value><![CDATA[DIRECT]]></xf:value>
+									</xf:item>
+									<xf:item>
+										<xf:label><![CDATA[금일]]></xf:label>
+										<xf:value><![CDATA[TODAY]]></xf:value>
+									</xf:item>
+									<xf:item>
+										<xf:label><![CDATA[일주일]]></xf:label>
+										<xf:value><![CDATA[WEEK]]></xf:value>
+									</xf:item>
+									<xf:item>
+										<xf:label><![CDATA[1개월]]></xf:label>
+										<xf:value><![CDATA[MONTH]]></xf:value>
+									</xf:item>
+								</xf:choices>
+							</xf:select1>
+						</xf:group>
 					</xf:group>
 					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>

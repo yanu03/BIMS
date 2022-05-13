@@ -32,6 +32,12 @@ public class VD0202Controller extends ControllerSupport {
 		return result.getResult();
 	}
 	
+	@RequestMapping("/vd/VD0202G1R1")
+	public @ResponseBody Map<String, Object> VD0202G1R1() throws Exception {
+		result.setData("dlt_PARAM_KIND", VD0202Service.VD0202G1R1());
+		return result.getResult();
+	}
+	
 	@RequestMapping("/vd/VD0202SHI1")
 	public @ResponseBody Map<String, Object> VD0202SHI0() throws Exception {
 		result.setData("dlt_searchitem2", VD0202Service.VD0202SHI1());
