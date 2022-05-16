@@ -59,6 +59,7 @@
 						<w2:key id="ROUT_ID" name="노선ID" dataType="text"></w2:key>
 						<w2:key id="ROUT_NM" name="노선명" dataType="text"></w2:key>
 						<w2:key id="OPER_SN" name="운행순번" dataType="text"></w2:key>
+						<w2:key id="OPER_DT" name="운행일" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>			
 		</w2:dataCollection>
@@ -93,13 +94,9 @@
 		dma_sub_search.set("ROUT_ID", scwin.param.data);
 		dma_sub_search.set("DAY_DIV", scwin.param.data2);
 		dma_sub_search.set("ROUT_NM", scwin.param.data3);
-		//dma_sub_search.set("OPER_SN", scwin.param.data4);
+		dma_sub_search.set("OPER_DT", util.getCurrentDate3());
 		
-		//com.executeSubmission(sub_AL0203G1R0);		
-		//com.executeSubmission(sub_AL0203G0P0);
-		//scwin.drawChart(chkCnt);		
-		//scwin.testDrawChart(chkCnt);
-		scwin.drawChart2(chkCnt);
+		scwin.drawChart(chkCnt);
 	};
 	
 	scwin.onpageunload = function() {
@@ -130,7 +127,7 @@
 		this.pointRadius = {};	//포인트 반지름 0일 경우 포인트 안그려짐
 	}
 	
-	scwin.drawChart2 = function(chkCnt){
+	scwin.drawChart = function(chkCnt){
 		
 		var datasets = new Array();
 		var transData = new Array();
@@ -155,38 +152,65 @@
 			
 			for(var y = 0; y < transData.length; y++){
 				var label = transData[y].OPER_SN + "회차";
-				//var updDtm = transData[y].UPD_DTM;
-				var updDtm = util.getCurrentDate3();
 				var operSn = transData[y].OPER_SN;
-				var arrvTm = transData[y].ARRV_TM;
-				var dprtTm = transData[y].DPRT_TM;
+				//var arrvTm = transData[y].ARRV_TM;
+				//var dprtTm = transData[y].DPRT_TM;
+				debugger;
+				if(transData[y].ARRV_TM.substring(0,2) == '24' || transData[y].ARRV_TM.substring(0,2) == '25' || transData[y].ARRV_TM.substring(0,2) == '26'){
+				
+				var nextDay = new Date(dma_sub_search.get("OPER_DT"));
+				nextDay.setDate(nextDay.getDate() +1).toLocaleString();
+				var day = nextDay.getDate().toString();
+				var year = nextDay.getFullYear().toString();
+				var month = nextDay.getMonth()+1;
+				if(month.toString().length == '1'){
+					month = '0'+month
+				}
+				var newNextDate = year+'-'+month+'-'+day
+				var updDtm = newNextDate;
+				
+				if(transData[y].ARRV_TM.substring(0,2) == '24'){
+					var jsonArrvTm = transData[y].ARRV_TM.replace("24", "00");
+					var jsonDprtTm = transData[y].DPRT_TM.replace("24", "00");
+				}else if(transData[y].ARRV_TM.substring(0,2) == '25'){
+					var jsonArrvTm = transData[y].ARRV_TM.replace("25", "01");
+					var jsonDprtTm = transData[y].DPRT_TM.replace("25", "01");
+				}else if(transData[y].ARRV_TM.substring(0,2) == '26'){
+					var jsonArrvTm = transData[y].ARRV_TM.replace("26", "02");
+					var jsonDprtTm = transData[y].DPRT_TM.replace("26", "02");
+				}
+				
+				var arrvTm = newNextDate+' '+jsonArrvTm
+				var dprtTm = newNextDate+' '+jsonDprtTm
+				
+			}else{
+				var updDtm = dma_sub_search.get("OPER_DT");
+				var arrvTm = dma_sub_search.get("OPER_DT")+' '+transData[y].ARRV_TM;
+				var dprtTm = dma_sub_search.get("OPER_DT")+' '+transData[y].DPRT_TM;
+			}
+				
+				
 				var accruLen = transData[y].ACCRU_LEN;
 				var nodeType = transData[y].NODE_TYPE;
 				
-				//if(nodeType=='NT002'){
-					var categoryJson = new Object();
-					
-					categoryJson.x = new Date(updDtm+' '+arrvTm);
-					categoryJson.y = accruLen;
-					categoryJson.NODE_NM = jsonData[y].NODE_NM;
-					data.push(categoryJson);
-					
-				//}
+				var categoryJson = new Object();
 				
-				//if((nodeType=='NT002')&&(arrvTm!=dprtTm)){
-					var categoryJson = new Object();
+				categoryJson.x = new Date(arrvTm);
+				categoryJson.y = accruLen;
+				categoryJson.NODE_NM = jsonData[y].NODE_NM;
+				data.push(categoryJson);
 				
-					categoryJson.x = new Date(updDtm+' '+dprtTm);
-					categoryJson.y = accruLen;
-					categoryJson.NODE_NM = jsonData[y].NODE_NM;
-					data.push(categoryJson);
-				//}
+			
+				var categoryJson = new Object();
+			
+				categoryJson.x = new Date(dprtTm);
+				categoryJson.y = accruLen;
+				categoryJson.NODE_NM = jsonData[y].NODE_NM;
+				data.push(categoryJson);
 				
 			};
 
 		var charData = new CharData();
-		
-	
 		
 		charData.data = data;
 		

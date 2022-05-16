@@ -88,6 +88,7 @@
 						<w2:column id="REP_ROUT_ID" name="대표노선ID" dataType="text"></w2:column>
 						<w2:column id="ALLOC_NO" name="배차번호" dataType="text"></w2:column>
 						<w2:column id="DAY_DIV" name="요일구분" dataType="text"></w2:column>
+						<w2:column id="WAY_DIV" name="요일구분" dataType="text"></w2:column>
 						<w2:column id="VHC_ID" name="차량ID" dataType="text"></w2:column>
 						<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
 						<w2:column id="COMP_NM" name="운수사명" dataType="text"></w2:column>
@@ -799,6 +800,9 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:40px;" id="column19"
 										value="배차번호" blockSelect="false" displayMode="label" colSpan="" rowSpan="2">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:40px;" id="column1"
+										value="상하행" blockSelect="false" displayMode="label" colSpan="" rowSpan="2">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px;" id="column16"
 										value="오전" blockSelect="false" displayMode="label" colSpan="3">
 									</w2:column>
@@ -840,6 +844,9 @@
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="ALLOC_NO"
 										value="" blockSelect="false" displayMode="label" readOnly="true" disabled="true">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="50" inputType="select" style="height:20px" id="WAY_DIV"
+										value="" blockSelect="false" displayMode="label" readOnly="" disabled="true">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="textImage" style="height:20px" id="VHC_NO"
 										value="" blockSelect="false" displayMode="label" readOnly="" imageSrc="/cm/images/inc/btn_search.png" imageHeight="20"

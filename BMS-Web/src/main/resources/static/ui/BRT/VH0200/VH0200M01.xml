@@ -523,7 +523,12 @@
 		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'CHG_CNT'+'" style="height:20px" inputType="text" width="60" value="'+'발생건수'+'" rowSpan="3"></w2:column>';
 		for(var i = 0; i < maxCnt; i++) {
 			var nodeNm = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(i, "NODE_NM") + ' (' + dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(i, "ACCRU_LEN") + ')'
-			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'NODE_NM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="140" colSpan="4" value="'+nodeNm+'"></w2:column>';
+			var nodeType = dlt_BRT_CUR_CHG_OPER_DTL_INFO_HIS.getCellData(i, "NODE_TYPE");
+			if(nodeType == 'NT001'){
+				gridHeader +='<w2:column blockSelect="false" id="'+'h'+'NT001_'+i+'" style="height:20px; background-color:#d1e5ff;" textAlign="center" inputType="text" width="140" colSpan="4" value="'+nodeNm+'"></w2:column>';
+			}else if(nodeType == 'NT002'){
+				gridHeader +='<w2:column blockSelect="false" id="'+'h'+'NT002_'+i+'" style="height:20px; background-color:#ffdbdb;" textAlign="center" inputType="text" width="140" colSpan="4" value="'+nodeNm+'"></w2:column>';
+			}
 		}
 		gridHeader +='</w2:row>';
 		
@@ -618,7 +623,7 @@
 		+'<w2:footer style="" id="footer2">'
 		+'<w2:row style="" id="row4">'
 		+'<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;" '
-		+'id="column55" value="" blockSelect="false" displayMode="label" colSpan="300" rowSpan="" '
+		+'id="column55" value="" blockSelect="false" displayMode="label" colSpan="280" rowSpan="" '
 		+'expression="&quot;데이터 개수 : &quot; + COUNT(&apos;COMP_ID&apos;)" textAlign="left">'
 		+'</w2:column>'
 		+'</w2:row>'
@@ -1042,7 +1047,7 @@
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column1"
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px;" id="column1"
 										value="운행일" blockSelect="false" displayMode="label">
 									</w2:column>
 									<!-- <w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px" id="column2"
@@ -1118,8 +1123,8 @@
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="변경운행 상세" style=""></w2:textbox>
+							<w2:span label="※정류소-빨강, 교차로-파랑" style="width: 100px;height: 23px; margin-left:10px;" id=""></w2:span>
 						</xf:group>
-						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 						<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
 					<xf:group class="" id="" style=""></xf:group>

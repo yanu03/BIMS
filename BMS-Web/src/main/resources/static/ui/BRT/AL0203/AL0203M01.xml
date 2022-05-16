@@ -308,8 +308,8 @@
 		
 		if(rowData.length == 0 ) {
 			dma_sub_search.set("NODE_TYPE", "NT002"); 
-			//com.executeSubmission(sub_ROUT_NODE_CPMSTN);
-			com.executeSubmission(sub_MAIN_ROUT_NODE_CPMSTN);
+			com.executeSubmission(sub_ROUT_NODE_CPMSTN);
+			//com.executeSubmission(sub_MAIN_ROUT_NODE_CPMSTN);
 			return;
 		}
 		
@@ -320,7 +320,12 @@
 		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'OPER_SN'+'" style="height:20px" inputType="text" width="70" value="'+'운행순번'+'" rowSpan="2"></w2:column>';
 		for(var i = 0; i < maxCnt; i++) {
 			var nodeNm = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(i, "NODE_NM");
-			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'NODE_NM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="140" colSpan="2" value="'+nodeNm+'"></w2:column>';
+			var nodeType = dlt_BRT_OPER_ALLOC_PL_NODE_INFO.getCellData(i, "NODE_TYPE");
+			if(nodeType == 'NT001'){
+				gridHeader +='<w2:column blockSelect="false" id="'+'h'+'NT001_'+i+'" style="height:20px; background-color:#d1e5ff;" textAlign="center" inputType="text" width="150" colSpan="2" value="'+nodeNm+'"></w2:column>';
+			}else if(nodeType == 'NT002'){
+				gridHeader +='<w2:column blockSelect="false" id="'+'h'+'NT002_'+i+'" style="height:20px; background-color:#ffdbdb;" textAlign="center" inputType="text" width="150" colSpan="2" value="'+nodeNm+'"></w2:column>';
+			}
 		}
 		gridHeader +='</w2:row>';
 		
@@ -330,8 +335,8 @@
 		gridHeader +='<w2:row style="" id="second_row">';
 		//maxCnt만큼 body 생성  
 		for(var i = 0; i < maxCnt; i++) {
-			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'ARRV_TM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="70" colSpan="'+1+'" value="도착시간"></w2:column>';
-			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'DPRT_TM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="70" colSpan="'+1+'" value="출발시간"></w2:column>';
+			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'ARRV_TM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="90" colSpan="'+1+'" value="도착시간"></w2:column>';
+			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'DPRT_TM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="90" colSpan="'+1+'" value="출발시간"></w2:column>';
 			gridBody += '<w2:column blockSelect="false" id="'+'ARRV_TM_'+i+'" style="height:20px" inputType="text" width=""></w2:column>'
 			gridBody += '<w2:column blockSelect="false" id="'+'DPRT_TM_'+i+'" style="height:20px" inputType="text" width=""></w2:column>'
 		}
@@ -374,12 +379,21 @@
 		+ gridBody
 		+'</w2:row>'
 		+'</w2:gBody>'
+		
+		+'<w2:footer style="" id="footer2">'
+		+'<w2:row style="" id="row4">'
+		+'<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;" '
+		+'id="column55" value="" blockSelect="false" displayMode="label" colSpan="150" rowSpan="" '
+		+'expression="&quot;데이터 개수 : &quot; + COUNT(&apos;COMP_ID&apos;)" textAlign="left">'
+		+'</w2:column>'
+		+'</w2:row>'
+		+'</w2:footer>'
+		
 		+'</w2:gridView>' ;
 		
 		AL0203G1.setGridStyle(WebSquare.xml.parse( gridStr , true ));
 		autoOptions.Sub1.grid = AL0203G1;
 		AL0203G1.setFixedColumn(2);
-		
 
 		dlt_VIEW_OPER_PL_NODE_INFO.modifyAllStatus("R")
 	};
@@ -491,6 +505,7 @@
 	};
 	
 	scwin.sub_AL0203G1R0_submitdone = function(e) {
+		
 		scwin.setGridViewInfo();
 //		scwin.fusionChart(AL0203G1.getFocusedRowIndex());
 		com.setFocusedCell(AL0203G1, "OPER_SN");
@@ -758,8 +773,8 @@
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="운행계획 상세" style=""></w2:textbox>
+							<w2:span label="※정류소-빨강, 교차로-파랑" style="width: 100px;height: 23px; margin-left:10px;" id=""></w2:span>
 						</xf:group>
-						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 						<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
 					<xf:group class="" id="" style=""></xf:group>

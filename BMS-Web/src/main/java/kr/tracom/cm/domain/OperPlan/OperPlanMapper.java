@@ -74,8 +74,12 @@ public interface OperPlanMapper {
     public List<Map<String, Object>> selectOperAllocPlanNode(Map<String, Object> params);
     
     public List<Map<String, Object>> selectOperAllocRealNode(Map<String, Object> params);
+    
+    public List<Map<String, Object>> selectAvgOperAllocRealNode(Map<String, Object> params);
 
 	public List selectOperAllocRealNodeCnt(Map param);
+	
+	public List selectAvgOperAllocRealNodeCnt(Map param);
     
     //노드 운행계획 생성
 	public int makeOperPl(Map<String, Object> params);
