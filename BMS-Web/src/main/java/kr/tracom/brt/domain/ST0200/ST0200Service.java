@@ -23,6 +23,10 @@ public class ST0200Service extends ServiceSupport {
 		return st0200Mapper.ST0200G0R0(map);
 	}
 	
+	public List ST0200PROC() throws Exception {
+		return st0200Mapper.ST0200PROC();
+	}
+	
 	public List ST0200G1R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_sub_search");
 		String temp[] = map.get("ROUT_ID").toString().replace("[","").replace("]","").replace(" ","").split(",");

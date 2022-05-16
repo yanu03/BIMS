@@ -316,16 +316,18 @@
 		var charData = new CharData();
 		var rgb = color[i];
 		
-		charData.data = data;
-		charData.label = label;
-		charData.borderColor = rgb;
-		charData.backgroundColor = rgb;
-		charData.borderWidth = 1;
-		charData.pointBorderWidth = 1;
-		charData.tension = 0;
-		charData.pointRadius = 1;
-		
-		datasets.push(charData);
+		if(data.length > 0 && xLabel.length > 0){
+			charData.data = data;
+			charData.label = label;
+			charData.borderColor = rgb;
+			charData.backgroundColor = rgb;
+			charData.borderWidth = 1;
+			charData.pointBorderWidth = 1;
+			charData.tension = 0;
+			charData.pointRadius = 1;
+			
+			datasets.push(charData);
+		}
 		
 		transData = [];
 	}
@@ -338,6 +340,7 @@
 		chart_ST0200 = new Chart(ctx, {
 			    type: 'line',
 				data: {
+					//labels:["05시", "06시","07시", "08시","09시", "10시","11시", "12시","13시", "14시","15시", "16시","17시", "18시","19시", "20시","21시", "22시","23시", "24시"],
 					labels:xLabel,
 					datasets
 				  },
@@ -744,10 +747,10 @@
 									<xf:label><![CDATA[일별]]></xf:label>
 									<xf:value><![CDATA[DAY]]></xf:value>
 								</xf:item>
-								<xf:item>
+								<!-- <xf:item>
 									<xf:label><![CDATA[월별]]></xf:label>
 									<xf:value><![CDATA[MONTH]]></xf:value>
-								</xf:item>
+								</xf:item> -->
 							</xf:choices>
 						</xf:select1>
 						<xf:group class="label" id="" style="">

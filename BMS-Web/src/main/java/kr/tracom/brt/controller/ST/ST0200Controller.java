@@ -21,6 +21,7 @@ public class ST0200Controller extends ControllerSupport {
 	@RequestMapping("/st/ST0200G0R0")
 	public @ResponseBody Map<String, Object> ST0200G0R0() throws Exception {
 		result.setData("dlt_BMS_ROUT_MST", st0200Service.ST0200G0R0());
+		//st0200Service.ST0200PROC();
 		return result.getResult();
 	}
 	
