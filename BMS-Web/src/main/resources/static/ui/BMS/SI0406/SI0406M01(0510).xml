@@ -63,15 +63,13 @@
 						<w2:column id="AREA" name="권역" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ROUT_MOCK_LINK_CMPSTN" saveRemovedData="true" ev:oninsertrow=""
-					ev:oncelldatachange="">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ROUT_MOCK_LINK_CMPSTN" saveRemovedData="true" ev:oninsertrow="" ev:oncelldatachange="">
 					<w2:columnInfo>
-						<w2:column id="chk" name="chk" dataType="text" ignoreStatus="true"></w2:column>
 						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
 						<w2:column id="MOCK_LINK_ID" name="표준링크아이디" dataType="text"></w2:column>
-						<w2:column id="LINK_SN" name="순번" dataType="text"></w2:column>
-						<w2:column id="F_NODE_NAME" name="시작노드명" dataType="text"></w2:column>
+						<w2:column id="LINK_SN" name="순번" dataType="text"></w2:column><w2:column id="F_NODE_NAME" name="시작노드명" dataType="text"></w2:column>
 						<w2:column id="T_NODE_NAME" name="종료노드명" dataType="text"></w2:column>
+						
 						<w2:column id="UPD_DTM" name="name6" dataType="text"></w2:column>
 						<w2:column id="UPD_ID" name="name7" dataType="text"></w2:column>
 					</w2:columnInfo>
@@ -82,45 +80,6 @@
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_MOCK_LINK" saveRemovedData="true">
-					<w2:columnInfo>
-						<w2:column id="chk" name="chk" dataType="text" ignoreStatus="true"></w2:column>
-						<w2:column id="MOCK_LINK_ID" name="표준링크아이디" dataType="text"></w2:column>
-						<w2:column id="F_NODE" name="시작노드ID" dataType="text"></w2:column>
-						<w2:column id="T_NODE" name="종료노드ID" dataType="text"></w2:column>
-						<w2:column id="LANES" name="차로수" dataType="text"></w2:column>
-						<w2:column id="ROAD_RANK" name="도로등급" dataType="text"></w2:column>
-						<w2:column id="ROAD_TYPE" name="도로유형" dataType="text"></w2:column>
-						<w2:column id="ROAD_NO" name="도로번호" dataType="text"></w2:column>
-						<w2:column id="ROAD_NAME" name="도로명" dataType="text"></w2:column>
-						<w2:column id="ROAD_USE" name="도로사용여부" dataType="text"></w2:column>
-						<w2:column id="MULTI_LINK" name="중용구간여부" dataType="text"></w2:column>
-						<w2:column id="CONNECT" name="연결로코드" dataType="text"></w2:column>
-						<w2:column id="MAX_SPD" name="최고제한속도" dataType="text"></w2:column>
-						<w2:column id="REST_VEH" name="통과제한차량" dataType="text"></w2:column>
-						<w2:column id="REST_W" name="통과제한하중" dataType="text"></w2:column>
-						<w2:column id="REST_H" name="통과제한높이" dataType="text"></w2:column>
-						<w2:column id="LENGTH" name="도로길이" dataType="text"></w2:column>
-						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
-						<w2:column id="F_NODE_NAME" name="시작노드명" dataType="text"></w2:column>
-						<w2:column id="T_NODE_NAME" name="종료노드명" dataType="text"></w2:column>
-						<w2:column id="F_GPS_X" name="시작GPS_X좌표" dataType="text"></w2:column>
-						<w2:column id="F_GPS_Y" name="시작GPS_Y좌표" dataType="text"></w2:column>
-						<w2:column id="T_GPS_X" name="종료GPS_X좌표" dataType="text"></w2:column>
-						<w2:column id="T_GPS_Y" name="종료GPS_Y좌표" dataType="text"></w2:column>
-						<w2:column id="F_MOCK_NODE_TYPE" name="시작노드타입" dataType="text"></w2:column>
-						<w2:column id="T_MOCK_NODE_TYPE" name="종료노드타입" dataType="text"></w2:column>
-						<w2:column id="F_NODE_TYPE" name="시작매핑노드타입" dataType="text"></w2:column>
-						<w2:column id="T_NODE_TYPE" name="종료매핑노드타입" dataType="text"></w2:column>
-						<!-- 이하 공통코드 사용하기 위한 별칭 중복 데이터 -->
-						<w2:column id="NODE_ID" name="노드아이디" dataType="text"></w2:column>
-						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
-						<w2:column id="NODE_TYPE" name="노드타입" dataType="text"></w2:column>
-						<w2:column id="GPS_X" name="X좌표" dataType="text"></w2:column>
-						<w2:column id="GPS_Y" name="Y좌표" dataType="text"></w2:column>
-					</w2:columnInfo>
-				</w2:dataList>
-				<!-- 표준링크정보 비교용 고정 데이터 -->
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_MOCK_LINK2" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="MOCK_LINK_ID" name="표준링크아이디" dataType="text"></w2:column>
 						<w2:column id="F_NODE" name="시작노드ID" dataType="text"></w2:column>
@@ -181,14 +140,10 @@
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_SI0406G2R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_SI0406G3R0" ref="" target="data:json,dlt_BMS_MOCK_LINK2" action="/si/SI0406G2R0" method="post"
-				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
-				ev:submit="" ev:submitdone="scwin.sub_SI0406G3R0_submitdone" ev:submiterror="" abortTrigger="">
-			</xf:submission>
 		</xf:model>
 
 		<script type="text/javascript" lazy="false"><![CDATA[
-//링크 번호가 다르다... 확인이 필요...링크 번호가 다르다... 확인이 필요...링크 번호가 다르다... 확인이 필요...	
+	
 /**
 	
  * 지도에 표준 링크 데이터 뿌림
@@ -214,14 +169,20 @@
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions);
 
 		var subOptions = {
-			SEARCH: scwin.btn_sub_move, DEL:scwin.btn_sub_del ,
-			SAVE:[{cbFnc:scwin.btn_up_onclick, nm:"상",class:"up"},{cbFnc:scwin.btn_down_onclick,nm:"하",class:"down"}]
+			SEARCH: scwin.btn_sub_move, DEL:scwin.btn_sub_del
 		};
 		
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);
 		
+//		var subOptions2 = {
+//			SAVE: [{cbFnc:scwin.btn_sub2_link, nm:"표준링크", class:"share"}, {cbFnc:scwin.btn_sub2_node, nm:"표준노드", class:"share"}]
+//		};
+//		com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions2);
+		
 		com.setSubBtn2(wfm_subBtn2, autoOptions);
 		
+		//com.setEnterKeyEvent(pgm_subList, scwin.btn_sub_search_onclick);
+				
 		SI0406G0.mergeCells("byrestriccol");
 		
 		routMap.initMap("map_SI0406", {width:"100%"
@@ -230,9 +191,9 @@
 		});
 		
 
-		//scwin.disp_check_all();
+		scwin.disp_check_all();
 		
-		
+
 	};
 
 	
@@ -242,10 +203,8 @@
 	
 
 	scwin.sub_SI0406G0R0_submitdone = function(e) {
-		com.setFocusedCell(SI0406G0, "ROUT_ID");
-		debugger;
+		com.setFocusedCell(SI0406G0, "ROUT_ID");	
 		com.executeSubmission(sub_SI0406G2R0);
-		com.executeSubmission(sub_SI0406G3R0);
 	};
 	
 	scwin.sbx_ChoiceBox_onviewchange = function(info) {
@@ -297,9 +256,22 @@
 	};
 	
 	scwin.sub_SI0406G1R0_submitdone = function(e) {
-		for (var i=0; i<dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getDataLength(); i++) {
-			dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(i, "chk", 1);		
-		}		
+	
+	/*	
+		if(dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getTotalRow() == 0){
+			routMap.initDisplay("map_SI0406");
+		}
+		else {
+			//com.setFocusedCell(SI0406G1, "NODE_ID");
+			if(SI0406G1.getFocusedRowIndex() == -1 ){
+				SI0406G1.setFocusedCell( 0, "NODE_ID");
+			}
+			else {
+				SI0406G1.setFocusedCell( SI0406G1.getFocusedRowIndex(), "NODE_ID");
+			}
+		}
+		scwin.btn_sub_move();
+	*/	
 	};
 	
 	scwin.sub_SI0406G1S0_submitdone = function(e) {
@@ -310,6 +282,43 @@
 		}
 	}
 			
+//	scwin.btn_integration_onclick = function() {
+//		if(dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getTotalRow()>0){
+//			var str = "갱신 후에는 되돌릴수 없습니다. 정말 갱신하시겠습니까?";
+//			com.confirm(str, function(rtn) {
+//				if (rtn) {
+//					var val_NODE_ID = dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getColData("NODE_ID");
+//					dma_sub_search.set("NODE_IDS", val_NODE_ID);
+//					dma_sub_search.set("ROUT_ID", dlt_BMS_ROUT_MST.getCellData(SI0406G0.getFocusedRowIndex(), "ROUT_ID"));
+//					dma_sub_search.set("INT_ROUT_ID", dlt_BMS_ROUT_MST.getCellData(SI0406G0.getFocusedRowIndex(), "INT_ROUT_ID"));
+//					dma_sub_search.set("AREA", dlt_BMS_ROUT_MST.getCellData(SI0406G0.getFocusedRowIndex(), "AREA"));
+//					var param = dma_sub_search.get("ROUT_ID");
+//					if (param != "") {
+//						var data = { data : dma_sub_search.getJSON(), callbackFn : "scwin.insertNode" };
+//						var options = { id : "SI0406P01",
+//										popupName : "노드연계", 
+//										modal : true};
+//						com.openPopup("/ui/BMS/SI0406/SI0406P01.xml", options, data);
+//					}
+//				}
+//			});
+//		}
+//		else {
+//			var val_NODE_ID = dlt_BMS_ROUT_NODE_CMPSTN.getColData("NODE_ID");
+//			dma_sub_search.set("NODE_IDS", val_NODE_ID);
+//			dma_sub_search.set("INT_ROUT_ID", dlt_BMS_ROUT_MST.getCellData(SI0406G0.getFocusedRowIndex(), "INT_ROUT_ID"));
+//					
+//			var param = dma_sub_search.get("ROUT_ID");
+//			if (param != "") {
+//				var data = { data : dma_sub_search.getJSON(), callbackFn : "scwin.insertNode" };
+//				var options = { id : "SI0406P01",
+//								popupName : "노드연계", 
+//								modal : true};
+//				com.openPopup("/ui/BMS/SI0406/SI0406P01.xml", options, data);
+//			}
+//		}
+//	}
+	
 	scwin.btn_del_onclick = function() {
 
 	};
@@ -332,7 +341,7 @@
 			com.confirm(str, function(rtn) {
 				if (rtn) {
 					com.clearGrid(SI0406G1);
-					com.searchGrid(SI0406G0, sub_SI0406G0R0);
+					com.searchGrid(SI0406G0, sub_SI0406G0R0);22
 				}
 			});
 		}
@@ -380,48 +389,53 @@
 		routMap.setDispCheck("map_SI0406", disp_check.getValue());
 	}
 	
+//	scwin.btn_sub2_link = function() {
+//		
+//		var data = { callbackFn : "scwin.insertMockLink" };
+//		var options = { id : "SI0406P01",
+//						popupName : "표준링크 목록",
+//						width : 600,
+//						height : 500,
+//						modal : true };
+//		com.openPopup("/ui/BMS/SI0406/SI0406P01.xml", options, data);	
+//	}	
+//	
+//	scwin.btn_sub2_node = function() {
+//
+//	}
+
 	scwin.sub_SI0406G2R0_submitdone = function(e) {
 		com.setFocusedCell(SI0406G2, "MOCK_LINK_ID");
-		for (var i=0; i<dlt_BMS_MOCK_LINK.getDataLength(); i++) {
-			dlt_BMS_MOCK_LINK.setCellData(i, "chk", 1);		
-		}
-		routMap.drawMockLink("map_SI0406", SI0406G2, dlt_BMS_MOCK_LINK2, SI0406G2.getFocusedRowIndex(), scwin.linkClickEvent, scwin.checkLinkCmpstn);
-		
-		var mockLinkIds = dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getColData("MOCK_LINK_ID");
-		com.excludeItemsByGrid(SI0406G2, mockLinkIds, "MOCK_LINK_ID");			
+		routMap.drawMockLink("map_SI0406", SI0406G2, SI0406G2.getFocusedRowIndex(), scwin.linkClickEvent, scwin.checkLinkCmpstn);
 	};
 	
 	scwin.SI0406G2_onrowindexchange = function(row,oldRow) {
-		//routMap.drawMockLink("map_SI0406", SI0406G2, SI0406G2.getFocusedRowIndex(), scwin.linkClickEvent, scwin.checkLinkCmpstn);
+		routMap.drawMockLink("map_SI0406", SI0406G2, SI0406G2.getFocusedRowIndex(), scwin.linkClickEvent, scwin.checkLinkCmpstn);
 		routMap.moveMap("map_SI0406", dlt_BMS_MOCK_LINK.getCellData(row, "GPS_Y"), dlt_BMS_MOCK_LINK.getCellData(row, "GPS_X"));
 	};
 	
 	//지도 링크 클릭 시 발생하는 이벤트
 	scwin.linkClickEvent = function(row) {
-		
 		SI0406G2.setFocusedCell(row, "MOCK_LINK_ID");
+		var insertRowIndex = dlt_BMS_ROUT_MOCK_LINK_CMPSTN.insertRow();
 		
-//		var insertRowIndex = dlt_BMS_ROUT_MOCK_LINK_CMPSTN.insertRow();
-//		
-//		dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(insertRowIndex, "ROUT_ID", dma_sub_search.get("ROUT_ID"));
-//		dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(insertRowIndex, "MOCK_LINK_ID", dlt_BMS_MOCK_LINK.getCellData(row, "MOCK_LINK_ID"));
-//		dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(insertRowIndex, "F_NODE_NAME", dlt_BMS_MOCK_LINK.getCellData(row, "F_NODE_NAME"));
-//		dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(insertRowIndex, "T_NODE_NAME", dlt_BMS_MOCK_LINK.getCellData(row, "T_NODE_NAME"));
+		dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(insertRowIndex, "ROUT_ID", dma_sub_search.get("ROUT_ID"));
+		dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(insertRowIndex, "MOCK_LINK_ID", dlt_BMS_MOCK_LINK.getCellData(row, "MOCK_LINK_ID"));
+		dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(insertRowIndex, "F_NODE_NAME", dlt_BMS_MOCK_LINK.getCellData(row, "F_NODE_NAME"));
+		dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(insertRowIndex, "T_NODE_NAME", dlt_BMS_MOCK_LINK.getCellData(row, "T_NODE_NAME"));
 		
-//		for(var i=0; i<dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getDataLength(); i++) {
-//			dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(i, "LINK_SN", i+1);
-//		} 
-//		SI0406G1.setFocusedCell(insertRowIndex, "MOCK_LINK_ID");
-
-
+		for(var i=0; i<dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getDataLength(); i++) {
+			dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(i, "LINK_SN", i+1);
+		} 
+		SI0406G1.setFocusedCell(insertRowIndex, "MOCK_LINK_ID");
 		//노선 링크정보에 insert 후 링크 다시 그림
-		//routMap.drawMockLink("map_SI0406", SI0406G2, SI0406G2.getFocusedRowIndex(), scwin.linkClickEvent, scwin.checkLinkCmpstn);
+		routMap.drawMockLink("map_SI0406", SI0406G2, SI0406G2.getFocusedRowIndex(), scwin.linkClickEvent, scwin.checkLinkCmpstn);
 	};
 	
 	//노선 링크정보에 표준링크아이디가 있는지 체크, 있으면 노선 색 변경
 	scwin.checkLinkCmpstn = function(dataCheck, rowIndex) {
 		if(!dataCheck) {
-			var mockLinkId = dlt_BMS_MOCK_LINK2.getCellData(rowIndex, "MOCK_LINK_ID");
+			var mockLinkId = dlt_BMS_MOCK_LINK.getCellData(rowIndex, "MOCK_LINK_ID");
 			var curIndexArr = dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getMatchedIndex("MOCK_LINK_ID", mockLinkId);
 			if(curIndexArr.length != 0) {
 				dataCheck = true;
@@ -430,90 +444,7 @@
 			return dataCheck;
 		}
 	}
-	
-	
-	// -> 버튼
-	scwin.btn_grid_add_onclick = function() {
-		var checkedIdx = SI0406G2.getCheckedIndex("chk");
-		var count = checkedIdx.length;
-		
-		if (count > 0) {
-			for(i = 0 ; i<count; i++){
-				var data = dlt_BMS_MOCK_LINK.getAllJSON()[checkedIdx[i]];
-				var index = com.getMatchedIndex(dlt_BMS_ROUT_MOCK_LINK_CMPSTN, "MOCK_LINK_ID", data.MOCK_LINK_ID); //동일한 index 찾기
-				if(index.length == 0){
-					index = com.indexGridNear(dlt_BMS_ROUT_MOCK_LINK_CMPSTN, "MOCK_LINK_ID", data.MOCK_LINK_ID);
-					var insertIndex = dlt_BMS_ROUT_MOCK_LINK_CMPSTN.insertRow(index);
-					dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setRowJSON(insertIndex,data, true)
-					dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(insertIndex, "ROUT_ID", dma_sub_search.get("ROUT_ID"));
-				}
-				else {
-					SI0406G1.setRowVisible(index[0], true);
-					dlt_BMS_ROUT_MOCK_LINK_CMPSTN.undoRow(index[0]);
-				}
-			}
-			dlt_BMS_MOCK_LINK.removeRows(checkedIdx);
-
-		}
-		
-		for(var i=0; i<dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getDataLength(); i++) {
-			dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(i, "LINK_SN", i+1);
-		} 		
-		routMap.drawMockLink("map_SI0406", SI0406G2, dlt_BMS_MOCK_LINK2, SI0406G2.getFocusedRowIndex(), scwin.linkClickEvent, scwin.checkLinkCmpstn);
-	};
-	
-	// <- 버튼
-	scwin.btn_grid_del_onclick = function() {
-		var checkedIdx = SI0406G1.getCheckedIndex("chk");
-		var count = checkedIdx.length;
-		/*
-		
-		if (count > 0) {
-			for(i = 0 ; i<count; i++){
-				var data = dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getAllJSON()[checkedIdx[i]];
-				index = com.indexGridNear(dlt_BMS_MOCK_LINK, "VHC_ID", data.VHC_ID);
-				var insertIndex = dlt_BMS_MOCK_LINK.insertRow(index);
-				dlt_BMS_MOCK_LINK.setRowJSON(insertIndex,data, true)
-				dlt_BMS_MOCK_LINK.setCellData(insertIndex, "ROUT_ID", dma_sub_search.get("ROUT_ID"));
-			}
-		}
-		//com.delGrid2(SI0406G1);
-		
-		*/
-		dlt_BMS_ROUT_MOCK_LINK_CMPSTN.removeRows(checkedIdx);
-		com.executeSubmission(sub_SI0406G2R0);
-		
-		for(var i=0; i<dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getDataLength(); i++) {
-			dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(i, "LINK_SN", i+1);
-		} 	
-		routMap.drawMockLink("map_SI0406", SI0406G2, dlt_BMS_MOCK_LINK2, SI0406G2.getFocusedRowIndex(), scwin.linkClickEvent, scwin.checkLinkCmpstn);	
-	};	
-	
-	scwin.sub_SI0406G3R0_submitdone = function(e) {
-		routMap.drawMockLink("map_SI0406", SI0406G2, dlt_BMS_MOCK_LINK2, SI0406G2.getFocusedRowIndex(), scwin.linkClickEvent, scwin.checkLinkCmpstn);	
-	};
-	
-	scwin.btn_up_onclick = function() {
-	    var idx = SI0406G1.getFocusedRowIndex();
-	    com.getGridViewDataList(SI0406G1).rowMoveUp(idx);
-	    var data = dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getAllJSON();
-	    var count = data.length;
-	    
-	    for(i=0; i<count; i++) {
-		    dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(i, "LINK_SN", i+1);	
-		   } 		
-	}
-	
-	scwin.btn_down_onclick = function() {
-  	    var idx = SI0406G1.getFocusedRowIndex();
-   		com.getGridViewDataList(SI0406G1).rowMoveDown(idx);	
-	    var data = dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getAllJSON();
-	    var count = data.length;
-	    
-	    for(i=0; i<count; i++) {
-		    dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(i, "LINK_SN", i+1);	
-		   } 	
-	}]]></script>
+	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
@@ -568,7 +499,7 @@
 				</xf:group>
 			</xf:group>
 
-			<xf:group id="pgm_content" class="pgm_content grdc_a_20_600_60_600" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_2f_20_5f_20_3f" style="">
 
 				<xf:group id="pgm_list" class="pgm_list grdr_20_2_187_20_a" style="">
 					<xf:group class="defaultbox" id="" style="">
@@ -639,17 +570,108 @@
 					</xf:group>
 					<xf:group id="" class="horizontal_line">
 					</xf:group>
-					<xf:group id="pgm_subList" class="pgm_subList grdr_20_a" style="">
+					<xf:group id="pgm_subList" class="pgm_subList grdr_20_36_a" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="지도" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl" id="" label="노선 링크정보" style=""></w2:textbox>
+						</xf:group>
+						<xf:group id="" class="gr_sub_header" style="">
+							<xf:group class="gr_sub_search" id="" style="">
+								<xf:group class="label" id="" style="">
+									<w2:span class="" id="" label="검색"></w2:span>
+								</xf:group>
+								<xf:group class="search" id="" style="">
+									<xf:input id="search_sub_input" class="search_input" style="width:auto;" ref="data:dma_sub_search.CONTENT" placeholder="표준링크ID 또는 노드명"></xf:input>
+								</xf:group>
+								<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
+							</xf:group>
 						</xf:group>
 						<xf:group id="" class="" style="">
-							<!-- <xf:group id="map_SI0406" style="overflow:hidden;"></xf:group> -->
-							<div id="map_SI0406" style="overflow:hidden;"></div>
-						</xf:group>						
+							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="SI0406G1" class="cm_grid leftL"
+								autoFitMinWidth="0" dataList="data:dlt_BMS_ROUT_MOCK_LINK_CMPSTN" ev:onrowindexchange="scwin.SI0406G1_onrowindexchange"
+								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="true"
+								rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false"
+								useShiftKey="true">
+								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
+								<w2:header style="" id="header1">
+									<w2:row style="" id="row1">
+										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column6"
+											value="표준링크아이디" blockSelect="false" displayMode="label">
+										</w2:column>
+										<!-- <w2:column removeBorderStyle="false" width="50" inputType="text" style="height:20px" id="column5"
+											value="순번" blockSelect="false" displayMode="label">
+										</w2:column> -->
+										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column4"
+											value="시작노드명" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column3"
+											value="종료노드명" blockSelect="false" displayMode="label">
+										</w2:column>
+									</w2:row>
+								</w2:header>
+								<w2:gBody style="" id="gBody1">
+									<w2:row style="" id="row2">
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
+											id="MOCK_LINK_ID" value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="LINK_SN"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column> -->
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
+											id="F_NODE_NAME" value="" blockSelect="false" displayMode="label" textAlign="left">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
+											id="T_NODE_NAME" value="" blockSelect="false" displayMode="label" textAlign="left">
+										</w2:column>
+									</w2:row>
+								</w2:gBody>
+							<w2:footer id="footer1" style="">
+								<w2:row id="row3" style="">
+									<w2:column blockSelect="false" colSpan="14" displayMode="label"
+										expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
+										style="height:20px;" textAlign="left" width="1830">
+									</w2:column>
+								</w2:row>
+							</w2:footer>								
+							</w2:gridView>
+						</xf:group>
 					</xf:group><!-- pgm_subList -->
 				</xf:group>
 				<xf:group id="" class="vertical_line"></xf:group>
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a" style="">
+					<xf:group id="" class="gr_map_header" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl" id="" label="지도" style=";"></w2:textbox>
+						</xf:group>
+
+						<!-- <xf:group class="check" id="" style="right: 100px">
+							<xf:select id="disp_check" selectedIndex="0" cols="" appearance="full" style="" rows="1"
+								ref="data:dma_disp_check.check" ev:onviewchange="scwin.dma_disp_check_onviewchange">
+								<xf:choices>
+									<xf:item>	
+										<xf:label><![CDATA[경로]]></xf:label>
+										<xf:value><![CDATA[NT003]]></xf:value>
+									</xf:item>
+									<xf:item>
+										<xf:label><![CDATA[정류소]]></xf:label>
+										<xf:value><![CDATA[NT002]]></xf:value>
+									</xf:item>
+									<xf:item>
+										<xf:label><![CDATA[교차로]]></xf:label>
+										<xf:value><![CDATA[NT001]]></xf:value>
+									</xf:item>
+								</xf:choices>
+							</xf:select>
+						</xf:group> -->
+					</xf:group>
+					<xf:group class="" id="" style="">
+					</xf:group>
+					<xf:group id="" class="" style="">
+						<!-- <xf:group id="map_SI0406" style="overflow:hidden;"></xf:group> -->
+						<div id="map_SI0406" style="overflow:hidden;"></div>
+					</xf:group>
+				</xf:group> <!--end pgm_detail-->
+				<xf:group id="" class="vertical_line">
+				</xf:group>
 				<xf:group id="pgm_subList2" class="pgm_subList grdr_20_2_a" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
@@ -661,14 +683,11 @@
 					</xf:group>				
 					<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="SI0406G2" class="cm_grid leftL" autoFitMinWidth="0"
 						dataList="data:dlt_BMS_MOCK_LINK" ev:onrowindexchange="scwin.SI0406G2_onrowindexchange" fixedColumnWithHidden="true"
-						dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="true"
-						rowNumVisible="false" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true">
+						dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="true" rowNumHeaderValue="순번"
+						rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true">
 						<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 						<w2:header style="" id="header1">
 							<w2:row style="" id="row1">
-								<w2:column width="40" inputType="checkbox" style="height:25px" id="chkHeader" 
-									value="선택" blockSelect="false" sortable="false">
-								</w2:column>
 								<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column17"
 									value="표준링크아이디" blockSelect="false" displayMode="label">
 								</w2:column>
@@ -681,7 +700,7 @@
 								<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column14"
 									value="차로수" blockSelect="false" displayMode="label">
 								</w2:column>
-								<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column10"
+								<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column10"
 									value="도로명" blockSelect="false" displayMode="label">
 								</w2:column>
 								<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column2"
@@ -694,23 +713,20 @@
 						</w2:header>
 						<w2:gBody style="" id="gBody1">
 							<w2:row style="" id="row2">
-			    				<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:25px"
-			    					inputType="checkbox" id="chk" blockSelect="false">
-			    				</w2:column>							
 								<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="MOCK_LINK_ID"
 									value="" blockSelect="false" displayMode="label">
 								</w2:column>
 								<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="F_NODE_NAME" value=""
-									blockSelect="false" displayMode="label" textAlign="left">
+									blockSelect="false" displayMode="label">
 								</w2:column>
 								<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="T_NODE_NAME" value=""
-									blockSelect="false" displayMode="label" textAlign="left">
+									blockSelect="false" displayMode="label">
 								</w2:column>
 								<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="LANES" value=""
 									blockSelect="false" displayMode="label">
 								</w2:column>
 								<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="ROAD_NAME" value=""
-									blockSelect="false" displayMode="label" textAlign="left">
+									blockSelect="false" displayMode="label">
 								</w2:column>
 								<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="LENGTH" value=""
 									blockSelect="false" displayMode="label">
@@ -729,90 +745,7 @@
 							</w2:row>
 						</w2:footer>						
 					</w2:gridView>
-				</xf:group>
-
-				<xf:group style="position: relative; text-align: center;">
-					<xf:group style="position: absolute; top: 50%; transform: translate(0px, -30px);">
-						<w2:anchor class="btn_com right" id="btn_grid_add" outerDiv="" style="" ev:onclick="scwin.btn_grid_add_onclick">
-							<xf:label><![CDATA[→]]></xf:label>
-						</w2:anchor>
-						<w2:anchor class="btn_com left" id="btn_grid_del" outerDiv="" style="margin-top:5px" ev:onclick="scwin.btn_grid_del_onclick">
-							<xf:label><![CDATA[←]]></xf:label>
-						</w2:anchor>
-					</xf:group>
-				</xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_36_a" style="">
-					<xf:group class="defaultbox" id="" style="">
-						<w2:textbox class="df_tt fl" id="" label="노선 링크정보" style=""></w2:textbox>
-					</xf:group>
-					<xf:group id="" class="gr_sub_header" style="">
-						<xf:group class="gr_sub_search" id="" style="">
-							<xf:group class="label" id="" style="">
-								<w2:span class="" id="" label="검색"></w2:span>
-							</xf:group>
-							<xf:group class="search" id="" style="">
-								<xf:input id="search_sub_input" class="search_input" style="width:auto;" ref="data:dma_sub_search.CONTENT" placeholder="표준링크ID 또는 노드명"></xf:input>
-							</xf:group>
-							<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
-						</xf:group>
-					</xf:group>
-					<xf:group id="" class="" style="">
-						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="SI0406G1" class="cm_grid leftL"
-							autoFitMinWidth="0" dataList="data:dlt_BMS_ROUT_MOCK_LINK_CMPSTN" ev:onrowindexchange="scwin.SI0406G1_onrowindexchange"
-							fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="true"
-							rowNumHeaderValue="순번" rowNumVisible="false" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false"
-							useShiftKey="true">
-							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
-							<w2:header style="" id="header1">
-								<w2:row style="" id="row1">
-									<w2:column width="40" inputType="checkbox" style="height:25px" id="chkHeader" 
-										value="선택" blockSelect="false" sortable="false">
-									</w2:column>								
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column6"
-										value="표준링크아이디" blockSelect="false" displayMode="label">
-									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="50" inputType="text" style="height:20px" id="column5"
-										value="순번" blockSelect="false" displayMode="label">
-									</w2:column> -->
-									<w2:column removeBorderStyle="false" width="228" inputType="text" style="height:20px" id="column4"
-										value="시작노드명" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="228" inputType="text" style="height:20px" id="column3"
-										value="종료노드명" blockSelect="false" displayMode="label">
-									</w2:column>
-								</w2:row>
-							</w2:header>
-							<w2:gBody style="" id="gBody1">
-								<w2:row style="" id="row2">
-				    				<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:25px"
-				    					inputType="checkbox" id="chk" blockSelect="false">
-				    				</w2:column>								
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
-										id="MOCK_LINK_ID" value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="LINK_SN"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column> -->
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
-										id="F_NODE_NAME" value="" blockSelect="false" displayMode="label" textAlign="left">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
-										id="T_NODE_NAME" value="" blockSelect="false" displayMode="label" textAlign="left">
-									</w2:column>
-								</w2:row>
-							</w2:gBody>
-						<w2:footer id="footer1" style="">
-							<w2:row id="row3" style="">
-								<w2:column blockSelect="false" colSpan="14" displayMode="label"
-									expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
-									style="height:20px;" textAlign="left" width="1830">
-								</w2:column>
-							</w2:row>
-						</w2:footer>								
-						</w2:gridView>
-					</xf:group>
-				</xf:group> <!--end pgm_detail-->				
-								
+				</xf:group>								
 			</xf:group> <!-- end content --> 
 		</xf:group> <!-- end container -->
 	</body>
