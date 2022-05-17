@@ -132,9 +132,24 @@
 	
 	<delete id="SI0300G0D0" parameterType="Map">
 		delete
+		from BRT_REP_ROUT_DRV_CMPSTN
+		where DRV_ID = #{DRV_ID};
+		
+		delete
 		from BMS_DRV_MST
-		where DRV_ID = #{DRV_ID}
+		where DRV_ID = #{DRV_ID};
 	</delete>
+	
+	<!-- 운전자 삭제시 배차 UPDATE -->
+	<update id="SI0300G0D1" parameterType="Map">
+		UPDATE BRT_DAY_DRV_ALLOC_INFO
+		SET DRV_ID = ''
+		WHERE DRV_ID = #{DRV_ID};
+		
+		UPDATE BRT_DRV_ALLOC_INFO
+		SET DRV_ID = ''
+		WHERE DRV_ID = #{DRV_ID};
+	</update>
 
 
 </mapper>

@@ -71,6 +71,9 @@
 						<w2:column id="VHC_ID" name="차량ID" dataType="text"></w2:column>
 						<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
 						<w2:column id="COMP_NM" name="운수사명" dataType="text"></w2:column>
+						<w2:column id="SEC_VHC_ID" name="2교대차량ID" dataType="text"></w2:column>
+						<w2:column id="SEC_VHC_NO" name="2교대차량번호" dataType="text"></w2:column>
+						<w2:column id="SEC_COMP_NM" name="2교대운수사명" dataType="text"></w2:column>
 						<w2:column id="DRV_NM" name="운전자명" dataType="text"></w2:column>
 						<w2:column id="SEC_DRV_NM" name="2교대운전자명" dataType="text"></w2:column>
 						<w2:column id="THR_DRV_NM" name="3교대운전자명" dataType="text"></w2:column>
@@ -112,7 +115,7 @@
 			</xf:submission>
 			<xf:submission id="sub_AL0302G1R0" ref="data:json,dma_param_AL0302G1" target='data:json,dlt_BRT_ALLOC_PL_MST'
 				action="/al/AL0302G1R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
-				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_AL0302G1R0_submitdone" ev:submiterror=""
+				customHandler="" mode="asynchronous" processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_AL0302G1R0_submitdone" ev:submiterror=""
 				abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_AL0302G1S0" ref='data:json,{"action":"modified","id":"dlt_BRT_ALLOC_PL_MST"}'
@@ -221,8 +224,6 @@
 							var startDate = startDateValue.slice(0,4) + '-' + startDateValue.slice(4, 6) + '-' + startDateValue.slice(6,8)
 							var lastDate = lastDateValue.slice(0,4) + '-' + lastDateValue.slice(4, 6) + '-' + lastDateValue.slice(6,8)
 							
-							//var regex = RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
-							//if(!(regex.test(startDate) && regex.test(lastDate))) return "Not Date Format";
 							var relDt = [];
 							var curDate = new Date(startDate);
 							while(curDate <= new Date(lastDate)) {
@@ -249,8 +250,10 @@
 							
 							dlt_BRT_ALLOC_PL_MST.setJSON(popup_param[1]);
 							if(dma_param_AL0302G1.get("relDt").length != 0){
+								var fDate = com.transDate(F_DATE.getValue(), 'dash');
+								var lDate = com.transDate(L_DATE.getValue(), 'dash');
 								var repRoutNm = dlt_BRT_OPER_PL_MST.getCellData(AL0302G0.getFocusedRowIndex(), "REP_ROUT_NM");
-								var str = repRoutNm + "대표노선에 해당 차량과 운전자를 배포 하시겠습니까?";
+								var str = repRoutNm + "에 해당 차량과 운전자를 배포 하시겠습니까?" + " 배포일 : " + fDate + "~" + lDate
 								
 								com.confirm(str, function(rtn) {
 									if (rtn) {
@@ -287,8 +290,6 @@
 					var startDate = startDateValue.slice(0,4) + '-' + startDateValue.slice(4, 6) + '-' + startDateValue.slice(6,8)
 					var lastDate = lastDateValue.slice(0,4) + '-' + lastDateValue.slice(4, 6) + '-' + lastDateValue.slice(6,8)
 					
-					//var regex = RegExp(/^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/);
-					//if(!(regex.test(startDate) && regex.test(lastDate))) return "Not Date Format";
 					var relDt = [];
 					var curDate = new Date(startDate);
 					while(curDate <= new Date(lastDate)) {
@@ -315,9 +316,10 @@
 					
 					dlt_BRT_ALLOC_PL_MST.setJSON(popup_param[1]);
 					if(dma_param_AL0302G1.get("relDt").length != 0){
+						var fDate = com.transDate(F_DATE.getValue(), 'dash');
+						var lDate = com.transDate(L_DATE.getValue(), 'dash');
 						var repRoutNm = dlt_BRT_OPER_PL_MST.getCellData(AL0302G0.getFocusedRowIndex(), "REP_ROUT_NM");
-						var str = repRoutNm + "대표노선에 해당 차량과 운전자를 배포 하시겠습니까?";
-						
+						var str = repRoutNm + "에 해당 차량과 운전자를 배포 하시겠습니까?" + " 배포일 : " + fDate + "~" + lDate
 						com.confirm(str, function(rtn) {
 							if (rtn) {
 								com.executeSubmission(sub_AL0302G1S1);
@@ -432,12 +434,12 @@
 			
 			var data = { data: repRoutId, vhcId:vhcId, callbackFn : "scwin.searchVhcCallback" };
 					   	 
-			var opt = { id : "popUpVhcList", 
+			var opt = { id : "popUpAllocVhcList", 
 						popupName : "차량번호 검색",
 						//width : 600,
 						//height : 500,
 						modal : true};
-			com.openPopup("/cm/common/popUpVhcList.xml", opt, data);
+			com.openPopup("/cm/common/popUpAllocVhcList.xml", opt, data);
 				
 		}
 		else if(col == 4){
@@ -457,6 +459,23 @@
 			com.openPopup("/cm//common/popUpDrvList.xml", opt, data);
 		}
 		else if(col == 5){
+			var vhcId = [];
+			var rowCnt = dlt_BRT_ALLOC_PL_MST.getRowCount();
+			var jsonData = dlt_BRT_ALLOC_PL_MST.getAllJSON();
+			for(var x = 0; x < rowCnt; x++){
+				vhcId.push(jsonData[x].SEC_VHC_ID);
+			};
+			
+			var data = { data: repRoutId, vhcId:vhcId, callbackFn : "scwin.searchVhc2Callback" };
+					   	 
+			var opt = { id : "popUpAllocVhcList", 
+						popupName : "차량번호 검색",
+						//width : 600,
+						//height : 500,
+						modal : true};
+			com.openPopup("/cm/common/popUpAllocVhcList.xml", opt, data);
+		}
+		else if(col == 7){
 			var drvId = [];
 			var rowCnt = dlt_BRT_ALLOC_PL_MST.getRowCount();
 			var jsonData = dlt_BRT_ALLOC_PL_MST.getAllJSON();
@@ -472,25 +491,9 @@
 						modal : true};
 			com.openPopup("/cm//common/popUpDrvList.xml", opt, data);
 		}
-		else if(col == 7){
-			var drvId = [];
-			var rowCnt = dlt_BRT_ALLOC_PL_MST.getRowCount();
-			var jsonData = dlt_BRT_ALLOC_PL_MST.getAllJSON();
-			for(var x = 0; x < rowCnt; x++){
-				drvId.push(jsonData[x].THR_DRV_ID);
-			};
-			var data = { data:repRoutId, drvId:drvId, callbackFn : "scwin.searchDrv3Callback" };
-					   	 
-			var opt = { id : "popUpDrvList", 
-						popupName : "운전자 검색",
-						//width : 600,
-						//height : 500,
-						modal : true};
-			com.openPopup("/cm//common/popUpDrvList.xml", opt, data);
-		}
 	};
 	
-	//찾기 버튼 콜백함수
+	//1교대 차량 콜백함수
 	scwin.searchVhcCallback = function(obj) {
 		var vhcId =obj[0].VHC_ID;
 		var vhcNo =obj[0].VHC_NO;
@@ -499,9 +502,24 @@
 		dlt_BRT_ALLOC_PL_MST.setCellData(AL0302G1.getFocusedRowIndex(), "VHC_ID", vhcId);
 		dlt_BRT_ALLOC_PL_MST.setCellData(AL0302G1.getFocusedRowIndex(), "VHC_NO", vhcNo);
 		dlt_BRT_ALLOC_PL_MST.setCellData(AL0302G1.getFocusedRowIndex(), "COMP_NM", compNm);
+		
+		/*dlt_BRT_ALLOC_PL_MST.setCellData(AL0302G1.getFocusedRowIndex(), "SEC_VHC_ID", vhcId);
+		dlt_BRT_ALLOC_PL_MST.setCellData(AL0302G1.getFocusedRowIndex(), "SEC_VHC_NO", vhcNo);
+		dlt_BRT_ALLOC_PL_MST.setCellData(AL0302G1.getFocusedRowIndex(), "SEC_COMP_NM", compNm);*/
 	};
 	
-	//찾기 버튼 콜백함수
+	//2교대 차량 콜백함수
+	scwin.searchVhc2Callback = function(obj) {
+		var vhcId =obj[0].VHC_ID;
+		var vhcNo =obj[0].VHC_NO;
+		var compNm =obj[0].COMP_NM;
+		
+		dlt_BRT_ALLOC_PL_MST.setCellData(AL0302G1.getFocusedRowIndex(), "SEC_VHC_ID", vhcId);
+		dlt_BRT_ALLOC_PL_MST.setCellData(AL0302G1.getFocusedRowIndex(), "SEC_VHC_NO", vhcNo);
+		dlt_BRT_ALLOC_PL_MST.setCellData(AL0302G1.getFocusedRowIndex(), "SEC_COMP_NM", compNm);
+	};
+	
+	//1교대 운전자 콜백함수
 	scwin.searchDrvCallback = function(obj) {
 		var drvId =obj[0].DRV_ID;
 		var drvNm =obj[0].DRV_NM;
@@ -510,7 +528,7 @@
 		dlt_BRT_ALLOC_PL_MST.setCellData(AL0302G1.getFocusedRowIndex(), "DRV_NM", drvNm);
 	};
 	
-	//찾기 버튼 콜백함수
+	//2교대 운전자 콜백함수
 	scwin.searchDrv2Callback = function(obj) {
 		var drvId =obj[0].DRV_ID;
 		var drvNm =obj[0].DRV_NM;
@@ -519,7 +537,7 @@
 		dlt_BRT_ALLOC_PL_MST.setCellData(AL0302G1.getFocusedRowIndex(), "SEC_DRV_NM", drvNm);
 	};
 	
-	//찾기 버튼 콜백함수
+	//3교대 운전자 콜백함수
 	scwin.searchDrv3Callback = function(obj) {
 		var drvId =obj[0].DRV_ID;
 		var drvNm =obj[0].DRV_NM;
@@ -534,12 +552,12 @@
 		if(col == 1){
 			var data = { data: repRoutId,callbackFn : "scwin.searchVhcCallbackG2" };
 					   	 
-			var opt = { id : "popUpVhcList", 
+			var opt = { id : "popUpAllocVhcList", 
 						popupName : "차량번호 검색",
 						//width : 600,
 						//height : 500,
 						modal : true};
-			com.openPopup("/cm//common/popUpVhcList.xml", opt, data);
+			com.openPopup("/cm//common/popUpAllocVhcList.xml", opt, data);
 				
 		}
 		else if(col == 3){
@@ -781,17 +799,10 @@
 					</xf:group>
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">
-						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
-							dataList="data:dlt_BRT_OPER_PL_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.AL0302G0_oncellclick" ev:oneditkeyup=""
-							ev:onkeyup="" ev:onrowindexchange="scwin.AL0302G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange=""
-							fixedColumnWithHidden="true" id="AL0302G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true"
-							rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true"
-							visibleRowNum="" wheelRows="" autoFitMinWidth="0" disabledScrollHidden="" editModeEvent="" editModeEventIcon=""
-							checkEditableInputClass="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll="" ignoreNonEditableCellTabEnter=""
-							readOnly="true" keepDefaultColumnWidth="" oddEvenColorDisplay="" rowNumWidth="" summaryAuto="" excludeDeletedRows=""
-							useCtrlOnMultisort="" useFilterList="" useFilterListSync="" sortedIconPosition="" sortable="" sortOrderReverse=""
-							showSortableUseFilter="" focusMode="row" rowNumStatusUniqueId="" rowNumStatusResize="" ev:onbeforecolumnmove="" userData1=""
-							mergeCol="REP_ROUT_NM" hammerPressTime="0" mergeCells="byrestriccol">
+						<w2:gridView autoFit="lastColumn" class="cm_grid left" dataList="data:dlt_BRT_OPER_PL_MST" ev:oncellclick="scwin.AL0302G0_oncellclick" 
+							ev:onrowindexchange="scwin.AL0302G0_onrowindexchange" fixedColumnWithHidden="true" id="AL0302G0" ignoreCellClick="false" 
+							rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true"
+							autoFitMinWidth="0" readOnly="true" showSortableUseFilter="" focusMode="row" mergeCol="REP_ROUT_NM" hammerPressTime="0" mergeCells="byrestriccol">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row5">
@@ -896,9 +907,9 @@
 							<xf:group class="label" id="" style="">
 								<w2:span class="" id="" label="배포방법" style="margin-left: 10px;"></w2:span>
 							</xf:group>
-							<xf:select1 id="REL_WAY" chooseOption="" style="width: 100px;height: 21px; margin-top: 2px;float: left;" submenuSize="auto"
-								allOption="" disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled" chooseOptionLabel=""
-								ref="">
+							<xf:select1 id="REL_WAY" chooseOption="" style="width: 100px;height: 21px; margin-top: 2px;float: left;"
+								submenuSize="auto" allOption="" disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled"
+								chooseOptionLabel="" ref="">
 								<xf:choices>
 									<xf:item>
 										<xf:label><![CDATA[고정]]></xf:label>
@@ -914,14 +925,17 @@
 									</xf:item>
 								</xf:choices>
 							</xf:select1>
+							<xf:group style="margin-top:3px;" id="">
+								<w2:span class="" id="" label="*배포 날짜와 방법을 선택해주세요." style="margin-left: 10px; "></w2:span>
+							</xf:group>
 							<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 						</xf:group>
 					</xf:group>
 					<xf:group id="" class="" style="">
-						<w2:gridView ignoreCellClick="false" ev:onrowindexchange="" autoFit="lastColumn" rowNumHeaderValue="순번"
-							visibleRowNum="" class="cm_grid right" fixedColumnWithHidden="true" rowNumVisible="false" dataList="data:dlt_BRT_ALLOC_PL_MST"
+						<w2:gridView ignoreCellClick="false" autoFit="lastColumn" rowNumHeaderValue="순번"
+							class="cm_grid right" fixedColumnWithHidden="true" rowNumVisible="false" dataList="data:dlt_BRT_ALLOC_PL_MST"
 							id="AL0302G1" readOnly="false" style="" useShiftKey="true" scrollByColumn="false" rowStatusVisible="false" rowStatusHeaderValue="상태"
-							ev:oncellclick="" focusMode="cell" ev:ontextimageclick="scwin.AL0302G1_ontextimageclick">
+							focusMode="cell" ev:ontextimageclick="scwin.AL0302G1_ontextimageclick">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row3">
@@ -931,41 +945,47 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:40px;" id="column1"
 										value="상하행" blockSelect="false" displayMode="label" colSpan="" rowSpan="2">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:40px;" id="column18"
-										value="차량번호" blockSelect="false" displayMode="label" colSpan="" rowSpan="2">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:40px;" id="column17"
-										value="운수사" blockSelect="false" displayMode="label" colSpan="" rowSpan="2">
-									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px;" id="column16"
-										value="1교대운전자" blockSelect="false" displayMode="label">
+										value="오전" blockSelect="false" displayMode="label" colSpan="3">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px;" id="column15"
-										value="2교대운전자" blockSelect="false" displayMode="label" colSpan="2" rowSpan="">
+										value="오후" blockSelect="false" displayMode="label" colSpan="4" rowSpan="">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px;" id="column13"
+									<!-- <w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px;" id="column13"
 										value="3교대운전자" blockSelect="false" displayMode="label" colSpan="2" rowSpan="">
-									</w2:column>
+									</w2:column> 
 									<w2:column removeBorderStyle="false" width="30" inputType="text" style="height:20px;" id="column13"
 										value="" blockSelect="false" displayMode="label" colSpan="1" rowSpan="2">
-									</w2:column>
+									</w2:column>-->
 								</w2:row>
 								<w2:row style="" id="row1">
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:40px;" id="column18"
+										value="차량번호" blockSelect="false" displayMode="label" colSpan="" >
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:40px;" id="column17"
+										value="운수사" blockSelect="false" displayMode="label" colSpan="" >
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column8"
 										value="운전자명" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:40px;" id="column18"
+										value="차량번호" blockSelect="false" displayMode="label" colSpan="" >
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:40px;" id="column17"
+										value="운수사" blockSelect="false" displayMode="label" colSpan="" >
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column5"
 										value="운전자명" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column6"
+									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column6"
 										value="교대시각" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column1"
+									<!-- <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column1"
 										value="운전자명" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column2"
 										value="교대시각" blockSelect="false" displayMode="label">
-									</w2:column>
+									</w2:column> -->
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
@@ -987,23 +1007,30 @@
 										value="" blockSelect="false" displayMode="label" readOnly="" imageSrc="/cm/images/inc/btn_search.png" imageHeight="20"
 										imageWidth="20">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="textImage" style="height:20px"
-										id="SEC_DRV_NM" value="" blockSelect="false" displayMode="label" readOnly="" textAlign="" imageSrc="/cm/images/inc/btn_search.png"
+									<w2:column removeBorderStyle="false" width="100" inputType="textImage" style="height:20px" id="SEC_VHC_NO"
+										value="" blockSelect="false" displayMode="label" readOnly="" imageSrc="/cm/images/inc/btn_search.png" imageHeight="20"
+										imageWidth="20">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="SEC_COMP_NM"
+										value="" blockSelect="false" displayMode="label" readOnly="" textAlign="left" disabled="true">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="100" inputType="textImage" style="height:20px" id="SEC_DRV_NM" 
+										value="" blockSelect="false" displayMode="label" readOnly="" textAlign="" imageSrc="/cm/images/inc/btn_search.png"
 										imageHeight="20" imageWidth="20">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="SEC_TRAN_TM"
 										value="" blockSelect="false" displayMode="label" readOnly="" textAlign="" maxLength="5">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="textImage" style="height:20px"
+									<!-- <w2:column removeBorderStyle="false" width="100" inputType="textImage" style="height:20px"
 										id="THR_DRV_NM" value="" blockSelect="false" displayMode="label" readOnly="" textAlign="" imageSrc="/cm/images/inc/btn_search.png"
 										imageHeight="20" imageWidth="20">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="THR_TRAN_TM"
 										value="" blockSelect="false" displayMode="label" readOnly="" maxLength="5">
-									</w2:column>
+									</w2:column> 
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id=""
 										value="" blockSelect="false" displayMode="label" readOnly="" maxLength="5">
-									</w2:column>
+									</w2:column>-->
 								</w2:row>
 							</w2:gBody>
 							<w2:footer id="footer3" style="">

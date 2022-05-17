@@ -107,22 +107,27 @@
 		LEFT JOIN BMS_NODE_MST b
 		ON a.NODE_ID = b.NODE_ID
 	<where>
-		<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
-			AND a.REP_ROUT_ID LIKE CONCAT('%',#{CONTENT},'%') || a.REP_ROUT_NM LIKE CONCAT('%',#{CONTENT},'%')
+		<if test="TYPE2 == 'ALL' and CONTENT != null and CONTENT != ''">
+			AND (a.REP_ROUT_ID LIKE CONCAT('%',#{CONTENT},'%') || a.REP_ROUT_NM LIKE CONCAT('%',#{CONTENT},'%'))
 		</if>
-		<if test="TYPE == 'REP_ROUT_ID'">
+		<if test="TYPE2 == 'REP_ROUT_ID'">
 			AND a.REP_ROUT_ID LIKE CONCAT('%',#{CONTENT},'%')
 		</if>
-		<if test="TYPE == 'REP_ROUT_NM'">
+		<if test="TYPE2 == 'REP_ROUT_NM'">
 			AND a.REP_ROUT_NM LIKE CONCAT('%',#{CONTENT},'%') 
 		</if>
-		<if test="OCR_DTM != null and OCR_DTM != ''">
-			AND DATE_FORMAT(a.OCR_DTM, '%Y%m%d') OCR_DTM = #{OCR_DTM}
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
+			<![CDATA[AND DATE_FORMAT(a.OCR_DTM, '%Y%m%d') >= #{F_DATE}]]>
 		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
+			<![CDATA[AND DATE_FORMAT(a.OCR_DTM, '%Y%m%d') <= #{L_DATE}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
+			AND (DATE_FORMAT(a.OCR_DTM, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE})
+		</if>			
 	</where>
 	ORDER BY
 		a.OCR_DTM DESC
-	
 </select>
 
 <select id="VI0100P0R0" resultType="Map">

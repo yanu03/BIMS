@@ -278,8 +278,17 @@
 					modal : true,  
 					width : 1400, height: 450 };
 					
+		var opt2 = { id : "FM0100P02", 
+					popupName : "시설물 위치 좌표 설정",
+					modal : true,  
+					width : 600, height: 500 };
+					
 		if(data.FCLT_KIND != null && data.FCLT_KIND != ''){
-			com.openPopup("/ui/BMS/FM0100/FM0100P01.xml", opt, data);
+			if(dlt_BMS_NODE_MST.getCellData(FM0100G0.getFocusedRowIndex(), "STTN_FCLT_TYPE") == 'ST003'){
+				com.openPopup("/ui/BMS/FM0100/FM0100P01.xml", opt, data);
+			}else{
+				com.openPopup("/ui/BMS/FM0100/FM0100P02.xml", opt2, data);
+			}	
 		}else{
 			com.messagBox("alert", "시설물 유형을 선택해주세요.");
 		}
@@ -311,6 +320,16 @@
 	scwin.CLSFCTN_ID_onfocus = function(e) {
 		scwin.btn_searchMro_onclick();		
 	};
+	
+	scwin.useYnDisplayFormatter = function(data){
+		if(data == ""){
+			return "";
+		}else if(data == 'Y'){
+			return "예";
+		}else if(data == 'N'){
+			return "아니요";
+		}
+	}
 	
 	]]></script>
 	</head>
@@ -359,11 +378,11 @@
 					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group><!-- pgm_header -->
-			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_1f_20_1f" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_1f_1f" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_2_1f_1f bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="노드 목록" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl list" id="" label="노드 목록" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					<xf:group></xf:group>
@@ -434,13 +453,10 @@
 							</w2:footer>
 						</w2:gridView>
 					</xf:group>
-					
-					<xf:group id="" class="horizontal_line">
-					</xf:group>
 					<xf:group id="" class="pgm_list grdr_20_2_a" style="">
-					<xf:group id="" class="gr_sub_header" style="">
+					<xf:group id="" class="gr_sub_header" style="margin-top:20px">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="시설물 목록" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl list" id="" label="시설물 목록" style=""></w2:textbox>
 						</xf:group>
 						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
@@ -526,17 +542,7 @@
 									</w2:column>
 									<w2:column width="70" id="INST_DT">
 									</w2:column>
-									<w2:column width="70" id="USE_YN">
-										<xf:choices>
-											<xf:item>
-												<xf:label><![CDATA[사용]]></xf:label>
-												<xf:value><![CDATA[Y]]></xf:value>
-											</xf:item>
-											<xf:item>
-												<xf:label><![CDATA[미사용]]></xf:label>
-												<xf:value><![CDATA[N]]></xf:value>
-											</xf:item>
-										</xf:choices>
+									<w2:column width="70" id="USE_YN" displayFormatter="scwin.useYnDisplayFormatter">
 									</w2:column>
 									<w2:column width="70" id="REMARK" textAlign="left">
 									</w2:column>
@@ -554,13 +560,10 @@
 					</xf:group>					
 				</xf:group><!-- pgm_list -->
 				</xf:group>
-				
-				<xf:group id="" class="vertical_line">
-				</xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_290_20_a" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_290_20_a bms_box_wrap" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="시설물 정보" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl view" id="" label="시설물 정보" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					<xf:group id="" class="" style=""></xf:group>

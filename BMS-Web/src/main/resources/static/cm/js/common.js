@@ -3624,6 +3624,8 @@ com.transText = function(str) {
  * // return 예시) 2012/03/19
  * com.transDate(20120319, "colon");
  * // return 예시) 2012:03:19
+ * com.transDate(20120319, "dash");
+ * // return 예시) 2012-03-19
  * com.transDate(20120319);
  * // return 예시) 2012년 03월 19일
  */
@@ -3645,6 +3647,10 @@ com.transDate = function(str, type) {
 	} else if (type == "colon") {
 		if (date.length == 8) {
 			output = date.substr(0, 4) + ":" + date.substr(4, 2) + ":" + date.substr(6, 2);
+		}
+	} else if (type == "dash") {
+		if (date.length == 8) {
+			output = date.substr(0, 4) + "-" + date.substr(4, 2) + "-" + date.substr(6, 2);
 		}
 	} else {
 		var year = date.substr(0, 4);

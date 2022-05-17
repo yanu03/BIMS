@@ -146,9 +146,32 @@
 	
 	<delete id="SI0200G0D0" parameterType="Map">
 		delete
+		from BRT_REP_ROUT_VHC_CMPSTN
+		where VHC_ID = #{VHC_ID};
+		
+		delete
 		from BMS_VHC_MST
-		where VHC_ID = #{VHC_ID}
+		where VHC_ID = #{VHC_ID};
 	</delete>
+	
+	<!-- 차량 삭제시 배차 UPDATE -->
+	<update id="SI0200G0D1" parameterType="Map">
+		UPDATE BRT_DAY_ALLOC_PL_INFO
+		SET VHC_ID = ''
+		WHERE VHC_ID = #{VHC_ID};
+		
+		UPDATE BRT_DAY_ALLOC_PL_INFO
+		SET SEC_VHC_ID = ''
+		WHERE SEC_VHC_ID = #{VHC_ID};
+		
+		UPDATE BRT_ALLOC_PL_MST
+		SET VHC_ID = ''
+		WHERE VHC_ID = #{VHC_ID};
+		
+		UPDATE BRT_ALLOC_PL_MST
+		SET SEC_VHC_ID = ''
+		WHERE SEC_VHC_ID = #{VHC_ID};
+	</update>
 
 
 </mapper>

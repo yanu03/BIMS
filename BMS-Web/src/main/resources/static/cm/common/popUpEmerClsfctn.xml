@@ -220,7 +220,7 @@
 							</xf:choices>
 						</xf:select>						
 					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_popUpBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group>
 			
@@ -270,7 +270,7 @@
 				
 			</xf:group>
 			<xf:group id="" style="" class="popup_bottom">
-				<w2:anchor id="btn_confirm" style="" ev:onclick="scwin.btn_confirm_onclick" class="btn_cm">
+				<w2:anchor id="btn_confirm" style="" ev:onclick="scwin.btn_confirm_onclick" class="btn_cm confirm">
 					<xf:label><![CDATA[확인]]></xf:label>
 				</w2:anchor>
 				<w2:anchor id="btn_cancel" style="" ev:onclick="scwin.btn_cancel_onclick" class="btn_cm" outerDiv="">

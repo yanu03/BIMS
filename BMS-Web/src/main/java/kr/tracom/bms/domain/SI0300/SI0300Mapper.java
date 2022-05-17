@@ -20,5 +20,7 @@ public interface SI0300Mapper {
 	
 	public int SI0300G0D0(Map param);
 	
+	public int SI0300G0D1(Map param);
+	
 	public int SI0300G0U0(Map param);
 }

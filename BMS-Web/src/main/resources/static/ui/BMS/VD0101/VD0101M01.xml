@@ -203,7 +203,9 @@
 		
 		var focusRowIdx = scwin.idxRowAuthority;
 		var dvcKind = dlt_BMS_DVC_INFO.getCellData(VD0101G1.getFocusedRowIndex(), "DVC_KIND")
+		var dvcId = dlt_BMS_DVC_INFO.getCellData(VD0101G1.getFocusedRowIndex(), "DVC_ID")
 		dma_subsearch.set("DVC_KIND", dvcKind);
+		dma_subsearch.set("DVC_ID", dvcId);
 		
 		var paramKind = dlt_BMS_DVC_PARAM_CFG_INFO.getColData("PARAM_KIND");
 		var paramDiv = dlt_BMS_DVC_PARAM_CFG_INFO.getColData("PARAM_DIV");

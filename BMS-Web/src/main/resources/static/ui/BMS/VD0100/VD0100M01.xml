@@ -82,6 +82,7 @@
 						<w2:column id="MODEL_NM" name="모델명" dataType="text"></w2:column>
 						<w2:column id="USE_YN" name="사용여부" dataType="text" defaultValue="Y"></w2:column>
 						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
+						<w2:column id="PARTNER_ID" name="기관명" dataType="text"></w2:column>
 						<w2:column id="PARTNER_NM" name="기관명" dataType="text"></w2:column>
 						<w2:column id="CTR_YN" name="제어여부" dataType="text" defaultValue="N"></w2:column>
 						<w2:column id="DVC_COORDS" name="장치좌표" dataType="text"></w2:column>
@@ -138,17 +139,23 @@
 	<script type="text/javascript" lazy="false"><![CDATA[
 	scwin.onpageload = function() {
 		var autoOptions = {
-			Main : { grid : VD0100G0, frm : VD0100F0, srchSbm : sub_VD0100G0R0, srchGrp : pgm_header, keyColumn : "DVC_ID",
-					 focusColumn : "VHC_ID", name :  "장치 목록"}
+			Main : { grid : VD0100G0, frm : VD0100F0, srchSbm : sub_VD0100G0R0, savSbm : sub_VD0100G0S0, srchGrp : pgm_header, keyColumn : "DVC_ID",
+					 focusColumn : "VHC_ID", name :  "장치 목록", keySbm : sub_VD0100G0K0}
 			//Sub1 : { grid : VD0100G0, srchSbm : sub_VD0100G0R0, savSbm : sub_VD0100G0S0,  keySbm : sub_VD0100G0K0, name :  "장치 목록"}
 		 };
 		 
-		var mainOptions = {
+		/*var mainOptions = {
 			ADD: scwin.execute_key
 			,SAVE: scwin.saveDvc
+		};*/
+		
+		var mainOptions = {
+			ADD: com.addGrid2
+			
 		};
 		
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
+		//com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions);
 		
 		
 		com.executeSubmission(sub_VD0100SHI0);
@@ -164,6 +171,24 @@
 
 	};
 	
+	com.addGrid2 = function(){
+		com.executeSubmission(sub_VD0100G0K0);
+	};
+	
+	//키값 추가 submission done
+	scwin.sub_VD0100G0K0_submitdone = function(e) {
+		//com.addGridForm(VD0100G0, VD0100F0, dma_SEQ_BMS_DVC_INFO_0, "DVC_ID", "DVC_ID");
+		
+		var data = com.getGridViewDataList(VD0100G0);
+		var insertIndex = data.insertRow(VD0100G0.getBottomRowIndex());
+		
+		VD0100G0.setFocusedCell(insertIndex, 'VHC_ID', true);
+		data.setCellData(insertIndex, "DVC_ID", dma_SEQ_BMS_DVC_INFO_0.get("SEQ"));
+		
+		//장치 추가 버튼 클릭
+		//scwin.btn_addDvc_onclick();
+	};	
+	
 	scwin.sub_VD0100SHI0_submitdone = function(e) {
 		com.executeSubmission(sub_VD0100SHI1);	
 	};
@@ -178,7 +203,6 @@
 							{code : "INST_LOC", compID : "INST_LOC, VD0100G0:INST_LOC"}
 		 ];
 		 
-		
 		com.setCommonDtl(codeOptions, function() {
 			com.searchGrid(VD0100G0, sub_VD0100G0R0);
 		});
@@ -315,7 +339,6 @@
 	 * 같은 레벨의 노트에 메뉴를 추가한다.
 	 */
 	scwin.equalLevel = function() {
-		debugger;
 		var focusedRowIndex = VD0100G0.getFocusedRealRowIndex();
 		var parentMenuCd = dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "PARENT_ID");
 		var rowIndexArr = dlt_BMS_DVC_INFO.getMatchedIndex("PARENT_ID", parentMenuCd, true, 0, dlt_BMS_DVC_INFO.getTotalRow());
@@ -401,13 +424,7 @@
 		com.saveDone(VD0100G0,sub_VD0100G0R0);
 	};
 	
-	//키값 추가 submission done
-	scwin.sub_VD0100G0K0_submitdone = function(e) {
-		//com.addGridForm(VD0100G0, VD0100F0, dma_SEQ_BMS_DVC_INFO_0, "DVC_ID", "DVC_ID");
-		
-		//장치 추가 버튼 클릭
-		scwin.btn_addDvc_onclick();
-	};	
+	
 	
 	scwin.sub_VD0100G0S0_submitdone = function(e) {
 		var sCode = com.getResultCode(e);
@@ -440,8 +457,7 @@
 		var focusOption = {keyMap : dma_subsearch};
 		com.changeDualGrid(VD0100G0, VD0100G0, sub_VD0100G0S0, sub_VD0100G0R0, focusOption, row, oldRow);*/
 		
-		var parentId = dlt_BMS_DVC_INFO.getCellData(row, "PARENT_ID");
-		
+		var parentId = dlt_BMS_DVC_INFO.getCellData(VD0100G0.getRealRowIndex(row), "PARENT_ID");
 		if(parentId != null && parentId != ''){
 			PARENT_YN.setValue("Y");
 			PARENT_ID10.setDisabled(false);
@@ -451,9 +467,6 @@
 		}
 		
 	};
-	
-	
-	
 	
 	//위치좌표 팝업
 	scwin.DVC_COORDS_onclick = function(e) {
@@ -497,6 +510,23 @@
 		dlt_BMS_DVC_INFO.setCellData(VD0100G0.getFocusedRowIndex(), "CLSFCTN_NM", obj.CLSFCTN_NM);
 	}	
 	
+	scwin.VHC_ID_onfocus = function(e) {
+		scwin.VHC_ID_SEARCH_onclick();
+	};
+	
+	scwin.VHC_ID_SEARCH_onclick = function(e) {
+	     var data = {callbackFn : "scwin.VHC_ID_SEARCH_callback" };
+	     var options = { id : "popUpEmerList",
+	                  popupName : "차량 목록", 
+	                  modal : true};
+	     com.openPopup("/cm/common/popUpVhcList.xml", options, data);			
+	};
+	
+	scwin.VHC_ID_SEARCH_callback = function(obj) {
+		dlt_BMS_DVC_INFO.setCellData(VD0100G0.getFocusedRealRowIndex(), "VHC_ID", obj[0].VHC_ID);
+		dlt_BMS_DVC_INFO.setCellData(VD0100G0.getFocusedRealRowIndex(), "VHC_NO", obj[0].VHC_NO);
+	}	
+	
 	scwin.cnl_onclick = function(){
 		CLSFCTN_NM.setValue("");
 	}
@@ -507,6 +537,14 @@
 			PARENT_ID10.setValue("");
 		}else{
 			PARENT_ID10.setDisabled(false);
+		}
+	};
+	
+	scwin.DVC_KIND_onviewchange = function(info) {
+		if(info.newValue == 'DK001'){
+			dlt_BMS_DVC_INFO.setCellData(VD0100G0.getFocusedRowIndex(), "LEVEL", 1);
+		}else{
+			dlt_BMS_DVC_INFO.setCellData(VD0100G0.getFocusedRowIndex(), "LEVEL", 2);
 		}
 	};
 	]]></script>
@@ -580,10 +618,10 @@
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column3"
-										value="차량ID" blockSelect="false" displayMode="label" sortable="true" class="">
+										value="차량ID" blockSelect="false" displayMode="label" sortable="true" class="req">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column4"
-										value="차량번호" blockSelect="false" displayMode="label" sortable="true" class="">
+										value="차량번호" blockSelect="false" displayMode="label" sortable="true" class="req">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column12"
 										value="장치ID" blockSelect="false" displayMode="label" sortable="true" class="req">
@@ -611,10 +649,10 @@
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
 									<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px" id="VHC_ID"
-										value="" blockSelect="false" displayMode="label" userData1="">
+										value="" blockSelect="false" displayMode="label" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px" id="VHC_NO"
-										value="" blockSelect="false" displayMode="label" userData1="">
+										value="" blockSelect="false" displayMode="label" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px" id="DVC_ID"
 										value="" blockSelect="false" displayMode="label" userData1="M">
@@ -680,6 +718,27 @@
 								<xf:group style="width:120px;" tagname="col"></xf:group>
 							</xf:group>
 							<xf:group style="" tagname="tr">
+								<xf:group class="w2tb_th req" style="" tagname="th">차량ID</xf:group>
+								<xf:group class="w2tb_td" style="" tagname="td">
+									<xf:input adjustMaxLength="" class="" disabled="true" id="VHC_ID" mandatory=""
+										ref="data:dlt_BMS_DVC_INFO.VHC_ID" style="width:100px;">
+									</xf:input>
+									<xf:image class="btn" ev:onclick="scwin.VHC_ID_SEARCH_onclick" id="VHC_ID_SEARCH" longdesc=""
+										src="/cm/images/inc/icon_search.gif" style="width:21px;height:23px;margin-left:5px;">
+									</xf:image>
+								</xf:group>
+								<xf:group class="w2tb_th req" style="" tagname="th" id="">차량번호</xf:group>
+								<xf:group class="w2tb_td" style="" tagname="td">
+									<w2:attributes>
+										<w2:colspan>1</w2:colspan>
+										<w2:rowspan>1</w2:rowspan>
+									</w2:attributes>
+									<xf:input adjustMaxLength="" class="" disabled="true" id="VHC_NO" mandatory=""
+										ref="data:dlt_BMS_DVC_INFO.VHC_NO" style="width:100px;">
+									</xf:input>
+								</xf:group>
+							</xf:group>
+							<xf:group style="" tagname="tr">
 								<xf:group class="w2tb_th req" style="" tagname="th">장치ID</xf:group>
 								<xf:group class="w2tb_td" style="" tagname="td">
 									<xf:input adjustMaxLength="" class="" disabled="true" id="DVC_ID" mandatory=""
@@ -719,7 +778,7 @@
 									<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="-선택-"
 										direction="auto" disabled="false" disabledClass="w2selectbox_disabled" displayMode="label" id="DVC_KIND" labelWidthAuto=""
 										mandatory="true" optionOrder="" ref="data:dlt_BMS_DVC_INFO.DVC_KIND" renderType="component" style="height:24px; width:160px;"
-										submenuSize="auto">
+										submenuSize="auto" ev:onviewchange="scwin.DVC_KIND_onviewchange">
 										<xf:choices></xf:choices>
 									</xf:select1>
 								</xf:group>
@@ -770,7 +829,7 @@
 							</xf:group>
 							<xf:group tagname="tr" style="">
 								<xf:group tagname="th" class="w2tb_th">
-									부모여부
+									상위장치 여부
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
 									</w2:attributes>
@@ -816,7 +875,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group class="w2tb_th" style="" tagname="th">부모장치</xf:group>
+								<xf:group class="w2tb_th" style="" tagname="th">상위장치</xf:group>
 								<xf:group class="w2tb_td" style="" tagname="td">
 									<w2:attributes>
 										<w2:colspan>1</w2:colspan>

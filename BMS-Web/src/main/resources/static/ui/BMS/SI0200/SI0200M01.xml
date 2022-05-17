@@ -109,7 +109,11 @@
 					focusColumn : "COMP_NM", name : "운수사 목록"}
 		 };
 		
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions);
+		var mainOptions = {
+			DEL : scwin.deleteVhc
+		}
+		
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
 				
 		com.executeSubmission(sub_SI0200SHI0);	
 		com.executeSubmission(sub_SI0200SHI1);
@@ -124,6 +128,25 @@
 		
 	};
 	
+	
+	scwin.deleteVhc = function(){
+		var rows = SI0200G0.getAllFocusedRowIndex();
+		if(rows.length > 0){
+			var count = rows.length;
+			var str = "해당 차량의 배차 정보도 함께 삭제됩니다. 삭제하시겠습니까?";
+			
+			if(count > 0) {
+				com.confirm(str, function(rtn) {
+					if (rtn) {
+						com.delGrid(SI0200G0);
+					}	
+				});
+			}
+		
+		}else {
+			com.alert("삭제할 차량을 선택해주세요.");
+		}
+	}
 	
 	scwin.sub_SI0200G0R0_submitdone = function(e) {
 	

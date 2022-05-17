@@ -265,7 +265,7 @@
 					<xf:group></xf:group>
 					<xf:group id="" style="">
 						<w2:gridView dataList="data:dlt_BMS_LIVING_LOG" defaultCellHeight="20" id="PI0302G01" rowNumVisible="true"
-							useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
+							useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
 							overflowX="hidden" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
 							style="width: 100%;height: 100%;" class="cm_grid" autoFit="lastColumn">
 							<w2:header id="header1" style="">
@@ -277,7 +277,10 @@
 										removeBorderStyle="false" style="height:20px" value="관리ID" width="120">
 									</w2:column>
 									<w2:column blockSelect="false" displayMode="label" id="column3" inputType="text"
-										removeBorderStyle="false" style="height:20px" value="전송일시" width="174">
+										removeBorderStyle="false" style="height:20px" value="전송일시" width="150">
+									</w2:column>
+									<w2:column blockSelect="false" displayMode="label" id="column4" inputType="text"
+										removeBorderStyle="false" style="height:20px" value="" width="120">
 									</w2:column>
 								</w2:row>
 							</w2:header>
@@ -290,6 +293,9 @@
 										removeBorderStyle="false" style="height:20px" value="" width="133">
 									</w2:column>
 									<w2:column blockSelect="false" displayMode="label" id="SEND_DT" inputType="text"
+										removeBorderStyle="false" style="height:20px" value="" width="174">
+									</w2:column>
+									<w2:column blockSelect="false" displayMode="label" id="" inputType="text"
 										removeBorderStyle="false" style="height:20px" value="" width="174">
 									</w2:column>
 								</w2:row>

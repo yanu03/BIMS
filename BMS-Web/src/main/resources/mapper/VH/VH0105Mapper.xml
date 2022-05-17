@@ -86,7 +86,7 @@
 		</if>			
 	</where>
 	ORDER BY
-		A.OPER_DT DESC, A.REP_ROUT_ID DESC, A.ALLOC_NO, A.OPER_SN
+		A.OPER_DT DESC, A.UPD_DTM DESC, A.REP_ROUT_ID DESC, A.ALLOC_NO, A.OPER_SN
 </select>
 
 <select id="VH0105SHI0" resultType="Map">

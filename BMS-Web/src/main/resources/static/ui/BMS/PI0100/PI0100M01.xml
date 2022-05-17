@@ -59,11 +59,11 @@
 			<w2:workflowCollection></w2:workflowCollection>
 			<xf:submission id="sub_PI0100G0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_USER_NEWS_CFG_INFO" action="/pi/PI0100G0R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI0100G0R0_submitdone" ev:submiterror="" abortTrigger="">
+				processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_PI0100G0R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI0100G0S0" ref='data:json,{"action":"modified","id":"dlt_BMS_USER_NEWS_CFG_INFO"}'
 				target="data:json,dma_result" action="/pi/PI0100G0S0" method="post" mediatype="application/json" encoding="UTF-8" instance=""
-				replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit=""
+				replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="저장중입니다..." ev:submit=""
 				ev:submitdone="scwin.sub_PI0100G0S0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI0100G0K0" ref="" target="data:json,dma_SEQ_BMS_USER_NEWS_CFG_INFO_0" action="/pi/PI0100G0K0" method="post"
@@ -134,6 +134,16 @@
 			autoChoiceBox.show("");
 		}
 	};
+	
+	scwin.useYnDisplayFormatter = function(data){
+		if(data == ""){
+			return "";
+		}else if(data == 'Y'){
+			return "예";
+		}else if(data == 'N'){
+			return "아니요";
+		}
+	}
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -232,10 +242,10 @@
 										displayMode="label" readOnly="true" textAlign="left">
 									</w2:column>
 									<w2:column width="126" style="height:20px;" inputType="text" id="NEWS_CONTENTS" blockSelect="false"
-										displayFormat="" readOnly="true">
+										displayFormat="" readOnly="true" textAlign="left">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="USE_YN"
-										value="" blockSelect="false" displayMode="label" readOnly="true" valueType="other">
+										value="" blockSelect="false" displayMode="label" readOnly="true" valueType="other" displayFormatter="scwin.useYnDisplayFormatter">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="CATEGORY"
 										value="" blockSelect="false" displayMode="label" readOnly="true">
@@ -247,7 +257,7 @@
 										value="" blockSelect="false" displayMode="label" readOnly="true">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="REMARK"
-										value="" blockSelect="false" displayMode="label" readOnly="true">
+										value="" blockSelect="false" displayMode="label" readOnly="true" textAlign="left">
 									</w2:column>
 								</w2:row>
 							</w2:gBody>

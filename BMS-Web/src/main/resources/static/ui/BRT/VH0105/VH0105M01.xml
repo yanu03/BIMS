@@ -428,6 +428,9 @@
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column1"
 										value="운행일" blockSelect="false" displayMode="label">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column15"
+										value="갱신일시" blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column2"
 										value="대표노선명" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -499,6 +502,9 @@
 							<w2:gBody style="" id="gBody2">
 								<w2:row style="" id="row4">
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="OPER_DT"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="UPD_DTM"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="REP_ROUT_NM"

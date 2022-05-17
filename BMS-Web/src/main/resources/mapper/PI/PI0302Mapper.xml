@@ -37,8 +37,9 @@
 			ON B.VHC_ID = C.VHC_ID
 		WHERE
 			A.ATTR_ID = 'LR003'
+			AND A.SEND_DT BETWEEN DATE_ADD(NOW(), INTERVAL -1 MONTH) AND NOW()
 		ORDER BY
-			A.SEND_DT
+			A.SEND_DT DESC
 	</select>
 	
 	<update id="PI0302G0U0" parameterType="Map">

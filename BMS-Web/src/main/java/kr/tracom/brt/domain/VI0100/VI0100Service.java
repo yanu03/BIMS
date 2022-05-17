@@ -77,7 +77,7 @@ public class VI0100Service extends ServiceSupport {
 	
 	public List VI0100G1R0() throws Exception {
 		// TODO Auto-generated method stub
-		Map param = getSimpleDataMap("dma_param_VI0100G1");
+		Map param = getSimpleDataMap("dma_search");
 		return vi0100Mapper.VI0100G1R0(param);
 	}
 	 	

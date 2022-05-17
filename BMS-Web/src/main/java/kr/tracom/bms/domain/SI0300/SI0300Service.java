@@ -105,6 +105,7 @@ public class SI0300Service extends ServiceSupport{
 						
 					}
 				} else if (rowStatus.equals("D")) {
+					si0300Mapper.SI0300G0D1(data);
 					dCnt += si0300Mapper.SI0300G0D0(data);
 				} 
 			}			

@@ -486,15 +486,15 @@
 					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group><!-- pgm_header -->
-			<xf:group id="pgm_content" class="pgm_content grdc_4f_20_6f" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_1f_2f" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="분류 목록" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl list" id="" label="분류 목록" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					<xf:group></xf:group>
-					<xf:group id="" class="" style="margin-left:50px">
+					<xf:group id="" class="" style="border: 1px solid #CED4D9; border-top: 2px solid #333333; padding: 30px;">
 						<w2:treeview id="SI0600T0" dataType="listed" tooltipGroupClass="false" style="height:100%" labelclass=""
 							ev:onchange="scwin.SI0600T0_onchange" dynamicAppend="true" >
 							<w2:itemset nodeset="data:dlt_EMER_CLSFCTN_MST">
@@ -513,12 +513,10 @@
 						</w2:treeview>
 					</xf:group>
 				</xf:group><!-- pgm_list -->
-
-				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_220_20_20_a" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_240_20_a bms_box_wrap" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="분류 상세 정보" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl view" id="" label="분류 상세 정보" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					<xf:group class="" id="" style="">
@@ -614,10 +612,9 @@
 							</xf:group>
 						</xf:group>
 					</xf:group>
-					<xf:group id="" class="horizontal_line"></xf:group>
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="담당자 목록" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl list" id="" label="담당자 목록" style=""></w2:textbox>
 						</xf:group>
 						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>

@@ -183,9 +183,11 @@
 			
 		if(ST0204G0.getCellChecked(row, 'chk')==0){
 			for(var i = 0; i < rowCount; i++){
-				ST0204G0.setCellChecked(i, 'chk', false);			
+				ST0204G0.setCellChecked(i, 'chk', false);		
+				dlt_BMS_ROUT_MST.modifyRowStatus(row, "R")	
 			}
 		   	ST0204G0.setCellChecked(row, 'chk', true);
+		   	dlt_BMS_ROUT_MST.modifyRowStatus(row, "R")
 		   	
 		}
 	
@@ -209,6 +211,8 @@
 		
 		dma_sub_search.set("REP_ROUT_ID", repRoutId);
 		
+		
+		
 		if(chkJsonData.length != 0){
 			com.executeSubmission(sub_ST0204G1R0);
 			pivot_ST0204.show();
@@ -216,10 +220,12 @@
 			chart_ST0204.destroy();
 			pivot_ST0204.hide();
 		}
+		
+		
 	};
 	
 	scwin.ST0204G0_onrowindexchange = function(row,oldRow) {
-	
+		dlt_BMS_ROUT_MST.modifyRowStatus(row, "R")	
 	};
 	
 	scwin.sub_ST0204G1R0_submitdone = function(e) {
@@ -553,10 +559,10 @@
 									<xf:label><![CDATA[일별]]></xf:label>
 									<xf:value><![CDATA[DAY]]></xf:value>
 								</xf:item>
-								<xf:item>
+								<!-- <xf:item>
 									<xf:label><![CDATA[월별]]></xf:label>
 									<xf:value><![CDATA[MONTH]]></xf:value>
-								</xf:item>
+								</xf:item> -->
 							</xf:choices>
 						</xf:select1>
 						<xf:group class="label" id="" style="">

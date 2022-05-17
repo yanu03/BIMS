@@ -587,7 +587,12 @@
 		gridHeader +='<w2:column blockSelect="false" id="'+'h'+'TOTAL_COMP_TM'+'" style="height:20px" inputType="text" width="75" value="'+'총 비교시간'+'" rowSpan="3"></w2:column>';
 		for(var i = 0; i < maxCnt; i++) {
 			var nodeNm = dlt_BRT_OPER_ALLOC_RL_NODE_INFO.getCellData(i, "NODE_NM");
-			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'NODE_NM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="140" colSpan="5" value="'+nodeNm+'"></w2:column>';
+			var nodeType = dlt_BRT_OPER_ALLOC_RL_NODE_INFO.getCellData(i, "NODE_TYPE");
+			if(nodeType == 'NT001'){
+				gridHeader +='<w2:column blockSelect="false" id="'+'h'+'NT001_'+i+'" style="height:20px; background-color:#d1e5ff;" textAlign="center" inputType="text" width="140" colSpan="5" value="'+nodeNm+'"></w2:column>';
+			}else if(nodeType == 'NT002'){
+				gridHeader +='<w2:column blockSelect="false" id="'+'h'+'NT002_'+i+'" style="height:20px; background-color:#ffdbdb;" textAlign="center" inputType="text" width="140" colSpan="5" value="'+nodeNm+'"></w2:column>';
+			}
 		}
 		gridHeader +='</w2:row>';
 		
@@ -599,7 +604,7 @@
 		for(var i = 0; i < maxCnt; i++) {
 			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'ALLOC_INFO_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="140" colSpan="2" value="운행계획"></w2:column>';
 			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'CHG_INFO_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="140" colSpan="2" value="실제운행결과"></w2:column>';
-			gridHeader +='<w2:column blockSelect="false" id="'+'h'+'COMPARE_TM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="75" colSpan="1" value="비교결과"></w2:column>';
+			gridHeader +='<w2:column blockSelect="false" id="'+'H'+'COMPARE_TM_'+i+'" style="height:20px;" textAlign="center" inputType="text" width="75" colSpan="1" value="비교결과"></w2:column>';
 		}
 		gridHeader +='</w2:row>';
 		
@@ -622,7 +627,6 @@
 		
 		var rowIndex = 0;
 		var rowCnt = 0;
-		
 
 		for(var i = 0; i < rowCntArr.length; i++) {
 			var j = 0;
@@ -693,7 +697,7 @@
 		+'<w2:footer style="" id="footer2">'
 		+'<w2:row style="" id="row4">'
 		+'<w2:column removeBorderStyle="false" width="NaN" inputType="expression" style="height:20px;" '
-		+'id="column55" value="" blockSelect="false" displayMode="label" colSpan="500" rowSpan="" '
+		+'id="column55" value="" blockSelect="false" displayMode="label" colSpan="330" rowSpan="" '
 		+'expression="&quot;데이터 개수 : &quot; + COUNT(&apos;COMP_ID&apos;)" textAlign="left">'
 		+'</w2:column>'
 		+'</w2:row>'
@@ -813,11 +817,12 @@
 		var routId = dlt_BMS_ROUT_MST.getCellData(AL0600G0.getFocusedRowIndex(), "ROUT_ID");
 		var dayDiv = dlt_BMS_ROUT_MST.getCellData(AL0600G0.getFocusedRowIndex(), "DAY_DIV");
 		var routNm = dlt_BMS_ROUT_MST.getCellData(AL0600G0.getFocusedRowIndex(), "ROUT_NM");
+		var operDt = dma_sub_search.get("OPER_DT");
 		
-		 var data = { data : routId, data2 : dayDiv, data3 : routNm, data4 : operSn, data5:transData, data6:realData, callbackFn : "" };
+		 var data = { data : routId, data2 : dayDiv, data3 : routNm, data4 : operSn, data5:transData, data6:realData, operDt : operDt, callbackFn : "" };
          var options = { id : "AL0600P0",
-         				 width : "1600px",
-         				 height : "800px",
+         				 width : "1800px",
+         				 height : "900px",
                          popupName : "운행 결과 비교 시공도", 
                          modal : true};
 		
@@ -1022,8 +1027,8 @@
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="운행계획비교 상세" style=""></w2:textbox>
+							<w2:span label="※정류소-빨강, 교차로-파랑" style="width: 100px;height: 23px; margin-left:10px;" id=""></w2:span>
 						</xf:group>
-						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 						<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
 					<xf:group class="" id="" style=""></xf:group>

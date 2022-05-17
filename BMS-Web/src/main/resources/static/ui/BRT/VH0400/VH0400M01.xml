@@ -638,8 +638,8 @@
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column7"
 										value="운행일" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="75" inputType="text" style="height:20px" id="column12"
-										value="발생시간" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column12"
+										value="발생일시" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column11"
 										value="차량번호" blockSelect="false" displayMode="label">

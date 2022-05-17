@@ -50,6 +50,7 @@ public class SI0200Service extends ServiceSupport {
 				} else if (rowStatus.equals("U")) {
 					uCnt += si0200Mapper.SI0200G0U0(data);
 				} else if (rowStatus.equals("D")) {
+					si0200Mapper.SI0200G0D1(data);
 					dCnt += si0200Mapper.SI0200G0D0(data);
 				} 
 			}			

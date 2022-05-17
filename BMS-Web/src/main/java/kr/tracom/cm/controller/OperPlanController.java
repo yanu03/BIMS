@@ -48,6 +48,14 @@ public class OperPlanController extends ControllerSupport {
 		result.setData("dlt_BRT_OPER_ALLOC_PL_NODE_CNT", operPlanService.selectOperAllocRealNodeCnt());
 		return result.getResult();	
 	}
+	
+	@RequestMapping("/operPlan/selectAvgOperAllocRealNode")
+	public @ResponseBody Map<String, Object> selectAvgOperAllocRealNode() throws Exception {
+		result.setData("dlt_BRT_OPER_ALLOC_RL_NODE_INFO", operPlanService.selectAvgOperAllocRealNode());
+		result.setData("dlt_BRT_OPER_ALLOC_PL_NODE_CNT", operPlanService.selectAvgOperAllocRealNodeCnt());
+		return result.getResult();	
+	}
+	
 	@RequestMapping("/operPlan/selectOperPlanRout2")
 	public @ResponseBody Map<String, Object> selectOperPlanRout2() throws Exception {
 		result.setData("dlt_BRT_OPER_PL_ROUT_INFO_ASC", operPlanService.selectOperPlanRoutAsc());

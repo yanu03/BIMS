@@ -132,7 +132,11 @@
 								srchGrp : pgm_header, keyColumn : "RPC_ID", focusColumn : "RPC_ID", name :  "대체차량 운행 목록"}
 		};
 		
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions);
+		var mainOptions = {
+			SETTING:{cbFnc:scwin.direct_reflec_onclick, nm:"즉시반영", class : "setting"}
+		}
+		
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
 		
 
 		var codeOptions = [{code : "INCDNT_TYPE", compID : "AL0303G0:INCDNT_TYPE"}
@@ -155,6 +159,10 @@
 		
 	};
 	
+	//즉시반영 클릭 이벤트
+	scwin.direct_reflec_onclick = function(){
+		com.alert("즉시반영 이벤트입니다.");
+	};
 	
 	//맵 클릭 이벤트
 	scwin.onClickMap = function(e) {

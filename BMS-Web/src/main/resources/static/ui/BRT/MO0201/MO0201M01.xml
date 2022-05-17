@@ -1296,10 +1296,10 @@
 				</xf:group>
 			</xf:group>
 			<!-- <xf:group id="pgm_content" class="pgm_content grdc_600_20_a" style="" >	 -->		
-			<xf:group id="pgm_content" class="pgm_content grdc_a_20_850" style="" >			
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_350_20_a" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_1f_2f" style="" >			
+				<xf:group id="pgm_list" class="pgm_list grdr_20_2_350_20_a bms_box_wrap" style="">
 					<xf:group class="defaultbox" id="" style="">
-						<w2:textbox class="df_tt fl" id="" label="운행차량" style=""></w2:textbox>
+						<w2:textbox class="df_tt fl list" id="" label="운행차량" style=""></w2:textbox>
 					</xf:group>
 					<xf:group></xf:group>
 					<xf:group adaptive="layout" class="w2tb" id="" style="">
@@ -1373,10 +1373,10 @@
 							</w2:gBody>
 						</w2:gridView>										
 					</xf:group>
-					<xf:group id="" class="horizontal_line"></xf:group>
+					<xf:group id=""></xf:group>
 					<xf:group id="pgm_subList" class="pgm_list grdr_20_2_a" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="Dispatch" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl list" id="" label="Dispatch" style=""></w2:textbox>
 						</xf:group>
 						<xf:group></xf:group>
 						<xf:group id="" class="" style="">
@@ -1427,9 +1427,8 @@
 							</w2:gridView>
 						</xf:group>
 					</xf:group><!-- pgm_subList -->											
-				</xf:group>	
-				<xf:group id="" class="vertical_line"></xf:group>
-				<div id="map_MO0201" style="">
+				</xf:group>
+				<div id="map_MO0201" style="padding:0 !important" class="bms_box_wrap">
 					<ul id="category_map_MO0201" class="category" style="">
 			   		 </ul>							
 				   	 <!-- <div class="map-type" style="z-index: 10000;">

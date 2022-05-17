@@ -51,7 +51,7 @@ public class VD0204Controller extends ControllerSupport {
 	
 	@RequestMapping("/vd/VD0204G1R0")
 	public @ResponseBody Map<String, Object> VD0204G1R0() throws Exception {
-		result.setData("dlt_MGR_PROC_HIS", vd0204Service.VD0204G1R0());
+		result.setData("dlt_PLF_IMP_VER_INFO", vd0204Service.VD0204G1R0());
 		return result.getResult();
 	}
 	

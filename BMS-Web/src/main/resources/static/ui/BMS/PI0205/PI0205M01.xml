@@ -79,7 +79,7 @@
 			<w2:workflowCollection></w2:workflowCollection>
 			<xf:submission id="sub_PI0205G0R0" ref='data:json,["dma_search","dma_AUDIO_INFO"]' target="data:json,dlt_BMS_VOC_INFO"
 				action="/pi/PI0205G0R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
-				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI0205G0R0_submitdone" ev:submiterror=""
+				customHandler="" mode="asynchronous" processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_PI0205G0R0_submitdone" ev:submiterror=""
 				abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI0205G0K0" ref="" target="data:json,dma_SEQ_BMS_VOC_INFO_2" action="/pi/PI0205G0K0" method="post"
@@ -88,7 +88,7 @@
 			</xf:submission>
 			<xf:submission id="sub_PI0205G0S0" ref='data:json,["dlt_BMS_VOC_INFO","dma_AUDIO_INFO"]' target="" action="/pi/PI0205G0S0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				processMsg="저장중입니다..." ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI0205SHI0" ref="" target="data:json,dlt_searchitem" action="/pi/PI0205SHI0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
@@ -107,12 +107,33 @@
 		//추가 버튼 감추기
 		var mainOptions = {
 			ADD:{disp:"hide"},
+			DEL:{cbFnc:scwin.btn_delete_onclick, nm:"초기화", class:"del"}
 		};
 		
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
+		
+		com.executeSubmission(sub_PI0205SHI0);
 	};
 	
-	$p.executeSubmission(sub_PI0205SHI0);
+	//초기화 버튼 온클릭
+	scwin.btn_delete_onclick = function(){
+		var str = "해당 노선의 음성 데이터를 초기화 하시겠습니까?";
+		
+		com.confirm(str, function(rtn) {
+			if (rtn) {
+				dlt_BMS_VOC_INFO.setCellData(PI0205G0.getFocusedRowIndex(), "PLAY_TYPE", "");
+				dlt_BMS_VOC_INFO.setCellData(PI0205G0.getFocusedRowIndex(), "PLAY_TM", "");
+				dlt_BMS_VOC_INFO.setCellData(PI0205G0.getFocusedRowIndex(), "KR_TTS", "");
+				dlt_BMS_VOC_INFO.setCellData(PI0205G0.getFocusedRowIndex(), "REMARK", "");
+				dlt_BMS_VOC_INFO.setCellData(PI0205G0.getFocusedRowIndex(), "VOC_PATH", "");
+				dlt_BMS_VOC_INFO.modifyRowStatus(PI0205G0.getFocusedRowIndex(), "D");
+			}	
+			
+		});
+	
+		//com.delGrid(PI0205G0);
+		
+	}
 	
 	scwin.upload0_onInputValueChange = function(fileName) {
 		
@@ -122,8 +143,6 @@
 		
 		var fileNameIndex = fileName.lastIndexOf('\\');
 		//파일명
-		
-		
 		if (fileExtension == "wav" || fileExtension == "tts"){
 			var real_fileName = fileName.substring(fileNameIndex+1, fileName.length);
 			var vocId = dlt_BMS_VOC_INFO.getCellData(PI0205G0.getFocusedRowIndex(), "VOC_ID");
@@ -374,7 +393,7 @@
 				
 				<xf:group id="" class="vertical_line">
 				</xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_320_20_a" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="음성 정보" style=""></w2:textbox>
@@ -500,6 +519,12 @@
 								</xf:group>
 							</xf:group>
 						</xf:group>
+					</xf:group>
+					<xf:group style="" id=""></xf:group>
+					<xf:group style="position: relative;" id="">
+						<xf:image src="/cm/images/add/bg_brt.png"
+							style="width: 100%;height: 100%; position: absolute; object-fit: contain; cursor:default" id="">
+						</xf:image>
 					</xf:group>
 				</xf:group> <!-- pgm_detail -->
 			</xf:group>

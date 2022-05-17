@@ -1440,10 +1440,20 @@ public class OperPlanService extends ServiceSupport {
 		Map<String, Object> map = getSimpleDataMap("dma_sub_search");
 		return operPlanMapper.selectOperAllocRealNode(map);
 	}
+	
+	public List<Map<String, Object>> selectAvgOperAllocRealNode() throws Exception {
+		Map<String, Object> map = getSimpleDataMap("dma_sub_search");
+		return operPlanMapper.selectAvgOperAllocRealNode(map);
+	}
 
 	public List selectOperAllocRealNodeCnt() throws Exception {
 		Map param = getSimpleDataMap("dma_sub_search");
 		return operPlanMapper.selectOperAllocRealNodeCnt(param);
+	}
+	
+	public List selectAvgOperAllocRealNodeCnt() throws Exception {
+		Map param = getSimpleDataMap("dma_sub_search");
+		return operPlanMapper.selectAvgOperAllocRealNodeCnt(param);
 	}
 	
 	public List<Map<String, Object>> selectOperPlanRoutDesc() throws Exception {
