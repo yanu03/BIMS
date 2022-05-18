@@ -689,11 +689,33 @@
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_LENGTH"
 										value="" blockSelect="false" displayMode="label" readOnly="false" textAlign="right">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="USE_YN"
-										value="" blockSelect="false" displayMode="label" readOnly="false" displayFormatter="scwin.useYnDisFormatter">
+									<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="USE_YN"
+										value="" blockSelect="false" displayMode="label" readOnly="false" displayFormatter="scwin.useYnDisFormatter" allOption=""
+										chooseOption="" ref="">
+										<w2:choices>
+											<w2:item>
+												<w2:label><![CDATA[사용]]></w2:label>
+												<w2:value><![CDATA[Y]]></w2:value>
+											</w2:item>
+											<w2:item>
+												<w2:label><![CDATA[미사용]]></w2:label>
+												<w2:value><![CDATA[N]]></w2:value>
+											</w2:item>
+										</w2:choices>
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="AUTO_YN"
-										value="" blockSelect="false" displayMode="label" displayFormatter="scwin.autoYnDisFormatter">
+									<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="AUTO_YN"
+										value="" blockSelect="false" displayMode="label" displayFormatter="scwin.autoYnDisFormatter" allOption="" chooseOption=""
+										ref="">
+										<w2:choices>
+											<w2:item>
+												<w2:label><![CDATA[예]]></w2:label>
+												<w2:value><![CDATA[Y]]></w2:value>
+											</w2:item>
+											<w2:item>
+												<w2:label><![CDATA[아니요]]></w2:label>
+												<w2:value><![CDATA[N]]></w2:value>
+											</w2:item>
+										</w2:choices>
 									</w2:column>
 									<!-- <w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="SCHEDULE_YN"
 										value="" blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.schYnDisFormatter">
