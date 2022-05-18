@@ -3,7 +3,7 @@
 	xmlns:ev="http://www.w3.org/2001/xml-events"
 	xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
 	<!-- meta_hirzontal_guides 수정됨 -->
-	 <head meta_vertical_guides="" meta_horizontal_guides="220">
+	 <head meta_vertical_guides="" meta_horizontal_guides="">
 	<w2:type>DEFAULT</w2:type>
 	<w2:buildDate/>
 	<xf:model>
@@ -15,6 +15,7 @@
 				<w2:keyInfo>
 					<w2:key id="NODE_ID" name="노드ID" dataType="text"></w2:key>
 					<w2:key id="NODE_NM" name="노드명" dataType="text"></w2:key>
+					<w2:key id="STTN_FCLT_TYPE" name="name3" dataType="text"></w2:key>
 				</w2:keyInfo>
 			</w2:dataMap>
 			<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_FCLT_INFO" saveRemovedData="true">
@@ -90,7 +91,19 @@
 					<w2:column id="PARAM_KIND" name="매개변수종류" dataType="text"></w2:column>
 				</w2:columnInfo>
 				<w2:data use="false"></w2:data>
-			</w2:dataList>						
+			</w2:dataList>
+			<w2:dataList baseNode="list" repeatNode="map" id="dlt_searchitem2" saveRemovedData="true">
+				<w2:columnInfo>
+					<w2:column id="ORG_ID" name="기관ID" dataType="text"></w2:column>
+					<w2:column id="ORG_NM" name="기관명" dataType="text"></w2:column>
+				</w2:columnInfo>
+			</w2:dataList>
+			<w2:dataList baseNode="list" repeatNode="map" id="dlt_searchitem3" saveRemovedData="true">
+				<w2:columnInfo>
+					<w2:column id="CLSFCTN_ID" name="분류ID" dataType="text"></w2:column>
+					<w2:column id="CLSFCTN_NM" name="분류명" dataType="text"></w2:column>
+				</w2:columnInfo>
+			</w2:dataList>
 		</w2:dataCollection>
 		<w2:workflowCollection></w2:workflowCollection>
 		<xf:submission id="sub_MO0203P0R0" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_FCLT_INFO" action="/mo/MO0203P0R0"
@@ -100,7 +113,15 @@
 		<xf:submission id="sub_MO0203P0R1" ref="" target="data:json,dlt_PARAM_KIND" action="/mo/MO0203P0R1" method="post"
 			mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 			ev:submit="" ev:submitdone="scwin.sub_MO0203P0R1_submitdone" ev:submiterror="" abortTrigger="">
-		</xf:submission>		
+		</xf:submission>
+		<xf:submission id="sub_MO0203SHI1" ref="" target="data:json,dlt_searchitem2" action="/fm/FM0202SHI1" method="post"
+			mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
+			ev:submit="" ev:submitdone="scwin.sub_MO0203SHI1_submitdone" ev:submiterror="" abortTrigger="">
+		</xf:submission>
+		<xf:submission id="sub_MO0203SHI2" ref="" target="data:json,dlt_searchitem3" action="/fm/FM0202SHI2" method="post"
+			mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
+			ev:submit="" ev:submitdone="scwin.sub_MO0203SHI2_submitdone" ev:submiterror="" abortTrigger="">
+		</xf:submission>
 	</xf:model>
 	<script type="text/javascript" lazy="false"><![CDATA[
 	var oriBgWidth = null;
@@ -111,6 +132,7 @@
 		scwin.param = com.getParameter();
 		dma_sub_search.set("NODE_ID", scwin.param.NODE_ID);
 		dma_sub_search.set("NODE_NM", scwin.param.NODE_NM);
+		dma_sub_search.set("STTN_FCLT_TYPE", scwin.param.STTN_FCLT_TYPE);
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
 		
 		var codeOptions = [ {code : "NODE_TYPE", compID : "MO0203P0:NODE_TYPE" },
@@ -121,7 +143,9 @@
 		com.setCommonDtl(codeOptions);
 
 		
-		com.executeSubmission(sub_MO0203P0R0);
+		com.executeSubmission(sub_MO0203SHI1);
+		
+		
 		
 	};
 	
@@ -139,7 +163,7 @@
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {
 			
-			if(scwin.param.STTN_FCLT_TYPE == 'ST003'){
+			if(dma_sub_search.get("STTN_FCLT_TYPE") == 'ST003'){
 				document.getElementById(STTN_IMG.getID()).className = "ST003_station";
 			}else{
 				document.getElementById(STTN_IMG.getID()).className = 'ST002_station_1';
@@ -150,26 +174,13 @@
 	};
 	
 	scwin.MO0203P0_onrowindexchange = function(row,oldRow) {
-		scwin.setGridViewInfo();
+		var param = com.getParameter();
 		
 		var str = ""
 		var imgSrc = ""
 		var imgId = ""
-		
-		var param = com.getParameter();
-		
-		for(var i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++) {
-			//비정상
-			if (dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND") == "FC021") {
-				MO0203P0.setCellClass(i, "FCLT_COND", "cond_abnormal");
-			}
-			//정상
-			else if (dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND") == "FC020") {
-				MO0203P0.setCellClass(i, "FCLT_COND", "cond_normal");
-			}			
-		} // end for
-      	
- 		for (i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++) {
+
+		for (i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++) {
 			var coord = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COORDS").split(',');
 			var top = coord[0];
 			var left = coord[1];
@@ -191,7 +202,7 @@
 				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
 			}
 			
-			str += '<div id="'+fcltId+'" style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
+			str += '<div id="'+fcltId+'"style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
 			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
 			str += '</div>'
 			
@@ -199,27 +210,27 @@
 		
 		$('#'+STTN_IMG.getID()).html(str);
 		
-		var fclt_ctrindex = MO0203P0.getColumnIndex("FCLT_CTR");
-		var param = com.getParameter();
+		var fcltID = dlt_BMS_FCLT_INFO.getCellData(row, "FCLT_ID");
+		var fcltKind = dlt_BMS_FCLT_INFO.getCellData(row, "FCLT_KIND");
+		var fcltCond = dlt_BMS_FCLT_INFO.getCellData(row, "FCLT_COND");
 		
-		for(var i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++){
-			var ctr_yn = dlt_BMS_FCLT_INFO.getCellData(i, "CTR_YN");
-			if(ctr_yn == 'N'){
-				
-				//FM0202G1.setDisabled("cell", i, "FCLT_CTR", true);
-	            //제어 버튼 안보이게 처리
-	            MO0203P0.setCellClass(i, "FCLT_CTR", "hideData");
+		//이미지 변경
+		if((fcltKind == 'FK001' && fcltCond == 'FC020')|| fcltCond == ''){
+				$('#'+fcltID).children('img').attr("src", '/cm/images/bms/BIT_RED_normal_selected.png');
+			}else if((fcltKind == 'FK001' && fcltCond == 'FC021')|| fcltCond == ''){
+				$('#'+fcltID).children('img').attr("src", '/cm/images/bms/BIT_RED_abnormal_selected.png');
+			}else if((fcltKind == 'FK004' && fcltCond == 'FC020') || fcltCond == ''){
+				$('#'+fcltID).children('img').attr("src", '/cm/images/bms/AIRTUBE_normal_selected.png');
+			}else if((fcltKind == 'FK004' && fcltCond == 'FC021') || fcltCond == ''){
+				$('#'+fcltID).children('img').attr("src", '/cm/images/bms/AIRTUBE_abnormal_selected.png');
+			}else if((fcltKind == 'FK005' && fcltCond == 'FC020')|| fcltCond == ''){
+				$('#'+fcltID).children('img').attr("src", '/cm/images/bms/AIRCON_normal_selected.png');
+			}else if((fcltKind == 'FK005' && fcltCond == 'FC021')|| fcltCond == ''){
+				$('#'+fcltID).children('img').attr("src", '/cm/images/bms/AIRCON_abnormal_selected.png');
 			}
-		}
 		
 		oriBgWidth = document.getElementById(STTN_IMG.getID()).offsetWidth;
-		oriBgHeight = document.getElementById(STTN_IMG.getID()).offsetHeight;
-		
-		for(var i = 0; i < dlt_BMS_FCLT_INFO.getRowCount(); i++){
-			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
-			oriFcltWidth[i] = document.getElementById(fcltId+'img').width;
-			oriFcltHeight[i] = document.getElementById(fcltId+'img').height;
-		}				     	
+		oriBgHeight = document.getElementById(STTN_IMG.getID()).offsetHeight;				     	
 	};
 	
 	//동적 그리드 함수
@@ -275,7 +286,7 @@
 		var gridStr = '<w2:gridView xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" '
 							+'autoFit="lastColumn" class="cm_grid left" dataList="data:dlt_BMS_FCLT_INFO" ev:oncellclick="scwin.MO0203P0_oncellclick" '
 							+'ev:onrowindexchange="scwin.MO0203P0_onrowindexchange" fixedColumnWithHidden="true" id="MO0203P0" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" '
-							+'rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" autoFitMinWidth="0" readOnly="true" '
+							+'rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="height:250px" useShiftKey="true" autoFitMinWidth="0" readOnly="true" '
 							+'sortable="false" focusMode="row" showSortableImage="true" sortEvent="onclick" ev:onheaderclick="scwin.MO0203P0_onheaderclick">';
 		gridStr += '<w2:header style="" id="header2">'
 		+ '<w2:row style="" id="row3">'
@@ -289,7 +300,7 @@
 		+'<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px" id="" value="" blockSelect="false" displayMode="label"></w2:column>'
 		+'</w2:row>'
 		+'</w2:gBody>';
-		gridStr += '<w2:footer id="footer1" style=""><w2:row id="row3" style=""><w2:column blockSelect="false" colSpan="30" displayMode="label" expression="&quot;데이터 개수 : &quot; + COUNT(\'COMP_ID\')" id="column42" inputType="expression" removeBorderStyle="false" style="height:20px;" textAlign="left" width="2386"></w2:column></w2:row></w2:footer>';
+		//gridStr += '<w2:footer id="footer1" style=""><w2:row id="row3" style=""><w2:column blockSelect="false" colSpan="30" displayMode="label" expression="&quot;데이터 개수 : &quot; + COUNT(\'COMP_ID\')" id="column42" inputType="expression" removeBorderStyle="false" style="height:20px;" textAlign="left" width="2386"></w2:column></w2:row></w2:footer>';
 		gridStr += '</w2:gridView>';
 
 		MO0203P0.setGridStyle(WebSquare.xml.parse(gridStr , true ));
@@ -297,7 +308,95 @@
 		//autoOptions.Sub1.grid = MO0203P0;
 		scwin.commonCode();
 		
+		//이미지 생성 함수
+		scwin.makeImage();
+		
 	};
+	
+	scwin.makeImage = function(){
+		var str = ""
+		var imgSrc = ""
+		var imgId = ""
+		
+		//var param = com.getParameter();
+		
+		//시설물상태에 따라 클래스(백그라운드 색) 설정
+		for (i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++) {
+			//비정상
+			if (dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND") == "FC021") {
+				MO0203P0.setCellClass(i, "FCLT_COND", "cond_abnormal");
+			}
+			//정상
+			else if (dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND") == "FC020") {
+				MO0203P0.setCellClass(i, "FCLT_COND", "cond_normal");
+			}
+		}
+		
+		for (i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++) {
+			var coord = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COORDS").split(',');
+			var top = coord[0];
+			var left = coord[1];
+			var fcltKind = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_KIND");
+			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
+			var fcltCond = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND");
+			
+			if((fcltKind == 'FK001' && fcltCond == 'FC020')|| fcltCond == ''){
+				imgSrc = "/cm/images/bms/BIT_RED_normal.png";
+			}else if((fcltKind == 'FK001' && fcltCond == 'FC021') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/BIT_RED_abnormal.png";
+			}else if((fcltKind == 'FK004' && fcltCond == 'FC020') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
+			}else if((fcltKind == 'FK004' && fcltCond == 'FC021') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/AIRTUBE_abnormal.png";
+			}else if((fcltKind == 'FK005' && fcltCond == 'FC020') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/AIRCON_normal.png";
+			}else if((fcltKind == 'FK005' && fcltCond == 'FC021') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
+			}
+			
+			//시설물 이미지
+			str += '<div id="'+fcltId+'" style="z-index: 1; position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
+			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			str += '</div>'
+			
+		}
+		
+		//정류소 이미지
+		if(dma_sub_search.get() == 'ST003'){
+			var imgSrc = "/cm/images/bms/ST003_1.png"
+		}else{
+			var imgSrc = "/cm/images/bms/ST002_2.jpg"
+		}
+		
+		var nodeId = dma_sub_search.get("NODE_ID");
+		
+		str += '<img xmlns="http://www.w3.org/1999/xhtml" style="position:absolute; cursor:default" src="'+imgSrc+'" id="'+nodeId+'img'+'">';
+		
+		$('#'+STTN_IMG.getID()).html(str);
+		
+		
+		var fclt_ctrindex = MO0203P0.getColumnIndex("FCLT_CTR");
+		//var param = com.getParameter();
+		
+		for(var i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++){
+			var ctr_yn = dlt_BMS_FCLT_INFO.getCellData(i, "CTR_YN");
+			if(ctr_yn == 'N'){
+				
+				//MO0203P0.setDisabled("cell", i, "FCLT_CTR", true);
+	            //제어 버튼 안보이게 처리
+	            MO0203P0.setCellClass(i, "FCLT_CTR", "hideData");
+			}
+		}
+		
+		/*oriBgWidth = document.getElementById(STTN_IMG.getID()).offsetWidth;
+		oriBgHeight = document.getElementById(STTN_IMG.getID()).offsetHeight;
+		
+		for(var i = 0; i < dlt_BMS_FCLT_INFO.getRowCount(); i++){
+			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
+			oriFcltWidth[i] = document.getElementById(fcltId+'img').width;
+			oriFcltHeight[i] = document.getElementById(fcltId+'img').height;
+		}*/
+	}	
 	
 	scwin.commonCode = function(){
 		var codeOptions = [ 
@@ -312,12 +411,120 @@
 		var rowIndex = dlt_BMS_FCLT_INFO.getMatchedIndex("DVC_ID", id);
 		MO0203P0.setFocusedCell(rowIndex, "DVC_ID", false);
 	}	
+	
+	scwin.sub_MO0203SHI1_submitdone = function(e) {
+		com.executeSubmission(sub_MO0203SHI2);
+	};
+	
+	scwin.sub_MO0203SHI2_submitdone = function(e) {
+		com.executeSubmission(sub_MO0203P0R0);
+	};
+	
+	scwin.sub_MO0203P0R1_submitdone = function(e) {
+		//동적 그리드 시작
+		scwin.setGridViewInfo();
+		
+		var str = ""
+		var imgSrc = ""
+		var imgId = ""
+		
+		var param = com.getParameter();
+		
+		//시설물상태에 따라 클래스(백그라운드 색) 설정
+		for (i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++) {
+			//비정상
+			if (dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND") == "FC021") {
+				MO0203P0.setCellClass(i, "FCLT_COND", "cond_abnormal");
+			}
+			//정상
+			else if (dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND") == "FC020") {
+				MO0203P0.setCellClass(i, "FCLT_COND", "cond_normal");
+			}
+		}
+		
+		for (i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++) {
+			var coord = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COORDS").split(',');
+			var top = coord[0];
+			var left = coord[1];
+			var fcltKind = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_KIND");
+			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
+			var fcltCond = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND");
+			
+			if((fcltKind == 'FK001' && fcltCond == 'FC020')|| fcltCond == ''){
+				imgSrc = "/cm/images/bms/BIT_RED_normal.png";
+			}else if((fcltKind == 'FK001' && fcltCond == 'FC021') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/BIT_RED_abnormal.png";
+			}else if((fcltKind == 'FK004' && fcltCond == 'FC020') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
+			}else if((fcltKind == 'FK004' && fcltCond == 'FC021') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/AIRTUBE_abnormal.png";
+			}else if((fcltKind == 'FK005' && fcltCond == 'FC020') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/AIRCON_normal.png";
+			}else if((fcltKind == 'FK005' && fcltCond == 'FC021') || fcltCond == ''){
+				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
+			}
+			
+			str += '<div id="'+fcltId+'" style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
+			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			str += '</div>'
+			
+		}
+		
+		$('#'+STTN_IMG.getID()).html(str);
+		
+		
+		var fclt_ctrindex = MO0203P0.getColumnIndex("FCLT_CTR");
+		var param = com.getParameter();
+		
+		for(var i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++){
+			var ctr_yn = dlt_BMS_FCLT_INFO.getCellData(i, "CTR_YN");
+			if(ctr_yn == 'N'){
+				
+				//MO0203P0.setDisabled("cell", i, "FCLT_CTR", true);
+	            //제어 버튼 안보이게 처리
+	            MO0203P0.setCellClass(i, "FCLT_CTR", "hideData");
+			}
+		}
+		
+		oriBgWidth = document.getElementById(STTN_IMG.getID()).offsetWidth;
+		oriBgHeight = document.getElementById(STTN_IMG.getID()).offsetHeight;
+		
+		for(var i = 0; i < dlt_BMS_FCLT_INFO.getRowCount(); i++){
+			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
+			oriFcltWidth[i] = document.getElementById(fcltId+'img').width;
+			oriFcltHeight[i] = document.getElementById(fcltId+'img').height;
+		}		
+	};
+	
+	scwin.MO0203P0_oncellclick = function(row,col,colId) {
+		var gridColumn = FM0202G1.getColumnID(col);
+		
+		if (gridColumn == "FCLT_CTR") {
+				var param = FM0202G1.getDataRow(row).FCLT_ID;
+				var fcltKind = dlt_BMS_FCLT_INFO.getCellData(row, "FCLT_KIND");
+				
+				if(fcltKind == 'FK001'){
+					scwin.openMenu("BIT 제어","/ui/BMS/SI0102/SI0102M01.xml", "MN00010102");
+				}else if(fcltKind == 'FK004'){
+					scwin.openMenu("에어튜브 제어","/ui/BMS/SI0102/SI0102M01.xml", "MN00010102");
+				}else if(fcltKind == 'FK005'){
+					scwin.openMenu("에어컨 제어","/ui/BMS/SI0102/SI0102M01.xml", "MN00010102");
+				}
+				
+				//컨트롤러 api추가 필요. 
+				
+			}else if(gridColumn == "FCLT_RESET"){
+				var param = FM0202G1.getDataRow(row).FCLT_ID;
+				
+				//컨트롤러 api추가 필요.
+			}		
+	};	
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group class="popup_container" id="popup_container" style="">
 			
-			<xf:group style="" id="pgm_detail" class="pgm_detail grdr_20_230_20_a">
+			<xf:group style="" id="pgm_detail" class="pgm_detail grdr_20_300_20_a">
 				<xf:group class="gr_map_header" id="" style="">
 					<xf:group class="defaultbox" id="" style="">
 						<w2:textbox class="df_tt fl" id="" label="시설물 상태" style=""></w2:textbox>
@@ -333,7 +540,7 @@
 						<w2:textbox class="df_tt fl" id="" label="시설물 목록" style=""></w2:textbox>
 					</xf:group>
 				</xf:group>								
-				<w2:gridView id="MO0203P0" style="width:98%;height:300px;" defaultCellHeight="20" rowNumVisible="true" 
+				<w2:gridView id="MO0203P0" style="width:98%;height:250px;" defaultCellHeight="20" rowNumVisible="true" 
 				useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
 				overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
 				dataList="data:dlt_BMS_FCLT_INFO" class="cm_grid" autoFit="lastColumn" fixedColumnScrollHidden="" ev:oncellclick="" ev:onscrolly="" ev:onrowindexchange="scwin.MO0203P0_onrowindexchange" focusMove="" focusMode="row">

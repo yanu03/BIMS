@@ -61,7 +61,7 @@ public class MO0203Controller extends ControllerSupport {
 		return result.getResult();
 	}
 	
-	@RequestMapping("/mo/MO0203G0R1")
+	@RequestMapping("/mo/MO0203P0R1")
 	public @ResponseBody Map<String, Object> FM0202G0R1() throws Exception {
 		result.setData("dlt_PARAM_KIND", mo0203Service.MO0203P0R1());
 		return result.getResult();

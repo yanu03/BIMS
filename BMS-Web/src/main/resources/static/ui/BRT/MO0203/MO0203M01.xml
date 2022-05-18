@@ -486,6 +486,7 @@
 	}	
 	
 	scwin.onMessageReceived = function(payload) {
+		debugger;
 		var jsonObj = JSON.parse(payload.body);
 		
 		var attrId = jsonObj.ATTR_ID;
@@ -494,6 +495,7 @@
 		
 		//attrId = 2022 : 정류장별 차량 도착 정보
 		if(attrId == util.ATTR_ID.BUS_ARRIVAL_INFO && nodeId == jsonObj.STTN_ID){
+			debugger;
 			MO0203T0_setTable(dataList);
 		}
 		
