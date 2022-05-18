@@ -19,7 +19,10 @@
 					,	A.UPD_ID
 					,	IF(D.CNT > 0 , 'CE001','CE002') COND_ERROR
 					, 	E.ROUT_ID
-					,	E.NODE_SN	 	
+					,	E.NODE_SN
+					,	R.REP_ROUT_ID
+					,	H.STTN_FCLT_TYPE
+					,	H.STTN_NO	 	
 		FROM	BMS_ROUT_NODE_CMPSTN E
 		INNER JOIN BMS_ROUT_MST R
 			ON E.ROUT_ID = R.ROUT_ID AND R.DEL_YN !='Y'
@@ -32,13 +35,24 @@
 		         			LEFT JOIN BMS_FCLT_COND_INFO C 
 		         				ON B.MNG_ID = C.MNG_ID 
 		         			WHERE  FCLT_COND  = 'FC021' GROUP BY NODE_ID) D
-		  ON A.NODE_ID = D.NODE_ID		
+		  ON A.NODE_ID = D.NODE_ID	
+		LEFT JOIN		BMS_STTN_MST H
+			ON	A.NODE_ID = H.STTN_ID  	
 		  
 		WHERE
 			A.NODE_TYPE = 'NT002'
 			<if test="CONTENT1 != null">
-				AND E.ROUT_ID = #{CONTENT1}				
+				AND R.REP_ROUT_ID = #{CONTENT1}				
 			</if>
+			<if test="CONTENT2 != null">
+				AND E.ROUT_ID = #{CONTENT2}				
+			</if>
+			<if test="CONTENT3 != null">
+				AND A.NODE_NM LIKE CONCAT('%',#{CONTENT3},'%')		
+			</if>
+			<!-- <if test="CONTENT1 != null">
+				AND E.ROUT_ID = #{CONTENT1}				
+			</if> -->
 			<!-- <if test="CONTENT2 != null and CONTENT2 != ''">
 				AND (A.NODE_ID LIKE CONCAT('%',#{CONTENT2},'%') || A.NODE_NM LIKE CONCAT('%',#{CONTENT2},'%'))
 			</if> -->
@@ -79,5 +93,20 @@
 		WHERE a.ROUT_ID = #{ROUT_ID}
 		ORDER BY a.LINK_SN
 	</select>
+	
+	<select id="MO0203P0R0" resultType="Map" parameterType="Map">
+		CALL	PROC_FCLT_MONITOR(#{NODE_ID})
+	</select>	
+	
+	<select id="MO0203P0R1" resultType="Map">
+		SELECT 
+			A.PARAM_KIND
+		FROM 
+			BMS_FCLT_PARAM_CFG_INFO A
+		WHERE 
+			A.FCLT_KIND != 'FK004' AND A.PARAM_DIV = 'PD003'
+		GROUP BY
+			PARAM_KIND
+	</select>	
 	
 </mapper>

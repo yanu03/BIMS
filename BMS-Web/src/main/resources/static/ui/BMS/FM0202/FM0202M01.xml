@@ -246,6 +246,13 @@
 		};		
 		
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);		
+		
+		var codeOptions = [ {code : "NODE_TYPE", compID : "FM0202G0:NODE_TYPE" },
+							{code : "PARAM_KIND", compID : "PARAM_KIND"},
+							{code : "INST_LOC", compID : "FM0202G1:INST_LOC"},
+		 ];			
+		 
+		//com.setCommonDtl(codeOptions);
 
 		FM0202G0.mergeCol(3,false);
 		FM0202G0.mergeCells("byrestriccol");

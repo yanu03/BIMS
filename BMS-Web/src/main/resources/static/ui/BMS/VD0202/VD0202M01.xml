@@ -785,7 +785,6 @@
 			com.alert("차내장치를 선택해주세요.");
 		}else{
 			scwin.openMenu("차내장치 상태 및 제어","/ui/BMS/VD0204/VD0204M01.xml", "MN00040202",dvcId);		
-			var bac= null;
 		}
 	};
 	

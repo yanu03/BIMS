@@ -77,9 +77,8 @@
 				,keyColumn : "STTN_ID", focusColumn : "STTN_NM", name :  "정류소명"}
 		};
 		var popupOptions = {
-			SEARCH: {}
-			//ADD: {},
-			//SAVE: {}
+			SEARCH: {},
+			SAVE : {cbFnc:scwin.goToSttnMst, nm:"[정류소 관리]열기",class:"Intg"}	
 		};
 		com.setPopupBtn(wfm_mainBtn, popupOptions, autoOptions);
 		
@@ -164,6 +163,18 @@
 		}
 	};
 	
+	scwin.goToSttnMst = function() {
+		var sttnId = dlt_BMS_STTN_MST.getCellData(SI0402P2.getFocusedRowIndex(), "STTN_ID");
+		if(sttnId == null || sttnId == ''){
+			com.openMenu("정류소 관리","/ui/BMS/SI0501/SI0501M01.xml", "MN00010607");
+			com.closePopup(scwin.closeCallbackFncName);
+		}else{
+			com.openMenu("정류소 관리","/ui/BMS/SI0501/SI0501M01.xml", "MN00010607", sttnId);		
+			com.closePopup(scwin.closeCallbackFncName);
+		}		
+	}	
+	
+	
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -183,7 +194,7 @@
 			<xf:group style="" id="" class="popup_content">
 				<w2:gridView  fixedColumnWithHidden="true" dataList="data:dlt_BMS_STTN_MST" useShiftKey="false" readOnly="true"
 					style="width:775px" scrollByColumn="false" id="SI0402P2" autoFit="allColumn" class="cm_grid popup" focusMode="row"
-					ev:onrowindexchange="scwin.SI0402P2_onrowindexchange">
+					ev:onrowindexchange="scwin.SI0402P2_onrowindexchange" disabledScrollHidden="">
 					<w2:header style="" id="header1">
 						<w2:row style="" id="row1">
 							<!-- <w2:column width="39" inputType="radio" style="height:20px" id="chkHeader" value="선택" blockSelect="false"></w2:column> -->
@@ -207,7 +218,7 @@
 							</w2:column> -->
 
 								<w2:column width="" inputType="text" style="height:20px" id="STTN_ID" blockSelect="false"></w2:column>
-								<w2:column width="" inputType="text" style="height:20px" id="STTN_NM" blockSelect="false"></w2:column>
+								<w2:column width="" inputType="text" style="height:20px" id="STTN_NM" blockSelect="false" textAlign="left"></w2:column>
 								<w2:column width="" inputType="text" style="height:20px" id="STTN_NO" blockSelect="false"></w2:column>
 								<w2:column width="" inputType="select" style="height:20px" id="WAY_DIV" blockSelect="false"></w2:column>
 								<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="AREA" value=""

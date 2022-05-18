@@ -4667,9 +4667,7 @@ routMap.drawRoute2 = function(mapId, list, focusIdx) {
 	}
 }
 
-routMap.drawMockLink = function(mapId, grid, focusIdx, clickEvent, dataCheckFunc) {
-	var list = com.getGridDispJsonData(grid);
-
+routMap.drawMockLink = function(mapId, grid, list, focusIdx, clickEvent, dataCheckFunc) {
 	/*if(list.length>0){
 		var data = list[list.length-1];
 		var temp = {
@@ -4683,9 +4681,9 @@ routMap.drawMockLink = function(mapId, grid, focusIdx, clickEvent, dataCheckFunc
 	}*/
 	routMap.initDisplay(mapId);
 	
-	if(list != null && list.length != 0) {
+	if(list != null && list.getDataLength() != 0) {
 		var oldMornStd = "";
-		for(var i = 0; i < list.length; i++) {
+		for(var i = 0; i < list.getDataLength(); i++) {
 			
 			/**드래그이벤트**/
 			if(routMap.mapInfo[mapId].draggable){
@@ -4695,17 +4693,17 @@ routMap.drawMockLink = function(mapId, grid, focusIdx, clickEvent, dataCheckFunc
 				};
 			}
 			
-			list[i].index = i;
+			list.getRowJSON(i).index = i;
 			
 			/**드래그이벤트**/
-			list[i].draggable = routMap.mapInfo[mapId].draggable;
+			list.getRowJSON(i).draggable = routMap.mapInfo[mapId].draggable;
 			
 //			if(list[i].NODE_TYPE == routMap.NODE_TYPE.BUSSTOP && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.BUSSTOP)>=0) {
 //				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx);
 //			}
-			routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, true);
+			routMap.addMarkerInter(mapId, list.getRowJSON(i), grid, i, focusIdx, true);
 			
-			if(i < list.length -1){
+			if(i < list.getDataLength() -1){
 				
 				var color = "#5b5b5b";
 //				if(mornStd=='MS002'){
@@ -4714,7 +4712,7 @@ routMap.drawMockLink = function(mapId, grid, focusIdx, clickEvent, dataCheckFunc
 //				else if(mornStd=='MS003'){
 //					color = "#FF005E";
 //				}
-				var data = list[i];
+				var data = list.getRowJSON(i);
 				
 				var start = {
 						NODE_ID: data.F_NODE,

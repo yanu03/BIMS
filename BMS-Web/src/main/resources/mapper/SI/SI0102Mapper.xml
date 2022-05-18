@@ -4,145 +4,145 @@
 <mapper namespace="kr.tracom.bms.domain.SI0102.SI0102Mapper">
 
 <select id="SI0102G0R0" resultType="Map">
-	select COMP_ID, AREA, COMP_NM, COMP_ENM, REP_NM, COMP_REG_NO, ADDR, GPS_X, GPS_Y, TM_X, TM_Y,
-	PHONE, FAX, EMAIL, DRV_CNT, SVC_ROUT_CNT, LIC_VHC_CNT, SPR_VHC_CNT, REMARK
-	from BMS_TRANSCOMP_MST 
-	
-<!-- 	select COMP_ID, AREA, COMP_NM, REP_NM, COMP_REG_NO, ADDR,
-		   PHONE, FAX, EMAIL, DRV_CNT, SVC_ROUT_CNT, LIC_VHC_CNT, SPR_VHC_CNT, REMARK
-	from BMS_TRANSCOMP_MST -->
-	<where>
-		<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
-			AND COMP_ID LIKE CONCAT('%',#{CONTENT},'%') || COMP_NM LIKE CONCAT('%',#{CONTENT},'%') 
-		</if>
-		<if test="TYPE == 'COMP_ID'">
-			AND COMP_ID LIKE CONCAT('%',#{CONTENT},'%')
-		</if>
-		<if test="TYPE == 'COMP_NM'">
-			AND COMP_NM LIKE CONCAT('%',#{CONTENT},'%') 
-		</if>
-	</where>
+   select COMP_ID, AREA, COMP_NM, COMP_ENM, REP_NM, COMP_REG_NO, ADDR, GPS_X, GPS_Y, TM_X, TM_Y,
+   PHONE, FAX, EMAIL, DRV_CNT, SVC_ROUT_CNT, LIC_VHC_CNT, SPR_VHC_CNT, REMARK
+   from BMS_TRANSCOMP_MST 
+   
+<!--    select COMP_ID, AREA, COMP_NM, REP_NM, COMP_REG_NO, ADDR,
+         PHONE, FAX, EMAIL, DRV_CNT, SVC_ROUT_CNT, LIC_VHC_CNT, SPR_VHC_CNT, REMARK
+   from BMS_TRANSCOMP_MST -->
+   <where>
+      <if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
+         AND COMP_ID LIKE CONCAT('%',#{CONTENT},'%') || COMP_NM LIKE CONCAT('%',#{CONTENT},'%') 
+      </if>
+      <if test="TYPE == 'COMP_ID'">
+         AND COMP_ID LIKE CONCAT('%',#{CONTENT},'%')
+      </if>
+      <if test="TYPE == 'COMP_NM'">
+         AND COMP_NM LIKE CONCAT('%',#{CONTENT},'%') 
+      </if>
+   </where>
 </select>
-	
+   
 <select id="SI0102G0K0" resultType="Map">
-	SELECT CONCAT('CP', LPAD(NEXTVAL(SEQ_BMS_TRANSCOMP_MST_0), 8, '0')) AS 'SEQ'
+   SELECT CONCAT('CP', LPAD(NEXTVAL(SEQ_BMS_TRANSCOMP_MST_0), 8, '0')) AS 'SEQ'
 </select>
 
 <select id="SI0102SHI0" resultType="Map">
-	select COMP_ID, COMP_NM
-	from BMS_TRANSCOMP_MST
-	order by COMP_NM
+   select COMP_ID, COMP_NM
+   from BMS_TRANSCOMP_MST
+   order by COMP_NM
 </select>
 
 <insert id="SI0102G0I0" parameterType="Map">
-<!-- 	<selectKey keyProperty="corpId" resultType="String" order="BEFORE">
+<!--    <selectKey keyProperty="corpId" resultType="String" order="BEFORE">
           SELECT CONCAT('CP', LPAD(NEXTVAL(SEQ_BMS_TRANSCOMP_MST_0), 8, '0'))
        </selectKey>
  -->
-	<!-- insert into BMS_TRANSCOMP_MST(COMP_ID, AREA, COMP_NM, COMP_ENM, REP_NM, COMP_REG_NO, ADDR, GPS_X, GPS_Y,TM_X, TM_Y,
-		   PHONE, FAX, EMAIL, DRV_CNT, SVC_ROUT_CNT, LIC_VHC_CNT, SPR_VHC_CNT, REMARK)
-	values (#{COMP_ID}, #{AREA}, #{COMP_NM}, #{COMP_ENM}, #{REP_NM}, #{COMP_REG_NO}, #{ADDR}, #{GPS_X}, #{GPS_Y},#{TM_X}, #{TM_Y},
-		   #{PHONE}, #{FAX}, #{EMAIL}, #{DRV_CNT}, #{SVC_ROUT_CNT}, #{LIC_VHC_CNT}, #{SPR_VHC_CNT}, #{REMARK}) -->
-	insert into BMS_TRANSCOMP_MST(COMP_ID, AREA, COMP_NM, COMP_ENM, REP_NM, COMP_REG_NO, ADDR,
-		   PHONE, FAX, EMAIL, DRV_CNT, SVC_ROUT_CNT, LIC_VHC_CNT, SPR_VHC_CNT, REMARK, UPD_DTM, UPD_ID, 
-		   GPS_X, GPS_Y, TM_X, TM_Y )
-	values (#{COMP_ID}, #{AREA}, #{COMP_NM}, #{COMP_ENM}, #{REP_NM}, #{COMP_REG_NO}, #{ADDR},
-		   #{PHONE}, #{FAX}, #{EMAIL}, #{DRV_CNT}, #{SVC_ROUT_CNT}, #{LIC_VHC_CNT}, #{SPR_VHC_CNT}, #{REMARK}, #{UPD_DTM}, #{SSN_USER_ID},
-		   127.256252, 36.502246, 333824.0303, 222954.4859)
+   <!-- insert into BMS_TRANSCOMP_MST(COMP_ID, AREA, COMP_NM, COMP_ENM, REP_NM, COMP_REG_NO, ADDR, GPS_X, GPS_Y,TM_X, TM_Y,
+         PHONE, FAX, EMAIL, DRV_CNT, SVC_ROUT_CNT, LIC_VHC_CNT, SPR_VHC_CNT, REMARK)
+   values (#{COMP_ID}, #{AREA}, #{COMP_NM}, #{COMP_ENM}, #{REP_NM}, #{COMP_REG_NO}, #{ADDR}, #{GPS_X}, #{GPS_Y},#{TM_X}, #{TM_Y},
+         #{PHONE}, #{FAX}, #{EMAIL}, #{DRV_CNT}, #{SVC_ROUT_CNT}, #{LIC_VHC_CNT}, #{SPR_VHC_CNT}, #{REMARK}) -->
+   insert into BMS_TRANSCOMP_MST(COMP_ID, AREA, COMP_NM, COMP_ENM, REP_NM, COMP_REG_NO, ADDR,
+         PHONE, FAX, EMAIL, DRV_CNT, SVC_ROUT_CNT, LIC_VHC_CNT, SPR_VHC_CNT, REMARK, UPD_DTM, UPD_ID, 
+         GPS_X, GPS_Y, TM_X, TM_Y )
+   values (#{COMP_ID}, #{AREA}, #{COMP_NM}, #{COMP_ENM}, #{REP_NM}, #{COMP_REG_NO}, #{ADDR},
+         #{PHONE}, #{FAX}, #{EMAIL}, #{DRV_CNT}, #{SVC_ROUT_CNT}, #{LIC_VHC_CNT}, #{SPR_VHC_CNT}, #{REMARK}, #{UPD_DTM}, #{SSN_USER_ID},
+         127.256252, 36.502246, 333824.0303, 222954.4859)
 </insert>
 
 <update id="SI0102G0U0" parameterType="Map">
-	update BMS_TRANSCOMP_MST
-	set AREA = #{AREA}
-	,	COMP_NM = #{COMP_NM}
-	,	COMP_ENM = #{COMP_ENM}
-	,	REP_NM = #{REP_NM}
-	,	COMP_REG_NO = #{COMP_REG_NO}
-	,	ADDR = #{ADDR}
-	,	PHONE = #{PHONE} 
-	,	FAX = #{FAX}
-	,	EMAIL = #{EMAIL}
-	,	DRV_CNT = #{DRV_CNT}
-	,	SVC_ROUT_CNT = #{SVC_ROUT_CNT}
-	,	LIC_VHC_CNT = #{LIC_VHC_CNT}
-	,	SPR_VHC_CNT = #{SPR_VHC_CNT}
-	,	REMARK = #{REMARK}
-	,	UPD_DTM = #{UPD_DTM}
-	,	UPD_ID = #{SSN_USER_ID}
-	,	GPS_X = #{GPS_X}
-	,	GPS_Y = #{GPS_Y}
-	,	TM_X = #{TM_X}
-	,	TM_Y = #{TM_Y}
-	where COMP_ID = #{COMP_ID}
+   update BMS_TRANSCOMP_MST
+   set AREA = #{AREA}
+   ,   COMP_NM = #{COMP_NM}
+   ,   COMP_ENM = #{COMP_ENM}
+   ,   REP_NM = #{REP_NM}
+   ,   COMP_REG_NO = #{COMP_REG_NO}
+   ,   ADDR = #{ADDR}
+   ,   PHONE = #{PHONE} 
+   ,   FAX = #{FAX}
+   ,   EMAIL = #{EMAIL}
+   ,   DRV_CNT = #{DRV_CNT}
+   ,   SVC_ROUT_CNT = #{SVC_ROUT_CNT}
+   ,   LIC_VHC_CNT = #{LIC_VHC_CNT}
+   ,   SPR_VHC_CNT = #{SPR_VHC_CNT}
+   ,   REMARK = #{REMARK}
+   ,   UPD_DTM = #{UPD_DTM}
+   ,   UPD_ID = #{SSN_USER_ID}
+   ,   GPS_X = #{GPS_X}
+   ,   GPS_Y = #{GPS_Y}
+   ,   TM_X = #{TM_X}
+   ,   TM_Y = #{TM_Y}
+   where COMP_ID = #{COMP_ID}
 </update>
 
 <delete id="SI0102G0D0" parameterType="Map">
-	delete
-	from BMS_TRANSCOMP_MST
-	where COMP_ID = #{COMP_ID}
+   delete
+   from BMS_TRANSCOMP_MST
+   where COMP_ID = #{COMP_ID}
 </delete>
 
 <select id="SI0102G1R0" resultType="Map">
-	select a.GRG_ID, a.GRG_NM, a.OWNER_TYPE, a.ADDR, a.PHONE, b.COMP_ID
-	from BMS_GRG_MST a INNER JOIN BMS_GRG_COMP_CMPSTN b ON a.GRG_ID=b.GRG_ID 
-	WHERE b.COMP_ID = #{COMP_ID}
+   select a.GRG_ID, a.GRG_NM, a.OWNER_TYPE, a.ADDR, a.PHONE, b.COMP_ID
+   from BMS_GRG_MST a INNER JOIN BMS_GRG_COMP_CMPSTN b ON a.GRG_ID=b.GRG_ID 
+   WHERE b.COMP_ID = #{COMP_ID}
 </select>
 
 <!-- <select id="SI0102G1R0" resultType="Map">
-		SELECT C.GRG_ID, A.GRG_ID, A.GRG_NM, A.OWNER_TYPE, B.COMP_ID
-		  FROM BMS_ORG_MST A, BMS_TRANSCOMP_MST B, BMS_USER_AUTH_CMPSTN C 
-		 WHERE A.ORG_ID = B.ORG_ID 
-		   AND A.USER_ID = C.USER_ID 
-		   AND C.AUTH_CD = #{AUTH_CD}
-		ORDER BY USER_ID
+      SELECT C.GRG_ID, A.GRG_ID, A.GRG_NM, A.OWNER_TYPE, B.COMP_ID
+        FROM BMS_ORG_MST A, BMS_TRANSCOMP_MST B, BMS_USER_AUTH_CMPSTN C 
+       WHERE A.ORG_ID = B.ORG_ID 
+         AND A.USER_ID = C.USER_ID 
+         AND C.AUTH_CD = #{AUTH_CD}
+      ORDER BY USER_ID
 </select> -->
 
 <!-- <select id="SI0102G1R0" resultType="Map">
-		SELECT C.AUTH_CD, A.USER_ID, A.USER_NM, A.ORG_ID, B.ORG_NM
-		  FROM BMS_USER_MST A, BMS_ORG_MST B, BMS_USER_AUTH_CMPSTN C 
-		 WHERE A.ORG_ID = B.ORG_ID 
-		   AND A.USER_ID = C.USER_ID 
-		   AND C.AUTH_CD = #{AUTH_CD}
-		ORDER BY USER_ID
+      SELECT C.AUTH_CD, A.USER_ID, A.USER_NM, A.ORG_ID, B.ORG_NM
+        FROM BMS_USER_MST A, BMS_ORG_MST B, BMS_USER_AUTH_CMPSTN C 
+       WHERE A.ORG_ID = B.ORG_ID 
+         AND A.USER_ID = C.USER_ID 
+         AND C.AUTH_CD = #{AUTH_CD}
+      ORDER BY USER_ID
 </select> -->
 
 <insert id="SI0102G1I0" parameterType="Map">
-	insert into BMS_GRG_COMP_CMPSTN (COMP_ID, GRG_ID)
-	values (#{COMP_ID}, #{GRG_ID})
+   insert into BMS_GRG_COMP_CMPSTN (COMP_ID, GRG_ID)
+   values (#{COMP_ID}, #{GRG_ID})
 </insert>
 
 <!-- <delete id="SI0102G1D0" parameterType="Map">
-	DELETE FROM BMS_GRG_COMP_CMPSTN 
-		<where>
-			<if test="COMP_ID != null and COMP_ID != ''">
-				 AND COMP_ID = #{COMP_ID}
-			</if>
-			<if test="AUTH_CD != null and AUTH_CD != ''">
-				 AND GRG_ID = #{GRG_ID}
-			</if>
-		</where>
+   DELETE FROM BMS_GRG_COMP_CMPSTN 
+      <where>
+         <if test="COMP_ID != null and COMP_ID != ''">
+             AND COMP_ID = #{COMP_ID}
+         </if>
+         <if test="AUTH_CD != null and AUTH_CD != ''">
+             AND GRG_ID = #{GRG_ID}
+         </if>
+      </where>
 </delete> -->
 
 <delete id="SI0102G1D0" parameterType="Map">
-	DELETE FROM BMS_GRG_COMP_CMPSTN 
-	WHERE COMP_ID = #{COMP_ID}
-	AND GRG_ID = #{GRG_ID}
+   DELETE FROM BMS_GRG_COMP_CMPSTN 
+   WHERE COMP_ID = #{COMP_ID}
+   AND GRG_ID = #{GRG_ID}
 </delete>
 
 <select id="SI0102P0R0" resultType="Map">
-	select GRG_ID, GRG_NM
-	from BMS_GRG_MST
-	<where>
-		<if test="TYPE == 'ALL'">
-			AND GRG_ID LIKE CONCAT('%',#{CONTENT},'%') || GRG_NM LIKE CONCAT('%',#{CONTENT},'%')
-		</if>
-		<if test="TYPE == 'GRG_ID'">
-			AND GRG_ID LIKE CONCAT('%',#{CONTENT},'%')
-		</if>
-		<if test="TYPE == 'GRG_NM'">
-			AND GRG_NM LIKE CONCAT('%',#{CONTENT},'%') 
-		</if>
-	</where>
+   select GRG_ID, GRG_NM
+   from BMS_GRG_MST
+   <where>
+      <if test="TYPE == 'ALL'">
+         AND GRG_ID LIKE CONCAT('%',#{CONTENT},'%') || GRG_NM LIKE CONCAT('%',#{CONTENT},'%')
+      </if>
+      <if test="TYPE == 'GRG_ID'">
+         AND GRG_ID LIKE CONCAT('%',#{CONTENT},'%')
+      </if>
+      <if test="TYPE == 'GRG_NM'">
+         AND GRG_NM LIKE CONCAT('%',#{CONTENT},'%') 
+      </if>
+   </where>
 </select>
 
 </mapper>
