@@ -51,6 +51,7 @@
 						<w2:key id="CONTENT1" name="name1" dataType="text"></w2:key>
 						<w2:key id="CONTENT2" name="name2" dataType="text"></w2:key>
 						<w2:key id="CONTENT3" name="name3" dataType="text"></w2:key>
+						<w2:key id="CONTENT_SUB" name="name3" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataMap baseNode="map" id="dma_sub_search">
@@ -302,7 +303,7 @@
 			<w2:workflowCollection></w2:workflowCollection>
 			<xf:submission id="sub_MO0201G0R0" ref="data:json,dma_search" target="data:json,dlt_BRT_CUR_OPER_INFO" action="/mo/MO0201G0R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="" ev:submit="" ev:submitdone="scwin.sub_MO0201G0R0_submitdone" ev:submiterror="" abortTrigger="">
+				processMsg="조회 중입니다..." ev:submit="" ev:submitdone="scwin.sub_MO0201G0R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_MO0201G1R0" ref="data:json,dma_search" target='data:json,dlt_BMS_ROUT_NODE_CMPSTN2'
 				action="/mo/MO0201G1R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
@@ -418,8 +419,8 @@
 
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID, autoOptions, mainOptions);		
 
-		MO0201G0.mergeCol(2,false);
-		MO0201G0.mergeCells("byrestriccol");
+		//MO0201G0.mergeCol(2,false);
+		//MO0201G0.mergeCells("byrestriccol");
 		
 		com.executeSubmission(sub_MO0201SHI0);	
 		
@@ -506,7 +507,7 @@
 		com.executeSubmission(sub_selectSigPeriod);
 		
 		
-		//맵 하단 캔버스 관련
+		////////////////////////맵 하단 캔버스 관련//////////////////////////
 		//차량 위치 매핑문제 때문에 보류 전자노선도 모니터링 우선 작업 필요
 		var canvas = $("#canvas")[0];
 		var ctx = canvas.getContext("2d");
@@ -584,6 +585,9 @@
 		}		
 		///////////////end 캔버스 관련///////////////////////
 		
+//		com.searchGrid(MO0201G0, sub_MO0201G0R0);
+//		com.searchGrid(MO0201G3, sub_MO0201G3R0);		
+		
 	};	//end onpageload
 	
 	var sigTimeout = null;
@@ -657,7 +661,7 @@
 		busImg.src = "/cm/images/tmap/busstop.png";
 		
 		//attrId = 2022 : 정류소별 차량 도착 정보
-		if(attrId == 2022){
+		if(attrId == util.ATTR_ID.BUS_ARRIVAL_INFO){
 			
 		//payload.body >>>> {"ATTR_ID":2022,"LIST":[{"ROUT_ID":"RT00000080","REMAIN_TM":1364334,"REMAIN_STTN":2}],"STTN_ID":"ND00000017"}
 		
@@ -673,7 +677,7 @@
 		}
 		
 		//attrId = 4014 : 실시간 차량 위치 정보
-		else if(attrId == 4014){
+		else if(attrId == util.ATTR_ID.BUS_INFO){
 				//payload.body >>>> {"GPS_Y":36.484005,"ATTR_ID":4014,"DVC_ID":"DV00000002","GPS_X":127.25973,"VHC_ID":"VH00000002"}		
 		
 		//jsonObj.VHC_ID => 차량아이디
@@ -699,7 +703,7 @@
 		}
 		
 		//운행 이벤트
-		else if (attrId == 4012) {
+		else if (attrId == util.ATTR_ID.BUS_OPER_EVENT) {
 			try {
 				var eventCode = jsonObj.EVT_CODE;			
 				routMap.mapInfo["map_MO0201_vehicle"].isEvent = "on";			
@@ -750,7 +754,7 @@
 		}
 		
 		//디스패치
-		else if (attrId == 4020) {
+		else if (attrId == util.ATTR_ID.DISPATCH) {
 			try {
 				dlt_BRT_DSPTCH_LOG.insertRow(0);
 				
@@ -833,7 +837,8 @@
 			
 	scwin.MO0201G0_onrowindexchange = function(row,oldRow) {
 		//gbMap.setLevel(4);
-		//com.executeSubmission(sub_selectNodeListByRepRout);		 
+		//com.executeSubmission(sub_selectNodeListByRepRout);
+		dma_search.set("CONTENT1", dlt_BRT_CUR_OPER_INFO.getCellData(row, "REP_ROUT_ID"));		 
 		com.executeSubmission(sub_selectNodeDispListByRepRout);		 
 		 			
 	};
@@ -841,7 +846,7 @@
 	scwin.sub_MO0201G0R0_submitdone = function(e) {
 		//운행 상태
 		for (i=0; i<dlt_BRT_CUR_OPER_INFO.getDataLength(); i++) {
-			//정상
+			//정상운행
 			if (dlt_BRT_CUR_OPER_INFO.getCellData(i, "OPER_STS") == "OS001") {
 				MO0201G0.setCellClass(i, "OPER_STS", "cond_normal");
 			}
@@ -849,8 +854,8 @@
 //			else if (dlt_BRT_CUR_OPER_INFO.getCellData(i, "OPER_STS") == "OS003") {
 //				MO0201G0.setCellClass(i, "OPER_STS", "cond_neutrality");
 //			}
-			//고장
-			else if (dlt_BRT_CUR_OPER_INFO.getCellData(i, "OPER_STS") == "OS005") {
+			//운행종료
+			else if (dlt_BRT_CUR_OPER_INFO.getCellData(i, "OPER_STS") == "OS002") {
 				MO0201G0.setCellClass(i, "OPER_STS", "cond_abnormal");
 			}
 		}			
@@ -861,8 +866,8 @@
 	};
 	
 	scwin.sub_MO0201SHI0_submitdone = function(e) {
-		TYPE1.setValue("RR00000002");		
-		$p.executeSubmission(sub_MO0201SHI1);
+		//TYPE1.setValue("RR00000002");		
+		//$p.executeSubmission(sub_MO0201SHI1);
 		com.searchGrid(MO0201G0, sub_MO0201G0R0);
 		com.searchGrid(MO0201G3, sub_MO0201G3R0);
 	};
@@ -1249,6 +1254,12 @@
 		com.executeSubmission(sub_MO0201G1R0);
 		com.executeSubmission(sub_MO0201G2R0);		
 	};
+	
+	scwin.btn_sub_move = function() {
+		if(com.isEmpty(dma_search.get("CONTENT3"))==false){
+			com.gridMove(MO0201G0, "VHC_NO", dma_search.get("CONTENT3"), MO0201G0.getFocusedRowIndex());
+		}		
+	}
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -1258,39 +1269,26 @@
 			</xf:group>
 			<xf:group class="pgm_header" id="pgm_header" style="">
 				<xf:group class="gr_search" id="" style="">
-					<xf:group class="label" id="" style="">
-						<w2:span class="" id="" label="대표 노선"></w2:span>
-					</xf:group>
-					<xf:group class="search" id="" style="">
-						<xf:select1 allOption="true" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE1_onviewchange" id="TYPE1" optionOrder="false"
-							ref="data:dma_search.CONTENT1" class="search_type_100" style="" submenuSize="auto" textAlign="center" chooseOptionLabel="-선택-">
-							<xf:choices>
-								<xf:itemset nodeset="data:dlt_repRoutItem">
-									<xf:label ref="REP_ROUT_NM"></xf:label>
-									<xf:value ref="REP_ROUT_ID"></xf:value>
-								</xf:itemset>
-							</xf:choices>
-						</xf:select1>
+	               <xf:group class="label" id="" style="">
+	                  <w2:span class="" id="" label="대표 노선"></w2:span>
+	               </xf:group>
+	               <xf:select1 allOption="true" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+	               	disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE1_onviewchange" id="TYPE1"
+	               	optionOrder="false" ref="data:dma_search.CONTENT_SUB" class="search_type_100" style="" submenuSize="auto" textAlign="center"
+	               	chooseOptionLabel="-선택-">
+	               	<xf:choices>
+	               		<xf:itemset nodeset="data:dlt_repRoutItem">
+	               			<xf:label ref="REP_ROUT_NM"></xf:label>
+	               			<xf:value ref="REP_ROUT_ID"></xf:value>
+	               		</xf:itemset>
+	               	</xf:choices>
+	               </xf:select1>
+	               <xf:group class="search" id="" style="">
 						<xf:group class="label" id="" style="">
-						<w2:span class="" id="" label="노선"></w2:span>
-					</xf:group>
-					<xf:group class="search" id="" style="">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE2_onviewchange" id="TYPE2" optionOrder="false"
-							ref="data:dma_search.CONTENT2" class="search_type_100" style="" submenuSize="auto" textAlign="center" chooseOptionLabel="-전체-">
-							<xf:choices>
-								<xf:itemset nodeset="data:dlt_searchitem2">
-									<xf:label ref="ROUT_NM"></xf:label>
-									<xf:value ref="ROUT_ID"></xf:value>
-								</xf:itemset>
-							</xf:choices>
-						</xf:select1>
-					</xf:group>
-					<xf:group class="label" id="" style="">
-						<w2:span class="" id="" label="검색"></w2:span>
-					</xf:group>
-					<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT3" placeholder="노선명"></xf:input>
+							<w2:span class="" id="" label="검색"></w2:span>
+						</xf:group>
+						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT3" placeholder="차량번호">
+						</xf:input>
 					</xf:group>
 					<w2:wframe class="" id="wfm_mainBtn" scope="true" src="/cm/common/wf_mainBtn.xml" style=""></w2:wframe>
 				</xf:group>
@@ -1307,12 +1305,15 @@
 								autoFitMinWidth="0" dataList="data:dlt_BRT_CUR_OPER_INFO" ev:onrowindexchange="scwin.MO0201G0_onrowindexchange"
 								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="true"
 								rowNumHeaderValue="" rowNumVisible="false" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" 
-								useShiftKey="true" noResultMessage="금일 운행차량 없음">							
+								useShiftKey="true" noResultMessage="해당노선 차량 없음">							
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px" id="column11"
-										value="노선명" blockSelect="false" displayMode="label">
+		                           <w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px" id="column11"
+		                              value="대표노선명" blockSelect="false" displayMode="label">
+		                           </w2:column>								
+									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:25px" id="column7"
+										value="운행상태" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:25px" id="column6"
 										value="차량번호" blockSelect="false" displayMode="label">
@@ -1326,7 +1327,7 @@
 									<w2:column removeBorderStyle="false" width="85" inputType="text" style="height:25px" id="column1"
 										value="디스패치 표시" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="column0"
+									<w2:column removeBorderStyle="false" width="30" inputType="text" style="height:25px" id="column0"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 									<!-- <w2:column removeBorderStyle="false" width="65" inputType="text" style="height:20px" id="column5"
@@ -1342,7 +1343,10 @@
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="ROUT_NM"
+		                           <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="REP_ROUT_NM"
+		                              value="" blockSelect="false" displayMode="label">
+		                           </w2:column>								
+									<w2:column removeBorderStyle="false" width="138" inputType="select" style="height:25px" id="OPER_STS"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="138" inputType="text" style="height:25px" id="VHC_NO"

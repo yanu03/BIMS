@@ -227,8 +227,6 @@
 			//routMap.removeRightClickOverlay("map_MO0203_vehicle");
 			routMap.removeRightClickOverlay("map_MO0203");
 		});				
-		
-		
 	};	
 	
 	scwin.btn_sub_move = function(){
@@ -244,6 +242,7 @@
 	
 	//정류장별 차량 도착 정보 테이블 생성
 	MO0203T0_setTable = function(dataList){
+		debugger;
 		var param = com.getParameter();
 		dlt_BMS_ETA_INFO.removeAll();
 		dlt_BMS_SOONETA_INFO.removeAll();
@@ -494,12 +493,12 @@
 		var nodeId = dlt_BMS_NODE_MST.getCellData(MO0203G0.getFocusedRowIndex(), "NODE_ID");
 		
 		//attrId = 2022 : 정류장별 차량 도착 정보
-		if(attrId == 2022 && nodeId == jsonObj.STTN_ID){
+		if(attrId == util.ATTR_ID.BUS_ARRIVAL_INFO && nodeId == jsonObj.STTN_ID){
 			MO0203T0_setTable(dataList);
 		}
 		
 		//attrId = 4014 : 실시간 차량 위치 정보
-		else if(attrId == 4014){
+		else if(attrId == util.ATTR_ID.BUS_INFO){
 			
 		}
 		
@@ -595,7 +594,8 @@
 		var options = {
 			id : "MO0203P01",
 			popupName : "정류소 상태정보",
-			type : "browserPopup",
+			//browserPopup으로 열면 버그 일어남
+			//type : "browserPopup",
 			width : 1380,
 			height : 720			
 		};
@@ -715,30 +715,35 @@
 							<w2:textbox class="df_tt fl" id="" label="정류소 목록(map)" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
-					<xf:group id="" style="">
-						<div id="map_MO0203" style="overflow:hidden;">
-							<ul id="category_map_MO0203" class="category"></ul>
-						</div>
-				
-						<xf:group id="brt_div" class="pgm_detail" style="z-index: 10000;position: absolute;right: 52px;margin-top: 245px;margin-right: -20px;display: none;visibility: hidden;width: 140px;height: 399px;">
-							<xf:group style="width: 100%; height:100%" id="bit_img">
-								<xf:group id="" class="brt_bit" style="background-size: cover; height: 393px; position: relative;"></xf:group>
-							</xf:group>
-							<xf:group style="" id=""></xf:group>
-							<xf:group style="position: absolute;top: 30%;left: 14%;width: 100px;text-align: center;">
-								<w2:span label="정류소명" style="color: white;font-size: 12px;" id=""
-									ref="data:dlt_BMS_ROUT_NODE_CMPSTN2.NODE_NM">
-								</w2:span>
-							</xf:group>
-							<xf:group style="position: absolute; top: 40%; left: 7%; text-align: center; width: 118px;">
-								<w2:span label="" style="color: white;font-size: 10px;"
-										 id="" ref="data:dlt_BMS_ROUT_NODE_CMPSTN2.NODE_ID">
-								</w2:span>
-							</xf:group>
-							<xf:group style="" id=""></xf:group>
-							<xf:group tagname="table" style="" id="MO0203T0" class="w2tb bit_tb"></xf:group>
-						</xf:group>								
-						
+					<xf:group id="" style="position:relative">
+						<xf:group id="" style="position: absolute;width: 100%;height: 100%;">
+							<div id="map_MO0203" style="overflow:hidden;">
+								<ul id="category_map_MO0203" class="category"></ul>
+								<xf:group id="brt_div" class="pgm_detail" style="z-index: 10000;position: absolute;right: 52px;margin-top: 245px;margin-right: -20px;width: 140px;height: 399px;">
+									<xf:group style="width: 100%; height:100%" id="bit_img">
+										<xf:group id="" class="brt_bit" style="background-size: cover; height: 393px; position: relative;"></xf:group>
+									</xf:group>
+									<xf:group style="" id=""></xf:group>
+									<xf:group style="position: absolute;top: 30%;left: 14%;width: 100px;text-align: center;">
+										<w2:span label="정류소명" style="color: white;font-size: 12px;" id=""
+											ref="data:dlt_BMS_NODE_MST.NODE_NM">
+										</w2:span>
+									</xf:group>
+									<xf:group style="position: absolute; top: 40%; left: 7%; text-align: center; width: 118px;">
+										<w2:span label="" style="color: white;font-size: 10px;"
+												 id="" ref="data:dlt_BMS_NODE_MST.NODE_ID">
+										</w2:span>
+									</xf:group>
+									<!-- <xf:group>
+										<w2:span label="NODE_ID" style="color: white;font-size: 14px;text-align: center;" id=""
+											ref="data:dlt_BMS_NODE_MST.NODE_ID">
+										</w2:span>
+									</xf:group> -->
+									<xf:group style="" id=""></xf:group>
+									<xf:group tagname="table" style="" id="MO0203T0" class="w2tb bit_tb"></xf:group>
+								</xf:group>								
+							</div>
+						</xf:group>
 					</xf:group>
 				</xf:group><!-- pgm_detail end -->
 			</xf:group><!-- end content -->
