@@ -15,6 +15,7 @@
 					<w2:columnInfo>
 						<w2:column id="OPER_DT" name="운행일" dataType="text"></w2:column>
 						<w2:column id="REP_ROUT_ID" name="대표노선ID" dataType="text"></w2:column>
+						<w2:column id="REP_ROUT_NM" name="대표노선ID" dataType="text"></w2:column>
 						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
 						<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
 						<w2:column id="OPER_SN" name="운행순번" dataType="text"></w2:column>
@@ -25,7 +26,22 @@
 						<w2:column id="MIN_SPD" name="최소속도" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
-
+				
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BRT_ROUT_AVER_OPER_SP_STAT_2" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="OPER_DT" name="운행일" dataType="text"></w2:column>
+						<w2:column id="REP_ROUT_ID" name="대표노선ID" dataType="text"></w2:column>
+						<w2:column id="REP_ROUT_NM" name="대표노선ID" dataType="text"></w2:column>
+						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
+						<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
+						<w2:column id="OPER_SN" name="운행순번" dataType="text"></w2:column>
+						<w2:column id="ALLOC_NO" name="배차번호" dataType="text"></w2:column>
+						<w2:column id="STAT_H" name="통계시간" dataType="text"></w2:column>
+						<w2:column id="AVRG_SPD" name="평균속도" dataType="text"></w2:column>
+						<w2:column id="MAX_SPD" name="최대속도" dataType="text"></w2:column>
+						<w2:column id="MIN_SPD" name="최소속도" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ROUT_MST" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="chk" name="선택" dataType="text" defaultValue="0"></w2:column>
@@ -78,13 +94,15 @@
 						<w2:key id="REP_ROUT_ID" name="대표노선아이디" dataType="text"></w2:key>
 						<w2:key id="ROUT_ID" name="노선아이디" dataType="text"></w2:key>
 						<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
+						<w2:key id="SELECT_DIV" name="조회구분" dataType="text"></w2:key>
+						<w2:key id="WAY_DIV" name="상하행구분" dataType="text"></w2:key>
 						<w2:key id="F_DATE" name="name3" dataType="text"></w2:key>
 						<w2:key id="L_DATE" name="name3" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
-			<xf:submission id="sub_ST0204G1R0" ref="data:json,dma_sub_search" target="data:json,dlt_BRT_ROUT_AVER_OPER_SP_STAT"
+			<xf:submission id="sub_ST0204G1R0" ref="data:json,dma_sub_search" target='data:json,["dlt_BRT_ROUT_AVER_OPER_SP_STAT","dlt_BRT_ROUT_AVER_OPER_SP_STAT_2"]'
 				action="/st/ST0204G1R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
 				customHandler="" mode="asynchronous" processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_ST0204G1R0_submitdone"
 				ev:submiterror="" abortTrigger="">
@@ -105,27 +123,18 @@
 		<script type="text/javascript" lazy="false"><![CDATA[ 
 	scwin.onpageload = function() {
 		var autoOptions = {
-			Main : { grid : ST0204G0, srchSbm : sub_ST0204G0R0, keyColumn : "REP_ROUT_ID", srchGrp : pgm_header, name :  "노선 목록"},
-			Sub1 : { grid : ST0204G1, srchSbm : sub_ST0204G1R0 }
+			Main : { grid : ST0204G0, srchSbm : sub_ST0204G0R0, keyColumn : "REP_ROUT_ID", srchGrp : pgm_header, name :  "노선 목록"}
+			//Sub1 : { grid : ST0204G1, srchSbm : sub_ST0204G1R0 }
 		 };				
 		 
 		 var mainOptions = {
 	         EXL:scwin.btn_excel_onclick
 	     }; 
 		 
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID_FORM, autoOptions, mainOptions);
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
 		
-		var codeOptions = [{ code : "DAY_DIV", compID : "TYPE2, ST0204G0:DAY_DIV"}
-							,{ code : "WAY_DIV", compID : "TYPE3, ST0204G0:WAY_DIV"}
-						];
-		
-		com.setCommonDtl(codeOptions);
-
-		//com.executeSubmission(sub_ST0204SHI0);
-		
-		com.setCommonDtl(codeOptions, function() {
-				com.searchGrid(ST0204G0,sub_ST0204G0R0);
-		});
+		dma_sub_search.set("SELECT_DIV", "OPER_SN");
+		dma_sub_search.set("WAY_DIV", "WD001");
 		
 		var date = new Date();
 		var year = date.getFullYear().toString();
@@ -145,7 +154,20 @@
 		var firstday = year+month+"01";
 		F_DATE.setValue(firstday);
 		L_DATE.setValue(today);
-	
+		
+		var codeOptions = [{ code : "DAY_DIV", compID : "TYPE2, ST0204G0:DAY_DIV"}
+							,{ code : "WAY_DIV", compID : "TYPE3, ST0204G0:WAY_DIV"}
+						];
+		
+		//com.executeSubmission(sub_ST0204SHI0);
+		
+		com.setCommonDtl(codeOptions, function() {
+				com.searchGrid(ST0204G0,sub_ST0204G0R0);
+		});
+		
+		
+		
+		
 	};
 	
 	scwin.onpageunload = function() {
@@ -157,29 +179,30 @@
 	};
 	
 	scwin.sub_ST0204G0R0_submitdone = function(e) {
-		com.setFocusedCell(ST0204G0, "chk");
+		/*com.setFocusedCell(ST0204G0, "chk");
 		ST0204G0.setCellChecked(ST0204G0.getFocusedRowIndex(), "chk", true);
 
 		var chkJsonData = ST0204G0.getCheckedJSON("chk");
 		var chkCnt = chkJsonData.length;
 		var i = 0;
-		var repRoutId = [];
+		var repRoutId = [];*/
 
 		com.setFocusedCell(ST0204G0, "REP_ROUT_ID");
 
 		//체크 가져오기
-		for(i; i<chkCnt; i++){
+		/*for(i; i<chkCnt; i++){
 			repRoutId.push(chkJsonData[i].REP_ROUT_ID);
-		}
+		}*/
 		
 		//조회구분도 넣어서 처리하기. 일별 월별 시간대별
+		var repRoutId = dlt_BMS_ROUT_MST.getCellData(ST0204G0.getFocusedRowIndex(), "REP_ROUT_ID");
 		dma_sub_search.set("REP_ROUT_ID", repRoutId);
 		
 		com.executeSubmission(sub_ST0204G1R0);
 	};
 	
 	scwin.ST0204G0_oncellclick = function(row,col,colId) {
-		var rowCount = dlt_BMS_ROUT_MST.getRowCount();
+		/*var rowCount = dlt_BMS_ROUT_MST.getRowCount();
 			
 		if(ST0204G0.getCellChecked(row, 'chk')==0){
 			for(var i = 0; i < rowCount; i++){
@@ -191,14 +214,6 @@
 		   	
 		}
 	
-		/*if (col != "0"){
-		   if(ST0204G0.getCellChecked(row, 'chk')==0){
-		      ST0204G0.setCellChecked(row, 'chk', true);
-		   }else if(ST0204G0.getCellChecked(row, 'chk')==1){
-		      ST0204G0.setCellChecked(row, 'chk', false);
-		   }
-		}*/
-		
 		var chkJsonData = ST0204G0.getCheckedJSON("chk");
 		var chkCnt = chkJsonData.length;
 		var i = 0;
@@ -211,30 +226,40 @@
 		
 		dma_sub_search.set("REP_ROUT_ID", repRoutId);
 		
-		
-		
 		if(chkJsonData.length != 0){
 			com.executeSubmission(sub_ST0204G1R0);
 			pivot_ST0204.show();
 		}else if(chkJsonData.length == 0){
 			chart_ST0204.destroy();
 			pivot_ST0204.hide();
-		}
+		}*/
 		
 		
 	};
 	
 	scwin.ST0204G0_onrowindexchange = function(row,oldRow) {
-		dlt_BMS_ROUT_MST.modifyRowStatus(row, "R")	
+		//조회구분도 넣어서 처리하기. 일별 월별 시간대별
+		var repRoutId = dlt_BMS_ROUT_MST.getCellData(ST0204G0.getFocusedRowIndex(), "REP_ROUT_ID");
+		dma_sub_search.set("REP_ROUT_ID", repRoutId);
+		
+		com.executeSubmission(sub_ST0204G1R0);
+		
+		//dlt_BMS_ROUT_MST.modifyRowStatus(row, "R")	
 	};
 	
 	scwin.sub_ST0204G1R0_submitdone = function(e) {
-		//var chkJsonData = ST0204G0.getCheckedJSON("chk");
-		//var chkCnt = chkJsonData.length;
+		chart_ST0204.destroy();
+		scwin.DrawLineChart_OperSn();
 		
-		var routNm = dlt_BMS_ROUT_MST.getCellData(ST0204G0.getFocusedRowIndex(), "REP_ROUT_NM");
-		
-		scwin.DrawChart(routNm);
+		if(SELECT_DIV.getValue() == 'OPER_SN'){
+			//scwin.DrawLineChart_OperSn();
+			ST0204T0.show("");
+			ST0204T1.hide();
+		}else if(SELECT_DIV.getValue() == 'ALLOC'){
+			//scwin.DrawBarChart_Alloc();
+			ST0204T0.hide();
+			ST0204T1.show("");
+		}
 	};
 	
 	scwin.getRandomColor = function(_isAlpha) {
@@ -273,11 +298,85 @@
 		this.pointRadius = {};	//포인트 반지름 0일 경우 포인트 안그려짐
 	}
 	
-	var chart_ST0204 = null;
-	scwin.DrawChart = function(routNm){
-		
+	scwin.DrawLineChart_OperSn = function(){
 		var datasets = new Array();
-		var transData = new Array();
+		var i = 0;
+		var j = 0;
+		var num = 0;
+	
+		var rowCount = dlt_BRT_ROUT_AVER_OPER_SP_STAT.getRowCount();
+		var jsonData = dlt_BRT_ROUT_AVER_OPER_SP_STAT.getAllJSON();
+		
+		var data = new Array();
+		var xLabel = new Array();
+		
+		for(var y = 0; y < jsonData.length; y++){
+			var label = jsonData[y].REP_ROUT_NM;
+			var avrgSpd = jsonData[y].AVRG_SPD;
+			var statH = jsonData[y].STAT_H;
+			var operDt = jsonData[y].OPER_DT;
+			var operSn = jsonData[y].OPER_SN;
+			var allocNo = jsonData[y].ALLOC_NO;
+			
+			if(operDt != null){
+				var categoryJson = new Object();
+				var labelJson = new Object();
+				
+				categoryJson = avrgSpd;
+				if(dma_sub_search.get("SELECT_DIV") == 'OPER_SN'){
+					labelJson = operSn;
+				}else if(dma_sub_search.get("SELECT_DIV") == 'ALLOC'){
+					labelJson = allocNo;
+				}
+				
+				xLabel.push(labelJson);
+				data.push(categoryJson);
+			}
+			
+		};
+		
+		var charData = new CharData();
+		var rgb = color[0];
+		
+		if(data.length > 0 && xLabel.length > 0){
+			charData.data = data;
+			charData.label = label;
+			charData.borderColor = rgb;
+			charData.backgroundColor = rgb;
+			charData.borderWidth = 1; //선 굵기
+			charData.pointBorderWidth = 1; //점 굵기
+			charData.tension = 0;
+			charData.pointRadius = 1; //점 지름
+			charData.maxBarThickness= 60; //막대 굵기
+			
+			datasets.push(charData);
+		}
+		
+		transData = [];
+	
+		if(chart_ST0204 != null) {
+		      chart_ST0204.destroy();   
+		}
+	
+		var ctx = document.getElementById('chart_ST0204');
+		chart_ST0204 = new Chart(ctx, {
+			    type: 'line',
+				data: {
+					//labels:["05시", "06시","07시", "08시","09시", "10시","11시", "12시","13시", "14시","15시", "16시","17시", "18시","19시", "20시","21시", "22시","23시", "24시"],
+					labels:xLabel,
+					datasets
+				  },
+			  options: {
+			       // responsive: true
+			        maintainAspectRatio: false,
+			    }
+			});
+	
+	}
+	
+	
+	scwin.DrawBarChart_Alloc = function(){
+		var datasets = new Array();
 		var i = 0;
 		var j = 0;
 		var num = 0;
@@ -288,23 +387,12 @@
 		var data = new Array();
 		var xLabel = new Array();
 		
-		for(j; j<rowCount; j++){
-			if(jsonData[num].ROUT_ID ==  dlt_BRT_ROUT_AVER_OPER_SP_STAT.getCellData(j, "ROUT_ID")){
-				transData.push(dlt_BRT_ROUT_AVER_OPER_SP_STAT.getRowJSON(j));
-			}else if(jsonData[num].ROUT_ID  !=  dlt_BRT_ROUT_AVER_OPER_SP_STAT.getCellData(j, "ROUT_ID")){
-				num = j;
-				j = j;
-				break;
-			}
-		}
-		
-		
-		for(var y = 0; y < transData.length; y++){
-			var label = transData[y].ROUT_NM;
-			var avrgSpd = transData[y].AVRG_SPD;
-			var statH = transData[y].STAT_H;
-			var operDt = transData[y].OPER_DT;
-			var operSn = transData[y].OPER_SN;
+		for(var y = 0; y < jsonData.length; y++){
+			var label = jsonData[y].REP_ROUT_NM;
+			var avrgSpd = jsonData[y].AVRG_SPD;
+			var statH = jsonData[y].STAT_H;
+			var operDt = jsonData[y].OPER_DT;
+			var operSn = jsonData[y].OPER_SN;
 			
 			if(operDt != null){
 				var categoryJson = new Object();
@@ -320,16 +408,17 @@
 		};
 
 		var charData = new CharData();
-		var rgb = color[i];
+		var rgb = color[0];
 		
 		charData.data = data;
-		charData.label = routNm;
+		charData.label = label;
 		charData.borderColor = rgb;
 		charData.backgroundColor = rgb;
-		charData.borderWidth = 1;
-		charData.pointBorderWidth = 1;
+		charData.borderWidth = 1; //선 굵기
+		charData.pointBorderWidth = 1; //점 굵기
 		charData.tension = 0;
-		charData.pointRadius = 1;
+		charData.pointRadius = 1; //점 지름
+		charData.maxBarThickness= 60; //막대 굵기
 		
 		datasets.push(charData);
 		
@@ -402,18 +491,14 @@
 	scwin.SELECT_DIV_onviewchange = function(info) {
 		dma_sub_search.set("SELECT_DIV", info.newValue);
 		
-		if(info.newValue == 'MONTH'){
-			F_DATE.setCalendarValueType("yearMonth");
-			L_DATE.setCalendarValueType("yearMonth");
-		}else{
-			F_DATE.setCalendarValueType("yearMonthDate");
-			L_DATE.setCalendarValueType("yearMonthDate");
-		}
-		
 		com.executeSubmission(sub_ST0204G1R0);
 	};
 	
 	
+	scwin.TYPE3_onviewchange = function(info) {
+		var wayDiv = info.newValue;
+		dma_sub_search.set("WAY_DIV", wayDiv);
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -445,7 +530,7 @@
 					</xf:group>
 					<xf:group id="" style="" class="search">
 						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="" id="TYPE3" optionOrder="false" ref="data:dma_search.CONTENT3"
+							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE3_onviewchange" id="TYPE3" optionOrder="false" ref="data:dma_search.CONTENT3"
 							class="search_type_100" style="" submenuSize="auto" textAlign="left" chooseOptionLabel="-전체-">
 							<xf:choices></xf:choices>
 						</xf:select1>
@@ -466,18 +551,24 @@
 							dataList="data:dlt_BMS_ROUT_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.ST0204G0_oncellclick" 
 							ev:onrowindexchange="scwin.ST0204G0_onrowindexchange" fixedColumnWithHidden="true"
 							id="ST0204G0" ignoreCellClick="false" rowNumHeaderValue="순번" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" 
-							style="" useShiftKey="true" autoFitMinWidth="0" readOnly="true" focusMode="row" fixedColumn="3">
+							style="" useShiftKey="true" autoFitMinWidth="0" readOnly="true" focusMode="row" fixedColumn="2">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
-									<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택" blockSelect="false"
+									<!-- <w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택" blockSelect="false"
 										sortable="false">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column4"
 										value="대표노선ID" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column2"
 										value="대표노선명" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="65" inputType="text" style="height:20px" id="column2"
+										value="요일구분" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="65" inputType="text" style="height:20px" id="column2"
+										value="상하행" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="60" inputType="text" style="height:20px" id="column3"
 										value="첫차시간" blockSelect="false" displayMode="label">
@@ -488,23 +579,29 @@
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column7"
 										value="운행간격(분)" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column5"
+									<w2:column removeBorderStyle="false" width="190" inputType="text" style="height:20px" id="column5"
 										value="기점명" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column6"
+									<w2:column removeBorderStyle="false" width="190" inputType="text" style="height:20px" id="column6"
 										value="종점명" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
-									<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
+									<!-- <w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
 										inputType="checkbox" id="chk" blockSelect="false">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="REP_ROUT_ID"
 										value="" blockSelect="false" displayMode="label" textAlign="">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="REP_ROUT_NM"
+										value="" blockSelect="false" displayMode="label" textAlign="">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="94" inputType="select" style="height:20px" id="DAY_DIV"
+										value="" blockSelect="false" displayMode="label" textAlign="">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="94" inputType="select" style="height:20px" id="WAY_DIV"
 										value="" blockSelect="false" displayMode="label" textAlign="">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="85" inputType="text" style="height:20px" id="FST_TM"
@@ -552,12 +649,12 @@
 							direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled" ref="" ev:onviewchange="scwin.SELECT_DIV_onviewchange">
 							<xf:choices>
 								<xf:item>
-									<xf:label><![CDATA[시간대별]]></xf:label>
-									<xf:value><![CDATA[TIME]]></xf:value>
+									<xf:label><![CDATA[운행순번별]]></xf:label>
+									<xf:value><![CDATA[OPER_SN]]></xf:value>
 								</xf:item>
 								<xf:item>
-									<xf:label><![CDATA[일별]]></xf:label>
-									<xf:value><![CDATA[DAY]]></xf:value>
+									<xf:label><![CDATA[배차별]]></xf:label>
+									<xf:value><![CDATA[ALLOC]]></xf:value>
 								</xf:item>
 								<!-- <xf:item>
 									<xf:label><![CDATA[월별]]></xf:label>
@@ -575,19 +672,66 @@
 						</w2:inputCalendar>
 						<w2:span label="~" style="margin-right: 10px;" id=""></w2:span>
 						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
-							style="width: 120px;margin-top: 3px;" id="L_DATE" renderType="component" renderDiv="true" calendarValueType="yearMonthDate"
-							ref="data:dma_sub_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange">
+							style="width: 120px;" id="L_DATE" renderType="component" renderDiv="true" calendarValueType="yearMonthDate"
+							ref="data:dma_sub_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange" minYear="2000"
+							maxYear="2025">
 						</w2:inputCalendar>
 					</xf:group>
+					
 					<xf:group style="position:relative;" id="" class="">
 						<canvas id="chart_ST0204" style="position:absolute;"></canvas>
 					</xf:group>
 					
 					<xf:group id="" class="horizontal_line"></xf:group>
-					<!--  <xf:group style="" id="" class="label">
-						<w2:span label="단위 : [평균통행속도:km/h]" style="float: left;margin-right: 3px; margin-top:5px;" id=""></w2:span>
-					</xf:group>-->					
-					<xf:group id="" class="" style="">
+					
+					<xf:group id="ST0204T0" class="" style="position: relative;">
+						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_ROUT_AVER_OPER_SP_STAT_2" vals="AVRG_SPD"
+							rows="OPER_DT,REP_ROUT_NM" cols="ALLOC_NO,OPER_SN" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0204" renderMode="compact"
+							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Average" allTotalName="평균속도"
+							digitsAfterDecimal="1" useNumberFormat="true" autoFitMinWidth="1300" autoPopupInvalidMessage="" headerTextAlign="center"
+							noResultMessage="">
+							<w2:fieldInfo>
+								<w2:field id="OPER_DT" name="운행일"></w2:field>
+								<w2:field id="REP_ROUT_ID" name="대표노선ID"></w2:field>
+								<w2:field id="REP_ROUT_NM" name="대표노선명"></w2:field>
+								<w2:field id="ALLOC_NO" name="배차번호"></w2:field>
+								<w2:field id="OPER_SN" name="운행순번"></w2:field>
+								<w2:field id="ROUT_ID" name="노선ID"></w2:field>
+								<w2:field id="ROUT_NM" name="노선명"></w2:field>
+								<w2:field id="STAT_H" name="시간"></w2:field>
+								<w2:field id="AVRG_SPD" name="평균속도"></w2:field>
+								<w2:field id="MAX_SPD" name="최대속도"></w2:field>
+								<w2:field id="MIN_SPD" name="최저속도"></w2:field>
+							</w2:fieldInfo>
+						</w2:pivot>
+					</xf:group>
+					
+					<xf:group id="ST0204T1" class="" style="position: relative; display: none;visibility:hidden;">
+						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_ROUT_AVER_OPER_SP_STAT_2" vals="AVRG_SPD"
+							rows="OPER_DT,REP_ROUT_NM,OPER_SN" cols="ALLOC_NO" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0204_sub" renderMode="compact"
+							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Average" allTotalName="평균속도"
+							digitsAfterDecimal="1" useNumberFormat="true" autoFitMinWidth="1300" autoPopupInvalidMessage="" headerTextAlign="center"
+							noResultMessage="">
+							<w2:fieldInfo>
+								<w2:field id="OPER_DT" name="운행일"></w2:field>
+								<w2:field id="REP_ROUT_ID" name="대표노선ID"></w2:field>
+								<w2:field id="REP_ROUT_NM" name="대표노선명"></w2:field>
+								<w2:field id="ALLOC_NO" name="배차번호"></w2:field>
+								<w2:field id="OPER_SN" name="운행순번"></w2:field>
+								<w2:field id="ROUT_ID" name="노선ID"></w2:field>
+								<w2:field id="ROUT_NM" name="노선명"></w2:field>
+								<w2:field id="STAT_H" name="시간"></w2:field>
+								<w2:field id="AVRG_SPD" name="평균속도"></w2:field>
+								<w2:field id="MAX_SPD" name="최대속도"></w2:field>
+								<w2:field id="MIN_SPD" name="최저속도"></w2:field>
+							</w2:fieldInfo>
+						</w2:pivot>
+					</xf:group>
+					
+					<xf:group style="" id="" class="label">
+						<w2:span label="단위 : [평균통행속도:km/h]" style="float: right;margin-right: 3px; margin-top:5px;" id=""></w2:span>
+					</xf:group>
+					<!-- <xf:group id="" class="" style="">
 				    	<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
 							dataList="data:dlt_BRT_ROUT_AVER_OPER_SP_STAT" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 							ev:onrowindexchange="scwin.ST0204G1_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true"
@@ -676,7 +820,7 @@
 								</w2:row>
 							</w2:footer>
 						</w2:gridView>
-					</xf:group>
+					</xf:group> -->
 				</xf:group><!-- pgm_detail -->
 			</xf:group>
 		</xf:group>

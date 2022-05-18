@@ -11,4 +11,5 @@ public interface ST0204Mapper {
 	public List ST0204G0R0(Map param);
 	
 	public List ST0204G1R0(Map param);
+	public List ST0204G1R1(Map param);
 }

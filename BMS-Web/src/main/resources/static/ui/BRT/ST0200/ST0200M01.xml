@@ -663,17 +663,11 @@
 					</xf:group>
 					<xf:group></xf:group><!-- margin -->
 					<xf:group id="" class="" style="">
-						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
-							dataList="data:dlt_BMS_ROUT_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.ST0200G0_oncellclick" ev:oneditkeyup=""
-							ev:onkeyup="" ev:onrowindexchange="scwin.ST0200G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange=""
-							fixedColumnWithHidden="true" id="ST0200G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="false"
-							rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true"
-							visibleRowNum="" wheelRows="" autoFitMinWidth="0" disabledScrollHidden="" editModeEvent="" editModeEventIcon=""
-							checkEditableInputClass="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll="" ignoreNonEditableCellTabEnter=""
-							readOnly="true" keepDefaultColumnWidth="" oddEvenColorDisplay="" rowNumWidth="" summaryAuto="" excludeDeletedRows=""
-							useCtrlOnMultisort="" useFilterList="" useFilterListSync="" sortedIconPosition="" sortable="" sortOrderReverse=""
-							showSortableUseFilter="" focusMode="row" rowNumStatusUniqueId="" rowNumStatusResize="" ev:onbeforecolumnmove="" userData1=""
-							ev:onheaderclick="scwin.ST0200G0_onheaderclick">
+						<w2:gridView autoFit="lastColumn" class="cm_grid left"
+							dataList="data:dlt_BMS_ROUT_MST" ev:oncellclick="scwin.ST0200G0_oncellclick" ev:onrowindexchange="scwin.ST0200G0_onrowindexchange" 
+							fixedColumnWithHidden="true" id="ST0200G0" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="false"
+							rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true" 
+							autoFitMinWidth="0" readOnly="true" focusMode="row" ev:onheaderclick="scwin.ST0200G0_onheaderclick">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
@@ -785,7 +779,7 @@
 								<w2:field id="REP_ROUT_ID" name="대표노선ID"></w2:field>
 								<w2:field id="ROUT_ID" name="노선ID"></w2:field>
 								<w2:field id="ROUT_NM" name="노선명"></w2:field>
-								<w2:field id="STAT_H" name="통계시간"></w2:field>
+								<w2:field id="STAT_H" name="시간"></w2:field>
 								<w2:field id="AVRG_SPD" name="평균속도"></w2:field>
 								<w2:field id="MAX_SPD" name="최대속도"></w2:field>
 								<w2:field id="MIN_SPD" name="최저속도"></w2:field>
@@ -804,7 +798,7 @@
 								<w2:field id="REP_ROUT_ID" name="대표노선ID"></w2:field>
 								<w2:field id="ROUT_ID" name="노선ID"></w2:field>
 								<w2:field id="ROUT_NM" name="노선명"></w2:field>
-								<w2:field id="STAT_H" name="통계시간"></w2:field>
+								<w2:field id="STAT_H" name="시간"></w2:field>
 								<w2:field id="AVRG_SPD" name="평균속도"></w2:field>
 								<w2:field id="MAX_SPD" name="최대속도"></w2:field>
 								<w2:field id="MIN_SPD" name="최저속도"></w2:field>

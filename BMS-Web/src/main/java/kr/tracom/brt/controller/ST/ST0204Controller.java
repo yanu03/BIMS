@@ -27,6 +27,7 @@ public class ST0204Controller extends ControllerSupport {
 	@RequestMapping("/st/ST0204G1R0")
 	public @ResponseBody Map<String, Object> ST0204G1R0() throws Exception {
 		result.setData("dlt_BRT_ROUT_AVER_OPER_SP_STAT", st0204Service.ST0204G1R0());
+		result.setData("dlt_BRT_ROUT_AVER_OPER_SP_STAT_2", st0204Service.ST0204G1R1());
 		return result.getResult();
 	}
 	
