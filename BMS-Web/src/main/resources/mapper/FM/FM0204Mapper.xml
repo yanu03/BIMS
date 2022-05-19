@@ -25,7 +25,7 @@
 	WHERE 
 		A.FCLT_KIND != 'FK004' AND A.PARAM_DIV = 'PD003'
 	GROUP BY
-		PARAM_KIND
+		PARAM_KIND, NODE_TYPE
 </select>
 
 <!-- 시설물(에어튜브) 파라미터 헤더 조회-->

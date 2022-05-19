@@ -664,8 +664,9 @@
 			} // end if
 
 		} // end for
-      	
+	 
 	  var selectedDvcKind = dlt_BMS_DVC_INFO.getCellData(row, "DVC_KIND");
+	  var dvc_cond = dlt_BMS_DVC_INFO.getCellData(row, "DVC_COND");
 	  switch (selectedDvcKind){
 			case "DK001":
 				selectImg = "/cm/images/bms/OBE_normal_selected.PNG";
@@ -726,7 +727,7 @@
 				selectImg = "/cm/images/bms/tag_normal_selected.png";
 		//		selectImg = "/cm/images/bms/bad_icon.PNG";
 				if(dvc_cond == "DC021")
-					selectImg = "/cm/images/bms/tag_abnoraml_selected.png";
+					selectImg = "/cm/images/bms/tag_abnormal_selected.png";
 				break;		
 		}      
 		
