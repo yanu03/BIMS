@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,7 @@ public class EventThread extends Thread{
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	private Queue<KafkaMessage> kafkaQ = new LinkedList<>();
+	private ConcurrentLinkedQueue<KafkaMessage> kafkaQ = new ConcurrentLinkedQueue<>();
 	private String sessionId;	
 	
 	private boolean bRunning = true;
@@ -115,12 +116,15 @@ public class EventThread extends Thread{
 	
 	
 	public void addKafkaMessage(KafkaMessage kafkaMessage) {		
-		kafkaQ.add(kafkaMessage);		
+		kafkaQ.offer(kafkaMessage);		
 	}
 	
 	
 	public KafkaMessage getKafkaMessage() {
-		return kafkaQ.poll();
+		while (kafkaQ.peek() != null) {
+			return kafkaQ.poll();
+		}
+		 return null;
 	}
 	
 	public int getKafkaSize() {
