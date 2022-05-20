@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.tracom.brt.domain.VH0204.VH0204Mapper">
+
+<select id="VH0204G0R0" parameterType="Map" resultType="Map">
+	SELECT
+		DATE_FORMAT(UPD_DTM, '%Y-%m-%d %H:%i:%s') UPD_DTM 
+		,ROUT_ID
+		,REP_ROUT_ID
+		,INT_ROUT_ID
+		,REP_ROUT_NM
+		,ROUT_NM
+		,ROUT_TYPE
+		,ROUT_DIV
+		,DVC_NM
+		,RSV_ROUT_YN
+		,ST_STTN_ID
+		,ST_STTN_NM
+		,ST_STTN_ENM
+		,ED_STTN_ID
+		,ED_STTN_ENM
+		,ED_STTN_NM
+		,RET_STTN_ID
+		,RET_STTN_NM
+		,RET_STTN_ENM
+		,STTN_CNT
+		,ROUT_LEN
+		,ROUT_STRT_LEN
+		,CURVATURE
+		,JIT_DSPCH_YN
+		,LIC_VHC_CNT
+		,SPR_VHC_CNT
+		,DATE_FORMAT(APPL_ST_DT, '%Y-%m-%d') APPL_ST_DT 
+		,DATE_FORMAT(APPL_ED_DT, '%Y-%m-%d') APPL_ED_DT 
+		,WAY_DIV
+		,USER_WAY_DIV
+		,WAY_INFO
+		,AREA
+		,SHAPE_DIV
+		,HOLI_YN
+		,USE_YN
+		,DEL_YN
+		,HIS_DIV
+		,REMARK
+		,UPD_ID
+	FROM
+		BMS_ROUT_HIS A
+	<where>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(ROUT_TYPE)">
+				ROUT_TYPE = #{ROUT_TYPE}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(HIS_DIV)">
+				AND HIS_DIV = #{HIS_DIV}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT)">
+				AND (ROUT_ID LIKE CONCAT('%',#{CONTENT},'%') || ROUT_NM LIKE CONCAT('%',#{CONTENT},'%'))
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0204) and @kr.tracom.util.CommonUtil@empty(L_DATE_VH0204)">
+			<![CDATA[AND DATE_FORMAT(UPD_DTM, '%Y%m%d') >= #{F_DATE_VH0204}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0204) and @kr.tracom.util.CommonUtil@empty(F_DATE_VH0204)">
+			<![CDATA[AND DATE_FORMAT(UPD_DTM, '%Y%m%d') <= #{L_DATE_VH0204}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0204) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0204)">
+			AND DATE_FORMAT(UPD_DTM, '%Y%m%d') BETWEEN #{F_DATE_VH0204} AND #{L_DATE_VH0204}
+		</if>			
+	</where>
+	ORDER BY
+		UPD_DTM DESC, ROUT_ID DESC
+</select>
+	
+</mapper>
