@@ -658,6 +658,12 @@
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column31"
 										value="데이터길이" blockSelect="false" displayMode="label">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column33"
+										value="속성1" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column34"
+										value="속성2" blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column width="100" style="height:20px;" inputType="text" id="column28" value="사용여부"
 										blockSelect="false">
 									</w2:column>
@@ -688,6 +694,12 @@
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_LENGTH"
 										value="" blockSelect="false" displayMode="label" readOnly="false" textAlign="right">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ATTR1_VAL"
+										value="" blockSelect="false" displayMode="label" readOnly="false">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ATTR2_VAL"
+										value="" blockSelect="false" displayMode="label" readOnly="false">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="USE_YN"
 										value="" blockSelect="false" displayMode="label" readOnly="false" displayFormatter="scwin.useYnDisFormatter" allOption=""

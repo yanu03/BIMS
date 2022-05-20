@@ -454,6 +454,9 @@
 	scwin.sub_VD0204G0R1_submitdone = function(e) {
 		scwin.setGridViewInfo();
 		
+		VD0204G0.mergeCol(0,false);
+		VD0204G0.mergeCells("byrestriccol");
+		
 	};
 	
 	//동적 그리드 함수
@@ -732,6 +735,8 @@
 	scwin.sub_VD0204G2R1_submitdone = function(e) {
 		scwin.setTagGridViewInfo();
 		com.setFocusedCell(VD0204G2, "VHC_ID");
+		
+		VD0204G2.mergeCells("byrestriccol");
 	};
 	
 	//동적 그리드 함수 (태그리스)

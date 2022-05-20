@@ -175,7 +175,10 @@
 	};
 	
 	scwin.btn_excel_onclick = function() {
-		com.exlGrid(ST0204G1);
+		var excelOpt = {};  //excel download 옵션 
+		excelOpt.fileName = "배차 순번별 평균속도.xls";    //또는 xlsx 확장자 사용 
+		
+		pivot_ST0204.pivotExcelDownload(excelOpt);
 	};
 	
 	scwin.sub_ST0204G0R0_submitdone = function(e) {

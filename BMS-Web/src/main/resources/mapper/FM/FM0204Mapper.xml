@@ -5,7 +5,12 @@
 
 <!-- 시설물 상태 파라미터 조회 프로시서 -->
 <select id="FM0204G0R0" resultType="Map">
-	CALL PROC_FCLT_STATUS()
+	<if test="@kr.tracom.util.CommonUtil@notEmpty(NODE_ID)">			 
+		CALL PROC_FCLT_STATUS(#{NODE_ID});
+	</if>
+	<if test="@kr.tracom.util.CommonUtil@empty(NODE_ID)">			 
+		CALL PROC_FCLT_STATUS();
+	</if>
 </select>
 
 <!-- 시설물(에어튜브) 상태 파라미터 조회 프로시서-->

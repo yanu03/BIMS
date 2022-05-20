@@ -511,6 +511,7 @@
 						<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
 						<w2:key id="CONTENT3" name="name2" dataType="text"></w2:key>
 						<w2:key id="USE_YN" name="name3" dataType="text"></w2:key>
+						<w2:key id="NODE_ID" name="노드ID" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataMap baseNode="map" id="dma_subsearch">
@@ -990,6 +991,12 @@
 				break;
 			case 'PK003':
 				T0_PK003.setDisabled(false);
+				T0_PK003_AUTO.setDisabled(false);
+				if(autoYn[i] == 'Y'){
+					T0_PK003_AUTO.setValue(1);
+				}else{
+					T0_PK003_AUTO.setValue(0);
+				}
 				break;
 			case 'PK004':
 				T0_PK004.setDisabled(false);
@@ -1002,15 +1009,39 @@
 				break;
 			case 'PK005':
 				T0_PK005.setDisabled(false);
+				T0_PK005_AUTO.setDisabled(false);
+				if(autoYn[i] == 'Y'){
+					T0_PK005_AUTO.setValue(1);
+				}else{
+					T0_PK005_AUTO.setValue(0);
+				}
 				break;
 			case 'PK006':
 				T0_PK006.setDisabled(false);
+				T0_PK006_AUTO.setDisabled(false);
+				if(autoYn[i] == 'Y'){
+					T0_PK006_AUTO.setValue(1);
+				}else{
+					T0_PK006_AUTO.setValue(0);
+				}
 				break;
 			case 'PK007':
 				T0_PK007.setDisabled(false);
+				T0_PK007_AUTO.setDisabled(false);
+				if(autoYn[i] == 'Y'){
+					T0_PK007_AUTO.setValue(1);
+				}else{
+					T0_PK007_AUTO.setValue(0);
+				}
 				break;
 			case 'PK008':
 				T0_PK008.setDisabled(false);
+				T0_PK008_AUTO.setDisabled(false);
+				if(autoYn[i] == 'Y'){
+					T0_PK008_AUTO.setValue(1);
+				}else{
+					T0_PK008_AUTO.setValue(0);
+				}
 				break;
 			case 'PK009':
 				T0_PK009_AUTO.setDisabled(false);
@@ -1038,6 +1069,7 @@
 				break;
 			case 'PK011':
 				LOG_LEVEL.setDisabled(false);
+				
 				break;
 			case 'PK012':
 				T0_PK012.setDisabled(false);
@@ -1071,6 +1103,12 @@
 				break;
 			case 'PK022':
 				T0_PK022.setDisabled(false);
+				T0_PK022_AUTO.setDisabled(false);
+				if(autoYn[i] == 'Y'){
+					T0_PK022_AUTO.setValue(1);
+				}else{
+					T0_PK022_AUTO.setValue(0);
+				}
 				break;
 			case 'PK023':
 				T0_PK023.setDisabled(false);
