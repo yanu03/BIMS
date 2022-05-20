@@ -177,12 +177,22 @@
 	};
 	
 	scwin.ST0200G0_oncellclick = function(row,col,colId) {
+		var rowCount = dlt_BMS_ROUT_MST.getRowCount();
+		
+		//chk말고 다른 cell클릭시
 		if (col != "0"){
-		   if(ST0200G0.getCellChecked(row, 'chk')==0){
+			if(ST0200G0.getCellChecked(row, 'chk')==0){
+				for(var i = 0; i < rowCount; i++){
+					ST0200G0.setCellChecked(i, 'chk', false);			
+				}
+			   	ST0200G0.setCellChecked(row, 'chk', true);
+			}
+		
+		   /*if(ST0200G0.getCellChecked(row, 'chk')==0){
 		      ST0200G0.setCellChecked(row, 'chk', true);
 		   }else if(ST0200G0.getCellChecked(row, 'chk')==1){
 		      ST0200G0.setCellChecked(row, 'chk', false);
-		   }
+		   }*/
 		}
 		
 		var chkJsonData = ST0200G0.getCheckedJSON("chk");
@@ -200,7 +210,6 @@
 		
 		if(chkJsonData.length != 0){
 			com.executeSubmission(sub_ST0200G1R1);
-			
 			pivot_ST0200.show();
 		}else if(chkJsonData.length == 0){
 			chart_ST0200.destroy();

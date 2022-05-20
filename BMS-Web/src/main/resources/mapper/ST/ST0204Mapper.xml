@@ -45,7 +45,7 @@
 			A.REP_ROUT_ID, A.DAY_DIV, A.WAY_DIV
 	</select>
   
-<!-- 그래프 데이터 -->
+<!-- 그래프 쿼리 -->
   <select id="ST0204G1R0" resultType="Map">
   	SELECT
   		<if test="SELECT_DIV == 'OPER_SN'">
@@ -134,7 +134,7 @@
 		A.OPER_SN -->
   </select>
   
-  <!-- 피봇 그리드 데이터 -->
+  <!-- 피봇 그리드 쿼리 -->
   <select id="ST0204G1R1" resultType="Map">
   	SELECT
   		<if test="SELECT_DIV == 'OPER_SN'">
