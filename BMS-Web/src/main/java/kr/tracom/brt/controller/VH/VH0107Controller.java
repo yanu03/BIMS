@@ -8,19 +8,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.tracom.brt.domain.VH0204.VH0204Service;
+import kr.tracom.brt.domain.VH0107.VH0107Service;
 import kr.tracom.cm.support.ControllerSupport;
 
 @Controller
 @Scope("request")
-public class VH0204Controller extends ControllerSupport {
+public class VH0107Controller extends ControllerSupport {
 
 	@Autowired
-	private VH0204Service vh0204Service;
+	private VH0107Service vh0107Service;
 
-	@RequestMapping("/vh/VH0204G0R0")
-	public @ResponseBody Map<String, Object> VH0204G0R0() throws Exception {
-		result.setData("dlt_BMS_STTN_HIS", vh0204Service.VH0204G0R0());
+	@RequestMapping("/vh/VH0107G0R0")
+	public @ResponseBody Map<String, Object> VH0107G0R0() throws Exception {
+		result.setData("dlt_BRT_STTN_STOP_HIS", vh0107Service.VH0107G0R0());
 		return result.getResult();
 	}
 	

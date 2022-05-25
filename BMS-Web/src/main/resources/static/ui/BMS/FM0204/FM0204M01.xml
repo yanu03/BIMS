@@ -662,7 +662,7 @@
 		com.alert("일괄 리셋입니다. (후 작업 필요)");
 	}
 	
-	//BIT제어 전송 버튼 클릭 이벤트
+	//정류소제어 전송 버튼 클릭 이벤트
 	scwin.selectControl = function() {
 		com.alert("전송입니다. (후 작업 필요)");
 	}

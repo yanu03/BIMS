@@ -183,21 +183,21 @@
 					</xf:group>
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">
-						<w2:gridView sortEvent="onclick" ev:oncellclick=""
-							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순서" sortable="true"
-							rowStatusHeaderValue="상태"  overflowX="scroll" overflowY="scroll" rowStatusVisible="false" ev:onrowindexchange="scwin.PI0301G0_onviewchange"
-							fixedColumnWithHidden="true" dataList="data:dlt_BMS_NEWS_CFG_INFO" ignoreCellClick="false" style="height:100%;" autoFit="lastColumn"
-							visibleRowNum="" id="PI0301G0" class="cm_grid left" tooltipPositionY="" focusMode="row">
+						<w2:gridView sortEvent="onclick" ev:oncellclick="" showSortableImage="" rowNumVisible="true" useShiftKey="true"
+							readOnly="" scrollByColumn="false" rowNumHeaderValue="순서" sortable="true" rowStatusHeaderValue="상태" overflowX="scroll"
+							overflowY="scroll" rowStatusVisible="false" ev:onrowindexchange="scwin.PI0301G0_onviewchange" fixedColumnWithHidden="true"
+							dataList="data:dlt_BMS_NEWS_CFG_INFO" ignoreCellClick="false" style="height:100%;" autoFit="lastColumn" visibleRowNum=""
+							id="PI0301G0" class="cm_grid left" tooltipPositionY="" focusMode="row">
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row2">
-									<w2:column width="100" style="height:20px;" inputType="text" id="column9" value="뉴스제공처 ID" blockSelect="false"
-										displayMode="label" userData1="" userData2="" class="req">
+									<w2:column width="100" style="height:20px;" inputType="text" id="column9" value="뉴스제공처 ID"
+										blockSelect="false" displayMode="label" userData1="" userData2="" class="req">
 									</w2:column>
-									<w2:column width="150" style="height:20px;" inputType="text" id="column17" value="뉴스제공처" blockSelect="false"
-										displayMode="label" userData1="" class="req">
+									<w2:column width="150" style="height:20px;" inputType="text" id="column17" value="뉴스제공처"
+										blockSelect="false" displayMode="label" userData1="" class="req">
 									</w2:column>
-									<w2:column width="400" style="height:20px;" inputType="text" id="column11" value="뉴스 URL" blockSelect="false"
-										displayMode="label" userData1="" class="req">
+									<w2:column width="400" style="height:20px;" inputType="text" id="column11" value="뉴스 URL"
+										blockSelect="false" displayMode="label" userData1="" class="req">
 									</w2:column>
 									<w2:column width="100%" style="height:20px;" inputType="text" id="column30" value="비고"
 										blockSelect="false">
@@ -222,8 +222,8 @@
 										</w2:choices>
 									</w2:column>
 									<w2:column width="" style="height:20px;" inputType="text" id="REMARK" blockSelect="false"
-										displayFormat="" calendarValueType="yearMonthDateTime" applyFormat="" displayMode="" readOnly="true"
-										displayFormatter="" textAlign="left">
+										displayFormat="" calendarValueType="yearMonthDateTime" applyFormat="" displayMode="" readOnly="true" displayFormatter=""
+										textAlign="left">
 										<w2:choices>
 											<w2:itemset nodeset="data:dlt_organizationBasic">
 												<w2:label ref="PARENT_ORG_NM"></w2:label>
@@ -235,28 +235,26 @@
 							</w2:gBody>
 							<w2:footer style="" id="footer1">
 								<w2:row style="" id="row3">
-									<w2:column removeBorderStyle="false" width="" inputType="expression" style="height:20px;" id="column42" value=""
-										blockSelect="false" displayMode="label" colSpan="15" rowSpan="" expression="&quot;데이터 개수 : &quot; + COUNT('GRG_ID')"
+									<w2:column removeBorderStyle="false" width="" inputType="expression" style="height:20px;" id="column42"
+										value="" blockSelect="false" displayMode="label" colSpan="15" rowSpan="" expression="&quot;데이터 개수 : &quot; + COUNT('GRG_ID')"
 										textAlign="left">
 									</w2:column>
 								</w2:row>
 							</w2:footer>
-				</w2:gridView>
+						</w2:gridView>
 					</xf:group>
 				</xf:group><!-- pgm_list -->
 				
-				<xf:group id="" class="vertical_line">
-				</xf:group>
+				<xf:group id="" class="vertical_line"></xf:group>
 				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_250_20_a" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="뉴스 제공처 설정" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
+					<xf:group class="" id="" style=""></xf:group>
 					<xf:group class="" id="" style="">
-					</xf:group>
-					<xf:group class="" id="" style="">
-						<xf:group id="PI0301F0" style="width:100%;" class="w2tb tb" tagname="table" >
+						<xf:group id="PI0301F0" style="width:100%;" class="w2tb tb" tagname="table">
 							<w2:attributes>
 								<w2:summary></w2:summary>
 							</w2:attributes>
@@ -267,32 +265,47 @@
 								<xf:group style="" tagname="col"></xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" style="" class="w2tb_th req">뉴스제공처&amp;nbsp;ID<w2:attributes>
+								<xf:group tagname="th" style="" class="w2tb_th req">
+									뉴스제공처&amp;nbsp;ID
+									<w2:attributes>
 										<w2:scope>row</w2:scope>
-									</w2:attributes></xf:group>
+									</w2:attributes>
+								</xf:group>
 								<xf:group tagname="td" style="" class="w2tb_td">
 									<w2:attributes>
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:input adjustMaxLength="false" id="PROV_ID" style="width: 100px;height: 24px;" ref="data:dlt_BMS_NEWS_CFG_INFO.PROV_ID"
-										placeholder="홍길동" readOnly="true" initValue="" userData1="M" disabled="true">
+									<xf:input adjustMaxLength="false" id="PROV_ID" style="width: 100px;height: 24px;"
+										ref="data:dlt_BMS_NEWS_CFG_INFO.PROV_ID" placeholder="홍길동" readOnly="true" initValue="" userData1="M" disabled="true">
 									</xf:input>
 								</xf:group>
 							</xf:group>
-							<xf:group tagname="tr" style=""><xf:group tagname="th" class="w2tb_th req">뉴스제공처<w2:attributes><w2:scope>row</w2:scope></w2:attributes></xf:group>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" class="w2tb_th req">
+									뉴스제공처
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
 								<xf:group tagname="td" class="w2tb_td" style="">
 									<w2:attributes>
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:input adjustMaxLength="false" id="PROV_NM" placeholder="" readOnly="false"
-										ref="data:dlt_BMS_NEWS_CFG_INFO.PROV_NM" style="width: 100%;height: 24px;" refSync="" userData1="M" maxlength="20">
+										ref="data:dlt_BMS_NEWS_CFG_INFO.PROV_NM" style="width: 300px;height: 24px;" refSync="" userData1="M" maxlength="20">
 									</xf:input>
-								</xf:group></xf:group><xf:group tagname="tr" style="">
-								<xf:group tagname="th" style="" class="w2tb_th req">뉴스URL<w2:attributes>
+									<w2:span label="※제공처명(신문사명)을 정확하게 작성해주세요." style="width: 100px;height: 23px; margin-left:10px;" id=""></w2:span>
+								</xf:group>
+							</xf:group>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" style="" class="w2tb_th req">
+									뉴스URL
+									<w2:attributes>
 										<w2:scope>row</w2:scope>
-									</w2:attributes></xf:group>
+									</w2:attributes>
+								</xf:group>
 								<xf:group tagname="td" style="" class="w2tb_td">
 									<w2:attributes>
 										<w2:colspan>3</w2:colspan>
@@ -300,11 +313,18 @@
 									</w2:attributes>
 									<xf:group class="ml5 fr" id="" style=""></xf:group>
 									<xf:input adjustMaxLength="false" id="PROV_URL" placeholder="" readOnly="false"
-										ref="data:dlt_BMS_NEWS_CFG_INFO.PROV_URL" style="width: 100%;height: 24px;" refSync="" userData1="M" maxlength="20">
-									</xf:input>			
+										ref="data:dlt_BMS_NEWS_CFG_INFO.PROV_URL" style="width: 300px;height: 24px;" refSync="" userData1="M" maxlength="">
+									</xf:input>
+									<w2:span label="※RSS형식만 지원합니다." style="width: 100px;height: 23px; margin-left:10px;" id=""></w2:span>
 								</xf:group>
 							</xf:group>
-							<xf:group tagname="tr" style=""><xf:group tagname="th" class="w2tb_th">사용여부<w2:attributes><w2:scope>row</w2:scope></w2:attributes></xf:group>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" class="w2tb_th">
+									사용여부
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes>
 										<w2:colspan>3</w2:colspan>
@@ -323,7 +343,9 @@
 											</xf:item>
 										</xf:choices>
 									</xf:select1>
-								</xf:group></xf:group><xf:group tagname="tr" style="">
+								</xf:group>
+							</xf:group>
+							<xf:group tagname="tr" style="">
 								<xf:group tagname="th" class="w2tb_th" style="vertical-align: top">
 									비고
 									<w2:attributes>
@@ -335,7 +357,8 @@
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:textarea adjustMaxLength="false" id="" style="width: 100%;height: 70px" ref="data:dlt_BMS_NEWS_CFG_INFO.REMARK" maxlength="200">
+									<xf:textarea adjustMaxLength="false" id="" style="width: 100%;height: 70px"
+										ref="data:dlt_BMS_NEWS_CFG_INFO.REMARK" maxlength="200">
 									</xf:textarea>
 								</xf:group>
 							</xf:group>
@@ -345,8 +368,8 @@
 					<xf:group style="position: relative;" id="">
 						<xf:image src="/cm/images/add/bg_brt.png" style="width: 100%;height: 100%; position: absolute;" id=""></xf:image>
 					</xf:group>
-				</xf:group> <!--end pgm_detail-->
-			</xf:group> <!-- end content --> 
+				</xf:group><!--end pgm_detail-->
+			</xf:group><!-- end content --> 
 		</xf:group> <!-- end container -->
 	</body>
 </html>

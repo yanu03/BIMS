@@ -23,7 +23,7 @@
 			ON C.VHC_ID = A.VHC_ID
 			</if>
 			<if test="@kr.tracom.util.CommonUtil@notEmpty(OPER_DT)">
-			LEFT JOIN BRT_SELECT_CUR_OPER_HIS A
+			LEFT JOIN BRT_MOVE_CUR_OPER_HIS A
 			ON C.VHC_ID = A.VHC_ID
 			</if>
 			LEFT JOIN BMS_ROUT_MST B
