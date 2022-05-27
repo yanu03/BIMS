@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ev="http://www.w3.org/2001/xml-events"
+	xmlns:w2="http://www.inswave.com/websquare" xmlns:xf="http://www.w3.org/2002/xforms">
+	
+	<head meta_vertical_guides="" meta_horizontal_guides="">	  
+<!-- 	<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=31aa62fb189294413e43c24caeb82419"></script>
+	<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?autoload=false"></script>
+	<script type="text/javascript">
+	kakao.maps.load(function() {
+		// v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
+		var map = new kakao.maps.Map(node, options);
+	});
+	</script>  -->	   
+		<w2:type>DEFAULT</w2:type>
+		<w2:buildDate/>
+		<xf:model>
+			<xf:instance>
+				<data xmlns="" />
+			</xf:instance>
+			<w2:dataCollection baseNode="map">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_GRG_MST" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="GRG_ID" name="차고지ID" dataType="text"></w2:column>
+						<w2:column id="GRG_NM" name="차고지명" dataType="text"></w2:column>
+						<w2:column id="GRG_ENM" name="차고지영문명" dataType="text"></w2:column>
+						<w2:column id="OWNER_TYPE" name="소유형태" dataType="text"></w2:column>
+						<w2:column id="ADDR" name="주소" dataType="text"></w2:column>
+						<w2:column id="PHONE" name="전화번호" dataType="text"></w2:column>
+						<w2:column id="FAX" name="팩스" dataType="text"></w2:column>
+						<w2:column id="EMAIL" name="이메일" dataType="text"></w2:column>
+						<w2:column id="CNG_YN" name="CNG 충전 여부" dataType="text" defaultValue="Y"></w2:column>
+						<w2:column id="ELEC_YN" name="전기 충전 여부" dataType="text" defaultValue="Y"></w2:column>
+						<w2:column id="LEGAL_AREA" name="법적면적" dataType="text"></w2:column>
+						<w2:column id="SECURE_AREA" name="확보면적" dataType="text"></w2:column>
+						<!-- <w2:column id="APPL_ST_DT" name="적용시작일" dataType="text"></w2:column>
+							<w2:column id="APPL_ED_DT" name="적용종료일" dataType="text"></w2:column> -->
+						<w2:column id="USE_YN" name="사용여부" dataType="text" defaultValue="Y"></w2:column>
+						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
+						<w2:column id="GPS_X" name="GPS_X" dataType="text"></w2:column>
+						<w2:column id="GPS_Y" name="GPS_Y" dataType="text"></w2:column>
+
+
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataMap baseNode="map" id="dma_result">
+					<w2:keyInfo>
+						<w2:key id="STATUS" name="STATUS" dataType="text"></w2:key>
+						<w2:key id="ICNT" name="입력건수" dataType="text"></w2:key>
+						<w2:key id="UCNT" name="수정건수" dataType="text"></w2:key>
+						<w2:key id="DCNT" name="삭제건수" dataType="text"></w2:key>
+						<w2:key id="TYPE" name="TYPE" dataType="text"></w2:key>
+					</w2:keyInfo>
+					<w2:data></w2:data>
+				</w2:dataMap>
+				<w2:dataMap baseNode="map" id="dma_search">
+					<w2:keyInfo>
+						<w2:key id="TYPE" name="name1" dataType="text"></w2:key>
+						<w2:key id="USE_YN" name="name3" dataType="text"></w2:key>
+						<w2:key id="GRG_ID" name="차고지ID" dataType="text"></w2:key>
+						<w2:key id="GRG_NM" name="차고지명" dataType="text"></w2:key>
+						<w2:key id="CONTENT1" name="name1" dataType="text"></w2:key>
+						<w2:key id="CONTENT2" name="name2" dataType="text"></w2:key>
+						<w2:key id="CONTENT3" name="name3" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+				<w2:dataMap baseNode="map" id="dma_SEQ_BMS_GRG_MST_0">
+					<w2:keyInfo>
+						<w2:key id="SEQ" name="SEQ" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_grgSearchItem" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="GRG_ID" name="차고지ID" dataType="text"></w2:column>
+						<w2:column id="GRG_NM" name="차고지명" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+
+				<w2:dataMap baseNode="map" id="dma_sub_search">
+					<w2:keyInfo>
+						<w2:key id="GRG_ID" name="차고지ID" dataType="text"></w2:key>
+						<w2:key id="GRG_NM" name="차고지명" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_GRG_RDS_INFO" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="GRG_ID" name="차고지ID" dataType="text"></w2:column>
+						<w2:column id="SN" name="순번" dataType="text"></w2:column>
+						<w2:column id="GPS_X" name="경도" dataType="text"></w2:column>
+						<w2:column id="GPS_Y" name="위도" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_repRoutItem" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="REP_ROUT_ID" name="대표노선ID" dataType="text"></w2:column>
+						<w2:column id="REP_ROUT_NM" name="대표노선명" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_STTNCRS_LINK_CMPSTN" saveRemovedData="true"><!-- 맵 노선 그리기용 -->
+					<w2:columnInfo>
+						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
+						<w2:column id="NODE_ID" name="노드ID" dataType="text"></w2:column>
+						<w2:column id="LINK_SN" name="노드순번" dataType="number" defaultValue="0"></w2:column>
+						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
+						<w2:column id="NODE_TYPE" name="노드유형" dataType="text"></w2:column>
+						<w2:column id="LINK_ID" name="링크ID" dataType="text"></w2:column>
+						<w2:column id="STTN_ID" name="정류소ID" dataType="text"></w2:column>
+						<w2:column id="STTN_NO" name="정류소번호" dataType="text"></w2:column>
+						<w2:column id="CRS_ID" name="교차로ID" dataType="text"></w2:column>
+						<w2:column id="GPS_X" name="경도" dataType="text"></w2:column>
+						<w2:column id="GPS_Y" name="위도" dataType="text"></w2:column>
+						<w2:column id="LEN" name="노선거리" dataType="number" defaultValue="0"></w2:column>
+						<w2:column id="AREA" name="권역" dataType="text"></w2:column>
+						<w2:column id="MORN_STD" name="집중모니터링기준" dataType="text"></w2:column>
+						<w2:column id="NEXT_NODE_ID" name="name15" dataType="text"></w2:column>
+						<w2:column id="NEXT_GPS_X" name="name16" dataType="text"></w2:column>
+						<w2:column id="NEXT_GPS_Y" name="name17" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ROUT_NODE_CMPSTN2" saveRemovedData="true"><!-- 정류소용 -->
+					<w2:columnInfo>
+						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
+						<w2:column id="NODE_ID" name="노드ID" dataType="text"></w2:column>
+						<w2:column id="NODE_SN" name="노드순번" dataType="number" defaultValue="0"></w2:column>
+						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
+						<w2:column id="NODE_TYPE" name="노드유형" dataType="text"></w2:column>
+						<w2:column id="LINK_ID" name="링크ID" dataType="text"></w2:column>
+						<w2:column id="STTN_ID" name="정류소ID" dataType="text"></w2:column>
+						<w2:column id="STTN_NO" name="정류소번호" dataType="text"></w2:column>
+						<w2:column id="CRS_ID" name="교차로ID" dataType="text"></w2:column>
+						<w2:column id="GPS_X" name="경도" dataType="text"></w2:column>
+						<w2:column id="GPS_Y" name="위도" dataType="text"></w2:column>
+						<w2:column id="ROUT_LEN" name="노선거리" dataType="number" defaultValue="0"></w2:column>
+						<w2:column id="AREA" name="권역" dataType="text"></w2:column>
+						<w2:column id="MORN_STD" name="집중모니터링기준" dataType="text"></w2:column>
+						<w2:column id="COND_ERROR" name="고장여부" dataType="text"></w2:column>
+						<w2:column id="WAY_DIV" name="상하행구분" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BRT_CUR_OPER_INFO" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="REP_ROUT_ID" name="대표노선ID" dataType="text"></w2:column>
+						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
+						<w2:column id="VHC_NO" name="차번" dataType="text"></w2:column>
+						<w2:column id="OPER_DT" name="운행일" dataType="text"></w2:column>
+						<w2:column id="VHC_ID" name="차량ID" dataType="text"></w2:column>
+						<w2:column id="GPS_X" name="현재GPS_X좌표" dataType="text"></w2:column>
+						<w2:column id="GPS_Y" name="현재GPS_Y좌표" dataType="text"></w2:column>
+						<w2:column id="REP_ROUT_NM" name="대표노선명" dataType="text"></w2:column>
+						<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
+						<w2:column id="CHAS_NO" name="차대번호" dataType="text"></w2:column>
+						<w2:column id="MAKER" name="제조사" dataType="text"></w2:column>
+						<w2:column id="DRV_NM" name="운전자" dataType="text"></w2:column>
+						<w2:column id="COMP_NM" name="운수사" dataType="text"></w2:column>
+						<w2:column id="BUS_STS" name="버스상태" dataType="text"></w2:column>
+						<w2:column id="OPER_STS" name="운행상태" dataType="text"></w2:column>
+						<w2:column id="ALLOC_NO" name="배차번호" dataType="text"></w2:column>
+						<w2:column id="CUR_SPD" name="현재속도" dataType="text"></w2:column>
+						<w2:column id="CUR_STOP_TM" name="현재정차시간" dataType="text"></w2:column>
+						<w2:column id="NEXT_NODE_ID" name="다음노드아이디" dataType="text"></w2:column>
+						<w2:column id="NEXT_NODE_NM" name="다음노드명" dataType="text"></w2:column>
+						<w2:column id="PRV_PLCE_NM" name="이전장소명" dataType="text"></w2:column>
+						<w2:column id="NODE_TYPE" name="노드유형" dataType="text"></w2:column>
+						<w2:column id="MESSAGE" name="디스패치메시지" dataType="text"></w2:column>
+						<w2:column id="EVT_TYPE" name="이벤트타입" dataType="text"></w2:column>
+						<w2:column id="NEXT_NODE_TYPE" name="다음노드유형" dataType="text"></w2:column>
+						<w2:column id="NODE_NM" name="이전노드명" dataType="text"></w2:column>
+						<w2:column id="DSPTCH_KIND" name="디스패치종류" dataType="text"></w2:column>
+						<w2:column id="DSPTCH_DIV" name="디스패치구분" dataType="text"></w2:column>
+						<w2:column id="LINK_ID" name="링크ID" dataType="text"></w2:column>
+						<w2:column id="VHC_KIND" name="차량종류" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ROUT_NODE_CMPSTN3" saveRemovedData="true"><!-- 교차로 그리드용 -->
+					<w2:columnInfo>
+						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
+						<w2:column id="NODE_ID" name="노드ID" dataType="text"></w2:column>
+						<w2:column id="NODE_SN" name="노드순번" dataType="number" defaultValue="0"></w2:column>
+						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
+						<w2:column id="NODE_TYPE" name="노드유형" dataType="text"></w2:column>
+						<w2:column id="LINK_ID" name="링크ID" dataType="text"></w2:column>
+						<w2:column id="STTN_ID" name="정류소ID" dataType="text"></w2:column>
+						<w2:column id="STTN_NO" name="정류소번호" dataType="text"></w2:column>
+						<w2:column id="CRS_ID" name="교차로ID" dataType="text"></w2:column>
+						<w2:column id="GPS_X" name="경도" dataType="text"></w2:column>
+						<w2:column id="GPS_Y" name="위도" dataType="text"></w2:column>
+						<w2:column id="ROUT_LEN" name="노선거리" dataType="number" defaultValue="0"></w2:column>
+						<w2:column id="AREA" name="권역" dataType="text"></w2:column>
+						<w2:column id="MORN_STD" name="집중모니터링기준" dataType="text"></w2:column>
+						<w2:column id="CRS_KIND" name="교차로종류" dataType="text"></w2:column>
+						<w2:column id="PHASE_CNT" name="현시수" dataType="number"></w2:column>
+						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
+						<w2:column id="CRS_STS" name="교차로상태" dataType="text"></w2:column>
+						<w2:column id="CTR_STS" name="제어기상태" dataType="text"></w2:column>
+						<w2:column id="CTR_MODE" name="신호제어모드" dataType="text"></w2:column>
+						<w2:column id="A_PHASE_NO" name="A_현시번호" dataType="text"></w2:column>
+						<w2:column id="A_PHASE_TM" name="A_현시진행시간" dataType="text"></w2:column>
+						<w2:column id="B_PHASE_NO" name="B_현시번호" dataType="text"></w2:column>
+						<w2:column id="B_PHASE_TM" name="B_현시진행시간" dataType="text"></w2:column>
+						<w2:column id="COND_ERROR" name="name25" dataType="text"></w2:column>
+						<w2:column id="CUR_PHASE_NO" name="현재현시" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_searchitem2" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="ROUT_ID" name="name1" dataType="text"></w2:column>
+						<w2:column id="ROUT_NM" name="name2" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>				
+			</w2:dataCollection>
+			<w2:workflowCollection></w2:workflowCollection>
+			<xf:submission id="sub_SI0101G0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_GRG_MST" action='/si/SI0101G0R0'
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="조회 중입니다..." ev:submit="" ev:submitdone="scwin.sub_SI0101G0R0_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_SI0101G0S0" ref='data:json,{"action":"modified","id":"dlt_BMS_GRG_MST"}' target="data:json,dma_result"
+				action="/si/SI0101G0S0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
+				customHandler="" mode="asynchronous" processMsg="저장 중입니다.." ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_SI0101G0K0" ref="" target="data:json,dma_SEQ_BMS_GRG_MST_0" action="/si/SI0101G0K0" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
+				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_SI0101SHI0" ref="" target="data:json,dlt_grgSearchItem" action="/si/SI0101SHI0" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
+				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_SI0101P0R0" ref="data:json,dma_search" target="data:json,dlt_GRG_RDS_INFO" action="/si/SI0101P0R0"
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_SI0101P0S0" ref='data:json,{"action":"modified","id":"dlt_GRG_RDS_INFO"}' target="data:json,dma_result"
+				action="/si/SI0101P0S0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
+				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_SI0409SHI0" ref="" target="data:json,dlt_repRoutItem" action="/repRout/selectRepRoutItem" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
+				ev:submit="" ev:submitdone="scwin.sub_SI0409SHI0_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_selectSttnCrsLink" ref="data:json,dma_search" target="data:json,dlt_BMS_STTNCRS_LINK_CMPSTN"
+				action="/rout/selectSttnCrsLink" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+				errorHandler="" customHandler="" mode="asynchronous" processMsg="조회 중입니다.." ev:submit=""
+				ev:submitdone="scwin.sub_selectSttnCrsLink_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_selectSttnListByRepRout" ref="data:json,dma_search" target="data:json,dlt_BMS_ROUT_NODE_CMPSTN2"
+				action="/mo/MO0101G1R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
+				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_selectSttnListByRepRout_submitdone"
+				ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_selectBus" ref="data:json,dma_search" target="data:json,dlt_BRT_CUR_OPER_INFO" action="/mo/MO0101G0R0"
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="" ev:submit="" ev:submitdone="scwin.sub_selectBus_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_selectCrsListByRepRout" ref="data:json,dma_search" target="data:json,dlt_BMS_ROUT_NODE_CMPSTN3"
+				action="/mo/MO0101G2R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
+				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_selectCrsListByRepRout_submitdone"
+				ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_SI0409SHI1" ref="data:json,dma_search" target="data:json,dlt_searchitem2" action="/mo/MO0101SHI1"
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="" ev:submit="" ev:submitdone="scwin.sub_SI0409SHI1_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+		</xf:model>
+
+		<script type="text/javascript"><![CDATA[
+	
+	var isEdit = false;
+	scwin.onpageload = function() {
+		var autoOptions = {
+			Main : { }
+		};
+		
+		var subOptions = {
+		};
+		scwin.param = com.getParameter();
+		var mainOptions = {
+		
+		};
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
+		
+		com.executeSubmission(sub_SI0409SHI0);
+				
+	};
+
+	scwin.onpageunload = function() {
+
+	};
+					
+
+	scwin.sub_SI0409SHI0_submitdone = function(e) {
+		TYPE1.setValue("RR00000002");
+		//$p.executeSubmission(sub_SI0409SHI1);
+		com.executeSubmission(sub_selectSttnListByRepRout);
+//		com.executeSubmission(sub_selectCrsListByRepRout);
+		com.executeSubmission(sub_selectSttnCrsLink);		
+		com.executeSubmission(sub_selectBus);
+		
+	};
+	
+	scwin.TYPE1_onviewchange = function(info) {
+		//com.executeSubmission(sub_SI0409SHI1);		
+	};
+		
+	scwin.TYPE3_onviewchange = function(info) {
+		com.executeSubmission(sub_selectSttnListByRepRout);
+//		com.executeSubmission(sub_selectCrsListByRepRout);
+		com.executeSubmission(sub_selectSttnCrsLink);		
+		com.executeSubmission(sub_selectBus);		
+	};
+	
+//	scwin.sub_SI0409SHI1_submitdone = function(e) {
+//		com.executeSubmission(sub_selectSttnListByRepRout);
+//		com.executeSubmission(sub_selectCrsListByRepRout);
+//		com.executeSubmission(sub_selectSttnCrsLink);		
+//		com.executeSubmission(sub_selectBus);		
+//	};	
+	
+	scwin.sub_selectSttnCrsLink_submitdone = function(e) {
+		scwin.drawRoutMap(dlt_BMS_STTNCRS_LINK_CMPSTN, dlt_BMS_ROUT_NODE_CMPSTN2);
+	};
+	
+	scwin.sub_selectSttnListByRepRout_submitdone = function(e) {
+		//scwin.drawRoutMap(dlt_BMS_ROUT_NODE_CMPSTN2);
+	};	
+	
+	//세로 한 부분
+	var vertical = 0;
+	//가로 전체 개수
+	var sumHorizontal = 0;
+	//가로 위쪽
+	var topHorizontal = 0;
+	//가로 아래쪽
+	var botHorizontal = 0;	
+	
+	//노선, 정류소, 교차로 그리기
+	scwin.drawRoutMap = function(sttnCrsList, sttnList) {
+		//전체 데이터 이용해서 조건문 걸어서 Crs와 Sttn 값 다르게 설정해주면 될 거 같음. vertical 변수부터 전부 다시 설정해야함
+		$(".route-map").empty();
+		var sttnListLength = sttnList.getAllJSON().length;
+		var sttnCrsListLength = sttnCrsList.getAllJSON().length;
+	
+		//교통 상황에 따라 색깔변화, 고쳐야함
+		var routLineColor = "smooth";
+		
+		var routDivResult = "";
+		var sttnDivResult = "";
+		var crsDivResult = "";
+		
+		var sttnCrsCount = 0;
+		
+		/*
+		//세로 한 부분
+		var vertical = 0;
+		//가로 전체 개수
+		var sumHorizontal = 0;
+		//가로 위쪽
+		var topHorizontal = 0;
+		//가로 아래쪽
+		var botHorizontal = 0;
+		*/
+		if(sttnListLength < 30){
+			vertical = 2;
+		}
+		
+		else if(sttnListLength > 30 && sttnListLength < 40) {
+			vertical = 3;
+		}
+		
+		else {
+			vertical = 4;	
+		}
+		
+		//sumHorizontal = sttnListLength - (vertical*2); 
+		sumHorizontal = sttnCrsListLength - (vertical*2); 
+		
+		if(sumHorizontal %2 != 0) {
+			topHorizontal = parseInt(sumHorizontal / 2);
+			botHorizontal = parseInt(sumHorizontal / 2) - 1;	
+		}
+		
+		else if(sumHorizontal % 2 == 0) {
+			topHorizontal = sumHorizontal / 2;
+			botHorizontal = sumHorizontal / 2;				
+		}
+		
+		//가로 위쪽
+		for (var i=-1; i<topHorizontal; i++) {
+			routDivResult += '<div class="route-line h-line '+ routLineColor +'" style="width:calc(100% / '+ topHorizontal+ '); '; 
+			routDivResult += 'top:calc(100% / '+vertical+' * '+ 0 +');left:calc(100% / '+topHorizontal+' * '+ i +')"></div>';
+			if(dlt_BMS_STTNCRS_LINK_CMPSTN.getCellData(sttnCrsCount, "NODE_TYPE") == "NT001") {
+				crsDivResult += '<div class="cross" style="top:calc(100% / ' + vertical +'* ' + 0 + ');left:calc(100% / '+ topHorizontal +' * ' + i + ')">';	
+				crsDivResult += '<span class="name">' + sttnCrsList.getCellData(sttnCrsCount, "NODE_NM") +'</span>';
+				crsDivResult += '<span class="nodeId" style="display:none" data-value="' + sttnCrsList.getCellData(sttnCrsCount, "NODE_ID") +'"></span></div>';
+			}
+			else if(dlt_BMS_STTNCRS_LINK_CMPSTN.getCellData(sttnCrsCount, "NODE_TYPE") == "NT002") {
+				sttnDivResult += '<div class="station right" style="top:calc(100% / ' + vertical + ' * '+ 0 +');left:calc(100% / '+ topHorizontal +' * '+ i + ')">';
+				sttnDivResult += '<span class="name">' + sttnCrsList.getCellData(sttnCrsCount, "NODE_NM") +'</span>';
+				sttnDivResult += '<span class="nodeId" style="display:none" data-value="' + sttnCrsList.getCellData(sttnCrsCount, "NODE_ID") +'"></span></div>';				
+			}
+			sttnCrsCount++;
+		}
+		//세로 오른쪽
+		for (var i=0; i<vertical; i++) {
+			routDivResult += '<div class="route-line v-line '+ routLineColor +'" style="height:calc(100% / '+ vertical+ '); '; 
+			routDivResult += 'top:calc(100% / '+vertical+' * '+ i +');left:calc(100% / '+topHorizontal+' * '+ topHorizontal +')"></div>';
+			if(dlt_BMS_STTNCRS_LINK_CMPSTN.getCellData(sttnCrsCount, "NODE_TYPE") == "NT001") {
+				crsDivResult += '<div class="cross" style="top:calc(100% / ' + vertical +'* ' + i + ');left:calc(100% / '+ topHorizontal +' * ' + topHorizontal + ')">';
+				crsDivResult += '<span class="name">' + sttnCrsList.getCellData(sttnCrsCount, "NODE_NM") +'</span>';
+				crsDivResult += '<span class="nodeId" style="display:none" data-value="' + sttnCrsList.getCellData(sttnCrsCount, "NODE_ID") +'"></span></div>';	
+			}			
+			else if(dlt_BMS_STTNCRS_LINK_CMPSTN.getCellData(sttnCrsCount, "NODE_TYPE") == "NT002") {
+				sttnDivResult += '<div class="station down" style="top:calc(100% / ' + vertical +' * '+ i +');left:calc(100% / '+ topHorizontal +' * '+ topHorizontal + ')">';
+				sttnDivResult += '<span class="name">' + sttnCrsList.getCellData(sttnCrsCount, "NODE_NM") +'</span>';
+				sttnDivResult += '<span class="nodeId" style="display:none" data-value="' + sttnCrsList.getCellData(sttnCrsCount, "NODE_ID") +'"></span></div>';	
+			}	
+			sttnCrsCount++;	
+		}
+		//가로 아래쪽
+		for (var i=topHorizontal-1; i>=0; i--) {
+			routDivResult += '<div class="route-line h-line '+ routLineColor +'" style="width:calc(100% / '+ topHorizontal+ '); '; 
+			routDivResult += 'top:calc(100% / '+vertical+' * '+ vertical +');left:calc(100% / '+topHorizontal+' * '+ i +')"></div>';
+			if(dlt_BMS_STTNCRS_LINK_CMPSTN.getCellData(sttnCrsCount, "NODE_TYPE") == "NT001") {
+				crsDivResult += '<div class="cross" style="top:calc(100% / ' + vertical +'* ' + vertical + ');left:calc(100% / '+ topHorizontal +' * ' + (i+1) + ')">';
+				crsDivResult += '<span class="name">' + sttnCrsList.getCellData(sttnCrsCount, "NODE_NM") +'</span>';
+				crsDivResult += '<span class="nodeId" style="display:none" data-value="' + sttnCrsList.getCellData(sttnCrsCount, "NODE_ID") +'"></span></div>';	
+			}			
+			else if(dlt_BMS_STTNCRS_LINK_CMPSTN.getCellData(sttnCrsCount, "NODE_TYPE") == "NT002") {
+				sttnDivResult += '<div class="station left" style="top:calc(100% / ' + vertical + ' * '+ vertical +');left:calc(100% / '+ topHorizontal +' * '+ (i+1) + ')">';
+				sttnDivResult += '<span class="name">' + sttnCrsList.getCellData(sttnCrsCount, "NODE_NM") +'</span>';
+				sttnDivResult += '<span class="nodeId" style="display:none" data-value="' + sttnCrsList.getCellData(sttnCrsCount, "NODE_ID") +'"></span></div>';	
+			}		
+			sttnCrsCount++;
+		}
+		//세로 왼쪽
+		for (var i=vertical-1; i>=0; i--) {
+			routDivResult += '<div class="route-line v-line '+ routLineColor +'" style="height:calc(100% / '+ vertical+ '); '; 
+			routDivResult += 'top:calc(100% / '+vertical+' * '+ i +');left:calc(100% / '+topHorizontal+' * '+ 0 +')"></div>';
+			if(dlt_BMS_STTNCRS_LINK_CMPSTN.getCellData(sttnCrsCount, "NODE_TYPE") == "NT001") {
+				crsDivResult += '<div class="cross" style="top:calc(100% / ' + vertical +'* ' + (i+1) + ');left:calc(100% / '+ topHorizontal +' * ' + 0 + ')">';
+				crsDivResult += '<span class="name">' + sttnCrsList.getCellData(sttnCrsCount, "NODE_NM") +'</span>';
+				crsDivResult += '<span class="nodeId" style="display:none" data-value="' + sttnCrsList.getCellData(sttnCrsCount, "NODE_ID") +'"></span></div>';	
+			}	
+			else if(dlt_BMS_STTNCRS_LINK_CMPSTN.getCellData(sttnCrsCount, "NODE_TYPE") == "NT002") {		
+				sttnDivResult += '<div class="station up" style="top:calc(100% / ' + vertical +' * '+ (i+1) +');left:calc(100% / '+ topHorizontal +' * '+ 0 + ')">';
+				sttnDivResult += '<span class="name">' + sttnCrsList.getCellData(sttnCrsCount, "NODE_NM") +'</span>';
+				sttnDivResult += '<span class="nodeId" style="display:none" data-value="' + sttnCrsList.getCellData(sttnCrsCount, "NODE_ID") +'"></span></div>';	
+			}			
+			sttnCrsCount++;
+		}				
+		
+		$(".route-map").append(routDivResult);
+		$(".route-map").append(sttnDivResult);
+		$(".route-map").append(crsDivResult);
+	};
+
+	scwin.sub_selectBus_submitdone = function(e) {
+		for(var i=0; i<dlt_BRT_CUR_OPER_INFO.getAllJSON().length; i++) {
+			scwin.drawBus(dlt_BRT_CUR_OPER_INFO.getDataRow(i), dlt_BMS_STTNCRS_LINK_CMPSTN);
+		}
+	};
+	
+	//버스 그리기
+	scwin.drawBus = function(busData, sttnCrsList) {
+		var nextNodeId = busData.NEXT_NODE_ID;
+		var vhcKind = busData.VHC_KIND;
+		var busColor = "";
+		var busDivResult = "";
+		var busNo = busData.VHC_NO;
+		
+		switch(vhcKind) {
+			case "VK001":
+			busColor = "red";
+			break;
+			
+			case "VK002":
+			busColor = "blue";
+			break;
+			
+			case "VK003":
+			busColor = "black";
+			break;
+			
+			default:
+			busColor = "black";	
+			break;
+		}
+		
+		 
+		var matchedIndexArr = sttnCrsList.getMatchedIndex("NEXT_NODE_ID", nextNodeId);
+		var sttnCrsRowData = sttnCrsList.getDataRow(matchedIndexArr[0]);
+		
+		//버스와 다음 교차로/정류소까지의 거리
+		var distance = getDistanceBetween(busData.GPS_X, busData.GPS_Y, sttnCrsRowData.NEXT_GPS_X, sttnCrsRowData.NEXT_GPS_Y);
+		//km 변환
+		distance = distance / 1000;
+		distance = Math.round(distance * 100) / 100;
+		
+		if(matchedIndexArr[0] != 0) {
+//			prevNodeGPS_X = sttnCrsList.getCellData(matchedIndexArr[0]-1, "GPS_X");
+//			prevNodeGPS_Y = sttnCrsList.getCellData(matchedIndexArr[0]-1, "GPS_Y");
+//			var prevNodeDistance = 	getDistanceBetween(prevNodeGPS_X, prevNodeGPS_Y, sttnCrsRowData.GPS_X, sttnCrsRowData.GPS_Y);
+//			prevNodeDistance = prevNodeDistance / 1000;
+//			prevNodeDistance = Math.round(prevNodeDistance * 100) / 100;
+			var matchedLinkLen = sttnCrsList.getCellData(matchedIndexArr[0], "LEN");
+			matchedLinkLen = matchedLinkLen / 1000;
+			matchedLinkLen = Math.round(matchedLinkLen * 100) / 100;
+			//링크에서 버스의 거리 비율
+			//var distanceRatio = matchedLinkLen /  distance;
+			var distanceRatio = (1-distance) / matchedLinkLen;
+			distanceRatio = 0.5 + (distanceRatio * 0.5);
+			distanceRatio = Math.round(distanceRatio * 1000) / 1000;
+			var parentDiv = $(".route-map").find('.nodeId[data-value='+nextNodeId+']').parent();
+			var parentStyle = parentDiv.attr("style").split(";");
+			//var parentTop = parentDiv.css("top").replace("px","");
+			//var parentLeft = parentDiv.css("left").replace("px","");
+			
+			//x * y
+			var parentTop = parentStyle[0].match(/.+\/(.+)\)/)[1].trim();
+			var parentLeft = parentStyle[1].match(/.+\/(.+)\)/)[1].trim();
+			
+			var busDivTop = "";
+			var busDivLeft = "";
+			
+			//위
+			if(eval(parentTop) == 0) {
+				//if(parentLeft != topHorizontal) {
+					busDivTop = parentTop;
+					busDivLeft = parentLeft +'*'+ distanceRatio;	
+				//}
+			}
+			
+			//아래, 오른쪽아래 따로 조건걸어야함
+			else if(parentTop == vertical) {
+				busDivTop = vertical;
+				//busDivLeft = parentLeft / distanceRatio; 
+				busDivLeft = parentLeft * distanceRatio; 
+				
+			}
+			
+			//else if(parentTop != "0" && parentTop != vertical && parentLeft = ) {
+				
+			//}
+			//busDivResult += '<div class="bus ' + busColor +'" style="top:calc(100% / '+ parentTop+' * '+busDivTop+'); left:calc(100% / '+ parentLeft +' * '+busDivLeft+')">';
+			//busDivResult += '<div class="bus ' + busColor +'" style="top:calc(100% /'+ vertical+' * '+busDivTop+');left:calc(100% /'+ parentLeft +' * '+busDivLeft+')">';
+			busDivResult += '<div class="bus ' + busColor +'" style="top:calc(100% /'+ busDivTop+');left:calc(100% /'+ busDivLeft+')">';
+			busDivResult += '<span class="number">'+busNo+'</span></div>'
+			$(".route-map").append(busDivResult);
+		}
+		
+	}
+	
+	scwin.sub_selectCrsListByRepRout_submitdone = function(e) {
+	
+	};
+]]></script>
+	</head>
+	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
+		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
+			<xf:group id="pgm_navi" class="pgm_navi" style="">
+				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
+			</xf:group>
+			<xf:group id="pgm_header" class="pgm_header" style="">
+				<xf:group id="" style="" class="gr_search">
+	               <xf:group class="label" id="" style="">
+	                  <w2:span class="" id="" label="대표 노선"></w2:span>
+	               </xf:group>
+					<xf:group id="" style="" class="search">
+		               <xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+		               	disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE1_onviewchange" id="TYPE1"
+		               	optionOrder="false" ref="data:dma_search.CONTENT1" class="search_type_100" style="" submenuSize="auto"
+		               	textAlign="center" chooseOptionLabel="-선택-" ev:onchange="">
+			               	<xf:choices>
+			               		<xf:itemset nodeset="data:dlt_repRoutItem">
+			               			<xf:label ref="REP_ROUT_NM"></xf:label>
+			               			<xf:value ref="REP_ROUT_ID"></xf:value>
+			               		</xf:itemset>
+			               	</xf:choices>
+		               </xf:select1>
+					</xf:group>
+					<!-- <xf:group class="label" id="" style="">
+						<w2:span class="" id="" label="노선"></w2:span>
+					</xf:group>					
+					<xf:group class="search" id="" style="">
+						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE2_onviewchange" id="TYPE2" optionOrder="false"
+							ref="data:dma_search.CONTENT2" class="search_type_100" style="" submenuSize="auto" textAlign="center" chooseOptionLabel="-전체-">
+							<xf:choices>
+								<xf:itemset nodeset="data:dlt_searchitem2">
+									<xf:label ref="ROUT_NM"></xf:label>
+									<xf:value ref="ROUT_ID"></xf:value>
+								</xf:itemset>
+							</xf:choices>
+						</xf:select1>
+					</xf:group>	 -->				
+					<xf:group class="label" id="" style="">
+						<w2:span class="" id="" label="상하행구분"></w2:span>
+					</xf:group>					
+					<xf:group class="search" id="" style="">
+						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE3_onviewchange" id="TYPE3" optionOrder="false"
+							ref="data:dma_search.CONTENT3" class="search_type_100" style="" submenuSize="auto" textAlign="center" chooseOptionLabel="-전체-">
+							<xf:choices>
+								<xf:item>
+									<xf:label><![CDATA[상행]]></xf:label>
+									<xf:value><![CDATA[WD001]]></xf:value>
+								</xf:item>
+								<xf:item>
+									<xf:label><![CDATA[하행]]></xf:label>
+									<xf:value><![CDATA[WD002]]></xf:value>
+								</xf:item>
+							</xf:choices>
+						</xf:select1>
+					</xf:group>				
+					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+				</xf:group>
+			</xf:group>
+			<xf:group id="pgm_content" class="pgm_content grdc_a" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a bms_box_wrap" style="">
+					<xf:group id="" class="" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl" id="" label="전자노선도" style=""></w2:textbox>
+						</xf:group>
+					</xf:group>
+					<xf:group></xf:group>
+					<xf:group id="" class="" style="">		
+                                    <!-- //노선도 예시:202205 -->
+                                    <!-- 노선 가로라인 whdth 값 = (100% / 가로로 배열되는 정거장수) -->
+                                    <!-- 노선 세로라인 height 값 = (100% / 세로로 배열되는 정거장수) -->
+                                    <!-- 노선/차량/정거장/교차로/신호등 top 좌표 값 = (100% / 세로로 배열되는 정거장수 * 현재위치한 세로배열 순서:첫번째가 0으로 시작) -->
+                                    <!-- 노선/차량/정거장/교차로/신호등 left 좌표 값 = (100% / 가로로 배열되는 정거장수 * 현재위치한 세로배열 순서:첫번째가 0으로 시작) -->
+                                    <div class="route-map-area">
+                                        <div class="route-map">
+                                        <!-- 
+                                            //노선라인:202205
+                                            <div class="route-line h-line slow" style="width:calc(100% / 14); top:calc(100% / 3 * 0); left:calc(100% / 14 * 0)"></div>
+                                            <div class="route-line h-line slow" style="width:calc(100% / 14); top:calc(100% / 3 * 0); left:calc(100% / 14 * 1)"></div>
+                                            <div class="route-line h-line smooth" style="width:calc(100% / 14); top:calc(100% / 3 * 0); left:calc(100% / 14 * 2)"></div>
+                                            <div class="route-line h-line smooth" style="width:calc(100% / 14); top:calc(100% / 3 * 0); left:calc(100% / 14 * 3)"></div>
+                                            <div class="route-line h-line smooth" style="width:calc(100% / 14); top:calc(100% / 3 * 0); left:calc(100% / 14 * 4)"></div>
+                                            <div class="route-line h-line smooth" style="width:calc(100% / 14); top:calc(100% / 3 * 0); left:calc(100% / 14 * 5)"></div>
+                                            <div class="route-line h-line smooth" style="width:calc(100% / 14); top:calc(100% / 3 * 0); left:calc(100% / 14 * 6)"></div>
+                                            <div class="route-line h-line smooth" style="width:calc(100% / 14); top:calc(100% / 3 * 0); left:calc(100% / 14 * 7)"></div>
+                                            <div class="route-line h-line smooth" style="width:calc(100% / 14); top:calc(100% / 3 * 0); left:calc(100% / 14 * 8)"></div>
+                                            <div class="route-line h-line smooth" style="width:calc(100% / 14); top:calc(100% / 3 * 0); left:calc(100% / 14 * 9)"></div>
+                                            <div class="route-line h-line smooth" style="width:calc(100% / 14); top:calc(100% / 3 * 0); left:calc(100% / 14 * 10)"></div>
+                                            <div class="route-line h-line block" style="width:calc(100% / 14); top:calc(100% / 3 * 0); left:calc(100% / 14 * 11)"></div>
+                                            <div class="route-line h-line block" style="width:calc(100% / 14); top:calc(100% / 3 * 0); left:calc(100% / 14 * 12)"></div>
+                                            <div class="route-line h-line block" style="width:calc(100% / 14); top:calc(100% / 3 * 0); left:calc(100% / 14 * 13)"></div>
+                                            <div class="route-line v-line smooth" style="height: calc(100% / 3); top:calc(100% / 3 * 0); left:calc(100% / 14 * 14)"></div>
+                                            <div class="route-line v-line slow" style="height: calc(100% / 3); top:calc(100% / 3 * 1); left:calc(100% / 14 * 14)"></div>
+                                            <div class="route-line v-line block" style="height: calc(100% / 3); top:calc(100% / 3 * 2); left:calc(100% / 14 * 14)"></div>
+                                            <div class="route-line h-line slow" style="width:calc(100% / 14); top:calc(100% / 3 * 3); left:calc(100% / 14 * 13)"></div>
+                                            <div class="route-line h-line slow" style="width:calc(100% / 14); top:calc(100% / 3 * 3); left:calc(100% / 14 * 12)"></div>
+                                            <div class="route-line h-line slow" style="width:calc(100% / 14); top:calc(100% / 3 * 3); left:calc(100% / 14 * 11)"></div>
+                                            <div class="route-line h-line smooth" style="width:calc(100% / 14); top:calc(100% / 3 * 3); left:calc(100% / 14 * 10)"></div>
+                                            <div class="route-line h-line slow" style="width:calc(100% / 14); top:calc(100% / 3 * 3); left:calc(100% / 14 * 9)"></div>
+                                            <div class="route-line h-line slow" style="width:calc(100% / 14); top:calc(100% / 3 * 3); left:calc(100% / 14 * 8)"></div>
+                                            <div class="route-line h-line block" style="width:calc(100% / 14); top:calc(100% / 3 * 3); left:calc(100% / 14 * 7)"></div>
+                                            <div class="route-line h-line block" style="width:calc(100% / 14); top:calc(100% / 3 * 3); left:calc(100% / 14 * 6)"></div>
+                                            <div class="route-line h-line block" style="width:calc(100% / 14); top:calc(100% / 3 * 3); left:calc(100% / 14 * 5)"></div>
+                                            <div class="route-line h-line smooth" style="width:calc(100% / 14); top:calc(100% / 3 * 3); left:calc(100% / 14 * 4)"></div>
+                                            <div class="route-line h-line smooth" style="width:calc(100% / 14); top:calc(100% / 3 * 3); left:calc(100% / 14 * 3)"></div>
+                                            <div class="route-line h-line smooth" style="width:calc(100% / 14); top:calc(100% / 3 * 3); left:calc(100% / 14 * 2)"></div>
+                                            <div class="route-line h-line smooth" style="width:calc(100% / 14); top:calc(100% / 3 * 3); left:calc(100% / 14 * 1)"></div>
+                                            <div class="route-line h-line block" style="width:calc(100% / 14); top:calc(100% / 3 * 3); left:calc(100% / 14 * 0)"></div>
+                                            <div class="route-line v-line smooth" style="height: calc(100% / 3); top:calc(100% / 3 * 2); left:calc(100% / 14 * 0)"></div>
+                                            <div class="route-line v-line slow" style="height: calc(100% / 3); top:calc(100% / 3 * 1); left:calc(100% / 14 * 0)"></div>
+                                            <div class="route-line v-line block" style="height: calc(100% / 3);top:calc(100% / 3 * 0); left:calc(100% / 14 * 0)"></div>
+                                            노선라인:202205//
+                                            //정거장:202205
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 0)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 1)"><span class="name">두루초,중학교</span></div>
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 2)"><span class="name">가락초등학교</span></div>
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 3)"><span class="name">가락마을14단지</span></div>
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 4)"><span class="name">고운고등학교</span></div>
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 5)"><span class="name">가락마을 7,8단지</span></div>
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 6)"><span class="name">범지기마을 1단지</span></div>
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 7)"><span class="name">가재마을12단지</span></div>
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 8)"><span class="name">정부세종청사스포츠센터</span></div>
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 9)"><span class="name">정부세종청사북측</span></div>
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 10)"><span class="name">도램마을9단지</span></div>
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 11)"><span class="name">양지중학교(한뜰마을1,2단지)</span></div>
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 12)"><span class="name">국무조정실(한뜰마을3단지)</span></div>
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 13)"><span class="name">세종호수공원</span></div>
+                                            <div class="station right" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 14)"><span class="name">세종중앙공원</span></div>
+                                            <div class="station down" style="top:calc(100% / 3 * 1); left:calc(100% / 14 * 14)"><span class="name">국립세종수목원1</span></div>
+                                            <div class="station down" style="top:calc(100% / 3 * 2); left:calc(100% / 14 * 14)"><span class="name">국립세종수목원2</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 14)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 13)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 12)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 11)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 10)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 9)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 8)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 7)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 6)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 5)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 4)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 3)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 2)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 1)"><span class="name">호려울마을8,9단지</span></div>
+                                            <div class="station left" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 0)"><span class="name">동해물과 백두산이</span></div>
+                                            <div class="station up" style="top:calc(100% / 3 * 2); left:calc(100% / 14 * 0)"><span class="name">호려울마을8,9단지 호려울마을8,9단지1</span></div>
+                                            <div class="station up" style="top:calc(100% / 3 * 1); left:calc(100% / 14 * 0)"><span class="name">호려울마을8,9단지 호려울마을8,9단지2</span></div>
+                                            정거장:202205//
+                                            //버스:202205
+                                            <div class="bus red" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 0.5)"><span class="number">318(7분)</span></div>
+                                            <div class="bus blue" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 2.5)"><span class="number">318(7분)</span></div>
+                                            <div class="bus black" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 4)"><span class="number">318(7분)</span></div>
+                                            <div class="bus blue" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 13)"><span class="number">318(7분)</span></div>
+                                            <div class="bus red" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 14)"><span class="number">318(7분)</span></div>
+                                            <div class="bus black" style="top:calc(100% / 3 * 1); left:calc(100% / 14 * 14)"><span class="number">318(7분)</span></div>
+                                            <div class="bus black" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 14)"><span class="number">318(7분)</span></div>
+                                            버스:202205//
+                                            //교차로:202205
+                                            <div class="cross" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 5.5)"></div>
+                                            <div class="cross" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 8.5)"></div>
+                                            <div class="cross" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 12.5)"></div>
+                                            <div class="cross" style="top:calc(100% / 3 * 1.5); left:calc(100% / 14 * 14)"></div>
+                                            <div class="cross" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 10.5)"></div>
+                                            <div class="cross" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 5.5)"></div>
+                                            <div class="cross" style="top:calc(100% / 3 * 0.5); left:calc(100% / 14 * 0)"></div>
+                                            교차로:202205//
+                                            //신호등:202205
+                                            <div class="light red" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 4.5)"></div>
+                                            <div class="light green" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 7.5)"></div>
+                                            <div class="light green" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 10.5)"></div>
+                                            <div class="light green" style="top:calc(100% / 3 * 0.5); left:calc(100% / 14 * 14)"></div>
+                                            <div class="light red" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 7.5)"></div>
+                                            <div class="light red" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 1.5)"></div>
+                                            <div class="light green" style="top:calc(100% / 3 * 1.5); left:calc(100% / 14 * 0)"></div>
+                                            신호등:202205// -->
+                                        </div>
+                                    </div>
+                                    <!-- 노선도 예시:202205// -->
+
+                                    
+					</xf:group>
+				</xf:group>				
+			</xf:group>
+		</xf:group>
+	</body>
+</html>

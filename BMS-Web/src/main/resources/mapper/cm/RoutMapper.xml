@@ -731,5 +731,104 @@
 			</if>
 		
 </select>
+
+<select id="selectSttnCrsDispList" resultType="Map">
+		SELECT 			A.REP_ROUT_ID
+					,	A.ROUT_ID
+					,	A.NODE_ID
+					, 	A.NODE_SN
+					, 	A.NODE_NM
+					,	A.NODE_TYPE
+					,	A.LINK_ID
+					, 	A.STTN_ID
+					, 	A.STTN_NO
+					, 	A.CRS_ID
+					, 	A.ORGA_ID
+					,	A.GPS_X
+					, 	A.GPS_Y
+					,	A.LINK_NODE_YN
+					,	B.MORN_STD
+					,	E.WAY_DIV
+					
+		FROM 		  	BMS_ROUT_NODE_DISP_VW A 
+		LEFT JOIN 		BMS_ROUT_LINK_CMPSTN B
+			ON A.ROUT_ID = B.ROUT_ID AND A.LINK_ID = B.LINK_ID
+		<!-- LEFT JOIN		BMS_CRS_MST D
+			ON A.NODE_ID = D.CRS_ID	 -->
+		LEFT JOIN		BMS_ROUT_MST E
+			ON	A.ROUT_ID = E.ROUT_ID						
+		WHERE 			(A.NODE_TYPE = 'NT002' || A.NODE_TYPE = 'NT001' AND A.PHASE_NO IS NOT NULL AND A.PHASE_NO != '')			
+		
+		<if test="CONTENT1 != null">
+			AND A.REP_ROUT_ID = #{CONTENT1}
+		</if>
+		<if test="CONTENT2 != ''">
+			AND A.ROUT_ID = #{CONTENT2}
+		</if>
+		<if test="CONTENT3 != ''">
+			AND E.WAY_DIV = #{CONTENT3}
+		</if>
+					
+		GROUP BY			NODE_ID
+		ORDER BY			NODE_SN
+		
+</select>
+
+<select id="selectSttnCrsLink" resultType="Map">
+		SELECT 					R.REP_ROUT_ID
+							,	A.ROUT_ID
+							,	C.NODE_ID
+							,	D.NODE_ID AS NEXT_NODE_ID
+							, 	A.LINK_SN
+							, 	C.NODE_NM
+							,	C.NODE_TYPE
+							,	A.LINK_ID
+							, 	E.STTN_ID
+							, 	E.STTN_NO
+							, 	F.CRS_ID
+							/*
+							, 	A.ORGA_ID
+							*/
+							,	C.GPS_X
+							, 	C.GPS_Y
+							,	D.GPS_X AS NEXT_GPS_X
+							,	D.GPS_Y AS NEXT_GPS_Y							
+							/*
+							,	A.LINK_NODE_YN
+							*/
+							,	A.MORN_STD
+							,	R.WAY_DIV
+							,	B.LEN
+							
+		FROM					BMS_ROUT_STTNCRS_LINK_CMPSTN A					
+		LEFT JOIN			BMS_ROUT_MST R
+			ON					(A.ROUT_ID = R.ROUT_ID AND R.DEL_YN = 'N')
+		LEFT JOIN			BMS_STTNCRS_LINK B	
+			ON					A.LINK_ID = B.LINK_ID
+		LEFT JOIN			BMS_NODE_MST C
+			ON					B.ST_NODE_ID = C.NODE_ID
+		LEFT JOIN			BMS_NODE_MST D
+			ON					B.ED_NODE_ID = D.NODE_ID
+		LEFT JOIN			BMS_STTN_MST E
+			ON					B.ST_NODE_ID = E.STTN_ID	
+		LEFT JOIN			BMS_CRS_MST F
+			ON					B.ST_NODE_ID = F.CRS_ID				
+						
+		<where>			
+			<if test="CONTENT1 != null">
+				AND R.REP_ROUT_ID = #{CONTENT1}
+			</if>
+			<if test="CONTENT2 != ''">
+				AND A.ROUT_ID = #{CONTENT2}
+			</if>
+			<if test="CONTENT3 != ''">
+				AND R.WAY_DIV = #{CONTENT3}
+			</if>
+		</where>
+					
+		GROUP BY			NODE_ID
+		ORDER BY			LINK_SN
+		
+</select>
 	
 </mapper>

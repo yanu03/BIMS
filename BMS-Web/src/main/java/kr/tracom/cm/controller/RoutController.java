@@ -117,4 +117,16 @@ public class RoutController extends ControllerSupport {
 		return result.getResult();
 	}
 	
+	@RequestMapping("/rout/selectSttnCrsDipsList")
+	public @ResponseBody Map<String, Object> selectSttnCrsDispList() throws Exception {
+		result.setData("dlt_BMS_ROUT_NODE_DISP_VW", routService.selectSttnCrsDispList());
+		return result.getResult();
+	}
+	
+	@RequestMapping("/rout/selectSttnCrsLink")
+	public @ResponseBody Map<String, Object> selectSttnCrsLink() throws Exception {
+		result.setData("dlt_BMS_STTNCRS_LINK_CMPSTN", routService.selectSttnCrsLink());
+		return result.getResult();
+	}
+	
 }

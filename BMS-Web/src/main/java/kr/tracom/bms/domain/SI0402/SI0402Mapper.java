@@ -32,9 +32,27 @@ public interface SI0402Mapper {
 	
 	public Map SI0402G1K1();
 	
+	public Map SI0402G1K2();
+	
+	public Map SI0402G1K3();
+	
+	public Map SI0402G1K4();
+	
 	public int SI0402G1DA1(Map param); //노선과링크구성 테이블 삭제
 	
+	public int SI0402G1DA2(Map param);
+	
+	public int SI0402G1DA3(Map param);
+	
+	public int SI0402G1DA4(Map param);
+	
 	public int SI0402G1I1(Map param);
+	
+	public int SI0402G1I2(Map param);
+	
+	public int SI0402G1I3(Map param);
+	
+	public int SI0402G1I4(Map param);
 	
 	public List SI0402P0R0(Map param);
 	

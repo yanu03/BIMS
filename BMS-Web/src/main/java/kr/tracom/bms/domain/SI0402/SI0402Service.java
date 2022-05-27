@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ import kr.tracom.util.Result;
 @Service
 public class SI0402Service extends ServiceSupport {
 
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private SI0402Mapper si0402Mapper;
 	
@@ -209,6 +212,9 @@ public class SI0402Service extends ServiceSupport {
 				int sttnCnt = 0;
 				double routLen = 0;
 				si0402Mapper.SI0402G1DA1(map);
+				si0402Mapper.SI0402G1DA2(map);
+				si0402Mapper.SI0402G1DA3(map);
+				si0402Mapper.SI0402G1DA4(map);
 				List<Map<String, Object>> routNodeList = si0402Mapper.SI0402G1R1(map);
 				if(routNodeList.size()>0) {
 					for (int i = 0; i < routNodeList.size()-1; i++) {
@@ -238,6 +244,158 @@ public class SI0402Service extends ServiceSupport {
 						data2.put("ACCRU_LEN",(int)routLen);
 						si0402Mapper.updateLengthRoutNodeCmpstn(data2);
 					}
+					
+					//정류소별 링크
+					for (int i = 0; i < routNodeList.size()-1; i++) {
+						Map data = routNodeList.get(i);
+						String nodeType = (String) data.get("NODE_TYPE");
+						
+						if(!Constants.NODE_TYPE_BUSSTOP.equals(nodeType)){
+							continue;
+						}						
+						
+						Map data2 = null;
+						
+						for(int j = i+1; j < routNodeList.size()-1; j++ ) {
+							data2 = routNodeList.get(j);
+							String nodeType2 = (String) data2.get("NODE_TYPE");
+							if(Constants.NODE_TYPE_BUSSTOP.equals(nodeType2)) {
+								break;
+							}
+						}
+						
+						if(data2 == null) {
+							continue;
+						}
+						
+						Map linkKeyMap = si0402Mapper.SI0402G1K2();
+						data.put("LINK_ID",linkKeyMap.get("SEQ"));
+						data.put("LINK_SN",(i+1));
+						data.put("ST_NODE_ID",data.get("NODE_ID"));
+						data.put("ED_NODE_ID",data2.get("NODE_ID"));
+						String linkNm = data.get("NODE_NM") + "-" + data2.get("NODE_NM");
+						data.put("LINK_NM",linkNm);
+						double len = DataInterface.getDistanceBetween(CommonUtil.decimalToDouble(data.get("GPS_X")), CommonUtil.decimalToDouble(data.get("GPS_Y")), 
+								CommonUtil.decimalToDouble(data2.get("GPS_X")), CommonUtil.decimalToDouble(data2.get("GPS_Y")));
+						
+//						if(i==0) {
+//							data.put("ACCRU_LEN",0);
+//							si0402Mapper.updateLengthRoutNodeCmpstn(data);
+//						}
+						data.put("LEN",CommonUtil.pointRound(len,3));
+						routLen += len;
+						si0402Mapper.SI0402G1I2(data); //링크 insert
+						
+//						data2.put("ACCRU_LEN",(int)routLen);
+//						si0402Mapper.updateLengthRoutNodeCmpstn(data2);
+					}
+					
+					//정류소/교차로별 링크
+					for (int i = 0; i < routNodeList.size()-1; i++) {
+						Map data = routNodeList.get(i);
+						String nodeType = (String) data.get("NODE_TYPE");
+						
+						if(!Constants.NODE_TYPE_BUSSTOP.equals(nodeType) && !Constants.NODE_TYPE_CROSS.equals(nodeType)){
+							continue;
+						}
+						
+						Map data2 = null;
+						
+						for(int j = i+1; j < routNodeList.size()-1; j++ ) {
+							data2 = routNodeList.get(j);
+							String nodeType2 = (String) data2.get("NODE_TYPE");
+							if(Constants.NODE_TYPE_BUSSTOP.equals(nodeType2) || Constants.NODE_TYPE_CROSS.equals(nodeType2)) {
+								break;
+							}
+						}	
+						
+						if(data2 == null) {
+							continue;
+						}
+						
+						Map linkKeyMap = si0402Mapper.SI0402G1K3();
+						data.put("LINK_ID",linkKeyMap.get("SEQ"));
+						data.put("LINK_SN",(i+1));
+						data.put("ST_NODE_ID",data.get("NODE_ID"));
+						data.put("ED_NODE_ID",data2.get("NODE_ID"));
+						String linkNm = data.get("NODE_NM") + "-" + data2.get("NODE_NM");
+						data.put("LINK_NM",linkNm);
+						double len = DataInterface.getDistanceBetween(CommonUtil.decimalToDouble(data.get("GPS_X")), CommonUtil.decimalToDouble(data.get("GPS_Y")), 
+								CommonUtil.decimalToDouble(data2.get("GPS_X")), CommonUtil.decimalToDouble(data2.get("GPS_Y")));
+						
+//						if(i==0) {
+//							data.put("ACCRU_LEN",0);
+//							si0402Mapper.updateLengthRoutNodeCmpstn(data);
+//						}
+						data.put("LEN",CommonUtil.pointRound(len,3));
+						routLen += len;
+						si0402Mapper.SI0402G1I3(data); //링크 insert
+						
+//						data2.put("ACCRU_LEN",(int)routLen);
+//						si0402Mapper.updateLengthRoutNodeCmpstn(data2);
+					}
+					
+					//정류소/집중모니터링 교차로별 링크
+					for (int i = 0; i < routNodeList.size()-1; i++) {
+						Map data = routNodeList.get(i);
+						String nodeType = (String) data.get("NODE_TYPE");
+						
+						
+						if(!Constants.NODE_TYPE_BUSSTOP.equals(nodeType) && !Constants.NODE_TYPE_CROSS.equals(nodeType)){
+							continue;
+						}
+						
+						//현시가 있는 교차로만 찾아서 넣기
+						else if(Constants.NODE_TYPE_CROSS.equals(nodeType)) {
+							String phaseNo = (String) data.get("PHASE_NO");
+							if("".equals(phaseNo)) {
+								continue;
+							}
+						}
+						
+						Map data2 = null;
+						
+						for(int j = i+1; j < routNodeList.size()-1; j++ ) {
+							data2 = routNodeList.get(j);
+							String nodeType2 = (String) data2.get("NODE_TYPE");
+							
+							if(Constants.NODE_TYPE_BUSSTOP.equals(nodeType2) || Constants.NODE_TYPE_CROSS.equals(nodeType2)) {
+								if(Constants.NODE_TYPE_CROSS.equals(nodeType2)) {
+									String phaseNo2 = (String) data2.get("PHASE_NO");
+									if("".equals(phaseNo2)) {
+										continue;
+									}
+								}
+								break;
+							}
+						}	
+						
+						if(data2 == null) {
+							continue;
+						}
+						
+						Map linkKeyMap = si0402Mapper.SI0402G1K4();
+						data.put("LINK_ID",linkKeyMap.get("SEQ"));
+						data.put("LINK_SN",(i+1));
+						data.put("ST_NODE_ID",data.get("NODE_ID"));
+						data.put("ED_NODE_ID",data2.get("NODE_ID"));
+						String linkNm = data.get("NODE_NM") + "-" + data2.get("NODE_NM");
+						data.put("LINK_NM",linkNm);
+						double len = DataInterface.getDistanceBetween(CommonUtil.decimalToDouble(data.get("GPS_X")), CommonUtil.decimalToDouble(data.get("GPS_Y")), 
+								CommonUtil.decimalToDouble(data2.get("GPS_X")), CommonUtil.decimalToDouble(data2.get("GPS_Y")));
+						
+//						if(i==0) {
+//							data.put("ACCRU_LEN",0);
+//							si0402Mapper.updateLengthRoutNodeCmpstn(data);
+//						}
+						data.put("LEN",CommonUtil.pointRound(len,3));
+						routLen += len;
+						si0402Mapper.SI0402G1I4(data); //링크 insert
+						
+//						data2.put("ACCRU_LEN",(int)routLen);
+//						si0402Mapper.updateLengthRoutNodeCmpstn(data2);
+					}
+					
 					Map routMap = new HashMap();
 					double routStrtLen = DataInterface.getDistanceBetween(CommonUtil.decimalToDouble(routNodeList.get(0).get("GPS_X")), CommonUtil.decimalToDouble(routNodeList.get(0).get("GPS_Y")), 
 							CommonUtil.decimalToDouble(routNodeList.get(routNodeList.size()-1).get("GPS_X")), CommonUtil.decimalToDouble(routNodeList.get(routNodeList.size()-1).get("GPS_Y")));
@@ -258,6 +416,7 @@ public class SI0402Service extends ServiceSupport {
 			}
 			else
 			{
+				logger.error("Excetion {}", e);
 				throw e;
 			}		
 		}

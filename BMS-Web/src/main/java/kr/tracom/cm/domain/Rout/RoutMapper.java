@@ -28,4 +28,6 @@ public interface RoutMapper {
 	public List<Map<String, Object>> selectSttnList(Map param);
 	public List<Map<String, Object>> selectSttnCrsList(Map param);
 	public List<Map<String, Object>> selectSttnItem();
+	public List<Map<String, Object>> selectSttnCrsDispList(Map param);
+	public List<Map<String, Object>> selectSttnCrsLink(Map param);
 }
