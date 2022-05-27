@@ -127,7 +127,30 @@
 						,#{REMARK}
 						,#{UPD_DTM}
 						,#{SSN_UPD_ID}				
+					);
+					
+					
+	INSERT INTO		BMS_FCLT_COND_PARAM_INFO	
+					(
+						NODE_ID
+						,FCLT_ID
+						,FCLT_KIND
+						,PARAM_DIV
+						,PARAM_KIND
+						,MNG_ID
+						,DATA_VAL
+						,UPD_DTM
 					)
+	VALUES			(
+						#{NODE_ID}
+						,#{FCLT_ID}
+						,#{FCLT_KIND}
+						,#{PARAM_DIV}
+						,#{PARAM_KIND}
+						,#{MNG_ID}
+						,#{DATA_VAL}
+						,#{UPD_DTM}
+					);
 	
 	
 						
@@ -157,12 +180,32 @@
 					AND FCLT_ID = #{FCLT_ID} 
 					AND FCLT_KIND = #{OLD_FCLT_KIND} 
 					AND PARAM_DIV = #{OLD_PARAM_DIV} 
-					AND PARAM_KIND = #{OLD_PARAM_KIND}
+					AND PARAM_KIND = #{OLD_PARAM_KIND};
+					
+	
+	UPDATE			BMS_FCLT_COND_PARAM_INFO
+	SET				NODE_ID = #{NODE_ID}
+					,FCLT_ID = #{FCLT_ID}
+					,FCLT_KIND = #{FCLT_KIND}
+					,PARAM_DIV = #{PARAM_DIV}
+					,PARAM_KIND = #{PARAM_KIND}
+					,MNG_ID = #{MNG_ID}
+					,DATA_VAL = #{DATA_VAL}
+					,UPD_DTM = #{UPD_DTM}
+					
+	WHERE			NODE_ID = #{NODE_ID} 
+					AND FCLT_ID = #{FCLT_ID} 
+					AND FCLT_KIND = #{OLD_FCLT_KIND} 
+					AND PARAM_DIV = #{OLD_PARAM_DIV} 
+					AND PARAM_KIND = #{OLD_PARAM_KIND};
 </update>
 
 <delete id="FM0101G2D0" parameterType="Map">
 	DELETE FROM 	BMS_FCLT_PARAM_INFO
-	WHERE			NODE_ID = #{NODE_ID} AND FCLT_ID = #{FCLT_ID} AND FCLT_KIND = #{FCLT_KIND} AND PARAM_DIV = #{PARAM_DIV} AND PARAM_KIND = #{PARAM_KIND}
+	WHERE			NODE_ID = #{NODE_ID} AND FCLT_ID = #{FCLT_ID} AND FCLT_KIND = #{FCLT_KIND} AND PARAM_DIV = #{PARAM_DIV} AND PARAM_KIND = #{PARAM_KIND};
+	
+	DELETE FROM 	BMS_FCLT_COND_PARAM_INFO
+	WHERE			NODE_ID = #{NODE_ID} AND FCLT_ID = #{FCLT_ID} AND FCLT_KIND = #{FCLT_KIND} AND PARAM_DIV = #{PARAM_DIV} AND PARAM_KIND = #{PARAM_KIND};
 </delete>
 
 <select id="FM0101P0R0" resultType="Map" parameterType="Map">

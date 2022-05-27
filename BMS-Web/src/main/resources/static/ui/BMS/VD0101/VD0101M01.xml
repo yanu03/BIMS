@@ -591,7 +591,7 @@
 						<w2:gridView sortEvent="onclick" ev:oncellclick="" showSortableImage="" rowNumVisible="true" useShiftKey="true"
 							readOnly="false" scrollByColumn="false" rowNumHeaderValue="순서" sortable="true" rowStatusHeaderValue="상태" overflowX="auto"
 							overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" dataList="data:dlt_BMS_DVC_PARAM_CFG_INFO"
-							ignoreCellClick="false" style="" autoFit="lastColumn" visibleRowNum="10" id="VD0101G2" class="cm_grid right" tooltipPositionY=""
+							ignoreCellClick="false" style="" autoFit="lastColumn" visibleRowNum="" id="VD0101G2" class="cm_grid right" tooltipPositionY=""
 							checkReadOnlyOnPasteEnable="" focusFlow="" focusMove="" keyMoveEditMode="" focusDefaultColumn="" focusMode="row" userData1=""
 							ev:onrowindexchange="scwin.SI0800G0_onrowindexchange">
 							<w2:header style="" id="header1">
@@ -611,9 +611,9 @@
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column31"
 										value="데이터길이" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column32"
+									<!-- <w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column32"
 										value="설정값" blockSelect="false" displayMode="label">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column33"
 										value="속성1" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -623,12 +623,6 @@
 									<w2:column width="100" style="height:20px;" inputType="text" id="column28" value="사용여부"
 										blockSelect="false">
 									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column12"
-										value="자동여부" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column width="100" style="height:20px;" inputType="text" id="column78" value="스케줄여부"
-										blockSelect="false">
-										</w2:column> -->
 									<w2:column width="300" style="height:20px;" inputType="text" id="column11" value="비고"
 										blockSelect="false" displayMode="label">
 									</w2:column>
@@ -651,24 +645,28 @@
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_LENGTH"
 										value="" blockSelect="false" displayMode="label" readOnly="false" textAlign="right">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_VAL"
+									<!-- <w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DATA_VAL"
 										value="" blockSelect="false" displayMode="label" readOnly="false" textAlign="right">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ATTR1_VAL"
 										value="" blockSelect="false" displayMode="label" readOnly="false">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ATTR2_VAL"
 										value="" blockSelect="false" displayMode="label" readOnly="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="USE_YN" value=""
+									<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="USE_YN" value=""
 										blockSelect="false" displayMode="label" readOnly="false" displayFormatter="scwin.useYnDisFormatter">
+										<w2:choices>
+											<w2:item>
+												<w2:label><![CDATA[사용]]></w2:label>
+												<w2:value><![CDATA[Y]]></w2:value>
+											</w2:item>
+											<w2:item>
+												<w2:label><![CDATA[미사용]]></w2:label>
+												<w2:value><![CDATA[N]]></w2:value>
+											</w2:item>
+										</w2:choices>
 									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="AUTO_YN"
-										value="" blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.autoYnDisFormatter">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="SCHEDULE_YN"
-										value="" blockSelect="false" displayMode="label" readOnly="true" displayFormatter="scwin.schYnDisFormatter">
-										</w2:column> -->
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="REMARK" value=""
 										blockSelect="false" displayMode="label" readOnly="false" textAlign="left">
 									</w2:column>

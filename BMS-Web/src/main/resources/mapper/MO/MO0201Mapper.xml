@@ -128,7 +128,7 @@
 								, 	F.NODE_TYPE
 								 -->
 								
-				FROM  			BRT_CUR_OPER_HIS A	
+				FROM  			BRT_MOVE_CUR_OPER_HIS A	
 				LEFT JOIN		BMS_REP_ROUT_MST B
 					ON				A.REP_ROUT_ID = B.REP_ROUT_ID											
 				LEFT JOIN	  	BMS_VHC_MST C

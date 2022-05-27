@@ -649,32 +649,29 @@
 				dlt_VIEW_OPER_PL_NODE_INFO.setCellData(idx, "REAL_DPRT_TM_"+j, realNodeStTm);
 												
 				//비교시간 계산
-				var operArrHour = parseInt(nodeEdTm.substring(0, 2)) * 60 * 12;
+				var operArrHour = parseInt(nodeEdTm.substring(0, 2)) * 60 * 60;
 				var operArrMin = parseInt(nodeEdTm.substring(3, 5)) * 60;
 				var operArrSec = parseInt(nodeEdTm.substring(6));
 				var operArrTotal = operArrHour + operArrMin + operArrSec
 				
-				var operDprHour = parseInt(nodeStTm.substring(0, 2)) * 60 * 12;
+				var operDprHour = parseInt(nodeStTm.substring(0, 2)) * 60 * 60;
 				var operDprMin = parseInt(nodeStTm.substring(3, 5)) * 60;
 				var operDprSec = parseInt(nodeStTm.substring(6));
 				var operDprTotal = operDprHour + operDprMin + operDprSec
 				
-				var realArrHour = parseInt(realNodeEdTm.substring(0, 2)) * 60 * 12;
+				var realArrHour = parseInt(realNodeEdTm.substring(0, 2)) * 60 * 60;
 				var realArrMin = parseInt(realNodeEdTm.substring(3, 5)) * 60;
 				var realArrSec = parseInt(realNodeEdTm.substring(6));
 				var realArrTotal = realArrHour + realArrMin + realArrSec
 				
-				var realDprHour = parseInt(realNodeStTm.substring(0, 2)) * 60 * 12;
+				var realDprHour = parseInt(realNodeStTm.substring(0, 2)) * 60 * 60;
 				var realDprMin = parseInt(realNodeStTm.substring(3, 5)) * 60;
 				var realDprSec = parseInt(realNodeStTm.substring(6));
 				var realDprTotal = realDprHour + realDprMin + realDprSec
 				
 				if(isNaN(operArrTotal) != true && isNaN(operDprTotal) != true && isNaN(realArrTotal) != true && isNaN(realDprTotal) != true){
 					var compTm = (operDprTotal - operArrTotal) - (realDprTotal - realArrTotal);
-					/*if(compTm > 0){
-						compTm = "+" + compTm;
-					}*/
-					dlt_VIEW_OPER_PL_NODE_INFO.setCellData(idx, "COMPARE_TM_"+j, compTm);
+					dlt_VIEW_OPER_PL_NODE_INFO.setCellData(idx, "COMPARE_TM_"+j, compTm + "초");
 				}else{
 					dlt_VIEW_OPER_PL_NODE_INFO.setCellData(idx, "COMPARE_TM_"+j, "-");
 				}
@@ -718,28 +715,28 @@
 			rowCnt =  rowCntArr[i].CNT; //rowCnt == 한 row의 노드 수
 			for(var j = 0; j < rowCnt; j++) {
 				var index = rowIndex+j;
-				var compTm = dlt_VIEW_OPER_PL_NODE_INFO.getCellData(i, "COMPARE_TM_"+j);
-				if(compTm > 0){
+				var compTm = dlt_VIEW_OPER_PL_NODE_INFO.getCellData(i, "COMPARE_TM_"+j).split("초");
+				if(parseInt(compTm[0]) > 0){
 					AL0600G1.setCellColor(i, "COMPARE_TM_"+j, "#0000FF");
-				}else if(compTm < 0){
+				}else if(parseInt(compTm[0]) < 0){
 					AL0600G1.setCellColor(i, "COMPARE_TM_"+j, "#FF0000");
-				}else if(compTm == 0 || compTm == '-'){
+				}else if(parseInt(compTm[0]) == 0 || parseInt(compTm[0]) == '-'){
 					AL0600G1.setCellColor(i, "COMPARE_TM_"+j, "#000000");
 				}
 				
-				if(isNaN(compTm) != true){
-					totalCompTm = totalCompTm + compTm;
+				if(isNaN(parseInt(compTm[0])) != true){
+					totalCompTm = totalCompTm + parseInt(compTm[0]);
 				}
 			}
 			
-			dlt_VIEW_OPER_PL_NODE_INFO.setCellData(i, "TOTAL_COMP_TM", totalCompTm);
-			var rowTotalCompTm = dlt_VIEW_OPER_PL_NODE_INFO.getCellData(i, "TOTAL_COMP_TM"); // 총 비교시간
+			dlt_VIEW_OPER_PL_NODE_INFO.setCellData(i, "TOTAL_COMP_TM", totalCompTm + "초");
+			var rowTotalCompTm = dlt_VIEW_OPER_PL_NODE_INFO.getCellData(i, "TOTAL_COMP_TM").split("초"); // 총 비교시간
 			
-			if(rowTotalCompTm > 0){
+			if(parseInt(rowTotalCompTm[0]) > 0){
 				AL0600G1.setCellColor(i, "TOTAL_COMP_TM", "#0000FF");
-			}else if(rowTotalCompTm < 0){
+			}else if(parseInt(rowTotalCompTm[0]) < 0){
 				AL0600G1.setCellColor(i, "TOTAL_COMP_TM", "#FF0000");
-			}else if(rowTotalCompTm == 0 || totalCompTm == '-'){
+			}else if(parseInt(rowTotalCompTm[0]) == 0 || parseInt(rowTotalCompTm[0]) == '-'){
 				AL0600G1.setCellColor(i, "TOTAL_COMP_TM", "#000000");
 			}
 		}

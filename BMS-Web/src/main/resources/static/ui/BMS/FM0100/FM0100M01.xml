@@ -321,6 +321,28 @@
 		scwin.btn_searchMro_onclick();		
 	};
 	
+	
+	scwin.btn_searchIntgFcltId_onclick = function(e) {
+	
+		var data = { callbackFn : "scwin.searchIntgFcltIdCallback" };
+				   	 
+		var opt = { id : "FM0100P02", 
+					popupName : "연계시설물 검색",
+					//width : 650,
+					//height : 500,
+					modal : true};
+		com.openPopup("/cm/common/popUpIntgFclt.xml", opt, data);		
+	};
+	
+	scwin.searchIntgFcltIdCallback = function(returnValue) {
+		INTG_FCLT_ID.setValue(returnValue.INTG_FCLT_ID);
+		dlt_BMS_FCLT_INFO.setCellData(FM0100G1.getFocusedRowIndex(), "INTG_FCLT_ID", returnValue.INTG_FCLT_ID);
+	};
+	
+	scwin.INTG_FCLT_ID_onfocus = function(e) {
+		scwin.btn_searchIntgFcltId_onclick();		
+	};
+	
 	scwin.useYnDisplayFormatter = function(data){
 		if(data == ""){
 			return "";
@@ -691,16 +713,19 @@
 									</xf:input>
 								</xf:group>
 								<xf:group tagname="th" class="w2tb_th">
-									시설IP
+									연계시설물ID
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
 									</w2:attributes>
 								</xf:group>
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes></w2:attributes>
-									<xf:input adjustMaxLength="" class="" dataType="text" disabled="false" id="FCLT_IP" mandatory=""
-										maxlength="20" ref="data:dlt_BMS_FCLT_INFO.FCLT_IP" style="width:100%;" initValue="">
+									<xf:input adjustMaxLength="" class="" dataType="text" disabled="false" id="INTG_FCLT_ID" mandatory=""
+										maxlength="20" ref="data:dlt_BMS_FCLT_INFO.INTG_FCLT_ID" style="width:130px;" initValue="" ev:onfocus="scwin.INTG_FCLT_ID_onfocus">
 									</xf:input>
+									<xf:image class="btn" ev:onclick="scwin.btn_searchIntgFcltId_onclick" id="btn_searchIntgFcltId" longdesc=""
+										src="/cm/images/inc/icon_search.gif" style="width:21px;height:23px;margin-left:5px;">
+									</xf:image>
 								</xf:group>
 							</xf:group>
 							<xf:group style="" tagname="tr">
@@ -774,10 +799,12 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" class="w2tb_th">위치 좌표(X,Y)</xf:group>
+								<xf:group tagname="th" class="w2tb_th">
+									위치 좌표(X,Y)
+								</xf:group>
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes>
-										<w2:colspan>3</w2:colspan>
+										<w2:colspan>1</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:group>
@@ -789,8 +816,19 @@
 										</xf:trigger>
 									</xf:group>
 								</xf:group>
+								<xf:group tagname="th" class="w2tb_th">
+									시설IP
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" class="w2tb_td">
+									<w2:attributes></w2:attributes>
+									<xf:input adjustMaxLength="" class="" dataType="text" disabled="false" id="FCLT_IP" mandatory=""
+										maxlength="20" ref="data:dlt_BMS_FCLT_INFO.FCLT_IP" style="width:100%;" initValue="">
+									</xf:input>
+								</xf:group>
 							</xf:group>
-							
 							<xf:group tagname="tr" style="">
 								<xf:group tagname="th" class="w2tb_th" style="vertical-align: top" id="" tabIndex="">
 									비고

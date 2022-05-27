@@ -454,6 +454,9 @@
 	scwin.sub_VD0204G0R1_submitdone = function(e) {
 		scwin.setGridViewInfo();
 		
+		VD0204G0.mergeCol(0,false);
+		VD0204G0.mergeCells("byrestriccol");
+		
 	};
 	
 	//동적 그리드 함수
@@ -462,6 +465,7 @@
 		var rowData = dlt_BMS_DVC_COND_PARAM_INFO.getAllJSON();
 		var paramKindJson = dlt_PARAM_KIND.getAllJSON();
 		var rowCntParamKind = dlt_PARAM_KIND.getRowCount();
+		var headerWidth;
 		//var rowCntArr = dlt_BMS_DVC_COND_PARAM_INFO.getRowCount();
 		//var rowCntParamKind = dlt_commonDtlPARAM_KIND.getRowCount();
 		
@@ -481,7 +485,13 @@
 				var dlCd = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD");
 				var dlCdNm = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD_NM");
 				
-				gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm'+i+3+'" value="'+dlCdNm+'" blockSelect="false" displayMode="label"></w2:column>';
+				if(dlCd == 'PK016'){
+					headerWidth = 130;
+				}else{
+					headerWidth = 100;
+				}
+				
+				gridHeader +='<w2:column removeBorderStyle="false" width="'+headerWidth+'" inputType="text" style="height:20px" id="h_colunm'+i+3+'" value="'+dlCdNm+'" blockSelect="false" displayMode="label"></w2:column>';
 			}
 			
 		}
@@ -725,6 +735,8 @@
 	scwin.sub_VD0204G2R1_submitdone = function(e) {
 		scwin.setTagGridViewInfo();
 		com.setFocusedCell(VD0204G2, "VHC_ID");
+		
+		VD0204G2.mergeCells("byrestriccol");
 	};
 	
 	//동적 그리드 함수 (태그리스)

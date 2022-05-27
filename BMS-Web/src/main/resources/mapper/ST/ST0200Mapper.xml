@@ -26,6 +26,7 @@
   	CALL PROC_MAKE_ROUT_AVER_OPER_SP_STAT(#{OPER_DT});
   </select> 
   
+  <!-- 피봇 테이블 데이터 -->
   <select id="ST0200G1R0" resultType="Map">
   		SELECT
   		<if test="SELECT_DIV == 'TIME'">
@@ -33,7 +34,7 @@
 			,A.REP_ROUT_ID
 			,A.ROUT_ID
 			,CONCAT(A.STAT_H, '시') AS STAT_H
-			,AVRG_SPD
+			,AVG(AVRG_SPD) AS AVRG_SPD
 			,MAX_SPD
 			,MIN_SPD
 			,B.ROUT_NM
@@ -84,6 +85,7 @@
 		</if>
   </select>
   
+  <!-- 그래프 데이터 -->
    <select id="ST0200G1R1" resultType="Map">
  		SELECT
   		<if test="SELECT_DIV == 'TIME'">

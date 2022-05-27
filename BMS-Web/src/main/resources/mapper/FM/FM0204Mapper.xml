@@ -5,7 +5,12 @@
 
 <!-- 시설물 상태 파라미터 조회 프로시서 -->
 <select id="FM0204G0R0" resultType="Map">
-	CALL PROC_FCLT_STATUS()
+	<if test="@kr.tracom.util.CommonUtil@notEmpty(NODE_ID)">			 
+		CALL PROC_FCLT_STATUS(#{NODE_ID});
+	</if>
+	<if test="@kr.tracom.util.CommonUtil@empty(NODE_ID)">			 
+		CALL PROC_FCLT_STATUS();
+	</if>
 </select>
 
 <!-- 시설물(에어튜브) 상태 파라미터 조회 프로시서-->
@@ -13,19 +18,22 @@
 	CALL PROC_FCLT_AIR_STATUS()
 </select>
 
-<!-- 시설물 파라미터종류 조회-->
+<!-- 시설물 파라미터 헤더 조회-->
 <select id="FM0204G0R1" resultType="Map">
 	SELECT 
 		A.PARAM_KIND
+		,B.NODE_TYPE
 	FROM 
 		BMS_FCLT_PARAM_INFO A
+		LEFT JOIN BMS_NODE_MST B
+		ON A.NODE_ID = B.NODE_ID
 	WHERE 
 		A.FCLT_KIND != 'FK004' AND A.PARAM_DIV = 'PD003'
 	GROUP BY
-		PARAM_KIND
+		PARAM_KIND, NODE_TYPE
 </select>
 
-<!-- 시설물(에어튜브) 파라미터종류 조회-->
+<!-- 시설물(에어튜브) 파라미터 헤더 조회-->
 <select id="FM0204G2R1" resultType="Map">
 	SELECT 
 		A.PARAM_KIND

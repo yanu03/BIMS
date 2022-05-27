@@ -23,7 +23,7 @@
 			ON C.VHC_ID = A.VHC_ID
 			</if>
 			<if test="@kr.tracom.util.CommonUtil@notEmpty(OPER_DT)">
-			LEFT JOIN BRT_CUR_OPER_HIS A
+			LEFT JOIN BRT_MOVE_CUR_OPER_HIS A
 			ON C.VHC_ID = A.VHC_ID
 			</if>
 			LEFT JOIN BMS_ROUT_MST B
@@ -47,7 +47,7 @@
 			A.REP_ROUT_ID, A.VHC_ID
 	</if>
 		ORDER BY
-			A.OPER_STS, <!-- A.REP_ROUT_ID, A.ROUT_ID,  -->C.VHC_ID
+			A.OPER_STS DESC, <!-- A.REP_ROUT_ID, A.ROUT_ID,  -->C.VHC_ID
 
 		<!-- 
 		*현재 운행 차량만

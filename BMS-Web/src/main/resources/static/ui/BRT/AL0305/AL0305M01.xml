@@ -353,7 +353,7 @@
 		var today = new Date();
 		var str = "지난 날짜입니다. 수정 하시겠습니까?";
 		
-		if(col == 2){
+		if(col == 3){
 			if((operDt.getFullYear() < today.getFullYear()) || (operDt.getMonth()+1 <= today.getMonth()+1 && operDt.getDate() < today.getDate())){
 				com.alert("지난 날짜입니다.");
 				
@@ -396,7 +396,7 @@
 			
 				
 		}
-		else if(col == 4){
+		else if(col == 5){
 			if((operDt.getFullYear() < today.getFullYear()) || (operDt.getMonth()+1 <= today.getMonth()+1 && operDt.getDate() < today.getDate())){
 				com.alert("지난 날짜입니다.");
 				
@@ -436,7 +436,7 @@
 			
 			}
 		}
-		else if(col == 5){
+		else if(col == 6){
 			if((operDt.getFullYear() < today.getFullYear()) || (operDt.getMonth()+1 <= today.getMonth()+1 && operDt.getDate() < today.getDate())){
 				com.alert("지난 날짜입니다.");
 				
@@ -476,7 +476,7 @@
 			
 			}
 		}
-		else if(col == 7){
+		else if(col == 8){
 			if((operDt.getFullYear() < today.getFullYear()) || (operDt.getMonth()+1 <= today.getMonth()+1 && operDt.getDate() < today.getDate())){
 				com.alert("지난 날짜입니다.");
 				

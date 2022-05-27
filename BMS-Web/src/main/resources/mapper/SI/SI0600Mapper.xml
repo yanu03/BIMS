@@ -82,7 +82,7 @@
 			(	
 				CLSFCTN_ID,
 				CLSFCTN_NM,
-				CLSFCTN_ENM
+				CLSFCTN_ENM,
 				PARENT_ID,
 				LEVEL,
 				SORT,

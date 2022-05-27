@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface FM0204Mapper {
 
-	public List FM0204G0R0();
+	public List FM0204G0R0(Map param);
 	
 	public List FM0204G0R1();
 	

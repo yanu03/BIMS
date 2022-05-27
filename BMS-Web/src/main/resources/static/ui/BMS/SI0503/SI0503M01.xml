@@ -110,10 +110,6 @@
         		instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_SI0503G0S0_submitdone"
         		ev:submiterror="" abortTrigger="">
         	</xf:submission>
-        	<xf:submission id="sub_SI0503G1R0" ref="" target="" action="" method="post" mediatype="application/json" encoding="UTF-8"
-        		instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
-        		ev:submiterror="" abortTrigger="">
-        	</xf:submission>
         	<xf:submission id="sub_SI0503G0K0" ref="" target="data:json,dma_SEQ_BMS_CRS_MST_0" action="/si/SI0503G0K0" method="post" mediatype="application/json" encoding="UTF-8"
         		instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_SI0503G0K0_submitdone"
         		ev:submiterror="" abortTrigger="">
@@ -122,14 +118,14 @@
         		instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
         		ev:submiterror="" abortTrigger="">
         	</xf:submission>
-		<xf:submission id="sub_SI0503G1R0" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_REP_ROUT_MST" action="/repRout/selectRepRoutListByNode"
-			method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-			processMsg="" ev:submit="" ev:submitdone="scwin.sub_SI0503G1R0_submitdone" ev:submiterror="" abortTrigger="">
-		</xf:submission>
-		<xf:submission id="sub_SI0503G2R0" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_ROUT_NODE_DISP_VW" action="/rout/selectNodeDispListByRepRouts"
-			method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-			processMsg="조회 중입니다.." ev:submit="" ev:submitdone="scwin.sub_SI0503G2R0_submitdone" ev:submiterror="" abortTrigger="">
-		</xf:submission>
+			<xf:submission id="sub_SI0503G1R0" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_REP_ROUT_MST" action="/repRout/selectRepRoutListByNode"
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="" ev:submit="" ev:submitdone="scwin.sub_SI0503G1R0_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_SI0503G2R0" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_ROUT_NODE_DISP_VW" action="/rout/selectNodeDispListByRepRouts"
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="조회 중입니다.." ev:submit="" ev:submitdone="scwin.sub_SI0503G2R0_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
         </xf:model>
         <script type="text/javascript" lazy="false"><![CDATA[
         
@@ -617,10 +613,10 @@
 									<w2:header style="" id="header2">
 										<w2:row style="" id="row4">
 											<w2:column removeBorderStyle="false" width="100" inputType="text" style=""
-												id="column89" value="노선ID" blockSelect="false" displayMode="label">
+												id="column89" value="대표노선ID" blockSelect="false" displayMode="label">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="100" inputType="text" style=""
-												id="column88" value="노선명" blockSelect="false" displayMode="label">
+												id="column88" value="대표노선명" blockSelect="false" displayMode="label">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="60" inputType="text" style=""
 												id="column87" value="노선유형" blockSelect="false" displayMode="label">
@@ -642,10 +638,10 @@
 									<w2:gBody style="" id="gBody2">
 										<w2:row style="" id="row5">
 											<w2:column removeBorderStyle="false" width="88" inputType="text" style=""
-												id="ROUT_ID" value="" blockSelect="false" displayMode="label">
+												id="REP_ROUT_ID" value="" blockSelect="false" displayMode="label">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="104" inputType="text" style=""
-												id="ROUT_NM" value="" blockSelect="false" displayMode="label" textAlign="left">
+												id="REP_ROUT_NM" value="" blockSelect="false" displayMode="label" textAlign="left">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="70" inputType="select" style=""
 												id="ROUT_TYPE" value="" blockSelect="false" displayMode="label">

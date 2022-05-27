@@ -454,7 +454,7 @@
 	}
 	
 	scwin.sub_MO0203SCK_submitdone = function(e) {
-		scwin.onMessageReceived();
+		//scwin.onMessageReceived();
 	};
 	
 	function showMessage(message) {

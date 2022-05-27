@@ -547,30 +547,49 @@
 										<w2:colspan>1</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:input class="req" id="CLSFCTN_NM"  mandatory="" ref="data:dlt_EMER_CLSFCTN_MST.CLSFCTN_NM"
-										style="width:100%;"  adjustMaxLength="" maxlength="30" disabled="">
+									<xf:input class="req" id="CLSFCTN_NM" mandatory="" ref="data:dlt_EMER_CLSFCTN_MST.CLSFCTN_NM"
+										style="width:100%;" adjustMaxLength="" maxlength="30" disabled="">
 									</xf:input>
 								</xf:group>
 							</xf:group>
-							<xf:group tagname="tr" style=""><xf:group tagname="th" class="w2tb_th">협력기관명<w2:attributes><w2:scope>row</w2:scope></w2:attributes></xf:group>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" class="w2tb_th">
+									협력기관명
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes></w2:attributes>
-									<xf:input adjustMaxLength="" class="" disabled="" ev:oneditenter="" ev:onfocus="scwin.PARTNER_NM_onfocus"
-										fireEventOnInvalid="" id="PARTNER_NM" invalidMessageFunc="" mandatory="" readOnly="" ref="data:dlt_EMER_CLSFCTN_MST.PARTNER_NM"
-										style="width:80%;" validateOnCheckMaxByteLength="" validateOnInput="" validator="">
+									<xf:input adjustMaxLength="" class="" disabled="" ev:oneditenter=""
+										ev:onfocus="scwin.PARTNER_NM_onfocus" fireEventOnInvalid="" id="PARTNER_NM" invalidMessageFunc="" mandatory="" readOnly=""
+										ref="data:dlt_EMER_CLSFCTN_MST.PARTNER_NM" style="width:80%;" validateOnCheckMaxByteLength="" validateOnInput="" validator="">
 									</xf:input>
 									<xf:image class="btn" ev:onclick="scwin.PARTNER_SEARCH_onclick" id="PARTNER_SEARCH" longdesc=""
 										src="/cm/images/inc/icon_search.gif" style="width:21px;height:23px;margin-left:5px;">
 									</xf:image>
 								</xf:group>
-								<xf:group tagname="th" class="w2tb_th">전화번호<w2:attributes><w2:scope>row</w2:scope></w2:attributes></xf:group>
+								<xf:group tagname="th" class="w2tb_th">
+									전화번호
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes></w2:attributes>
 									<xf:input adjustMaxLength="" allowChar="0-9" class="" customModelFormatter="com.transPhone"
 										displayFormatter="com.transPhone" id="PHONE" mandatory="" maxlength="30" ref="data:dlt_EMER_CLSFCTN_MST.PHONE" refSync=""
 										style="">
 									</xf:input>
-								</xf:group></xf:group><xf:group tagname="tr" style=""><xf:group tagname="th" class="w2tb_th">주소<w2:attributes><w2:scope>row</w2:scope></w2:attributes></xf:group>
+								</xf:group>
+							</xf:group>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" class="w2tb_th">
+									주소
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes>
 										<w2:colspan>3</w2:colspan>
@@ -583,21 +602,35 @@
 										style="left:0px;top:0px;margin-right: 5px;">
 										<xf:label><![CDATA[찾기]]></xf:label>
 									</w2:anchor>
-								</xf:group></xf:group><xf:group tagname="tr" style=""><xf:group tagname="th" class="w2tb_th">팩스<w2:attributes><w2:scope>row</w2:scope></w2:attributes></xf:group>
-	<xf:group tagname="td" class="w2tb_td">
-		<w2:attributes></w2:attributes>
-		<xf:input adjustMaxLength="" allowChar="0-9" class="" customModelFormatter="com.transPhone" displayFormatter="com.transPhone" id="FAX"
-			mandatory="" maxlength="30" ref="data:dlt_EMER_CLSFCTN_MST.FAX" refSync="" style="" initValue="">
-		</xf:input>
-	</xf:group>
-	<xf:group tagname="td" class="w2tb_th">이메일<w2:attributes></w2:attributes></xf:group>
-	<xf:group tagname="td" class="w2tb_td">
-		<w2:attributes></w2:attributes>
-		<xf:input adjustMaxLength="" allowChar="aA-zZ,0-9,@,." class="" customModelFormatter="" customModelUnformatter="" disabled=""
-			displayFormatter="" id="EMAIL" invalidMessageFunc="" mandatory="" maxlength="50" ref="data:dlt_EMER_CLSFCTN_MST.EMAIL"
-			style="width:100%;" tooltipFormatter="" validator="">
-		</xf:input>
-	</xf:group></xf:group><xf:group style="" tagname="tr">
+								</xf:group>
+							</xf:group>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" class="w2tb_th">
+									팩스
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" class="w2tb_td">
+									<w2:attributes></w2:attributes>
+									<xf:input adjustMaxLength="" allowChar="0-9" class="" customModelFormatter="com.transPhone"
+										displayFormatter="com.transPhone" id="FAX" mandatory="" maxlength="30" ref="data:dlt_EMER_CLSFCTN_MST.FAX" refSync="" style=""
+										initValue="">
+									</xf:input>
+								</xf:group>
+								<xf:group tagname="td" class="w2tb_th">
+									이메일
+									<w2:attributes></w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" class="w2tb_td">
+									<w2:attributes></w2:attributes>
+									<xf:input adjustMaxLength="" allowChar="aA-zZ,0-9,@,." class="" customModelFormatter=""
+										customModelUnformatter="" disabled="" displayFormatter="" id="EMAIL" invalidMessageFunc="" mandatory="" maxlength="50"
+										ref="data:dlt_EMER_CLSFCTN_MST.EMAIL" style="width:100%;" tooltipFormatter="" validator="">
+									</xf:input>
+								</xf:group>
+							</xf:group>
+							<xf:group style="" tagname="tr">
 								<xf:group class="w2tb_th" style="vertical-align: top;" tagname="th">비고</xf:group>
 								<xf:group class="w2tb_td" style="" tagname="td">
 									<w2:attributes>
@@ -605,8 +638,8 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:textarea adjustMaxLength="" disabled="" id="REMARK" mandatory=""
-										ref="data:dlt_EMER_CLSFCTN_MST.REMARK" style="width:100%;" allowChar="" validator="" validateOnInput="false"
-										initValue="" maxlength="200">
+										ref="data:dlt_EMER_CLSFCTN_MST.REMARK" style="width:100%;" allowChar="" validator="" validateOnInput="false" initValue=""
+										maxlength="200">
 									</xf:textarea>
 								</xf:group>
 							</xf:group>
@@ -633,7 +666,7 @@
 								<w2:row style="" id="row4">
 									<!-- <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column59"
 										value="분류ID" blockSelect="false" displayMode="label">
-									</w2:column> -->
+										</w2:column> -->
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column58"
 										value="담당자ID" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -658,7 +691,7 @@
 								<w2:row style="" id="row5">
 									<!-- <w2:column removeBorderStyle="false" width="109" inputType="text" style="height:20px" id="CLSFCTN_ID"
 										value="" blockSelect="false" displayMode="label">
-									</w2:column> -->
+										</w2:column> -->
 									<w2:column removeBorderStyle="false" width="106" inputType="text" style="height:20px" id="MEMBER_ID"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -686,7 +719,7 @@
 										style="height:20px;" textAlign="left" width="1924">
 									</w2:column>
 								</w2:row>
-							</w2:footer>							
+							</w2:footer>
 						</w2:gridView>
 					</xf:group>
 				</xf:group><!-- pgm_detail -->

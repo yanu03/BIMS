@@ -67,11 +67,5 @@ public class VD0204Controller extends ControllerSupport {
 		return result.getResult();
 	}
 	
-	@RequestMapping("/vd/VD0204G2S0")
-	public @ResponseBody Map<String, Object> VD0204G2S0() throws Exception {
-		Map map = vd0204Service.VD0204G2S0();
-		result.setData("dma_result", map);
-		return result.getResultSave();
-	}
 	
 }

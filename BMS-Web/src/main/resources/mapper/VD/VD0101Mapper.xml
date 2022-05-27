@@ -154,8 +154,29 @@
 						,#{REMARK}
 						,#{UPD_DTM}
 						,#{SSN_UPD_ID}				
-					)
+					);
 	
+	INSERT INTO		BMS_DVC_COND_PARAM_INFO	
+					(
+						VHC_ID
+						,DVC_ID
+						,DVC_KIND
+						,PARAM_DIV
+						,PARAM_KIND
+						,DATA_VAL
+						,MNG_ID
+						,UPD_DTM
+					)
+	VALUES			(
+						#{VHC_ID}
+						,#{DVC_ID}
+						,#{DVC_KIND}
+						,#{PARAM_DIV}
+						,#{PARAM_KIND}
+						,#{DATA_VAL}
+						,#{MNG_ID}
+						,#{UPD_DTM}
+					);
 	
 						
 </insert>
@@ -183,7 +204,23 @@
 					AND DVC_ID = #{DVC_ID} 
 					AND DVC_KIND = #{OLD_DVC_KIND} 
 					AND PARAM_DIV = #{OLD_PARAM_DIV} 
-					AND PARAM_KIND = #{OLD_PARAM_KIND}
+					AND PARAM_KIND = #{OLD_PARAM_KIND};
+					
+					
+	UPDATE			BMS_DVC_COND_PARAM_INFO
+	SET				VHC_ID = #{VHC_ID}
+					,DVC_ID = #{DVC_ID}
+					,DVC_KIND = #{DVC_KIND}
+					,PARAM_DIV = #{PARAM_DIV}
+					,PARAM_KIND = #{PARAM_KIND}
+					,DATA_VAL = #{DATA_VAL}
+					,UPD_DTM = #{UPD_DTM}
+					
+	WHERE			VHC_ID = #{VHC_ID} 
+					AND DVC_ID = #{DVC_ID} 
+					AND DVC_KIND = #{OLD_DVC_KIND} 
+					AND PARAM_DIV = #{OLD_PARAM_DIV} 
+					AND PARAM_KIND = #{OLD_PARAM_KIND};
 </update> 
 
 <delete id="VD0101G2D0" parameterType="Map">
@@ -192,7 +229,15 @@
 					AND DVC_ID = #{DVC_ID} 
 					AND DVC_KIND = #{DVC_KIND} 
 					AND PARAM_DIV = #{PARAM_DIV} 
-					AND PARAM_KIND = #{PARAM_KIND}
+					AND PARAM_KIND = #{PARAM_KIND};
+	
+	
+	DELETE FROM 	BMS_DVC_COND_PARAM_INFO
+	WHERE			VHC_ID = #{VHC_ID} 
+					AND DVC_ID = #{DVC_ID} 
+					AND DVC_KIND = #{DVC_KIND} 
+					AND PARAM_DIV = #{PARAM_DIV} 
+					AND PARAM_KIND = #{PARAM_KIND};
 </delete>
 
 <select id="VD0101P0R0" resultType="Map" parameterType="Map">
