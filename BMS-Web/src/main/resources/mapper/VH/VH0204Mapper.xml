@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.tracom.brt.domain.VH0204.VH0204Mapper">
+
+<select id="VH0204G0R0" parameterType="Map" resultType="Map">
+	SELECT
+		DATE_FORMAT(UPD_DTM, '%Y-%m-%d %H:%i:%s') UPD_DTM 
+		,STTN_ID
+		,STTN_NM
+		,STTN_ENM
+		,AREA
+		,STTN_NO
+		,GPS_X
+		,GPS_Y
+		,CENTER_YN
+		,STTN_FCLT_TYPE
+		,VHC_DOOR_DIR_TYPE
+		,WAY_DIV
+		,APPL_RDS
+		,BAY_TYPE
+		,BAY_LEN
+		,LINE_CNT
+		,STOP_TM_PEAK
+		,STOP_TM_NONE_PEAK
+		,APPL_ST_DT
+		,APPL_ED_DT
+		,HIS_DIV
+		,USE_YN
+		,DEL_YN
+		,REMARK
+		,UPD_ID
+	FROM
+		BMS_STTN_HIS
+	<where>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(STTN_FCLT_TYPE)">
+				STTN_FCLT_TYPE = #{STTN_FCLT_TYPE}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(HIS_DIV)">
+				AND HIS_DIV = #{HIS_DIV}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT)">
+				AND (STTN_ID LIKE CONCAT('%',#{CONTENT},'%') || STTN_NM LIKE CONCAT('%',#{CONTENT},'%'))
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0204) and @kr.tracom.util.CommonUtil@empty(L_DATE_VH0204)">
+			<![CDATA[AND DATE_FORMAT(UPD_DTM, '%Y%m%d') >= #{F_DATE_VH0204}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0204) and @kr.tracom.util.CommonUtil@empty(F_DATE_VH0204)">
+			<![CDATA[AND DATE_FORMAT(UPD_DTM, '%Y%m%d') <= #{L_DATE_VH0204}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0204) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0204)">
+			AND DATE_FORMAT(UPD_DTM, '%Y%m%d') BETWEEN #{F_DATE_VH0204} AND #{L_DATE_VH0204}
+		</if>			
+	</where>
+	ORDER BY
+		UPD_DTM DESC, STTN_ID DESC
+</select>
+	
+</mapper>
