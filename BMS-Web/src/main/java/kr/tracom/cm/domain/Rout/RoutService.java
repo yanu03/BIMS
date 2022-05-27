@@ -104,4 +104,14 @@ public class RoutService extends ServiceSupport {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
 		return routMapper.selectSttnCrsList(map);
 	}
+	
+	public List<Map<String, Object>> selectSttnCrsDispList() throws Exception {
+		Map<String, Object> map = getSimpleDataMap("dma_search");
+		return routMapper.selectSttnCrsDispList(map);
+	}
+	
+	public List<Map<String, Object>> selectSttnCrsLink() throws Exception {
+		Map<String, Object> map = getSimpleDataMap("dma_search");
+		return routMapper.selectSttnCrsLink(map);
+	}
 }

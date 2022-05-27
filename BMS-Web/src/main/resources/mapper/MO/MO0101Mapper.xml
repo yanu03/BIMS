@@ -49,6 +49,7 @@
 						,   E.COMP_NM
 						,	A.PRV_PLCE_NM
 						, 	F.NODE_TYPE
+						,	C.VHC_KIND
 						
 		FROM  			BRT_CUR_OPER_INFO A
 		LEFT JOIN   	BMS_ROUT_MST	B
@@ -70,9 +71,9 @@
 			<if test="CONTENT2 != ''">
 				AND A.ROUT_ID = #{CONTENT2}
 			</if>
-			<!-- <if test="CONTENT3 != null and CONTENT3 != ''">
-				AND	A.VHC_NO LIKE CONCAT('%', #{CONTENT3}, '%')
-			</if> -->
+			<if test="CONTENT3 != null and CONTENT3 != ''">
+				AND B.WAY_DIV = #{CONTENT3}
+			</if>
 		ORDER BY		A.REP_ROUT_ID, A.ROUT_ID, VHC_ID	
 	</select>
 	

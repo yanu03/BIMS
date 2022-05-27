@@ -242,7 +242,11 @@
 	
 	//정류장별 차량 도착 정보 테이블 생성
 	MO0203T0_setTable = function(dataList){
-		debugger;
+//		dataList.push({"REMAIN_TM": 30});
+//		dataList.push({"ROUT_NM": "B0"});
+//		dataList.push({"REMAIN_STTN": "3"});
+		
+		
 		var param = com.getParameter();
 		dlt_BMS_ETA_INFO.removeAll();
 		dlt_BMS_SOONETA_INFO.removeAll();
@@ -252,12 +256,12 @@
 		var vhcImgSrc = '';
 		
 		//테이블 소스 시작
-		tableStr = '<table id="mf_tac_layout_contents_MN00090201_body_MO0203T0" style="" class="w2group w2tb bit_tb">'
-					+'<caption id="mf_tac_layout_contents_MN00090201_body_wq_uuid_505" class="w2group "></caption>'
-					+'<colgroup id="mf_tac_layout_contents_MN00090201_body_wq_uuid_506" class="w2group ">'
-					+'<col id="mf_tac_layout_contents_MN00090201_body_wq_uuid_507" style="width:50.00%;" class="w2group ">'
-					+'<col id="mf_tac_layout_contents_MN00090201_body_wq_uuid_508" style="width:25.00%" class="w2group ">'
-					+'<col id="mf_tac_layout_contents_MN00090201_body_wq_uuid_508" style="width:25.00%" class="w2group ">'
+		tableStr = '<table id="mf_tac_layout_contents_MN00070202_body_MO0203T0" style="" class="w2group w2tb bit_tb">'
+					+'<caption id="mf_tac_layout_contents_MN00070202_body_wq_uuid_505" class="w2group "></caption>'
+					+'<colgroup id="mf_tac_layout_contents_MN00070202_body_wq_uuid_506" class="w2group ">'
+					+'<col id="mf_tac_layout_contents_MN00070202_body_wq_uuid_507" style="width:25.00%;" class="w2group ">'
+					+'<col id="mf_tac_layout_contents_MN00070202_body_wq_uuid_508" style="width:37.50%" class="w2group ">'
+					+'<col id="mf_tac_layout_contents_MN00070202_body_wq_uuid_508" style="width:37.50%" class="w2group ">'
 					+'</colgroup>'
 					+'<tbody>';
 		
@@ -286,45 +290,45 @@
 			
 			//보내는게 1개
 			if(dataList.length == 1){
-				tableBody += '<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+				tableBody += '<tr id="mf_tac_layout_contents_MN00070202_body_wq_uuid_511" class="w2group">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 12px;" class="w2span ">'
 					+dlt_BMS_ETA_INFO.getCellData(0, "ROUT_NM")
 					+'</span>'
 					+'</td>'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px; color: yellow;" class="w2span ">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 2px; color: yellow;" class="w2span ">'
 					+dlt_BMS_ETA_INFO.getCellData(0, "REMAIN_STTN")
 					+'</span>'
 					+'</td>'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_518" style="border-color: black;  text-align: right;" class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 15px;text-align: right;color: green;" class="w2span ">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_518" style="border-color: black;  text-align: right;" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 2px;text-align: right;color: green;" class="w2span ">'
 					+dlt_BMS_ETA_INFO.getCellData(0, "REMAIN_TM")
 					+'</span>'
 					+'</td>'
 					+'</tr>'
 					
-					+'<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_512" class="w2group">'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_513" style="border-color: black; border-bottom-color:yellow" class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_516" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+					+'<tr id="mf_tac_layout_contents_MN00070202_body_wq_uuid_512" class="w2group">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_513" style="border-color: black; border-bottom-color:yellow" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_516" style="width: 100px;height: 23px;font-size: 2px;" class="w2span ">'
 
 					+'</span>'
 					+'</td>'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_513" style="border-color: black; border-bottom-color:yellow" class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_516" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_513" style="border-color: black; border-bottom-color:yellow" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_516" style="width: 100px;height: 23px;font-size: 2px;" class="w2span ">'
 
 					+'</span>'
 					+'</td>'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_518" style="border-color: black; border-bottom-color:yellow; text-align: right;" class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 15px;text-align: right;color: green;" class="w2span ">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_518" style="border-color: black; border-bottom-color:yellow; text-align: right;" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 2px;text-align: right;color: green;" class="w2span ">'
 
 					+'</span>'
 					+'</td>'
 					+'</tr>'
 			
-				tableBody +='<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
-							+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: yellow; border-right-color:yellow;" class="w2group w2tb_td w2tb_noTH" scope="row" colspan="3" rowspan="1">'
-							+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+				tableBody +='<tr id="mf_tac_layout_contents_MN00070202_body_wq_uuid_511" class="w2group">'
+							+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_514" style="border-color: yellow; border-right-color:yellow;" class="w2group w2tb_td w2tb_noTH" scope="row" colspan="3" rowspan="1">'
+							+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 10px;" class="w2span ">'
 							+"곧도착 : " + dlt_BMS_SOONETA_INFO.getCellData(0, "ROUT_NM");
 							+'</span>'
 							+'</td>'
@@ -334,19 +338,19 @@
 			else if(dataList.length > 1){
 				for(var i = 0; i < dataList.length; i++){
 					if(dlt_BMS_ETA_INFO.getCellData(i, "REMAIN_TM") != '0분'){
-						tableBody += '<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
-									+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
-									+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+						tableBody += '<tr id="mf_tac_layout_contents_MN00070202_body_wq_uuid_511" class="w2group">'
+									+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
+									+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 2px;" class="w2span ">'
 									+dlt_BMS_ETA_INFO.getCellData(i, "ROUT_NM")
 									+'</span>'
 									+'</td>'
-									+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
-									+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px; color: yellow;" class="w2span ">'
+									+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
+									+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 2px; color: yellow;" class="w2span ">'
 									+dlt_BMS_ETA_INFO.getCellData(i, "REMAIN_STTN")
 									+'</span>'
 									+'</td>'
-									+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_518" style="border-color: black;  text-align: right;" class="w2group w2tb_td w2tb_noTH">'
-									+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 15px;text-align: right;color: green;" class="w2span ">'
+									+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_518" style="border-color: black;  text-align: right;" class="w2group w2tb_td w2tb_noTH">'
+									+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 2px;text-align: right;color: green;" class="w2span ">'
 									+dlt_BMS_ETA_INFO.getCellData(i, "REMAIN_TM")
 									+'</span>'
 									+'</td>'
@@ -355,9 +359,9 @@
 				
 				}
 				//곧도착 2개 이상..
-				tableBody +='<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
-							+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: yellow; border-right-color:yellow; border-top-style:double;" class="w2group w2tb_td w2tb_noTH" scope="row" colspan="3" rowspan="1">'
-							+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+				tableBody +='<tr id="mf_tac_layout_contents_MN00070202_body_wq_uuid_511" class="w2group">'
+							+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_514" style="border-color: yellow; border-right-color:yellow; border-top-style:double;" class="w2group w2tb_td w2tb_noTH" scope="row" colspan="3" rowspan="1">'
+							+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 2px;" class="w2span ">'
 							+"곧도착 : " + dlt_BMS_SOONETA_INFO.getCellData(0, "ROUT_NM");
 							+'</span>'
 							+'</td>'
@@ -367,36 +371,36 @@
 		}
 		//데이터가 없다면 빈 테이블 그리기
 		else if(dataList.length == 0){
-			tableBody += '<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+			tableBody += '<tr id="mf_tac_layout_contents_MN00070202_body_wq_uuid_511" class="w2group">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 2px;" class="w2span ">'
 					+'</span>'
 					+'</td>'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px; color: yellow;" class="w2span ">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_514" style="border-color: black; " class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 2px; color: yellow;" class="w2span ">'
 					+'</span>'
 					+'</td>'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_518" style="border-color: black;  text-align: right;" class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 15px;text-align: right;color: green;" class="w2span ">'
-					+'</span>'
-					+'</td>'
-					+'</tr>'
-					
-					+'<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; border-bottom-color:yellow" class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
-					+'</span>'
-					+'</td>'
-					
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_518" style="border-color: black; border-bottom-color:yellow; text-align: right;" class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 15px;text-align: right;color: green;" class="w2span ">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_518" style="border-color: black;  text-align: right;" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 2px;text-align: right;color: green;" class="w2span ">'
 					+'</span>'
 					+'</td>'
 					+'</tr>'
 					
-			tableBody +='<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: yellow; border-right-color:yellow;" class="w2group w2tb_td w2tb_noTH" scope="row" colspan="3" rowspan="1">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+					+'<tr id="mf_tac_layout_contents_MN00070202_body_wq_uuid_511" class="w2group">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_514" style="border-color: black; border-bottom-color:yellow" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 2px;" class="w2span ">'
+					+'</span>'
+					+'</td>'
+					
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_518" style="border-color: black; border-bottom-color:yellow; text-align: right;" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 2px;text-align: right;color: green;" class="w2span ">'
+					+'</span>'
+					+'</td>'
+					+'</tr>'
+					
+			tableBody +='<tr id="mf_tac_layout_contents_MN00070202_body_wq_uuid_511" class="w2group">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_514" style="border-color: yellow; border-right-color:yellow;" class="w2group w2tb_td w2tb_noTH" scope="row" colspan="3" rowspan="1">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 2px;" class="w2span ">'
 					+"곧도착 : "
 					+'</span>'
 					+'</td>'
@@ -415,40 +419,40 @@
 		var tableBody = '';
 		
 		//테이블 소스 시작
-		tableStr = '<table id="mf_tac_layout_contents_MN00090201_body_MO0203T0" style="" class="w2group w2tb bit_tb">'
-					+'<caption id="mf_tac_layout_contents_MN00090201_body_wq_uuid_505" class="w2group "></caption>'
-					+'<colgroup id="mf_tac_layout_contents_MN00090201_body_wq_uuid_506" class="w2group ">'
-					+'<col id="mf_tac_layout_contents_MN00090201_body_wq_uuid_507" style="width:50.00%;" class="w2group ">'
-					+'<col id="mf_tac_layout_contents_MN00090201_body_wq_uuid_508" style="width:25.00%" class="w2group ">'
-					+'<col id="mf_tac_layout_contents_MN00090201_body_wq_uuid_508" style="width:25.00%" class="w2group ">'
+		tableStr = '<table id="mf_tac_layout_contents_MN00070202_body_MO0203T0" style="" class="w2group w2tb bit_tb">'
+					+'<caption id="mf_tac_layout_contents_MN00070202_body_wq_uuid_505" class="w2group "></caption>'
+					+'<colgroup id="mf_tac_layout_contents_MN00070202_body_wq_uuid_506" class="w2group ">'
+					+'<col id="mf_tac_layout_contents_MN00070202_body_wq_uuid_507" style="width:25.00%;" class="w2group ">'
+					+'<col id="mf_tac_layout_contents_MN00070202_body_wq_uuid_508" style="width:37.5%" class="w2group ">'
+					+'<col id="mf_tac_layout_contents_MN00070202_body_wq_uuid_508" style="width:37.5%" class="w2group ">'
 					+'</colgroup>'
 					+'<tbody>';
 					
-			tableBody += '<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black;" class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+			tableBody += '<tr id="mf_tac_layout_contents_MN00070202_body_wq_uuid_511" class="w2group">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_514" style="border-color: black;" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 2px;" class="w2span ">'
 					+'</span>'
 					+'</td>'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_518" style="border-color: black;text-align: right;" class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 15px;text-align: right;color: green;" class="w2span ">'
-					+'</span>'
-					+'</td>'
-					+'</tr>'
-					
-					+'<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: black; border-bottom-color:yellow" class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
-					+'</span>'
-					+'</td>'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_518" style="border-color: black; border-bottom-color:yellow; text-align: right;" class="w2group w2tb_td w2tb_noTH">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 15px;text-align: right;color: green;" class="w2span ">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_518" style="border-color: black;text-align: right;" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 2px;text-align: right;color: green;" class="w2span ">'
 					+'</span>'
 					+'</td>'
 					+'</tr>'
 					
-			tableBody +='<tr id="mf_tac_layout_contents_MN00090201_body_wq_uuid_511" class="w2group">'
-					+'<td id="mf_tac_layout_contents_MN00090201_body_wq_uuid_514" style="border-color: yellow; border-right-color:yellow; border-top-style:double;" class="w2group w2tb_td w2tb_noTH" scope="row" colspan="3" rowspan="1">'
-					+'<span id="mf_tac_layout_contents_MN00090201_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 15px;" class="w2span ">'
+					+'<tr id="mf_tac_layout_contents_MN00070202_body_wq_uuid_511" class="w2group">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_514" style="border-color: black; border-bottom-color:yellow" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 2px;" class="w2span ">'
+					+'</span>'
+					+'</td>'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_518" style="border-color: black; border-bottom-color:yellow; text-align: right;" class="w2group w2tb_td w2tb_noTH">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_519" style="width: 100%;height: 23px;font-size: 2px;text-align: right;color: green;" class="w2span ">'
+					+'</span>'
+					+'</td>'
+					+'</tr>'
+					
+			tableBody +='<tr id="mf_tac_layout_contents_MN00070202_body_wq_uuid_511" class="w2group">'
+					+'<td id="mf_tac_layout_contents_MN00070202_body_wq_uuid_514" style="border-color: yellow; border-right-color:yellow; border-top-style:double;" class="w2group w2tb_td w2tb_noTH" scope="row" colspan="3" rowspan="1">'
+					+'<span id="mf_tac_layout_contents_MN00070202_body_wq_uuid_515" style="width: 100px;height: 23px;font-size: 2px;" class="w2span ">'
 					+"곧도착 : " + dlt_BMS_SOONETA_INFO.getCellData(0, "ROUT_NM");
 					+'</span>'
 					+'</td>'
@@ -456,7 +460,7 @@
 					
 		tableStr += tableBody + '</tbody></table>';
 		
-		$("#mf_tac_layout_contents_MN00090201_body_MO0203T0").html(tableStr);
+		$("#mf_tac_layout_contents_MN00070202_body_MO0203T0").html(tableStr);
 	}
 	
 	
@@ -486,7 +490,6 @@
 	}	
 	
 	scwin.onMessageReceived = function(payload) {
-		debugger;
 		var jsonObj = JSON.parse(payload.body);
 		
 		var attrId = jsonObj.ATTR_ID;
@@ -495,7 +498,6 @@
 		
 		//attrId = 2022 : 정류장별 차량 도착 정보
 		if(attrId == util.ATTR_ID.BUS_ARRIVAL_INFO && nodeId == jsonObj.STTN_ID){
-			debugger;
 			MO0203T0_setTable(dataList);
 		}
 		
@@ -504,7 +506,7 @@
 			
 		}
 		
-	}
+	}	
 	
 	scwin.sub_MO0203SCK_submitdone = function(e) {
 		scwin.onMessageReceived();
@@ -529,8 +531,8 @@
 		routMap.showMarkerList("map_MO0203", allDataList, focusIdx, MO0203G0); 	
 		//카테고리 뿌리기
 		routMap.showCategory("map_MO0203", allDataList, focusIdx, MO0203G0);
-				
-		//com.executeSubmission(sub_MO0203SCK);
+		
+		com.executeSubmission(sub_MO0203SCK);
 		
 		var nodeId = dlt_BMS_NODE_MST.getCellData(MO0203G0.getFocusedRowIndex(), "NODE_ID");
 		dma_NODE_ID.set("NODE_ID", "(정류소 ID : "+nodeId+")");
@@ -721,7 +723,7 @@
 						<xf:group id="" style="position: absolute;width: 100%;height: 100%;">
 							<div id="map_MO0203" style="overflow:hidden;">
 								<ul id="category_map_MO0203" class="category"></ul>
-								<xf:group id="brt_div" class="pgm_detail" style="z-index: 10000;position: absolute;right: 52px;margin-top: 245px;margin-right: -20px;width: 140px;height: 399px;">
+								<xf:group id="brt_div" class="pgm_detail" style="z-index: 10000;position: absolute;right: 52px;margin-top: 152px;margin-right: -20px;width: 140px;height: 399px;">
 									<xf:group style="width: 100%; height:100%" id="bit_img">
 										<xf:group id="" class="brt_bit" style="background-size: cover; height: 393px; position: relative;"></xf:group>
 									</xf:group>
@@ -736,13 +738,15 @@
 												 id="" ref="data:dlt_BMS_NODE_MST.NODE_ID">
 										</w2:span>
 									</xf:group>
+									<xf:group style="position: absolute; top: 47%; left: 7%;" id="MO0203T0" class="w2tb bit_tb">
+									
+									</xf:group>
 									<!-- <xf:group>
 										<w2:span label="NODE_ID" style="color: white;font-size: 14px;text-align: center;" id=""
 											ref="data:dlt_BMS_NODE_MST.NODE_ID">
 										</w2:span>
 									</xf:group> -->
 									<xf:group style="" id=""></xf:group>
-									<xf:group tagname="table" style="" id="MO0203T0" class="w2tb bit_tb"></xf:group>
 								</xf:group>								
 							</div>
 						</xf:group>
