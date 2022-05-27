@@ -201,6 +201,7 @@ a:hover,a:active,a:focus{text-decoration:none}
 .tb .w2inputCalendar_div.req .w2inputCalendar_divInput{background:rgb(243,248,255);padding-left:0 !important;text-align:center;}
 .tb .w2inputCalendar_div_img .w2inputCalendar_button{top:0 !important;}
 .tb .w2input.req{background: #fff0ee;padding-left:0 !important;}
+.tb .w2input.base{background: #dcebfc;padding-left:0 !important;}
 .tb .w2textarea.req,
 .tb .w2selectbox.req{background:rgb(243,248,255);margin-right:0 !important; padding-left:0 !important;}
 .tb .w2selectbox.req .w2selectbox_focus .w2selectbox_label,

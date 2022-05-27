@@ -861,7 +861,7 @@
 		//바디 시작
 		gridBody += '<w2:column blockSelect="false" disabled="false" falseValue="0" defaultValue="" trueValue="1" id="chk" readOnly="false" style="height:20px" inputType="checkbox" width="39"></w2:column>';
 		gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="NODE_ID" value="" blockSelect="false" displayMode="label"></w2:column>';
-		gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="NODE_NM" value="" blockSelect="false" displayMode="label"></w2:column>';
+		gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="NODE_NM" value="" blockSelect="false" displayMode="label" textAlign="left"></w2:column>';
 		gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="FCLT_ID" value="" blockSelect="false" displayMode="label"></w2:column>';
 		gridBody += '<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px" id="FCLT_KIND_NM" value="" blockSelect="false" displayMode="label"></w2:column>';
 		//gridBody += '<w2:column removeBorderStyle="false" width="117" inputType="select" style="height:20px" id="FCLT_COND" value="" blockSelect="false" displayMode="label"></w2:column>';

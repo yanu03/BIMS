@@ -165,7 +165,7 @@
 				com.searchGrid(ST0204G0,sub_ST0204G0R0);
 		});
 		
-		
+		ST0204G0.mergeCells("byrestriccol");
 		
 		
 	};
@@ -243,11 +243,13 @@
 	scwin.ST0204G0_onrowindexchange = function(row,oldRow) {
 		//조회구분도 넣어서 처리하기. 일별 월별 시간대별
 		var repRoutId = dlt_BMS_ROUT_MST.getCellData(ST0204G0.getFocusedRowIndex(), "REP_ROUT_ID");
+		var wayDiv = dlt_BMS_ROUT_MST.getCellData(ST0204G0.getFocusedRowIndex(), "WAY_DIV");
+		var dayDiv = dlt_BMS_ROUT_MST.getCellData(ST0204G0.getFocusedRowIndex(), "DAY_DIV");
 		dma_sub_search.set("REP_ROUT_ID", repRoutId);
+		dma_sub_search.set("WAY_DIV", wayDiv);
+		dma_sub_search.set("DAY_DIV", dayDiv);
 		
 		com.executeSubmission(sub_ST0204G1R0);
-		
-		//dlt_BMS_ROUT_MST.modifyRowStatus(row, "R")	
 	};
 	
 	scwin.sub_ST0204G1R0_submitdone = function(e) {
@@ -521,20 +523,19 @@
 						<w2:span id="" class="" label="요일구분"></w2:span>
 					</xf:group>
 					<xf:group id="" style="" class="search">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="" id="TYPE2" optionOrder="false" ref="data:dma_search.CONTENT2"
-							class="search_type_100" style="" submenuSize="auto" textAlign="left" chooseOptionLabel="-전체-">
-							<xf:choices>
-							</xf:choices>
+						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="" id="TYPE2" optionOrder="false"
+							ref="data:dma_search.CONTENT2" class="search_type_100" style="" submenuSize="auto" textAlign="left" chooseOptionLabel="-선택-">
+							<xf:choices></xf:choices>
 						</xf:select1>
 					</xf:group>
 					<xf:group id="" style="" class="label">
 						<w2:span id="" class="" label="상하행"></w2:span>
 					</xf:group>
 					<xf:group id="" style="" class="search">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE3_onviewchange" id="TYPE3" optionOrder="false" ref="data:dma_search.CONTENT3"
-							class="search_type_100" style="" submenuSize="auto" textAlign="left" chooseOptionLabel="-전체-">
+						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE3_onviewchange" id="TYPE3" optionOrder="false"
+							ref="data:dma_search.CONTENT3" class="search_type_100" style="" submenuSize="auto" textAlign="left" chooseOptionLabel="-선택-">
 							<xf:choices></xf:choices>
 						</xf:select1>
 					</xf:group>
@@ -554,7 +555,7 @@
 							dataList="data:dlt_BMS_ROUT_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.ST0204G0_oncellclick" 
 							ev:onrowindexchange="scwin.ST0204G0_onrowindexchange" fixedColumnWithHidden="true"
 							id="ST0204G0" ignoreCellClick="false" rowNumHeaderValue="순번" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" 
-							style="" useShiftKey="true" autoFitMinWidth="0" readOnly="true" focusMode="row" fixedColumn="2">
+							style="" useShiftKey="true" autoFitMinWidth="0" readOnly="true" focusMode="row" fixedColumn="">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
@@ -582,12 +583,15 @@
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column7"
 										value="운행간격(분)" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="190" inputType="text" style="height:20px" id="column5"
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column8"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<!-- <w2:column removeBorderStyle="false" width="190" inputType="text" style="height:20px" id="column5"
 										value="기점명" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="190" inputType="text" style="height:20px" id="column6"
 										value="종점명" blockSelect="false" displayMode="label">
-									</w2:column>
+									</w2:column> -->
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
@@ -616,12 +620,15 @@
 									<w2:column removeBorderStyle="false" width="85" inputType="text" style="height:20px" id="NONE_PEAK"
 										value="" blockSelect="false" displayMode="label" textAlign="right">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="85" inputType="text" style="height:20px" id="ST_STTN_NM"
+									<w2:column removeBorderStyle="false" width="85" inputType="text" style="height:20px" id=""
+										value="" blockSelect="false" displayMode="label" textAlign="right">
+									</w2:column>
+									<!-- <w2:column removeBorderStyle="false" width="85" inputType="text" style="height:20px" id="ST_STTN_NM"
 										value="" blockSelect="false" displayMode="label" textAlign="">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="85" inputType="text" style="height:20px" id="ED_STTN_NM"
 										value="" blockSelect="false" displayMode="label" textAlign="">
-									</w2:column>
+									</w2:column> -->
 								</w2:row>
 							</w2:gBody>
 							<w2:footer style="" id="footer1">
@@ -689,7 +696,7 @@
 					
 					<xf:group id="ST0204T0" class="" style="position: relative;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_ROUT_AVER_OPER_SP_STAT_2" vals="AVRG_SPD"
-							rows="OPER_DT,REP_ROUT_NM" cols="ALLOC_NO,OPER_SN" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0204" renderMode="compact"
+							rows="OPER_DT,REP_ROUT_NM" cols="OPER_SN" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0204" renderMode="compact"
 							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Average" allTotalName="평균속도"
 							digitsAfterDecimal="1" useNumberFormat="true" autoFitMinWidth="1300" autoPopupInvalidMessage="" headerTextAlign="center"
 							noResultMessage="">
@@ -711,7 +718,7 @@
 					
 					<xf:group id="ST0204T1" class="" style="position: relative; display: none;visibility:hidden;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_ROUT_AVER_OPER_SP_STAT_2" vals="AVRG_SPD"
-							rows="OPER_DT,REP_ROUT_NM,OPER_SN" cols="ALLOC_NO" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0204_sub" renderMode="compact"
+							rows="OPER_DT,REP_ROUT_NM" cols="ALLOC_NO" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0204_sub" renderMode="compact"
 							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Average" allTotalName="평균속도"
 							digitsAfterDecimal="1" useNumberFormat="true" autoFitMinWidth="1300" autoPopupInvalidMessage="" headerTextAlign="center"
 							noResultMessage="">

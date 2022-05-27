@@ -641,7 +641,7 @@
 								</xf:group>
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes></w2:attributes>
-									<xf:input adjustMaxLength="" class="req" disabled="" ev:oneditenter=""
+									<xf:input adjustMaxLength="" class="base" disabled="" ev:oneditenter=""
 										ev:onfocus="scwin.RET_STTN_NM_onfocus" fireEventOnInvalid="" id="RET_STTN_NM" invalidMessageFunc="" mandatory="" readOnly=""
 										ref="data:dlt_BMS_ROUT_MST.RET_STTN_NM" style="width:80%;" validateOnCheckMaxByteLength="" validateOnInput=""
 										validator="">
@@ -658,7 +658,7 @@
 										<w2:colspan>1</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:input adjustMaxLength="" class="req" disabled="" ev:oneditenter=""
+									<xf:input adjustMaxLength="" class="base" disabled="" ev:oneditenter=""
 										ev:onfocus="scwin.ST_STTN_NM_onfocus" fireEventOnInvalid="" id="ST_STTN_NM" invalidMessageFunc="" mandatory="" readOnly=""
 										ref="data:dlt_BMS_ROUT_MST.ST_STTN_NM" style="width:80%;" validateOnCheckMaxByteLength="" validateOnInput=""
 										validator="">
@@ -673,7 +673,7 @@
 								</xf:group>
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes></w2:attributes>
-									<xf:input adjustMaxLength="" class="req" disabled="" ev:oneditenter=""
+									<xf:input adjustMaxLength="" class="base" disabled="" ev:oneditenter=""
 										ev:onfocus="scwin.ED_STTN_NM_onfocus" fireEventOnInvalid="" id="ED_STTN_NM" invalidMessageFunc="" mandatory="" readOnly=""
 										ref="data:dlt_BMS_ROUT_MST.ED_STTN_NM" style="width:80%;" validateOnCheckMaxByteLength="" validateOnInput=""
 										validator="">

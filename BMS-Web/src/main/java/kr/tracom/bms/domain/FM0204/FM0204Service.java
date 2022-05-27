@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,9 @@ import kr.tracom.util.Result;
 
 @Service
 public class FM0204Service extends ServiceSupport {
+	
+	@Value("${api.gateway.url}")
+	private String apiGatewayUrl;
 	
 	@Autowired
 	private FM0204Mapper FM0204Mapper;

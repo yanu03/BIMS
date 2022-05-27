@@ -694,7 +694,7 @@
 							<xf:group tagname="td" class="w2tb_td">
 								<w2:attributes></w2:attributes>
 								<xf:input adjustMaxLength="false" id="" style="width: 144px;text-align: right;"
-									ref="data:dlt_BMS_FCLT_PARAM_CFG_INFO.DATA_LENGTH" maxlength="2" allowChar="0-9" maxByteLength="">
+									ref="data:dlt_BMS_FCLT_PARAM_CFG_INFO.DATA_LENGTH" maxlength="5" allowChar="0-9" maxByteLength="">
 								</xf:input>
 							</xf:group>
 							<xf:group tagname="th" class="w2tb_th">
