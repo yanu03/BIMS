@@ -181,4 +181,76 @@
 	DELETE FROM 	BMS_FCLT_INFO
 	WHERE			FCLT_ID = #{FCLT_ID}
 </delete>
+
+
+<!-- plf 테이블에 삽입 20220530 BS -->
+<insert id="FM0100G0I2" parameterType="Map">
+	INSERT INTO PLF_IMP_DEV_MST (
+								  IMP_ID
+								, IMP_NM
+								, IMP_TYPE
+								, STTN_ID
+								, STTN_NO
+								, USE_YN
+								)
+	VALUES (
+			  #{MNG_ID}
+			, (SELECT STTN_NM FROM BMS_STTN_MST WHERE STTN_ID = #{NODE_ID})
+			, ''
+			, #{NODE_ID}
+			, (SELECT STTN_NO FROM BMS_STTN_MST WHERE STTN_ID = #{NODE_ID})
+			, 'Y'
+	);
+	
+	INSERT INTO PLF_IMP_SESS_INFO (
+								  PLF_ID
+								, SESS_ID
+                                , SESS_NM
+                                , SESS_IP
+                                , REMOTE_TYPE
+                                , ELAPSED_TIME
+                                , IN_PACKET
+                                , OUT_PACKET
+                                )
+	VALUES(
+			  'SB-2021-01'
+			, #{MNG_ID}
+			, (SELECT STTN_NM FROM BMS_STTN_MST WHERE STTN_ID = #{NODE_ID})
+			, '-'
+			, ''
+			, '0'
+			, '0'
+			, '0'
+		);
+</insert>
+
+<!-- plf 테이블 업데이트 20220530 BS -->
+<update id="FM0100G0U2" parameterType="Map">
+	UPDATE
+		PLF_IMP_DEV_MST
+	SET
+		  IMP_ID = #{MNG_ID}
+		<!-- , IMP_TYPE = '' -->
+	WHERE
+		IMP_NM = (SELECT STTN_NM FROM BMS_STTN_MST WHERE STTN_ID = #{NODE_ID});
+		
+	UPDATE
+		PLF_IMP_SESS_INFO
+	SET
+		  SESS_ID = #{MNG_ID}
+		<!-- , REMOTE_TYPE = '' -->
+	WHERE
+		SESS_NM = (SELECT STTN_NM FROM BMS_STTN_MST WHERE STTN_ID = #{NODE_ID});
+</update>
+
+<!-- plf 테이블 삭제 20220530 BS -->
+<delete id="FM0100G0D2" parameterType="Map">
+	DELETE FROM PLF_IMP_DEV_MST
+	WHERE IMP_ID = #{MNG_ID};
+	
+	DELETE FROM PLF_IMP_SESS_INFO
+	WHERE SESS_ID = #{MNG_ID};
+</delete>
+
+
 </mapper>

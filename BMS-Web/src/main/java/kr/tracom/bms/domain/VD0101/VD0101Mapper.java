@@ -26,13 +26,7 @@ public interface VD0101Mapper {
 	
 	public List VD0101P0SH();
 	
-	/** PLF 테이블 관련 20211018 jh **/
-	public int VD0101G1I2(Map param);
-	
-	public int VD0101G1U2(Map param);
-	
-	public int VD0101G1D2(Map param);
-	
 	public List<Map> VD0101P0R0(Map param);
+	
 	
 }

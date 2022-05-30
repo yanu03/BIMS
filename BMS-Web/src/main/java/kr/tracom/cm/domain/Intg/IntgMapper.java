@@ -11,4 +11,6 @@ public interface IntgMapper {
 	
 	public List<Map<String, Object>> selectIntgList(Map param);
 	
+	public List<Map<String, Object>> selectIntgMstList();
+	
 }
