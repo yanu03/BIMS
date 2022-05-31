@@ -45,7 +45,8 @@ public class IntgService extends ServiceSupport {
 	}
 	
 	public String insertIntgList() throws Exception {
-		List<Map<String, Object>> token = intgMapper.selectIntgMstList();
+		Map param = null;
+		List<Map<String, Object>> token = intgMapper.selectIntgMstList(param);
 		String key = (String) token.get(0).get("INTG_API_KEY");
 		String intgUrl = (String) token.get(0).get("INTG_URL");
 		
@@ -72,6 +73,7 @@ public class IntgService extends ServiceSupport {
 					int len = array.length;
 					array[0].replaceAll("[", "");
 					array[len].replaceAll("[", "");
+					array[len].replaceAll("]", "");
 					
 					for(int i = 0; i < array.length; i++) {
 						array[i] = array[i] + "}";

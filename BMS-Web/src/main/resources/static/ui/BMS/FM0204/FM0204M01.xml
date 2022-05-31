@@ -18,6 +18,7 @@
 						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
 						<w2:column id="NODE_TYPE" name="노드명" dataType="text"></w2:column>
 						<w2:column id="FCLT_ID" name="시설물아이디" dataType="text"></w2:column>
+						<w2:column id="INTG_FCLT_ID" name="연계시설물아이디" dataType="text"></w2:column>
 						<w2:column id="FCLT_KIND" name="시설물종류" dataType="text"></w2:column>
 						<w2:column id="FCLT_KIND_NM" name="시설물종류이름" dataType="text"></w2:column>
 						<w2:column id="FCLT_COND" name="시설물상태" dataType="text"></w2:column>
@@ -127,6 +128,7 @@
 						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
 						<w2:column id="NODE_TYPE" name="노드명" dataType="text"></w2:column>
 						<w2:column id="FCLT_ID" name="시설물아이디" dataType="text"></w2:column>
+						<w2:column id="INTG_FCLT_ID" name="연계시설물아이디" dataType="text"></w2:column>
 						<w2:column id="FCLT_KIND" name="시설물종류" dataType="text"></w2:column>
 						<w2:column id="FCLT_KIND_NM" name="시설물종류이름" dataType="text"></w2:column>
 						<w2:column id="FCLT_COND" name="시설물상태" dataType="text"></w2:column>
@@ -523,6 +525,17 @@
 						<w2:key id="USE_YN" name="name4" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
+				
+				<!-- 제어 -->
+				<w2:dataMap baseNode="map" id="dma_sendtest">
+					<w2:keyInfo>
+						<w2:key id="INTG_FCLT_ID" name="연계장치아이디" dataType="text"></w2:key>
+						<w2:key id="INTG_TYPE" name="연계유형" dataType="text"></w2:key>
+						<w2:key id="POWER" name="전원" dataType="text"></w2:key>
+						<w2:key id="DEGREE" name="온도" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+				
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
 			<xf:submission id="sub_FM0204G0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_FCLT_COND_PARAM_INFO"
@@ -555,6 +568,10 @@
 				processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_FM0204G2R2_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_nodeItem" ref="" target="data:json,dlt_searchitem" action="/node/selectNodeItem" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
+				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_sendtest" ref="data:json,dma_sendtest" target="" action="/fm/sendtest" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -664,7 +681,10 @@
 	
 	//정류소제어 전송 버튼 클릭 이벤트
 	scwin.selectControl = function() {
-		com.alert("전송입니다. (후 작업 필요)");
+		//제어 서브미션 테스트
+		dma_sendtest.set("INTG_FCLT_ID", dlt_BMS_STTN_FCLT_COND_PARAM_INFO.getCellData(FM0204G0.getFocusedRowIndex(), "INTG_FCLT_ID"));
+		dma_sendtest.set("INTG_TYPE", "PC");
+		com.executeSubmission(sub_sendtest);
 	}
 	
 	//에어튜브제어 버튼 클릭 이벤트
@@ -1644,6 +1664,16 @@
 		}
 	}
 	
+	
+	scwin.T0_PK002_onviewchange = function(info) {
+		var value = "";
+		if(info.newValue == '1'){
+			value = "on";
+		}else{
+			value = "off";
+		}
+		dma_sendtest.set("POWER", value);
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -1906,7 +1936,7 @@
 										</xf:group>
 										<xf:group tagname="td" style="" class="w2tb_td" id="">
 											<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="" direction="auto" disabled="false"
-												disabledClass="w2selectbox_disabled" id='T0_PK002' ref="" style="" submenuSize="auto">
+												disabledClass="w2selectbox_disabled" id='T0_PK002' ref="" style="" submenuSize="auto" ev:onviewchange="scwin.T0_PK002_onviewchange">
 												<xf:choices>
 													<xf:item>
 														<xf:label><![CDATA[ON]]></xf:label>
