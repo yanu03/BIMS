@@ -786,6 +786,7 @@
 							, 	E.STTN_ID
 							, 	E.STTN_NO
 							, 	F.CRS_ID
+							,	F.PHASE_CNT
 							/*
 							, 	A.ORGA_ID
 							*/

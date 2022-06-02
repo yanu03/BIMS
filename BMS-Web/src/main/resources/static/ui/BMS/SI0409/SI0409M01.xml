@@ -115,6 +115,7 @@
 						<w2:column id="NEXT_NODE_ID" name="name15" dataType="text"></w2:column>
 						<w2:column id="NEXT_GPS_X" name="name16" dataType="text"></w2:column>
 						<w2:column id="NEXT_GPS_Y" name="name17" dataType="text"></w2:column>
+						<w2:column id="PHASE_CNT" name="name18" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ROUT_NODE_CMPSTN2" saveRemovedData="true"><!-- 정류소용 -->
@@ -265,6 +266,7 @@
 		<script type="text/javascript"><![CDATA[
 	
 	var isEdit = false;
+	var refreshTime;
 	scwin.onpageload = function() {
 		var autoOptions = {
 			Main : { }
@@ -279,7 +281,7 @@
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
 		
 		com.executeSubmission(sub_SI0409SHI0);
-				
+
 	};
 
 	scwin.onpageunload = function() {
@@ -451,16 +453,24 @@
 		$(".route-map").append(routDivResult);
 		$(".route-map").append(sttnDivResult);
 		$(".route-map").append(crsDivResult);
+		
+		scwin.drawSig(sttnCrsList);
 	};
 
 	scwin.sub_selectBus_submitdone = function(e) {
 		for(var i=0; i<dlt_BRT_CUR_OPER_INFO.getAllJSON().length; i++) {
 			scwin.drawBus(dlt_BRT_CUR_OPER_INFO.getDataRow(i), dlt_BMS_STTNCRS_LINK_CMPSTN);
 		}
+		clearInterval(refreshTime);
+		refreshTime = setInterval(function() {
+			com.executeSubmission(sub_selectBus);
+		},parseInt(refPeriod.getValue()));		
+		var test = null;		
 	};
 	
 	//버스 그리기
 	scwin.drawBus = function(busData, sttnCrsList) {
+		$(".bus").remove();
 		var nextNodeId = busData.NEXT_NODE_ID;
 		var vhcKind = busData.VHC_KIND;
 		var busColor = "";
@@ -507,13 +517,12 @@
 			//링크에서 버스의 거리 비율
 			//var distanceRatio = matchedLinkLen /  distance;
 			var distanceRatio = (1-distance) / matchedLinkLen;
-			distanceRatio = 0.5 + (distanceRatio * 0.5);
+			//distanceRatio = 0.5 + (distanceRatio * 0.5);
 			distanceRatio = Math.round(distanceRatio * 1000) / 1000;
 			var parentDiv = $(".route-map").find('.nodeId[data-value='+nextNodeId+']').parent();
 			var parentStyle = parentDiv.attr("style").split(";");
 			//var parentTop = parentDiv.css("top").replace("px","");
 			//var parentLeft = parentDiv.css("left").replace("px","");
-			
 			//x * y
 			var parentTop = parentStyle[0].match(/.+\/(.+)\)/)[1].trim();
 			var parentLeft = parentStyle[1].match(/.+\/(.+)\)/)[1].trim();
@@ -524,17 +533,33 @@
 			//위
 			if(eval(parentTop) == 0) {
 				//if(parentLeft != topHorizontal) {
+					distanceRatio = 0.5 + (distanceRatio * 0.5);
 					busDivTop = parentTop;
 					busDivLeft = parentLeft +'*'+ distanceRatio;	
 				//}
 			}
 			
-			//아래, 오른쪽아래 따로 조건걸어야함
-			else if(parentTop == vertical) {
+			//아래 오른쪽 왼쪽 테스트 필요함
+			//아래
+			else if(eval(parentTop) == vertical * vertical && eval(parentLeft) != topHorizontal * topHorizontal) {
+				distanceRatio = 1.5 + (distanceRatio * 1.5);
 				busDivTop = vertical;
 				//busDivLeft = parentLeft / distanceRatio; 
-				busDivLeft = parentLeft * distanceRatio; 
-				
+				busDivLeft = parentLeft +'*'+ distanceRatio; 
+			}
+			
+			//오른쪽
+			else if(eval(parentLeft) == topHorizontal * topHorizontal) {
+				distanceRatio = 1.5 + (distanceRatio * 1.5);
+				busDivTop = parentTop + '*' + distanceRatio;
+				busDivLeft = parentLeft; 
+			}
+			
+			//왼쪽
+			else if(eval(parentLeft) == 0) {
+				distanceRatio = 0.5 + (distanceRatio * 0.5);
+				busDivTop = vertical;
+				busDivLeft = parentLeft; 
 			}
 			
 			//else if(parentTop != "0" && parentTop != vertical && parentLeft = ) {
@@ -552,7 +577,41 @@
 	scwin.sub_selectCrsListByRepRout_submitdone = function(e) {
 	
 	};
-]]></script>
+
+	scwin.refPeriod_onviewchange = function(info) {
+		clearInterval(refreshTime);
+		
+		refreshTime = setInterval(function() {
+			com.executeSubmission(sub_selectBus);
+		},parseInt(refPeriod.getValue()));
+	};
+	
+	scwin.drawSig = function(sttnCrsList) {
+		var sttnCrsListLength = sttnCrsList.getAllJSON().length;
+		var crsDivResult = "";
+
+		for(var i=0; i<sttnCrsListLength; i++) {
+			var phaseCnt = sttnCrsList.getCellData(i, "PHASE_CNT");
+			if (phaseCnt != "") {
+				var crsId = sttnCrsList.getCellData(i, "CRS_ID");
+				var parentDiv = $(".route-map").find('.nodeId[data-value='+crsId+']').parent();
+						
+				var parentStyle = parentDiv.attr("style").split(";");
+				
+				//x * y
+				var parentTop = parentStyle[0].match(/.+\/(.+)\)/)[1].trim();
+				var parentLeft = parentStyle[1].match(/.+\/(.+)\)/)[1].trim();				
+										
+				crsDivResult += '<div class="light green" style="top:calc(100% / ' + parentTop+'); left:calc(100% / '+ parentLeft+')">';
+				crsDivResult += '<span class="sigCrsId" style="display:none" data-value="' + crsId +'"></span></div>';					
+			}
+		}
+		$(".route-map").append(crsDivResult);
+	};
+	
+	scwin.realTimeSig = function(dataList) {
+		
+	}]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
@@ -612,6 +671,33 @@
 						</xf:select1>
 					</xf:group>				
 					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					<xf:group class="label" id="" style="margin-left: 10px;">
+						<w2:span class="" id="" label="정보갱신 주기"></w2:span>
+					</xf:group>					
+					<xf:group class="search" id="" style="">
+						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.refPeriod_onviewchange" id="refPeriod"
+							optionOrder="false" ref="" class="search_type_100" style="" submenuSize="auto" textAlign="center" chooseOptionLabel="-전체-">
+							<xf:choices>
+								<xf:item>
+									<xf:label><![CDATA[15초]]></xf:label>
+									<xf:value><![CDATA[3000]]></xf:value>
+								</xf:item>
+								<xf:item>
+									<xf:label><![CDATA[30초]]></xf:label>
+									<xf:value><![CDATA[30000]]></xf:value>
+								</xf:item>
+								<xf:item>
+									<xf:label><![CDATA[60초]]></xf:label>
+									<xf:value><![CDATA[60000]]></xf:value>
+								</xf:item>
+								<xf:item>
+									<xf:label><![CDATA[120초]]></xf:label>
+									<xf:value><![CDATA[120000]]></xf:value>
+								</xf:item>
+							</xf:choices>
+						</xf:select1>
+					</xf:group>				
 				</xf:group>
 			</xf:group>
 			<xf:group id="pgm_content" class="pgm_content grdc_a" style="">
