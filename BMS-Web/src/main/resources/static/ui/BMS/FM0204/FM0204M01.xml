@@ -1165,7 +1165,7 @@
 	scwin.sub_FM0204G2R2_submitdone = function(e) {
 		var paramKind = dlt_CTL_PARAM_KIND.getColData("PARAM_KIND");
 		var autoYn = dlt_CTL_PARAM_KIND.getColData("AUTO_YN");
-		debugger;
+		
 		FM0204F1.setDisabled(true);
 	
 		//후에 제어가 추가 된다면 추가작업 필요.

@@ -110,10 +110,16 @@
 		 };
 		
 		var mainOptions = {
-			DEL : scwin.deleteVhc
+			DEL : scwin.deleteVhc,
+			SEARCH : {}
 		}
 		
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions, codeOptions);
+		
+		var mainSrhOptions = {
+		};		
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainSrhOptions, codeOptions);
+		
 				
 		com.executeSubmission(sub_SI0200SHI0);	
 		com.executeSubmission(sub_SI0200SHI1);

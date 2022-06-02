@@ -47,6 +47,7 @@
 .grdc_1f_25_1f {display:grid; grid-template-columns:1fr 25px 1fr;}
 .grdc_6f_25_4f {display:grid; grid-template-columns:6fr 25px 4fr;}
 .grdc_65f_25_35f {display:grid; grid-template-columns:65fr 25px 35fr;}
+.grdc_65f_10_35f {display:grid; grid-template-columns:65fr 10px 35fr;}
 .grdc_45f_25_55f {display:grid; grid-template-columns:45fr 25px 55fr;}
 .grdc_if_60_if {display:grid; grid-template-columns:1fr 60px 1fr;}
 
@@ -88,8 +89,10 @@
 .grdc_330_20_a {display:grid; grid-template-columns:330px 20px auto;}
 
 .grdc_500_20_a {display:grid; grid-template-columns:500px 20px auto;}
+.grdc_500_0_a {display:grid; grid-template-columns:500px 0px auto;}
 .grdc_550_20_a {display:grid; grid-template-columns:550px 20px auto;}
 .grdc_600_20_a {display:grid; grid-template-columns:600px 20px auto;}
+.grdc_600_0_a {display:grid; grid-template-columns:600px 0px auto;}
 .grdc_a_20_850 {display:grid; grid-template-columns:auto 20px minmax(850px, auto);}
 .grdc_650_20_a {display:grid; grid-template-columns:650px 20px auto;}
 .grdc_800_20_a {display:grid; grid-template-columns:800px 20px auto;}
@@ -109,12 +112,16 @@
 
 .grdc_a_20_600_60_600  {display:grid; grid-template-columns:auto 20px 600px 60px 600px;}
 
+.grdc_a_0_1220  {display:grid; grid-template-columns:auto 0px 1220px;}
+.grdc_560_60_560  {display:grid; grid-template-columns:560px 60px 560px;}
+
 .grdc_1f_1f {display:grid; grid-template-columns:1fr 1fr;}
 .grdc_200_1f_1f {display:grid; grid-template-columns:200px 1fr 1fr;}
 .grdc_2f_1f {display:grid; grid-template-columns:2fr 1fr;}
 .grdc_1f_2f {display:grid; grid-template-columns:1fr 2fr;}
 .grdc_2f_20_8f {display:grid; grid-template-columns:2fr 20px 8fr;} /* 왼쪽 오른쪽 구분선 추가 */
 .grdc_3f_20_7f {display:grid; grid-template-columns:3fr 20px 7fr;} /* 왼쪽 오른쪽 구분선 추가 */
+.grdc_3f_0_7f {display:grid; grid-template-columns:3fr 0px 7fr;} /* 왼쪽 오른쪽 구분선 추가 */
 .grdc_4f_20_6f {display:grid; grid-template-columns:4fr 20px 6fr;} /* 왼쪽 오른쪽 구분선 추가 */
 .grdc_5f_20_5f {display:grid; grid-template-columns:5fr 20px 5fr;} /* 왼쪽 오른쪽 구분선 추가 */
 .grdc_5f_70_5f {display:grid; grid-template-columns:5fr 70px 5fr;} /* 왼쪽 오른쪽 구분선 추가 */
@@ -158,6 +165,7 @@
 .grdr_25_2_a {display:grid; grid-template-rows: minmax(25px, max-content) 2px auto;}
 .grdr_20_2_170_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 170px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
 .grdr_20_2_187_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 187px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
+.grdr_187_20_a {display:grid; grid-template-rows: 187px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
 .grdr_20_2_187_2_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 187px 2px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
 .grdr_20_2_200_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 200px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
 .grdr_20_2_212_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 212px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
@@ -168,7 +176,9 @@
 .grdr_20_2_290 {display:grid; grid-template-rows: minmax(20px, max-content) 2px 288px;} 
 .grdr_20_2_350_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 350px auto;} 
 .grdr_20_2_350_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 350px minmax(20px, max-content) auto;} 
-.grdr_20_2_360_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 360px minmax(20px, max-content) auto;} 
+.grdr_20_2_360_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 360px minmax(20px, max-content) auto;}
+.grdr_20_2_370_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 370px minmax(20px, max-content) auto;}
+.grdr_20_2_300_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 300px minmax(20px, max-content) auto;}
 .grdr_20_2_400_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 400px minmax(20px, max-content) auto;} 
 .grdr_20_2_450_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 450px minmax(20px, max-content) auto;} 
 .grdr_20_36_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(36px, max-content) auto;} /* 왼쪽그리드 하단 */
@@ -180,6 +190,7 @@
 .grdr_20_2_170_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(170px, max-content) minmax(20px, max-content) minmax(20px, max-content) auto;}
 .grdr_20_2_1f_20_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_1f_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr 1fr;} /* 왼쪽그리드 하단 */
+.grdr_20_2_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_4f_20_20_6f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 4fr minmax(20px, max-content) minmax(20px, max-content) 6fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_6f_20_20_4f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 6fr minmax(20px, max-content) minmax(20px, max-content) 4fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_1f_20_20_1f_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) minmax(20px, max-content) 1fr auto;} /* 왼쪽그리드 하단 */
@@ -192,6 +203,10 @@
 .grdr_20_2_6f_20_4f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 6fr minmax(20px, max-content) 4fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_7f_20_3f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 7fr minmax(20px, max-content) 3fr;} /* 왼쪽그리드 하단 */
 .grdr_20_50_a {display:grid; grid-template-rows: minmax(20px, max-content) 50px auto; }
+.grdr_20_80_a {display:grid; grid-template-rows: minmax(20px, max-content) 80px auto; }
+
+.grdr_20_50_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) 50px 1fr minmax(20px, max-content) 1fr; }
+.grdr_50_a {display:grid; grid-template-rows: 50px auto; }
 .grdr_20_20_2_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) 1fr minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_1f_20_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) 1fr minmax(20px, max-content) minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
@@ -207,6 +222,7 @@
 
 .grdr_20_200_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 200px minmax(20px, max-content) auto;}
 .grdr_20_230_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 230px minmax(20px, max-content) auto;}
+.grdr_20_230_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 230px minmax(20px, max-content) minmax(20px, max-content) auto;}
 
 
 .grdr_20_300_a {display:grid; grid-template-rows: minmax(20px, max-content) 300px auto;}

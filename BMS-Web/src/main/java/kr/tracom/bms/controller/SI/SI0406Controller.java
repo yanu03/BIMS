@@ -28,9 +28,16 @@ public class SI0406Controller extends ControllerSupport {
 	@RequestMapping("/si/SI0406G2R0")
 	public @ResponseBody Map<String, Object> SI0406G2R0() throws Exception {
 		result.setData("dlt_BMS_MOCK_LINK", si0406Service.SI0406G2R0());
-		result.setData("dlt_BMS_MOCK_LINK2", si0406Service.SI0406G2R0());
+		//result.setData("dlt_BMS_MOCK_LINK2", si0406Service.SI0406G2R0());
 		return result.getResult();
 	}
+	
+	@RequestMapping("/si/SI0406G3R0")
+	public @ResponseBody Map<String, Object> SI0406G3R0() throws Exception {
+		//result.setData("dlt_BMS_MOCK_LINK", si0406Service.SI0406G2R0());
+		result.setData("dlt_BMS_MOCK_LINK2", si0406Service.SI0406G2R0());
+		return result.getResult();
+	}	
 	
 	@RequestMapping("/si/SI0406G1S0")
 	public @ResponseBody Map<String, Object> SI0406G1S0() throws Exception {

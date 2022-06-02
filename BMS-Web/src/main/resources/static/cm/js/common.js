@@ -4470,6 +4470,7 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
 						mainBtn.addClass(item.class);
 						mainBtn.bind("onclick", eval("usrOpt."+i));
 						if ((i == gcm.BTN.SEARCH.nm)&&(typeof main.srchGrp !== "undefined")&&(main.srchGrp !== null)){
+							
 							com.setEnterKeyEvent(main.srchGrp, eval("usrOpt."+i));
 						}
 					}
@@ -4479,6 +4480,7 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
 						var mainBtn = wfm_mainBtn.getWindow().btn_main_generator.getChild(tmpParentIdx, "btn_main");
 						if(typeof eval(usrOpt[i].cbFnc) === "function"){
 							mainBtn.bind("onclick", eval(usrOpt[i].cbFnc));
+							
 							if ((i == gcm.BTN.SEARCH.nm)&&(typeof main.srchGrp !== "undefined")&&(main.srchGrp !== null)){
 								com.setEnterKeyEvent(main.srchGrp, eval(usrOpt[i].cbFnc));
 							}
@@ -5240,6 +5242,7 @@ com.setMainSrhBtn = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
 							}
 						}
 					}
+					
 					
 					if(i == gcm.BTN.SEARCH.nm){
 
@@ -7198,6 +7201,69 @@ com.delGridChecked = function(grid,str,afterCb){
 	}
 }
 
+com.delGridChecked2 = function(grid,afterCb){
+	var data = com.getGridViewDataList(grid);
+	var focusIdxs = grid.getCheckedIndex("chk");
+	var count = focusIdxs.length;
+	if (count > 0) {
+				
+		for(var i=count-1; i>=0; i--){
+			var isCreate = false;
+			try {
+				var modifiedIdx = data.getModifiedIndex();
+
+				for (var j = 0; j < modifiedIdx.length; j++) {
+					var index = modifiedIdx[j];
+					if(index==focusIdxs[i]){
+						var modifiedData = data.getRowJSON(index);
+						if (modifiedData.rowStatus === "C") { //생성된 경우 visible 하지 않고 삭제함 //getInsertedIndex 로 대신 구현해도 됨
+							isCreate = true;
+						}
+						break;
+					}
+				}
+			} catch (e) {
+				$p.log("[com.delGrid] Exception :: " + e.message);
+			}	
+		
+			if(isCreate==true){ //생성된 경우 데이터에서 삭제함
+				data.removeRow(focusIdxs[i]);
+			}
+			else {
+				grid.setCellChecked(focusIdxs[i], "chk", false);
+				grid.setRowVisible(focusIdxs[i], false);
+				data.deleteRow(focusIdxs[i]);
+			}
+		}
+		
+		var focusIndex = 0;
+		
+		if(count>0){
+			for(var i=0; i<count; i++){
+				if(grid.getRowVisible(focusIdxs[i])){
+					focusIndex = focusIdxs[i];
+					break;
+				}
+			}
+					
+			if(i==count){
+				if((focusIdxs[count-1] +1)<data.getTotalRow()){
+					focusIndex = focusIdxs[count-1] +1;
+				}
+				else{
+					focusIndex = data.getTotalRow();
+				}
+			}
+		}
+
+		grid.setFocusedCell(focusIndex, 0, false);
+		
+		if((afterCb != null) && (typeof afterCb != "undefined") && (typeof afterCb == "function")){
+			afterCb();
+		}		
+	}
+}
+
 com.deleteAllGrid = function(grid){
 	var data = com.getGridViewDataList(grid);
 	var count = data.getTotalRow();
@@ -8459,6 +8525,16 @@ com.excludeItemsByGrid = function(grid, items, matchedColumn){
 	}
 }
 
+com.excludeItemsByGrid2 = function(grid, items, matchedColumn){
+	com.clearGrid(grid);
+	var data = com.getGridViewDataList(grid);
+	for (i = 0; i < items.length; i++) {
+		var curIndex = data.getMatchedIndex(matchedColumn, items[i]);
+		grid.setRowVisible(curIndex, false);
+		data.deleteRow(curIndex);
+	}
+}
+
 var shortcutTargetElement = document;
 if (shortcutTargetElement.attachEvent) {
 	shortcutTargetElement.detachEvent("keydown", gcm.shortcutEvent.keydownEvent);
@@ -8659,6 +8735,7 @@ com.indexGridNear = function(data, column, value){
  * @return {int} index 현재 index
  */
 com.gridMove = function(grid,searchColumn, content, index){
+	
 	var data = com.getGridViewDataList(grid);
 	var rowData = data.getAllJSON();
 	var startIndex = 0;
@@ -8750,6 +8827,44 @@ com.getUploadPath = function() {
 
 com.getAudioPath = function() {
 	return gcm.AUDIO_PATH;
+}
+
+
+com.clone = function(fromData, toData) {
+	var rowData = fromData.getAllJSON();
+	toData.setJSON(rowData);
+};
+
+com.moveGrid = function(fromGrid, toGrid, fromKeyColumn, toCellColumn, toCellValue){
+	debugger;
+	var fromData = com.getGridViewDataList(fromGrid);
+	var toData = com.getGridViewDataList(toGrid);
+	
+	var checkedIdx = fromGrid.getCheckedIndex("chk");
+	var count = checkedIdx.length;
+	
+	if (count > 0) {
+		for(i = 0 ; i<count; i++){
+			var data = fromData.getAllJSON()[checkedIdx[i]];
+			
+			var value = eval("data."+fromKeyColumn);
+			
+			var index = com.getMatchedIndex(toData, fromKeyColumn, value); //동일한 index 찾기
+			if(index.length == 0){
+				index = com.indexGridNear(toData, fromKeyColumn, value);
+				var insertIndex = toData.insertRow(index);
+				toData.setRowJSON(insertIndex,data, true)
+				if(com.isEmpty(toCellColumn)==false && com.isEmpty(toCellValue)==false){
+					toData.setCellData(insertIndex, toCellColumn, toCellValue);
+				}
+			}
+			else {
+				toGrid.setRowVisible(index[0], true);
+				toData.undoRow(index[0]);
+			}
+		}
+		com.delGridChecked2(fromGrid);
+	}
 }
 
 /**
