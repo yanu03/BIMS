@@ -4,8 +4,11 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import kr.tracom.platform.attribute.BisAtCode;
+import kr.tracom.platform.attribute.bis.AtFacilityParam;
 import kr.tracom.platform.net.protocol.TimsMessage;
 import kr.tracom.platform.net.protocol.attribute.AtData;
 import kr.tracom.platform.net.protocol.attribute.AtMessage;
@@ -16,6 +19,9 @@ public class SetRequest {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
+
+    @Autowired
+    FacilityParam facilityParam;
 
     public Map<String, Object> handle(TimsMessage timsMessage, String sessionId){
     	
@@ -29,7 +35,12 @@ public class SetRequest {
              short attrId = atMessage.getAttrId();
              AtData atData = atMessage.getAttrData();
 
-             //attrID 별 처리
+             switch(attrId){
+             
+	             case BisAtCode.FACILITY_PARAM:
+	                 facilityParam.handle((AtFacilityParam) atMessage.getAttrData(), sessionId);
+	                 break;
+	         }
              
          }    	
          

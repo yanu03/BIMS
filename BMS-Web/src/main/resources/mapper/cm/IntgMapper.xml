@@ -30,5 +30,24 @@
 	</where>			
 </select>
 
+<select id="selectIntgMstList" resultType="Map">
+	SELECT
+		INTG_URL
+		,INTG_API_KEY
+	FROM
+		BMS_INTG_MST
+	WHERE
+		<if test="INTG_TYPE == 'AR'">
+			INTG_ID = 'IT00000026'
+		</if>
+		<if test="INTG_TYPE == 'PC'">
+			INTG_ID = 'IT00000027'
+		</if>
+		<if test="INTG_TYPE == 'DC'">
+			INTG_ID = 'IT00000028'
+		</if>
+		
+</select>
+
 
 </mapper>

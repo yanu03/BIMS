@@ -122,8 +122,7 @@
 	
 		//F_DATE.setValue(util.getCurrentDate2());
 		
-		//dma_search.set("REP_ROUT_ID", "RR00000002");
-		//TYPE1.setValue("RR00000002");
+		
 		TYPE2.setValue("DY001");
 		
 		com.executeSubmission(sub_AL0206SHI0);
@@ -134,6 +133,9 @@
 	};
 	
 	scwin.sub_AL0206SHI0_submitdone = function(e) {
+		dma_search.set("REP_ROUT_ID", "RR00000002");
+		TYPE1.setValue("RR00000002");
+		
 		com.executeSubmission(sub_AL0206G0R0);
 	};
 	

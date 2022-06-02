@@ -69,7 +69,7 @@ public class RoutController extends ControllerSupport {
 	
 	@RequestMapping("/rout/selectNodeDispListByRouts")
 	public @ResponseBody Map<String, Object> selectNodeDispListByRouts() throws Exception {
-		result.setData("dlt_BMS_ROUT_NODE_DISP_VW", routService.selectNodeDispListByRout());
+		result.setData("dlt_BMS_ROUT_NODE_DISP_VW", routService.selectNodeDispListByRouts());
 		return result.getResult();
 	}
 	

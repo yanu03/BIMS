@@ -24,4 +24,11 @@ public interface FM0100Mapper {
 	
 	public int FM0100G1D0(Map param);
 	
+	/** PLF 테이블 관련 20211018 jh **/
+	public int FM0100G0I2(Map param);
+	
+	public int FM0100G0U2(Map param);
+	
+	public int FM0100G0D2(Map param);
+	
 }

@@ -753,9 +753,9 @@ background-color: #EBEBEB;
 .map_brtMain { height:351px; }
 
 .ST003_station{
-	background-image: url('/cm/images/bms/ST003.png');
+	background-image: url('/cm/images/bms/ST003_1.png');
 	background-repeat: no-repeat;
-	background-position: center;
+	background-position: top;
 	background-size: contain;
 	position: relative;
 	width: 100%;
@@ -764,10 +764,11 @@ background-color: #EBEBEB;
 }
 
 .ST003_station_1{
-	background-image: url('/cm/images/bms/ST003_1.png');
+	background-image: url('/cm/images/bms/ST003.png');
 	background-repeat: no-repeat;
 	background-position: center;
-	background-size: contain;
+	/* background-position: top;
+	background-size: contain; */
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -880,7 +881,7 @@ background-color: #EBEBEB;
    background-position: top;
    position: relative;	
 	}
-	
+
 /* 노선도 */
 .route-map-area {
 	position: relative;
@@ -907,7 +908,7 @@ background-color: #EBEBEB;
 .station.right { background-image: url('/cm/images/tmap/station-right.svg');}
 .station.up { background-image: url('/cm/images/tmap/station-up.svg');}
 .station.down { background-image: url('/cm/images/tmap/station-down.svg');}
-.station span.name {display:inline-block; width: 120px; position: absolute; top: 55px; left: 5px; transform: rotate(45deg);  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.station span.name {display:inline-block; width: 120px; position: absolute; top: 55px; left: 5px; transform: rotate(45deg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .bus {position: absolute; transform: translate(-13px, -18px); width: 27px; height: 33px; background-position: center center; background-repeat: no-repeat; z-index: 3;}
 .bus.red {background-image: url('/cm/images/tmap/bus-red.svg');}
 .bus.blue {background-image: url('/cm/images/tmap/bus-blue.svg');}
@@ -917,4 +918,4 @@ background-color: #EBEBEB;
 .cross span.name {display:inline-block; width: 120px; position: absolute; top: 55px; left: 5px; transform: rotate(45deg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .light {position: absolute; transform: translate(-13px, -18px); width: 27px; height: 33px; background-position: center center; background-repeat: no-repeat; z-index: 3;}
 .light.red {background-image: url('/cm/images/tmap/light-red.svg');}
-.light.green {background-image: url('/cm/images/tmap/light-green.svg');}	
+.light.green {background-image: url('/cm/images/tmap/light-green.svg');}

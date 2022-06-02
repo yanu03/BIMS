@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  <mapper namespace="kr.tracom.brt.domain.ST0205.ST0205Mapper">
+  
+<!-- 그래프 쿼리0 -->
+  <select id="ST0205G0R0" resultType="Map">
+  	SELECT
+		A.REP_ROUT_ID
+		,A.ROUT_ID
+		,AVG(AVRG_SPD) AS AVRG_SPD
+		,MAX(MAX_SPD) AS MAX_SPD
+		,MIN_SPD
+		,B.ROUT_NM
+		,B.REP_ROUT_NM
+	FROM
+		BRT_ROUT_AVER_OPER_SP_STAT A
+		LEFT JOIN BMS_ROUT_MST B
+		ON A.ROUT_ID = B.ROUT_ID
+	<where>
+		<if test="F_DATE != null and F_DATE != '' and L_DATE != null and L_DATE != '' ">
+			DATE_FORMAT(A.OPER_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+		</if>
+		AND B.DEL_YN = 'N'
+	</where>
+	GROUP BY
+		A.REP_ROUT_ID
+	ORDER BY
+		A.REP_ROUT_ID
+  </select>
+  
+  <!-- 피봇 그리드 쿼리0 -->
+  <select id="ST0205G0R1" resultType="Map">
+  	SELECT
+ 		DATE_FORMAT(A.OPER_DT, '%Y-%m-%d') OPER_DT
+		,A.REP_ROUT_ID
+		,A.ROUT_ID
+		,AVG(AVRG_SPD) AS AVRG_SPD
+		,MAX(MAX_SPD) AS MAX_SPD
+		,MIN_SPD
+		,B.ROUT_NM
+		,B.REP_ROUT_NM
+	FROM
+		BRT_ROUT_AVER_OPER_SP_STAT A
+		LEFT JOIN BMS_ROUT_MST B
+		ON A.ROUT_ID = B.ROUT_ID
+	<where>
+		<if test="F_DATE != null and F_DATE != '' and L_DATE != null and L_DATE != '' ">
+			AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+		</if>
+		AND B.DEL_YN = 'N'
+	</where>
+	GROUP BY
+		OPER_DT, A.REP_ROUT_ID
+		
+UNION ALL
+	
+	SELECT
+ 		"평균속도" AS OPER_DT
+		,A.REP_ROUT_ID
+		,A.ROUT_ID
+		,AVG(AVRG_SPD) AS AVRG_SPD
+		,MAX(MAX_SPD) AS MAX_SPD
+		,MIN_SPD
+		,B.ROUT_NM
+		,B.REP_ROUT_NM
+	FROM
+		BRT_ROUT_AVER_OPER_SP_STAT A
+		LEFT JOIN BMS_ROUT_MST B
+		ON A.ROUT_ID = B.ROUT_ID
+	<where>
+		<if test="F_DATE != null and F_DATE != '' and L_DATE != null and L_DATE != '' ">
+			AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+		</if>
+		AND B.DEL_YN = 'N'
+	</where>
+	GROUP BY
+		"", A.REP_ROUT_ID
+
+  </select>
+  
+  
+  <!-- 그래프 쿼리1 -->
+  <select id="ST0205G1R0" resultType="Map">
+  	SELECT
+ 		DATE_FORMAT(A.OPER_DT, '%Y-%m-%d') OPER_DT
+		,A.REP_ROUT_ID
+		,A.ROUT_ID
+		,AVG(AVRG_SPD) AS AVRG_SPD
+		,MAX(MAX_SPD) AS MAX_SPD
+		,MIN_SPD
+		,B.ROUT_NM
+		,B.REP_ROUT_NM
+	FROM
+		BRT_ROUT_AVER_OPER_SP_STAT A
+		LEFT JOIN BMS_ROUT_MST B
+		ON A.ROUT_ID = B.ROUT_ID
+	<where>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(REP_ROUT_ID)">
+			A.REP_ROUT_ID = #{REP_ROUT_ID}
+		</if>
+		<if test="F_DATE != null and F_DATE != '' and L_DATE != null and L_DATE != '' ">
+			AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+		</if>
+		AND B.DEL_YN = 'N'
+	</where>
+	GROUP BY
+		A.ROUT_ID
+	ORDER BY
+		A.ROUT_ID
+  </select>
+  
+  <!-- 피봇 그리드 쿼리1 -->
+  <select id="ST0205G1R1" resultType="Map">
+  	SELECT
+  		DATE_FORMAT(A.OPER_DT, '%Y-%m-%d') OPER_DT
+		,A.REP_ROUT_ID
+		,A.ROUT_ID
+		,AVG(AVRG_SPD) AS AVRG_SPD
+		,MAX(MAX_SPD) AS MAX_SPD
+		,MIN_SPD
+		,B.ROUT_NM
+		,B.REP_ROUT_NM
+	FROM
+		BRT_ROUT_AVER_OPER_SP_STAT A
+		LEFT JOIN BMS_ROUT_MST B
+		ON A.ROUT_ID = B.ROUT_ID
+	<where>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(REP_ROUT_ID)">
+			A.REP_ROUT_ID = #{REP_ROUT_ID}
+		</if>
+		<if test="F_DATE != null and F_DATE != '' and L_DATE != null and L_DATE != '' ">
+			AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+		</if>
+		AND B.DEL_YN = 'N'
+	</where>
+	GROUP BY
+		OPER_DT, A.ROUT_ID
+	
+UNION ALL
+
+	SELECT
+ 		"평균속도" AS OPER_DT
+		,A.REP_ROUT_ID
+		,A.ROUT_ID
+		,AVG(AVRG_SPD) AS AVRG_SPD
+		,MAX(MAX_SPD) AS MAX_SPD
+		,MIN_SPD
+		,B.ROUT_NM
+		,B.REP_ROUT_NM
+	FROM
+		BRT_ROUT_AVER_OPER_SP_STAT A
+		LEFT JOIN BMS_ROUT_MST B
+		ON A.ROUT_ID = B.ROUT_ID
+	<where>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(REP_ROUT_ID)">
+			A.REP_ROUT_ID = #{REP_ROUT_ID}
+		</if>
+		<if test="F_DATE != null and F_DATE != '' and L_DATE != null and L_DATE != '' ">
+			AND DATE_FORMAT(A.OPER_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+		</if>
+		AND B.DEL_YN = 'N'
+	</where>
+	GROUP BY
+		"", A.ROUT_ID
+  </select>
+
+</mapper>

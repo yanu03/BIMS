@@ -25,6 +25,7 @@ public class IntgController extends ControllerSupport {
 	
 	@RequestMapping("/intg/selectIntgList")
 	public @ResponseBody Map<String, Object> selectIntgList() throws Exception {
+		//intgService.insertIntgList();
 		result.setData("dlt_BMS_INTG_AIRCON_INFO", intgService.selectIntgList());
 		return result.getResult();
 	}

@@ -22,13 +22,6 @@ public interface FM0204Mapper {
 	
 	public List FM0204G2R2(Map param);
 	
-	/** PLF 테이블 관련 20211018 jh **/
-	public int FM0204G1I2(Map param);
-	
-	public int FM0204G1U2(Map param);
-	
-	public int FM0204G1D2(Map param);
-	
 	public List<Map> FM0204P0R0(Map param);
 	
 }
