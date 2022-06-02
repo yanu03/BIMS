@@ -143,7 +143,7 @@
 				<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.grd_groupView_onrowindexchange" editModeEvent="onclick" groupbyZoneHeight="" showSortableImage=""
 				 useShiftKey="true" scrollByColumn="false" sortable="true" rowStatusHeaderValue="상태"  rowStatusVisible="false" fixedColumnWithHidden="true" 
 				 dataList="dlt_commonCo" keyMoveEditMode="true" ignoreCellClick="false" style="height: 100%;" autoFit="allColumn" visibleRowNum="10" id="grd_groupView" ev:onafteredit="" 
-				 class="cm_grid" autoFitMinWidth="" rowNumHeaderValue="순서" rowNumVisible="true">
+				 class="cm_grid" autoFitMinWidth="" rowNumHeaderValue="No." rowNumVisible="true">
 					<w2:header style="" id="">
 						<w2:row style="" id="">
 							<w2:column width="40" style="height:20px;" inputType="checkbox" id="chk" value="" blockSelect="false" displayMode="label" fixColumnWidth="true">

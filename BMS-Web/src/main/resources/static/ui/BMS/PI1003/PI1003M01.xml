@@ -215,7 +215,7 @@
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">
 						<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.PI1003G0_onrowindexchange" ev:oncellclick=""
-							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순서"
+							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="No."
 							sortable="true" rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
 							dataList="data:dlt_BMS_NOTICE_SCNRO_MST" ignoreCellClick="false" style="height:100%;" autoFit="lastColumn" visibleRowNum=""
 							id="PI1003G0" class="cm_grid" tooltipPositionY="" focusMode="row">

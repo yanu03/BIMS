@@ -480,7 +480,7 @@
 							class="cm_grid left" wheelRows="" ev:onviewchange="" fixedColumnWithHidden="true" dataList="dlt_menu" id="grd_menu" style=""
 							scrollByColumn="false" useShiftKey="true" rowStatusVisible="false" ev:onafteredit="" rowStatusHeaderValue="상태"
 							ev:oncellclick="scwin.grd_menu_oncellclick" rowNumVisible="true" ev:ontextimageclick="scwin.grd_menu_ontextimageclick" ev:onkeyup=""
-							ev:oneditkeyup="scwin.grd_menu_oneditkeyup" enterKeyMove=""  rowNumHeaderValue="순서" readOnly="false">
+							ev:oneditkeyup="scwin.grd_menu_oneditkeyup" enterKeyMove=""  rowNumHeaderValue="No." readOnly="false">
 							<w2:header id="header1" style="">
 								<w2:row id="row2" style="">
 									<w2:column id="column16" blockSelect="false" style="height:20px;" width="79" inputType="text" value="메뉴코드"

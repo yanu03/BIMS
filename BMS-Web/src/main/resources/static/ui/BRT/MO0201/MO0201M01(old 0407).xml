@@ -1288,7 +1288,7 @@
 					<xf:group id="MO0201T0" style="position: absolute;z-index: 5;width: 600px;">
 						<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.MO0201G3_onrowindexchange"
 							ev:oncellclick="" showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="true" scrollByColumn="false"
-							rowNumHeaderValue="순서" sortable="false" rowStatusHeaderValue="상태" overflowX="hidden" overflowY="scroll" rowStatusVisible="false"
+							rowNumHeaderValue="No." sortable="false" rowStatusHeaderValue="상태" overflowX="hidden" overflowY="scroll" rowStatusVisible="false"
 							fixedColumnWithHidden="true" dataList="data:dlt_BMS_ROUT_MST" ignoreCellClick="false" style="height:212px;"
 							autoFit="lastColumn" visibleRowNum="" id="MO0201G3" class="cm_grid left" tooltipPositionY="" focusMode="row">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
@@ -1326,7 +1326,7 @@
 							<xf:group></xf:group>
 							<xf:group adaptive="layout" class="w2tb" id="" style="">
 							<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.MO0201G0_onrowindexchange" ev:oncellclick=""
-								showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순서"
+								showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="No."
 								sortable="false" rowStatusHeaderValue="상태" overflowX="hidden" overflowY="scroll" rowStatusVisible="false"
 								fixedColumnWithHidden="true" dataList="data:dlt_BRT_CUR_OPER_INFO" ignoreCellClick="false" style="height:410px;width: 400px;"
 								autoFit="lastColumn" visibleRowNum="" id="MO0201G0" class="cm_grid left" tooltipPositionY="" focusMode="row">

@@ -281,7 +281,7 @@
 							autoFit="lastColumn" sortable="true" sortEvent="onclick" class="cm_grid left" showSortableImage="" fixedColumnWithHidden="true"
 							dataList="dlt_BMS_API_INFO" id="SM0800G0" readOnly="" style="" overflowX="hidden" useShiftKey="true" scrollByColumn="false"
 							overflowY="scroll" rowStatusVisible="false" ev:onafteredit="" rowStatusHeaderValue="상태"
-							ev:oncellclick="scwin.SM0800G0_oncellclick" ev:oncelldblclick="" rowNumHeaderValue="순서" rowNumVisible="true"
+							ev:oncellclick="scwin.SM0800G0_oncellclick" ev:oncelldblclick="" rowNumHeaderValue="No." rowNumVisible="true"
 							focusMode="row">
 							<w2:header id="header1" style="">
 								<w2:row id="row2" style="">

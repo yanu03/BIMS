@@ -426,7 +426,7 @@
 							groupbyZoneHeight="" showSortableImage="" useShiftKey="true" scrollByColumn="false" sortable="true" rowStatusHeaderValue="상태"
 							 rowStatusVisible="false" fixedColumnWithHidden="true" dataList="dlt_si0701Co" keyMoveEditMode="true"
 							ignoreCellClick="false" style="" autoFit="allColumn" visibleRowNum="" id="grd_CoView" ev:onafteredit="" class="cm_grid left"
-							autoFitMinWidth="" rowNumHeaderValue="순서" rowNumVisible="true">
+							autoFitMinWidth="" rowNumHeaderValue="No." rowNumVisible="true">
 							<w2:header style="" id="">
 								<w2:row style="" id="">
 									<!-- <w2:column width="40" style="height:20px;" inputType="checkbox" id="chk" value="" blockSelect="false" displayMode="label" fixColumnWidth="true">
@@ -486,7 +486,7 @@
 					<xf:group id="" class="" style="">
 						<w2:gridView ignoreCellClick="false" autoFit="lastColumn" visibleRowNum="" sortable="true" sortEvent="onclick"
 							class="cm_grid right" showSortableImage="" fixedColumnWithHidden="true" dataList="dlt_si0701Dtl" id="grd_dtlView" style=""
-							scrollByColumn="false" useShiftKey="true" overflowY="auto" rowStatusVisible="false" ev:onafteredit="" rowNumHeaderValue="순서" rowNumVisible="true"
+							scrollByColumn="false" useShiftKey="true" overflowY="auto" rowStatusVisible="false" ev:onafteredit="" rowNumHeaderValue="No." rowNumVisible="true"
 							keyMoveEditMode="true" editModeEvent="onclick"  autoFitMinWidth="">
 							<w2:header id="header1" style="">
 								<w2:row id="row2" style="">

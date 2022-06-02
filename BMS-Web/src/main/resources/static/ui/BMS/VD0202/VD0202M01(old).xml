@@ -939,7 +939,7 @@
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">
 						<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.VD0202G0_onrowindexchange" ev:oncellclick=""
-							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순서"
+							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="No."
 							sortable="true" rowStatusHeaderValue="상태" overflowX="hidden" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
 							dataList="data:dlt_BRT_CUR_OPER_INFO" ignoreCellClick="false" style="" autoFit="lastColumn" visibleRowNum="" id="VD0202G0"
 							class="cm_grid left" tooltipPositionY="" focusMode="row" noResultMessage="금일 고장건수 없음">

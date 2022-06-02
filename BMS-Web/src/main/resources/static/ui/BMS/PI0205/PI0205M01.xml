@@ -325,7 +325,7 @@
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">
 						<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.PI0205G0_onrowindexchange" ev:oncellclick=""
-							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순서" sortable="true"
+							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="No." sortable="true"
 							rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false"
 							fixedColumnWithHidden="true" dataList="data:dlt_BMS_VOC_INFO" ignoreCellClick="false" style="height:100%;" autoFit="lastColumn"
 							visibleRowNum="" id="PI0205G0" class="cm_grid" tooltipPositionY="" focusMode="row">
