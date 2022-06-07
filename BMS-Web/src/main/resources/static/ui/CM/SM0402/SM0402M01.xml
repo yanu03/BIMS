@@ -362,7 +362,7 @@
 						<w2:gridView ignoreCellClick="false" ev:onrowindexchange="scwin.grd_authority_onrowindexchange" autoFit="lastColumn"
 							visibleRowNum="" sortable="true" sortEvent="onclick" class="cm_grid left" fixedColumnWithHidden="true" dataList="dlt_authority"
 							id="grd_authority" style="" scrollByColumn="false" useShiftKey="true" rowStatusVisible="false" ev:onafteredit=""
-							rowStatusHeaderValue="상태" ev:oncellclick="" rowNumVisible="true" dataDragDrop=""  rowNumHeaderValue="순서" focusMode="row">
+							rowStatusHeaderValue="상태" ev:oncellclick="" rowNumVisible="true" dataDragDrop=""  rowNumHeaderValue="No." focusMode="row">
 							<w2:header id="header1" style="">
 								<w2:row id="row2" style="">
 									<w2:column id="column9" blockSelect="false" style="height:20px;" width="100" inputType="text" value="권한코드"
@@ -422,7 +422,7 @@
 					</xf:group>
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">
-						<w2:gridView ignoreCellClick="false" ev:onrowindexchange="" autoFit="lastColumn" rowNumHeaderValue="순서" visibleRowNum="8"
+						<w2:gridView ignoreCellClick="false" ev:onrowindexchange="" autoFit="lastColumn" rowNumHeaderValue="No." visibleRowNum="8"
 							class="cm_grid right" fixedColumnWithHidden="true" rowNumVisible="true" dataList="dlt_authorityMember" id="grd_authorityMember" readOnly=""
 							style="" useShiftKey="true" scrollByColumn="false" rowStatusVisible="false" rowStatusHeaderValue="상태" ev:oncellclick=""
 							focusMode="row">

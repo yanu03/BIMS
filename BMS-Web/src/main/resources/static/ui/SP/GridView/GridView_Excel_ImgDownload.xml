@@ -138,7 +138,7 @@ Excel Image Data Download 설정 방법 및 실행방법을 확인한다.
 			<w2:gridView autoFit="allColumn" class="cm_grid" dataList="data:dlt_ExcelData" ev:onafteredit=""
 				ev:onrowindexchange="scwin.grd_Authority_onrowindexchange" fixedColumnWithHidden="true" id="grd_excelGrid" ignoreCellClick="false"
 				rowStatusHeaderValue="" rowStatusVisible="" scrollByColumn="false" sortEvent="ondblclick" sortable="true" style="height:400px;"
-				useShiftKey="true" visibleRowNum="10" rowNumVisible="true" rowNumHeaderValue="순서" ev:onfilereadend="scwin.grd_excelGrid_onfilereadend"
+				useShiftKey="true" visibleRowNum="10" rowNumVisible="true" rowNumHeaderValue="No." ev:onfilereadend="scwin.grd_excelGrid_onfilereadend"
 				rowNumWidth="">
 				<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 				<w2:header style="" id="header1">

@@ -594,7 +594,7 @@
                   <w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
                      dataList="data:dlt_BRT_OPER_PL_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.AL0302G0_oncellclick" ev:oneditkeyup=""
                      ev:onkeyup="" ev:onrowindexchange="scwin.AL0302G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange=""
-                     fixedColumnWithHidden="true" id="AL0302G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true"
+                     fixedColumnWithHidden="true" id="AL0302G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true"
                      rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true"
                      visibleRowNum="" wheelRows="" autoFitMinWidth="0" disabledScrollHidden="" editModeEvent="" editModeEventIcon=""
                      checkEditableInputClass="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll="" ignoreNonEditableCellTabEnter=""
@@ -698,7 +698,7 @@
                </xf:group>
                <xf:group></xf:group><!-- margin-->
                <xf:group id="" class="" style="">
-                  <w2:gridView ignoreCellClick="false" ev:onrowindexchange="" autoFit="allColumn" rowNumHeaderValue="순번"
+                  <w2:gridView ignoreCellClick="false" ev:onrowindexchange="" autoFit="allColumn" rowNumHeaderValue="No."
                      visibleRowNum="" class="cm_grid right" fixedColumnWithHidden="true" rowNumVisible="false" dataList="data:dlt_BRT_ALLOC_PL_MST"
                      id="AL0302G1" readOnly="false" style="" useShiftKey="true" scrollByColumn="false" rowStatusVisible="false" rowStatusHeaderValue="상태"
                      ev:oncellclick="" focusMode="cell" ev:ontextimageclick="scwin.AL0302G1_ontextimageclick">
@@ -790,7 +790,7 @@
                   <w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
                </xf:group>
                <xf:group id="" class="" style="">
-                  <w2:gridView ignoreCellClick="false" ev:onrowindexchange="" autoFit="allColumn" rowNumHeaderValue="순번"
+                  <w2:gridView ignoreCellClick="false" ev:onrowindexchange="" autoFit="allColumn" rowNumHeaderValue="No."
                      visibleRowNum="" class="cm_grid right" fixedColumnWithHidden="true" rowNumVisible="false"
                      dataList="data:dlt_BRT_OPER_DT_ALLOC_PL_MST" id="AL0302G2" readOnly="false" style="" useShiftKey="true" scrollByColumn="false"
                      rowStatusVisible="false" rowStatusHeaderValue="상태" ev:oncellclick="" focusMode="cell"

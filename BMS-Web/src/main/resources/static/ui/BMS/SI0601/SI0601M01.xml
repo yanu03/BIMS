@@ -222,7 +222,7 @@
 							autoFit="lastColumn" visibleRowNum="" sortable="true" sortEvent="onclick" class="cm_grid left" showSortableImage=""
 							fixedColumnWithHidden="true" dataList="data:dlt_BMS_PARTNER_MST" id="SI0601G0" readOnly="true" style="" overflowX="hidden"
 							scrollByColumn="false" useShiftKey="true" overflowY="scroll" rowStatusVisible="false" rowStatusHeaderValue="상태" ev:oncellclick=""
-							rowNumVisible="true" rowNumHeaderValue="순서" focusMode="row">
+							rowNumVisible="true" rowNumHeaderValue="No." focusMode="row">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">

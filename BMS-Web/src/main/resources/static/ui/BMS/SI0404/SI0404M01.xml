@@ -129,7 +129,7 @@
 		 };
 		 
 		var mainOptions = {
-			ADD:{cbFnc:scwin.btn_integration_onclick, nm:"세종 연계",class:"Intg"},
+			ADD:{cbFnc:scwin.btn_integration_onclick, nm:"세종데이터 연계",class:"Intg"},
 			//기존에 삭제버튼을 사용하지 않아 '공공데이터 연계' 버튼으로 대체 사용하였습니다. 
 			DEL:{cbFnc:scwin.btn_integration_onclick2, nm:"공공데이터 연계",class:"Intg"},
 			CNL:scwin.btn_cancel_onclick,
@@ -143,7 +143,8 @@
 		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainSrhOptions, codeOptions);
 		
 		var subOptions = {
-			SEARCH: scwin.btn_sub_move, DEL:scwin.btn_sub_del
+			SEARCH: scwin.btn_sub_move
+			//, DEL:scwin.btn_sub_del
 		};
 		//com.setEnterKeyEvent(pgm_subList, scwin.btn_sub_search_onclick);
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);
@@ -255,7 +256,7 @@
 					if (param != "") {
 						var data = { data : dma_sub_search.getJSON(), callbackFn : "scwin.insertNode" };
 						var options = { id : "SI0404P01",
-										popupName : "세종연계", 
+										popupName : "세종데이터 연계", 
 										modal : true};
 						com.openPopup("/ui/BMS/SI0404/SI0404P01.xml", options, data);
 					}
@@ -271,7 +272,7 @@
 			if (param != "") {
 				var data = { data : dma_sub_search.getJSON(), callbackFn : "scwin.insertNode" };
 				var options = { id : "SI0404P01",
-								popupName : "세종연계", 
+								popupName : "세종데이터 연계", 
 								modal : true};
 				com.openPopup("/ui/BMS/SI0404/SI0404P01.xml", options, data);
 			}
@@ -466,7 +467,7 @@
 							<w2:gridView  alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle=""
 								id="SI0404G0" class="cm_grid left" dataList="data:dlt_BMS_ROUT_MST"
 								ev:onkeyup="" ev:onrowindexchange="scwin.SI0404G0_onrowindexchange" fixedColumnWithHidden="true"
-								ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false"
+								ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false"
 								rowStatusWidth="40" scrollByColumn="false" style="height:177px" useShiftKey="true" autoFitMinWidth="0"
 								focusMode="row"
 								rowNumStatusResize="" ev:onbeforecolumnmove="" userData1="" sortable="false">
@@ -484,11 +485,11 @@
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column3"
 											value="노선명" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column5"
-											value="기점명" blockSelect="false" displayMode="label">
+										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column3"
+											value="세종연계노선ID" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column6"
-											value="종점명" blockSelect="false" displayMode="label">
+										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column3"
+											value="공공연계노선ID" blockSelect="false" displayMode="label">
 										</w2:column>
 									</w2:row>
 								</w2:header>
@@ -506,10 +507,10 @@
 										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ROUT_NM"
 											value="" blockSelect="false" displayMode="label" textAlign="left">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ST_STTN_NM"
+										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="INT_ROUT_ID"
 											value="" blockSelect="false" displayMode="label" textAlign="left">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ED_STTN_NM"
+										<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="PUB_ROUT_ID"
 											value="" blockSelect="false" displayMode="label" textAlign="left">
 										</w2:column>
 									</w2:row>
@@ -546,7 +547,7 @@
 								<w2:gridView   alwaysTriggerScrollStart="" autoFit="lastColumn"
 									id="SI0404G1" class="cm_grid leftL" autoFitMinWidth="0" dataList="data:dlt_BMS_ROUT_NODE_CMPSTN" ev:onrowindexchange="scwin.SI0404G1_onrowindexchange"
 									fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row"  ignoreCellClick="false"  sortable="false" readOnly="true" 
-									rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true">
+									rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true">
 									<w2:header id="header1" style="">
 										<w2:row id="row1" style="">
 											<w2:column blockSelect="false" displayMode="label" id="column1" inputType="text"

@@ -24,6 +24,9 @@
 			<if test="TYPE == 'VDO_NM'">
 				AND VDO_NM LIKE CONCAT('%',#{CONTENT},'%') 
 			</if>
+			<if test="TYPE2 != ''">
+				AND FILE_TYPE = #{TYPE2}
+			</if>
 		</where>		
 	</select>
 

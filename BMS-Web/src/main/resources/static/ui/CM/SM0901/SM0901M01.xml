@@ -354,7 +354,7 @@
 							visibleRowNum="" sortable="true" sortEvent="onclick" class="cm_grid left" showSortableImage="" fixedColumnWithHidden="true" 
 							dataList="dlt_organizationBasic" id="grd_organizationBasic" readOnly="true" style=""  scrollByColumn="false" 
 							useShiftKey="true" overflowY="scroll" rowStatusVisible="false" rowStatusHeaderValue="상태" ev:oncellclick=""  rowNumVisible="true" 
-							rowNumHeaderValue="순서" focusMode="row" scrollByColumnAdaptive="" syncScroll="">
+							rowNumHeaderValue="No." focusMode="row" scrollByColumnAdaptive="" syncScroll="">
 							<w2:header id="header1" style="">
 								<w2:row id="row2" style="">
 									<w2:column id="column9" blockSelect="false" style="height:20px;" width="100" inputType="text" value="조직ID"
@@ -445,7 +445,7 @@
 							groupbyZoneHeight="" showSortableImage="" useShiftKey="true" scrollByColumn="false" sortable="true" rowStatusHeaderValue="상태"
 							rowStatusVisible="false" fixedColumnWithHidden="true" dataList="dlt_orgAuthProgram" keyMoveEditMode="true" ignoreCellClick="false"
 							style="" autoFit="lastColumn" visibleRowNum="" id="grd_program" ev:onafteredit="" class="cm_grid left" autoFitMinWidth=""
-							rowNumHeaderValue="순서" rowNumVisible="true" focusMode="row" readOnly="">
+							rowNumHeaderValue="No." rowNumVisible="true" focusMode="row" readOnly="">
 							<w2:header id="header1" style="">
 								<w2:row id="row2" style="">
 									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:40px;" id="column27"

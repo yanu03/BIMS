@@ -6190,7 +6190,7 @@ com.setSubBtn = function(btnOptions, generator) {
  * 
  */
 com.setSubBtn2 = function(wfm_subBtn,autoOpt, subOpt, codeOptions) {
-	
+	debugger;
 	var programAuthority = gcm.CUR_PROGRAM_AUTH;
 
 	if(programAuthority.AUTH_CHECK != 'Y')return;

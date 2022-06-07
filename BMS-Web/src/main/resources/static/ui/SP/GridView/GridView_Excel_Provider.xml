@@ -226,7 +226,7 @@
 					</xf:group>
 
 				</xf:group>
-			</xf:group><w2:gridView ignoreCellClick="false" ev:onrowindexchange="scwin.grd_Authority_onrowindexchange" rowNumHeaderValue="순서" autoFit="allColumn" visibleRowNum="" sortable="true" sortEvent="ondblclick" class="cm_grid" rowNumVisible="true" fixedColumnWithHidden="true" dataList="dlt_zipCode" id="grd_pagingGrid" style="height:290px;" useShiftKey="true" scrollByColumn="false" rowStatusVisible="false" ev:onafteredit="" rowStatusHeaderValue="" rowNumWidth="120">
+			</xf:group><w2:gridView ignoreCellClick="false" ev:onrowindexchange="scwin.grd_Authority_onrowindexchange" rowNumHeaderValue="No." autoFit="allColumn" visibleRowNum="" sortable="true" sortEvent="ondblclick" class="cm_grid" rowNumVisible="true" fixedColumnWithHidden="true" dataList="dlt_zipCode" id="grd_pagingGrid" style="height:290px;" useShiftKey="true" scrollByColumn="false" rowStatusVisible="false" ev:onafteredit="" rowStatusHeaderValue="" rowNumWidth="120">
 				<w2:header id="header1" style="">
 					<w2:row id="row1" style="">
 						<w2:column id="column39" blockSelect="false" style="height:20px" width="120" inputType="text" value="SIGUNGUCODE" displayMode="label"></w2:column>

@@ -879,7 +879,7 @@
 						<w2:gridView  alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle=""
 							id="SI0402G0" class="cm_grid left" dataList="data:dlt_BMS_ROUT_MST"
 							ev:onkeyup="" ev:onrowindexchange="scwin.SI0402G0_onrowindexchange" fixedColumnWithHidden="true"
-							ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false"
+							ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false"
 							rowStatusWidth="40" scrollByColumn="false" style="height:177px" useShiftKey="true" autoFitMinWidth="0"
 							focusMode="row" rowNumStatusResize="" ev:onbeforecolumnmove="" userData1="" sortable="false" >
 							<w2:header style="" id="header1">
@@ -957,7 +957,7 @@
 							<w2:gridView   alwaysTriggerScrollStart="" autoFit="lastColumn"
 								id="SI0402G1" class="cm_grid leftL" autoFitMinWidth="0" captionTitle="" checkEditableInputClass=""  dataList="data:dlt_BMS_ROUT_NODE_CMPSTN" sortable="false" 
 								ev:onrowindexchange="scwin.SI0402G1_onrowindexchange"	ev:onviewchange="scwin.SI0402G1_onviewchange" ixedColumnWithHidden="true" dataDragDrop="true"
-								focusMode="row"  ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false"
+								focusMode="row"  ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false"
 								useShiftKey="true">
 								<w2:header id="header1" style="">
 									<w2:row id="row1" style="">

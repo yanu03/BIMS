@@ -674,7 +674,7 @@
 					<xf:group id="" class="" style="">
 						<w2:gridView autoFit="lastColumn" class="cm_grid left"
 							dataList="data:dlt_BMS_ROUT_MST" ev:oncellclick="scwin.ST0200G0_oncellclick" ev:onrowindexchange="scwin.ST0200G0_onrowindexchange" 
-							fixedColumnWithHidden="true" id="ST0200G0" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="false"
+							fixedColumnWithHidden="true" id="ST0200G0" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="false"
 							rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true" 
 							autoFitMinWidth="0" readOnly="true" focusMode="row" ev:onheaderclick="scwin.ST0200G0_onheaderclick">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>

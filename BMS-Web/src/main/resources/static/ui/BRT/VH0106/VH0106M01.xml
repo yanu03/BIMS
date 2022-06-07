@@ -320,7 +320,7 @@
 					<xf:group id="" class="" style="">
 						<w2:gridView autoFit="lastColumn" class="cm_grid left" dataList="data:dlt_BRT_OPER_END_SPOT_HIS"
 							ev:onrowindexchange="scwin.VH0106G0_onrowindexchange" fixedColumnWithHidden="true" id="VH0106G0" ignoreCellClick="false"
-							rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true"
+							rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true"
 							autoFitMinWidth="0" readOnly="true" focusMode="row" showSortableImage="false" sortEvent="onclick" noResultMessage="기간내 이력 없음"
 							fixedColumn="2">
 							<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>

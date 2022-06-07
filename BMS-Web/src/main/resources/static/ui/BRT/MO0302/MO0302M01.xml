@@ -308,7 +308,7 @@
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">							
 						<w2:gridView id="MO0302G0" defaultCellHeight="20" rowNumVisible="true"
-							useShiftKey="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" 
+							useShiftKey="true" scrollByColumn="false" rowNumHeaderValue="No." sortable="true" 
 							rowStatusHeaderValue="상태" overflowX="scroll" overflowY="scroll" rowStatusVisible="false"
 							 fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_BRT_INCDNT_HIS" class="cm_grid left" autoFit="lastColumn" 
 							ev:oncellclick=""  ev:onrowindexchange="" focusMode="row">

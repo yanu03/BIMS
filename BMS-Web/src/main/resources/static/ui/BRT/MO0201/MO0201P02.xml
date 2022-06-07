@@ -288,7 +288,7 @@
 					</xf:group>
 				</xf:group>								
 				<w2:gridView id="MO0201P1" style="width:98%;height:300px;" defaultCellHeight="20" rowNumVisible="true" 
-				useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
+				useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="No." sortable="true" rowStatusHeaderValue="상태"
 				overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
 				dataList="data:dlt_BMS_DVC_INFO" class="cm_grid" autoFit="lastColumn" fixedColumnScrollHidden="" ev:oncellclick="" ev:onscrolly="" ev:onrowindexchange="scwin.MO0201P1_onrowindexchange" focusMove="" focusMode="row">
 				<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>

@@ -63,7 +63,8 @@ public class PI0501Service extends ServiceSupport {
 				String rowStatus = (String) data.get("rowStatus");
 				if (rowStatus.equals("C")) {
 					if((data.get("FILE_NM")!=null)&&(data.get("FILE_NM").toString().isEmpty()==false)
-							&&(data.get("VDO_ID").equals(data.get("FILE_NM"))==false))
+							&&(data.get("VDO_ID").equals(data.get("FILE_NM"))==false)
+							&&(data.get("FILE_YN").equals("Y")==true))
 						{
 							doMoveFile(UPLOAD_DIR, UPLOAD_VIDEO_DIR, data.get("FILE_NM").toString(), data.get("VDO_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString());
 							data.put("FILE_NM", data.get("VDO_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString());
@@ -71,7 +72,8 @@ public class PI0501Service extends ServiceSupport {
 					iCnt += pi0501Mapper.PI0501G0I0(data);				
 				} else if (rowStatus.equals("U")) {
 					if((data.get("FILE_NM")!=null)&&(data.get("FILE_NM").toString().isEmpty()==false)
-							&&(data.get("VDO_ID").equals(data.get("FILE_NM"))==false)) 
+							&&(data.get("VDO_ID").equals(data.get("FILE_NM"))==false)
+							&&(data.get("FILE_YN").equals("Y")==true)) 
 						{
 							doMoveFile(UPLOAD_DIR, UPLOAD_VIDEO_DIR,data.get("FILE_NM").toString(),data.get("VDO_ID").toString()+ "." + data.get("FILE_EXTENSION").toString());
 							data.put("FILE_NM", data.get("VDO_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString());

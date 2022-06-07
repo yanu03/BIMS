@@ -205,7 +205,7 @@
 				
 					<xf:group id="" class="" style="">
 						<w2:gridView sortEvent="onclick" ev:oncellclick="" showSortableImage="" rowNumVisible="true" useShiftKey="true"
-							readOnly="" scrollByColumn="false" rowNumHeaderValue="순서" sortable="true" rowStatusHeaderValue="상태" overflowX="scroll"
+							readOnly="" scrollByColumn="false" rowNumHeaderValue="No." sortable="true" rowStatusHeaderValue="상태" overflowX="scroll"
 							overflowY="scroll" rowStatusVisible="false" ev:onrowindexchange="scwin.PI0301G0_onviewchange" fixedColumnWithHidden="true"
 							dataList="data:dlt_BMS_NEWS_CFG_INFO" ignoreCellClick="false" style="height:100%;" autoFit="lastColumn" visibleRowNum=""
 							id="PI0301G0" class="cm_grid left" tooltipPositionY="" focusMode="row">

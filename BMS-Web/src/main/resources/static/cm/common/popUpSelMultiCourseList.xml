@@ -413,7 +413,7 @@
 					</xf:group>
 					<xf:group></xf:group>
 					<w2:gridView autoFit="lastColumn" autoFitMinWidth="0" class="cm_grid right" dataList="data:dlt_BRT_COR_MST" ev:onrowindexchange="scwin.corGrid_onrowindexchange"
-						fixedColumnWithHidden="true" focusMode="row" id="corGrid" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="순번"
+						fixedColumnWithHidden="true" focusMode="row" id="corGrid" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="No."
 						rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true" >
 						<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
 						<w2:header style="" id="header2">
@@ -476,7 +476,7 @@
 						</xf:group>
 						<xf:group></xf:group>
 						<w2:gridView autoFit="lastColumn" autoFitMinWidth="0" class="cm_grid right" dataList="data:dlt_BRT_COR_DTL_INFO"
-							fixedColumnWithHidden="true" focusMode="row" id="corDtlGrid" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="순번"
+							fixedColumnWithHidden="true" focusMode="row" id="corDtlGrid" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="No."
 							rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true" >
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
@@ -571,7 +571,7 @@
 					</xf:group>		
 					<xf:group></xf:group>
 					<w2:gridView autoFit="lastColumn" autoFitMinWidth="0" class="cm_grid right" dataList="data:dlt_BRT_TARET_COR_MST"  ev:onrowindexchange="scwin.targetCorGrid_onrowindexchange"
-						fixedColumnWithHidden="true" focusMode="row" id="targetCorGrid" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="순번"
+						fixedColumnWithHidden="true" focusMode="row" id="targetCorGrid" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="No."
 						rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true" >
 						<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
 						<w2:header style="" id="header2">
@@ -636,7 +636,7 @@
 						</xf:group>
 						<xf:group></xf:group>
 						<w2:gridView autoFit="lastColumn" autoFitMinWidth="0" class="cm_grid right" dataList="data:dlt_BRT_TARGET_COR_DTL_INFO" 
-							fixedColumnWithHidden="true" focusMode="row" id="targetCorDtlGrid" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="순번"
+							fixedColumnWithHidden="true" focusMode="row" id="targetCorDtlGrid" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="No."
 							rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true" >
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">

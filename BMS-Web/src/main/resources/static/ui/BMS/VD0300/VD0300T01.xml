@@ -49,7 +49,7 @@
     </head>
     <body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<w2:gridView id="VD0300G2" style="width:100%;height:100%;" defaultCellHeight="20" rowNumVisible="true"
-			useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
+			useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="No." sortable="true" rowStatusHeaderValue="상태"
 			overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
 			dataList="data:dlt_BMS_DVC_HIS" class="cm_grid right" autoFit="lastColumn" fixedColumnScrollHidden="" sortOrderReverse="true">
 			<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>

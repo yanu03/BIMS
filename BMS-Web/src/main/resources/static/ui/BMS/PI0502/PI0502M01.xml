@@ -313,7 +313,7 @@
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
 							dataList="data:dlt_VDO_ORGA_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 							ev:onrowindexchange="scwin.PI0502G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true"
-							id="PI0502G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusHeaderValue=""
+							id="PI0502G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusHeaderValue=""
 							rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows=""
 							autoFitMinWidth="0" disabledScrollHidden="" editModeEvent="" editModeEventIcon="" checkEditableInputClass="" keyMoveEditMode=""
 							moveKeyEditMode="" moveKeyEditModeAll="" ignoreNonEditableCellTabEnter="" readOnly="true" keepDefaultColumnWidth=""
@@ -458,7 +458,6 @@
 								<xf:group class="defaultbox" id="" style="">
 									<w2:textbox class="df_tt fl list" id="" label="영상 목록" style=""></w2:textbox>
 								</xf:group>
-								<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 							</xf:group>
 							<xf:group id="" class="" style=""></xf:group>
 							<xf:group id="">
@@ -467,7 +466,7 @@
 									editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 									ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row"
 									id="PI0502G1" ignoreCellClick="false" ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode=""
-									moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="순번"
+									moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="No."
 									rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false"
 									rowStatusWidth="40" scrollByColumn="false" showSortableUseFilter="" sortOrderReverse="" sortable="" sortedIconPosition="" style=""
 									summaryAuto="" useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true" visibleRowNum="" wheelRows="">
@@ -527,7 +526,6 @@
 								</w2:gridView>
 							</xf:group>
 						</xf:group>
-
 						<xf:group style="position: relative; text-align: center;">
 							<xf:group style="position: absolute; top: 50%; transform: translate(0px, -30px);">
 								<w2:anchor class="btn_com right" id="btn_grid_add" outerDiv="" style="" ev:onclick="scwin.btn_grid_add_onclick">
@@ -538,12 +536,12 @@
 								</w2:anchor>
 							</xf:group>
 						</xf:group>
-						
 						<xf:group id="pgm_list3" class="pgm_list grdr_20_2_a" style="">
 							<xf:group id="" class="gr_sub_header" style="">
 								 <xf:group class="defaultbox" id="" style="">
 									<w2:textbox class="df_tt fl list" id="" label="영상 편성 목록" style=""></w2:textbox>
 								</xf:group> 
+								<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 								
 								<!--<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>-->
 							</xf:group>
@@ -554,7 +552,7 @@
 									editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 									ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row"
 									id="PI0502G2" ignoreCellClick="false" ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode=""
-									moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="순번"
+									moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="No."
 									rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false"
 									rowStatusWidth="40" scrollByColumn="false" showSortableUseFilter="" sortOrderReverse="" sortable="" sortedIconPosition="" style=""
 									summaryAuto="" useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true" visibleRowNum="" wheelRows="">

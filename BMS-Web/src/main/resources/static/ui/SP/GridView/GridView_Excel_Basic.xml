@@ -183,7 +183,7 @@
 						</w2:anchor>
 					</xf:group>
 				</xf:group>
-			</xf:group><w2:gridView ignoreCellClick="false" rowNumHeaderValue="순서" autoFit="allColumn" visibleRowNum="" sortable="true" sortEvent="ondblclick" class="cm_grid" rowNumVisible="true" fixedColumnWithHidden="true" dataList="dlt_advancedExcel" id="grd_excelGrid" ev:onfilereadend="scwin.grd_excelGrid_onfilereadend" style="height:300px;" useShiftKey="true" scrollByColumn="false" rowStatusVisible="true" ev:onafteredit="" rowStatusHeaderValue="상태" columnMoveWithFooter="" columnMove="">
+			</xf:group><w2:gridView ignoreCellClick="false" rowNumHeaderValue="No." autoFit="allColumn" visibleRowNum="" sortable="true" sortEvent="ondblclick" class="cm_grid" rowNumVisible="true" fixedColumnWithHidden="true" dataList="dlt_advancedExcel" id="grd_excelGrid" ev:onfilereadend="scwin.grd_excelGrid_onfilereadend" style="height:300px;" useShiftKey="true" scrollByColumn="false" rowStatusVisible="true" ev:onafteredit="" rowStatusHeaderValue="상태" columnMoveWithFooter="" columnMove="">
 				<w2:header id="header1" style="">
 					<w2:row id="row2" style="">
 						<w2:column id="column11" blockSelect="false" style="height:25px;" width="50" inputType="text" value="메뉴코드" displayMode="label"></w2:column>
