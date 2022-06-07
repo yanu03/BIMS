@@ -745,6 +745,11 @@ routMap.addSoundMarkerInter = function(mapId, data, grid, idx, focusIdx) {
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/voice_node.png", imageSize);
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/voice_node_selected.png", imageSize);
 	}
+	else if(data.NODE_TYPE == routMap.NODE_TYPE.NORMAL){
+		imageSize = new kakao.maps.Size(12, 12); 
+		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex.png", imageSize);
+		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/vertex_selected.png", imageSize);
+	}
 	else {
 		markerImage = new kakao.maps.MarkerImage("/cm/images/tmap/road_trans.png", imageSize);
 		markerSelImage = new kakao.maps.MarkerImage("/cm/images/tmap/road_selected.png", imageSize);

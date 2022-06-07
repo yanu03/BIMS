@@ -175,6 +175,7 @@
 .grdr_20_2_320_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 320px minmax(20px, max-content) auto;} 
 .grdr_20_2_290 {display:grid; grid-template-rows: minmax(20px, max-content) 2px 288px;} 
 .grdr_20_2_350_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 350px auto;} 
+.grdr_20_2_400_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 450px auto;} 
 .grdr_20_2_350_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 350px minmax(20px, max-content) auto;} 
 .grdr_20_2_360_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 360px minmax(20px, max-content) auto;}
 .grdr_20_2_370_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 370px minmax(20px, max-content) auto;}

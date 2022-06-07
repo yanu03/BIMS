@@ -616,7 +616,7 @@
 		//xml 형식을 정의 하면 <w2:gridView 에 xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" 포함 합니다.
 		var gridStr = '<w2:gridView xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" dataList="dlt_VIEW_OPER_PL_NODE_INFO" ev:onafteredit="scwin.AL0205G1_onafteredit" '
 						+ 'scrollByColumn="true" ignoreCellClick="false"  fixedColumnWithHidden="true" id="AL0205G1" ev:onrowindexchange="scwin.AL0205G1_onrowindexchange" class ="cm_grid right" useShiftKey="false" '
-						+ ' ev:oncellclick="scwin.AL0205G1_oncellclick" mergeCells="byrestriccol" focusMode="row" mergeCol="OPER_SN, WAY_DIV" autoFit="none" readOnly="true" rowNumVisible="true" rowNumHeaderValue="순번">'
+						+ ' ev:oncellclick="scwin.AL0205G1_oncellclick" mergeCells="byrestriccol" focusMode="row" mergeCol="OPER_SN, WAY_DIV" autoFit="none" readOnly="true" rowNumVisible="true" rowNumHeaderValue="No.">'
 		+ '<w2:header id="header1" style="text-align:left">'
 		+ gridHeader
 		+'</w2:header>'
@@ -883,7 +883,7 @@
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
 							dataList="data:dlt_BMS_STTN_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 							ev:onrowindexchange="scwin.AL0205G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true"
-							id="AL0205G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusHeaderValue=""
+							id="AL0205G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusHeaderValue=""
 							rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows=""
 							autoFitMinWidth="0" disabledScrollHidden="" editModeEvent="" editModeEventIcon="" checkEditableInputClass="" keyMoveEditMode=""
 							moveKeyEditMode="" moveKeyEditModeAll="" ignoreNonEditableCellTabEnter="" readOnly="true" keepDefaultColumnWidth=""
@@ -937,7 +937,7 @@
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
 							dataList="data:dlt_BMS_CRS_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 							ev:onrowindexchange="scwin.AL0205G2_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true"
-							id="AL0205G2" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusHeaderValue=""
+							id="AL0205G2" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusHeaderValue=""
 							rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows=""
 							autoFitMinWidth="0" disabledScrollHidden="" editModeEvent="" editModeEventIcon="" checkEditableInputClass="" keyMoveEditMode=""
 							moveKeyEditMode="" moveKeyEditModeAll="" ignoreNonEditableCellTabEnter="" readOnly="true" keepDefaultColumnWidth=""
@@ -1037,7 +1037,7 @@
 					<xf:group id="" class="" style="">
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
 							checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BRT_OPER_ALLOC_PL_NODE_INFO" fixedColumnWithHidden="true"
-							focusMode="row" id="AL0205G1" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="false" rowStatusVisible="false"
+							focusMode="row" id="AL0205G1" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="false" rowStatusVisible="false"
 							rowStatusWidth="40" scrollByColumn="false" useShiftKey="true" fixedRow="0" fixedColumn="0"
 							ev:onrowindexchange="scwin.AL0205G1_onrowindexchange">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>

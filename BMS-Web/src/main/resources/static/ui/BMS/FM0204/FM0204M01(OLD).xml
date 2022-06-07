@@ -456,7 +456,7 @@
 		//xml 형식을 정의 하면 <w2:gridView 에 xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" 포함 합니다.
 		var gridStr = '<w2:gridView xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" '
 							+'autoFit="lastColumn" class="cm_grid left" dataList="data:dlt_BMS_FCLT_COND_PARAM_INFO" ev:oncellclick="scwin.FM0204G0_oncellclick" '
-							+'ev:onrowindexchange="scwin.FM0204G0_onrowindexchange" fixedColumnWithHidden="true" id="FM0204G0" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" '
+							+'ev:onrowindexchange="scwin.FM0204G0_onrowindexchange" fixedColumnWithHidden="true" id="FM0204G0" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" '
 							+'rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" autoFitMinWidth="0" readOnly="true" '
 							+'sortable="false" focusMode="row" showSortableImage="true" sortEvent="onclick" ev:onheaderclick="scwin.FM0204G0_onheaderclick">';
 		gridStr += '<w2:header style="" id="header2">'
@@ -905,7 +905,7 @@
 		//xml 형식을 정의 하면 <w2:gridView 에 xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" 포함 합니다.
 		var gridStr = '<w2:gridView xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" '
 							+'autoFit="lastColumn" class="cm_grid left" dataList="data:dlt_BMS_FCLT_AIR_COND_PARAM_INFO" ev:oncellclick="scwin.FM0204G2_oncellclick" '
-							+'ev:onrowindexchange="scwin.FM0204G2_onrowindexchange" fixedColumnWithHidden="true" id="FM0204G2" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" '
+							+'ev:onrowindexchange="scwin.FM0204G2_onrowindexchange" fixedColumnWithHidden="true" id="FM0204G2" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" '
 							+'rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" autoFitMinWidth="0" readOnly="true" '
 							+'sortable="false" focusMode="row" showSortableImage="true" sortEvent="onclick" ev:onheaderclick="scwin.FM0204G2_onheaderclick">';
 		gridStr += '<w2:header style="" id="header2">'
@@ -1015,7 +1015,7 @@
 					<xf:group id="" class="" style="">
 						<w2:gridView autoFit="allColumn" class="cm_grid left" dataList="data:dlt_BMS_FCLT_COND_PARAM_INFO"
 							ev:oncellclick="scwin.FM0204G0_oncellclick" ev:onrowindexchange="scwin.FM0204G0_onrowindexchange" fixedColumnWithHidden="true"
-							id="FM0204G0" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
+							id="FM0204G0" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
 							scrollByColumn="false" useShiftKey="true" autoFitMinWidth="0" readOnly="true" sortable="false" focusMode="row"
 							showSortableImage="true" sortEvent="onclick" >
 							<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
@@ -1056,7 +1056,7 @@
 							<xf:group id="" class="" style="">
 								<w2:gridView autoFit="lastColumn" autoFitMinWidth="0" checkEditableInputClass="" class="cm_grid right"
 									dataList="data:dlt_MGR_PROC_HIS" ev:oncellclick="scwin.FM0204G1_oncellclick" ev:onrowindexchange=""
-									fixedColumnWithHidden="true" focusMode="row" id="FM0204G1" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="순번"
+									fixedColumnWithHidden="true" focusMode="row" id="FM0204G1" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="No."
 									rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowStatusVisible="false" scrollByColumn="false" sortable="false"
 									useShiftKey="true" sortEvent="onclick">
 									<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
@@ -1480,7 +1480,7 @@
 					<xf:group id="" class="" style="">
 						<w2:gridView autoFit="allColumn" class="cm_grid left" dataList="data:dlt_BMS_FCLT_AIR_COND_PARAM_INFO"
 							ev:oncellclick="scwin.FM0204G2_oncellclick" ev:onrowindexchange="scwin.FM0204G2_onrowindexchange" fixedColumnWithHidden="true"
-							id="FM0204G2" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
+							id="FM0204G2" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
 							scrollByColumn="false" useShiftKey="true" autoFitMinWidth="0" readOnly="true" sortable="false" focusMode="row"
 							showSortableImage="true" sortEvent="onclick" >
 							<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>

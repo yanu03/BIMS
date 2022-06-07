@@ -744,7 +744,7 @@
 					</xf:group>
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">
-						<w2:gridView ignoreCellClick="false" ev:onrowindexchange="scwin.AL0305G0_onrowindexchange" autoFit="lastColumn" rowNumHeaderValue="순번"
+						<w2:gridView ignoreCellClick="false" ev:onrowindexchange="scwin.AL0305G0_onrowindexchange" autoFit="lastColumn" rowNumHeaderValue="No."
 							visibleRowNum="" class="cm_grid right" fixedColumnWithHidden="true" rowNumVisible="false"
 							dataList="data:dlt_BRT_OPER_DT_ALLOC_PL_MST" id="AL0305G0" readOnly="false" style="" useShiftKey="true" scrollByColumn="false"
 							rowStatusVisible="false" rowStatusHeaderValue="상태" ev:oncellclick="" focusMode="cell"

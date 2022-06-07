@@ -566,7 +566,7 @@
 							useShiftKey="true" scrollByColumn="false" owNumHeaderValue="순번" sortable="true" 
 							rowStatusHeaderValue="상태" overflowX="scroll" overflowY="scroll" rowStatusVisible="false"
 							 fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_BMS_GRG_MST" class="cm_grid left" autoFit="lastColumn" 
-							ev:oncellclick="scwin.SI0101G0_oncellclick"  ev:onrowindexchange="scwin.SI0101G0_onrowindexchange" rowNumHeaderValue="순번" focusMode="row" readOnly="true">
+							ev:oncellclick="scwin.SI0101G0_oncellclick"  ev:onrowindexchange="scwin.SI0101G0_onrowindexchange" rowNumHeaderValue="No." focusMode="row" readOnly="true">
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:22px;" id="column16" value="차고지ID"

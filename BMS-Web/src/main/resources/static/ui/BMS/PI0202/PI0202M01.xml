@@ -102,6 +102,16 @@
 			</xf:submission>
 		</xf:model>
 		<script type="text/javascript" lazy="false"><![CDATA[
+/**
+ * 안내 음성이 출력되는 지점 관리 프로그램
+ * 1.대표 노선 선택 -> 2. 해당 노선 노드 '노선 지점'과 지도에 표시됨 -> 3. 음성편성 추가 버튼 클릭 후 지도 클릭 -> 4. 음성편성 리스트중 선택 -> 5. 두 노드 사이에 노선 지점이 들어감.
+ * 음성편성지점은 드래그 가능
+ 
+ * @version 1.0
+ * @author 양현우
+ * @date 2022/06/03
+ */		
+	
 	var isSoundAdd;
 
 	var curRoutId;
@@ -135,7 +145,7 @@
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);
 		
 		var subOptions2 = {
-			SAVE:[{cbFnc:scwin.addSoundClick,nm:"음성편성 추가",class:"addPath"},{cbFnc:scwin.btn_sub_del,nm:"선택삭제",class:"del"}
+			SAVE:[{cbFnc:scwin.addSoundClick,nm:"음성편성 추가",class:"addPath"},{cbFnc:scwin.btn_sub_del,nm:"선택편성삭제",class:"del"}
 			]
 		};
 
@@ -451,7 +461,7 @@
 						<w2:gridView  alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle=""
 							id="PI0202G0" class="cm_grid left" dataList="data:dlt_BMS_ROUT_MST"
 							ev:onkeyup="" ev:onrowindexchange="scwin.PI0202G0_onrowindexchange" fixedColumnWithHidden="true"
-							ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false"
+							ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false"
 							rowStatusWidth="40" scrollByColumn="false" style="height:177px" useShiftKey="true" autoFitMinWidth="0"
 							focusMode="row" rowNumStatusResize="" ev:onbeforecolumnmove="" userData1="">
 							<w2:header style="" id="header1">
@@ -529,7 +539,7 @@
 							<w2:gridView   alwaysTriggerScrollStart="" autoFit="lastColumn"
 								id="PI0202G1" class="cm_grid leftL" autoFitMinWidth="0" captionTitle="" checkEditableInputClass=""  dataList="data:dlt_BMS_ROUT_NODE_CMPSTN"
 								ev:onrowindexchange="scwin.PI0202G1_onrowindexchange"	ev:onviewchange="scwin.PI0202G1_onviewchange" ixedColumnWithHidden="true" dataDragDrop="true"
-								focusMode="row"  ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false"
+								focusMode="row"  ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false"
 								useShiftKey="true"  sortable="false" >
 								<w2:header id="header1" style="">
 									<w2:row id="row1" style="">

@@ -610,7 +610,7 @@
 							ev:onrowindexchange="scwin.VD0100G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows=""
 							fixedColumnWithHidden="true" focusMode="row" id="VD0100G0" ignoreCellClick="false" ignoreNonEditableCellTabEnter=""
 							keepDefaultColumnWidth="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay=""
-							readOnly="true" rowNumHeaderValue="순번" rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth=""
+							readOnly="true" rowNumHeaderValue="No." rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth=""
 							rowStatusHeaderValue="" rowStatusVisible="false" scrollByColumn="false" showSortableUseFilter="" sortOrderReverse="" sortable="true"
 							sortedIconPosition="" summaryAuto="" useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true" visibleRowNum=""
 							wheelRows="" sortEvent="onclick">

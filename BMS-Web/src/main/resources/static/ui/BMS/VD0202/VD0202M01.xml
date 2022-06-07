@@ -418,7 +418,7 @@
 		//xml 형식을 정의 하면 <w2:gridView 에 xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" 포함 합니다.
 		var gridStr = '<w2:gridView xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" '
 							+'autoFit="lastColumn" class="cm_grid left" dataList="data:dlt_BMS_DVC_INFO" ev:oncellclick="scwin.VD0202G1_oncellclick" '
-							+'ev:onrowindexchange="scwin.VD0202G1_onrowindexchange" fixedColumnWithHidden="true" id="VD0202G1" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" '
+							+'ev:onrowindexchange="scwin.VD0202G1_onrowindexchange" fixedColumnWithHidden="true" id="VD0202G1" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" '
 							+'rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" autoFitMinWidth="0" readOnly="true" '
 							+'sortable="false" focusMode="row" showSortableImage="true" sortEvent="onclick" ev:onheaderclick="scwin.VD0202G1_onheaderclick">';
 		gridStr += '<w2:header style="" id="header2">'
@@ -1082,7 +1082,7 @@
 					    	
 					    						
 								<w2:gridView id="VD0202G1" style="width:98%;height:98%" defaultCellHeight="20" rowNumVisible="true" 
-								useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
+								useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="No." sortable="true" rowStatusHeaderValue="상태"
 								overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
 								dataList="data:dlt_BMS_DVC_INFO" class="cm_grid" autoFit="lastColumn" fixedColumnScrollHidden="" ev:oncellclick="scwin.VD0201G1_oncellclick" 
 								ev:onscrolly="" ev:onrowindexchange="scwin.VD0202G1_onrowindexchange" focusMove="" focusMode="row">

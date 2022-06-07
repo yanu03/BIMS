@@ -214,7 +214,7 @@
     						ev:onrowindexchange="scwin.SI0702G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows=""
     						fixedColumnWithHidden="true" focusMode="row" id="SI0702G0" ignoreCellClick="false" ignoreNonEditableCellTabEnter=""
     						keepDefaultColumnWidth="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay=""
-    						readOnly="true" rowNumHeaderValue="순번" rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth=""
+    						readOnly="true" rowNumHeaderValue="No." rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth=""
     						rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" showSortableUseFilter=""
     						sortOrderReverse="" sortable="" sortedIconPosition="" style="" summaryAuto="" useCtrlOnMultisort="" useFilterList=""
     						useFilterListSync="" useShiftKey="true" userData1="" visibleRowNum="" wheelRows="">

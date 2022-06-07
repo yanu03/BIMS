@@ -2369,7 +2369,7 @@
 					<xf:group id="" class="" style="">
 						<w2:gridView alwaysTriggerScrollStart="" captionTitle="" id="AL0202G0" class="cm_grid left AL0202G0" sortable="false" 
 							dataList="data:dlt_BRT_OPER_PL_MST" ev:onrowindexchange="scwin.AL0202G0_onrowindexchange" fixedColumnWithHidden="true"
-							autoFit="lastColumn" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" mergeCells="byrestriccol"
+							autoFit="lastColumn" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" mergeCells="byrestriccol"
 							rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="true" style="" useShiftKey="true"
 							autoFitMinWidth="0" focusMode="row" readOnly="true" tooltipDisplay="true" tooltipPositionX="0" tooltipPositionY="5">
 							<w2:header style="" id="header1">
@@ -2470,7 +2470,7 @@
 					</xf:group>
 					<xf:group class="" id="" style="">
 						<w2:gridView id="AL0202G1" autoFit="" captionTitle="" class="cm_grid right AL0202G1" dataList="data:dlt_VIEW_OPER_PL_ROUT_INFO" sortable="false" 
-							ev:onrowindexchange="scwin.AL0202G1_onrowindexchange" fixedColumnWithHidden="true" ignoreCellClick="false" rowNumHeaderValue="순번"
+							ev:onrowindexchange="scwin.AL0202G1_onrowindexchange" fixedColumnWithHidden="true" ignoreCellClick="false" rowNumHeaderValue="No."
 							rowNumVisible="false" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="true" style="" useShiftKey="true" ev:oneditkeyup="scwin.AL0202G1_oneditkeyup"
 							autoFitMinWidth="0" focusMode="cell" ev:oncelldblclick="scwin.AL0202G1_oncelldblclick" mergeCells="byrestriccol" mergeCol="ALLOC_NO,WAY_DIV" ev:onrightbuttonclick="scwin.AL0202G1_onrightkeyup" ev:oncustomcopy="scwin.AL0202G1_oncustomcopy" ev:oncustompaste="scwin.AL0202G1_oncustompaste">
 							<w2:header style="" id="header1">
@@ -2518,7 +2518,7 @@
 							</w2:gBody>
 						</w2:gridView>
 						<w2:gridView id="AL0202G2" autoFit="" captionTitle="" class="" dataList="data:dlt_EXL_OPER_PL_ROUT_INFO"
-							ev:onrowindexchange="" fixedColumnWithHidden="true" ignoreCellClick="false" rowNumHeaderValue="순번"
+							ev:onrowindexchange="" fixedColumnWithHidden="true" ignoreCellClick="false" rowNumHeaderValue="No."
 							rowNumVisible="false" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="true" style="height:0px" useShiftKey="true"
 							autoFitMinWidth="0" focusMode="cell" mergeCells="byrestriccol" mergeCol="ALLOC_NO,WAY_DIV">
 							<w2:header style="" id="header1">
@@ -2559,7 +2559,7 @@
 							</w2:gBody>
 						</w2:gridView>
 						<w2:gridView id="AL0202G3" autoFit="" captionTitle="" class="" dataList="data:dlt_OPER_ALLOC_PL_ROUT_INFO"
-							ev:onrowindexchange="" fixedColumnWithHidden="true" ignoreCellClick="false" rowNumHeaderValue="순번"
+							ev:onrowindexchange="" fixedColumnWithHidden="true" ignoreCellClick="false" rowNumHeaderValue="No."
 							rowNumVisible="false" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="true" style="height:0px" useShiftKey="true"
 							autoFitMinWidth="0" focusMode="cell" mergeCells="" mergeCol="">
 							<w2:header style="" id="header1">

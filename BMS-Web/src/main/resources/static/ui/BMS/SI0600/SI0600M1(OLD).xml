@@ -627,7 +627,7 @@
 							editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 							ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row"
 							id="SI0600G0" ignoreCellClick="false" ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode=""
-							moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="순번"
+							moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="No."
 							rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false"
 							scrollByColumn="false" showSortableUseFilter="" sortOrderReverse="" sortable="" sortedIconPosition="" summaryAuto=""
 							useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true" visibleRowNum="" wheelRows="">

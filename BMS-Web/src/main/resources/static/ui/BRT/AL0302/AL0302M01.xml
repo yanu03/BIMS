@@ -801,7 +801,7 @@
 					<xf:group id="" class="" style="">
 						<w2:gridView autoFit="lastColumn" class="cm_grid left" dataList="data:dlt_BRT_OPER_PL_MST" ev:oncellclick="scwin.AL0302G0_oncellclick" 
 							ev:onrowindexchange="scwin.AL0302G0_onrowindexchange" fixedColumnWithHidden="true" id="AL0302G0" ignoreCellClick="false" 
-							rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true"
+							rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true"
 							autoFitMinWidth="0" readOnly="true" showSortableUseFilter="" focusMode="row" mergeCol="REP_ROUT_NM" hammerPressTime="0" mergeCells="byrestriccol">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
@@ -932,7 +932,7 @@
 						</xf:group>
 					</xf:group>
 					<xf:group id="" class="" style="">
-						<w2:gridView ignoreCellClick="false" autoFit="lastColumn" rowNumHeaderValue="순번"
+						<w2:gridView ignoreCellClick="false" autoFit="lastColumn" rowNumHeaderValue="No."
 							class="cm_grid right" fixedColumnWithHidden="true" rowNumVisible="false" dataList="data:dlt_BRT_ALLOC_PL_MST"
 							id="AL0302G1" readOnly="false" style="" useShiftKey="true" scrollByColumn="false" rowStatusVisible="false" rowStatusHeaderValue="상태"
 							focusMode="cell" ev:ontextimageclick="scwin.AL0302G1_ontextimageclick">
@@ -1057,7 +1057,7 @@
 						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
 					<xf:group id="" class="" style="">
-						<w2:gridView ignoreCellClick="false" ev:onrowindexchange="" autoFit="allColumn" rowNumHeaderValue="순번"
+						<w2:gridView ignoreCellClick="false" ev:onrowindexchange="" autoFit="allColumn" rowNumHeaderValue="No."
 							visibleRowNum="" class="cm_grid right" fixedColumnWithHidden="true" rowNumVisible="false"
 							dataList="data:dlt_BRT_OPER_DT_ALLOC_PL_MST" id="AL0302G2" readOnly="false" style="" useShiftKey="true" scrollByColumn="false"
 							rowStatusVisible="false" rowStatusHeaderValue="상태" ev:oncellclick="" focusMode="cell"

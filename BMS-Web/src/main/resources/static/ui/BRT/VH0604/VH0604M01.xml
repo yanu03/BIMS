@@ -414,7 +414,7 @@
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
 							dataList="data:dlt_BMS_CRS_SIGOPER_TRF_HIS" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 							ev:onrowindexchange="scwin.VH0604G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true"
-							id="VH0604G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusHeaderValue=""
+							id="VH0604G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusHeaderValue=""
 							rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows=""
 							autoFitMinWidth="0" disabledScrollHidden="" editModeEvent="" editModeEventIcon="" checkEditableInputClass="" keyMoveEditMode=""
 							moveKeyEditMode="" moveKeyEditModeAll="" ignoreNonEditableCellTabEnter="" readOnly="true" keepDefaultColumnWidth=""

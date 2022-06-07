@@ -305,7 +305,7 @@
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">							
 						<w2:gridView id="MO0500G0" defaultCellHeight="20" rowNumVisible="true" useShiftKey="true" scrollByColumn="false"
-							rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태" overflowX="scroll" overflowY="scroll" rowStatusVisible="false"
+							rowNumHeaderValue="No." sortable="true" rowStatusHeaderValue="상태" overflowX="scroll" overflowY="scroll" rowStatusVisible="false"
 							fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_BRT_OPER_APPR_INFO" class="cm_grid left" autoFit="lastColumn"
 							ev:onrowindexchange="scwin.MO0500G0_onrowindexchange" focusMode="row" ev:oncellclick="">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>

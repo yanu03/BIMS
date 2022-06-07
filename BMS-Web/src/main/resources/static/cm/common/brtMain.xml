@@ -305,7 +305,7 @@
 									<w2:gridView  alwaysTriggerScrollStart="" autoFit="allColumn" captionTitle=""
 										class="cm_grid right brtMainG0" dataList="data:dlt_BRT_CUR_OPER_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup=""
 										ev:onkeyup="" ev:onrowindexchange="scwin.brtMainG0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange=""
-										fixedColumnWithHidden="true" id="brtMainG0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true"
+										fixedColumnWithHidden="true" id="brtMainG0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true"
 										rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true"
 										visibleRowNum="" wheelRows="" autoFitMinWidth="0" disabledScrollHidden="" editModeEvent="" editModeEventIcon=""
 										checkEditableInputClass="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll="" ignoreNonEditableCellTabEnter=""
@@ -383,7 +383,7 @@
 								<xf:group></xf:group>
 								<xf:group id="" class="" style="">
 									<w2:gridView  autoFit="lastColumn" class="cm_grid right brtMainG1" dataList="data:dlt_BRT_DSPTCH_LOG" 
-										fixedColumnWithHidden="true" id="brtMainG1" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true"
+										fixedColumnWithHidden="true" id="brtMainG1" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true"
 										rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true"
 										autoFitMinWidth="0" readOnly="true" focusMode="row" userData1="">
 										<w2:header style="" id="header1">
@@ -422,7 +422,7 @@
 								</xf:group>
 								<xf:group></xf:group>
 								<w2:gridView  autoFit="lastColumn" class="cm_grid right brtMainG2" dataList="data:dlt_BRT_OPER_EVENT_HIS" 
-										fixedColumnWithHidden="true" id="brtMainG2" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true"
+										fixedColumnWithHidden="true" id="brtMainG2" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true"
 										rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true"
 										autoFitMinWidth="0" readOnly="true" focusMode="row" userData1="">
 										<w2:header style="" id="header1">

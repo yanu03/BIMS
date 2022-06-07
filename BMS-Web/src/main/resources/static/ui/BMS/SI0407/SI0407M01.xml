@@ -432,7 +432,7 @@
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="SI0407G0" class="cm_grid tab"
 								autoFitMinWidth="0" dataList="data:dlt_BMS_MOCK_NODE" ev:onrowindexchange="scwin.SI0407G0_onrowindexchange"
 								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="true" readOnly="false"
-								rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false"
+								rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false"
 								useShiftKey="true">
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 								<w2:header style="" id="header1">
@@ -515,7 +515,7 @@
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="SI0407G1" class="cm_grid tab" ev:onchange="scwin.SI0407G1_onchange"
 								autoFitMinWidth="0" dataList="data:dlt_BMS_MOCK_LINK" ev:onrowindexchange="scwin.SI0407G1_onrowindexchange"
 								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="true" readOnly="false"
-								rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true">
+								rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true">
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">

@@ -403,7 +403,9 @@ a:hover,a:active,a:focus{text-decoration:none}
 .innerTab .w2tabcontrol_tabhost .w2tabcontrol_tab_center:first-child {border-left:none;} */
 
 
-
+.innerTab .w2tabcontrol_container{
+   bottom: 0;
+}
 .innerTab .w2tabcontrol_tabhost {border-bottom:1px solid #CED4D9; width: 100%; padding: 0 20px; margin: -10px -20px 0 -20px;}
 .innerTab .w2tabcontrol_selected {background: none !important; margin-top: -1px !important; border-bottom: 2px solid #A13E3E !important;}
 .innerTab .w2tabcontrol_tabhost li {line-height: inherit !important; height: inherit !important; min-width: 100px !important;}

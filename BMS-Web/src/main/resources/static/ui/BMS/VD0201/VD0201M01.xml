@@ -426,7 +426,7 @@
 					<xf:group></xf:group>
 						<xf:group id="" class="" style="">
 								<w2:gridView id="VD0201G1" style="width:98%;height:98%" defaultCellHeight="20" rowNumVisible="true"
-								useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
+								useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="No." sortable="true" rowStatusHeaderValue="상태"
 								overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
 								dataList="data:dlt_BMS_DVC_INFO" class="cm_grid" autoFit="lastColumn" fixedColumnScrollHidden="" ev:oncellclick="scwin.VD0201G1_oncellclick">
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>

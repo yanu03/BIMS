@@ -342,7 +342,7 @@
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
 							dataList="data:dlt_BMS_ROUT_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 							ev:onrowindexchange="scwin.AL0101G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true"
-							id="AL0101G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusHeaderValue=""
+							id="AL0101G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusHeaderValue=""
 							rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" autoFitMinWidth="0"
 							focusMode="row" rowNumStatusResize="" ev:onbeforecolumnmove="" userData1="">
 							<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
@@ -421,7 +421,7 @@
 							<w2:gridView   alwaysTriggerScrollStart="" autoFit="lastColumn"
 								id="AL0101G1" class="cm_grid leftL" autoFitMinWidth="0" captionTitle="" checkEditableInputClass=""  dataList="data:dlt_BRT_MAIN_ROUT_NODE_INFO"
 								ev:onrowindexchange="scwin.AL0101G1_onrowindexchange"	ev:onviewchange="scwin.AL0101G1_onviewchange" ixedColumnWithHidden="true" dataDragDrop="true"
-								focusMode="row"  ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false"
+								focusMode="row"  ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false"
 								useShiftKey="true"  sortable="false">
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
