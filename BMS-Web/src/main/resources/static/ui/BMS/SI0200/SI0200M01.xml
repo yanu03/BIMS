@@ -105,7 +105,7 @@
 						];
 						
 		var autoOptions = {
-			Main : { grid : SI0200G0, frm : SI0200F0, srchSbm : sub_SI0200G0R0, savSbm : sub_SI0200G0S0, keySbm : sub_SI0200G0K0, srchGrp : pgm_header, keyColumn : "COMP_ID",
+			Main : { grid : SI0200G0, frm : SI0200F0, srchSbm : sub_SI0200G0R0, savSbm : sub_SI0200G0S0, keySbm : sub_SI0200G0K0, srchGrp : pgm_search, keyColumn : "COMP_ID",
 					focusColumn : "COMP_NM", name : "운수사 목록"}
 		 };
 		
@@ -115,11 +115,9 @@
 		}
 		
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions, codeOptions);
-		
 		var mainSrhOptions = {
-		};		
+		};	
 		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainSrhOptions, codeOptions);
-		
 				
 		com.executeSubmission(sub_SI0200SHI0);	
 		com.executeSubmission(sub_SI0200SHI1);
@@ -230,57 +228,82 @@
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-			<xf:group class="pgm_header" id="pgm_header" style="">
-				<xf:group class="gr_search" id="" style="">
-					<xf:group class="label" id="" style="">
-						<w2:span class="" id="" label="검색 항목"></w2:span>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+		
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:group class="search" id="" style="">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="sbx_ChoiceBox"
-							optionOrder="false" ref="data:dma_search.TYPE" style="" class="search_type" submenuSize="auto" textAlign="left">
-							<xf:choices>
-								<xf:item>
-									<xf:label><![CDATA[전체]]></xf:label>
-									<xf:value><![CDATA[ALL]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[차량ID]]></xf:label>
-									<xf:value><![CDATA[VHC_ID]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[차량번호]]></xf:label>
-									<xf:value><![CDATA[VHC_NO]]></xf:value>
-								</xf:item>
-							</xf:choices>
-						</xf:select1>
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="차량 ID 또는 차량 명"></xf:input>
-						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-" chooseOptionValue=""
-							class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange="" ev:onviewchange=""
-							id="acb_autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start" selectedData=""
-							style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false" visibleRowNum="">
-							<w2:choices>
-								<w2:itemset nodeset="data:dlt_vhcSearchItem">
-									<w2:label ref="VHC_ID"></w2:label>
-									<w2:value ref="VHC_ID"></w2:value>
-								</w2:itemset>
-							</w2:choices>
-						</w2:autoComplete>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<w2:wframe class="" id="wfm_mainBtn" scope="true" src="/cm/common/wf_mainBtn.xml" style=""></w2:wframe>
 				</xf:group>
 			</xf:group>
-			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
-					<xf:group class="defaultbox" id="" style="">
-						<w2:textbox class="df_tt fl" id="" label="차량 목록" style=""></w2:textbox>
-					</xf:group>
-					<xf:group></xf:group>
+		
+			<xf:group id="pgm_content" class="pgm_content grdc_5f_0_5f" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl list ico-list" id="" label="차량 목록" style=""></w2:textbox>
+						</xf:group>
+					</xf:group>
+					
+					<xf:group id="" class="" style="">
+						<xf:group id="" style="" class="gr_search">
+							<xf:group id="" style="" class="label">
+									<w2:span id="" class="" label="검색 항목"></w2:span>
+							</xf:group>
+							<xf:group id="pgm_search" style="" class="search">
+								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+									ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" disabledClass="w2selectbox_disabled" displayMode="label" id="TYPE"
+									optionOrder="false" ref="data:dma_search.TYPE" class="search_type_100" style="" submenuSize="auto"
+									textAlign="left">
+									<xf:choices>
+										<xf:item>
+											<xf:label><![CDATA[전체]]></xf:label>
+											<xf:value><![CDATA[ALL]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[차량ID]]></xf:label>
+											<xf:value><![CDATA[VHC_ID]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[차량번호]]></xf:label>
+											<xf:value><![CDATA[VHC_NO]]></xf:value>
+										</xf:item>
+									</xf:choices>
+								</xf:select1>
+								<xf:group id="" style="" class="label">
+									<w2:span id="" class="" label="장치종류"></w2:span>
+								</xf:group>
+								<xf:select1 disabledClass="w2selectbox_disabled" appearance="minimal" direction="auto" chooseOption="true"
+									displayMode="label" optionOrder="false" id="sbx_DVC_KIND" ref="data:dma_search.DVC_KIND" ev:onchange="scwin.DVC_KIND_onchange"
+									style="width:170px" class="search_type" allOption="" disabled="false" submenuSize="auto" chooseOptionLabel="-전체-" textAlign="left">
+									<xf:choices></xf:choices>
+								</xf:select1>
+								<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="차량 ID 또는 차량 명"></xf:input>
+								<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-" chooseOptionValue=""
+									class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange="" ev:onviewchange=""
+									id="acb_autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start" selectedData=""
+									style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false" visibleRowNum="">
+									<w2:choices>
+										<w2:itemset nodeset="data:dlt_vhcSearchItem">
+											<w2:label ref="VHC_ID"></w2:label>
+											<w2:value ref="VHC_ID"></w2:value>
+										</w2:itemset>
+									</w2:choices>
+								</w2:autoComplete>
+							</xf:group>
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>							
+						</xf:group>
+					</xf:group>
+				
+					<xf:group id="" class="" style="">
+
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
 							dataList="data:dlt_BMS_VHC_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 							ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true" id="SI0200G0" ignoreCellClick="false"
@@ -359,18 +382,20 @@
 							</w2:footer>
 						</w2:gridView>
 					</xf:group>
+				</xf:group><!-- pgm_list -->
+				
+				<xf:group id="" class=""></xf:group>
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_370_20_a bms_box_wrap" style="">
 
-				</xf:group>
-				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_360_20_a" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="차량 상세 정보" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl view ico-view" id="" label="차량 상세 정보" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
-					<xf:group class="" id="" style="">
-					</xf:group>
-					<xf:group class="" id="" style="overflow: auto; position:relative; ">
+					<xf:group class="" id="" style=""></xf:group>
+
+					<xf:group class="" id="" style="overflow: auto; position:relative;">
+					<!-- <xf:group class="" id="" style="overflow: auto; position:relative; border-bottom: 1px solid #e0e0e0;"> -->
 						<xf:group class="w2tb tb" id="SI0200F0" style="width:100%; position:absolute;" tagname="table">
 							<w2:attributes>
 								<w2:summary></w2:summary>
@@ -658,7 +683,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" class="w2tb_th" style="height: 70px;vertical-align: top;" id="" tabIndex="">
+								<xf:group tagname="th" class="w2tb_th" style="vertical-align: top" id="" tabIndex="">
 									비고
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
@@ -680,8 +705,9 @@
 					<xf:group style="position: relative;" id="">
 						<xf:image src="/cm/images/add/bg_brt.png" style="width: 100%;height: 100%; position: absolute; object-fit: contain; cursor:default" id=""></xf:image>
 					</xf:group>
-				</xf:group>
-			</xf:group> <!-- content end -->
-		</xf:group> <!-- container end -->
+
+				</xf:group><!-- pgm_detail -->
+			</xf:group>
+		</xf:group>
 	</body>
 </html>

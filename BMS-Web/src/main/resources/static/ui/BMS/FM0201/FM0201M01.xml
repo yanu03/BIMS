@@ -574,7 +574,7 @@
 				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a" style="">
 					<xf:group class="gr_map_header" id="" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="지도" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl map" id="" label="지도" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					<xf:group></xf:group>

@@ -402,6 +402,10 @@ a:hover,a:active,a:focus{text-decoration:none}
 /* .innerTab .w2tabcontrol_tabhost .w2tabcontrol_tab_center.on + .w2tabcontrol_tab_center {border-left:none;} 
 .innerTab .w2tabcontrol_tabhost .w2tabcontrol_tab_center:first-child {border-left:none;} */
 
+.innerTab .w2tabcontrol_container{
+	bottom: 0;
+	border-top: none;
+}
 
 
 .innerTab .w2tabcontrol_tabhost {border-bottom:1px solid #CED4D9; width: 100%; padding: 0 20px; margin: -10px -20px 0 -20px;}
@@ -728,7 +732,7 @@ height: 24px;
 
 .w2tb.b0 .w2tb_td {border:0 !important;}
 .w2tb_td.vat{vertical-align:top;}
-.w2tb_td ul{border:solid 1px #ced4d9; position:relative;}
+.w2tb_td ul{border:solid 1px #ced4d9; position:relative;} 
 .w2tb_td li{padding:5px; font-weight:bold;}
 .w2tb_td li.bg{background-color:#f7f7f7; top:0;}
 .w2tb_td textarea{padding: 5px 5px 5px 5px;margin: 3px 0;}
@@ -1484,8 +1488,8 @@ ul.question li a:hover {font-weight:bold;}
 
 .tab_div
 {
-	border-bottom: 1px solid #c4cad6;
-	margin-bottom: 10px
+	/* border-bottom: 1px solid #c4cad6;
+	margin-bottom: 10px */
 }
 
 
@@ -1493,26 +1497,40 @@ ul.question li a:hover {font-weight:bold;}
 .tab_ul
 {
     position: relative;
-    /* top: 10px; */
-    /* left: 10px; */
-    border-top: 1px solid #d9d9d9;
-    border-left: 1px solid #d9d9d9;
-    border-right: 1px solid #d9d9d9;
-    /* box-shadow: 0 1px 1px rgb(0 0 0 / 40%); */
-    /* background: #eee; */
-    overflow: hidden;
-    z-index: 2;
-    border-radius: 5px;
+    border-bottom:1px solid #CED4D9 !important; width: 100%; margin: 0px 0px 0 0px;
+    border-top : none !important;
+    border-left : none !important;
+    border-right : none !important;
+    height: 28px
 }
     
-.tab_ul li {float:left;list-style: none;border-left: 1px solid #d9d9d9;padding:6px 0;text-align: center;cursor: pointer;width: 100px;color: black;} 
-.tab_ul li.on {background: #0475f4;color: #fff !important;border-radius: 5px;border-left: none;border-right: none;}
-.tab_ul li:hover {color: #0475f4;}
+.tab_ul li {float:left;list-style: none;border-left: none; padding:6px 0;text-align: center;cursor: pointer;color: black; min-width: 100px !important;} 
+.tab_ul li.on {background: none !important; margin-top: -1px !important; border-bottom: 2px solid #A13E3E !important;}
+/* .tab_ul li:hover {color: #0475f4;} */
+.tab_ul li:hover { margin-top: 2px; }
 .tab_ul li:last-child{margin-right:0;border-right:0;}
 .tab_ul li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
 .tab_ul li.on + li {border-left:none;} 
 .tab_ul li:first-child {border-left:none;}
 
+.tab_ul2
+{
+    position: relative;
+    border-bottom:1px solid #CED4D9 !important; width: 100%; padding: 0 20px; margin:0px -20px 0 -20px;
+    border-top : none !important;
+    border-left : none !important;
+    border-right : none !important;
+    height: 28px
+}
+    
+.tab_ul2 li {float:left;list-style: none;border-left: none; padding:6px 0;text-align: center;cursor: pointer;color: black; min-width: 100px !important;} 
+.tab_ul2 li.on {background: none !important; margin-top: -1px !important; border-bottom: 2px solid #A13E3E !important;}
+/* .tab_ul li:hover {color: #0475f4;} */
+.tab_ul2 li:hover { margin-top: 2px; }
+.tab_ul2 li:last-child{margin-right:0;border-right:0;}
+.tab_ul2 li span {display: block;margin:0 auto 3px;width:27px;height: 28px;}
+.tab_ul2 li.on + li {border-left:none;} 
+.tab_ul2 li:first-child {border-left:none;}
 
 /* 운행 정시성 탭관련 */
 .stat_pnctlty

@@ -383,12 +383,12 @@
 		scwin.connect();
 		
 		 var autoOptions = {
-			Main : { grid : MO0201G0, srchSbm : sub_MO0201G0R0, keyColumn : "ROUT_ID", srchGrp : pgm_header, name : "노선 목록"}
+			Main : { grid : MO0201G0, srchSbm : sub_MO0201G0R0, keyColumn : "ROUT_ID", srchGrp : pgm_search, name : "노선 목록"}
 			
 		 };
 		 
 		 var mainOptions = {
-			SEARCH:scwin.btn_sub_move,
+			SEARCH:{},
 			CNL:{}
 		}; 
 		 
@@ -417,7 +417,11 @@
 		 
 		com.setCommonDtl(codeOptions);
 
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID, autoOptions, mainOptions);		
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID, autoOptions, mainOptions, codeOptions);		
+		var mainSrhOptions = {
+			SEARCH:scwin.btn_sub_move
+		};	
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRID, autoOptions, mainSrhOptions, codeOptions);
 
 		//MO0201G0.mergeCol(2,false);
 		//MO0201G0.mergeCells("byrestriccol");
@@ -613,7 +617,7 @@
 	
 
 	scwin.onMessageReceived = function(payload) {
-		debugger;
+		
 		var jsonObj = JSON.parse(payload.body);
 		
 		var attrId = jsonObj.ATTR_ID;
@@ -1264,55 +1268,70 @@
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-			<xf:group class="pgm_header" id="pgm_header" style="">
-				<xf:group class="gr_search" id="" style="">
-	               <xf:group class="label" id="" style="">
-	                  <w2:span class="" id="" label="대표 노선"></w2:span>
-	               </xf:group>
-	               <xf:select1 allOption="true" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-	               	disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE1_onviewchange" id="TYPE1"
-	               	optionOrder="false" ref="data:dma_search.CONTENT_SUB" class="search_type_100" style="" submenuSize="auto" textAlign="center"
-	               	chooseOptionLabel="-선택-">
-	               	<xf:choices>
-	               		<xf:itemset nodeset="data:dlt_repRoutItem">
-	               			<xf:label ref="REP_ROUT_NM"></xf:label>
-	               			<xf:value ref="REP_ROUT_ID"></xf:value>
-	               		</xf:itemset>
-	               	</xf:choices>
-	               </xf:select1>
-	               <xf:group class="search" id="" style="">
-						<xf:group class="label" id="" style="">
-							<w2:span class="" id="" label="검색"></w2:span>
-						</xf:group>
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT3" placeholder="차량번호">
-						</xf:input>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+		
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<w2:wframe class="" id="wfm_mainBtn" scope="true" src="/cm/common/wf_mainBtn.xml" style=""></w2:wframe>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					</xf:group>
 				</xf:group>
 			</xf:group>
-			<!-- <xf:group id="pgm_content" class="pgm_content grdc_600_20_a" style="" >	 -->		
-			<xf:group id="pgm_content" class="pgm_content grdc_1f_2f" style="" >			
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_350_20_a bms_box_wrap" style="">
-					<xf:group class="defaultbox" id="" style="">
-						<w2:textbox class="df_tt fl list" id="" label="운행차량" style=""></w2:textbox>
-					</xf:group>
-					<xf:group></xf:group>
-					<xf:group adaptive="layout" class="w2tb" id="" style="">
-							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="MO0201G0" class="cm_grid leftL"
-								autoFitMinWidth="0" dataList="data:dlt_BRT_CUR_OPER_INFO" ev:onrowindexchange="scwin.MO0201G0_onrowindexchange"
-								fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="true"
-								rowNumHeaderValue="" rowNumVisible="false" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" 
-								useShiftKey="true" noResultMessage="해당노선 차량 없음">							
+		
+			<xf:group id="pgm_content" class="pgm_content grdc_1f_0_2f" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_420_0_a" style=""> <!-- auto 영역 -->
+					<xf:group id="" class="pgm_list grdr_20_50_350 bms_box_wrap" style="">
+						<xf:group id="" class="" style="">
+							<xf:group class="defaultbox" id="" style="">
+								<w2:textbox class="df_tt fl list ico-list" id="" label="운행 차량" style=""></w2:textbox>
+							</xf:group>
+						</xf:group>
+					
+						<xf:group id="" class="" style="">
+							<xf:group id="" style="" class="gr_search">
+								<xf:group class="search" id="pgm_search" style="">
+									<xf:group class="label" id="" style="">
+										<w2:span class="" id="" label="대표 노선"></w2:span>
+									</xf:group>
+									<xf:select1 allOption="true" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+										disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE1_onviewchange" id="TYPE1" optionOrder="false"
+										ref="data:dma_search.CONTENT_SUB" class="search_type_100" style="" submenuSize="auto" textAlign="center" chooseOptionLabel="-선택-">
+										<xf:choices>
+											<xf:itemset nodeset="data:dlt_repRoutItem">
+												<xf:label ref="REP_ROUT_NM"></xf:label>
+												<xf:value ref="REP_ROUT_ID"></xf:value>
+											</xf:itemset>
+										</xf:choices>
+									</xf:select1>
+									<xf:group class="search" id="" style="">
+										<xf:group class="label" id="" style="">
+											<w2:span class="" id="" label="검색"></w2:span>
+										</xf:group>
+										<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT3" placeholder="차량번호">
+										</xf:input>
+									</xf:group>
+								</xf:group>
+								<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>
+							</xf:group>
+						</xf:group>
+				
+						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="MO0201G0" class="cm_grid leftL" style="height:300px"
+							autoFitMinWidth="0" dataList="data:dlt_BRT_CUR_OPER_INFO" ev:onrowindexchange="scwin.MO0201G0_onrowindexchange"
+							fixedColumnWithHidden="true" dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="true"
+							rowNumHeaderValue="" rowNumVisible="false" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" 
+							useShiftKey="true" noResultMessage="해당노선 차량 없음">							
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
-		                           <w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px" id="column11"
-		                              value="대표노선명" blockSelect="false" displayMode="label">
-		                           </w2:column>								
+									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px" id="column11" value="대표노선명"
+										blockSelect="false" displayMode="label">
+									</w2:column>								
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:25px" id="column7"
 										value="운행상태" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -1344,9 +1363,9 @@
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
-		                           <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="REP_ROUT_NM"
-		                              value="" blockSelect="false" displayMode="label">
-		                           </w2:column>								
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="REP_ROUT_NM" value=""
+										blockSelect="false" displayMode="label">
+									</w2:column>								
 									<w2:column removeBorderStyle="false" width="138" inputType="select" style="height:25px" id="OPER_STS"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -1356,12 +1375,12 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="CUR_SPD"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-				    				<w2:column falseValue="0" defaultValue="" trueValue="1" width="70" readOnly="false" style="height:25px"
-				    					inputType="checkbox" id="EVT_YN" blockSelect="false">
-				    				</w2:column>
-				    				<w2:column falseValue="0" defaultValue="" trueValue="1" width="70" readOnly="false" style="height:25px"
-				    					inputType="checkbox" id="DSPTCH_YN" blockSelect="false">
-				    				</w2:column>
+									<w2:column falseValue="0" defaultValue="" trueValue="1" width="70" readOnly="false" style="height:25px" inputType="checkbox"
+										id="EVT_YN" blockSelect="false">
+									</w2:column>
+									<w2:column falseValue="0" defaultValue="" trueValue="1" width="70" readOnly="false" style="height:25px" inputType="checkbox"
+										id="DSPTCH_YN" blockSelect="false">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id=""
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -1377,9 +1396,10 @@
 								</w2:row>
 							</w2:gBody>
 						</w2:gridView>										
+
 					</xf:group>
 					<xf:group id=""></xf:group>
-					<xf:group id="pgm_subList" class="pgm_list grdr_20_2_a" style="">
+					<xf:group id="pgm_subList" class="pgm_list grdr_20_2_a bms_box_wrap" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl list" id="" label="Dispatch" style=""></w2:textbox>
 						</xf:group>
@@ -1433,6 +1453,7 @@
 						</xf:group>
 					</xf:group><!-- pgm_subList -->											
 				</xf:group>
+				<div id="" style="" class=""></div>
 				<div id="map_MO0201" style="padding:0 !important" class="bms_box_wrap">
 					<ul id="category_map_MO0201" class="category" style="">
 			   		 </ul>							

@@ -145,17 +145,15 @@
 		
 		//옵션
 		var autoOptions = {
-			Main : { grid : VD0203G0, srchSbm : sub_VD0203G0R0, srchGrp : pgm_header, keyColumn : "VHC_ID", focusColumn : "COMPLETE_YN", name :  "차내장치 목록"}
+			Main : { grid : VD0203G0, srchSbm : sub_VD0203G0R0, srchGrp : pgm_search, keyColumn : "VHC_ID", focusColumn : "COMPLETE_YN", name :  "차내장치 목록"}
 			,Sub1 : { grid : VD0203G1, srchSbm : sub_VD0203G1R0, srchGrp : gr_sub_header, name :  "예약상세 정보"}
 		};
 		
 		var mainOptions = {
 			RESERV : scwin.btn_resrv_onclick,
-			RESERV_CNL : scwin.btn_resrvcnl_onclick
+			RESERV_CNL : scwin.btn_resrvcnl_onclick,
+			SEARCH : {}
 		};
-		
-		//버튼 생성
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions);
 		
 		//코드옵션
 		//(code : DataCollection의 컬럼 ID명, compID : "FormId , GridId : GridColumn")
@@ -168,6 +166,16 @@
 							,{code : "DVC_KIND", compID : "VD0203G1:DVC_KIND"}
 							,{code : "INST_LOC", compID : "VD0203G1:INST_LOC"}
 						];
+						
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions, codeOptions);
+		var mainSrhOptions = {
+		};	
+		
+		//버튼 생성
+
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions, codeOptions);
+		
+
 		//코드옵션 실행
 		com.setCommonDtl(codeOptions, function() {
 			com.searchGrid(VD0203G0, sub_VD0203G0R0);
@@ -382,74 +390,86 @@
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-			<xf:group id="pgm_header" class="pgm_header" style="">
-				<xf:group id="" style="" class="gr_search">
-					<xf:group id="" style="" class="label">
-						<w2:span id="" class="" label="장치종류"></w2:span>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+		
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:select1 disabledClass="w2selectbox_disabled" appearance="minimal" direction="auto" chooseOption="true"
-						displayMode="label" optionOrder="false" id="sbx_DVC_KIND" ref="data:dma_search.DVC_KIND" ev:onchange="scwin.DVC_KIND_onchange"
-						style="width:170px" class="search_type" allOption="" disabled="false" submenuSize="auto" chooseOptionLabel="-전체-" textAlign="left">
-						<xf:choices></xf:choices>
-					</xf:select1>
-					<xf:group id="" style="" class="label">
-						<w2:span id="" class="" label="검색 항목"></w2:span>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:group id="" style="" class="search">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" disabledClass="w2selectbox_disabled" displayMode="label" id="TYPE"
-							optionOrder="false" ref="data:dma_search.TYPE" class="search_type_100" style="" submenuSize="auto" textAlign="left">
-							<xf:choices>
-								<xf:item>
-									<xf:label><![CDATA[-전체-]]></xf:label>
-									<xf:value><![CDATA[ALL]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[차량번호]]></xf:label>
-									<xf:value><![CDATA[VHC_NO]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[예약상태]]></xf:label>
-									<xf:value><![CDATA[COMPLETE_YN]]></xf:value>
-								</xf:item>
-							</xf:choices>
-						</xf:select1>
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="차량번호 또는 예약상태"></xf:input>
-						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
-							chooseOptionValue="" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
-							ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="acb_autoChoiceBox" interactionMode="" noResult="useData"
-							ref="data:dma_search.CONTENT" search="start" selectedData="" class="search_auto" style="display:none" submenuSize="auto"
-							textAlign="left" useKeywordHighlight="false" visibleRowNum="">
-							<w2:choices>
-								<w2:itemset nodeset="data:dlt_searchitem">
-									<w2:label ref="VDO_ID"></w2:label>
-									<w2:value ref="VDO_ID"></w2:value>
-								</w2:itemset>
-							</w2:choices>
-						</w2:autoComplete>
-					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group>
-			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
+		
+			<xf:group id="pgm_content" class="pgm_content grdc_5f_0_5f" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="차내장치 목록" style=""></w2:textbox>
-							<xf:input adjustMaxLength="false" id="" style="width: 144px; float: right;"></xf:input>
-							<w2:span label="버전정보 : " style="float: right;margin-right: 10px;margin-top: 2px;" id=""></w2:span>
-							<w2:upload imageStyle="position:absolute;vertical-align:middle;word-wrap:break-word"
-								inputStyle="vertical-align:middle;word-wrap:break-word" ev:ondone="scwin.upload0_ondone"
-								style="height: 23px;float: right;margin-right: 40px;" id="div_file" ev:onInputValueChange="scwin.file_onInputValueChange">
-							</w2:upload>
-							<w2:span label="펌웨어파일 : " style="float: right;margin-right: 10px;margin-top: 2px;" id=""></w2:span>
+							<w2:textbox class="df_tt fl list ico-list" id="" label="차량장치 목록" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
-					<xf:group></xf:group>
+					
+					<xf:group id="" class="" style="">
+						<xf:group id="" style="" class="gr_search">
+
+							<xf:group id="" class="grdc_1f_1f" style="">
+								<xf:group id="" style="" class="">
+									<xf:group id="" style="" class="label">
+											<w2:span id="" class="" label="검색 항목"></w2:span>
+									</xf:group>
+									<xf:group id="pgm_search" style="" class="search">
+										<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+											ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" disabledClass="w2selectbox_disabled" displayMode="label" id="TYPE"
+											optionOrder="false" ref="data:dma_search.TYPE" class="search_type_100" style="" submenuSize="auto" textAlign="left">
+											<xf:choices>
+												<xf:item>
+													<xf:label><![CDATA[-전체-]]></xf:label>
+													<xf:value><![CDATA[ALL]]></xf:value>
+												</xf:item>
+												<xf:item>
+													<xf:label><![CDATA[차량번호]]></xf:label>
+													<xf:value><![CDATA[VHC_NO]]></xf:value>
+												</xf:item>
+												<xf:item>
+													<xf:label><![CDATA[예약상태]]></xf:label>
+													<xf:value><![CDATA[COMPLETE_YN]]></xf:value>
+												</xf:item>
+											</xf:choices>
+										</xf:select1>
+										<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" style="width: 120px;" placeholder="차량번호, 예약상태"></xf:input>
+										<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
+											chooseOptionValue="" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
+											ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="acb_autoChoiceBox" interactionMode="" noResult="useData"
+											ref="data:dma_search.CONTENT" search="start" selectedData="" class="search_auto" style="display:none" submenuSize="auto"
+											textAlign="left" useKeywordHighlight="false" visibleRowNum="">
+											<w2:choices>
+												<w2:itemset nodeset="data:dlt_searchitem">
+													<w2:label ref="VDO_ID"></w2:label>
+													<w2:value ref="VDO_ID"></w2:value>
+												</w2:itemset>
+											</w2:choices>
+										</w2:autoComplete>
+									</xf:group>
+									<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>
+								</xf:group>
+								<xf:group id="" style="" class="">
+									<xf:input adjustMaxLength="false" id="" style="width: 75px; float: right;"></xf:input>
+									<w2:span label="버전정보 : " style="float: right;margin-right: 10px;margin-top: 2px;" id=""></w2:span>
+									<w2:upload imageStyle="position:absolute;vertical-align:middle;word-wrap:break-word"
+										inputStyle="vertical-align:middle;word-wrap:break-word" ev:ondone="scwin.upload0_ondone"
+										style="height: 23px;float: right;margin-right: 40px;" id="div_file" ev:onInputValueChange="scwin.file_onInputValueChange">
+									</w2:upload>
+									<w2:span label="펌웨어 : " style="float: right;margin-right: 10px;margin-top: 2px;" id=""></w2:span>
+								</xf:group>
+							</xf:group>
+						</xf:group>
+					</xf:group>
+				
 					<xf:group id="" class="" style="">
 						<w2:gridView id="VD0203G0" defaultCellHeight="20" rowNumVisible="false" useShiftKey="true" scrollByColumn="false"
 							owNumHeaderValue="순번" sortable="false" rowStatusHeaderValue="상태" overflowX="scroll" overflowY="scroll" rowStatusVisible="false"
@@ -533,9 +553,9 @@
 							</w2:footer>
 						</w2:gridView>
 					</xf:group>
-				</xf:group>
-				<xf:group class="vertical_line" id=""></xf:group>
-				<xf:group class="pgm_detail grdr_20_2_a" id="pgm_detail">
+				</xf:group> <!-- grdr_20_50_a -->
+				<xf:group class="" id=""></xf:group>
+				<xf:group class="pgm_detail grdr_20_2_a bms_box_wrap" id="pgm_detail">
 					<xf:group id="gr_sub_header" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="예약상세 정보" style=""></w2:textbox>
@@ -622,7 +642,7 @@
 							</w2:footer>
 						</w2:gridView>
 					</xf:group>
-				</xf:group>
+				</xf:group> <!-- grdr_20_2_a -->
 			</xf:group>
 		</xf:group>
 		

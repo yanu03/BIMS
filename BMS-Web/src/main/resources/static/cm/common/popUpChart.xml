@@ -155,7 +155,7 @@
 				var operSn = transData[y].OPER_SN;
 				//var arrvTm = transData[y].ARRV_TM;
 				//var dprtTm = transData[y].DPRT_TM;
-				debugger;
+				
 				if(transData[y].ARRV_TM.substring(0,2) == '24' || transData[y].ARRV_TM.substring(0,2) == '25' || transData[y].ARRV_TM.substring(0,2) == '26'){
 				
 				var nextDay = new Date(dma_sub_search.get("OPER_DT"));

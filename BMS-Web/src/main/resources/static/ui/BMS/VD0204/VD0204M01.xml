@@ -368,34 +368,37 @@
 		
 	
 		autoOptions = {
-			Main : { grid : VD0204G0, srchSbm : sub_VD0204G0R0, srchGrp : pgm_header, keyColumn : "VHC_ID", focusColumn : "VHC_NO", name :  "차량 목록"},
+			Main : { grid : VD0204G0, srchSbm : sub_VD0204G0R0, srchGrp : pgm_search, keyColumn : "VHC_ID", focusColumn : "VHC_NO", name :  "차량 목록"},
 			Sub1 : { grid : VD0204G1, srchSbm : sub_VD0204G1R0, name :  "장치 목록"}
 		 };
 		 
 		var mainOptions = {
 				ADD:{cbFnc:scwin.selectReset,nm:"일괄리셋", class:"reset"}
-				,DEL:{}
-				,CNL:{}
-				,SAVE:{}
+				,DEL:{}	,CNL:{}	,SAVE:{}, SEARCH : {}
 		}
 		 
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainOptions);
+		var codeOptions = [ {code : "AREA", compID : "VD0204G0:AREA" },
+			{code : "VHC_KIND", compID : "VD0204G0:VHC_KIND"},
+			{code : "ROUT_TYPE", compID : "VD0204G0:ROUT_TYPE"},
+			{code : "VHC_TYPE", compID : "VD0204G0:VHC_TYPE"},
+			{code : "VHC_FUEL", compID : "VD0204G0:VHC_FUEL"},
+			{code : "DVC_KIND", compID : "autoChoiceBox2, VD0204G1:DVC_KIND"},
+			{code : "INST_LOC", compID : "VD0204G1:INST_LOC"},
+			{code : "PARAM_KIND"},
+			{code : "LOG_LEVEL", compID : "LOG_LEVEL"}
+		 ];
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainOptions, codeOptions);
+		
+		var mainSrhOptions = {
+		};		
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainSrhOptions, codeOptions);
 		
 		var subOptions2 = {
 			ADD:[{cbFnc:scwin.selectControl,nm:"전송", class:"send"}]
 		};
 		com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions2);
 		
-		var codeOptions = [ {code : "AREA", compID : "VD0204G0:AREA" },
-							{code : "VHC_KIND", compID : "VD0204G0:VHC_KIND"},
-							{code : "ROUT_TYPE", compID : "VD0204G0:ROUT_TYPE"},
-							{code : "VHC_TYPE", compID : "VD0204G0:VHC_TYPE"},
-							{code : "VHC_FUEL", compID : "VD0204G0:VHC_FUEL"},
-							{code : "DVC_KIND", compID : "autoChoiceBox2, VD0204G1:DVC_KIND"},
-							{code : "INST_LOC", compID : "VD0204G1:INST_LOC"},
-							{code : "PARAM_KIND"},
-							{code : "LOG_LEVEL", compID : "LOG_LEVEL"}
-		 ];
+
 		 
 		com.setCommonDtl(codeOptions, function() {
 			com.searchGrid(VD0204G0, sub_VD0204G0R0);
@@ -850,342 +853,349 @@
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+		
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
+					</xf:group>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					</xf:group>
+				</xf:group>
 			</xf:group>
-			<xf:group id="pgm_header" class="pgm_header" style="">
-				<xf:group id="" style="" class="gr_search">
-					<xf:group id="" style="" class="search">
-						<!-- <xf:group class="label" id="" style="">
-							<w2:span class="" id="" label="차량번호" style=""></w2:span>
-						</xf:group>
-						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
-							chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
-							ev:onviewchange="" id="autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT3" search="start"
-							selectedData="" style="width: 150px;" submenuSize="auto" textAlign="center" useKeywordHighlight="false" visibleRowNum="" nextTabByEnter=""
-							disableEdit="">
-							<w2:choices>
-								<w2:itemset nodeset="data:dlt_vhcItem">
-									<w2:label ref="VHC_NO"></w2:label>
-									<w2:value ref="VHC_ID"></w2:value>
-								</w2:itemset>
-							</w2:choices>
-						</w2:autoComplete> -->
-						<xf:group class="label" id="" style="">
-							<w2:span class="" id="" label="장치종류" style=""></w2:span>
-						</xf:group>
-						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
-							chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
-							ev:onviewchange="" id="autoChoiceBox2" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT4" search="start"
-							selectedData="" style="width: 150px;" submenuSize="auto" textAlign="center" useKeywordHighlight="false" visibleRowNum="" nextTabByEnter=""
-							disableEdit="">
-							<w2:choices>
-								<w2:itemset nodeset="data:dlt_dvcKindItem">
-									<w2:label ref="DVC_KIND"></w2:label>
-									<w2:value ref="DVC_KIND"></w2:value>
-								</w2:itemset>
-							</w2:choices>
-						</w2:autoComplete>
-					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
-				</xf:group>
-			</xf:group><!-- pgm_header -->
-			
-			<xf:group id="pgm_content" class="pgm_content grdr_20_a" style="">
-				<xf:group id="" class="tab_div" style="">
-					<ul id="VD0204_TAB" class="tab_ul" style="width:200px">
-						<li id="li_OBE" class="on">OBE</li>
-						<li id="li_tagless" class="">태그리스</li>
-					</ul>
-				</xf:group>
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_1f_20_1f" style="">
-					<xf:group id="" class="gr_sub_header" style="">
-						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="차내장치 파라미터 상태" style=""></w2:textbox>
-						</xf:group>
-						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
-					</xf:group>
-					<!-- <ul id="VD0204_TAB" class="ctl_dvc" style="">
-						<li id="li_OBE" class="on">OBE</li>
-						<li id="li_tagless" class="">태그리스</li>
-					</ul> -->
-					<xf:group></xf:group>
-					<xf:group id="" class="" style="">
-						<w2:gridView autoFit="allColumn" class="cm_grid left" dataList="data:dlt_BMS_DVC_COND_PARAM_INFO"
-							ev:oncellclick="scwin.VD0204G0_oncellclick" ev:onrowindexchange="scwin.VD0204G0_onrowindexchange" fixedColumnWithHidden="true"
-							id="VD0204G0" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
-							scrollByColumn="false" useShiftKey="true" autoFitMinWidth="0" readOnly="true" sortable="false" focusMode="row"
-							showSortableImage="true" sortEvent="onclick" >
-							<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
-							<w2:header style="" id="header2">
-								<w2:row style="" id="row3">
-									<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택"
-										blockSelect="false" sortable="false">
-									</w2:column>
-								</w2:row>
-							</w2:header>
-							<w2:gBody style="" id="gBody2">
-								<w2:row style="" id="row4">
-									<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
-										inputType="checkbox" id="chk" blockSelect="false">
-									</w2:column>
-								</w2:row>
-							</w2:gBody>
-							<w2:footer id="footer1" style="">
-								<w2:row id="row3" style="">
-									<w2:column blockSelect="false" colSpan="30" displayMode="label"
-										expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
-										style="height:20px;" textAlign="left" width="2386">
-									</w2:column>
-								</w2:row>
-							</w2:footer>
-						</w2:gridView>
-					</xf:group>
-					<xf:group id="" class="horizontal_line"></xf:group>
+		
+			<xf:group id="" class="pgm_content grdc_a" style="">
+				<xf:group id="" class=" grdr_50_a bms_box_wrap" style="">
 
-					<xf:group style="" id="pgm_sub_list" class="pgm_list grdc_65f_25_35f">
-						<xf:group id="" class="grdr_20_2_a" style="">
-							<xf:group id="" class="gr_sub_header" style="">
-								<xf:group class="defaultbox" id="" style="">
-									<w2:textbox class="df_tt fl" id="" label="프로세스" style=""></w2:textbox>
+					<xf:group id="" class="" style="">
+						<xf:group id="" style="" class="gr_search">
+							<!-- <xf:group id="" style="" class="label">
+									<w2:span id="" class="" label="검색 항목"></w2:span>
+							</xf:group> -->
+							<xf:group class="search" id="pgm_search" style="">
+								<xf:group class="label" id="" style="">
+									<w2:span class="" id="" label="장치종류" style=""></w2:span>
+								</xf:group>
+								<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
+									chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
+									ev:onviewchange="" id="autoChoiceBox2" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT4" search="start"
+									selectedData="" style="width: 150px;" submenuSize="auto" textAlign="center" useKeywordHighlight="false" visibleRowNum="" nextTabByEnter=""
+									disableEdit="">
+									<w2:choices>
+										<w2:itemset nodeset="data:dlt_dvcKindItem">
+											<w2:label ref="DVC_KIND"></w2:label>
+											<w2:value ref="DVC_KIND"></w2:value>
+										</w2:itemset>
+									</w2:choices>
+								</w2:autoComplete>
+							</xf:group>
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>
+						</xf:group>							
+					</xf:group>
+
+					<xf:group id="pgm_content" class="pgm_content grdr_40_a" style="">
+						<xf:group id="" class="tab_div" style="">
+							<ul id="VD0204_TAB" class="tab_ul2" style="">
+								<li id="li_OBE" class="on">OBE</li>
+								<li id="li_tagless" class="">태그리스</li>
+							</ul>
+						</xf:group>
+						<xf:group id="pgm_list" class="pgm_list grdr_5f_20_5f " style="">
+							<xf:group id="" class="grdr_20_2_a bms_box_wrap" style="">
+								<xf:group id="" class="gr_sub_header" style="">
+									<xf:group class="defaultbox" id="" style="">
+										<w2:textbox class="df_tt fl list" id="" label="장치 상태" style=""></w2:textbox>
+									</xf:group>
+									<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
+								</xf:group>
+								<!-- <ul id="VD0204_TAB" class="ctl_dvc" style="">
+									<li id="li_OBE" class="on">OBE</li>
+									<li id="li_tagless" class="">태그리스</li>
+								</ul> -->
+								<xf:group></xf:group>
+								<xf:group id="" class="" style="">
+									<w2:gridView autoFit="allColumn" class="cm_grid left" dataList="data:dlt_BMS_DVC_COND_PARAM_INFO"
+										ev:oncellclick="scwin.VD0204G0_oncellclick" ev:onrowindexchange="scwin.VD0204G0_onrowindexchange" fixedColumnWithHidden="true"
+										id="VD0204G0" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
+										scrollByColumn="false" useShiftKey="true" autoFitMinWidth="0" readOnly="true" sortable="false" focusMode="row"
+										showSortableImage="true" sortEvent="onclick" >
+										<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
+										<w2:header style="" id="header2">
+											<w2:row style="" id="row3">
+												<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택"
+													blockSelect="false" sortable="false">
+												</w2:column>
+											</w2:row>
+										</w2:header>
+										<w2:gBody style="" id="gBody2">
+											<w2:row style="" id="row4">
+												<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
+													inputType="checkbox" id="chk" blockSelect="false">
+												</w2:column>
+											</w2:row>
+										</w2:gBody>
+										<w2:footer id="footer1" style="">
+											<w2:row id="row3" style="">
+												<w2:column blockSelect="false" colSpan="30" displayMode="label"
+													expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
+													style="height:20px;" textAlign="left" width="2386">
+												</w2:column>
+											</w2:row>
+										</w2:footer>
+									</w2:gridView>
 								</xf:group>
 							</xf:group>
-							<xf:group id="" class="" style=""></xf:group>
+							<xf:group id="" class=""></xf:group>
+		
+							<xf:group style="" id="pgm_sub_list" class="pgm_list grdc_65f_25_35f">
+								<xf:group id="" class="grdr_20_2_a bms_box_wrap" style="">
+									<xf:group id="" class="gr_sub_header" style="">
+										<xf:group class="defaultbox" id="" style="">
+											<w2:textbox class="df_tt fl view" id="" label="프로세스" style=""></w2:textbox>
+										</xf:group>
+									</xf:group>
+									<xf:group id="" class="" style=""></xf:group>
+									<xf:group id="" class="" style="">
+										<w2:gridView autoFit="lastColumn" autoFitMinWidth="0" checkEditableInputClass="" class="cm_grid right"
+											dataList="data:dlt_PLF_IMP_VER_INFO" ev:oncellclick="scwin.VD0204G1_oncellclick" ev:onrowindexchange="scwin.VD0204G1_onrowindexchange"
+											fixedColumnWithHidden="true" focusMode="row" id="VD0204G1" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="순번"
+											rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowStatusVisible="false" scrollByColumn="false" sortable="false"
+											useShiftKey="true" sortEvent="onclick" mergeCells="">
+											<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
+											<w2:header style="" id="header1">
+												<w2:row style="" id="row1">
+													<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px"
+														id="column12" value="프로세스명" blockSelect="false" displayMode="label" sortable="true" class="">
+													</w2:column>
+													<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px"
+														id="column3" value="관리ID" blockSelect="false" displayMode="label" sortable="true" class="">
+													</w2:column>
+													<!-- <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
+														id="column1" value="CPU" blockSelect="false" displayMode="label" class="">
+													</w2:column>
+													<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
+														id="column10" value="MEMORY" blockSelect="false" displayMode="label" class="">
+													</w2:column> -->
+													<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
+														id="column8" value="버전" blockSelect="false" displayMode="label" class="">
+													</w2:column>
+													<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px"
+														id="column6" value="시작시각" blockSelect="false" displayMode="label" class="">
+													</w2:column>
+													<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px"
+														id="column7" value="최근동작시각" blockSelect="false" displayMode="label">
+													</w2:column>
+													<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px"
+														id="column2" value="업데이트시각" blockSelect="false" displayMode="label">
+													</w2:column>
+													<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
+														id="column11" value="" blockSelect="false" displayMode="label">
+													</w2:column>
+												</w2:row>
+											</w2:header>
+											<w2:gBody style="" id="gBody1">
+												<w2:row style="" id="row2">
+													<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
+														id="PRCS_NM" value="" blockSelect="false" displayMode="label">
+													</w2:column>
+													<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
+														id="IMP_ID" value="" blockSelect="false" displayMode="label">
+													</w2:column>
+													<!-- <w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
+														id="CPU_USG" value="" blockSelect="false" displayMode="label">
+													</w2:column>
+													<w2:column removeBorderStyle="false" width="128" inputType="text" style="height:20px"
+														id="MEM_USG" value="" blockSelect="false" displayMode="label">
+													</w2:column> -->
+													<w2:column removeBorderStyle="false" width="109" inputType="text" style="height:20px"
+														id="VER_TOTAL" value="" blockSelect="false" displayMode="label">
+													</w2:column>
+													<w2:column removeBorderStyle="false" width="86" inputType="text" style="height:20px"
+														id="ST_DTM" value="" blockSelect="false" displayMode="label" textAlign="">
+													</w2:column>
+													<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px"
+														id="LAST_DTM" value="" blockSelect="false" displayMode="label" textAlign="">
+													</w2:column>
+													<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px"
+														id="BLD_DTM" value="" blockSelect="false" displayMode="label" textAlign="">
+													</w2:column>
+													<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px"
+														id="" value="" blockSelect="false" displayMode="label" textAlign="">
+													</w2:column>
+												</w2:row>
+											</w2:gBody>
+											<w2:footer id="footer1" style="">
+												<w2:row id="row3" style="">
+													<w2:column blockSelect="false" colSpan="14" displayMode="label"
+														expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
+														style="height:20px;" textAlign="left" width="2777">
+													</w2:column>
+												</w2:row>
+											</w2:footer>
+										</w2:gridView>
+									</xf:group>
+								</xf:group>
+		
+								<xf:group id="" class=""></xf:group>
+								<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a bms_box_wrap">
+									<xf:group id="" class="gr_sub_header" style="">
+										<xf:group class="defaultbox" id="" style="">
+											<w2:textbox class="df_tt fl" id="" label="제어" style=""></w2:textbox>
+										</xf:group>
+										<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
+									</xf:group>
+									<xf:group class="" id="" style=""></xf:group>
+									<xf:group style="overflow:auto; position:relative;" id="">
+										<xf:group tagname="table" style="width:100%; position:absolute" id="VD0204F0" class="w2tb tb">
+											<w2:attributes>
+												<w2:summary></w2:summary>
+											</w2:attributes>
+											<xf:group tagname="colgroup">
+												<xf:group style="width:90px;" tagname="col"></xf:group>
+												<xf:group style="width:120px;" tagname="col"></xf:group>
+												<xf:group style="width:90px;" tagname="col"></xf:group>
+												<xf:group style="width:120px;" tagname="col"></xf:group>
+											</xf:group>
+											<xf:group tagname="tr" style="height:5px;">
+												<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
+													집중모니터링&amp;nbsp;여부
+													<w2:attributes>
+														<w2:scope>row</w2:scope>
+													</w2:attributes>
+												</xf:group>
+												<xf:group tagname="td" style="" class="w2tb_td" id="T_PK016">
+													<xf:select selectedindex="-1" id="" appearance="full"
+														style="margin-left: 10px;" cols="" rows="" ref="">
+														<xf:choices>
+															<xf:item>
+																<xf:label><![CDATA[여부]]></xf:label>
+																<xf:value><![CDATA[1]]></xf:value>
+															</xf:item>
+														</xf:choices>
+													</xf:select>
+												</xf:group>
+												<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
+													정주기&amp;nbsp;주기
+													<w2:attributes>
+														<w2:scope>row</w2:scope>
+													</w2:attributes>
+												</xf:group>
+												<xf:group tagname="td" style="" class="w2tb_td" id="T_PK017">
+													<xf:input adjustMaxLength="false" id="input2" style="" type="number"></xf:input>
+												</xf:group>
+											</xf:group>
+											<!-- <xf:group tagname="tr" style="">
+												<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
+													로그레벨
+													<w2:attributes>
+														<w2:scope>row</w2:scope>
+													</w2:attributes>
+												</xf:group>
+												<xf:group tagname="td" style="" class="w2tb_td" id="T_PK011">
+													<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+														disabledClass="w2selectbox_disabled" id="LOG_LEVEL" style="" submenuSize="auto" ref="" chooseOptionLabel="">
+														<xf:choices></xf:choices>
+													</xf:select1>
+												</xf:group>
+												<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
+													LCD&amp;nbsp;휘도
+													<w2:attributes>
+														<w2:scope>row</w2:scope>
+													</w2:attributes>
+												</xf:group>
+												<xf:group tagname="td" style="" class="w2tb_td" id="T_PK005">
+													<xf:input adjustMaxLength="false" id="LCD_LUM" style="" type="number"></xf:input>
+												</xf:group>
+											</xf:group>
+											<xf:group tagname="tr" style="">
+												<xf:group tagname="th" class="w2tb_th" style="height: 10px;">
+													사운드&amp;nbsp;볼륨
+													<w2:attributes>
+														<w2:scope>row</w2:scope>
+													</w2:attributes>
+												</xf:group>
+												<xf:group tagname="td" class="w2tb_td" id="T_PK004">
+													<w2:attributes></w2:attributes>
+													<xf:input adjustMaxLength="false" id="input1" style="" type="number"></xf:input>
+												</xf:group>
+												<xf:group tagname="th" class="w2tb_th" style="height: 10px;"><w2:attributes>
+														<w2:scope>row</w2:scope>
+													</w2:attributes></xf:group>
+												<xf:group tagname="td" class="w2tb_td">
+													<w2:attributes></w2:attributes>
+												</xf:group>
+											</xf:group> -->
+										</xf:group>
+									</xf:group>
+								</xf:group>
+							</xf:group>
+							
+							<xf:group style="" id="VD0204_ul" class="" tagname="ul">
+								<xf:group style="" id="" class="" tagname="li">
+									<xf:group tagname="ul" style="list-style-type:disc;">
+										<xf:group tagname="li">
+											<xf:group class="repeat" tagname="li">
+												<w2:textbox label="다중 체크 안내문 테스트입니다. (후 작업 필요)" style="" id="" tagname="strong" ref=""></w2:textbox>
+											</xf:group>
+										</xf:group>
+										<xf:group tagname="li">
+											<xf:group class="repeat" tagname="li">
+												<w2:textbox label="다중 체크는 일괄리셋만 가능합니다. (후 작업 필요)" style="" id="" tagname="strong" ref=""></w2:textbox>
+											</xf:group>
+										</xf:group>
+									</xf:group>
+								</xf:group>
+							</xf:group>
+							
+						</xf:group><!-- pgm_list end -->
+		
+						<xf:group id="pgm_list2" class="pgm_list grdr_20_2_a bms_box_wrap" style="">
+							<xf:group id="" class="gr_sub_header" style="">
+								<xf:group class="defaultbox" id="" style="">
+									<w2:textbox class="df_tt fl list" id="" label="장치 상태" style=""></w2:textbox>
+								</xf:group>
+								<!--  <w2:wframe id="wfm_subBtn3" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>-->
+							</xf:group>
+							<xf:group></xf:group>
 							<xf:group id="" class="" style="">
-								<w2:gridView autoFit="lastColumn" autoFitMinWidth="0" checkEditableInputClass="" class="cm_grid right"
-									dataList="data:dlt_PLF_IMP_VER_INFO" ev:oncellclick="scwin.VD0204G1_oncellclick" ev:onrowindexchange="scwin.VD0204G1_onrowindexchange"
-									fixedColumnWithHidden="true" focusMode="row" id="VD0204G1" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="순번"
-									rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowStatusVisible="false" scrollByColumn="false" sortable="false"
-									useShiftKey="true" sortEvent="onclick" mergeCells="">
-									<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
-									<w2:header style="" id="header1">
-										<w2:row style="" id="row1">
-											<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px"
-												id="column12" value="프로세스명" blockSelect="false" displayMode="label" sortable="true" class="">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px"
-												id="column3" value="관리ID" blockSelect="false" displayMode="label" sortable="true" class="">
-											</w2:column>
-											<!-- <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
-												id="column1" value="CPU" blockSelect="false" displayMode="label" class="">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
-												id="column10" value="MEMORY" blockSelect="false" displayMode="label" class="">
-											</w2:column> -->
-											<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px"
-												id="column8" value="버전" blockSelect="false" displayMode="label" class="">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px"
-												id="column6" value="시작시각" blockSelect="false" displayMode="label" class="">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px"
-												id="column7" value="최근동작시각" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px"
-												id="column2" value="업데이트시각" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px"
-												id="column11" value="" blockSelect="false" displayMode="label">
+								<w2:gridView autoFit="allColumn" class="cm_grid left" dataList="data:dlt_BMS_DVC_TAG_COND_PARAM_INFO"
+									ev:oncellclick="scwin.VD0204G2_oncellclick" ev:onrowindexchange="scwin.VD0204G2_onrowindexchange" fixedColumnWithHidden="true"
+									id="VD0204G2" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
+									scrollByColumn="false" useShiftKey="true" autoFitMinWidth="0" readOnly="true" sortable="false" focusMode="row"
+									showSortableImage="true" sortEvent="onclick" >
+									<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
+									<w2:header style="" id="header2">
+										<w2:row style="" id="row3">
+											<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택"
+												blockSelect="false" sortable="false">
 											</w2:column>
 										</w2:row>
 									</w2:header>
-									<w2:gBody style="" id="gBody1">
-										<w2:row style="" id="row2">
-											<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
-												id="PRCS_NM" value="" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
-												id="IMP_ID" value="" blockSelect="false" displayMode="label">
-											</w2:column>
-											<!-- <w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
-												id="CPU_USG" value="" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="128" inputType="text" style="height:20px"
-												id="MEM_USG" value="" blockSelect="false" displayMode="label">
-											</w2:column> -->
-											<w2:column removeBorderStyle="false" width="109" inputType="text" style="height:20px"
-												id="VER_TOTAL" value="" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="86" inputType="text" style="height:20px"
-												id="ST_DTM" value="" blockSelect="false" displayMode="label" textAlign="">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px"
-												id="LAST_DTM" value="" blockSelect="false" displayMode="label" textAlign="">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px"
-												id="BLD_DTM" value="" blockSelect="false" displayMode="label" textAlign="">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px"
-												id="" value="" blockSelect="false" displayMode="label" textAlign="">
+									<w2:gBody style="" id="gBody2">
+										<w2:row style="" id="row4">
+											<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
+												inputType="checkbox" id="chk" blockSelect="false">
 											</w2:column>
 										</w2:row>
 									</w2:gBody>
 									<w2:footer id="footer1" style="">
 										<w2:row id="row3" style="">
-											<w2:column blockSelect="false" colSpan="14" displayMode="label"
+											<w2:column blockSelect="false" colSpan="30" displayMode="label"
 												expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
-												style="height:20px;" textAlign="left" width="2777">
+												style="height:20px;" textAlign="left" width="2386">
 											</w2:column>
 										</w2:row>
 									</w2:footer>
 								</w2:gridView>
 							</xf:group>
-						</xf:group>
-
-						<xf:group id="" class="vertical_line"></xf:group>
-						<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a ">
-							<xf:group id="" class="gr_sub_header" style="">
-								<xf:group class="defaultbox" id="" style="">
-									<w2:textbox class="df_tt fl" id="" label="제어" style=""></w2:textbox>
-								</xf:group>
-								<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
-							</xf:group>
-							<xf:group class="" id="" style=""></xf:group>
-							<xf:group style="overflow:auto; position:relative;" id="">
-							<xf:group tagname="table" style="width:100%; position:absolute" id="VD0204F0" class="w2tb tb">
-								<w2:attributes>
-									<w2:summary></w2:summary>
-								</w2:attributes>
-								<xf:group tagname="colgroup">
-									<xf:group style="width:90px;" tagname="col"></xf:group>
-									<xf:group style="width:120px;" tagname="col"></xf:group>
-									<xf:group style="width:90px;" tagname="col"></xf:group>
-									<xf:group style="width:120px;" tagname="col"></xf:group>
-								</xf:group>
-								<xf:group tagname="tr" style="height:5px;">
-									<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
-										집중모니터링&amp;nbsp;여부
-										<w2:attributes>
-											<w2:scope>row</w2:scope>
-										</w2:attributes>
-									</xf:group>
-									<xf:group tagname="td" style="" class="w2tb_td" id="T_PK016">
-										<xf:select selectedindex="-1" id="" appearance="full"
-											style="margin-left: 10px;" cols="" rows="" ref="">
-											<xf:choices>
-												<xf:item>
-													<xf:label><![CDATA[여부]]></xf:label>
-													<xf:value><![CDATA[1]]></xf:value>
-												</xf:item>
-											</xf:choices>
-										</xf:select>
-									</xf:group>
-									<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
-										정주기&amp;nbsp;주기
-										<w2:attributes>
-											<w2:scope>row</w2:scope>
-										</w2:attributes>
-									</xf:group>
-									<xf:group tagname="td" style="" class="w2tb_td" id="T_PK017">
-										<xf:input adjustMaxLength="false" id="input2" style="" type="number"></xf:input>
-									</xf:group>
-								</xf:group>
-								<!-- <xf:group tagname="tr" style="">
-									<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
-										로그레벨
-										<w2:attributes>
-											<w2:scope>row</w2:scope>
-										</w2:attributes>
-									</xf:group>
-									<xf:group tagname="td" style="" class="w2tb_td" id="T_PK011">
-										<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-											disabledClass="w2selectbox_disabled" id="LOG_LEVEL" style="" submenuSize="auto" ref="" chooseOptionLabel="">
-											<xf:choices></xf:choices>
-										</xf:select1>
-									</xf:group>
-									<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
-										LCD&amp;nbsp;휘도
-										<w2:attributes>
-											<w2:scope>row</w2:scope>
-										</w2:attributes>
-									</xf:group>
-									<xf:group tagname="td" style="" class="w2tb_td" id="T_PK005">
-										<xf:input adjustMaxLength="false" id="LCD_LUM" style="" type="number"></xf:input>
-									</xf:group>
-								</xf:group>
-								<xf:group tagname="tr" style="">
-									<xf:group tagname="th" class="w2tb_th" style="height: 10px;">
-										사운드&amp;nbsp;볼륨
-										<w2:attributes>
-											<w2:scope>row</w2:scope>
-										</w2:attributes>
-									</xf:group>
-									<xf:group tagname="td" class="w2tb_td" id="T_PK004">
-										<w2:attributes></w2:attributes>
-										<xf:input adjustMaxLength="false" id="input1" style="" type="number"></xf:input>
-									</xf:group>
-									<xf:group tagname="th" class="w2tb_th" style="height: 10px;"><w2:attributes>
-											<w2:scope>row</w2:scope>
-										</w2:attributes></xf:group>
-									<xf:group tagname="td" class="w2tb_td">
-										<w2:attributes></w2:attributes>
-									</xf:group>
-								</xf:group> -->
-							</xf:group>
-							</xf:group>
-						</xf:group>
+						</xf:group><!-- pgm_list2 end -->
 					</xf:group>
-					
-					<xf:group style="" id="VD0204_ul" class="" tagname="ul">
-						<xf:group style="" id="" class="" tagname="li">
-							<xf:group tagname="ul" style="list-style-type:disc;">
-								<xf:group tagname="li">
-									<xf:group class="repeat" tagname="li">
-										<w2:textbox label="다중 체크 안내문 테스트입니다. (후 작업 필요)" style="" id="" tagname="strong" ref=""></w2:textbox>
-									</xf:group>
-								</xf:group>
-								<xf:group tagname="li">
-									<xf:group class="repeat" tagname="li">
-										<w2:textbox label="다중 체크는 일괄리셋만 가능합니다. (후 작업 필요)" style="" id="" tagname="strong" ref=""></w2:textbox>
-									</xf:group>
-								</xf:group>
-							</xf:group>
-						</xf:group>
-					</xf:group>
-					
-				</xf:group><!-- pgm_list end -->
-
-				<xf:group id="pgm_list2" class="pgm_list grdr_20_2_a" style="">
-					<xf:group id="" class="gr_sub_header" style="">
-						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="차내장치 파라미터 상태" style=""></w2:textbox>
-						</xf:group>
-						<!--  <w2:wframe id="wfm_subBtn3" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>-->
-					</xf:group>
-					<xf:group></xf:group>
-					<xf:group id="" class="" style="">
-						<w2:gridView autoFit="allColumn" class="cm_grid left" dataList="data:dlt_BMS_DVC_TAG_COND_PARAM_INFO"
-							ev:oncellclick="scwin.VD0204G2_oncellclick" ev:onrowindexchange="scwin.VD0204G2_onrowindexchange" fixedColumnWithHidden="true"
-							id="VD0204G2" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
-							scrollByColumn="false" useShiftKey="true" autoFitMinWidth="0" readOnly="true" sortable="false" focusMode="row"
-							showSortableImage="true" sortEvent="onclick" >
-							<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
-							<w2:header style="" id="header2">
-								<w2:row style="" id="row3">
-									<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택"
-										blockSelect="false" sortable="false">
-									</w2:column>
-								</w2:row>
-							</w2:header>
-							<w2:gBody style="" id="gBody2">
-								<w2:row style="" id="row4">
-									<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
-										inputType="checkbox" id="chk" blockSelect="false">
-									</w2:column>
-								</w2:row>
-							</w2:gBody>
-							<w2:footer id="footer1" style="">
-								<w2:row id="row3" style="">
-									<w2:column blockSelect="false" colSpan="30" displayMode="label"
-										expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
-										style="height:20px;" textAlign="left" width="2386">
-									</w2:column>
-								</w2:row>
-							</w2:footer>
-						</w2:gridView>
-					</xf:group>
-				</xf:group><!-- pgm_list2 end -->
+				</xf:group>
 			</xf:group>
 		</xf:group>
 	</body>

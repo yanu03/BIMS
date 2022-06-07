@@ -274,9 +274,12 @@
 		};
 		scwin.param = com.getParameter();
 		var mainOptions = {
-		
+			SEARCH:{}
 		};
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
+		var mainSrhOptions = {
+		};		
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions)
 		
 		com.executeSubmission(sub_SI0409SHI0);
 				
@@ -555,16 +558,36 @@
 ]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+		
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
+					</xf:group>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					</xf:group>
+				</xf:group>
 			</xf:group>
-			<xf:group id="pgm_header" class="pgm_header" style="">
-				<xf:group id="" style="" class="gr_search">
-	               <xf:group class="label" id="" style="">
-	                  <w2:span class="" id="" label="대표 노선"></w2:span>
-	               </xf:group>
-					<xf:group id="" style="" class="search">
+		
+			<xf:group id="pgm_content" class="pgm_content grdc_a" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_50_a bms_box_wrap" style="">
+					<!-- <xf:group id="" class="" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl view" id="" label="전자 노선도" style=""></w2:textbox>
+						</xf:group>
+					</xf:group> -->
+					
+					<xf:group id="" class="" style="">
+						<xf:group id="" style="" class="gr_search">
+							<xf:group id="" style="" class="label">
+									<w2:span id="" class="" label="대표 노선"></w2:span>
+							</xf:group>
+							<xf:group class="search" id="pgm_search" style="">
 		               <xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
 		               	disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE1_onviewchange" id="TYPE1"
 		               	optionOrder="false" ref="data:dma_search.CONTENT1" class="search_type_100" style="" submenuSize="auto"
@@ -611,18 +634,11 @@
 							</xf:choices>
 						</xf:select1>
 					</xf:group>				
-					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
-				</xf:group>
-			</xf:group>
-			<xf:group id="pgm_content" class="pgm_content grdc_a" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a bms_box_wrap" style="">
-					<xf:group id="" class="" style="">
-						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="전자노선도" style=""></w2:textbox>
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>							
 						</xf:group>
 					</xf:group>
-					<xf:group></xf:group>
-					<xf:group id="" class="" style="">		
+				
+					<xf:group id="" class="" style="">
                                     <!-- //노선도 예시:202205 -->
                                     <!-- 노선 가로라인 whdth 값 = (100% / 가로로 배열되는 정거장수) -->
                                     <!-- 노선 세로라인 height 값 = (100% / 세로로 배열되는 정거장수) -->

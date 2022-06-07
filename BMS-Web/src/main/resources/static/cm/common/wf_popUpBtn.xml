@@ -20,7 +20,7 @@
 	};
 		
 	scwin.wfTitle_alertPageInfo = function() {
-		debugger;
+		
 		var pageUrl = $p.parent().$p.getFrame().getSrc();
 		com.alert("[" + $p.parent().wfm_title.getWindow().wfTitle_txt_H1.getValue() + "] 페이지의 파일 경로는 다음과 같습니다.<br/>" + pageUrl);
 	};

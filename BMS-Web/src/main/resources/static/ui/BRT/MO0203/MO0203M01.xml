@@ -190,26 +190,32 @@
 	scwin.onpageload = function() {
 		 scwin.connect();
 		 var autoOptions = {
-			Main : { grid : MO0203G0, srchSbm : sub_MO0203G0R0, keyColumn : "NODE_ID", srchGrp : pgm_header, name : "정류장 목록",
+			Main : { grid : MO0203G0, srchSbm : sub_MO0203G0R0, keyColumn : "NODE_ID", srchGrp : pgm_search, name : "정류장 목록",
 						focusColumn : "NODE_NM"}
 					
 		 };
 		 
 		 var mainOptions = {
-		 	SEARCH: scwin.btn_sub_move,
-		 	CNL:{}
-		 };
+			SEARCH:{},
+			CNL:{}
+		}; 
 		 
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions);
+		var codeOptions = [ {code : "NODE_TYPE", compID : "MO0203G0:NODE_TYPE" }
+							,{code : "COND_ERROR", compID : "MO0203G0:COND_ERROR" }
+						
+		 ];
+		 
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions, codeOptions);		
+		var mainSrhOptions = {
+			SEARCH:scwin.btn_sub_move
+		};	
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions, codeOptions);
 				
 		routMap.initMap2("map_MO0203", {width:"100%"
 				, height:"100%"
 		});
 		
-		var codeOptions = [ {code : "NODE_TYPE", compID : "MO0203G0:NODE_TYPE" }
-							,{code : "COND_ERROR", compID : "MO0203G0:COND_ERROR" }
-						
-		 ];			
+			
 		 
 		com.setCommonDtl(codeOptions//, function(){
 			//com.searchGrid(MO0203G0, sub_MO0203G0R0);
@@ -609,63 +615,78 @@
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-			<xf:group class="pgm_header" id="pgm_header" style="">
-				<xf:group class="gr_search" id="" style="">
-					<xf:group class="label" id="" style="">
-						<w2:span class="" id="" label="대표 노선"></w2:span>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+		
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:group class="search" id="" style="">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE1_onviewchange" id="TYPE1" optionOrder="false"
-							ref="data:dma_search.CONTENT1" class="search_type_100" style="" submenuSize="auto" textAlign="center" chooseOptionLabel="">
-							<xf:choices>
-								<xf:itemset nodeset="data:dlt_repRoutItem">
-									<xf:label ref="REP_ROUT_NM"></xf:label>
-									<xf:value ref="REP_ROUT_ID"></xf:value>
-								</xf:itemset>
-							</xf:choices>
-						</xf:select1>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:group class="label" id="" style="">		
-						<w2:span class="" id="" label="노선"></w2:span>
-					</xf:group>
-					<xf:group class="search" id="" style="">							
-						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							ev:onviewchange="scwin.TYPE_onviewchange" disabledClass="w2selectbox_disabled" displayMode="label" id="TYPE" optionOrder="false"
-							ref="data:dma_search.CONTENT2" class="search_type_100" style="" submenuSize="auto" textAlign="left">
-							<xf:choices>
-								<xf:itemset nodeset="data:dlt_routItem">
-									<xf:label ref="ROUT_NM"></xf:label>
-									<xf:value ref="ROUT_ID"></xf:value>
-								</xf:itemset>
-							</xf:choices>
-						</xf:select1>
-					</xf:group>	
-					<xf:group class="label" id="" style="">
-						<w2:span class="" id="" label="검색"></w2:span>
-					</xf:group>
-					<xf:group class="search" id="" style="">						
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT3" placeholder="정류소명"></xf:input>
-						<!-- <w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
-							chooseOptionValue="" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange="" ev:onviewchange=""
-							id="autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT3" search="start" selectedData=""
-							class="search_auto" style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false" visibleRowNum="">
-						</w2:autoComplete> -->
-					</xf:group>	
-					<w2:wframe class="" id="wfm_mainBtn" scope="true" src="/cm/common/wf_mainBtn.xml" style=""></w2:wframe>
 				</xf:group>
 			</xf:group>
-
-			<xf:group id="pgm_content" class="pgm_content grdc_500_20_a" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
-					<xf:group class="defaultbox" id="" style="">
-						<w2:textbox class="df_tt fl" id="" label="정류소 목록" style=""></w2:textbox>
+		
+			<xf:group id="pgm_content" class="pgm_content grdc_500_0_a" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
+					<xf:group id="" class="" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl list ico-list" id="" label="정류소 목록" style=""></w2:textbox>
+						</xf:group>
 					</xf:group>
-					<xf:group></xf:group>
+					
+					<xf:group id="" class="" style="">
+						<xf:group id="pgm_search" style="" class="gr_search">
+							<xf:group class="label" id="" style="">
+								<w2:span class="" id="" label="대표노선"></w2:span>
+							</xf:group>
+							<xf:group class="search" id="" style="">
+								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE1_onviewchange" id="TYPE1" optionOrder="false"
+									ref="data:dma_search.CONTENT1" class="search_type_100" style="width:50px" submenuSize="auto" textAlign="center" chooseOptionLabel="">
+									<xf:choices>
+										<xf:itemset nodeset="data:dlt_repRoutItem">
+											<xf:label ref="REP_ROUT_NM"></xf:label>
+											<xf:value ref="REP_ROUT_ID"></xf:value>
+										</xf:itemset>
+									</xf:choices>
+								</xf:select1>
+							</xf:group>
+							<xf:group id="" style="" class="label">
+									<w2:span id="" class="" label="노선"></w2:span>
+							</xf:group>
+							<xf:group id="" style="" class="search">
+							
+								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+									ev:onviewchange="scwin.TYPE_onviewchange" disabledClass="w2selectbox_disabled" displayMode="label" id="TYPE" optionOrder="false"
+									ref="data:dma_search.CONTENT2" class="search_type_100" style="width:80px" submenuSize="auto" textAlign="left">
+									<xf:choices>
+										<xf:itemset nodeset="data:dlt_routItem">
+											<xf:label ref="ROUT_NM"></xf:label>
+											<xf:value ref="ROUT_ID"></xf:value>
+										</xf:itemset>
+									</xf:choices>
+								</xf:select1>
+							</xf:group>	
+							<xf:group class="label" id="" style="">
+								<w2:span class="" id="" label="검색"></w2:span>
+							</xf:group>
+							<xf:group class="search" id="" style="">						
+								<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT3" placeholder="정류소명" style="width:70px"></xf:input>
+								<!-- <w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
+									chooseOptionValue="" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange="" ev:onviewchange=""
+									id="autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT3" search="start" selectedData=""
+									class="search_auto" style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false" visibleRowNum="">
+								</w2:autoComplete> -->
+							</xf:group>	
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>							
+						</xf:group>
+					</xf:group>
+				
 					<xf:group id="" class="" style="">
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
 							dataList="data:dlt_BMS_NODE_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
@@ -711,12 +732,12 @@
 					</xf:group>
 				</xf:group><!-- pgm_list end -->
 				
-				<xf:group id="" class="vertical_line"></xf:group>
+				<xf:group id="" class=""></xf:group>
 				
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_a" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_a bms_box_wrap" style="">
 					<xf:group class="gr_map_header" id="" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="정류소 목록(map)" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl map" id="" label="지도" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					<xf:group id="" style="position:relative">

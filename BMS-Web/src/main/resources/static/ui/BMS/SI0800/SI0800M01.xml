@@ -81,13 +81,21 @@
 					 , srchGrp : pgm_header, keyColumn : "REMARK", focusColumn : "DVC_KIND", name :  "파라미터 목록"}
 		};									//KeyColumn 비고 바꿔야 한다. 그리드 포커스 때문에 키컬럼을 remark로 했음
 		
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions);
+
 		
 		var codeOptions = [ {code : "DVC_KIND", compID : "SI0800G0:DVC_KIND, DVC_KIND" }
 							,{code : "PARAM_DIV", compID : "SI0800G0:PARAM_DIV, PARAM_DIV" }
 							,{code : "PARAM_KIND", compID : "SI0800G0:PARAM_KIND, PARAM_KIND" }
 							,{code : "DATA_TYPE", compID : "SI0800G0:DATA_TYPE, DATA_TYPE" }
 						];
+
+		var mainOptions = {
+			SEARCH : {}
+		}; 
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions, codeOptions);
+		var mainSrhOptions = {
+		};	
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainSrhOptions, codeOptions);
 		
 		//com.executeSubmission(sub_SI0800G0R0);
 		
@@ -268,63 +276,79 @@
 	};
 	]]></script>
 	</head>
-	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group class="pgm_container grdr_41_36_a" id="pgm_container" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-			<xf:group id="pgm_header" style="" class="pgm_header">
-				<xf:group class="gr_search" id="" style="">
-					<xf:group class="label" id="" style="">
-						<w2:span class="" id="" label="검색 항목"></w2:span>
+    <body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+		
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:group class="search" id="" style="">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" disabledClass="w2selectbox_disabled" displayMode="label" id="TYPE"
-							optionOrder="false" ref="data:dma_search.TYPE" class="search_type_100" style="" submenuSize="auto"
-							textAlign="left">
-							<xf:choices>
-								<xf:item>
-									<xf:label><![CDATA[전체]]></xf:label>
-									<xf:value><![CDATA[ALL]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[장치종류]]></xf:label>
-									<xf:value><![CDATA[DVC_KIND]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[파라미터구분]]></xf:label>
-									<xf:value><![CDATA[PARAM_DIV]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[파라미터종류]]></xf:label>
-									<xf:value><![CDATA[PARAM_KIND]]></xf:value>
-								</xf:item>
-							</xf:choices>
-						</xf:select1>
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="장치종류 또는 파라미터구분, 종류"></xf:input>
-						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
-							chooseOptionValue="" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange="" ev:onviewchange=""
-							id="autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start" selectedData=""
-							class="search_auto" style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false" visibleRowNum="">
-							<w2:choices>
-								<w2:itemset nodeset="data:dlt_searchitem">
-									<w2:label ref="VHC_NO"></w2:label>
-									<w2:value ref="VHC_ID"></w2:value>
-								</w2:itemset>
-							</w2:choices>
-						</w2:autoComplete>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group>
-
-			<xf:group id="pgm_content" style="" class="pgm_content grdc_5f_20_5f">
-				<xf:group id="pgm_list" style="" class="pgm_list grdr_20_a">
-					<xf:group id="" style="" class="defaultbox">
-						<w2:textbox id="" style="" class="df_tt fl" label="파라미터 목록"></w2:textbox>
+		
+			<xf:group id="pgm_content" class="pgm_content grdc_5f_0_5f" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
+					<xf:group id="" class="" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl list ico-list" id="" label="파라미터 목록" style=""></w2:textbox>
+						</xf:group>
 					</xf:group>
-					<xf:group id="" style="">
+					
+					<xf:group id="" class="" style="">
+						<xf:group id="" style="" class="gr_search">
+							<xf:group id="" style="" class="label">
+									<w2:span id="" class="" label="검색 항목"></w2:span>
+							</xf:group>
+							<xf:group class="search" id="pgm_search" style="">
+								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+									ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" disabledClass="w2selectbox_disabled" displayMode="label" id="TYPE"
+									optionOrder="false" ref="data:dma_search.TYPE" class="search_type_100" style="" submenuSize="auto"
+									textAlign="left">
+									<xf:choices>
+										<xf:item>
+											<xf:label><![CDATA[전체]]></xf:label>
+											<xf:value><![CDATA[ALL]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[장치종류]]></xf:label>
+											<xf:value><![CDATA[DVC_KIND]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[파라미터구분]]></xf:label>
+											<xf:value><![CDATA[PARAM_DIV]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[파라미터종류]]></xf:label>
+											<xf:value><![CDATA[PARAM_KIND]]></xf:value>
+										</xf:item>
+									</xf:choices>
+								</xf:select1>
+								<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="장치종류 또는 파라미터구분, 종류"></xf:input>
+								<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
+									chooseOptionValue="" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange="" ev:onviewchange=""
+									id="autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start" selectedData=""
+									class="search_auto" style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false" visibleRowNum="">
+									<w2:choices>
+										<w2:itemset nodeset="data:dlt_searchitem">
+											<w2:label ref="VHC_NO"></w2:label>
+											<w2:value ref="VHC_ID"></w2:value>
+										</w2:itemset>
+									</w2:choices>
+								</w2:autoComplete>
+							</xf:group>
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>							
+						</xf:group>
+					</xf:group>
+				
+					<xf:group id="" class="" style="">
+
 						<w2:gridView sortEvent="onclick" ev:oncellclick=""
 							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순서"
 							sortable="true" rowStatusHeaderValue="상태"  overflowX="auto" overflowY="scroll" rowStatusVisible="false"
@@ -410,12 +434,17 @@
 						</w2:gridView>
 					</xf:group>
 				</xf:group>
-				<xf:group id="" style="" class="vertical_line"></xf:group>
-				<xf:group class="pgm_detail grdr_20_2_250_20_a">
-					<xf:group id="" style="" class="defaultbox">
-						<w2:textbox id="" style="" class="df_tt fl" label="파라미터 상세"></w2:textbox>
-					</xf:group>
-					<xf:group id="" style="" class=""></xf:group>
+			<xf:group id="" class=""></xf:group>
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_300_20_a bms_box_wrap" style="">
+
+					<xf:group id="" class="gr_sub_header" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl view ico-view" id="" label="파라미터 상세 정보" style=""></w2:textbox>
+						</xf:group>
+    				</xf:group>
+    				<xf:group class="" id="" style=""></xf:group>
+    				<xf:group class="" id="" style="">
+
 					<xf:group tagname="table" style="width:100%;" id="SI0800F0" class="w2tb tb">
 						<w2:attributes>
 							<w2:summary></w2:summary>
@@ -491,7 +520,7 @@
 							</xf:group>
 							<xf:group tagname="td" class="w2tb_td">
 								<w2:attributes></w2:attributes>
-								<xf:input adjustMaxLength="false" id="" style="width: 144px;text-align: right;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_LENGTH" maxlength="5" allowChar="0-9" maxByteLength=""></xf:input>
+								<xf:input adjustMaxLength="false" id="" style="width: 144px;text-align: right;" ref="data:dlt_BMS_DVC_PARAM_CFG_INFO.DATA_LENGTH" maxlength="2" allowChar="0-9" maxByteLength=""></xf:input>
 							</xf:group>
 							<xf:group tagname="th" class="w2tb_th">
 								데이터값
@@ -573,6 +602,7 @@
 							</xf:group>
 						</xf:group>
 					</xf:group>
+    					</xf:group>
 					<xf:group style="" id=""></xf:group>
 					<xf:group style="position: relative;" id="">
 						<xf:image src="/cm/images/add/bg_brt.png" style="width: 100%;height: 100%;position: absolute; object-fit:contain; cursor:default" id=""></xf:image>
