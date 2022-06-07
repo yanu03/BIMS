@@ -113,14 +113,21 @@
 	scwin.onpageload = function() {
 		var autoOptions = {
 			Main : { grid : PI0207G0, frm : PI0207F0, srchSbm : sub_PI0207G0R0, savSbm : sub_PI0207G0S0, keySbm : sub_PI0207G0K0
-					, srchGrp : pgm_header, keyColumn : "ORGA_ID", focusColumn : "ORGA_NM", name :  "편성 목록"},
+					, srchGrp : pgm_search, keyColumn : "ORGA_ID", focusColumn : "ORGA_NM", name :  "편성 목록"},
 			Sub1 : { grid : PI0207G2, srchSbm : sub_PI0207G2R0, savSbm : sub_PI0207G2S0, name :  "음성 목록"}
 		 };	
 		
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID_FORM, autoOptions);		 
+		var mainOptions = {
+			SEARCH : {}
+		};
 
 		var codeOptions = [ {code : "FILE_TYPE", compID : "PI0207G1:FILE_TYPE, PI0207G2:FILE_TYPE" } ];	
-			 
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID_FORM, autoOptions, mainOptions, codeOptions);
+
+		var mainSrhOptions = {
+		};	
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRID_FORM, autoOptions, mainSrhOptions, codeOptions);		 
+					 
 		com.setCommonDtl(codeOptions, function() {
 			com.searchGrid(PI0207G0, sub_PI0207G0R0);
 		});	
@@ -279,60 +286,73 @@
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-
-
-			<xf:group class="pgm_header" id="pgm_header" style="">
-				<xf:group class="gr_search" id="" style="">
-					<xf:group class="label" id="" style="">
-						<w2:span class="" id="" label="검색 항목"></w2:span>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+		
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:group class="search" id="" style="">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="TYPE10"
-							optionOrder="false" ref="data:dma_search.TYPE" class="search_type_100" style="" submenuSize="auto"
-							textAlign="left">
-							<xf:choices>
-								<xf:item>
-									<xf:label><![CDATA[전체]]></xf:label>
-									<xf:value><![CDATA[ALL]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[편성ID]]></xf:label>
-									<xf:value><![CDATA[ORGA_ID]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[편성명]]></xf:label>
-									<xf:value><![CDATA[ORGA_NM]]></xf:value>
-								</xf:item>
-							</xf:choices>
-						</xf:select1>
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="편성ID 또는 편성명"></xf:input>
-						<w2:autoComplete interactionMode="" chooseOptionValue="" chooseOptionLabel="-전체-" visibleRowNum=""
-							chooseOption="true" caseSensitive="false" displayMode="label" ev:onviewchange="" id="autoChoiceBox" useKeywordHighlight="false"
-							ref="data:dma_search.CONTENT" class="search_auto" search="start" ev:onchange="" allOption=""
-							submenuSize="auto" editType="select" emptyItem="" selectedData="" emptyValue="" noResult="useData" textAlign="left" style="display: none">
-							<w2:choices>
-								<w2:itemset nodeset="data:dlt_searchitem">
-									<w2:label ref="ORGA_ID"></w2:label>
-									<w2:value ref="ORGA_ID"></w2:value>
-								</w2:itemset>
-							</w2:choices>
-						</w2:autoComplete>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<w2:wframe class="" id="wfm_mainBtn" scope="true" src="/cm/common/wf_mainBtn.xml" style=""></w2:wframe>
 				</xf:group>
 			</xf:group>
-
-			<xf:group id="pgm_content" class="pgm_content grdc_4f_20_6f" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
-					<xf:group class="defaultbox" id="" style="">
-						<w2:textbox class="df_tt fl" id="" label="편성 목록" style=""></w2:textbox>
+		
+			<xf:group id="pgm_content" class="pgm_content grdc_4f_0_6f" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style=""> <!-- auto 영역 -->
+					<xf:group id="" class="" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl list ico-list" id="" label="편성 목록" style=""></w2:textbox>
+						</xf:group>
 					</xf:group>
-					<xf:group></xf:group>
+					
+					<xf:group id="" class="" style="">
+						<xf:group id="" style="" class="gr_search">
+							<xf:group id="" style="" class="label">
+									<w2:span id="" class="" label="검색 항목"></w2:span>
+							</xf:group>
+							<xf:group class="search" id="pgm_search" style="">
+								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="TYPE10"
+									optionOrder="false" ref="data:dma_search.TYPE" class="search_type_100" style="" submenuSize="auto"
+									textAlign="left">
+									<xf:choices>
+										<xf:item>
+											<xf:label><![CDATA[전체]]></xf:label>
+											<xf:value><![CDATA[ALL]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[편성ID]]></xf:label>
+											<xf:value><![CDATA[ORGA_ID]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[편성명]]></xf:label>
+											<xf:value><![CDATA[ORGA_NM]]></xf:value>
+										</xf:item>
+									</xf:choices>
+								</xf:select1>
+								<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="편성ID 또는 편성명"></xf:input>
+								<w2:autoComplete interactionMode="" chooseOptionValue="" chooseOptionLabel="-전체-" visibleRowNum=""
+									chooseOption="true" caseSensitive="false" displayMode="label" ev:onviewchange="" id="autoChoiceBox" useKeywordHighlight="false"
+									ref="data:dma_search.CONTENT" class="search_auto" search="start" ev:onchange="" allOption=""
+									submenuSize="auto" editType="select" emptyItem="" selectedData="" emptyValue="" noResult="useData" textAlign="left" style="display: none">
+									<w2:choices>
+										<w2:itemset nodeset="data:dlt_searchitem">
+											<w2:label ref="ORGA_ID"></w2:label>
+											<w2:value ref="ORGA_ID"></w2:value>
+										</w2:itemset>
+									</w2:choices>
+								</w2:autoComplete>
+							</xf:group>
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>							
+						</xf:group>
+					</xf:group>
+				
+
 					<xf:group id="" class="" style="">
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
 							dataList="data:dlt_VOC_ORGA_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
@@ -392,94 +412,95 @@
 					</xf:group>
 
 				</xf:group>
-				<xf:group id="" class="vertical_line"></xf:group>
-				
-				<xf:group class="pgm_detail grdr_20_2_115_20_a">
-					<xf:group id="" class="gr_sub_header" style="">
-						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="편성 정보" style=""></w2:textbox>
+				<xf:group id="" class=""></xf:group>
+				<xf:group class="pgm_detail grdr_177_0_a">
+					<xf:group class="pgm_detail grdr_20_2_155 bms_box_wrap">
+						<xf:group id="" class="gr_sub_header" style="">
+							<xf:group class="defaultbox" id="" style="">
+								<w2:textbox class="df_tt fl view" id="" label="편성 정보" style=""></w2:textbox>
+							</xf:group>
 						</xf:group>
-					</xf:group>
-					<xf:group class="" id="" style="">
-					</xf:group>
-					<xf:group class="" id="" style="">
-						<xf:group adaptive="layout" class="w2tb tb" id="PI0207F0" style="" tagname="table">
-							<w2:attributes>
-								<w2:summary></w2:summary>
-							</w2:attributes>
-							<xf:group tagname="colgroup">
-								<xf:group style="width:90px;" tagname="col"></xf:group>
-								<xf:group tagname="col" style="width:120.00px;"></xf:group>
-								<xf:group style="width:90px;" tagname="col"></xf:group>
-								<xf:group style="width:120px;" tagname="col"></xf:group>
-							</xf:group>
-							<xf:group style="" tagname="tr">
-								<xf:group class="w2tb_th req" style="" tagname="th">편성&amp;nbsp;ID</xf:group>
-								<xf:group class="w2tb_td" style="" tagname="td">
-									<w2:attributes>
-										<w2:colspan>1</w2:colspan>
-										<w2:rowspan>1</w2:rowspan>
-									</w2:attributes>
-									<xf:input class="" id="ORGA_ID" mandatory="" ref="data:dlt_VOC_ORGA_INFO.ORGA_ID" style="width:100px;height:21px;"
-										disabled="true" adjustMaxLength="">
-									</xf:input>
+						<xf:group class="" id="" style="">
+						</xf:group>
+						<xf:group class="" id="" style="">
+							<xf:group adaptive="layout" class="w2tb tb" id="PI0207F0" style="" tagname="table">
+								<w2:attributes>
+									<w2:summary></w2:summary>
+								</w2:attributes>
+								<xf:group tagname="colgroup">
+									<xf:group style="width:90px;" tagname="col"></xf:group>
+									<xf:group tagname="col" style="width:120.00px;"></xf:group>
+									<xf:group style="width:90px;" tagname="col"></xf:group>
+									<xf:group style="width:120px;" tagname="col"></xf:group>
 								</xf:group>
-								<xf:group class="w2tb_th req" style="" tagname="th">편성명</xf:group>
-								<xf:group class="w2tb_td" style="" tagname="td">
-									<xf:input allowChar="" customModelFormatter="" customModelUnformatter="" dataType="text" disabled=""
-										displayFormatter="com.transPhone" id="ORGA_NM" maskFormat="" maxlength="13" minByteLength=""
-										ref="data:dlt_VOC_ORGA_INFO.ORGA_NM" style="width:100%;height: 21px;" validator="">
-									</xf:input>
+								<xf:group style="" tagname="tr">
+									<xf:group class="w2tb_th req" style="" tagname="th">편성&amp;nbsp;ID</xf:group>
+									<xf:group class="w2tb_td" style="" tagname="td">
+										<w2:attributes>
+											<w2:colspan>1</w2:colspan>
+											<w2:rowspan>1</w2:rowspan>
+										</w2:attributes>
+										<xf:input class="" id="ORGA_ID" mandatory="" ref="data:dlt_VOC_ORGA_INFO.ORGA_ID" style="width:100px;height:21px;"
+											disabled="true" adjustMaxLength="">
+										</xf:input>
+									</xf:group>
+									<xf:group class="w2tb_th req" style="" tagname="th">편성명</xf:group>
+									<xf:group class="w2tb_td" style="" tagname="td">
+										<xf:input allowChar="" customModelFormatter="" customModelUnformatter="" dataType="text" disabled=""
+											displayFormatter="com.transPhone" id="ORGA_NM" maskFormat="" maxlength="13" minByteLength=""
+											ref="data:dlt_VOC_ORGA_INFO.ORGA_NM" style="width:100%;height: 21px;" validator="">
+										</xf:input>
+									</xf:group>
 								</xf:group>
-							</xf:group>
-							<xf:group style="" tagname="tr">
-								<xf:group tagname="td" class="w2tb_th" id="">음성개수<w2:attributes></w2:attributes></xf:group>
-								<xf:group tagname="td" class="w2tb_td">
-									<w2:attributes></w2:attributes>
-									<xf:input allowChar="" customModelFormatter="" customModelUnformatter="" dataType="text" disabled="true"
-										displayFormatter="com.transPhone" id="VIDEO_COUNT" maskFormat="" maxlength="13" minByteLength=""
-										ref="data:dlt_VOC_ORGA_INFO.AUDIO_COUNT" style="width:100px;height: 21px;text-align: right;" validator="">
-									</xf:input>
-								</xf:group>
-								<xf:group class="w2tb_th" style="" tagname="th">총&amp;nbsp;재생시간(초)</xf:group>
-								<xf:group class="w2tb_td" style="" tagname="td">
-									<w2:attributes>
-										<w2:colspan>1</w2:colspan>
-										<w2:rowspan>1</w2:rowspan>
-									</w2:attributes>
-									<xf:input allowChar="" customModelFormatter="" customModelUnformatter="" dataType="text" disabled="true"
-										displayFormatter="com.transPhone" id="TOTAL_TIME" maskFormat="" maxlength="13" minByteLength=""
-										ref="data:dlt_VOC_ORGA_INFO.TOTAL_TIME" style="width:100px;height: 21px; text-align: right;" validator="">
-									</xf:input>
-								</xf:group>
-							</xf:group><xf:group tagname="tr" style="">
-								<xf:group tagname="th" class="w2tb_th" style="height: 24px;vertical-align: top;" id="" tabIndex="">
-									비고
-									<w2:attributes>
-										<w2:scope>row</w2:scope>
-									</w2:attributes>
-								</xf:group>
-								<xf:group tagname="td" class="w2tb_td">
-									<w2:attributes>
-										<w2:colspan>3</w2:colspan>
-										<w2:rowspan>1</w2:rowspan>
-									</w2:attributes>
-									<xf:textarea adjustMaxLength="" class="" disabled="" id="REMARK" mandatory="" ref="data:dlt_VOC_ORGA_INFO.REMARK"
-										style="width:100%;height: 50px;" maxlength="200">
-									</xf:textarea>
+								<xf:group style="" tagname="tr">
+									<xf:group tagname="td" class="w2tb_th" id="">음성개수<w2:attributes></w2:attributes></xf:group>
+									<xf:group tagname="td" class="w2tb_td">
+										<w2:attributes></w2:attributes>
+										<xf:input allowChar="" customModelFormatter="" customModelUnformatter="" dataType="text" disabled="true"
+											displayFormatter="com.transPhone" id="VIDEO_COUNT" maskFormat="" maxlength="13" minByteLength=""
+											ref="data:dlt_VOC_ORGA_INFO.AUDIO_COUNT" style="width:100px;height: 21px;text-align: right;" validator="">
+										</xf:input>
+									</xf:group>
+									<xf:group class="w2tb_th" style="" tagname="th">총&amp;nbsp;재생시간(초)</xf:group>
+									<xf:group class="w2tb_td" style="" tagname="td">
+										<w2:attributes>
+											<w2:colspan>1</w2:colspan>
+											<w2:rowspan>1</w2:rowspan>
+										</w2:attributes>
+										<xf:input allowChar="" customModelFormatter="" customModelUnformatter="" dataType="text" disabled="true"
+											displayFormatter="com.transPhone" id="TOTAL_TIME" maskFormat="" maxlength="13" minByteLength=""
+											ref="data:dlt_VOC_ORGA_INFO.TOTAL_TIME" style="width:100px;height: 21px; text-align: right;" validator="">
+										</xf:input>
+									</xf:group>
+								</xf:group><xf:group tagname="tr" style="">
+									<xf:group tagname="th" class="w2tb_th" style="height: 24px;vertical-align: top;" id="" tabIndex="">
+										비고
+										<w2:attributes>
+											<w2:scope>row</w2:scope>
+										</w2:attributes>
+									</xf:group>
+									<xf:group tagname="td" class="w2tb_td">
+										<w2:attributes>
+											<w2:colspan>3</w2:colspan>
+											<w2:rowspan>1</w2:rowspan>
+										</w2:attributes>
+										<xf:textarea adjustMaxLength="" class="" disabled="" id="REMARK" mandatory="" ref="data:dlt_VOC_ORGA_INFO.REMARK"
+											style="width:100%;height: 50px;" maxlength="200">
+										</xf:textarea>
+									</xf:group>
 								</xf:group>
 							</xf:group>
 						</xf:group>
 					</xf:group>
 					
-					<xf:group id="" class="horizontal_line">
+					<xf:group id="" class="">
 					</xf:group>
 					
-					<xf:group id="pgm_content2" class="pgm_content grdc_5f_70_5f" style="">
+					<xf:group id="pgm_content2" class="pgm_content grdc_5f_70_5f bms_box_wrap" style="">
 						<xf:group id="pgm_list2" class="pgm_list grdr_20_2_30_a" style="">
 							<xf:group id="" class="gr_sub_header" style="">
 								<xf:group class="defaultbox" id="" style="">
-									<w2:textbox class="df_tt fl" id="" label="정류소 음성 목록" style=""></w2:textbox>
+									<w2:textbox class="df_tt fl list" id="" label="정류소 음성 목록" style=""></w2:textbox>
 								</xf:group>
 							</xf:group>
 							<xf:group class="" id="" style="">
@@ -581,7 +602,7 @@
 						<xf:group id="pgm_list3" class="pgm_list grdr_20_2_30_a" style="">
 							<xf:group id="" class="gr_sub_header" style="">
 								 <xf:group class="defaultbox" id="" style="">
-									<w2:textbox class="df_tt fl" id="" label="음성 편성 목록" style=""></w2:textbox>
+									<w2:textbox class="df_tt fl list" id="" label="음성 편성 목록" style=""></w2:textbox>
 								</xf:group> 
 								
 								<!--<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>-->

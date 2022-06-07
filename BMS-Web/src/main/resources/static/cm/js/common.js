@@ -4444,7 +4444,7 @@ var autoOptions = {
 com.setMainBtn2(wfm_mainBtn, btnCom.TYPE.SINGLE_GRID, autoOptions, userOptions);
 */
 com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
-	
+
 	var programAuthority = gcm.CUR_PROGRAM_AUTH;
 	com.enableDisp(autoOpt);
 	

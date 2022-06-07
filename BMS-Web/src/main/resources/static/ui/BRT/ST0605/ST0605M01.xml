@@ -531,7 +531,7 @@
 	
 	//엑셀 다운로드
 	scwin.btn_excel_onclick = function() {
-		debugger;
+		
 		var routNm = dlt_BMS_ROUT_MST.getCellData(ST0605G0.getFocusedRowIndex(), "ROUT_NM");
 		var dayDiv = dlt_BMS_ROUT_MST.getCellData(ST0605G0.getFocusedRowIndex(), "DAY_DIV");
 		if(dayDiv == 'DY001'){

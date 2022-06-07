@@ -80,9 +80,16 @@
 		
 		var autoOptions = {
 			Main : { grid : PI0100G0, srchSbm : sub_PI0100G0R0, savSbm : sub_PI0100G0S0, keySbm : sub_PI0100G0K0
-					 , srchGrp : pgm_header, keyColumn : "USER_NEWS_ID", focusColumn : "NEWS_TITLE", name :  "사용자 뉴스 목록"}
+					 , srchGrp : pgm_search, keyColumn : "USER_NEWS_ID", focusColumn : "NEWS_TITLE", name :  "사용자 뉴스 목록"}
 		};
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions);
+		var mainOptions = {
+			SEARCH : {}
+		}
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
+		var mainSrhOptions = {
+		};	
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainSrhOptions);
+
 		
 		com.executeSubmission(sub_PI0100G0R0);
 		com.executeSubmission(sub_PI0100SHI0);	
@@ -147,58 +154,73 @@
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group class="pgm_container grdr_41_36_a" id="pgm_container" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-			<xf:group id="pgm_header" style="" class="pgm_header">
-				<xf:group class="gr_search" id="" style="">
-					<xf:group class="label" id="" style="">
-						<w2:span class="" id="" label="검색 항목"></w2:span>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+		
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:group class="search" id="" style="">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" disabledClass="w2selectbox_disabled" displayMode="label" id="TYPE"
-							optionOrder="false" ref="data:dma_search.TYPE" class="search_type_100" style="" submenuSize="auto"
-							textAlign="left">
-							<xf:choices>
-								<xf:item>
-									<xf:label><![CDATA[전체]]></xf:label>
-									<xf:value><![CDATA[ALL]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[사용자뉴스ID]]></xf:label>
-									<xf:value><![CDATA[USER_NEWS_ID]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[뉴스제목]]></xf:label>
-									<xf:value><![CDATA[NEWS_TITLE]]></xf:value>
-								</xf:item>
-							</xf:choices>
-						</xf:select1>
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="사용자뉴스ID 또는 뉴스제목"></xf:input>
-						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
-							chooseOptionValue="" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange="" ev:onviewchange=""
-							id="autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start" selectedData=""
-							class="search_auto" style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false" visibleRowNum="">
-							<w2:choices>
-								<w2:itemset nodeset="data:dlt_searchitem">
-									<w2:label ref="VHC_NO"></w2:label>
-									<w2:value ref="VHC_ID"></w2:value>
-								</w2:itemset>
-							</w2:choices>
-						</w2:autoComplete>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group>
-
-			<xf:group id="pgm_content" style="" class="pgm_content grdc_5f_20_5f">
-				<xf:group id="pgm_list" style="" class="pgm_list grdr_20_a">
-					<xf:group id="" style="" class="defaultbox">
-						<w2:textbox id="" style="" class="df_tt fl" label="사용자 뉴스 목록"></w2:textbox>
+		
+			<xf:group id="pgm_content" class="pgm_content grdc_5f_0_5f" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
+					<xf:group id="" class="" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl list ico-list" id="" label="사용자 뉴스 목록" style=""></w2:textbox>
+						</xf:group>
 					</xf:group>
-					<xf:group id="" style="">
+					
+					<xf:group id="" class="" style="">
+						<xf:group id="" style="" class="gr_search">
+							<xf:group id="" style="" class="label">
+									<w2:span id="" class="" label="검색 항목"></w2:span>
+							</xf:group>
+							<xf:group id="pgm_search" style="" class="search">
+								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+									ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" disabledClass="w2selectbox_disabled" displayMode="label" id="TYPE"
+									optionOrder="false" ref="data:dma_search.TYPE" class="search_type_100" style="" submenuSize="auto"
+									textAlign="left">
+									<xf:choices>
+										<xf:item>
+											<xf:label><![CDATA[전체]]></xf:label>
+											<xf:value><![CDATA[ALL]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[사용자뉴스ID]]></xf:label>
+											<xf:value><![CDATA[USER_NEWS_ID]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[뉴스제목]]></xf:label>
+											<xf:value><![CDATA[NEWS_TITLE]]></xf:value>
+										</xf:item>
+									</xf:choices>
+								</xf:select1>
+								<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="사용자뉴스ID 또는 뉴스제목"></xf:input>
+								<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
+									chooseOptionValue="" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange="" ev:onviewchange=""
+									id="autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start" selectedData=""
+									class="search_auto" style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false" visibleRowNum="">
+									<w2:choices>
+										<w2:itemset nodeset="data:dlt_searchitem">
+											<w2:label ref="VHC_NO"></w2:label>
+											<w2:value ref="VHC_ID"></w2:value>
+										</w2:itemset>
+									</w2:choices>
+								</w2:autoComplete>
+							</xf:group>
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>							
+						</xf:group>
+					</xf:group>
+				
+					<xf:group id="" class="" style="">
 						<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.PI0100G0_onrowindexchange" ev:oncellclick=""
 							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="No."
 							sortable="true" rowStatusHeaderValue="상태"  overflowX="auto" overflowY="scroll" rowStatusVisible="false"
@@ -271,135 +293,138 @@
 							</w2:footer>
 						</w2:gridView>
 					</xf:group>
-				</xf:group>
-
-				<xf:group id="" style="" class="vertical_line"></xf:group>
-				<xf:group class="pgm_detail grdr_20_2_350_20_a">
-					<xf:group id="" style="" class="defaultbox">
-						<w2:textbox id="" style="" class="df_tt fl" label="사용자 뉴스 정보"></w2:textbox>
+				</xf:group><!-- pgm_list -->
+				
+				<xf:group id="" class=""></xf:group>
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_320_20_a bms_box_wrap" style="">
+					<xf:group id="" class="gr_sub_header" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl view" id="" label="사용자 뉴스 정보" style=""></w2:textbox>
+						</xf:group>
 					</xf:group>
-					<xf:group id="" style="" class="">
-					</xf:group>
-					<xf:group tagname="table" style="width:100%;" id="PI0100F0" class="w2tb tb">
-						<w2:attributes>
-							<w2:summary></w2:summary>
-						</w2:attributes>
-						<xf:group tagname="caption"></xf:group>
-						<xf:group tagname="colgroup">
-							<xf:group tagname="col" style="width:25.00%;"></xf:group>
-							<xf:group tagname="col" style="width:25.00%"></xf:group>
-							<xf:group tagname="col" style="width:25.00%;"></xf:group>
-							<xf:group tagname="col" style="width:25.00%"></xf:group>
-						</xf:group>
-						<xf:group tagname="tr" style="height:10px;">
-							<xf:group tagname="th" style="" class="w2tb_th req">
-								사용자 뉴스 ID
-								<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes>
+					<xf:group class="" id="" style=""></xf:group>
+					<xf:group class="" id="" style="">
+						<xf:group tagname="table" style="width:100%;" id="PI0100F0" class="w2tb tb">
+							<w2:attributes>
+								<w2:summary></w2:summary>
+							</w2:attributes>
+							<xf:group tagname="caption"></xf:group>
+							<xf:group tagname="colgroup">
+								<xf:group tagname="col" style="width:25.00%;"></xf:group>
+								<xf:group tagname="col" style="width:25.00%"></xf:group>
+								<xf:group tagname="col" style="width:25.00%;"></xf:group>
+								<xf:group tagname="col" style="width:25.00%"></xf:group>
 							</xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<xf:input adjustMaxLength="false" id="" style="width:100px;height:100%;"
-									ref="data:dlt_BMS_USER_NEWS_CFG_INFO.USER_NEWS_ID" readOnly="true" disabled="true">
-								</xf:input>
+							<xf:group tagname="tr" style="height:10px;">
+								<xf:group tagname="th" style="" class="w2tb_th req">
+									사용자 뉴스 ID
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<xf:input adjustMaxLength="false" id="" style="width:100px;height:100%;"
+										ref="data:dlt_BMS_USER_NEWS_CFG_INFO.USER_NEWS_ID" readOnly="true" disabled="true">
+									</xf:input>
+								</xf:group>
+								<xf:group tagname="th" style="" class="w2tb_th">
+									뉴스 제목
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<xf:input adjustMaxLength="false" id="" style="height: 21px;"
+										ref="data:dlt_BMS_USER_NEWS_CFG_INFO.NEWS_TITLE">
+									</xf:input>
+								</xf:group>
 							</xf:group>
-							<xf:group tagname="th" style="" class="w2tb_th">
-								뉴스 제목
-								<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" style="" class="w2tb_th">
+									제공처명
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<xf:input adjustMaxLength="false" id="TITLE" style="height: 21px;" ref="data:dlt_BMS_USER_NEWS_CFG_INFO.PROV_NM"
+										maxlength="50">
+									</xf:input>
+								</xf:group>
+								<xf:group tagname="th" style="" class="w2tb_th">
+									범주
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<xf:input adjustMaxLength="false" id="" style="height: 21px;"
+										ref="data:dlt_BMS_USER_NEWS_CFG_INFO.CATEGORY">
+									</xf:input>
+								</xf:group>
 							</xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<xf:input adjustMaxLength="false" id="" style="height: 21px;"
-									ref="data:dlt_BMS_USER_NEWS_CFG_INFO.NEWS_TITLE">
-								</xf:input>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" style="" class="w2tb_th">사용여부<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes></xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<xf:select1 id="radio0" selectedIndex="0" appearance="full"
+										style="width:100%;height:21px;margin-left :20px;" userData1="" cols="2" rows="" ref='data:dlt_BMS_USER_NEWS_CFG_INFO.USE_YN'
+										useRadioTitle="" visibleColumn="">
+										<xf:choices>
+											<xf:item>
+												<xf:label><![CDATA[예]]></xf:label>
+												<xf:value><![CDATA[Y]]></xf:value>
+											</xf:item>
+											<xf:item>
+												<xf:label><![CDATA[아니요]]></xf:label>
+												<xf:value><![CDATA[N]]></xf:value>
+											</xf:item>
+										</xf:choices>
+									</xf:select1>
+								</xf:group>
+								<xf:group tagname="th" style="" class="w2tb_th">
+									출판일시
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<w2:inputCalendar footerDiv="false" id="BUY_DT" style="height: 23px;width: 150px;" renderDiv="true"
+											ref="data:dlt_BMS_USER_NEWS_CFG_INFO.PUB_DT" focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false"
+											renderType="component" defaultDate="" dateValidCheck="true" dateValidSet="true" ev:onviewchange="scwin.BUY_DT_onviewchange">
+										</w2:inputCalendar>
+								</xf:group>
 							</xf:group>
-						</xf:group>
-						<xf:group tagname="tr" style="">
-							<xf:group tagname="th" style="" class="w2tb_th">
-								제공처명
-								<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" style="vertical-align: top" class="w2tb_th">
+									뉴스 내용
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<w2:attributes>
+										<w2:colspan>3</w2:colspan>
+										<w2:rowspan>1</w2:rowspan>
+									</w2:attributes>
+									<xf:textarea id="CONTENTS" style="width:100%;height:140px;" ref="data:dlt_BMS_USER_NEWS_CFG_INFO.NEWS_CONTENTS" maxlength="2000"></xf:textarea>
+								</xf:group>
 							</xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<xf:input adjustMaxLength="false" id="TITLE" style="height: 21px;" ref="data:dlt_BMS_USER_NEWS_CFG_INFO.PROV_NM"
-									maxlength="50">
-								</xf:input>
-							</xf:group>
-							<xf:group tagname="th" style="" class="w2tb_th">
-								범주
-								<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes>
-							</xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<xf:input adjustMaxLength="false" id="" style="height: 21px;"
-									ref="data:dlt_BMS_USER_NEWS_CFG_INFO.CATEGORY">
-								</xf:input>
-							</xf:group>
-						</xf:group>
-						<xf:group tagname="tr" style="">
-							<xf:group tagname="th" style="" class="w2tb_th">사용여부<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes></xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<xf:select1 id="radio0" selectedIndex="0" appearance="full"
-									style="width:100%;height:21px;margin-left :20px;" userData1="" cols="2" rows="" ref='data:dlt_BMS_USER_NEWS_CFG_INFO.USE_YN'
-									useRadioTitle="" visibleColumn="">
-									<xf:choices>
-										<xf:item>
-											<xf:label><![CDATA[예]]></xf:label>
-											<xf:value><![CDATA[Y]]></xf:value>
-										</xf:item>
-										<xf:item>
-											<xf:label><![CDATA[아니요]]></xf:label>
-											<xf:value><![CDATA[N]]></xf:value>
-										</xf:item>
-									</xf:choices>
-								</xf:select1>
-							</xf:group>
-							<xf:group tagname="th" style="" class="w2tb_th">
-								출판일시
-								<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes>
-							</xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<w2:inputCalendar footerDiv="false" id="BUY_DT" style="height: 23px;width: 150px;" renderDiv="true"
-										ref="data:dlt_BMS_USER_NEWS_CFG_INFO.PUB_DT" focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false"
-										renderType="component" defaultDate="" dateValidCheck="true" dateValidSet="true" ev:onviewchange="scwin.BUY_DT_onviewchange">
-									</w2:inputCalendar>
-							</xf:group>
-						</xf:group>
-						<xf:group tagname="tr" style="">
-							<xf:group tagname="th" style="vertical-align: top" class="w2tb_th">
-								뉴스 내용
-								<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes>
-							</xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<w2:attributes>
-									<w2:colspan>3</w2:colspan>
-									<w2:rowspan>1</w2:rowspan>
-								</w2:attributes>
-								<xf:textarea id="CONTENTS" style="width:100%;height:140px;" ref="data:dlt_BMS_USER_NEWS_CFG_INFO.NEWS_CONTENTS" maxlength="2000"></xf:textarea>
-							</xf:group>
-						</xf:group>
-						<xf:group tagname="tr" style="">
-							<xf:group tagname="th" style="vertical-align: top" class="w2tb_th">
-								비고
-								<w2:attributes>
-									<w2:scope>row</w2:scope>
-								</w2:attributes>
-							</xf:group>
-							<xf:group tagname="td" style="" class="w2tb_td">
-								<w2:attributes>
-									<w2:colspan>3</w2:colspan>
-									<w2:rowspan>1</w2:rowspan>
-								</w2:attributes>
-								<xf:textarea id="REMARK" style="width:100%;height:90px;" ref="data:dlt_BMS_USER_NEWS_CFG_INFO.REMARK" maxlength="200"></xf:textarea>
+							<xf:group tagname="tr" style="">
+								<xf:group tagname="th" style="vertical-align: top" class="w2tb_th">
+									비고
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
+								</xf:group>
+								<xf:group tagname="td" style="" class="w2tb_td">
+									<w2:attributes>
+										<w2:colspan>3</w2:colspan>
+										<w2:rowspan>1</w2:rowspan>
+									</w2:attributes>
+									<xf:textarea id="REMARK" style="width:100%;height:90px;" ref="data:dlt_BMS_USER_NEWS_CFG_INFO.REMARK" maxlength="200"></xf:textarea>
+								</xf:group>
 							</xf:group>
 						</xf:group>
 					</xf:group>
@@ -521,7 +546,6 @@
 							</w2:gBody>
 						</w2:gridView>
 					</xf:group>-->
-
 				</xf:group>
 			</xf:group>
 		</xf:group>
