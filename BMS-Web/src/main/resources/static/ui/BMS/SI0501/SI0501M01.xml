@@ -710,7 +710,7 @@
 										</xf:group>
 										<xf:group id="pgm_sub_subList" class="" style="">
 											<w2:gridView autoFit="lastColumn" autoFitMinWidth="0" class="cm_grid right" dataList="data:dlt_BMS_REP_ROUT_MST"
-												fixedColumnWithHidden="true" focusMode="row" id="SI0501G1" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="순번" 
+												fixedColumnWithHidden="true" focusMode="row" id="SI0501G1" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="No." 
 												rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" >
 												<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 												<w2:header style="" id="header2">

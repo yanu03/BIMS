@@ -876,7 +876,7 @@
 											</xf:group>
 											<xf:group class=""></xf:group>
 											<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.PI0801G1_onrowindexchange" ev:oncellclick=""
-												showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순서" sortable="true"
+												showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="No." sortable="true"
 												rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false"
 												fixedColumnWithHidden="true" dataList="data:dlt_BMS_VOC_INFO" ignoreCellClick="false" style="height:100%" autoFit="lastColumn"
 												visibleRowNum="" id="PI0801G1" class="cm_grid left" tooltipPositionY="" focusMode="row">
@@ -1293,7 +1293,7 @@
 											<xf:group ></xf:group>
 											<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"  style="height:100%"
 												dataList="data:dlt_BMS_INNER_LED_INFO"	ev:onrowindexchange="scwin.PI0801G0_onrowindexchange" fixedColumnWithHidden="true"
-												id="PI0801G0" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
+												id="PI0801G0" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
 												scrollByColumn="false" useShiftKey="true" autoFitMinWidth="0" readOnly="true" focusMode="row">
 												<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 												<w2:header style="" id="header1">
@@ -1462,7 +1462,7 @@
 											</xf:group>
 											<xf:group class=""></xf:group>
 											<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.PI0801G2_onrowindexchange" ev:oncellclick=""
-												showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순서"
+												showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="No."
 												sortable="true" rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
 												dataList="data:dlt_BMS_VOC_INFO2" ignoreCellClick="false" style="height:100%" autoFit="lastColumn" visibleRowNum="" id="PI0801G2"
 												class="cm_grid left" tooltipPositionY="" focusMode="row">

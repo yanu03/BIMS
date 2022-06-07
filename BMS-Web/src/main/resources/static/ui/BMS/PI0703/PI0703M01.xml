@@ -300,7 +300,7 @@
 						<xf:group></xf:group>
 						<xf:group id="" class="" style="">							
 							<w2:gridView id="PI0703G0" defaultCellHeight="20" rowNumVisible="true"
-								useShiftKey="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" 
+								useShiftKey="true" scrollByColumn="false" rowNumHeaderValue="No." sortable="true" 
 								rowStatusHeaderValue="상태" overflowX="scroll" overflowY="scroll" rowStatusVisible="false"
 								 fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_BMS_DESTI_RSV_RST_INFO" class="cm_grid left" autoFit="lastColumn" 
 								ev:oncellclick="scwin.PI0703G0_oncellclick"  ev:onrowindexchange="" focusMode="row">

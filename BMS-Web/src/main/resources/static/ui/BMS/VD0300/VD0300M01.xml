@@ -576,7 +576,7 @@
 								editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 								ev:onrowindexchange="scwin.VD0300G1_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row"
 								id="VD0300G1" ignoreCellClick="false" ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode=""
-								moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="순번"
+								moveKeyEditMode="" moveKeyEditModeAll="" nextTabID="" oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="No."
 								rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false"
 								scrollByColumn="false" showSortableUseFilter="" sortOrderReverse="" sortable="true" sortedIconPosition="" summaryAuto=""
 								useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true" visibleRowNum="" wheelRows="" sortEvent="onclick">
@@ -669,7 +669,7 @@
 						</xf:group>
 						<!-- <xf:group></xf:group> -->
 						<w2:gridView id="VD0300G2" style="" defaultCellHeight="20" rowNumVisible="true"
-							useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
+							useShiftKey="true" readOnly="" scrollByColumn="false" rowNumHeaderValue="No." sortable="true" rowStatusHeaderValue="상태"
 							overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
 							dataList="data:dlt_BMS_DVC_HIS" class="cm_grid right" autoFit="lastColumn" fixedColumnScrollHidden="">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>

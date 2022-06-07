@@ -921,7 +921,7 @@
 								<xf:group id="" class="" style="">
 									<w2:gridView autoFit="allColumn" class="cm_grid left" dataList="data:dlt_BMS_DVC_COND_PARAM_INFO"
 										ev:oncellclick="scwin.VD0204G0_oncellclick" ev:onrowindexchange="scwin.VD0204G0_onrowindexchange" fixedColumnWithHidden="true"
-										id="VD0204G0" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
+										id="VD0204G0" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
 										scrollByColumn="false" useShiftKey="true" autoFitMinWidth="0" readOnly="true" sortable="false" focusMode="row"
 										showSortableImage="true" sortEvent="onclick" >
 										<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
@@ -963,7 +963,7 @@
 									<xf:group id="" class="" style="">
 										<w2:gridView autoFit="lastColumn" autoFitMinWidth="0" checkEditableInputClass="" class="cm_grid right"
 											dataList="data:dlt_PLF_IMP_VER_INFO" ev:oncellclick="scwin.VD0204G1_oncellclick" ev:onrowindexchange="scwin.VD0204G1_onrowindexchange"
-											fixedColumnWithHidden="true" focusMode="row" id="VD0204G1" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="순번"
+											fixedColumnWithHidden="true" focusMode="row" id="VD0204G1" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="No."
 											rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowStatusVisible="false" scrollByColumn="false" sortable="false"
 											useShiftKey="true" sortEvent="onclick" mergeCells="">
 											<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
@@ -1165,7 +1165,7 @@
 							<xf:group id="" class="" style="">
 								<w2:gridView autoFit="allColumn" class="cm_grid left" dataList="data:dlt_BMS_DVC_TAG_COND_PARAM_INFO"
 									ev:oncellclick="scwin.VD0204G2_oncellclick" ev:onrowindexchange="scwin.VD0204G2_onrowindexchange" fixedColumnWithHidden="true"
-									id="VD0204G2" ignoreCellClick="false" rowNumHeaderValue="순번" rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
+									id="VD0204G2" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
 									scrollByColumn="false" useShiftKey="true" autoFitMinWidth="0" readOnly="true" sortable="false" focusMode="row"
 									showSortableImage="true" sortEvent="onclick" >
 									<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
