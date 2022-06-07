@@ -52,7 +52,8 @@
 						<w2:key id="TYPE" name="name1" dataType="text"></w2:key>
 						<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
 						<w2:key id="USE_YN" name="name3" dataType="text"></w2:key>
-						<w2:key id="OCR_DTM" name="발생일자" dataType="date"></w2:key>
+						<w2:key id="F_DATE" name="" dataType="date"></w2:key>
+						<w2:key id="L_DATE" name="" dataType="date"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_grgSearchItem" saveRemovedData="true">
@@ -133,6 +134,12 @@
                      ,{code : "OPER_APPR_DIV", compID : "OPER_APPR_DIV, MO0500G0:OPER_APPR_DIV" }
                      ,{code : "VHC_TYPE", compID : "VHC_TYPE, MO0500G0:VHC_TYPE" }
                ];
+               
+		dma_search.F_DATE = util.getCurrentDate2();
+		F_DATE.setValue(util.getCurrentDate2());
+		
+		dma_search.L_DATE = util.getCurrentDate2();
+		L_DATE.setValue(util.getCurrentDate2());
                
       com.setCommonDtl(codeOptions, function(){
          com.searchGrid(MO0500G0, sub_MO0500G0R0);
@@ -237,6 +244,11 @@
 		var jsonObj = dlt_BRT_OPER_APPR_INFO.getRowJSON(curIndex);
 		routMap.showVehicle2("map_MO0500", jsonObj, rowData, MO0500G0, 0, 0);
 	};
+	
+	//라디오 버튼에 따라 날짜 설정
+	scwin.calendar_radio_onviewchange = function(info) {
+		com.setCalendarRadioChange(F_DATE, L_DATE, info);
+	};
 ]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -284,12 +296,39 @@
 								</w2:itemset>
 							</w2:choices>
 						</w2:autoComplete>
-						<xf:group style="" id="">
-							<w2:span label="발생일시 : " style="float: left;margin-left: 15px; margin-top:2px;" id=""></w2:span>
-							<w2:inputCalendar footerDiv="false" id="" style="width: 150px;height: 23px;float: left;margin-left: 10px;"
-								renderDiv="true" focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component"
-								ref="data:dma_search.OCR_DTM">
-							</w2:inputCalendar>
+						<xf:group class="label" id="" style="margin-left:5px;">
+							<w2:span class="" id="" label="발생일시"></w2:span>
+						</xf:group>
+						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+							style="width:120px; margin-right: 5px; float: left;margin-top: 3px;" id="F_DATE" renderType="component" renderDiv="true"
+							calendarValueType="yearMonthDate" ref="data:dma_search.F_DATE" ev:onviewchange="scwin.F_DATE_onviewchange" placeholder="yyyymmdd">
+						</w2:inputCalendar>
+						<w2:span label="~" style="float: left;margin-right: 5px;margin-top: 5px;" id=""></w2:span>
+						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+							style="width: 120px;float: left;margin-top: 3px;" id="L_DATE" renderType="component" renderDiv="true" placeholder="yyyymmdd" calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange">
+						</w2:inputCalendar>
+						<xf:group id="" style="margin-left: 10px;" class="radio">
+							<xf:select1 id="calendar_radio" ref="" selectedIndex="1" cols="" appearance="full"
+								style="min-width: 200px;" rows="1" ev:onviewchange="scwin.calendar_radio_onviewchange">
+								<xf:choices>
+									<xf:item>
+										<xf:label><![CDATA[직접입력]]></xf:label>
+										<xf:value><![CDATA[DIRECT]]></xf:value>
+									</xf:item>
+									<xf:item>
+										<xf:label><![CDATA[금일]]></xf:label>
+										<xf:value><![CDATA[TODAY]]></xf:value>
+									</xf:item>
+									<xf:item>
+										<xf:label><![CDATA[일주일]]></xf:label>
+										<xf:value><![CDATA[WEEK]]></xf:value>
+									</xf:item>
+									<xf:item>
+										<xf:label><![CDATA[1개월]]></xf:label>
+										<xf:value><![CDATA[MONTH]]></xf:value>
+									</xf:item>
+								</xf:choices>
+							</xf:select1>
 						</xf:group>
 					</xf:group>
 					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
@@ -312,7 +351,7 @@
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
 									<w2:column removeBorderStyle="false" width="136" inputType="text" style="height:22px;" id="column16"
-										value="발생일시" blockSelect="false" displayMode="label">
+										value="발생일시" blockSelect="false" displayMode="label" checkboxLabelFormatter="">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:22px;" id="column13"
 										value="차량번호" blockSelect="false" displayMode="label">

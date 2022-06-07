@@ -101,7 +101,7 @@
 				#{RPC_ID}
 				,#{INCDNT_ID}
 				,#{OCR_DTM}
-				,#{OPER_DT}
+				,NULLIF(#{OPER_DT}, '')
 				,#{REP_ROUT_ID}
 				,#{ALLOC_NO}
 				,#{GRP_VHC_ID}

@@ -42,9 +42,15 @@
 			<if test="TYPE == 'ROUT_NM'">
 				AND D.ROUT_NM LIKE CONCAT('%',#{CONTENT},'%') 
 			</if>
-			<if test="OCR_DTM != NULL and OCR_DTM != ''">
-				AND A.OCR_DTM BETWEEN DATE_FORMAT(#{OCR_DTM}, '%Y-%m-%d 0:0:0') AND DATE_FORMAT(#{OCR_DTM}, '%Y-%m-%d 23:59:59')
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
+				<![CDATA[AND DATE_FORMAT(A.OCR_DTM, '%Y%m%d') >= #{F_DATE}]]>
 			</if>
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
+				<![CDATA[AND DATE_FORMAT(A.OCR_DTM, '%Y%m%d') <= #{L_DATE}]]>
+			</if>
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
+				AND DATE_FORMAT(A.OCR_DTM, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+			</if>			
 		</where>	
 		ORDER BY
 			A.OCR_DTM DESC

@@ -469,7 +469,7 @@
 								</w2:header>
 								<w2:gBody style="" id="gBody1">
 									<w2:row style="" id="row2">
-										<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
+										<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:25px"
 											inputType="checkbox" id="chk" blockSelect="false">
 										</w2:column>									
 										<w2:column removeBorderStyle="false" width="102" inputType="text" style="height:20px" id="REP_ROUT_NM"
@@ -571,7 +571,7 @@
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
-									<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
+									<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:25px"
 										inputType="checkbox" id="chk" blockSelect="false">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="RSV_CNT"
@@ -735,7 +735,7 @@
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
-									<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
+									<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:25px"
 										inputType="checkbox" id="chk" blockSelect="false">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="VHC_NO"

@@ -313,12 +313,9 @@
 		com.changeDualGrid(VD0300G1, VD0300G2, sub_VD0300G2S0, sub_VD0300G2R0, focusOption, row, oldRow);
 		
 		//장애발생 이력 조회
-		//전송일시 데이터 안나옴 쿼리문 고쳐야할듯		
 		var mngID = dlt_BMS_DVC_INFO.getCellData(row, "MNG_ID");		
 		dma_subsearch3.set("MNG_ID", mngID);
 		com.executeSubmission(sub_VD0300G3R0);
-						
-		
 	};
 	
 	scwin.VD0300T0_onchange = function(tabID,idx,userTabID) {

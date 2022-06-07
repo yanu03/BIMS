@@ -27,6 +27,7 @@
 			,A.ROUT_ID
 			,A.VHC_ID
 			,B.VHC_NO
+			,B.VHC_KIND
 		FROM 
 			BRT_DVC_STAT A
 			LEFT JOIN BMS_VHC_MST B

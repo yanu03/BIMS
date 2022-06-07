@@ -36,7 +36,6 @@
 		WHERE DEL_YN!='Y'
 	</select>
 	
-	
 	<select id="VH0300G1R0" resultType="Map">
 		SELECT  
 			DATE_FORMAT(A.OCR_DTM, '%Y-%m-%d %h:%i:%s') OCR_DTM 

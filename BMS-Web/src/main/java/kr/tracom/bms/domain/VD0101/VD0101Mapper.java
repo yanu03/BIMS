@@ -8,13 +8,13 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface VD0101Mapper {
 
-	public List VD0101G0R0(Map param);
+	//public List VD0101G0R0(Map param);
 	
 	public List VD0101SHI0();
 	
 	public List VD0101SHI1();
 	
-	public List VD0101G1R0(Map param);
+	public List VD0101G0R0(Map param);
 	
 	public List VD0101G2R0(Map param);
 	

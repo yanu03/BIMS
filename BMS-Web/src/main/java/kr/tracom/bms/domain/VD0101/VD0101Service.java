@@ -20,10 +20,10 @@ public class VD0101Service extends ServiceSupport {
 	@Autowired
 	private VD0101Mapper vd0101Mapper;
 	
-	public List VD0101G0R0() throws Exception {
+	/*public List VD0101G0R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
 		return vd0101Mapper.VD0101G0R0(map);
-	}
+	}*/
 
 	public List VD0101SHI0() throws Exception {
 		return vd0101Mapper.VD0101SHI0();
@@ -33,10 +33,10 @@ public class VD0101Service extends ServiceSupport {
 		return vd0101Mapper.VD0101SHI1();
 	}
 	
-	public List VD0101G1R0() throws Exception {
+	public List VD0101G0R0() throws Exception {
 		// TODO Auto-generated method stub
 		Map param = getSimpleDataMap("dma_subsearch");
-		return vd0101Mapper.VD0101G1R0(param);
+		return vd0101Mapper.VD0101G0R0(param);
 	}
 	
 	public List VD0101G2R0() throws Exception {
