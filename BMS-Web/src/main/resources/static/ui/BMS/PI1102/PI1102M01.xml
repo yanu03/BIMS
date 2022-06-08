@@ -11,7 +11,7 @@
 			</xf:instance>
 			<w2:dataCollection baseNode="map">
 
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_VDO_ORGA_INFO" saveRemovedData="true">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_TRAN_VDO_ORGA_INFO" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="ORGA_ID" name="편성ID" dataType="text"></w2:column>
 						<w2:column id="ORGA_NM" name="편성명" dataType="text"></w2:column>
@@ -62,7 +62,7 @@
 						<w2:key id="ORGA_ID" name="편성ID" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_VDO_RSV_RST_INFO" saveRemovedData="true">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_TRAN_VDO_RSV_RST_INFO" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
 						<w2:column id="PROCE_RST" name="예약결과" dataType="text"></w2:column>
@@ -84,7 +84,7 @@
 				</w2:dataMap>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
-			<xf:submission id="sub_PI1102G0R0" ref="data:json,dma_search" target="data:json,dlt_VDO_ORGA_INFO" action="/pi/PI1102G0R0"
+			<xf:submission id="sub_PI1102G0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_TRAN_VDO_ORGA_INFO" action="/pi/PI1102G0R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="조회 중입니다..." ev:submit="" ev:submitdone="scwin.sub_PI1102G0R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -107,7 +107,7 @@
 				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI1102G1U0_submitdone" ev:submiterror=""
 				abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_PI1102G2R0" ref="data:json,dma_subsearch2" target="data:json,dlt_BMS_VDO_RSV_RST_INFO" action="/pi/PI1102G2R0" method="post" mediatype="application/json" encoding="UTF-8"
+			<xf:submission id="sub_PI1102G2R0" ref="data:json,dma_subsearch2" target="data:json,dlt_BMS_TRAN_VDO_RSV_RST_INFO" action="/pi/PI1102G2R0" method="post" mediatype="application/json" encoding="UTF-8"
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI1102G2R0_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -206,7 +206,7 @@
 			}
 		}
 		
-		dma_subsearch.set("ORGA_ID", dlt_VDO_ORGA_INFO.getCellData(PI1102G0.getFocusedRowIndex(), "ORGA_ID"));
+		dma_subsearch.set("ORGA_ID", dlt_BMS_TRAN_VDO_ORGA_INFO.getCellData(PI1102G0.getFocusedRowIndex(), "ORGA_ID"));
 		com.saveGrid(PI1102G1, sub_PI1102G1S0);	
 	}
 	
@@ -351,7 +351,7 @@
 
 					<xf:group id="" class="" style="">
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
-								dataList="data:dlt_VDO_ORGA_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
+								dataList="data:dlt_BMS_TRAN_VDO_ORGA_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 								ev:onrowindexchange="scwin.PI1102G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true" id="PI1102G0" ignoreCellClick="false"
 								nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40"
 								scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows="" autoFitMinWidth="0" disabledScrollHidden=""
@@ -452,11 +452,14 @@
 										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column8"
 											value="장치종류" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column19"
+										<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px" id="column19"
 											value="설치위치" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column13"
+										<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px" id="column13"
 											value="관리ID" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column14"
+											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 									</w2:row>
 								</w2:header>
@@ -484,6 +487,9 @@
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="MNG_ID"
+											userData1="" value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id=""
 											userData1="" value="" blockSelect="false" displayMode="label">
 										</w2:column>
 									</w2:row>
@@ -535,7 +541,7 @@
 						</xf:group>					
 						<xf:group id="" class="" style="">
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
-								dataList="data:dlt_BMS_VDO_RSV_RST_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
+								dataList="data:dlt_BMS_TRAN_VDO_RSV_RST_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 								ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true" id="PI1102G2" ignoreCellClick="false"
 								nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40"
 								scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows="" autoFitMinWidth="0" disabledScrollHidden=""

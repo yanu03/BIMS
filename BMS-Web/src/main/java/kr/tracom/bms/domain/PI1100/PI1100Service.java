@@ -56,7 +56,7 @@ public class PI1100Service extends ServiceSupport {
 		int uCnt = 0;
 		int dCnt = 0;		
 		
-		List<Map<String, Object>> param = getSimpleList("dlt_VDO_INFO");
+		List<Map<String, Object>> param = getSimpleList("dlt_BMS_TRAN_VDO_INFO");
 		try {
 			for (int i = 0; i < param.size(); i++) {
 				Map data = (Map) param.get(i);

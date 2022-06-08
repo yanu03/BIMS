@@ -7,15 +7,15 @@
 			ORGA_NM,
 			REMARK,
 		   (select COUNT(ORGA_ID)
-			FROM BMS_VDO_ORGA_LIST b
+			FROM BMS_TRAN_VDO_ORGA_LIST b
 			WHERE b.ORGA_ID = a.ORGA_ID) VIDEO_COUNT,
 		   (select SUM(PLAY_TM)
-			FROM BMS_VDO_INFO c, BMS_VDO_ORGA_LIST b
+			FROM BMS_TRAN_VDO_INFO c, BMS_TRAN_VDO_ORGA_LIST b
 			WHERE c.VDO_ID = b.VDO_ID
 			AND a.ORGA_ID = b.ORGA_ID) TOTAL_TIME
 	
 
-	from	BMS_VDO_ORGA_INFO a
+	from	BMS_TRAN_VDO_ORGA_INFO a
 	<where>
 		<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
 			AND ORGA_ID LIKE CONCAT('%',#{CONTENT},'%') || ORGA_NM LIKE CONCAT('%',#{CONTENT},'%') 
@@ -30,17 +30,17 @@
 </select>
 	
 <select id="PI1101G0K0" resultType="Map">
-	SELECT CONCAT('VG', LPAD(NEXTVAL(SEQ_BMS_VDO_ORGA_INFO_0), 8, '0')) AS 'SEQ'
+	SELECT CONCAT('TG', LPAD(NEXTVAL(SEQ_BMS_TRAN_VDO_ORGA_INFO_0), 8, '0')) AS 'SEQ'
 </select>
 
 <select id="PI1101SHI0" resultType="Map">
 	select ORGA_ID, ORGA_NM
-	from BMS_VDO_ORGA_INFO
+	from BMS_TRAN_VDO_ORGA_INFO
 	order by ORGA_NM
 </select>
 
 <insert id="PI1101G0I0" parameterType="Map">
-	insert into BMS_VDO_ORGA_INFO
+	insert into BMS_TRAN_VDO_ORGA_INFO
 			(
 				ORGA_ID,
 				ORGA_NM,
@@ -59,7 +59,7 @@
 </insert>
 
 <update id="PI1101G0U0" parameterType="Map">
-	update BMS_VDO_ORGA_INFO
+	update BMS_TRAN_VDO_ORGA_INFO
 	set 	ORGA_NM = #{ORGA_NM},
 			REMARK = #{REMARK},
 			UPD_DTM = #{UPD_DTM},
@@ -69,10 +69,10 @@
 
 <delete id="PI1101G0D0" parameterType="Map">
 	delete
-	from BMS_VDO_ORGA_INFO
+	from BMS_TRAN_VDO_ORGA_INFO
 	where ORGA_ID = #{ORGA_ID};
 	
-	DELETE FROM BMS_VDO_ORGA_LIST 
+	DELETE FROM BMS_TRAN_VDO_ORGA_LIST 
 	WHERE ORGA_ID = #{ORGA_ID}
 </delete>
 
@@ -88,7 +88,7 @@
 			PLAY_TM,
 			DATE_FORMAT(PLAY_ED_DT, '%Y%m%d') PLAY_ED_DT
 			
-	from 	BMS_VDO_INFO
+	from 	BMS_TRAN_VDO_INFO
 </select>
 
 <select id="PI1101G2R0" resultType="Map">
@@ -101,13 +101,13 @@
 		  	DATE_FORMAT(PLAY_ST_DT, '%Y%m%d') PLAY_ST_DT,
 		  	DATE_FORMAT(PLAY_ED_DT, '%Y%m%d') PLAY_ED_DT
 	
-	from BMS_VDO_ORGA_LIST a  INNER JOIN BMS_VDO_INFO b ON a.VDO_ID = b.VDO_ID
+	from BMS_TRAN_VDO_ORGA_LIST a  INNER JOIN BMS_TRAN_VDO_INFO b ON a.VDO_ID = b.VDO_ID
 	where a.ORGA_ID = #{ORGA_ID}
 	order by a.SN
 </select>
 
 <insert id="PI1101G2I0" parameterType="Map">
-	insert into BMS_VDO_ORGA_LIST
+	insert into BMS_TRAN_VDO_ORGA_LIST
 			(
 				ORGA_ID,
 				VDO_ID,
@@ -122,7 +122,7 @@
 </insert>
 
 <update id="PI1101G2U0" parameterType="Map"> 
-	update BMS_VDO_ORGA_LIST
+	update BMS_TRAN_VDO_ORGA_LIST
 	set SN = #{SN}
 	where ORGA_ID = #{ORGA_ID}
 	and	VDO_ID = #{VDO_ID}		
@@ -130,7 +130,7 @@
 </update>
 
 <delete id="PI1101G2D0" parameterType="Map">
-	DELETE FROM BMS_VDO_ORGA_LIST 
+	DELETE FROM BMS_TRAN_VDO_ORGA_LIST 
 	WHERE ORGA_ID = #{ORGA_ID}
 	AND VDO_ID = #{VDO_ID}
 </delete>
