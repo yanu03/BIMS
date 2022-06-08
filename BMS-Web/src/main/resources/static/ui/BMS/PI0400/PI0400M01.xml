@@ -256,7 +256,7 @@
 					<xf:group id="" class="" style="">
 						<xf:group id="" style="" class="gr_search">
 							<xf:group class="label" id="" style="">
-								<w2:span class="" id="" label="기준년월"></w2:span>
+								<w2:span class="" id="" label="예약날짜"></w2:span>
 							</xf:group>
 							<xf:group class="search" id="pgm_search" style="">
 								<w2:inputCalendar footerDiv="false" style="width: 130px;height: 25px;float: left;" renderDiv="true"

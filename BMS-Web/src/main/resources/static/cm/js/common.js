@@ -6190,7 +6190,6 @@ com.setSubBtn = function(btnOptions, generator) {
  * 
  */
 com.setSubBtn2 = function(wfm_subBtn,autoOpt, subOpt, codeOptions) {
-	debugger;
 	var programAuthority = gcm.CUR_PROGRAM_AUTH;
 
 	if(programAuthority.AUTH_CHECK != 'Y')return;
@@ -8836,7 +8835,6 @@ com.clone = function(fromData, toData) {
 };
 
 com.moveGrid = function(fromGrid, toGrid, fromKeyColumn, toCellColumn, toCellValue){
-	debugger;
 	var fromData = com.getGridViewDataList(fromGrid);
 	var toData = com.getGridViewDataList(toGrid);
 	
