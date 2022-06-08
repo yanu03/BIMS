@@ -20,27 +20,9 @@ public class VH0300Controller extends ControllerSupport {
 	
 	@RequestMapping("/vh/VH0300G0R0")
 	public @ResponseBody Map<String, Object> VH0300G0R0() throws Exception {
-		result.setData("dlt_BMS_STTN_MST", vh0300Service.VH0300G0R0());
+		result.setData("dlt_BRT_ACRT_LOC_STOP_LOG", vh0300Service.VH0300G0R0());
 		return result.getResult();
 	}
 	
-	@RequestMapping("/vh/VH0300G1R0")
-	public @ResponseBody Map<String, Object> VH0300G1R0() throws Exception {
-		result.setData("dlt_BRT_ACRT_LOC_STOP_LOG", vh0300Service.VH0300G1R0());
-		return result.getResult();
-	}
-
-	@RequestMapping("/vh/VH0300G1S0")
-	public @ResponseBody Map<String, Object> VH0300G1S0() throws Exception {
-		Map map = vh0300Service.VH0300G1S0();
-		result.setData("dma_result", map);
-		return result.getResultSave();
-	}	
-	
-	@RequestMapping("/vh/VH0300SHI0")
-	public @ResponseBody Map<String, Object> VH0300SHI0() throws Exception {
-		result.setData("dlt_searchitem", vh0300Service.VH0300SHI0());
-		return result.getResult();
-	}	
 	
 }
