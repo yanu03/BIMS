@@ -52,9 +52,13 @@
 						,IF(C.COMPLETE_YN = 'N', '예약중', NULL) RSV_STATE
 						<!-- ,(CASE WHEN C.RSV_ID IS NOT NULL THEN '예약중' END) RSV_STATE -->
 						,B.MNG_ID
+						,B.DVC_ID
+						,B.INST_LOC
+						,B.DVC_KIND
 						,C.RSV_ID
 						,DATE_FORMAT(D.RSV_DT, '%Y-%m-%d') RSV_DT
 						,E.COMP_NM
+						,(SELECT COUNT(*) FROM BMS_DESTI_RSV_RST_INFO VRR WHERE VRR.COMPLETE_YN = 'N' AND VRR.MNG_ID = C.MNG_ID) AS RSV_CNT
 						
 		FROM BMS_VHC_MST A 
 			LEFT JOIN BMS_DVC_INFO B ON A.VHC_ID = B.VHC_ID
@@ -165,9 +169,18 @@
 			<if test="RSV_STATE == '예약종료'">
 				AND RST.COMPLETE_YN = 'Y'
 			</if>			
-			<if test="RSV_DT != null">
-				AND DATE_FORMAT(RSV.RSV_DT, '%Y%m') = ${RSV_DT}
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
+				<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') >= #{F_DATE}]]>
+			</if>
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
+				<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') <= #{L_DATE}]]>
+			</if>
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
+					AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
 			</if>			
+			<!-- <if test="RSV_DT != null">
+				AND DATE_FORMAT(RSV.RSV_DT, '%Y%m') = ${RSV_DT}
+			</if>	 -->		
 		ORDER BY	RSV.RSV_DT
 	</select>
 	

@@ -90,6 +90,11 @@
 						<w2:column id="OPER_SN" name="운행순번" dataType="text"></w2:column>
 						<w2:column id="GPS_X_RAW" name="원GPS_X" dataType="text"></w2:column>
 						<w2:column id="GPS_Y_RAW" name="원GPS_Y" dataType="text"></w2:column>
+						<w2:column id="DRV_ID" name="name25" dataType="text"></w2:column>
+						<w2:column id="COR_ID" name="name26" dataType="text"></w2:column>
+						<w2:column id="NODE_ID" name="name27" dataType="text"></w2:column>
+						<w2:column id="LINK_ID" name="name28" dataType="text"></w2:column>
+						<w2:column id="NODE_SN" name="name29" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 			</w2:dataCollection>
@@ -680,24 +685,31 @@
 									<w2:column removeBorderStyle="false" width="300" inputType="text" style="height:20px" id="column20"
 										value="이벤트내용" blockSelect="false" displayMode="label">
 									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column17"
+									<!-- 이하 엑셀 다운로드용 -->
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column97"
+										value="운전자ID" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column96"
+										value="코스ID" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column95"
+										value="노선ID" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column94"
+										value="링크ID" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column93"
+										value="노드ID" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column92"
+										value="노드순번" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column91"
 										value="운행상태" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="50" inputType="text" style="height:20px" id="column18"
-										value="헤딩" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column90"
+										value="정차시간" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column13"
-										value="경도" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column14"
-										value="위도" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column15"
-										value="지나온 노드명" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="260" inputType="text" style="height:20px" id="column16"
-										value="링크명" blockSelect="false" displayMode="label">
-									</w2:column> -->
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
@@ -747,24 +759,30 @@
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="EVT_DATA"
 										value="" blockSelect="false" displayMode="label" textAlign="left">
 									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="OPER_STS"
+									<w2:column removeBorderStyle="false" width="" inputType="select" style="height:20px" id="DRV_ID"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="DRV_ANGLE"
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="COR_ID"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="=" inputType="text" style="height:20px" id="GPS_X"
+									<w2:column removeBorderStyle="false" width="=" inputType="text" style="height:20px" id="ROUT_ID"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="GPS_Y"
+									<w2:column removeBorderStyle="false" width="=" inputType="text" style="height:20px" id="LINK_ID"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="NODE_NM"
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="NODE_ID"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="LINK_NM"
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="NODE_SN"
 										value="" blockSelect="false" displayMode="label">
-									</w2:column> -->
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="OPER_STS"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="STOP_TM"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
 								</w2:row>
 							</w2:gBody>
 							<w2:footer id="footer1" style="">

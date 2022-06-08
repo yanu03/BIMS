@@ -1761,7 +1761,6 @@
 									ev:oncellclick="scwin.FM0204G0_oncellclick" ev:onrowindexchange="scwin.FM0204G0_onrowindexchange" fixedColumnWithHidden="true"
 									id="FM0204G0" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
 									scrollByColumn="false" useShiftKey="true" autoFitMinWidth="0" readOnly="true" sortable="false" focusMode="row" showSortableImage="true"
->>>>>>> 18902621e98837bf01c2ec9666993903fa1bbde5
 									sortEvent="onclick">
 									<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
 									<w2:header style="" id="header2">

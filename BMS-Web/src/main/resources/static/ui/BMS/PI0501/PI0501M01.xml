@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:w2="http://www.inswave.com/websquare"
 	xmlns:xf="http://www.w3.org/2002/xforms">
 	<head meta_vertical_guides="" meta_horizontal_guides="">
+		<script type="text/javascript" src="/cm/js/jquery.blockUI.js"></script>
 		<w2:type>DEFAULT</w2:type>
 		<w2:buildDate />
 		<xf:model>
@@ -90,7 +91,20 @@
 		</xf:model>
 
 		<script type="text/javascript" lazy="false"><![CDATA[
+/**
+ * 승객용 안내기영상 I/O 프로그램
+ * 파일 업로드 내용이 바뀔때 미리보기 이벤트 탐. 
+ * 영상이 Update됐을 때 즉각 반영이 안되는 문제가 있음. Create일 시는 문제 없어보임. 
+ * 파일 업로드 되는동안 I/O 막음 
+ * 날짜 validate 
+ 
+ 
+ * @version 1.0
+ * @author 양현우
+ * @date 2022/06/07
+ */	
 	scwin.onpageload = function() {
+	
 		var autoOptions = {
 			Main : { grid : PI0501G0, frm : PI0501F0, srchSbm : sub_PI0501G0R0, savSbm : sub_PI0501G0S0, keySbm : sub_PI0501G0K0, 
 					srchGrp : pgm_header, keyColumn : "VDO_ID", focusColumn : "VDO_NM", name : "영상 목록"}
@@ -132,6 +146,7 @@
 	
 	scwin.sub_PI0501G0S0_submitdone = function(e) {
 		com.saveDone(PI0501G0, sub_PI0501G0R0);
+		btn_upload.reset();
 	};
 	
 	//파일 선택버튼 클릭 이벤트
@@ -165,25 +180,47 @@
 	}*/
 	
 	scwin.upload0_onInputValueChange = function(returnValue){
-		
-		// 확장자 추출
-		var lastDot = returnValue.lastIndexOf('.'); 
-		var fileExtension = returnValue.substring(lastDot+1, returnValue.length);
-		
-		//파일명 추출
-		var fileNameIndex = returnValue.lastIndexOf('\\');
-		var fileName = returnValue.substring(fileNameIndex+1, returnValue.length);
-		
-		dlt_VDO_INFO.setCellData(PI0501G0.getFocusedRowIndex(), "FILE_YN", "Y");
-		dlt_VDO_INFO.setCellData(PI0501G0.getFocusedRowIndex(), "FILE_NM", fileName);
-		dlt_VDO_INFO.setCellData(PI0501G0.getFocusedRowIndex(), "FILE_EXTENSION", fileExtension);
-		dma_fileinfo.set("EXTENSION", fileExtension);
+		if(returnValue != "") {
+			// 확장자 추출
+			var lastDot = returnValue.lastIndexOf('.'); 
+			var fileExtension = returnValue.substring(lastDot+1, returnValue.length);
 			
-		btn_upload.submit();
+			//파일명 추출
+			var fileNameIndex = returnValue.lastIndexOf('\\');
+			var fileName = returnValue.substring(fileNameIndex+1, returnValue.length);
+			
+			dlt_VDO_INFO.setCellData(PI0501G0.getFocusedRowIndex(), "FILE_YN", "Y");
+			dlt_VDO_INFO.setCellData(PI0501G0.getFocusedRowIndex(), "FILE_NM", fileName);
+			dlt_VDO_INFO.setCellData(PI0501G0.getFocusedRowIndex(), "FILE_EXTENSION", fileExtension);
+			
+			var fileType = dlt_VDO_INFO.getCellData(PI0501G0.getFocusedRowIndex(), "FILE_TYPE");
+			
+			if (fileType == "FT001") {
+				if(fileExtension != "mp4" && fileExtension != "avi") {
+					com.alert("동영상은 .mp4, .avi 확장자만 업로드가 가능합니다.");
+					btn_upload.reset();	
+					return;		
+				}
+			}
+			else if (fileType == "FT002") {
+				if(fileExtension != "png" && fileExtension != "jpg") {
+					com.alert("이미지는 .png, .jpg 확장자만 업로드가 가능합니다.");	
+					btn_upload.reset();					
+					return;
+				}		
+			}
+			
+			
+			dma_fileinfo.set("EXTENSION", fileExtension);
+				
+			btn_upload.submit();
+			com.loadingBar(true);
+		}
 		
 	}
 	
 	scwin.upload0_ondone = function(retXml) {
+		com.loadingBar(false);
 		var fileType = dlt_VDO_INFO.getCellData(PI0501G0.getFocusedRowIndex(), "FILE_TYPE");
 		var real_fileName = dlt_VDO_INFO.getCellData(PI0501G0.getFocusedRowIndex(), "FILE_NM");
 		var src = "/fileUpload/up/" + real_fileName; 
@@ -197,6 +234,7 @@
 			$p.$("#video1").attr("src", src);
 		} else if (fileType == "FT002") {
 			$p.$("#image1").attr("src", src);
+			dlt_VDO_INFO.setCellData(PI0501G0.getFocusedRowIndex(), "PLAY_TM", 0);
 		}			
 		
 	};
@@ -291,14 +329,26 @@
 		var playEdDt = PLAY_ED_DT.getValue();
 		
 		if(playStDt > playEdDt){
-			com.messagBox("alert", "지정할 수 없는 날짜입니다.", scwin.checkClose(info))
+			com.messagBox("alert", "지정할 수 없는 날짜입니다.", scwin.checkCloseL(info))
 		}
 	};
 	
+	scwin.checkCloseF = function(info) {
+		PLAY_ST_DT.setValue(info.oldValue);
+	}	
 
-	scwin.checkClose = function(info){
+	scwin.checkCloseL = function(info){
 	   PLAY_ED_DT.setValue(info.oldValue);
 	}
+	
+	scwin.PLAY_ST_DT_onviewchange = function(info) {
+		var ldate = PLAY_ED_DT.getValue();
+		var fdate = PLAY_ST_DT.getValue();
+		
+		if (fdate > ldate && ldate != ""){
+			com.messagBox("alert", "지정할 수 없는 날짜입니다.",scwin.checkCloseF(info));
+		}		
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -391,8 +441,8 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column6"
 										value="파일유형" blockSelect="false" displayMode="label" class="req">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="104" inputType="text" style="height:20px" id="column5"
-										value="이미지재생시간" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px" id="column5"
+										value="이미지재생시간(초)" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column3"
 										value="재생시간(초)" blockSelect="false" displayMode="label">
@@ -403,7 +453,7 @@
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column2"
 										value="재생종료일" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column1"
+									<w2:column removeBorderStyle="false" width="500" inputType="text" style="height:20px" id="column1"
 										value="비고" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
@@ -499,7 +549,7 @@
 									</w2:attributes>
 									<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel=" " direction="auto"
 										disabled="false" disabledClass="w2selectbox_disabled" displayMode="label" id="FILE_TYPE" labelWidthAuto="" mandatory="true"
-										optionOrder="" ref="data:dlt_VDO_INFO.FILE_TYPE" renderType="component" style="width:100px;height:24px;" submenuSize="auto" ev:onchange="scwin.FILE_TYPE_onchange">
+										optionOrder="" ref="data:dlt_VDO_INFO.FILE_TYPE" renderType="component" style="width:100px;height:24px;" submenuSize="auto" ev:onchange="scwin.FILE_TYPE_onchange" nextTabID="">
 										<xf:choices></xf:choices>
 									</xf:select1>
 								</xf:group>
