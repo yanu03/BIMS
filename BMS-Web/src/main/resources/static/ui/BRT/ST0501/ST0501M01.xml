@@ -27,6 +27,7 @@
 						<w2:column id="ROUT_ID" name="노선아이디" dataType="text"></w2:column>
 						<w2:column id="VHC_ID" name="차량ID" dataType="text"></w2:column>
 						<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
+						<w2:column id="VHC_KIND" name="차량종류" dataType="text"></w2:column>
 						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
@@ -116,7 +117,13 @@
 			
 		};
 		
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions);
+		var codeOptions = [ 
+				{code : "VHC_KIND", compID : "ST0501G1:VHC_KIND" }
+		];	
+		
+		com.setCommonDtl(codeOptions);
+		
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions,codeOptions);
 		
 		dma_sub_search.set("DVC_SELECT_DIV", "DK001");
 		dma_sub_search.set("SELECT_DIV", "ERROR_CNT");
@@ -705,6 +712,12 @@
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column2"
 										value="차량번호" blockSelect="false" displayMode="label">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column3"
+										value="차량종류" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column4"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
@@ -716,6 +729,12 @@
 										value="" blockSelect="false" displayMode="label" textAlign="">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="VHC_NO"
+										value="" blockSelect="false" displayMode="label" textAlign="">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="94" inputType="select" style="height:20px" id="VHC_KIND"
+										value="" blockSelect="false" displayMode="label" textAlign="">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id=""
 										value="" blockSelect="false" displayMode="label" textAlign="">
 									</w2:column>
 								</w2:row>
@@ -840,7 +859,7 @@
 						grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Sum" allTotalName="총계" 
 						digitsAfterDecimal="0" useNumberFormat="true" scaler="1" grandTotalName="" suffix="건" prefix="" 
 						noResultMessageVisible="true" noResultMessage="데이터 없음" autoFitMinWidth="1300" 
-						ev:onrefresh="scwin.pivot_ST0501_onrefresh">
+						ev:onrefresh="scwin.pivot_ST0501_onrefresh" sortFunction="">
 				    		<w2:fieldInfo>
 								<w2:field id="ERROR_CNT" name="장애건수"></w2:field>
 								<w2:field id="JUDG_CNT" name="조치건수"></w2:field>

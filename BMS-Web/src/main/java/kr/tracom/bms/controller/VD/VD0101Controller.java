@@ -18,11 +18,11 @@ public class VD0101Controller extends ControllerSupport {
 	@Autowired
 	private VD0101Service vd0101Service;
 	
-	@RequestMapping("/vd/VD0101G0R0")
+	/*@RequestMapping("/vd/VD0101G0R0")
 	public @ResponseBody Map<String, Object> VD0101G0R0() throws Exception {
 		result.setData("dlt_BMS_VHC_MST", vd0101Service.VD0101G0R0());
 		return result.getResult();
-	}
+	}*/
 	
 	@RequestMapping("/vd/VD0101SHI0")
 	public @ResponseBody Map<String, Object> VD0101SHI0() throws Exception {
@@ -36,9 +36,9 @@ public class VD0101Controller extends ControllerSupport {
 		return result.getResult();
 	}
 	
-	@RequestMapping("/vd/VD0101G1R0")
-	public @ResponseBody Map<String, Object> VD0101G1R0() throws Exception {
-		result.setData("dlt_BMS_DVC_INFO", vd0101Service.VD0101G1R0());
+	@RequestMapping("/vd/VD0101G0R0")
+	public @ResponseBody Map<String, Object> VD0101G0R0() throws Exception {
+		result.setData("dlt_BMS_DVC_INFO", vd0101Service.VD0101G0R0());
 		return result.getResult();
 	}
 	
