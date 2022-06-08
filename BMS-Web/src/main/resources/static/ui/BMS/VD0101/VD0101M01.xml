@@ -383,7 +383,7 @@
 							checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_DVC_INFO" disabledScrollHidden="" editModeEvent=""
 							ev:onrowindexchange="scwin.VD0101G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows=""
 							fixedColumnWithHidden="true" focusMode="row" id="VD0101G0" ignoreCellClick="false" ignoreNonEditableCellTabEnter=""
-							readOnly="true" rowNumHeaderValue="순번" rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth=""
+							readOnly="true" rowNumHeaderValue="No." rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowNumWidth=""
 							rowStatusHeaderValue="" rowStatusVisible="false" scrollByColumn="false" showSortableUseFilter="" sortOrderReverse="" sortable="true"
 							sortedIconPosition="" summaryAuto="" useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true" visibleRowNum=""
 							wheelRows="" sortEvent="onclick">
@@ -421,7 +421,7 @@
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
-									<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px" id="VHC_ID"
+									<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:25px" id="VHC_ID"
 										value="" blockSelect="false" displayMode="label" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px" id="VHC_NO"
@@ -469,7 +469,7 @@
 						</w2:gridView>
 					</xf:group>
 
-							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
+							<!-- <w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
 								dataList="data:dlt_BMS_VHC_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.VD0101G0_oncellclick" ev:oneditkeyup=""
 								ev:onkeyup="" ev:onrowindexchange="scwin.VD0101G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange=""
 								fixedColumnWithHidden="true" id="VD0101G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true"
@@ -671,7 +671,7 @@
 									</w2:footer>							
 								</w2:gridView>
 							</xf:group>
-						</xf:group>
+						</xf:group> -->
 					<!-- </xf:group> --><!-- pgm_list -->
 				
 				</xf:group>
