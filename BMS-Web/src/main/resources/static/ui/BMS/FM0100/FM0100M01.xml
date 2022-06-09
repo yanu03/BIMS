@@ -746,7 +746,7 @@
 									<xf:group id="" style=""></xf:group>
 									<w2:inputCalendar footerDiv="false" id="INST_DT" style="height: 23px;width: 110px;" renderDiv="true"
 										ref="data:dlt_BMS_FCLT_INFO.INST_DT" focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false"
-										renderType="component" userData1="" defaultDate="" nextTabID="" class="" displayFormatFunc="" ev:onviewchange="scwin.INST_DT_onviewchange">
+										renderType="component" userData1="" defaultDate="" nextTabID="" class="" displayFormatFunc="" ev:onviewchange="scwin.INST_DT_onviewchange" dateValidCheck="true" dateValidSet="true">
 									</w2:inputCalendar>
 								</xf:group>
 							</xf:group>

@@ -415,6 +415,11 @@
 		var val = info.newValue;
 		dlt_BRT_RPC_VHC_INFO.setCellData(AL0303G0.getFocusedRowIndex(), "OPER_DT", val.substr(0, 8));
 	};
+	
+	scwin.ocrDtmDisplay = function(obj){
+		var outPut = util.getDateTime(obj);
+		return outPut;
+	}
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -528,7 +533,7 @@
 										displayMode="label" readOnly="true" userData1="M">
 									</w2:column> -->
 									<w2:column width="159" style="height:20px;" inputType="text" id="OCR_DTM" blockSelect="false"
-										displayMode="label" readOnly="true" userData1="M">
+										displayMode="label" readOnly="true" userData1="M" displayFormatter="scwin.ocrDtmDisplay">
 									</w2:column>
 									<w2:column width="159" style="height:20px;" inputType="text" id="GRP_VHC_NO" blockSelect="false"
 										displayMode="label" readOnly="true" userData1="M">
@@ -546,7 +551,7 @@
 										displayMode="label" readOnly="true">
 									</w2:column> -->
 									<w2:column width="159" style="height:20px;" inputType="text" id="RPC_DTM" blockSelect="false"
-										displayMode="label" readOnly="true" userData1="">
+										displayMode="label" readOnly="true" userData1="" displayFormatter="scwin.ocrDtmDisplay">
 									</w2:column>
 									<w2:column width="159" style="height:20px;" inputType="text" id="DETAILS" blockSelect="false"
 										displayMode="label" readOnly="true" textAlign="left">
@@ -646,7 +651,7 @@
 									<xf:group class="w2tb_td" style="" tagname="td">
 										<w2:inputCalendar calendarValueType="yearMonthDateTimeSec" focusOnDateSelect="false"
 											footerDiv="false" class="req" id="OCR_DTM" ref="data:dlt_BRT_RPC_VHC_INFO.OCR_DTM" renderDiv="true" renderType="component"
-											rightAlign="false" style="width: 150px;height: 23px;" ev:onviewchange="scwin.OCR_DTM_onviewchange">
+											rightAlign="false" style="width: 150px;height: 23px;" ev:onviewchange="scwin.OCR_DTM_onviewchange" dateValidCheck="true" dateValidSet="true">
 										</w2:inputCalendar>
 									</xf:group>
 							</xf:group>
@@ -707,7 +712,7 @@
 									</w2:attributes>
 									<w2:inputCalendar footerDiv="false" id="" style="width: 150px;height: 23px;" renderDiv="true"
 										focusOnDateSelect="false" calendarValueType="yearMonthDateTimeSec" rightAlign="false" renderType="component"
-										ref="data:dlt_BRT_RPC_VHC_INFO.RPC_DTM">
+										ref="data:dlt_BRT_RPC_VHC_INFO.RPC_DTM" dateValidCheck="true" dateValidSet="true">
 									</w2:inputCalendar>
 								</xf:group>
 							</xf:group>

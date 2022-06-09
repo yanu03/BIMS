@@ -151,6 +151,12 @@
 			return "아니요";
 		}
 	}
+	
+	scwin.pubDtDisplay = function(obj){
+		debugger;
+		var outPut = util.getCurrentDate3(obj);
+		return outPut;
+	}
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -248,7 +254,7 @@
 										blockSelect="false">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column39"
-										value="출판일시" blockSelect="false" displayMode="label">
+										value="출판일시" blockSelect="false" displayMode="label" displayFormatter="scwin.pubDtDisplay">
 									</w2:column>
 									<w2:column width="300" style="height:20px;" inputType="text" id="column11" value="비고"
 										blockSelect="false" displayMode="label">

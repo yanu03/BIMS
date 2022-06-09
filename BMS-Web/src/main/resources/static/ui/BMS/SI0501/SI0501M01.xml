@@ -696,7 +696,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:group id="pgm_subList" class="pgm_list grdr_20_20_a" style="padding:10px; background-color: #f7f7f7; display: grid; 
-										grid-template-rows: 20px 40px minmax(270px, max-content);">
+										grid-template-rows: 20px 40px minmax(310px, max-content);">
 										<xf:group class="defaultbox" id="" style="">
 											<w2:textbox class="df_tt fl list" id="" label="해당 경유 노선" style=""></w2:textbox>
 										</xf:group>

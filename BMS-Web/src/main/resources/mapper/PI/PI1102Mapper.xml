@@ -14,9 +14,6 @@
 		ON		 	 A.ORGA_ID = B.ORGA_ID	
 		LEFT JOIN	 BMS_TRAN_VDO_INFO C
 		ON   	     B.VDO_ID = C.VDO_ID
-		
-		
-
 		<where>
 			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
 				AND A.ORGA_ID LIKE CONCAT('%',#{CONTENT},'%') || ORGA_NM LIKE CONCAT('%',#{CONTENT},'%') 
@@ -37,28 +34,34 @@
 	</select>
 
 	<select id="PI1102G1R0" resultType="Map">
-		SELECT			DVC.VHC_ID
-						,VHC.VHC_NO
-						,RST.RSV_ID
-						,DVC.MNG_ID
-						,IF(RST.COMPLETE_YN = 'N' OR RST.PROCE_RST != 'PR008', DATE_FORMAT(RSV.RSV_DT, '%Y-%m-%d'), NULL) RSV_DT
-						,RSV.ORGA_ID
-						,DVC.DVC_KIND
-						,DVC.INST_LOC
-						,DVC.DVC_ID
-						,IF(RST.COMPLETE_YN = 'N', '예약중', NULL) RSV_STATE
-		FROM BMS_DVC_INFO DVC 
-			LEFT JOIN BMS_VHC_MST VHC 
+		SELECT			
+			DVC.VHC_ID
+			,VHC.VHC_NO
+			,RST.RSV_ID
+			,DVC.MNG_ID
+			,IF(RST.COMPLETE_YN = 'N' OR RST.PROCE_RST != 'PR008', DATE_FORMAT(RSV.RSV_DT, '%Y-%m-%d'), NULL) RSV_DT
+			,RSV.ORGA_ID
+			,DVC.DVC_KIND
+			,DVC.INST_LOC
+			,DVC.DVC_ID
+			,IF(RST.COMPLETE_YN = 'N', '예약중', NULL) RSV_STATE
+			,(SELECT COUNT(*) FROM BMS_TRAN_VDO_RSV_RST_INFO TRR WHERE TRR.COMPLETE_YN = 'N' AND TRR.MNG_ID = RST.MNG_ID) AS RSV_CNT
+		FROM 
+			BMS_DVC_INFO DVC 
+			LEFT JOIN BMS_VHC_MST VHC
 			ON DVC.VHC_ID = VHC.VHC_ID
-			LEFT JOIN BMS_TRAN_VDO_RSV_INFO RSV 
+			LEFT JOIN BMS_TRAN_VDO_RSV_INFO RSV
 			ON DVC.MNG_ID = RSV.MNG_ID
-			LEFT JOIN BMS_TRAN_VDO_RSV_RST_INFO RST 
+			LEFT JOIN BMS_TRAN_VDO_RSV_RST_INFO RST
 			ON DVC.MNG_ID = RST.MNG_ID
 			AND RST.COMPLETE_YN = 'N'
-		WHERE	DVC.DVC_KIND = 'DK010'
-		AND DVC.MNG_ID IS NOT NULL
-		GROUP BY DVC.MNG_ID
-		ORDER BY VHC.VHC_ID, DVC.MNG_ID			
+		WHERE
+			DVC.DVC_KIND = 'DK010'
+			AND DVC.MNG_ID IS NOT NULL
+		GROUP BY 
+			DVC.MNG_ID
+		ORDER BY 
+			VHC.VHC_ID, DVC.MNG_ID
 	</select>
 	
 	<insert id="PI1102G1I0" parameterType="Map">	
@@ -134,9 +137,15 @@
 			<if test="RSV_STATE == '예약종료'">
 				AND RST.COMPLETE_YN = 'Y'
 			</if>			
-			<if test="RSV_DT != null">
-				AND DATE_FORMAT(RSV.RSV_DT, '%Y%m') = ${RSV_DT}
-			</if>			
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
+			<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') >= #{F_DATE}]]>
+			</if>
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
+				<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') <= #{L_DATE}]]>
+			</if>
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
+				AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+			</if>		
 		ORDER BY	RSV.RSV_DT
 	</select>
 

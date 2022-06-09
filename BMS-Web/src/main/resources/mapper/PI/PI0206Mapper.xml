@@ -164,13 +164,13 @@
 			AND RST.COMPLETE_YN = 'Y'
 		</if>			
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
-			<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m') >= #{F_DATE}]]>
+			<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') >= #{F_DATE}]]>
 		</if>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
-			<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m') <= #{L_DATE}]]>
+			<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') <= #{L_DATE}]]>
 		</if>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
-			AND DATE_FORMAT(RSV.RSV_DT, '%Y%m') BETWEEN #{F_DATE} AND #{L_DATE}
+			AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
 		</if>
 		ORDER BY
 			RSV.RSV_DT DESC

@@ -568,7 +568,7 @@
 									<w2:inputCalendar calendarDisplayFormat="" calendarDisplayFormatFunc=""
 										calendarValueType="yearMonthDate" displayFormat="" editType="" focusOnDateSelect="false" footerDiv="false" id="PLAY_ST_DT"
 										ioFormat="" ref="data:dlt_BMS_TRAN_VDO_INFO.PLAY_ST_DT" renderDiv="true" renderType="component" rightAlign="false"
-										style="height:23px;width: 110px;" invalidMessageFunc="" ev:onviewchange="scwin.PLAY_ST_DT_onviewchange">
+										style="height:23px;width: 110px;" invalidMessageFunc="" ev:onviewchange="scwin.PLAY_ST_DT_onviewchange" dateValidCheck="true" dateValidSet="true">
 									</w2:inputCalendar>
 									~
 									<w2:inputCalendar calendarDisplayFormat="" calendarDisplayFormatFunc=""

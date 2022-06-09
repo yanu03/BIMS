@@ -93,6 +93,7 @@
 	
 	};
 	
+	//메뉴코드 추후에 가져와서 넣어야 할 것 같다.
 	scwin.transcompInfo = function(){
 		scwin.openMenu("운수사 정보 관리","/ui/BMS/SI0102/SI0102M01.xml", "MN00010102");
 	};
@@ -106,7 +107,7 @@
 	};
 	
 	scwin.routInfo = function(){
-		scwin.openMenu("노선 경로정보 관리","/ui/BMS/SI0402/SI0402M01.xml", "MN00010604");
+		scwin.openMenu("노선 경로정보 관리","/ui/BMS/SI0402/SI0402M01.xml", "MN00010606");
 	};
 	
 	//오픈메뉴

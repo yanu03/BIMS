@@ -313,7 +313,7 @@
 	                    cursor: 'default',
 	                    pointerEvents: 'none',
 	                	fontSize:11,
-	                	color: 'black', //폰트 컬러
+	                	color: 'white', //폰트 컬러
 	                	//textShadow : '1px 0px 0px black',
 	                	fontFamily : 'Malgun Gothic',
 	                	textOutline : '' //글씨 테두리 컬러
@@ -495,12 +495,7 @@
 								</xf:group>
 							</xf:group>
 						</xf:group>
-						
-													
 					</xf:group>
-				
-					
-
 					<!-- <xf:group id="pgm_detail" class="pgm_detail grdr_20_2_1f_20_20_1f" style=""> -->
 					<xf:group id="pgm_detail" class="pgm_detail grdr_2_a" style="">
 						<!-- <xf:group id="" class="gr_sub_header" style="">

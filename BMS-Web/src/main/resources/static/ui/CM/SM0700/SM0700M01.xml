@@ -334,7 +334,7 @@
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:22px;" id="column11" value="PWD"
 										blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="380" inputType="text" style="height:22px;" id="column3" value="비고"
+									<w2:column removeBorderStyle="false" width="350" inputType="text" style="height:22px;" id="column3" value="비고"
 										blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
