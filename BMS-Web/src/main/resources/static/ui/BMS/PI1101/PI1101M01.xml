@@ -31,12 +31,12 @@
 						<w2:column id="ORGA_NM" name="편성명" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
-				<w2:dataMap baseNode="map" id="dma_SEQ_BMS_VDO_ORGA_INFO_0">
+				<w2:dataMap baseNode="map" id="dma_SEQ_BMS_TRAN_VDO_ORGA_INFO_0">
 					<w2:keyInfo>
 						<w2:key id="SEQ" name="SEQ" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_VDO_ORGA_INFO" saveRemovedData="true">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_TRAN_VDO_ORGA_INFO" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="ORGA_ID" name="편성ID" dataType="text"></w2:column>
 						<w2:column id="ORGA_NM" name="편성명" dataType="text"></w2:column>
@@ -46,7 +46,7 @@
 						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_VDO_INFO" saveRemovedData="true">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_TRAN_VDO_INFO" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="VDO_ID" name="영상ID" dataType="text"></w2:column>
 						<w2:column id="VDO_NM" name="영상명" dataType="text"></w2:column>
@@ -61,12 +61,9 @@
 						<w2:column id="PLAY_ED_DT" name="재생종료일" dataType="date"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_VDO_ORGA_LIST" saveRemovedData="true">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_TRAN_VDO_ORGA_LIST" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="VDO_ID" name="영상ID" dataType="text"></w2:column>
-
-
-
 						<w2:column id="VDO_NM" name="영상명" dataType="text"></w2:column>
 						<w2:column id="FILE_TYPE" name="파일유형" dataType="text"></w2:column>
 						<w2:column id="PLAY_TM" name="재생시간" dataType="number"></w2:column>
@@ -83,15 +80,15 @@
 				</w2:dataMap>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
-			<xf:submission id="sub_PI1101G0R0" ref="data:json,dma_search" target="data:json,dlt_VDO_ORGA_INFO" action="/pi/PI1101G0R0" method="post" mediatype="application/json" encoding="UTF-8"
+			<xf:submission id="sub_PI1101G0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_TRAN_VDO_ORGA_INFO" action="/pi/PI1101G0R0" method="post" mediatype="application/json" encoding="UTF-8"
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="조회 중입니다..." ev:submit="" ev:submitdone="scwin.sub_PI1101G0R0_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_PI1101G0S0" ref='data:json,{"action":"modified","id":"dlt_VDO_ORGA_INFO"}' target="data:json,dma_result" action="/pi/PI1101G0S0" method="post" mediatype="application/json" encoding="UTF-8"
+			<xf:submission id="sub_PI1101G0S0" ref='data:json,{"action":"modified","id":"dlt_BMS_TRAN_VDO_ORGA_INFO"}' target="data:json,dma_result" action="/pi/PI1101G0S0" method="post" mediatype="application/json" encoding="UTF-8"
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="저장 중입니다..." ev:submit="" ev:submitdone="scwin.sub_PI1101G0S0_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_PI1101G0K0" ref="" target="data:json,dma_SEQ_BMS_VDO_ORGA_INFO_0" action="/pi/PI1101G0K0" method="post" mediatype="application/json" encoding="UTF-8"
+			<xf:submission id="sub_PI1101G0K0" ref="" target="data:json,dma_SEQ_BMS_TRAN_VDO_ORGA_INFO_0" action="/pi/PI1101G0K0" method="post" mediatype="application/json" encoding="UTF-8"
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI1101G0K0_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -99,15 +96,15 @@
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_PI1101G1R0" ref="" target="data:json,dlt_VDO_INFO" action="/pi/PI1101G1R0" method="post" mediatype="application/json" encoding="UTF-8"
+			<xf:submission id="sub_PI1101G1R0" ref="" target="data:json,dlt_BMS_TRAN_VDO_INFO" action="/pi/PI1101G1R0" method="post" mediatype="application/json" encoding="UTF-8"
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_PI1101G2R0" ref="data:json,dma_subsearch" target="data:json,dlt_VDO_ORGA_LIST" action="/pi/PI1101G2R0" method="post" mediatype="application/json" encoding="UTF-8"
+			<xf:submission id="sub_PI1101G2R0" ref="data:json,dma_subsearch" target="data:json,dlt_BMS_TRAN_VDO_ORGA_LIST" action="/pi/PI1101G2R0" method="post" mediatype="application/json" encoding="UTF-8"
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_PI1101G2S0" ref='data:json,{"action":"modified","id":"dlt_VDO_ORGA_LIST"}' target="data:json,dma_result" action="/pi/PI1101G2S0" method="post" mediatype="application/json" encoding="UTF-8"
+			<xf:submission id="sub_PI1101G2S0" ref='data:json,{"action":"modified","id":"dlt_BMS_TRAN_VDO_ORGA_LIST"}' target="data:json,dma_result" action="/pi/PI1101G2S0" method="post" mediatype="application/json" encoding="UTF-8"
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI1101G2S0_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -154,7 +151,7 @@
 	};
 	
 	scwin.sub_PI1101G0K0_submitdone = function(e) {
-		com.addGridForm(PI1101G0, PI1101F0, dma_SEQ_BMS_VDO_ORGA_INFO_0, "ORGA_ID", "ORGA_NM");		
+		com.addGridForm(PI1101G0, PI1101F0, dma_SEQ_BMS_TRAN_VDO_ORGA_INFO_0, "ORGA_ID", "ORGA_NM");		
 	};
 	
 	scwin.sub_PI1101G0S0_submitdone = function(e) {
@@ -173,16 +170,16 @@
 		
 		if (count > 0) {
 			for(i = 0 ; i<count; i++){
-				var data = dlt_VDO_INFO.getAllJSON()[focusIdxs[i]];
-				var insertIndex = dlt_VDO_ORGA_LIST.insertRow();
-				dlt_VDO_ORGA_LIST.setCellData(insertIndex, "VDO_ID", data.VDO_ID);
-				dlt_VDO_ORGA_LIST.setCellData(insertIndex, "VDO_NM", data.VDO_NM);
-				dlt_VDO_ORGA_LIST.setCellData(insertIndex, "FILE_TYPE", data.FILE_TYPE);
-				dlt_VDO_ORGA_LIST.setCellData(insertIndex, "PLAY_TM", data.PLAY_TM);
-				dlt_VDO_ORGA_LIST.setCellData(insertIndex, "PLAY_ST_DT", data.PLAY_ST_DT);
-				dlt_VDO_ORGA_LIST.setCellData(insertIndex, "PLAY_ED_DT", data.PLAY_ED_DT);
-				dlt_VDO_ORGA_LIST.setCellData(insertIndex, "SN", insertIndex);
-				dlt_VDO_ORGA_LIST.setCellData(insertIndex, "ORGA_ID", dma_subsearch.get("ORGA_ID"));
+				var data = dlt_BMS_TRAN_VDO_INFO.getAllJSON()[focusIdxs[i]];
+				var insertIndex = dlt_BMS_TRAN_VDO_ORGA_LIST.insertRow();
+				dlt_BMS_TRAN_VDO_ORGA_LIST.setCellData(insertIndex, "VDO_ID", data.VDO_ID);
+				dlt_BMS_TRAN_VDO_ORGA_LIST.setCellData(insertIndex, "VDO_NM", data.VDO_NM);
+				dlt_BMS_TRAN_VDO_ORGA_LIST.setCellData(insertIndex, "FILE_TYPE", data.FILE_TYPE);
+				dlt_BMS_TRAN_VDO_ORGA_LIST.setCellData(insertIndex, "PLAY_TM", data.PLAY_TM);
+				dlt_BMS_TRAN_VDO_ORGA_LIST.setCellData(insertIndex, "PLAY_ST_DT", data.PLAY_ST_DT);
+				dlt_BMS_TRAN_VDO_ORGA_LIST.setCellData(insertIndex, "PLAY_ED_DT", data.PLAY_ED_DT);
+				dlt_BMS_TRAN_VDO_ORGA_LIST.setCellData(insertIndex, "SN", insertIndex);
+				dlt_BMS_TRAN_VDO_ORGA_LIST.setCellData(insertIndex, "ORGA_ID", dma_subsearch.get("ORGA_ID"));
 			}
 		}
 		
@@ -202,11 +199,11 @@
 	scwin.btn_up_onclick = function() {
 	    var idx = PI1101G2.getFocusedRowIndex();
 	    com.getGridViewDataList(PI1101G2).rowMoveUp(idx);
-	    var data = dlt_VDO_ORGA_LIST.getAllJSON();
+	    var data = dlt_BMS_TRAN_VDO_ORGA_LIST.getAllJSON();
 	    var count = data.length;
 	    
 	    for(i=0; i<count; i++) {
-		    dlt_VDO_ORGA_LIST.setCellData(i, "SN", i+1);	
+		    dlt_BMS_TRAN_VDO_ORGA_LIST.setCellData(i, "SN", i+1);	
 		   } 
 	   
 	}
@@ -214,11 +211,11 @@
 	scwin.btn_down_onclick = function () {
   	    var idx = PI1101G2.getFocusedRowIndex();
    		com.getGridViewDataList(PI1101G2).rowMoveDown(idx);	
-	    var data = dlt_VDO_ORGA_LIST.getAllJSON();
+	    var data = dlt_BMS_TRAN_VDO_ORGA_LIST.getAllJSON();
 	    var count = data.length;
 	    
 	    for(i=0; i<count; i++) {
-		    dlt_VDO_ORGA_LIST.setCellData(i, "SN", i+1);	
+		    dlt_BMS_TRAN_VDO_ORGA_LIST.setCellData(i, "SN", i+1);	
 		   }    		
 	};
 	scwin.sbx_ChoiceBox_onviewchange = function(info) {
@@ -312,7 +309,7 @@
 
 					<xf:group id="" class="" style="">
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
-							dataList="data:dlt_VDO_ORGA_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
+							dataList="data:dlt_BMS_TRAN_VDO_ORGA_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 							ev:onrowindexchange="scwin.PI1101G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true"
 							id="PI1101G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusHeaderValue=""
 							rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows=""
@@ -397,7 +394,7 @@
 											<w2:colspan>1</w2:colspan>
 											<w2:rowspan>1</w2:rowspan>
 										</w2:attributes>
-										<xf:input class="" id="ORGA_ID" mandatory="" ref="data:dlt_VDO_ORGA_INFO.ORGA_ID" style="width:100px;height:21px;"
+										<xf:input class="" id="ORGA_ID" mandatory="" ref="data:dlt_BMS_TRAN_VDO_ORGA_INFO.ORGA_ID" style="width:100px;height:21px;"
 											disabled="true" adjustMaxLength="">
 										</xf:input>
 									</xf:group>
@@ -405,7 +402,7 @@
 									<xf:group class="w2tb_td" style="" tagname="td">
 										<xf:input allowChar="" customModelFormatter="" customModelUnformatter="" dataType="text" disabled=""
 											displayFormatter="com.transPhone" id="ORGA_NM" maskFormat="" maxlength="20" minByteLength=""
-											ref="data:dlt_VDO_ORGA_INFO.ORGA_NM" style="width:100%;height: 21px;" validator="">
+											ref="data:dlt_BMS_TRAN_VDO_ORGA_INFO.ORGA_NM" style="width:100%;height: 21px;" validator="">
 										</xf:input>
 									</xf:group>
 								</xf:group>
@@ -415,7 +412,7 @@
 										<w2:attributes></w2:attributes>
 										<xf:input allowChar="" customModelFormatter="" customModelUnformatter="" dataType="text" disabled="true"
 											displayFormatter="com.transPhone" id="VIDEO_COUNT" maskFormat="" maxlength="13" minByteLength=""
-											ref="data:dlt_VDO_ORGA_INFO.VIDEO_COUNT" style="width:100px;height: 21px;" validator="">
+											ref="data:dlt_BMS_TRAN_VDO_ORGA_INFO.VIDEO_COUNT" style="width:100px;height: 21px;" validator="">
 										</xf:input>
 									</xf:group>
 									<xf:group class="w2tb_th" style="" tagname="th">총&amp;nbsp;재생시간</xf:group>
@@ -426,7 +423,7 @@
 										</w2:attributes>
 										<xf:input allowChar="" customModelFormatter="" customModelUnformatter="" dataType="text" disabled="true"
 											displayFormatter="com.transPhone" id="TOTAL_TIME" maskFormat="" maxlength="13" minByteLength=""
-											ref="data:dlt_VDO_ORGA_INFO.TOTAL_TIME" style="width:100px;height: 21px;" validator="">
+											ref="data:dlt_BMS_TRAN_VDO_ORGA_INFO.TOTAL_TIME" style="width:100px;height: 21px;" validator="">
 										</xf:input>
 									</xf:group>
 								</xf:group><xf:group tagname="tr" style="">
@@ -441,7 +438,7 @@
 											<w2:colspan>3</w2:colspan>
 											<w2:rowspan>1</w2:rowspan>
 										</w2:attributes>
-										<xf:textarea adjustMaxLength="" class="" disabled="" id="REMARK" mandatory="" ref="data:dlt_VDO_ORGA_INFO.REMARK"
+										<xf:textarea adjustMaxLength="" class="" disabled="" id="REMARK" mandatory="" ref="data:dlt_BMS_TRAN_VDO_ORGA_INFO.REMARK"
 											style="width:100%;height: 50px;" maxlength="200">
 										</xf:textarea>
 									</xf:group>
@@ -464,7 +461,7 @@
 							<xf:group id="" class="" style=""></xf:group>
 							<xf:group id="">
 								<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
-									checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_VDO_INFO" disabledScrollHidden="" editModeEvent=""
+									checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_TRAN_VDO_INFO" disabledScrollHidden="" editModeEvent=""
 									editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 									ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row"
 									id="PI1101G1" ignoreCellClick="false" ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode=""
@@ -549,7 +546,7 @@
 							<xf:group id="" class="" style=""></xf:group>
 							<xf:group>
 								<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
-									checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_VDO_ORGA_LIST" disabledScrollHidden="" editModeEvent=""
+									checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_TRAN_VDO_ORGA_LIST" disabledScrollHidden="" editModeEvent=""
 									editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 									ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row"
 									id="PI1101G2" ignoreCellClick="false" ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode=""

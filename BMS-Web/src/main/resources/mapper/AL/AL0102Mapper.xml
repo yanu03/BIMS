@@ -4,7 +4,8 @@
 
 	<select id="AL0102G0R0" resultType="Map" parameterType="Map">
 		SELECT
-			DATE_FORMAT(HOLI_DT, '%Y-%m-%d') AS HOLI_DT
+			DATE_FORMAT(HOLI_DT, '%Y%m%d') AS HOLI_DT
+			,DATE_FORMAT(HOLI_DT, '%Y%m%d') AS OLD_HOLI_DT
 			,DAY_OF_WEEK
 			,HOLI_NM
 			,HOLI_ENM
@@ -25,37 +26,18 @@
 			<if test="TYPE == 'HOLI_NM'">
 				AND HOLI_NM LIKE CONCAT('%',#{CONTENT},'%') 
 			</if>
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(HOLY_DT)">
+				<![CDATA[AND DATE_FORMAT(HOLI_DT, '%Y') = #{HOLY_DT}]]>
+			</if>
 		</where>
 		ORDER BY
-			HOLI_DT
+			HOLI_DT DESC
 	</select>
 
 	<select id="AL0102SHI0" resultType="Map" parameterType="Map">
 		select  DATE_FORMAT(HOLI_DT, '%Y-%m-%d') AS HOLI_DT, HOLI_NM
 		from 	BRT_HOLI_MST
 	</select>
-
-	<update id="AL0102G0U0" parameterType="Map">
-		UPDATE 
-			BRT_HOLI_MST 
-		SET 
-			HOLI_DT = DATE_FORMAT(HOLI_DT, '%Y-%m-%d')
-			,DAY_OF_WEEK = #{DAY_OF_WEEK}
-			,HOLI_NM = #{HOLI_NM}
-			,HOLI_ENM = #{HOLI_ENM}
-			,DAY_TYPE = #{DAY_TYPE}
-			,REMARK = #{REMARK}
-			,UPD_DTM = NOW()
-			,UPD_ID  = #{UPD_ID}
-		WHERE 
-			HOLI_DT = #{HOLI_DT}
-	</update>
-
-	<delete id="AL0102G0D0" parameterType="Map">
-		DELETE FROM BRT_HOLI_MST
-		WHERE HOLI_DT = #{HOLI_DT};
-	</delete>
-
 
 	<insert id="AL0102G0I0" parameterType="Map">
 		INSERT INTO BRT_HOLI_MST(
@@ -77,6 +59,29 @@
 			,#{UPD_ID}
 			)
 	</insert>
+	
+	<update id="AL0102G0U0" parameterType="Map">
+		UPDATE 
+			BRT_HOLI_MST 
+		SET 
+			HOLI_DT = DATE_FORMAT(#{HOLI_DT}, '%Y-%m-%d')
+			,DAY_OF_WEEK = #{DAY_OF_WEEK}
+			,HOLI_NM = #{HOLI_NM}
+			,HOLI_ENM = #{HOLI_ENM}
+			,DAY_TYPE = #{DAY_TYPE}
+			,REMARK = #{REMARK}
+			,UPD_DTM = #{UPD_DTM}
+			,UPD_ID  = #{UPD_ID}
+		WHERE 
+			HOLI_DT = #{OLD_HOLI_DT}
+	</update>
+
+	<delete id="AL0102G0D0" parameterType="Map">
+		DELETE FROM BRT_HOLI_MST
+		WHERE HOLI_DT = #{HOLI_DT};
+	</delete>
+
+
 	<!--  <select id="PI0205G0R0" resultType="Map" parameterType="Map">
 		SELECT
 			R.ROUT_ID

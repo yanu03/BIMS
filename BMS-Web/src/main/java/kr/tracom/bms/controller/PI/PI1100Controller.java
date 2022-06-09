@@ -21,13 +21,13 @@ public class PI1100Controller extends ControllerSupport {
 	
 	@RequestMapping("/pi/PI1100G0R0")
 	public @ResponseBody Map<String, Object> PI1100G0R0() throws Exception {
-		result.setData("dlt_VDO_INFO", pi1100Service.PI1100G0R0());
+		result.setData("dlt_BMS_TRAN_VDO_INFO", pi1100Service.PI1100G0R0());
 		return result.getResult();
 	}	
 
 	@RequestMapping("/pi/PI1100G0K0")
 	public @ResponseBody Map<String, Object> PI1100G0K0() throws Exception {
-		result.setData("dma_SEQ_BMS_VDO_INFO_0", pi1100Service.PI1100G0K0());
+		result.setData("dma_SEQ_BMS_TRAN_VDO_INFO_0", pi1100Service.PI1100G0K0());
 		return result.getResult();
 	}
 	
