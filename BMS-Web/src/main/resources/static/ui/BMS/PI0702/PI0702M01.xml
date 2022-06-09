@@ -374,19 +374,32 @@
 		var chkCount = dlt_VHC_MST.getMatchedColumnData('chk', '1', 'chk');
 		var chkLen = chkCount.length; 
 		var chkData = PI0702G1.getCheckedJSON('chk');
+		var dataCheck = true;
 		
 		//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
 		if(chkLen > 1 ){
-			if(chkLen == 2){
-				if(chkData[0].VHC_ID == chkData[1].VHC_ID){
-					return;	
-				}
+			for(var i=0; i<chkLen; i++)
+			{
+				if(chkData[0].VHC_ID != chkData[i].VHC_ID){
+					dataCheck = false;
+				}	 
 			}
+				
+			if(!dataCheck) {
+				PI0702G2.hide();
+				gr_sub_header2.hide();
+				PI0702_ul.show("");
+			}
+			else if(dataCheck) {
+				PI0702G2.show("");
+				gr_sub_header2.show("");
+				PI0702_ul.hide();	
+			}			
 			
 			
-			PI0702G2.hide();
-			gr_sub_header2.hide();
-			PI0702_ul.show("");
+//			PI0702G2.hide();
+//			gr_sub_header2.hide();
+//			PI0702_ul.show("");
 			
 			//FM0204G1.setDisabled("grid", true);
 			//FM0204F0.setDisabled(true);
@@ -437,6 +450,13 @@
 		}
 		
 	};	
+	
+	scwin.checkCLoseF = function(info) {
+		F_DATE.setValue(info.oldValue);
+	}
+	scwin.checkCLoseL = function(info) {
+		L_DATE.setValue(info.oldValue);
+	}		
 	
 	scwin.L_DATE_onviewchange = function(info) {
 		var ldate = L_DATE.getValue();
@@ -642,16 +662,16 @@
 										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column13"
 											value="예약건수" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column11"
+										<!-- <w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column11"
 											value="예약날짜" blockSelect="false" displayMode="label">
-										</w2:column>
+										</w2:column> -->
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column10"
 											value="차량ID" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column9"
 											value="차량번호" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column8"
+										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column8"
 											value="설치위치" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column0"
@@ -691,9 +711,9 @@
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="RSV_CNT"
 											value="" blockSelect="false" displayMode="label" displayFormatter="scwin.rsvCnt" textAlign="right">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="RSV_DT"
+										<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="RSV_DT"
 											value="" blockSelect="false" displayMode="label">
-										</w2:column>
+										</w2:column> -->
 										<w2:column removeBorderStyle="false" width="112" inputType="text" style="height:20px" id="VHC_ID"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>

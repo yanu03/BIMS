@@ -39,6 +39,9 @@
 				<w2:dataMap baseNode="map" id="dma_sub_search">
 					<w2:keyInfo>
 						<w2:key id="REP_ROUT_ID" name="대표노선ID" dataType="text"></w2:key>
+						<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
+						<w2:key id="CONTENT2" name="name3" dataType="text"></w2:key>
+						<w2:key id="VHC_ID" name="name4" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_REP_ROUT_MST" saveRemovedData="true">
@@ -117,7 +120,17 @@
 		};	
 		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRID3, autoOptions, mainSrhOptions, codeOptions);		 
 
-
+		var subOptions = {
+			//DEL:scwin.btn_sub_del,
+			SEARCH: scwin.btn_sub_move
+		};
+		
+		var subOptions2 = {
+			SEARCH: scwin.btn_sub_move2
+		};
+		
+		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);
+		com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions2);
 			 
 		com.setCommonDtl(codeOptions, function() {
 			com.searchGrid(AL0104G0, sub_AL0104G0R0);
@@ -213,8 +226,22 @@
 	};
 	
 	scwin.sub_AL0104G2R0_submitdone = function(e) {
-		com.executeSubmission(sub_AL0104G1R0);		
+		com.executeSubmission(sub_AL0104G1R0);
+		AL0104G2.setFocusedCell(0, "VHC_ID");		
 	};
+	
+	scwin.btn_sub_move = function() {
+		if(com.isEmpty(dma_sub_search.get("CONTENT"))==false){
+			com.gridMove(AL0104G1, "VHC_ID,VHC_NO", dma_sub_search.get("CONTENT"), AL0104G1.getFocusedRowIndex());
+		}
+	};
+	
+	scwin.btn_sub_move2 = function() {
+		
+		if(com.isEmpty(dma_sub_search.get("CONTENT2"))==false){
+			com.gridMove(AL0104G2, "VHC_ID,VHC_NO", dma_sub_search.get("CONTENT2"), AL0104G2.getFocusedRowIndex());
+		}
+	};	
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -343,13 +370,23 @@
 				</xf:group> <!-- end pgm_list -->
 				<xf:group id="" class="vertical_line"></xf:group>
 				<xf:group id="" class="pgm_detail grdc_560_60_560 bms_box_wrap" style=""> <!-- grdc_560_60_560 영역 -->
-					<xf:group class="pgm_detail grdr_20_2_a">
+					<xf:group class="pgm_sublist grdr_20_36_a">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl view ico-view" id="" label="배정 안된 차량 목록" style=""></w2:textbox>
+						</xf:group>
+						
 						<xf:group id="" class="gr_sub_header" style="">
-							<xf:group class="defaultbox" id="" style="">
-								<w2:textbox class="df_tt fl view ico-view" id="" label="배정 안된 차량 목록" style=""></w2:textbox>
+							<xf:group class="gr_sub_search" id="pgm_sub_search" style="">
+								<xf:group class="label" id="" style="">
+									<w2:span class="" id="" label="찾기"></w2:span>
+								</xf:group>
+								<xf:group class="search" id="" style="">
+									<xf:input id="search_sub_input" class="search_input" style="width:210px;" ref="data:dma_sub_search.CONTENT" placeholder="차량ID 또는 차량번호"></xf:input>
+								</xf:group>
+								<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 							</xf:group>
 						</xf:group>
-						<xf:group></xf:group>
+						
 						<xf:group id="" class="pgm_detail2" style="">
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
 								checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_VHC_MST" disabledScrollHidden="" editModeEvent=""
@@ -363,23 +400,26 @@
 								<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
 								<w2:header style="" id="header2">
 									<w2:row style="" id="row3">
-										<w2:column removeBorderStyle="false" width="97" inputType="text" style="height:20px" id="column7"
-											value="차량 ID" blockSelect="false" displayMode="label">
+										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column7"
+											value="차량ID" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column6"
 											value="차량번호" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="134" inputType="text" style="height:20px" id="column5"
+										<!-- <w2:column removeBorderStyle="false" width="134" inputType="text" style="height:20px" id="column5"
 											value="운수사" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="89" inputType="text" style="height:20px" id="column4"
 											value="제조사" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="96" inputType="text" style="height:20px" id="column3"
+										</w2:column> -->
+										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column3"
 											value="차량모델명" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column2"
+										<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column2"
 											value="연료" blockSelect="false" displayMode="label">
+										</w2:column> -->
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column2"
+											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 									</w2:row>
 								</w2:header>
@@ -391,16 +431,19 @@
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="VHC_NO"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="COMP_NM"
+										<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="COMP_NM"
 											value="" blockSelect="false" displayMode="label" textAlign="left">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="MAKER" value=""
 											blockSelect="false" displayMode="label" textAlign="left">
-										</w2:column>
+										</w2:column> -->
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="MODEL_NM"
 											value="" blockSelect="false" displayMode="label" textAlign="left">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="VHC_FUEL"
+										<!-- <w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="VHC_FUEL"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column> -->
+										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id=""
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 									</w2:row>
@@ -426,13 +469,26 @@
 							</w2:anchor>
 						</xf:group>
 					</xf:group>
-					<xf:group class="pgm_detail grdr_20_2_a">					
+					<xf:group class="pgm_detail grdr_20_36_a">		
+								
 						<xf:group id="" class="gr_sub_header" style="">
 							<xf:group class="defaultbox" id="" style="">
 								<w2:textbox class="df_tt fl view ico-view" id="" label="배정 된 차량 목록" style=""></w2:textbox>
 							</xf:group>
-						</xf:group>		
-						<xf:group></xf:group>				
+						</xf:group>	
+							
+						<xf:group id="" class="gr_sub_header" style="">
+							<xf:group class="gr_sub_search" id="" style="">
+								<xf:group class="label" id="" style="">
+									<w2:span class="" id="" label="찾기"></w2:span>
+								</xf:group>
+								<xf:group class="search" id="" style="">
+									<xf:input id="search_sub_input2" class="search_input" ref="data:dma_sub_search.CONTENT2" placeholder="차량ID 또는 차량번호"></xf:input>
+								</xf:group>
+								<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
+							</xf:group>
+						</xf:group>
+									
 						<xf:group>
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
 								checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BRT_REP_ROUT_VHC_CMPSTN" disabledScrollHidden="" editModeEvent=""
@@ -447,22 +503,25 @@
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
 										<w2:column removeBorderStyle="false" width="97" inputType="text" style="height:20px" id="column7"
-											value="차량 ID" blockSelect="false" displayMode="label">
+											value="차량ID" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column6"
 											value="차량번호" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="134" inputType="text" style="height:20px" id="column5"
+										<!-- <w2:column removeBorderStyle="false" width="134" inputType="text" style="height:20px" id="column5"
 											value="운수사" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="89" inputType="text" style="height:20px" id="column4"
 											value="제조사" blockSelect="false" displayMode="label">
-										</w2:column>
-										<w2:column removeBorderStyle="false" width="96" inputType="text" style="height:20px" id="column3"
+										</w2:column> -->
+										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column3"
 											value="차량모델명" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column2"
+										<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column2"
 											value="연료" blockSelect="false" displayMode="label">
+										</w2:column> -->
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column0"
+											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 									</w2:row>
 								</w2:header>
@@ -474,16 +533,19 @@
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="VHC_NO"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="134" inputType="text" style="height:20px" id="COMP_NM"
+										<!-- <w2:column removeBorderStyle="false" width="134" inputType="text" style="height:20px" id="COMP_NM"
 											value="" blockSelect="false" displayMode="label" textAlign="left">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="89" inputType="text" style="height:20px" id="MAKER" value=""
 											blockSelect="false" displayMode="label" textAlign="left">
-										</w2:column>
+										</w2:column> -->
 										<w2:column removeBorderStyle="false" width="96" inputType="text" style="height:20px" id="MODEL_NM"
 											value="" blockSelect="false" displayMode="label" textAlign="left">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="VHC_FUEL"
+										<!-- <w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="VHC_FUEL"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column> -->
+										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id=""
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 									</w2:row>

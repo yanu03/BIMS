@@ -321,7 +321,6 @@
 	};
 	
 	scwin.sub_SI0406G1R0_submitdone = function(e) {
-	debugger;
 		for (var i=0; i<dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getDataLength(); i++) {
 			dlt_BMS_ROUT_MOCK_LINK_CMPSTN.setCellData(i, "chk", 0);		
 		}
@@ -424,7 +423,6 @@
 		routMap.drawMockLink("map_SI0406", SI0406G2, dlt_BMS_MOCK_LINK, SI0406G2.getFocusedRowIndex(), scwin.linkClickEvent, scwin.checkLinkCmpstn);
 		
 		var mockLinkIds = dlt_BMS_ROUT_MOCK_LINK_CMPSTN.getColData("MOCK_LINK_ID");
-		debugger;
 		com.excludeItemsByGrid2(SI0406G2, mockLinkIds, "MOCK_LINK_ID");			
 	};
 	
@@ -587,7 +585,7 @@
 				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style=""> <!-- auto 영역 -->
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl list ico-list" id="" label="차량 목록" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl list ico-list" id="" label="노선 목록" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					
@@ -735,6 +733,7 @@
 								<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 							</xf:group>
 						</xf:group>
+						
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" id="SI0406G2" class="cm_grid leftL" autoFitMinWidth="0"
 							dataList="data:dlt_BMS_MOCK_LINK" ev:onrowindexchange="scwin.SI0406G2_onrowindexchange" fixedColumnWithHidden="true"
 							dataDragDrop="true" focusMode="row" ignoreCellClick="false" sortable="false" readOnly="true" ev:oncellclick="scwin.SI0406G2_oncellclick"

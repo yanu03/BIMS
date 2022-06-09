@@ -8734,7 +8734,6 @@ com.indexGridNear = function(data, column, value){
  * @return {int} index 현재 index
  */
 com.gridMove = function(grid,searchColumn, content, index){
-	
 	var data = com.getGridViewDataList(grid);
 	var rowData = data.getAllJSON();
 	var startIndex = 0;

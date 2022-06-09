@@ -300,7 +300,7 @@
 				</xf:group>
 			</xf:group>
 		
-			<xf:group id="pgm_content" class="pgm_content grdc_600_0_a" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_a_0_1220" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style=""> <!-- auto 영역 -->
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
@@ -421,8 +421,19 @@
 					</xf:group>
 					<xf:group id="" class="horizontal_line">
 					</xf:group>
+					
+					
 					<xf:group id="pgm_subList" class="pgm_list grdr_20_36_a" style="">
-						<xf:group class="defaultbox" id="" style="">
+						<xf:group id="" class="gr_map_header" style="">
+							<xf:group class="defaultbox" id="" style="">
+								<w2:textbox class="df_tt fl map" id="" label="지도" style=";"></w2:textbox>
+							</xf:group>
+						</xf:group>
+						<xf:group id="" class="" style="">
+							<div id="map_AL0101" style="overflow:hidden;"></div>
+							<!-- <xf:group id="map_SI0402" style="overflow:hidden;"></xf:group>  -->
+						</xf:group>
+						<!--<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="주요경유지 정보" style=""></w2:textbox>
 						</xf:group>
 						<xf:group id="" class="gr_sub_header" style="">
@@ -508,20 +519,13 @@
 							</w2:footer>
 						</w2:gridView>
 					</xf:group>
-					</xf:group><!-- pgm_subList -->
+					</xf:group> -->
+					
 					</xf:group>
 				</xf:group>
 				<xf:group id="" class=""></xf:group>
 				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a bms_box_wrap" style="">
-					<xf:group id="" class="gr_map_header" style="">
-						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl map" id="" label="지도" style=";"></w2:textbox>
-						</xf:group>
-					</xf:group>
-					<xf:group id="" class="" style="">
-						<div id="map_AL0101" style="overflow:hidden;"></div>
-						<!-- <xf:group id="map_SI0402" style="overflow:hidden;"></xf:group>  -->
-					</xf:group>
+					
 				</xf:group> <!--end pgm_detail-->
 			</xf:group> <!-- end content --> 
 		</xf:group> <!-- end container -->

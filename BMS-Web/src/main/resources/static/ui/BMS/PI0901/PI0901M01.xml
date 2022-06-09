@@ -155,7 +155,7 @@
 				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl list ico-list" id="" label="템플릿 목록" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl list ico-list" id="" label="전자노선도 목록" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					

@@ -350,7 +350,9 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column16"
 										value="재직여부" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column width="70" id="column15" value="비고"></w2:column>
+									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column1"
+										value="비고" blockSelect="false" displayMode="label">
+									</w2:column>
 								</w2:row>
 							</w2:header>
 							<w2:gBody style="" id="gBody1">

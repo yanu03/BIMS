@@ -24,7 +24,7 @@
 	WHERE A.ROUT_ID = #{ROUT_ID}
 	<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT)">
 		<!-- <if test="TYPE == 'ALL'"> -->
-			AND (NODE_ID LIKE CONCAT('%',#{CONTENT},'%') || NODE_NM LIKE CONCAT('%',#{CONTENT},'%'))
+			<!-- AND (NODE_ID LIKE CONCAT('%',#{CONTENT},'%') || NODE_NM LIKE CONCAT('%',#{CONTENT},'%')) -->
 		<!-- </if>
 		<if test="TYPE == 'NODE_ID'">
 			AND NODE_ID LIKE CONCAT('%',#{CONTENT},'%')
@@ -62,10 +62,10 @@ VALUES(#{ROUT_ID} ,#{NODE_ID} ,#{NODE_SN} ,#{NODE_TYPE} ,#{NODE_NM} ,#{STTN_ID} 
 		AND (A.NODE_TYPE = 'NT001' || A.NODE_TYPE = 'NT002')
 		</otherwise>
 	</choose>
-	
+	<!-- 
 	<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT)">
 		AND (A.NODE_ID LIKE CONCAT('%',#{CONTENT},'%') || A.NODE_NM LIKE CONCAT('%',#{CONTENT},'%'))
-	</if>
+	</if> -->
 	 ORDER BY A.NODE_SN ASC
 </select>
 

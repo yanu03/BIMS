@@ -51,5 +51,6 @@
 					
 		FROM	  		 BMS_DL_CD_INFO
 		WHERE			 TXT_VAL1 = 'RD'
+		ORDER BY		SORT
 	</select>
 </mapper>
