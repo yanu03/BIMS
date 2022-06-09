@@ -470,7 +470,6 @@
 							fixedColumnWithHidden="true" ignoreCellClick="false" dataList="data:dlt_BMS_FCLT_INFO" class="cm_grid left" autoFit="lastColumn"
 							ev:oncellclick="scwin.FM0203G0_oncellclick" ev:onrowindexchange="scwin.FM0203G0_onrowindexchange" sortEvent="onclick"
 							disabledScrollHidden="" focusMode="row">
-
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
 								<w2:row style="" id="row1">
@@ -484,7 +483,7 @@
 										value="정류장명" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column width="100" id="column60" value="시설물ID"></w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:22px;" id="column49"
+									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:22px;" id="column49"
 										value="시설물유형" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:22px;" id="column13"
@@ -522,7 +521,7 @@
 										class="">
 									</w2:column> -->
 									<w2:column headers="FM0203G0_column3" removeBorderStyle="false" width="" inputType="select"
-										style="height:20px" id="INST_LOC" value="" blockSelect="false" displayMode="label">
+										style="height:20px" id="INST_LOC" value="" blockSelect="false" displayMode="label" textAlign="left">
 									</w2:column>
 									<w2:column width="" id="FCLT_IP" textAlign="right"></w2:column>
 									<w2:column width="" id="MNG_ID"></w2:column>
@@ -532,14 +531,8 @@
 							<w2:footer style="" id="footer1">
 								<w2:row style="" id="row3">
 									<w2:column removeBorderStyle="false" width="" inputType="expression" style="height:20px;" id="column48"
-										value="" blockSelect="false" displayMode="label" colSpan="9" rowSpan="" expression="&quot;데이터 개수 : &quot; + COUNT('STTN_NO')"
+										value="" blockSelect="false" displayMode="label" colSpan="20" rowSpan="" expression="&quot;데이터 개수 : &quot; + COUNT('STTN_NO')"
 										textAlign="left" headers="FM0203G0_column3">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column52"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column76"
-										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
 							</w2:footer>

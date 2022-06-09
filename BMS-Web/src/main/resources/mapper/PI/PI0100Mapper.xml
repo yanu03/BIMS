@@ -11,7 +11,7 @@
 		,USE_YN
 		,CATEGORY
 		,PROV_NM
-		,DATE_FORMAT(PUB_DT, '%Y-%m-%d') PUB_DT
+		,DATE_FORMAT(PUB_DT, '%Y%m%d') PUB_DT
 		,DATE_FORMAT(UPD_DTM, '%Y-%m-%d') UPD_DTM
 		,UPD_ID
 	FROM 
@@ -50,7 +50,9 @@
 			,USE_YN
 			,CATEGORY
 			,PROV_NM
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(PUB_DT)">
 			,PUB_DT
+			</if>
 			,UPD_DTM
 			,UPD_ID
 			) 
@@ -62,7 +64,9 @@
 			,#{USE_YN}
 			,#{CATEGORY}
 			,#{PROV_NM}
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(PUB_DT)">
 			,STR_TO_DATE(#{PUB_DT}, '%Y%m%d')
+			</if>
 			,#{UPD_DTM}
 			,#{UPD_ID}
 			)
@@ -86,7 +90,9 @@
 		,USE_YN = #{USE_YN}
 		,CATEGORY = #{CATEGORY}
 		,PROV_NM = #{PROV_NM}
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(PUB_DT)">
 		,PUB_DT = #{PUB_DT}
+		</if>
 		,UPD_DTM = #{UPD_DTM}
 		,UPD_ID = #{SSN_USER_ID}
 	WHERE 

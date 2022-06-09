@@ -734,15 +734,8 @@
 				
 				<xf:group id="" class=""></xf:group>
 				
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_a bms_box_wrap" style="">
-					<xf:group class="gr_map_header" id="" style="">
-						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl map" id="" label="지도" style=""></w2:textbox>
-						</xf:group>
-					</xf:group>
-					<xf:group id="" style="position:relative">
-						<xf:group id="" style="position: absolute;width: 100%;height: 100%;">
-							<div id="map_MO0203" style="overflow:hidden;">
+				
+							<div id="map_MO0203" style="padding:0 !important"  class="bms_box_wrap">
 								<ul id="category_map_MO0203" class="category"></ul>
 								<xf:group id="brt_div" class="pgm_detail" style="z-index: 10000;position: absolute;right: 52px;margin-top: 152px;margin-right: -20px;width: 140px;height: 399px;">
 									<xf:group style="width: 100%; height:100%" id="bit_img">
@@ -770,9 +763,7 @@
 									<xf:group style="" id=""></xf:group>
 								</xf:group>								
 							</div>
-						</xf:group>
-					</xf:group>
-				</xf:group><!-- pgm_detail end -->
+
 			</xf:group><!-- end content -->
 		</xf:group><!-- end container -->
 	</body>

@@ -41,12 +41,16 @@
 			   (
 			    VDO_ID,
 				VDO_NM,
-				PLAY_ST_DT,
 				FILE_TYPE,
 				IMG_PLAY_TM,
 				FILE_NM,
 				PLAY_TM,
+				<if test="@kr.tracom.util.CommonUtil@notEmpty(PLAY_ST_DT)">
+				PLAY_ST_DT,
+				</if>
+				<if test="@kr.tracom.util.CommonUtil@notEmpty(PLAY_ED_DT)">
 				PLAY_ED_DT,
+				</if>
 				REMARK,
 				UPD_DTM,
 				UPD_ID
@@ -55,12 +59,16 @@
 		values (
 			    #{VDO_ID},
 				#{VDO_NM},
-				STR_TO_DATE(#{PLAY_ST_DT}, '%Y%m%d'),
 				#{FILE_TYPE},
 				#{IMG_PLAY_TM},
 				#{FILE_NM},
 				#{PLAY_TM},
+				<if test="@kr.tracom.util.CommonUtil@notEmpty(PLAY_ST_DT)">
+				STR_TO_DATE(#{PLAY_ST_DT}, '%Y%m%d'),
+				</if>
+				<if test="@kr.tracom.util.CommonUtil@notEmpty(PLAY_ED_DT)">
 				STR_TO_DATE(#{PLAY_ED_DT}, '%Y%m%d'),
+				</if>
 				#{REMARK},
 				#{UPD_DTM},
 				#{SSN_USER_ID}
@@ -70,12 +78,16 @@
 	<update id="PI1100G0U0" parameterType="Map">
 		update BMS_TRAN_VDO_INFO
 		set 	VDO_NM = #{VDO_NM},
-				PLAY_ST_DT = STR_TO_DATE(#{PLAY_ST_DT}, '%Y%m%d'),
 				FILE_TYPE = #{FILE_TYPE},
 				IMG_PLAY_TM = #{IMG_PLAY_TM},
 				FILE_NM = #{FILE_NM},
 				PLAY_TM = #{PLAY_TM},
+				<if test="@kr.tracom.util.CommonUtil@notEmpty(PLAY_ST_DT)">
+				PLAY_ST_DT = STR_TO_DATE(#{PLAY_ST_DT}, '%Y%m%d'),
+				</if>
+				<if test="@kr.tracom.util.CommonUtil@notEmpty(PLAY_ED_DT)">
 				PLAY_ED_DT = STR_TO_DATE(#{PLAY_ED_DT}, '%Y%m%d'),
+				</if>
 				REMARK = #{REMARK},
 				UPD_DTM = #{UPD_DTM},
 				UPD_ID = #{SSN_USER_ID}

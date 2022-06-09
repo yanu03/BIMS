@@ -367,7 +367,7 @@
 								<xf:group style="" class="w2tb_td" tagname="td">
 									<w2:inputCalendar footerDiv="false" id="HOLI_DT_T" style="width: 150px;height: 23px;" renderDiv="true"
 										focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component"
-										ref="data:dlt_BRT_HOLI_MST.HOLI_DT" ev:onchange="scwin.HOLI_DT_onchange" ev:onviewchange="">
+										ref="data:dlt_BRT_HOLI_MST.HOLI_DT" ev:onchange="scwin.HOLI_DT_onchange" ev:onviewchange="" dateValidCheck="true" dateValidSet="true">
 									</w2:inputCalendar>
 								</xf:group>
 								<xf:group style="" class="w2tb_th req" tagname="th">요일</xf:group>

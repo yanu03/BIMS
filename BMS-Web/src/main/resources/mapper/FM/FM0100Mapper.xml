@@ -119,8 +119,12 @@
 						,REL_ID
 						,DEV_SERIAL_NO
 						,MODEL_NM
+						<if test="@kr.tracom.util.CommonUtil@notEmpty(INST_DT)">
 						,INST_DT
+						</if>
+						<if test="@kr.tracom.util.CommonUtil@notEmpty(BUY_DT)">
 						,BUY_DT
+						</if>
 						,CCTV_URL
 						,USE_YN
 						,CTR_YN
@@ -147,8 +151,12 @@
 						,#{REL_ID}
 						,#{DEV_SERIAL_NO}
 						,#{MODEL_NM}
+						<if test="@kr.tracom.util.CommonUtil@notEmpty(INST_DT)">
 						,STR_TO_DATE(#{INST_DT}, '%Y%m%d')
+						</if>
+						<if test="@kr.tracom.util.CommonUtil@notEmpty(BUY_DT)">
 						,STR_TO_DATE(#{BUY_DT}, '%Y%m%d')
+						</if>
 						,#{CCTV_URL}
 						,#{USE_YN}
 						,#{CTR_YN}
@@ -171,8 +179,12 @@
 					,USE_YN = #{USE_YN}	
 					,CTR_YN = #{CTR_YN}	
 					,REMARK = #{REMARK}
+					<if test="@kr.tracom.util.CommonUtil@notEmpty(INST_DT)">
 					,INST_DT = STR_TO_DATE(#{INST_DT}, '%Y%m%d')
+					</if>
+					<if test="@kr.tracom.util.CommonUtil@notEmpty(BUY_DT)">
 					,BUY_DT = STR_TO_DATE(#{BUY_DT}, '%Y%m%d')
+					</if>
 					
 	WHERE			FCLT_ID = #{FCLT_ID}							 	
 </update>

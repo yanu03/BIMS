@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.tracom.brt.domain.VH0108.VH0108Mapper">
+
+<select id="VH0108G0R0" resultType="Map">
+	select  
+		DATE_FORMAT(a.OCR_DTM, '%Y-%m-%d %H:%i:%s') OCR_DTM
+		,DATE_FORMAT(a.OPER_DT, '%Y-%m-%d') OPER_DT
+		,a.REP_ROUT_ID
+		,a.REP_ROUT_NM
+		,a.ROUT_NM
+		,a.VIOLT_TYPE
+		,a.VHC_ID
+		,a.VHC_NO
+		,a.ALLOC_NO
+		,a.OPER_SN
+		,a.DRV_ID
+		,a.GPS_X
+		,a.GPS_Y
+		,a.ROUT_ID
+		,a.NODE_ID
+		,b.NODE_NM
+		,c.DRV_NM
+	from 	
+		BRT_OPER_VIOLT_HIS a
+		LEFT JOIN BMS_NODE_MST b
+		ON a.NODE_ID = b.NODE_ID
+		LEFT JOIN BMS_DRV_MST c
+		ON a.DRV_ID = c.DRV_ID
+	<where>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT1)">
+				a.REP_ROUT_ID = #{CONTENT1}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT2)">
+				AND a.ROUT_ID = #{CONTENT2}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT3)">
+				AND a.VHC_NO LIKE CONCAT('%', #{CONTENT3}, '%')
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
+			<![CDATA[AND DATE_FORMAT(a.OCR_DTM, '%Y%m%d') >= #{F_DATE}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
+			<![CDATA[AND DATE_FORMAT(a.OCR_DTM, '%Y%m%d') <= #{L_DATE}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
+			AND (DATE_FORMAT(a.OCR_DTM, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE})
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(VIOLT_TYPE)">
+				AND VIOLT_TYPE = #{VIOLT_TYPE}
+		</if>
+	</where>
+	ORDER BY
+		a.OCR_DTM DESC
+</select>
+
+<select id="VH0108SHI0" resultType="Map" parameterType="Map">
+		SELECT  
+		a.REP_ROUT_ID
+		,b.REP_ROUT_NM
+	FROM
+		BRT_DAY_ALLOC_PL_INFO a
+		LEFT JOIN BMS_ROUT_MST b
+		ON a.REP_ROUT_ID = b.REP_ROUT_ID
+</select>
+
+</mapper>
