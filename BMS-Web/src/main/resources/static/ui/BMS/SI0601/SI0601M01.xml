@@ -86,6 +86,7 @@
 				, keySbm : sub_SI0601G0K0, srchGrp : pgm_search, keyColumn : "PARTNER_ID", focusColumn : "PARTNER_NM", name :  "기관 정보" }
 		 };
 
+		scwin.param = com.getParameter();
 		
 		var codeOptions = [ {code : "PARTNER_DIV", compID : "PARTNER_DIV, SI0601G0:PARTNER_DIV" }];		
 		var mainOptions = {
@@ -149,7 +150,32 @@
 	scwin.SI0601G0_onrowindexchange = function(row,oldRow) {
 		com.changeSingleGrid(SI0601G0, row, oldRow);
 	};
-	]]></script>
+	
+	scwin.btn_address_onclick = function(row) {
+		var row = SI0601G0.getFocusedRowIndex();
+
+		var options = {
+			id : "SI0601P01",
+			popupName : "주소 검색",
+			modal : true,
+		};
+		var data = {
+					ROW_INDEX : row,
+					callbackFn : "scwin.insertCool",
+					menuCode : scwin.param.menuCode
+		};
+		
+		com.openPopup(("/ui/BMS/SI0601/SI0601P01.xml"), options, data);
+		
+	};	
+	
+	scwin.insertCool = function(cooldinate) {
+		
+//		var row = SI0601G0.getFocusedRowIndex();
+//		
+//		dlt_BMS_PARTNER_MST.setCellData(row, "GPS_X", cooldinate.substr(0, 10));
+//		dlt_BMS_PARTNER_MST.setCellData(row, "GPS_Y", cooldinate.substr(16, 24));
+	};	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
@@ -200,7 +226,7 @@
 										</xf:item>
 									</xf:choices>
 								</xf:select1>
-								<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="조직ID 또는 조직명"></xf:input>
+								<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="협력기관ID 또는 협력기관명"></xf:input>
 								<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
 									chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
 									ev:onviewchange="" id="acb_autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start"
@@ -261,7 +287,7 @@
 										value="" blockSelect="false" displayMode="label" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="PARTNER_NM"
-										value="" blockSelect="false" displayMode="label" userData1="M">
+										value="" blockSelect="false" displayMode="label" userData1="M" textAlign="left">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="PARTNER_DIV"
 										value="" blockSelect="false" displayMode="label" userData1="M">
@@ -282,7 +308,7 @@
 										blockSelect="false" displayMode="label">
 									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REMARK"
-										value="" blockSelect="false" displayMode="label">
+										value="" blockSelect="false" displayMode="label" textAlign="left">
 									</w2:column>
 								</w2:row>
 							</w2:gBody>
@@ -352,7 +378,10 @@
 								</xf:group>
 								<xf:group class="w2tb_th" tagname="th">사업자등록번호</xf:group>
 								<xf:group class="w2tb_td" tagname="td">
-									<xf:input id="COMP_REG_NO" ref="data:dlt_BMS_PARTNER_MST.COMP_REG_NO" style="" readOnly="" readOnlyClass="" initValue="" allowChar="0-9-" maxlength="12"></xf:input>
+									<xf:input id="COMP_REG_NO" ref="data:dlt_BMS_PARTNER_MST.COMP_REG_NO" style="" readOnly="" readOnlyClass="" 
+									initValue="" allowChar="0-9-" maxlength="12" placeholder="0001122222" customModelFormatter="com.checkBizID"
+									displayFormatter="com.checkBizID">
+									</xf:input>
 								</xf:group>
 							</xf:group>
 							<xf:group style="" tagname="tr">
@@ -362,14 +391,25 @@
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:input id="ADDR" ref="data:dlt_BMS_PARTNER_MST.ADDR" style="" disabled="" refSync="" maxlength="100"></xf:input>
+									<xf:input id="ADDR" class="popup" ref="data:dlt_BMS_PARTNER_MST.ADDR" style="width:480px;margin-right:5px;" disabled="" 
+									refSync="" maxlength="100">
+									</xf:input>
+									<xf:image class="btn_gcm" ev:onclick="scwin.btn_address_onclick" id="btn_address" longdesc=""
+										src="/cm/images/inc/icon_search.gif" style="width:21px;height:20px;">
+									</xf:image>
+									<!-- <w2:anchor class="btn_gcm" ev:onclick="scwin.btn_cool_onclick" id="btn_cool" outerDiv="true"
+												style="left:0px;top:0px;">
+										<xf:label><![CDATA[위치보기]]></xf:label>
+									</w2:anchor> -->
 								</xf:group>
 								
 							</xf:group>
 							<xf:group style="" tagname="tr">
 								<xf:group style="" class="w2tb_th" tagname="th">전화번호</xf:group>
 								<xf:group style="" class="w2tb_td" tagname="td">
-									<xf:input disabled="" id="PHONE" ref="data:dlt_BMS_PARTNER_MST.PHONE" refSync="" style="" initValue="" allowChar="0-9-" maxlength="13" customModelFormatter="com.transPhone" displayFormatter="com.transPhone"></xf:input>
+									<xf:input disabled="" id="PHONE" ref="data:dlt_BMS_PARTNER_MST.PHONE" refSync="" style=""
+									 initValue="" allowChar="0-9" maxlength="13" customModelFormatter="com.transPhone"
+									  displayFormatter="com.transPhone" placeholder="0441234567"></xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" tagname="th">이메일</xf:group>
 								<xf:group class="w2tb_td" tagname="td">
@@ -381,7 +421,9 @@
 							<xf:group style="" tagname="tr">
 							<xf:group class="w2tb_th" tagname="th">팩스</xf:group>
 								<xf:group class="w2tb_td" tagname="td">
-									<xf:input id="FAX" ref="data:dlt_BMS_PARTNER_MST.FAX" style="" disabled="" refSync="" allowChar="0-9-" maxlength="13" customModelFormatter="com.transPhone" displayFormatter="com.transPhone"></xf:input>
+									<xf:input id="FAX" ref="data:dlt_BMS_PARTNER_MST.FAX" style="" 
+									disabled="" refSync="" allowChar="0-9" maxlength="13" customModelFormatter="com.transPhone" 
+									displayFormatter="com.transPhone" placeholder="0441234567"></xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" tagname="th"><w2:attributes><w2:colspan>2</w2:colspan><w2:rowspan>1</w2:rowspan></w2:attributes></xf:group>
 							</xf:group>

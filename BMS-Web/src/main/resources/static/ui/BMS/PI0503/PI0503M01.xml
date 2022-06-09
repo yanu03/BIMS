@@ -66,6 +66,7 @@
 				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_VDO_RSV_RST_INFO" saveRemovedData="true">
 					<w2:columnInfo>
+						<w2:column id="chk" name="name10" dataType="text"></w2:column>
 						<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
 						<w2:column id="PROCE_RST" name="예약결과" dataType="text"></w2:column>
 						<w2:column id="SEND_DTM" name="처리일시" dataType="date"></w2:column>
@@ -126,7 +127,7 @@
 		 
 		var mainOptions = {
 			RESERV : scwin.btn_resrv_onclick,
-			RESERV_CNL : scwin.btn_resrvcnl_onclick,
+			RESERV_CNL : {},
 			SEARCH : {}
 		};		 
 		 
@@ -157,7 +158,8 @@
 		};
 		
 		var subOptions2 = {
-			SEARCH: scwin.btn_sub_move2
+			SEARCH: scwin.btn_sub_move2,
+			RESERV_CNL : scwin.btn_resrvcnl_onclick
 		};		
 		
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);		
@@ -290,22 +292,40 @@
 	}
 	
 	scwin.btn_resrvcnl_onclick = function() {
-		var rows = PI0503G1.getCheckedIndex("chk");
+		var rows = PI0503G2.getCheckedIndex("chk");
 		var count = rows.length;
 		var str = count + " 건의 데이터를 예약 취소 하시겠습니까?";
+		var rsvState = true;
 		
-		if(count > 0) {
-			com.confirm(str, function(rtn) {
-				if (rtn) {
-					com.executeSubmission(sub_PI0503G1U0);
-				}	
-			});
+		if(RSV_STATE.getValue() == '예약종료') {
+			rsvState = false;	
+		}
+//		for(var x = 0; x < count; x++){
+//			if(rows[x].RSV_STATE == '예약종료'){
+//				rsvState = false;
+//				break;
+//			}
+//		}
+		
+		if(rsvState){
+			if(count > 0) {
+				com.confirm(str, function(rtn) {
+					if (rtn) {
+						com.executeSubmission(sub_PI0503G1U0);
+					}	
+				});
+			}else{
+				com.alert("선택된 예약정보가 없습니다.");
+			}
+		}else{
+			com.alert("이미 취소된 예약정보 입니다.");
 		}
 		
 	}
 	
 	scwin.sub_PI0503G1U0_submitdone = function(e) {
 		com.saveDone(PI0503G1, sub_PI0503G1R0);	
+		com.saveDone(PI0503G2, sub_PI0503G2R0);	
 	};
 	
 	scwin.PI0503G1_onrowindexchange = function(row,oldRow) {
@@ -322,13 +342,65 @@
 	};
 	
 	scwin.PI0503G1_oncellclick = function(row,col,colId) {
-	      if (col != "0"){
-	         if(PI0503G1.getCellChecked(row, 'chk')==0){
-	            PI0503G1.setCellChecked(row, 'chk', true);
-	         }else if(PI0503G1.getCellChecked(row, 'chk')==1){
-	            PI0503G1.setCellChecked(row, 'chk', false);
-	         }
-	      }			
+		 var rowCount = dlt_DVC_INFO.getRowCount();
+//		 
+//	      if (col != "0"){
+//	         if(PI0503G1.getCellChecked(row, 'chk')==0){
+//	            PI0503G1.setCellChecked(row, 'chk', true);
+//	         }else if(PI0503G1.getCellChecked(row, 'chk')==1){
+//	            PI0503G1.setCellChecked(row, 'chk', false);
+//	         }
+//	      }	
+
+		if (col != "0"){
+         if(PI0503G1.getCellChecked(row, 'chk')==0){
+	         for(var i=0; i<rowCount; i++) {
+		          PI0503G1.setCellChecked(i, 'chk', false);
+	        }
+	         PI0503G1.setCellChecked(row, 'chk', true);
+         }
+      }		
+		var chkCount = dlt_DVC_INFO.getMatchedColumnData('chk', '1', 'chk');
+		var chkLen = chkCount.length; 
+		var chkData = PI0503G1.getCheckedJSON('chk');
+		var dataCheck = true;
+		
+		//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
+		if(chkLen > 1 ){
+			for(var i=0; i<chkLen; i++)
+			{
+				if(chkData[0].VHC_ID != chkData[i].VHC_ID){
+					dataCheck = false;
+				}	 
+			}
+				
+			if(!dataCheck) {
+				PI0503G2.hide();
+				gr_sub_header2.hide();
+				PI0503_ul.show("");
+			}
+			else if(dataCheck) {
+				PI0503G2.show("");
+				gr_sub_header2.show("");
+				PI0503_ul.hide();	
+			}			
+			
+			
+//			PI0702G2.hide();
+//			gr_sub_header2.hide();
+//			PI0702_ul.show("");
+			
+			//FM0204G1.setDisabled("grid", true);
+			//FM0204F0.setDisabled(true);
+		}else if(chkLen < 2){
+			PI0503G2.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
+			gr_sub_header2.show("");
+			PI0503_ul.hide();
+			
+			//FM0204G1.setDisabled("grid", false);
+			//FM0204F0.setDisabled(false);
+		}	
+		
 	};
 	
 	scwin.sbx_ChoiceBox_onviewchange = function(info) {
@@ -358,7 +430,7 @@
 	};
 	scwin.rsvCnt = function(obj){
 		var rsvCnt = obj + '건';
-		return rsvCnt
+		return rsvCnt;
 	};
 
 	scwin.btn_sub_move = function() {
@@ -407,7 +479,19 @@
 	
 	scwin.btn_sub_move2 = function() {
 		 com.executeSubmission(sub_PI0503G2R0);
-	}	]]></script>
+	};
+		
+	scwin.PI0503G2_oncellclick = function(row,col,colId) {
+	
+		if (col != "0"){
+	         if(PI0503G2.getCellChecked(row, 'chk')==0){
+	            PI0503G2.setCellChecked(row, 'chk', true);
+	         }else if(PI0503G2.getCellChecked(row, 'chk')==1){
+	            PI0503G2.setCellChecked(row, 'chk', false);
+	         }
+	      }
+	};
+	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
@@ -715,9 +799,9 @@
 						</xf:group>					
 						<xf:group id="pgm_sub_list" class="" style="">
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
-								dataList="data:dlt_BMS_VDO_RSV_RST_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
+								dataList="data:dlt_BMS_VDO_RSV_RST_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.PI0503G2_oncellclick" ev:oneditkeyup="" ev:onkeyup=""
 								ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true" id="PI0503G2" ignoreCellClick="false"
-								nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40"
+								nextTabID="" rowNumHeaderValue="No." rowNumVisible="" rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40"
 								scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows="" autoFitMinWidth="0" disabledScrollHidden=""
 								editModeEvent="" editModeEventIcon="" checkEditableInputClass="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll=""
 								ignoreNonEditableCellTabEnter="" readOnly="true" keepDefaultColumnWidth="" oddEvenColorDisplay="" rowNumWidth="" summaryAuto=""
@@ -727,6 +811,9 @@
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
+										<w2:column removeBorderStyle="false" width="40" inputType="checkbox" style="height:20px" id="chkHeader"
+											value="선택" blockSelect="false" displayMode="label" sortable="false">
+										</w2:column>
 										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column7"
 											value="차량번호" blockSelect="false" displayMode="label">
 										</w2:column>
@@ -761,6 +848,9 @@
 								</w2:header>
 								<w2:gBody style="" id="gBody1">
 									<w2:row style="" id="row2">
+										<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:25px"
+										inputType="checkbox" id="chk" blockSelect="false">
+										</w2:column>
 										<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="VHC_NO"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>

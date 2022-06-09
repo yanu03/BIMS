@@ -20,6 +20,7 @@
 	
 		FROM BMS_DRV_MST a, BMS_TRANSCOMP_MST b
 		WHERE a.COMP_ID = b.COMP_ID
+		AND		USE_YN != 'N'
 			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
 				AND (DRV_ID LIKE CONCAT('%',#{CONTENT},'%') || DRV_NM LIKE CONCAT('%',#{CONTENT},'%') || COMP_NM LIKE CONCAT('%',#{CONTENT},'%')) 
 			</if>
@@ -72,12 +73,20 @@
 							,DRV_ENM
 							,PHONE
 							,BUS_DIV
-							,EPLY_DATE1
-							,EPLY_DATE2
+							<if test="@kr.tracom.util.CommonUtil@notEmpty(EPLY_DATE1)">
+								,EPLY_DATE1
+							</if>
+							<if test="@kr.tracom.util.CommonUtil@notEmpty(EPLY_DATE2)">
+								,EPLY_DATE2
+							</if>	
 							,LIC_NO
-							,CERTI_DT
+							<if test="@kr.tracom.util.CommonUtil@notEmpty(CERTI_DT)">
+								,CERTI_DT
+							</if>	
 							,EPLY_YN
-							,RETIRE_DT
+							<if test="@kr.tracom.util.CommonUtil@notEmpty(RETIRE_DT)">
+								,RETIRE_DT
+							</if>
 							,REMARK
 							,UPD_DTM
 							,UPD_ID
@@ -93,13 +102,21 @@
     						, AES_ENCRYPT(#{PHONE}, HEX(SHA2('TRACOM', 512)))							
 							<!-- ,#{PHONE} -->
 							,#{BUS_DIV}
-							,STR_TO_DATE(#{EPLY_DATE1}, '%Y%m%d')
-							,STR_TO_DATE(#{EPLY_DATE2}, '%Y%m%d')
+							<if test="@kr.tracom.util.CommonUtil@notEmpty(EPLY_DATE1)">
+								,STR_TO_DATE(#{EPLY_DATE1}, '%Y%m%d')
+							</if>
+							<if test="@kr.tracom.util.CommonUtil@notEmpty(EPLY_DATE2)">
+								,STR_TO_DATE(#{EPLY_DATE2}, '%Y%m%d')
+							</if>	
     						, AES_ENCRYPT(#{LIC_NO}, HEX(SHA2('TRACOM', 512)))								
 							<!-- ,#{LIC_NO} -->
-							,STR_TO_DATE(#{CERTI_DT}, '%Y%m%d')
+							<if test="@kr.tracom.util.CommonUtil@notEmpty(CERTI_DT)">
+								,STR_TO_DATE(#{CERTI_DT}, '%Y%m%d')
+							</if>
 							,#{EPLY_YN}
-							,STR_TO_DATE(#{RETIRE_DT}, '%Y%m%d')
+							<if test="@kr.tracom.util.CommonUtil@notEmpty(RETIRE_DT)">
+								,STR_TO_DATE(#{RETIRE_DT}, '%Y%m%d')
+							</if>
 							,#{REMARK}
 							,#{UPD_DTM}
 							,#{SSN_USER_ID}
@@ -117,12 +134,20 @@
 				DRV_ENM = #{DRV_ENM},
 				PHONE = AES_ENCRYPT(#{PHONE}, HEX(SHA2('TRACOM', 512))),
 				BUS_DIV = #{BUS_DIV},
-				EPLY_DATE1 = STR_TO_DATE(#{EPLY_DATE1}, '%Y%m%d'),
-				EPLY_DATE2 = STR_TO_DATE(#{EPLY_DATE2}, '%Y%m%d'),
+				<if test="@kr.tracom.util.CommonUtil@notEmpty(EPLY_DATE1)">
+					EPLY_DATE1 = STR_TO_DATE(#{EPLY_DATE1}, '%Y%m%d'),
+				</if>
+				<if test="@kr.tracom.util.CommonUtil@notEmpty(EPLY_DATE2)">
+					EPLY_DATE2 = STR_TO_DATE(#{EPLY_DATE2}, '%Y%m%d'),
+				</if>
 				LIC_NO = AES_ENCRYPT(#{LIC_NO}, HEX(SHA2('TRACOM', 512))),
-				CERTI_DT = STR_TO_DATE(#{CERTI_DT}, '%Y%m%d'),
+				<if test="@kr.tracom.util.CommonUtil@notEmpty(CERTI_DT)">
+					CERTI_DT = STR_TO_DATE(#{CERTI_DT}, '%Y%m%d'),
+				</if>
 				EPLY_YN = #{EPLY_YN},
-				RETIRE_DT = STR_TO_DATE(#{RETIRE_DT}, '%Y%m%d'),
+				<if test="@kr.tracom.util.CommonUtil@notEmpty(RETIRE_DT)">
+					RETIRE_DT = STR_TO_DATE(#{RETIRE_DT}, '%Y%m%d'),
+				</if>
 				REMARK = #{REMARK},
 				UPD_DTM = #{UPD_DTM},
 				UPD_ID = #{UPD_ID},

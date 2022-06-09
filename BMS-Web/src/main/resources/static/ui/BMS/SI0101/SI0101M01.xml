@@ -175,7 +175,7 @@
 		
 		map.setLevel(3);
 		//com.setExlUpdate(SI0101G0, false); //엑셀 업데이트 초기화
- 
+ 		SI0101_ul.hide("");
 	};
 
 	scwin.onpageunload = function() {
@@ -397,10 +397,13 @@
 		if(isEdit) {
 			temp.getChild(0,"btn_sub").setValue("편집종료");
 			temp.getChild(0,"btn_sub").addClass("end");
+			routMap.setMapCursor("map_SI0101", "crosshair");
+						
 		}
 		else {
 			temp.getChild(0,"btn_sub").setValue("편집시작");
 			temp.getChild(0,"btn_sub").removeClass("end");
+			routMap.setMapCursor("map_SI0101", "pointer");
 		}
 	}
 
@@ -409,15 +412,24 @@
 		var GPS_X = dlt_BMS_GRG_MST.getCellData(SI0101G0.getFocusedRowIndex(), "GPS_X") 
 		var GPS_Y = dlt_BMS_GRG_MST.getCellData(SI0101G0.getFocusedRowIndex(), "GPS_Y")	
 				
-		if (GPS_Y != "" || GPS_X != "") {
+		if (GPS_Y != "" && GPS_X != "") {
+			SI0101_map.show();
+			wfm_subBtn.show();
+			SI0101_ul.hide();
 			//중심좌표 이동		
 			routMap.moveMap("map_SI0101", GPS_Y, GPS_X);
+			var sCode = com.getResultCode(e);
+			if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {			
+				routMap.drawPolygon("map_SI0101",dlt_GRG_RDS_INFO, dma_search.get("GRG_NM"));			
+			}		
 		}
 		
-		var sCode = com.getResultCode(e);
-		if (sCode == gcm.MESSAGE_CODE.STATUS_SUCCESS) {			
-			routMap.drawPolygon("map_SI0101",dlt_GRG_RDS_INFO, dma_search.get("GRG_NM"));			
-		}		
+		else {
+			SI0101_map.hide();
+			wfm_subBtn.hide();
+			SI0101_ul.show();	
+		}
+		
 	};
 	
 	
@@ -488,6 +500,10 @@
 			dlt_BMS_GRG_MST.setCellData(row, "GPS_Y", cooldinates[1]);
 			routMap.setCenter("map_SI0101", cooldinates[1],cooldinates[0]);
 		}
+		
+		SI0101_map.show();
+		wfm_subBtn.show();
+		SI0101_ul.hide();
 	};		
 	]]></script>
 	</head>
@@ -612,7 +628,7 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column4" value="적용종료일"
 										blockSelect="false" displayMode="label">
 									</w2:column> -->
-									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:22px;" id="column20" value="사용여부"
+									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:22px;" id="column20" value="사용여부"
 										blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="380" inputType="text" style="height:22px;" id="column3" value="비고"
@@ -678,7 +694,7 @@
 							<w2:footer style="" id="footer1">
 								<w2:row style="" id="row3">
 									<w2:column removeBorderStyle="false" width="" inputType="expression" style="height:20px;" id="column48" value=""
-										blockSelect="false" displayMode="label" colSpan="13" rowSpan="" expression="&quot;데이터 개수 : &quot; + COUNT('GRG_ID')"
+										blockSelect="false" displayMode="label" colSpan="20" rowSpan="" expression="&quot;데이터 개수 : &quot; + COUNT('GRG_ID')"
 										textAlign="left">
 									</w2:column>
 								</w2:row>
@@ -755,7 +771,7 @@
 										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:input adjustMaxLength="" class="" disabled="" id="ADDR" mandatory="" ref="data:dlt_BMS_GRG_MST.ADDR"
+									<xf:input adjustMaxLength="" class="popup" disabled="" id="ADDR" mandatory="" ref="data:dlt_BMS_GRG_MST.ADDR"
 										style="width:263px;" allowChar="" validator="" validateOnInput="false" initValue="" maxByteLength="" maxlength="100">
 									</xf:input>
 									<xf:image class="btn" ev:onclick="scwin.btn_search_onclick" id="btn_search" longdesc=""
@@ -933,9 +949,22 @@
 											</xf:group>
 											<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 										</xf:group>
-										<xf:group id="" class="" style="">
+										<xf:group id="SI0101_map" class="" style="">
 											<div id="map_SI0101" style="overflow:hidden;"></div>
 										</xf:group>	
+										
+										<xf:group style="" id="SI0101_ul" class="" tagname="ul">
+											<xf:group style="" id="" class="" tagname="li">
+												<!-- <xf:group tagname="ul">
+													<xf:group tagname="li">
+														<xf:group class="repeat" tagname="li"> -->
+															<w2:textbox label="주소 입력 후 지도 편집이 가능합니다." style="" id="" tagname="strong" ref=""></w2:textbox>
+												<!-- 		</xf:group>
+													</xf:group>
+												</xf:group> -->
+											</xf:group>
+										</xf:group>	
+										
 									</xf:group>		
 								</xf:group>
 							</xf:group>

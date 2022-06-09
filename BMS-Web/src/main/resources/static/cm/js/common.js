@@ -3868,10 +3868,14 @@ com.checkBizID = function(str) {
 	} else {
 		temp1 = 0;
 	}
-	if (temp1 != aBizID[9]) {
-		return false;
+	if (temp1 != aBizID[9] || aBizID[9] == "") {
+		//return false;
+		//com.alert("사업자 등록번호가 유효하지 않습니다.");
+		return str;
 	}
-	return true;
+	//return true;
+	var result = aBizID[0]+aBizID[1]+aBizID[2]+'-'+aBizID[3]+aBizID[4]+'-'+aBizID[5]+aBizID[6]+aBizID[7]+aBizID[8]+aBizID[9];
+	return result;
 };
 
 /**

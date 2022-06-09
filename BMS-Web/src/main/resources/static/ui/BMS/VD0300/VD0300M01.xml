@@ -229,16 +229,29 @@
 		//탭 목록 클릭 이벤트
 		$("#VD0300_TAB").find("li").click( function() {
 			var li_id = this.id;
-			$("#VD0300_TAB").find("li").removeClass("on");
-			$("#VD0300_TAB").find("#"+li_id).addClass("on");
 			
 			if(li_id == "li_HIS") {
-				VD0300G2.show("");
-				VD0300G3.hide();
+				//유지보수 이력 변경사항이 있을 경우 예외처리
+				if(dlt_BMS_DVC_COND_LOG.getModifiedJSON().length != 0){
+					com.alert("유지보수 이력 저장 후 장애발생 이력 조회가 가능합니다.");	
+				}
+				else {
+					$("#VD0300_TAB").find("li").removeClass("on");
+					$("#VD0300_TAB").find("#"+li_id).addClass("on");
+					VD0300G2.show("");
+					VD0300G3.hide();
+				}
 			}
 			else if(li_id == "li_COND") {
-				VD0300G2.hide();
-				VD0300G3.show("");
+				if(dlt_BMS_DVC_HIS.getModifiedJSON().length != 0){
+					com.alert("장애발생 이력 저장 후 유지보수 이력 조회가 가능합니다.");	
+				}
+				else {
+					$("#VD0300_TAB").find("li").removeClass("on");
+					$("#VD0300_TAB").find("#"+li_id).addClass("on");
+					VD0300G2.hide();
+					VD0300G3.show("");
+				}
 				//com.setFocusedCell(VD0300G3, "SEND_DATE");
 			}
 		});
@@ -473,10 +486,11 @@
 									<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="column58"
 										value="권역" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column59"
-										value="운수사명" blockSelect="false" displayMode="label" sortable="false">
+									<w2:column removeBorderStyle="false" width="85" inputType="text" style="height:20px" id="column52"
+										value="차량종류" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column55"
+									
+									<!-- <w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column55"
 										value="제조사" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column54"
@@ -485,8 +499,8 @@
 									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column53"
 										value="모델명" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="85" inputType="text" style="height:20px" id="column52"
-										value="차량종류" blockSelect="false" displayMode="label" sortable="false">
+									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column59"
+										value="운수사명" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="65" inputType="text" style="height:20px" id="column51"
 										value="노선유형" blockSelect="false" displayMode="label" sortable="false">
@@ -496,7 +510,7 @@
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="column49"
 										value="차량연료" blockSelect="false" displayMode="label" sortable="false">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="201" inputType="text" style="height:20px" id="column41"
 										value="비고" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
@@ -516,10 +530,11 @@
 									<w2:column removeBorderStyle="false" width="113" inputType="select" style="height:20px" id="AREA" value=""
 										blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="134" inputType="text" style="height:20px" id="COMP_NM"
-										value="" blockSelect="false" displayMode="label" textAlign="left">
+									<w2:column removeBorderStyle="false" width="91" inputType="select" style="height:20px" id="VHC_TYPE"
+										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="MAKER" value=""
+									
+									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="MAKER" value=""
 										blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="99" inputType="text" style="height:20px" id="RELS_DT"
@@ -534,12 +549,12 @@
 									<w2:column removeBorderStyle="false" width="77" inputType="select" style="height:20px" id="ROUT_TYPE"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="91" inputType="select" style="height:20px" id="VHC_TYPE"
-										value="" blockSelect="false" displayMode="label">
+									<w2:column removeBorderStyle="false" width="134" inputType="text" style="height:20px" id="COMP_NM"
+										value="" blockSelect="false" displayMode="label" textAlign="left">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="94" inputType="select" style="height:20px" id="VHC_FUEL"
 										value="" blockSelect="false" displayMode="label">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="201" inputType="text" style="height:20px" id="REMARK"
 										value="" blockSelect="false" displayMode="label" textAlign="left">
 									</w2:column>
@@ -688,7 +703,7 @@
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
-									<w2:column removeBorderStyle="false" width="123" inputType="calendar" style="height:20px"
+									<w2:column removeBorderStyle="false" width="123" inputType="calendar" style="height:25px"
 										id="APLY_DATE" value="" blockSelect="false" displayMode="label" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="120" inputType="select" style="height:20px"
@@ -737,7 +752,7 @@
 							</w2:header>
 							<w2:gBody style="" id="gBody1">
 								<w2:row style="" id="row2">
-									<w2:column removeBorderStyle="false" width="129" inputType="calendar" style="height:20px"
+									<w2:column removeBorderStyle="false" width="129" inputType="calendar" style="height:25px"
 										id="SEND_DATE" value="" blockSelect="false" displayMode="label" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="107" inputType="text" style="height:20px" 
