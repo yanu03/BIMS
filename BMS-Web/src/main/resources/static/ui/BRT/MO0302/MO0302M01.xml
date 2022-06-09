@@ -77,14 +77,23 @@
 	scwin.onpageload = function() {
 		var autoOptions = {
 			Main : { grid : MO0302G0, srchSbm : sub_MO0302G0R0
-					,srchGrp : pgm_header, keyColumn : "OCR_DTM", focusColumn : "OCR_DTM", name :  "돌발상황대응이력 목록"}
+					,srchGrp : pgm_search, keyColumn : "OCR_DTM", focusColumn : "OCR_DTM", name :  "돌발상황대응이력 목록"}
 		};
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions);
-		
 		var codeOptions = [ {code : "INCDNT_TYPE", compID : "MO0302G0:INCDNT_TYPE" } 
 							,{code : "INCDNT_RES_TYPE", compID : "MO0302G0:INCDNT_RES_TYPE" }
 							,{code : "PROG_DIV", compID : "MO0302G0:PROG_DIV" }
 					];
+					
+		var mainOptions = {
+	     	  SEARCH:{}
+	    };
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions, codeOptions);		
+		var mainSrhOptions = {
+			SEARCH:scwin.btn_search_onclick
+		};		
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions, codeOptions);
+		
+
 		com.setCommonDtl(codeOptions);
 		
 		dma_search.F_DATE = util.getCurrentDate2();
@@ -209,102 +218,112 @@
 ]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-			<xf:group id="pgm_header" class="pgm_header" style="">
-				<xf:group id="" style="" class="gr_search">
-					<xf:group id="" style="" class="label">
-						<w2:span id="" class="" label="검색 항목"></w2:span>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+		
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:group id="" style="" class="search">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="sbx_ChoiceBox"
-							optionOrder="false" ref="data:dma_search.TYPE" style="" class="search_type" submenuSize="auto" textAlign="left">
-							<xf:choices>
-								<xf:item>
-									<xf:label><![CDATA[전체]]></xf:label>
-									<xf:value><![CDATA[ALL]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[돌발유형]]></xf:label>
-									<xf:value><![CDATA[INCDNT_TYPE]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[진행구분]]></xf:label>
-									<xf:value><![CDATA[PROG_DIV]]></xf:value>
-								</xf:item>
-							</xf:choices>
-						</xf:select1>
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="돌발유형 또는 진행여부"></xf:input>
-						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
-							chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
-							ev:onviewchange="" id="acb_autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start"
-							selectedData="" style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false" visibleRowNum="">
-							<w2:choices>
-								<w2:itemset nodeset="data:dlt_grgSearchItem">
-									<w2:label ref="GRG_ID"></w2:label>
-									<w2:value ref="GRG_ID"></w2:value>
-								</w2:itemset>
-							</w2:choices>
-						</w2:autoComplete>
-						<xf:group class="label" id="" style="margin-left: 10px;">
-							<w2:span class="" id="" label="발생일시"></w2:span>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					</xf:group>
+				</xf:group>
+			</xf:group>
+		
+			<xf:group id="pgm_content" class="pgm_content grdc_a" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
+					<xf:group id="" class="" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl list ico-list" id="" label="돌발상황대응이력 목록" style=""></w2:textbox>
 						</xf:group>
-						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
-							style="width:120px; margin-right: 10px; float: left;margin-top: 3px;" id="F_DATE" renderType="component" renderDiv="true"
-							calendarValueType="yearMonthDate" ref="data:dma_search.F_DATE" ev:onviewchange="scwin.F_DATE_onviewchange">
-						</w2:inputCalendar>
-						<w2:span label="~" style="float: left;margin-right: 10px;margin-top: 5px;" id=""></w2:span>
-						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
-							style="width: 120px;float: left;margin-top: 3px;" id="L_DATE" renderType="component" renderDiv="true" 
-							calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange">
-						</w2:inputCalendar>
-						<xf:group id="" style="margin-left: 10px;" class="radio">
-							<xf:select1 id="calendar_radio" ref="" selectedIndex="1" cols="" appearance="full"
-								style="margin-light: 10px;min-width: 200px;" rows="1" ev:onviewchange="scwin.calendar_radio_onviewchange">
+					</xf:group>
+					
+					<xf:group id="" class="" style="">
+						<xf:group id="" style="" class="gr_search">
+							<xf:group id="" style="" class="label">
+									<w2:span id="" class="" label="검색 항목"></w2:span>
+							</xf:group>
+							<xf:group class="search" id="pgm_search" style="">
+							<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+								disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="sbx_ChoiceBox"
+								optionOrder="false" ref="data:dma_search.TYPE" style="" class="search_type" submenuSize="auto" textAlign="left">
 								<xf:choices>
 									<xf:item>
-										<xf:label><![CDATA[직접입력]]></xf:label>
-										<xf:value><![CDATA[DIRECT]]></xf:value>
+										<xf:label><![CDATA[전체]]></xf:label>
+										<xf:value><![CDATA[ALL]]></xf:value>
 									</xf:item>
 									<xf:item>
-										<xf:label><![CDATA[금일]]></xf:label>
-										<xf:value><![CDATA[TODAY]]></xf:value>
+										<xf:label><![CDATA[돌발유형]]></xf:label>
+										<xf:value><![CDATA[INCDNT_TYPE]]></xf:value>
 									</xf:item>
 									<xf:item>
-										<xf:label><![CDATA[일주일]]></xf:label>
-										<xf:value><![CDATA[WEEK]]></xf:value>
-									</xf:item>
-									<xf:item>
-										<xf:label><![CDATA[1개월]]></xf:label>
-										<xf:value><![CDATA[MONTH]]></xf:value>
+										<xf:label><![CDATA[진행구분]]></xf:label>
+										<xf:value><![CDATA[PROG_DIV]]></xf:value>
 									</xf:item>
 								</xf:choices>
 							</xf:select1>
+							<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="돌발유형 또는 진행여부"></xf:input>
+							<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
+								chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
+								ev:onviewchange="" id="acb_autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start"
+								selectedData="" style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false" visibleRowNum="">
+								<w2:choices>
+									<w2:itemset nodeset="data:dlt_grgSearchItem">
+										<w2:label ref="GRG_ID"></w2:label>
+										<w2:value ref="GRG_ID"></w2:value>
+									</w2:itemset>
+								</w2:choices>
+							</w2:autoComplete>
+							<xf:group class="label" id="" style="margin-left: 10px;">
+								<w2:span class="" id="" label="발생일시"></w2:span>
+							</xf:group>
+							<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+								style="width:120px; margin-right: 10px; float: left;margin-top: 3px;" id="F_DATE" renderType="component" renderDiv="true"
+								calendarValueType="yearMonthDate" ref="data:dma_search.F_DATE" ev:onviewchange="scwin.F_DATE_onviewchange">
+							</w2:inputCalendar>
+							<w2:span label="~" style="float: left;margin-right: 10px;margin-top: 5px;" id=""></w2:span>
+							<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+								style="width: 120px;float: left;margin-top: 3px;" id="L_DATE" renderType="component" renderDiv="true" 
+								calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange">
+							</w2:inputCalendar>
+							<xf:group id="" style="margin-left: 10px;" class="radio">
+								<xf:select1 id="calendar_radio" ref="" selectedIndex="1" cols="" appearance="full"
+									style="margin-light: 10px;min-width: 200px;" rows="1" ev:onviewchange="scwin.calendar_radio_onviewchange">
+									<xf:choices>
+										<xf:item>
+											<xf:label><![CDATA[직접입력]]></xf:label>
+											<xf:value><![CDATA[DIRECT]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[금일]]></xf:label>
+											<xf:value><![CDATA[TODAY]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[일주일]]></xf:label>
+											<xf:value><![CDATA[WEEK]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[1개월]]></xf:label>
+											<xf:value><![CDATA[MONTH]]></xf:value>
+										</xf:item>
+									</xf:choices>
+								</xf:select1>
+
+								</xf:group>
+									<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>
+							</xf:group>
 						</xf:group>
-						<!-- <w2:inputCalendar footerDiv="false" id="" style="width: 150px;height: 23px;float: left;margin-left: 10px;"
-							renderDiv="true" focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component"
-							ref="data:dma_search.F_DATE">
-						</w2:inputCalendar>
-						<w2:span label="~" style="float: left;margin-right: 5px;margin-left: 5px;" id=""></w2:span>
-						<w2:inputCalendar footerDiv="false" id="" style="width: 150px;height: 23px;float: left;margin-right: 5px;"
-							renderDiv="true" focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component"
-							ref="data:dma_search.CLOSE_DT">
-						</w2:inputCalendar> -->
+						
+													
 					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
-				</xf:group>
-			</xf:group>
-			<xf:group id="pgm_content" class="pgm_content grdc_a" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
-					<xf:group id="" class="" style="">
-						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="돌발상황대응이력 목록" style=""></w2:textbox>
-							
-						</xf:group>
-					</xf:group>
+				
+					
+
+					<xf:group id="pgm_detail" class="pgm_detail grdr_2_a" style="">
 					<xf:group></xf:group>
 					<xf:group id="" class="" style="">							
 						<w2:gridView id="MO0302G0" defaultCellHeight="20" rowNumVisible="true"
@@ -402,6 +421,7 @@
 								</w2:row>
 							</w2:footer>
 						</w2:gridView>
+					</xf:group>
 					</xf:group>
 				</xf:group>
 			</xf:group>
