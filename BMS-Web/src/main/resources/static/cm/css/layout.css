@@ -241,6 +241,7 @@
 .grdr_282_0_a {display:grid; grid-template-rows: 282px 0px auto;}
 .grdr_330_0_a {display:grid; grid-template-rows: 330px 0px auto;}
 .grdr_500_20_a {display:grid; grid-template-rows: 500px 20px auto;}
+.grdr_295_0_a {display:grid; grid-template-rows: 295px 0px auto;}
 .grdr_30_100_30_a {display:grid; grid-template-rows: 30px 100px 30px auto;}
 
 .grdr_20_200_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 200px minmax(20px, max-content) auto;}
