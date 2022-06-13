@@ -215,6 +215,8 @@ a:hover,a:active,a:focus{text-decoration:none}
 .tb.calendar tr td:last-child{color:#4B76FD; background:cornsilk;}
 .tb.calendar tr td .txt_num{position:absolute;left:5px; top:5px;}
 
+.tb .w2input.popup {background-color: rgb(243,248,255);}
+
 /* grid */
 .cond_abnormal {/* background: #eb4545 !important; */
 				background : 	#cfa2a2 !important}

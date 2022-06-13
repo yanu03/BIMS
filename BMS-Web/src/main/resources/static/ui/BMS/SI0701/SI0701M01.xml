@@ -303,7 +303,7 @@
 		} else {
 			var rowStatus = dlt_si0701Co.getRowStatus(focusRowIdx);
 			if (rowStatus == "C") {
-				com.alert("공통 코드 등록 후에 사용 가능합니다.");
+				com.alert("시스템 코드 등록 후에 사용 가능합니다.");
 			} else {
 				var insertIndex = dlt_si0701Dtl.insertRow();
 				var CO_CD = dlt_si0701Co.getCellData(focusRowIdx, "CO_CD");
@@ -492,11 +492,15 @@
 				</xf:group>
 				<xf:group id="" class=""></xf:group>
 				<xf:group class="pgm_detail grdr_20_2_1f bms_box_wrap">
-					<xf:group id="" class="gr_sub_header" style="">
+					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl view ico-view" id="" label="상세 코드" style=""></w2:textbox>
 						</xf:group>
-						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
+						<xf:group id="gr_sub_header" class="gr_sub_header" style="margin-top:4px">
+								<xf:group class="gr_sub_search" id="pgm_sub_search" style="">
+									<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
+								</xf:group>
+						</xf:group>
 					</xf:group>
 					<xf:group></xf:group> <!-- margin-->												
 					<xf:group id="" class="" style="">
@@ -580,7 +584,7 @@
 										displayMode="label">
 									</w2:column>
 									<w2:column id="REMARK" blockSelect="false" style="height:20px" width="70" inputType="text"
-										displayMode="label">
+										displayMode="label" textAlign="left">
 									</w2:column>
 								</w2:row>
 							</w2:gBody>

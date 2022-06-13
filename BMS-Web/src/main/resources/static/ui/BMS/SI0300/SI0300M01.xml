@@ -17,7 +17,7 @@
 						<w2:column id="DRV_ENM" name="운전자영문명" dataType="text"></w2:column>
 						<w2:column id="PHONE" name="전화번호" dataType="text"></w2:column>
 						<w2:column id="BUS_DIV" name="버스구분" dataType="text"></w2:column>
-						<w2:column id="EPLY_DATE1" name="입사일1" dataType="date"></w2:column>
+						<w2:column id="EPLY_DATE1" name="입사일" dataType="date"></w2:column>
 						<w2:column id="EPLY_DATE2" name="입사일2" dataType="date"></w2:column>
 						<w2:column id="LIC_NO" name="운전면허번호" dataType="text"></w2:column>
 						<w2:column id="CERTI_DT" name="자격취득일" dataType="date"></w2:column>
@@ -238,12 +238,30 @@
 		
 		var rowStatus = dlt_BMS_DRV_MST.getRowStatus(SI0300G0.getFocusedRowIndex());
 		
+		//추가했을때만 운전자ID 변경가능
 		if (rowStatus != "C") {
 			DRV_ID.setDisabled(true);
 		} else if (rowStatus == "C") {
 			DRV_ID.setDisabled(false);
 		}		
+		//재직여부에따라 퇴직일 Disable여부
+		if(EPLY_YN.getValue() == "EY002"){
+			RETIRE_DT.setDisabled(false);	
+		} else {
+			RETIRE_DT.setDisabled(true);	
+		}
+		
 			
+	};
+	
+	scwin.EPLY_YN_onchange = function(info) {
+		//재직여부에따라 퇴직일 Disable여부
+		if(EPLY_YN.getValue() == "EY002"){
+			RETIRE_DT.setDisabled(false);	
+		} else {
+			RETIRE_DT.setDisabled(true);	
+		}
+		
 	};
 	]]></script>
 	</head>
@@ -475,7 +493,7 @@
 									<w2:attributes></w2:attributes>
 									<w2:inputCalendar calendarDisplayFormatFunc="" calendarValueType="yearMonthDate" displayFormat=""
 										editType="" focusOnDateSelect="false" footerDiv="false" id="EPLY_DATE1" ioFormat="" ref="data:dlt_BMS_DRV_MST.EPLY_DATE1" renderDiv="true"
-										renderType="component" rightAlign="false" style="height:23px;width: 110px;" calendarDisplayFormat="">
+										renderType="component" rightAlign="false" style="height:23px;width: 110px;" calendarDisplayFormat="" dateValidCheck="true" dateValidSet="true">
 									</w2:inputCalendar>
 								</xf:group>
 							</xf:group>
@@ -496,7 +514,7 @@
 									<w2:inputCalendar calendarDisplayFormat="" calendarDisplayFormatFunc=""
 										calendarValueType="yearMonthDate" displayFormat="" editType="" focusOnDateSelect="false" footerDiv="false" id="CERTI_DT"
 										ioFormat="" ref="data:dlt_BMS_DRV_MST.CERTI_DT" renderDiv="true" renderType="component" rightAlign="false"
-										style="height:23px;width: 110px;">
+										style="height:23px;width: 110px;" dateValidCheck="true" dateValidSet="true">
 									</w2:inputCalendar>
 								</xf:group>
 							</xf:group>
@@ -506,7 +524,7 @@
 									<xf:group id="" style=""></xf:group>
 									<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="" direction="auto"
 										disabled="false" disabledClass="w2selectbox_disabled" displayMode="label" id="EPLY_YN" labelWidthAuto="" mandatory="true"
-										optionOrder="" ref="data:dlt_BMS_DRV_MST.EPLY_YN" renderType="component" style="height:24px;width: 130px;" submenuSize="auto">
+										optionOrder="" ref="data:dlt_BMS_DRV_MST.EPLY_YN" renderType="component" style="height:24px;width: 130px;" submenuSize="auto" ev:onchange="scwin.EPLY_YN_onchange">
 										<xf:choices></xf:choices>
 									</xf:select1>
 								</xf:group>
@@ -519,7 +537,7 @@
 									<xf:group id="" style=""></xf:group>
 									<w2:inputCalendar calendarDisplayFormat="" calendarDisplayFormatFunc=""
 										calendarValueType="yearMonthDate" displayFormat="" editType="" focusOnDateSelect="false" footerDiv="false" id="RETIRE_DT"
-										ioFormat="" ref="data:dlt_BMS_DRV_MST.RETIRE_DT" renderDiv="true" renderType="component" rightAlign="false" style="height:23px;width: 110px;">
+										ioFormat="" ref="data:dlt_BMS_DRV_MST.RETIRE_DT" renderDiv="true" renderType="component" rightAlign="false" style="height:23px;width: 110px;" dateValidCheck="true" dateValidSet="true">
 									</w2:inputCalendar>
 								</xf:group>
 							</xf:group>
@@ -541,7 +559,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" class="w2tb_th" style="height: 200px;vertical-align: top;" id="" tabIndex="">
+								<xf:group tagname="th" class="w2tb_th" style="height: 300px;vertical-align: top;" id="" tabIndex="">
 									사원이미지
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
@@ -553,12 +571,12 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:image id="image1" ref="data:dlt_BMS_DRV_MST.FILE_PATH" src=""
-										style="height:180px;margin-left:2px;margin-bottom:3px;float:left;" disabled="" class="SI0300M01_image">
+										style="height: 280px;width:200px;margin-left:2px;margin-bottom:3px;float:left;" disabled="" class="SI0300M01_image">
 									</xf:image>
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" class="w2tb_th" style="height: 180px; vertical-align: top;" id="" tabIndex="">
+								<xf:group tagname="th" class="w2tb_th" style="height: 76px; vertical-align: top;" id="" tabIndex="">
 									비고
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
@@ -570,7 +588,7 @@
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:textarea adjustMaxLength="" class="" disabled="" id="REMARK" mandatory="" ref="data:dlt_BMS_DRV_MST.REMARK"
-										style="height: 180px; width:100%;" maxlength="200">
+										style="height: 76px; width:100%;" maxlength="200">
 									</xf:textarea>
 								</xf:group>
 							</xf:group>
