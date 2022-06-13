@@ -535,21 +535,21 @@
 					
 					<xf:group id="" class="horizontal_line">
 					</xf:group>
-						<xf:group id="pgm_subList" class="pgm_list grdr_20_36_a" style="">
+						<xf:group id="pgm_subList" class="pgm_list grdr_20_a" style="">
 							<xf:group class="defaultbox" id="" style="">
 								<w2:textbox class="df_tt fl list" id="" label="시설물 목록" style=""></w2:textbox>
 							</xf:group>
-							<xf:group id="" class="gr_sub_header" style="">
+							<!-- <xf:group id="" class="gr_sub_header" style="">
 								<xf:group class="gr_sub_search" id="pgm_sub_search" style="">
 									<xf:group class="label" id="" style="">
 										<w2:span class="" id="" label="찾기"></w2:span>
 									</xf:group>
 									<xf:group class="search" id="" style="">
-										<xf:input id="search_sub_input" class="search_input" ref="data:dma_sub_search.CONTENT" placeholder="노드ID 또는 노드명"></xf:input>
+										<xf:input id="search_sub_input" class="search_input" ref="data:dma_sub_search.CONTENT" placeholder="시설물ID"></xf:input>
 									</xf:group>
 									<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 								</xf:group>
-							</xf:group>
+							</xf:group> -->
 						<xf:group id="" class="" style="">
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
 							checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_FCLT_INFO" disabledScrollHidden="" editModeEvent=""

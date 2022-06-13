@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.tracom.cm.domain.Img.ImgMapper">
+
+<select id="selectImgPath" resultType="Map">
+	SELECT
+		CO_CD
+		,DL_CD
+		,IMG_PATH
+		,IMG_NM
+		,STATUS
+		,FOCUS
+	FROM	
+		BMS_DL_CD_IMG_INFO
+		
+</select>
+	
+</mapper>

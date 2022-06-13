@@ -205,7 +205,7 @@
 	//최대속도 엑셀
 	scwin.maxExcel = function(){
 		var maxExcelOpt = {};  //excel download 옵션 
-		maxExcelOpt.fileName = "주요노선별 최대속도.xls";    //또는 xlsx 확장자 사용 
+		maxExcelOpt.fileName = "노선별 평균속도.xls";    //또는 xlsx 확장자 사용 
 		pivot_ST0205T1.pivotExcelDownload(maxExcelOpt);
 	}
 	

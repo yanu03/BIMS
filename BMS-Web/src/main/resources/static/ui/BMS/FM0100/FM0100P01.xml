@@ -9,12 +9,14 @@
 				<data xmlns="" />
 			</xf:instance>
 			<w2:dataCollection baseNode="map">
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_TRANSCOMP_MST" saveRemovedData="true">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_DL_CD_IMG_INFO" saveRemovedData="true">
 					<w2:columnInfo>
-						<w2:column id="chk" name="선택" dataType="text"></w2:column>
-						<w2:column id="COMP_ID" name="운수사ID" dataType="text"></w2:column>
-						<w2:column id="COMP_NM" name="운수사명" dataType="text"></w2:column>
-						<w2:column id="AREA" name="운수사권역" dataType="text"></w2:column>
+						<w2:column id="CO_CD" name="공통코드" dataType="text"></w2:column>
+						<w2:column id="DL_CD" name="상세코드" dataType="text"></w2:column>
+						<w2:column id="IMG_PATH" name="이미지경로" dataType="text"></w2:column>
+						<w2:column id="IMG_NM" name="이미지이름" dataType="text"></w2:column>
+						<w2:column id="STATUS" name="상태" dataType="text"></w2:column>
+						<w2:column id="FOCUS" name="포커스" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_search">
@@ -35,9 +37,9 @@
 				</w2:dataMap>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
-			<xf:submission id="sub_SI0200P0R0" ref="data:json,dma_search" target="data:json,dlt_TRANSCOMP_MST" action="/si/SI0200P0R0" method="post"
+			<xf:submission id="sub_FM0100IMG" ref="" target="data:json,dlt_BMS_DL_CD_IMG_INFO" action="/img/selectImgPath" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
-				ev:submit="" ev:submitdone="scwin.sub_SI0200P0R0_submitdone" ev:submiterror="" abortTrigger="">
+				ev:submit="" ev:submitdone="scwin.sub_FM0100IMG_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 		</xf:model>
 		<script type="text/javascript" lazy="false"><![CDATA[
@@ -51,18 +53,20 @@
 		dma_searchitem.set("FCLT_COORDS", scwin.param.FCLT_COORDS);   
 		
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
-		com.setEnterKeyEvent(popup_header, scwin.btn_search_onclick);
 		
+		//이미지 경로 불러오는 submission
+		com.executeSubmission(sub_FM0100IMG);
+		
+		//정류소 이미지 경로 설정
 		if(dma_searchitem.get("STTN_FCLT_TYPE") == 'ST002'){
 			document.getElementById(STTN_IMG.getID()).className = "ST002_station_1";
 		}else if(dma_searchitem.get("STTN_FCLT_TYPE") == 'ST003'){
-			document.getElementById(STTN_IMG.getID()).className = "ST003_station_1";
+			document.getElementById(STTN_IMG.getID()).className = "ST003_station";
 		}else{
 			document.getElementById(STTN_IMG.getID()).className = "ST002_station_1";
 		}
 		
-		
-		
+		//시설물 좌표값이 있을 경우
 		if(dma_searchitem.get("FCLT_COORDS") != ''){
 			var coord = dma_searchitem.get("FCLT_COORDS").split(',');
 			var top = coord[0];
@@ -84,85 +88,46 @@
 			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'">';
 			str += '</div>'
 		
-		$('#'+STTN_IMG.getID()).html(str);
-		
-		$("#"+fcltId).on("click", function(e) {
- 			e.stopPropagation();
- 		});
-	}
+			$('#'+STTN_IMG.getID()).html(str);
 			
-		
-		/*var str = ""
-		
-		if(dma_searchitem.get('FCLT_KIND') == 'FK001'){
-			str += '<div id="testbit" style="position: absolute; top:100px; left:1100px" class="w2group " onclick="onclickBIT(this.style.top, this.style.left)"><input type="radio" name="test" tabindex="0" id="" class="w2trigger " value="BIT"></div>'
-			str += '<div id="testbit" style="position: absolute; top:100px; left:800px" class="w2group " onclick="onclickBIT(this.style.top, this.style.left)"><input type="radio" name="test" tabindex="0" id="" class="w2trigger " value="BIT"></div>'
-		}else if(dma_searchitem.get('FCLT_KIND') == 'FK004'){
-			str += '<div id="" style="position: absolute; top:120px; left:400px" class="w2group " onclick="onclickAIRTUBE(this.style.top, this.style.left)"><input type="radio" name="test" tabindex="0" id="" class="w2trigger " value="에어튜브"></div>'
-			str += '<div id="" style="position: absolute; top:120px; left:500px" class="w2group " onclick="onclickAIRTUBE(this.style.top, this.style.left)"><input type="radio" name="test" tabindex="0" id="" class="w2trigger " value="에어튜브"></div>'
-			str += '<div id="" style="position: absolute; top:120px; left:700px" class="w2group " onclick="onclickAIRTUBE(this.style.top, this.style.left)"><input type="radio" name="test" tabindex="0" id="" class="w2trigger " value="에어튜브"></div>'
-			str += '<div id="" style="position: absolute; top:120px; left:800px" class="w2group " onclick="onclickAIRTUBE(this.style.top, this.style.left)"><input type="radio" name="test" tabindex="0" id="" class="w2trigger " value="에어튜브"></div>'
-		}else if(dma_searchitem.get('FCLT_KIND') == 'FK005'){
-			str += '<div id="" style="position: absolute; top:20px; left:600px" class="w2group " onclick="onclickAIRCON(this.style.top, this.style.left)"><input type="radio" name="test" tabindex="0" id="" class="w2trigger " value="에어컨"></div>'
+			$("#"+fcltId).on("click", function(e) {
+	 			e.stopPropagation();
+	 		});
 		}
-	
-		$('#'+STTN_IMG.getID()).html(str);
-		
-		// 이벤트 등록
-        document.onmousedown = imgShow;
-        // 익명메서드 : 이벤트 취소
-        document.oncontextmenu = function () {
-            return false;
-        }*/
         
 	};
 	
-	/*function imgShow(){
+	scwin.onpageunload = function() {
 		
-		var str = ''
-		if(event.button == 0){
-			//alert('h');
-			
-			//var img = document.createElement("img");
-			var imgPath = "/cm/images/bms/BIT_RED_normal.png";
-//			img.src = imgPath;
-//			img.className = "test";
-//			img.style.position = "absolte";
-//			img.style.left = event.clientX - 50 + "px";
-//			img.style.top = event.clientY - 50 + "px";
-//			document.body.appendChild(img);
-			
-			//var top = event.clientY - 50;
-			//var left = event.clientX - 50;
-			
-			var top = $('#'+STTN_IMG.getID()).offset().top;
-			var left = $('#'+STTN_IMG.getID()).offset().left;
-			
-			str += '<div id="" style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group ">';
-			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgPath+'">';
-			str += '</div>'
-			
-			$('#'+STTN_IMG.getID()).html(str);
-		}else if(event.button == 2){
-			$('#'+STTN_IMG.getID()).empty();
-		}
-	}*/
+	};
+	
+	scwin.sub_FM0100IMG_submitdone = function(e) {
+		
+	};
 	
 	function clickImg(){
 		var str = ''
 		var imgPath = ''
 		var left = event.offsetX;
 		var top = event.offsetY;
+		var fcltKind = dma_searchitem.get('FCLT_KIND');
 		var fcltId = dma_searchitem.get("FCLT_ID") + '_popup';
 		var imgId = fcltId + 'img';
 		
-		if(dma_searchitem.get('FCLT_KIND') == 'FK001'){
+		if(fcltKind == 'FK001'){
 			imgPath = "/cm/images/bms/BIT_RED_normal.png";
-		}else if(dma_searchitem.get('FCLT_KIND') == 'FK004'){
+		}else if(fcltKind == 'FK004'){
 			imgPath = "/cm/images/bms/AIRTUBE_normal.png";
-		}else if(dma_searchitem.get('FCLT_KIND') == 'FK005'){
+		}else if(fcltKind == 'FK005'){
 			imgPath = "/cm/images/bms/AIRCON_normal.png";
+		}else if(fcltKind == 'FK007'){
+			imgPath = "/cm/images/bms/SCREENDOOR_normal.png";
 		}
+		
+		/* 저장한 이미지 경로 가져오기 - 수정필요
+		var test = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+		imgPath = "C:/sbrt-web" + test[0].IMG_PATH;
+		*/
 		
 		str += '<div id="'+fcltId+'" style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group " onmousedown="startDrag(event, this)">';
 		str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgPath+'" id="'+imgId+'"  >';
@@ -191,7 +156,6 @@
 		img_T = getTop(obj) - e_obj.clientY; 
 		document.onmousemove = moveDrag; 
 		document.onmouseup = stopDrag; 
-		//com.alert(img_L);
 		if(e_obj.preventDefault)e_obj.preventDefault(); 
 	}
 	
@@ -203,14 +167,6 @@
 	function getLeft(o){ return parseInt(o.style.left.replace('px', '')); } 
 	function getTop(o){ return parseInt(o.style.top.replace('px', '')); }
 
-
-	scwin.onpageunload = function() {
-		
-	};
-	
-	scwin.btn_search_onclick = function() {
-		com.executeSubmission(sub_SI0200P0R0);
-	};
 	
 	//확인버튼
 	scwin.btn_confirm_onclick = function() {
@@ -229,7 +185,6 @@
 	scwin.btn_cancel_onclick = function() {
 		com.closePopup();
 	};
-	
 	
 	scwin.sbx_ChoiceBox_onviewchange = function(info) {		
 		var str = ""
@@ -267,6 +222,7 @@
 		
 		$('#'+STTN_IMG.getID()).html(str);
 	};
+	
 	
 	]]></script>
 	</head>

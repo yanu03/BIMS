@@ -498,6 +498,8 @@
 				imgSrc = "/cm/images/bms/AIRCON_normal.png";
 			}else if(fcltKind == 'FK005' && (fcltCond == 'FC021' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
+			}else if(fcltKind == 'FK007' && (fcltCond == 'FC020' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
 			}
 			
 			//시설물 이미지
@@ -629,6 +631,8 @@
 				imgSrc = "/cm/images/bms/AIRCON_normal.png";
 			}else if(fcltKind == 'FK005' && (fcltCond == 'FC021' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
+			}else if(fcltKind == 'FK007' && (fcltCond == 'FC020' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
 			}
 			
 			str += '<div id="'+fcltId+'"style="z-index: 1;position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
