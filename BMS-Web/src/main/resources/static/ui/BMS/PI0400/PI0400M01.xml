@@ -460,8 +460,8 @@
 				</xf:group>
 				
 				
-				<xf:group class="pgm_list grdr_400_0_a">
-					<xf:group id="pgm_detail" class="pgm_detail bms_box_wrap" style="">
+				<xf:group class="pgm_list grdr_400_20_a bms_box_wrap">
+					<xf:group id="pgm_detail" class="pgm_detail" style="">
 						<xf:group id="" style="position:relative;height: 100%;" class="">
 							<w2:tabControl useTabKeyOnly="true" id="tabControl" class="innerTab" useMoveNextTabFocus="false" useConfirmMessage="false"
 								confirmTrueAction="exist" confirmFalseAction="new" alwaysDraw="false" style="" tabScroll="" tableRender="" tabPosition=""
@@ -633,9 +633,10 @@
 						</xf:group>
 					</xf:group>
 					<xf:group id="" class=""></xf:group>
-					<xf:group id="" style="" class="grdr_20_2_a bms_box_wrap">
+					
+					<xf:group id="" style="" class="grdr_20_2_a">
 						<xf:group id="" style="" class="defaultbox">
-							<w2:textbox id="" style="" class="df_tt fl list" label="기상/대기 최근 전송이력"></w2:textbox>
+							<w2:textbox id="" style="" class="df_tt fl view" label="기상/대기 최근 전송이력"></w2:textbox>
 						</xf:group>
 						<xf:group id="" style=""></xf:group>
 						<xf:group id="" style="">

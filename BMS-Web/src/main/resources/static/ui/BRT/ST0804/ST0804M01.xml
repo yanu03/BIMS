@@ -150,9 +150,13 @@
 		 
 		 var mainOptions = {
 	         EXL:scwin.btn_excel_onclick
+		,SEARCH : {}
 	     }; 
 		 
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions);
+		var mainSrhOptions = {
+		};	
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions);	 
 		
 		var date = new Date();
 		var year = date.getFullYear().toString();
@@ -467,16 +471,28 @@
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-			<xf:group id="pgm_header" class="pgm_header" style="">
-				<xf:group id="" style="" class="gr_search">
-					<xf:group class="label" id="" style="">
-						<w2:span label="일시" style="margin-right: 3px; margin-left: 15px;" id=""></w2:span>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					</xf:group>
+				</xf:group>
+			</xf:group>
+			<xf:group id="pgm_content" class="pgm_content grdr_50_a bms_box_wrap" style="">
+				<xf:group id="" style="" class="">
+					<xf:group id="pgm_search" style="" class="gr_search">
+						<xf:group class="label" id="" style="">
+							<w2:span label="일시" style="margin-right: 3px; margin-left: 15px;" id=""></w2:span>
+						</xf:group>
+						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
 						style="width:120px; margin-right: 10px; float:left;" id="F_DATE" renderType="component" renderDiv="true"
 						calendarValueType="yearMonthDate" ref="data:dma_sub_search.F_DATE" ev:onviewchange="scwin.F_DATE_onviewchange" minYear="2000"
 						maxYear="2025">
@@ -486,12 +502,13 @@
 						style="width: 120px; float:left;" id="L_DATE" renderType="component" renderDiv="true" calendarValueType="yearMonthDate"
 						ref="data:dma_sub_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange" minYear="2000"
 						maxYear="2025">
-					</w2:inputCalendar>
-					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+						</w2:inputCalendar>
+						<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>
+					</xf:group>
 				</xf:group>
-			</xf:group><!-- pgm_header -->
-			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_2_1f_20_1f" style="">
+				
+				<xf:group id="" class="pgm_content grdc_5f_0_5f" style="">
+					<xf:group id="pgm_list" class="pgm_list grdr_2_1f_20_1f" style="">
 					<!-- <xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl" id="" label="주요노선별 평균속도" style=""></w2:textbox>
@@ -499,15 +516,15 @@
 					</xf:group> -->
 					<xf:group></xf:group><!-- margin-->
 					
-					<xf:group style="overflow:auto; position:relative" id="" class="">
-						<xf:group id="chart_ST0804C0" class="" style="position:absolute; width:930px; height:100%"></xf:group>
+					<xf:group style="overflow:auto; position:relative" id="" class="bms_box_wrap">
+						<xf:group id="chart_ST0804C0" class="" style="position:absolute; width:95%; height:92%"></xf:group>
 					</xf:group>
 					
 					<!-- <xf:group style="position:relative;" id="" class="">
 						<canvas id="chart_ST0804C0" style="position:absolute;"></canvas>
 					</xf:group> -->
 					
-					<xf:group id="" class="horizontal_line"></xf:group>
+					<xf:group id="" class=""></xf:group>
 					
 					<xf:group id="ST0804T0" class="" style="position: relative;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_OPER_PNCTLTY_STAT_2" vals="PNCTLTY_CNT"
@@ -535,7 +552,7 @@
 					</xf:group> -->
 				</xf:group><!-- pgm_list -->
 				
-				<xf:group id="" class="vertical_line"></xf:group>
+				<xf:group id="" class=""></xf:group>
 				
 				<xf:group id="pgm_detail" class="grdr_2_1f_20_1f" style="">
 					<!-- <xf:group id="" class="gr_sub_header" style="">
@@ -554,7 +571,7 @@
 						<canvas id="chart_ST0804C1" style="position:absolute;"></canvas>
 					</xf:group> -->
 					
-					<xf:group id="" class="horizontal_line"></xf:group>
+					<xf:group id="" class=""></xf:group>
 					
 					<xf:group id="ST0804T1" class="" style="position: relative;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_OPER_PNCTLTY_STAT_P1" vals="PNCTLTY_CNT"
@@ -582,6 +599,7 @@
 						<w2:span label="단위 : [평균통행속도:km/h]" style="float: right;margin-right: 3px; margin-top:5px;" id=""></w2:span>
 					</xf:group> -->
 				</xf:group><!-- pgm_detail -->
+				</xf:group>
 			</xf:group>
 		</xf:group>
 	</body>

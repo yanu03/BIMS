@@ -123,15 +123,19 @@
 		<script type="text/javascript" lazy="false"><![CDATA[ 
 	scwin.onpageload = function() {
 		var autoOptions = {
-			Main : { grid : ST0204G0, srchSbm : sub_ST0204G0R0, keyColumn : "REP_ROUT_ID", srchGrp : pgm_header, name :  "노선 목록"}
+			Main : { grid : ST0204G0, srchSbm : sub_ST0204G0R0, keyColumn : "REP_ROUT_ID", srchGrp : pgm_search, name :  "노선 목록"}
 			//Sub1 : { grid : ST0204G1, srchSbm : sub_ST0204G1R0 }
 		 };				
 		 
 		 var mainOptions = {
-	         EXL:scwin.btn_excel_onclick
-	     }; 
-		 
+		         EXL:scwin.btn_excel_onclick
+			 ,SEARCH:{}
+		}; 
+	      
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
+		var mainSrhOptions = {
+		};
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions);
 		
 		dma_sub_search.set("SELECT_DIV", "OPER_SN");
 		dma_sub_search.set("WAY_DIV", "WD001");
@@ -507,54 +511,67 @@
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-			<xf:group id="pgm_header" class="pgm_header" style="">
-				<xf:group id="" style="" class="gr_search">
-					<xf:group id="" style="" class="label">
-						<w2:span id="" class="" label="검색"></w2:span>
-					</xf:group>
-					<xf:group id="" style="" class="search">
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT1" placeholder="대표노선 ID 또는 대표노선명"></xf:input>
-					</xf:group>
-					<xf:group id="" style="margin-left:7px;" class="label">
-						<w2:span id="" class="" label="요일구분"></w2:span>
-					</xf:group>
-					<xf:group id="" style="" class="search">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="" id="TYPE2" optionOrder="false"
-							ref="data:dma_search.CONTENT2" class="search_type_100" style="" submenuSize="auto" textAlign="left" chooseOptionLabel="-선택-">
-							<xf:choices></xf:choices>
-						</xf:select1>
-					</xf:group>
-					<xf:group id="" style="" class="label">
-						<w2:span id="" class="" label="상하행"></w2:span>
-					</xf:group>
-					<xf:group id="" style="" class="search">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE3_onviewchange" id="TYPE3" optionOrder="false"
-							ref="data:dma_search.CONTENT3" class="search_type_100" style="" submenuSize="auto" textAlign="left" chooseOptionLabel="-선택-">
-							<xf:choices></xf:choices>
-						</xf:select1>
-					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+		
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
 				</xf:group>
-			</xf:group><!-- pgm_header -->
-			<xf:group id="pgm_content" class="pgm_content grdc_600_20_a" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
+					</xf:group>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					</xf:group>
+				</xf:group>
+			</xf:group>
+		
+			<xf:group id="pgm_content" class="pgm_content grdc_600_0_a" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="대표노선 목록" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl list ico-list" id="" label="대표 노선 목록" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
-					<xf:group></xf:group><!-- margin-->
+					
+					<xf:group id="" class="" style="">
+						<xf:group id="pgm_search" style="" class="gr_search">
+							<xf:group id="" style="" class="label">
+								<w2:span id="" class="" label="검색"></w2:span>
+							</xf:group>
+							<xf:group id="" style="" class="search">
+								<xf:input id="search_input" class="search_input" style="width:130px" ref="data:dma_search.CONTENT1" placeholder="대표노선ID,대표노선명"></xf:input>
+							</xf:group>
+							<xf:group id="" style="margin-left:7px;" class="label">
+								<w2:span id="" class="" label="요일구분"></w2:span>
+							</xf:group>
+							<xf:group id="" style="" class="search">
+								<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="" id="TYPE2" optionOrder="false"
+									ref="data:dma_search.CONTENT2" class="search_type_100" style="width:70px" submenuSize="auto" textAlign="left" chooseOptionLabel="-선택-">
+									<xf:choices></xf:choices>
+								</xf:select1>
+							</xf:group>
+							<xf:group id="" style="" class="label">
+								<w2:span id="" class="" label="상하행"></w2:span>
+							</xf:group>
+							<xf:group id="" style="" class="search">
+								<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE3_onviewchange" id="TYPE3" optionOrder="false"
+									ref="data:dma_search.CONTENT3" class="search_type_100" style="width:70px" submenuSize="auto" textAlign="left" chooseOptionLabel="-선택-">
+									<xf:choices></xf:choices>
+								</xf:select1>
+							</xf:group>
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>							
+						</xf:group>
+					</xf:group>
+				
 					<xf:group id="" class="" style="">
 						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
 							dataList="data:dlt_BMS_ROUT_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.ST0204G0_oncellclick" 
 							ev:onrowindexchange="scwin.ST0204G0_onrowindexchange" fixedColumnWithHidden="true"
-							id="ST0204G0" ignoreCellClick="false" rowNumHeaderValue="No." rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" 
+							id="ST0204G0" ignoreCellClick="false" rowNumHeaderValue="순번" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" 
 							style="" useShiftKey="true" autoFitMinWidth="0" readOnly="true" focusMode="row" fixedColumn="">
 							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header1">
@@ -642,15 +659,14 @@
 						</w2:gridView>
 					</xf:group>
 				</xf:group><!-- pgm_list -->
-				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group id="pgm_detail" class="grdr_20_2_30_1f_20_1f" style="">
+				<xf:group id="" class=""></xf:group>
+				<xf:group id="pgm_detail" class="grdr_20_2_30_1f_20_1f bms_box_wrap" style="">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="비교 상세 정보" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl view" id="" label="비교 상세 정보" style=""></w2:textbox>
 						</xf:group>
-						<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:group></xf:group><!-- margin-->
+					<xf:group></xf:group><!-- margin -->
 					<xf:group class="gr_sub_search" id="" style="">
 						<xf:group class="label" id="" style="">
 							<w2:span label="조회구분" style="margin-right: 3px; " id=""></w2:span>
@@ -692,7 +708,7 @@
 						<canvas id="chart_ST0204" style="position:absolute;"></canvas>
 					</xf:group>
 					
-					<xf:group id="" class="horizontal_line"></xf:group>
+					<xf:group id="" class=""></xf:group>
 					
 					<xf:group id="ST0204T0" class="" style="position: relative;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_ROUT_AVER_OPER_SP_STAT_2" vals="AVRG_SPD"
@@ -745,7 +761,7 @@
 				    	<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
 							dataList="data:dlt_BRT_ROUT_AVER_OPER_SP_STAT" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 							ev:onrowindexchange="scwin.ST0204G1_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true"
-							id="ST0204G1" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="false" rowStatusHeaderValue=""
+							id="ST0204G1" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="순번" rowNumVisible="false" rowStatusHeaderValue=""
 							rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows=""
 							autoFitMinWidth="0" disabledScrollHidden="" editModeEvent="" editModeEventIcon="" checkEditableInputClass="" keyMoveEditMode=""
 							moveKeyEditMode="" moveKeyEditModeAll="" ignoreNonEditableCellTabEnter="" readOnly="true" keepDefaultColumnWidth=""
