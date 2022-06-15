@@ -1082,7 +1082,7 @@
 														</xf:select>
 													</xf:group>
 													<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
-														정주기&amp;nbsp;주기
+														정주기&amp;nbsp;주기 (초)
 														<w2:attributes>
 															<w2:scope>row</w2:scope>
 														</w2:attributes>
