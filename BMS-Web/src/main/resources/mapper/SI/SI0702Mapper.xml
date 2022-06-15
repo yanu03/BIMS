@@ -3,7 +3,7 @@
 
 <mapper namespace="kr.tracom.bms.domain.SI0702.SI0702Mapper">
 
-<select id="SI0702G0R0" resultType="Map">
+<!-- <select id="SI0702G0R0" resultType="Map">
 	SELECT 			PARTNER_ID
 				,	MEMBER_ID
 				,	PARTNER_NM
@@ -29,6 +29,24 @@
 			AND MEMBER_NM LIKE CONCAT('%',#{CONTENT},'%') 
 		</if>
 	</where>
+</select> -->
+
+<select id="SI0702G0R0" resultType="Map">
+	SELECT 			PARTNER_ID
+				,	MEMBER_ID
+				,	PARTNER_NM
+				,	SN
+				,	MEMBER_NM
+				,	MEMBER_DIV
+				,	CONVERT(AES_DECRYPT(PHONE, HEX(SHA2('TRACOM', 512))) USING UTF8) PHONE
+				,	CONVERT(AES_DECRYPT(FAX, HEX(SHA2('TRACOM', 512))) USING UTF8) FAX
+				,	CONVERT(AES_DECRYPT(EMAIL, HEX(SHA2('TRACOM', 512))) USING UTF8) EMAIL
+				,	REMARK
+				,	UPD_DTM
+				,	UPD_ID
+				
+	FROM			BMS_PARTNER_MEMBER_INFO			
+	WHERE			PARTNER_ID = #{PARTNER_ID}
 </select>
  
 <select id="SI0702SHI0" resultType="Map">
@@ -68,9 +86,9 @@
 			</if>				
 			,	#{MEMBER_NM}
 			,	#{MEMBER_DIV}
-			,	#{PHONE}
-			,	#{FAX}
-			,	#{EMAIL}
+			,	AES_ENCRYPT(#{PHONE}, HEX(SHA2('TRACOM', 512)))
+			,	AES_ENCRYPT(#{FAX}, HEX(SHA2('TRACOM', 512)))
+			,	AES_ENCRYPT(#{EMAIL}, HEX(SHA2('TRACOM', 512)))
 			,	#{REMARK}
 			,	#{UPD_DTM}
 			,	#{SSN_USER_ID}
@@ -86,11 +104,11 @@
 			<if test = "@kr.tracom.util.CommonUtil@notEmpty(SN)">			
 			SN = #{SN},
 			</if>			
-			PARTNER_NM = #{PARTNER_NM},
-			PHONE = #{PHONE},
-			FAX = #{FAX},
-			EMAIL = #{EMAIL},
-			REMARK = #{REMARK},
+			PARTNER_NM = #{PARTNER_NM}
+		,	PHONE = AES_ENCRYPT(#{PHONE}, HEX(SHA2('TRACOM', 512)))
+		,	FAX = AES_ENCRYPT(#{FAX}, HEX(SHA2('TRACOM', 512)))
+		,	EMAIL = AES_ENCRYPT(#{EMAIL}, HEX(SHA2('TRACOM', 512)))
+		,	REMARK = #{REMARK},
 			UPD_DTM = #{UPD_DTM},
 			UPD_ID = #{SSN_USER_ID}
 			
