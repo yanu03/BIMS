@@ -131,8 +131,8 @@
 		com.executeSubmission(sub_SI0408SHI0);
 		
 		var autoOptions = {
-			Main : { grid : SI0408G0, srchSbm : sub_SI0408G0R0, srchGrp : pgm_header, keyColumn : "ROUT_ID", focusColumn : "ROUT_ID", name : "노선 목록"},
-			Sub1 : { grid : SI0408G1, srchSbm : sub_SI0408G1R0, srchGrp : pgm_subList, savSbm : sub_SI0408G1S0, name :  "노선 경로정보", search_map : dma_sub_search}
+			Main : { grid : SI0408G0, srchSbm : sub_SI0408G0R0, srchGrp : pgm_search, keyColumn : "ROUT_ID", focusColumn : "ROUT_ID", name : "노선 목록"},
+			Sub1 : { grid : SI0408G1, srchSbm : sub_SI0408G1R0, srchGrp : pgm_sub_search, savSbm : sub_SI0408G1S0, name :  "노선 경로정보", search_map : dma_sub_search}
 		 };
 		 
 		var mainOptions = {
@@ -622,16 +622,16 @@
 							</w2:footer>
 						</w2:gridView>
 					</xf:group>
-					<xf:group id="" class="horizontal_line">
+					<xf:group id="" class="">
 					</xf:group>
 					<xf:group id="pgm_subList" class="pgm_list grdr_20_36_a" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl list" id="" label="노선 경로정보" style=""></w2:textbox>
 						</xf:group>
 						<xf:group id="" class="gr_sub_header" style="">
-							<xf:group class="gr_sub_search" id="" style="">
+							<xf:group class="gr_sub_search" id="pgm_sub_search" style="">
 								<xf:group class="label" id="" style="">
-									<w2:span class="" id="" label="검색 항목"></w2:span>
+									<w2:span class="" id="" label="찾기"></w2:span>
 								</xf:group>
 								<xf:group class="search" id="" style="">
 									<xf:input id="search_sub_input" class="search_input" ref="data:dma_sub_search.CONTENT" placeholder="노드ID 또는 노드명"></xf:input>

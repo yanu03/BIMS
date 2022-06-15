@@ -4794,7 +4794,7 @@ com.setMainBtn2 = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
 							}
 						}
 					}
-					else if( type == gcm.DISP_TYPE.DUAL_GRID3){ //듀얼 그리드
+					else if( type == gcm.DISP_TYPE.DUAL_GRID3){ //3개 그리드
 						if(i == gcm.BTN.SEARCH.nm){
 							item.cbFnc = function(){
 								var sub = autoOpt.Sub2;
@@ -5247,7 +5247,50 @@ com.setMainSrhBtn = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
 						}
 					}
 					
-					
+					else if( type == gcm.DISP_TYPE.DUAL_GRID_FORM2){ //복함 그리드와 폼
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+								
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.searchDualGrid(main.grid, sub.grid, main.frm, main.srchSbm, main.savSbm, main.allSavSbm, sub.savSbm)
+								}
+								else{
+									com.searchGrid(sub.grid, sub.srchSbm , sub.savSbm);
+								}
+							}
+						}
+					}
+					else if( type == gcm.DISP_TYPE.THIRD_GRID_FORM){ //3 그리드와 폼
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+								
+								var sub1 = autoOpt.Sub1;
+								var sub2 = autoOpt.Sub2;
+								if ((typeof sub1 !== "undefined")&&(sub1 !== null)&&(typeof sub2 !== "undefined")&&(sub2 !== null)){
+									com.searchThirdGrid(main.grid, sub1.grid, sub1.grid, main.frm, main.srchSbm, main.savSbm,
+											main.allSavSbm, sub1.savSbm, sub2.savSbm)
+								}
+								else{
+									com.searchGrid(main.grid, main.srchSbm , main.savSbm);
+								}
+								
+							}
+						}
+					}
+					else if( type == gcm.DISP_TYPE.DUAL_GRID3){ //듀얼 그리드 에서 2번째 서브그리드만 검색
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+								var sub = autoOpt.Sub2;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.searchDualGrid(main.grid, sub.grid, null, main.srchSbm, main.savSbm, main.allSavSbm, sub.savSbm)
+								}
+								else{
+									com.searchGrid(main.grid, main.srchSbm , main.savSbm);
+								}
+							}
+						}
+					}
 					if(i == gcm.BTN.SEARCH.nm){
 
 						if ((typeof main.srchGrp !== "undefined")&&(main.srchGrp !== null)){
@@ -8770,6 +8813,40 @@ com.gridMove = function(grid,searchColumn, content, index){
 	}
 }
 
+com.gridMove2 = function(grid,searchColumnVal,searchColumnID, content, index){
+
+	var data = com.getGridViewDataList(grid);
+	var rowData = data.getAllJSON();
+	var startIndex = 0;
+	var keyColumnValArr = searchColumnVal.split(',');
+	var keyColumnIdArr = searchColumnID.split(',');
+	
+	if(index<rowData.length-1){ //현재 포커스 다음 index 부터 검색
+		startIndex = index+1;
+	}
+	var nodeSn = 0;
+	for(var i = startIndex; i < rowData.length; i++) { //현재 포커스 다음 index 부터 마지막까지 검색
+		if(data.getRowStatus(i)!="D"){
+			for(var j = 0; j < keyColumnValArr.length; j++){
+				if(data.getCellData(i,keyColumnValArr[j]).indexOf(content)>=0){
+					grid.setFocusedCell(i, keyColumnIdArr[j]);
+					return;
+				}
+			}
+		}
+	}
+	
+	for(var i = 0; i < startIndex; i++) { //0 부터 현재 포커스 index 까지 검색
+		if(data.getRowStatus(i)!="D"){
+			for(var j = 0; j < keyColumnValArr.length; j++){
+				if(data.getCellData(i,keyColumnValArr[j]).indexOf(content)>=0){
+					grid.setFocusedCell(i, keyColumnIdArr[j]);
+					return;
+				}
+			}
+		}
+	}
+}
 /** 
  * 
  * @date 2022.03.11

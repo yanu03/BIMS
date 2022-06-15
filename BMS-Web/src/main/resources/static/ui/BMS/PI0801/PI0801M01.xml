@@ -868,7 +868,7 @@
 								<w2:tabs disabled="false" class="" id="tabs4" label="정류장 음성"></w2:tabs>
 								<w2:content alwaysDraw="false" class="innerTabContent" id="content4">
 									<xf:group id="" class="grdc_5f_10_5f" style="background:white;">
-										<xf:group id="" class="grdr_20_7_a bms_box_wrap" style="height:500px; ">
+										<xf:group id="" class="grdr_20_7_a" style="height:539px; ">
 											<xf:group class="gr_sub_header">
 												<xf:group class="defaultbox" id="" style="">
 													<w2:textbox class="df_tt fl list" id="" label="정류장 음성 목록" style=""></w2:textbox>
@@ -990,7 +990,7 @@
 										</xf:group>			
 										<xf:group id="" class="">
 										</xf:group>
-										<xf:group id="" class="pgm_detail grdr_20_2_474 bms_box_wrap" style="">
+										<xf:group id="" class="pgm_detail grdr_20_2_514" style="">
 											<xf:group id="" class="gr_sub_header" style="">				
 												<xf:group class="PI0801T1">
 													<xf:group class="defaultbox" id="" style="">
@@ -1283,7 +1283,7 @@
 								<w2:tabs disabled="false" class="" id="tabs3" label="실내LED"></w2:tabs>
 								<w2:content alwaysDraw="false" class="innerTabContent" id="content3">
 									<xf:group id="" class="grdc_5f_10_5f" style="background:white;" >
-										<xf:group id="" class="grdr_20_7_a bms_box_wrap" style="height:500px; ">
+										<xf:group id="" class="grdr_20_7_a" style="height:539px; ">
 											<xf:group class="gr_sub_header">
 												<xf:group class="defaultbox" id="" style="">
 													<w2:textbox class="df_tt fl list" id="" label="기본문구 목록" style=""></w2:textbox>
@@ -1352,7 +1352,7 @@
 										</xf:group>
 										<xf:group id="" class="">
 										</xf:group>
-										<xf:group id="" class="pgm_detail grdr_20_2_a bms_box_wrap" style="">
+										<xf:group id="" class="pgm_detail grdr_20_2_a" style="">
 											<xf:group id="" class="gr_sub_header" style="">
 												<xf:group class="PI0801T0">
 													<xf:group class="defaultbox" id="" style="">
@@ -1454,7 +1454,7 @@
 								<w2:tabs disabled="false" class="" id="tabs5" label="기타"></w2:tabs>
 								<w2:content alwaysDraw="false" class="innerTabContent" id="content5">
 									<xf:group id="" class="grdc_5f_10_5f" style="background:white;">
-										<xf:group id="" class="grdr_20_7_a bms_box_wrap" style="height:500px; ">
+										<xf:group id="" class="grdr_20_7_a" style="height:539px; ">
 											<xf:group class="gr_sub_header">
 												<xf:group class="defaultbox" id="" style="">
 													<w2:textbox class="df_tt fl list" id="" label="기타 목록" style=""></w2:textbox>
@@ -1554,7 +1554,7 @@
 										</xf:group>
 										<xf:group id="" class="">
 										</xf:group>
-										<xf:group id="" class="pgm_detail grdr_20_2_474 bms_box_wrap" style="">
+										<xf:group id="" class="pgm_detail grdr_20_2_514 " style="">
 											<xf:group id="" class="gr_sub_header" style="">
 												<xf:group class="PI0801T2">
 													<xf:group class="defaultbox" id="" style="">

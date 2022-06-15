@@ -538,7 +538,7 @@
 							</w2:footer>
 						</w2:gridView>
 					</xf:group>
-					<xf:group id="" class="horizontal_line">
+					<xf:group id="" class="">
 					</xf:group>
 					<xf:group id="pgm_subList" class="pgm_list grdr_20_36_a" style="">
 						<xf:group class="defaultbox" id="" style="">

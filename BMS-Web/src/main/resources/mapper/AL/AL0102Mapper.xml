@@ -42,7 +42,7 @@
 	<insert id="AL0102G0I0" parameterType="Map">
 		INSERT INTO BRT_HOLI_MST(
 			<if test="@kr.tracom.util.CommonUtil@notEmpty(HOLI_DT)">
-			,HOLI_DT
+			HOLI_DT
 			</if>
 			,DAY_OF_WEEK
 			,HOLI_NM

@@ -59,6 +59,7 @@
 <select id="VD0100G0R0" resultType="Map">
 	SELECT 			F.VHC_ID
 					,F.VHC_NO
+					,F.VHC_KIND
 					,A.DVC_ID
 					,A.ORG_ID
 					,A.DVC_KIND

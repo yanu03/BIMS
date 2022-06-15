@@ -52,7 +52,7 @@
 			</xf:submission>
 			<xf:submission id="sub_PI0301G0S0" ref='data:json,dlt_BMS_NEWS_CFG_INFO' target=""
 				action="/pi/PI0301G0S0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
-				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				customHandler="" mode="asynchronous" processMsg="저장중입니다..." ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 	        	<xf:submission id="sub_PI0301SHI0" ref="" target="data:json,dlt_searchItem" action="/pi/PI0301SHI0" method="post"
 	        		mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"

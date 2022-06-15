@@ -906,7 +906,7 @@
 							</ul>
 						</xf:group>
 						<xf:group id="pgm_list" class="pgm_list grdr_5f_20_5f " style="">
-							<xf:group id="" class="grdr_20_2_a bms_box_wrap" style="">
+							<xf:group id="" class="grdr_20_2_a" style="">
 								<xf:group id="" class="gr_sub_header" style="">
 									<xf:group class="defaultbox" id="" style="">
 										<w2:textbox class="df_tt fl list" id="" label="장치 상태" style=""></w2:textbox>
@@ -953,7 +953,7 @@
 							<xf:group id="" class=""></xf:group>
 		
 							<xf:group style="" id="pgm_sub_list" class="pgm_list grdc_65f_25_35f">
-								<xf:group id="" class="grdr_20_2_a bms_box_wrap" style="">
+								<xf:group id="" class="grdr_20_2_a" style="">
 									<xf:group id="" class="gr_sub_header" style="">
 										<xf:group class="defaultbox" id="" style="">
 											<w2:textbox class="df_tt fl view" id="" label="프로세스" style=""></w2:textbox>
@@ -1042,94 +1042,97 @@
 								</xf:group>
 		
 								<xf:group id="" class=""></xf:group>
-								<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a bms_box_wrap">
-									<xf:group id="" class="gr_sub_header" style="">
-										<xf:group class="defaultbox" id="" style="">
-											<w2:textbox class="df_tt fl" id="" label="제어" style=""></w2:textbox>
+								<xf:group id="pgm_detail" class="pgm_detail grdr_20_a">
+									<xf:group id="" class=""></xf:group>
+									<xf:group id="" class="grdr_20_2_a bms_box_wrap">
+										<xf:group id="" class="gr_sub_header" style="">
+											<xf:group class="defaultbox" id="" style="">
+												<w2:textbox class="df_tt fl" id="" label="제어" style=""></w2:textbox>
+											</xf:group>
+											<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 										</xf:group>
-										<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
-									</xf:group>
-									<xf:group class="" id="" style=""></xf:group>
-									<xf:group style="overflow:auto; position:relative;" id="">
-										<xf:group tagname="table" style="width:100%; position:absolute" id="VD0204F0" class="w2tb tb">
-											<w2:attributes>
-												<w2:summary></w2:summary>
-											</w2:attributes>
-											<xf:group tagname="colgroup">
-												<xf:group style="width:90px;" tagname="col"></xf:group>
-												<xf:group style="width:120px;" tagname="col"></xf:group>
-												<xf:group style="width:90px;" tagname="col"></xf:group>
-												<xf:group style="width:120px;" tagname="col"></xf:group>
+										<xf:group class="" id="" style=""></xf:group>
+										<xf:group style="overflow:auto; position:relative;" id="">
+											<xf:group tagname="table" style="width:100%; position:absolute" id="VD0204F0" class="w2tb tb">
+												<w2:attributes>
+													<w2:summary></w2:summary>
+												</w2:attributes>
+												<xf:group tagname="colgroup">
+													<xf:group style="width:90px;" tagname="col"></xf:group>
+													<xf:group style="width:120px;" tagname="col"></xf:group>
+													<xf:group style="width:90px;" tagname="col"></xf:group>
+													<xf:group style="width:120px;" tagname="col"></xf:group>
+												</xf:group>
+												<xf:group tagname="tr" style="height:5px;">
+													<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
+														집중모니터링&amp;nbsp;여부
+														<w2:attributes>
+															<w2:scope>row</w2:scope>
+														</w2:attributes>
+													</xf:group>
+													<xf:group tagname="td" style="" class="w2tb_td" id="T_PK016">
+														<xf:select selectedindex="-1" id="" appearance="full"
+															style="margin-left: 10px;" cols="" rows="" ref="">
+															<xf:choices>
+																<xf:item>
+																	<xf:label><![CDATA[여부]]></xf:label>
+																	<xf:value><![CDATA[1]]></xf:value>
+																</xf:item>
+															</xf:choices>
+														</xf:select>
+													</xf:group>
+													<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
+														정주기&amp;nbsp;주기
+														<w2:attributes>
+															<w2:scope>row</w2:scope>
+														</w2:attributes>
+													</xf:group>
+													<xf:group tagname="td" style="" class="w2tb_td" id="T_PK017">
+														<xf:input adjustMaxLength="false" id="input2" style="" type="number"></xf:input>
+													</xf:group>
+												</xf:group>
+												<!-- <xf:group tagname="tr" style="">
+													<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
+														로그레벨
+														<w2:attributes>
+															<w2:scope>row</w2:scope>
+														</w2:attributes>
+													</xf:group>
+													<xf:group tagname="td" style="" class="w2tb_td" id="T_PK011">
+														<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+															disabledClass="w2selectbox_disabled" id="LOG_LEVEL" style="" submenuSize="auto" ref="" chooseOptionLabel="">
+															<xf:choices></xf:choices>
+														</xf:select1>
+													</xf:group>
+													<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
+														LCD&amp;nbsp;휘도
+														<w2:attributes>
+															<w2:scope>row</w2:scope>
+														</w2:attributes>
+													</xf:group>
+													<xf:group tagname="td" style="" class="w2tb_td" id="T_PK005">
+														<xf:input adjustMaxLength="false" id="LCD_LUM" style="" type="number"></xf:input>
+													</xf:group>
+												</xf:group>
+												<xf:group tagname="tr" style="">
+													<xf:group tagname="th" class="w2tb_th" style="height: 10px;">
+														사운드&amp;nbsp;볼륨
+														<w2:attributes>
+															<w2:scope>row</w2:scope>
+														</w2:attributes>
+													</xf:group>
+													<xf:group tagname="td" class="w2tb_td" id="T_PK004">
+														<w2:attributes></w2:attributes>
+														<xf:input adjustMaxLength="false" id="input1" style="" type="number"></xf:input>
+													</xf:group>
+													<xf:group tagname="th" class="w2tb_th" style="height: 10px;"><w2:attributes>
+															<w2:scope>row</w2:scope>
+														</w2:attributes></xf:group>
+													<xf:group tagname="td" class="w2tb_td">
+														<w2:attributes></w2:attributes>
+													</xf:group>
+												</xf:group> -->
 											</xf:group>
-											<xf:group tagname="tr" style="height:5px;">
-												<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
-													집중모니터링&amp;nbsp;여부
-													<w2:attributes>
-														<w2:scope>row</w2:scope>
-													</w2:attributes>
-												</xf:group>
-												<xf:group tagname="td" style="" class="w2tb_td" id="T_PK016">
-													<xf:select selectedindex="-1" id="" appearance="full"
-														style="margin-left: 10px;" cols="" rows="" ref="">
-														<xf:choices>
-															<xf:item>
-																<xf:label><![CDATA[여부]]></xf:label>
-																<xf:value><![CDATA[1]]></xf:value>
-															</xf:item>
-														</xf:choices>
-													</xf:select>
-												</xf:group>
-												<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
-													정주기&amp;nbsp;주기
-													<w2:attributes>
-														<w2:scope>row</w2:scope>
-													</w2:attributes>
-												</xf:group>
-												<xf:group tagname="td" style="" class="w2tb_td" id="T_PK017">
-													<xf:input adjustMaxLength="false" id="input2" style="" type="number"></xf:input>
-												</xf:group>
-											</xf:group>
-											<!-- <xf:group tagname="tr" style="">
-												<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
-													로그레벨
-													<w2:attributes>
-														<w2:scope>row</w2:scope>
-													</w2:attributes>
-												</xf:group>
-												<xf:group tagname="td" style="" class="w2tb_td" id="T_PK011">
-													<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-														disabledClass="w2selectbox_disabled" id="LOG_LEVEL" style="" submenuSize="auto" ref="" chooseOptionLabel="">
-														<xf:choices></xf:choices>
-													</xf:select1>
-												</xf:group>
-												<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
-													LCD&amp;nbsp;휘도
-													<w2:attributes>
-														<w2:scope>row</w2:scope>
-													</w2:attributes>
-												</xf:group>
-												<xf:group tagname="td" style="" class="w2tb_td" id="T_PK005">
-													<xf:input adjustMaxLength="false" id="LCD_LUM" style="" type="number"></xf:input>
-												</xf:group>
-											</xf:group>
-											<xf:group tagname="tr" style="">
-												<xf:group tagname="th" class="w2tb_th" style="height: 10px;">
-													사운드&amp;nbsp;볼륨
-													<w2:attributes>
-														<w2:scope>row</w2:scope>
-													</w2:attributes>
-												</xf:group>
-												<xf:group tagname="td" class="w2tb_td" id="T_PK004">
-													<w2:attributes></w2:attributes>
-													<xf:input adjustMaxLength="false" id="input1" style="" type="number"></xf:input>
-												</xf:group>
-												<xf:group tagname="th" class="w2tb_th" style="height: 10px;"><w2:attributes>
-														<w2:scope>row</w2:scope>
-													</w2:attributes></xf:group>
-												<xf:group tagname="td" class="w2tb_td">
-													<w2:attributes></w2:attributes>
-												</xf:group>
-											</xf:group> -->
 										</xf:group>
 									</xf:group>
 								</xf:group>
@@ -1154,7 +1157,7 @@
 							
 						</xf:group><!-- pgm_list end -->
 		
-						<xf:group id="pgm_list2" class="pgm_list grdr_20_2_a bms_box_wrap" style="">
+						<xf:group id="pgm_list2" class="pgm_list grdr_20_2_a" style="">
 							<xf:group id="" class="gr_sub_header" style="">
 								<xf:group class="defaultbox" id="" style="">
 									<w2:textbox class="df_tt fl list" id="" label="장치 상태" style=""></w2:textbox>

@@ -648,7 +648,7 @@
 				</xf:group><!-- pgm_list -->
 				
 				<xf:group id="" class=""></xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_1f bms_box_wrap" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a bms_box_wrap" style="">
 
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">

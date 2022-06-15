@@ -369,8 +369,8 @@
 
 				</xf:group>
 				<xf:group id="" class=""></xf:group>
-				<xf:group class="pgm_detail grdr_177_0_a">
-					<xf:group class="pgm_detail grdr_20_2_155 bms_box_wrap">
+				<xf:group class="pgm_detail grdr_177_0_a bms_box_wrap">
+					<xf:group class="pgm_detail grdr_20_2_155">
 						<xf:group id="" class="gr_sub_header" style="">
 							<xf:group class="defaultbox" id="" style="">
 								<w2:textbox class="df_tt fl view" id="" label="편성 정보" style=""></w2:textbox>
@@ -452,12 +452,13 @@
 					<xf:group id="" class="">
 					</xf:group>
 					
-					<xf:group id="pgm_content2" class="pgm_content grdc_5f_70_5f bms_box_wrap" style="">
+					<xf:group id="pgm_content2" class="pgm_content grdc_5f_70_5f" style="">
 						<xf:group id="pgm_list2" class="pgm_list grdr_20_2_a" style="">
 							<xf:group id="" class="gr_sub_header" style="">
 								<xf:group class="defaultbox" id="" style="">
-									<w2:textbox class="df_tt fl list" id="" label="영상 목록" style=""></w2:textbox>
+									<w2:textbox class="df_tt fl view" id="" label="영상 목록" style=""></w2:textbox>
 								</xf:group>
+								<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 							</xf:group>
 							<xf:group id="" class="" style=""></xf:group>
 							<xf:group id="">
@@ -493,7 +494,7 @@
 											</w2:column>
 										</w2:row>
 									</w2:header>
-									<w2:gBody style="" id="gBody1">ㄴ
+									<w2:gBody style="" id="gBody1">
 										<w2:row style="" id="row2">
 											<w2:column removeBorderStyle="false" width="83" inputType="text" style="height:20px" id="VDO_ID"
 												value="" blockSelect="false" displayMode="label">
@@ -526,6 +527,7 @@
 								</w2:gridView>
 							</xf:group>
 						</xf:group>
+
 						<xf:group style="position: relative; text-align: center;">
 							<xf:group style="position: absolute; top: 50%; transform: translate(0px, -30px);">
 								<w2:anchor class="btn_com right" id="btn_grid_add" outerDiv="" style="" ev:onclick="scwin.btn_grid_add_onclick">
@@ -536,12 +538,12 @@
 								</w2:anchor>
 							</xf:group>
 						</xf:group>
+						
 						<xf:group id="pgm_list3" class="pgm_list grdr_20_2_a" style="">
 							<xf:group id="" class="gr_sub_header" style="">
 								 <xf:group class="defaultbox" id="" style="">
-									<w2:textbox class="df_tt fl list" id="" label="영상 편성 목록" style=""></w2:textbox>
+									<w2:textbox class="df_tt fl view" id="" label="영상 편성 목록" style=""></w2:textbox>
 								</xf:group> 
-								<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 								
 								<!--<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>-->
 							</xf:group>

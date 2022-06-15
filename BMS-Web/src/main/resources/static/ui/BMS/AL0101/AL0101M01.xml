@@ -419,7 +419,7 @@
 							</w2:footer>							
 						</w2:gridView>
 					</xf:group>
-					<xf:group id="" class="horizontal_line">
+					<xf:group id="" class="">
 					</xf:group>
 					
 					
@@ -529,6 +529,5 @@
 				</xf:group> <!--end pgm_detail-->
 			</xf:group> <!-- end content --> 
 		</xf:group> <!-- end container -->
-		</xf:group>
 	</body>
 </html>

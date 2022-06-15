@@ -224,6 +224,10 @@
 		}
 	}
 	
+	scwin.alertServicKey = function(){
+		com.alert("서비스키 설명");
+	}
+	
 	]]></script>
 
 	</head>
@@ -243,7 +247,6 @@
 					</xf:group>
 				</xf:group>
 			</xf:group>
-		
 			<xf:group id="pgm_content" class="pgm_content grdc_5f_0_5f" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
@@ -251,11 +254,10 @@
 							<w2:textbox class="df_tt fl list ico-list" id="" label="API권한 목록" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
-					
 					<xf:group id="" class="" style="">
 						<xf:group id="" style="" class="gr_search">
 							<xf:group id="" style="" class="label">
-									<w2:span id="" class="" label="검색 항목"></w2:span>
+								<w2:span id="" class="" label="검색 항목"></w2:span>
 							</xf:group>
 							<xf:group id="pgm_search" style="" class="search">
 								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
@@ -276,7 +278,9 @@
 										</xf:item>
 									</xf:choices>
 								</xf:select1>
-								<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="API권한 ID 또는 API권한명"></xf:input>
+								<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT"
+									placeholder="API권한 ID 또는 API권한명">
+								</xf:input>
 								<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
 									chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
 									ev:onviewchange="" id="acb_autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start"
@@ -289,17 +293,17 @@
 									</w2:choices>
 								</w2:autoComplete>
 							</xf:group>
-							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>							
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml"
+								scope="true">
+							</w2:wframe>
 						</xf:group>
 					</xf:group>
-				
 					<xf:group id="" class="" style="">
-						<w2:gridView ignoreCellClick="false" ev:onrowindexchange="scwin.SM0800G0_onrowindexchange"
-							autoFit="lastColumn" sortable="true" sortEvent="onclick" class="cm_grid left" showSortableImage="" fixedColumnWithHidden="true"
+						<w2:gridView ignoreCellClick="false" ev:onrowindexchange="scwin.SM0800G0_onrowindexchange" autoFit="lastColumn"
+							sortable="true" sortEvent="onclick" class="cm_grid left" showSortableImage="" fixedColumnWithHidden="true"
 							dataList="dlt_BMS_API_INFO" id="SM0800G0" readOnly="" style="" overflowX="hidden" useShiftKey="true" scrollByColumn="false"
-							overflowY="scroll" rowStatusVisible="false" ev:onafteredit="" rowStatusHeaderValue="상태"
-							ev:oncellclick="scwin.SM0800G0_oncellclick" ev:oncelldblclick="" rowNumHeaderValue="No." rowNumVisible="true"
-							focusMode="row">
+							overflowY="scroll" rowStatusVisible="false" ev:onafteredit="" rowStatusHeaderValue="상태" ev:oncellclick="scwin.SM0800G0_oncellclick"
+							ev:oncelldblclick="" rowNumHeaderValue="No." rowNumVisible="true" focusMode="row">
 							<w2:header id="header1" style="">
 								<w2:row id="row2" style="">
 									<w2:column id="column13" blockSelect="false" style="height:20px;" width="100" inputType="text"
@@ -334,11 +338,11 @@
 										inputType="text" displayMode="label" textAlign="right" chooseOption="false" chooseOptionLabel="" checkboxLabelFormatter=""
 										allOption="" ref="" userData1="M">
 									</w2:column>
-									<w2:column id="EXPIRE_DATE" blockSelect="false" readOnly="true" style="height:20px" width="" inputType="text"
-										displayMode="label" textAlign="" userData1="M">
+									<w2:column id="EXPIRE_DATE" blockSelect="false" readOnly="true" style="height:20px" width=""
+										inputType="text" displayMode="label" textAlign="" userData1="M">
 									</w2:column>
-									<w2:column id="USE_YN" blockSelect="false" readOnly="true" style="height:20px;" width="" inputType="text"
-										displayMode="label" userData1="M" displayFormatter="scwin.useYnDisFormatter">
+									<w2:column id="USE_YN" blockSelect="false" readOnly="true" style="height:20px;" width=""
+										inputType="text" displayMode="label" userData1="M" displayFormatter="scwin.useYnDisFormatter">
 									</w2:column>
 									<w2:column id="API_KEY" blockSelect="false" readOnly="true" style="height:20px;" width=""
 										inputType="text" displayMode="label" userData1="">
@@ -413,7 +417,7 @@
 								<xf:group style="" class="w2tb_td" tagname="td">
 									<w2:inputCalendar footerDiv="false" id="EXPIRE_DATE" style="width: 150px;height: 23px;" renderDiv="true"
 										focusOnDateSelect="false" calendarValueType="yearMonthDate" rightAlign="false" renderType="component"
-										ref="data:dlt_BMS_API_INFO.EXPIRE_DATE">
+										ref="data:dlt_BMS_API_INFO.EXPIRE_DATE" dateValidCheck="true" dateValidSet="true">
 									</w2:inputCalendar>
 								</xf:group>
 							</xf:group>
@@ -457,6 +461,9 @@
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
 									</w2:attributes>
+									<w2:anchor id="" title="서비스키" style="" ev:onclick="scwin.alertServicKey" class="ico_help mr5" outerDiv="false">
+										<xf:label></xf:label>
+									</w2:anchor>
 								</xf:group>
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes>

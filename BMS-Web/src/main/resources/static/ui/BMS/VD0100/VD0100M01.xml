@@ -67,6 +67,7 @@
 					<w2:columnInfo>
 						<w2:column id="VHC_ID" name="차량ID" dataType="text"></w2:column>
 						<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
+						<w2:column id="VHC_KIND" name="차량종류" dataType="text"></w2:column>
 						<w2:column id="DVC_ID" name="장치ID" dataType="text"></w2:column>
 						<w2:column id="ORG_ID" name="기관ID" dataType="text"></w2:column>
 						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
@@ -472,7 +473,7 @@
 	
 	//위치좌표 팝업
 	scwin.DVC_COORDS_onclick = function(e) {
-		var data = { VHC_KIND : dlt_BMS_VHC_MST.getCellData(VD0100G0.getFocusedRowIndex(), "VHC_KIND"), 
+		var data = { VHC_KIND : dlt_BMS_DVC_INFO.getCellData(VD0100G0.getFocusedRowIndex(), "VHC_KIND"), 
 					 DVC_ID : dlt_BMS_DVC_INFO.getCellData(VD0100G0.getFocusedRowIndex(), "DVC_ID"),
 					 DVC_KIND : dlt_BMS_DVC_INFO.getCellData(VD0100G0.getFocusedRowIndex(), "DVC_KIND"),
 					 DVC_COORDS : dlt_BMS_DVC_INFO.getCellData(VD0100G0.getFocusedRowIndex(), "DVC_COORDS"),
@@ -481,7 +482,7 @@
 		var opt = { id : "FM0100P01", 
 					popupName : "시설물 위치 좌표 설정",
 					modal : true,  
-					width : 1400, height: 450 };
+					width : 1300, height: 400 };
 					
 		if(data.DVC_KIND != null && data.DVC_KIND != ''){
 			com.openPopup("/ui/BMS/VD0100/VD0100P01.xml", opt, data);

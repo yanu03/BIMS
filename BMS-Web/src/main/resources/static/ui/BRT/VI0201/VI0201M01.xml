@@ -111,6 +111,12 @@
 
 		<script type="text/javascript"><![CDATA[
 	scwin.onpageload = function() {
+		var codeOptions = [ 
+			{code : "JUDG_TYPE", compID : "JUDG_TYPE, VI0201G0:JUDG_TYPE" }
+			,{code : "JUDG_RLT", compID : "JUDG_RLT, VI0201G0:JUDG_RLT" }
+			,{code : "CPLNT_TYPE", compID : "CPLNT_TYPE, VI0201G0:CPLNT_TYPE" }
+			,{code : "CPLNT_DIV", compID : "VI0201G0:CPLNT_DIV" }
+		];
 		var autoOptions = {
 			Main : { grid : VI0201G0, srchSbm : sub_VI0201G0R0, savSbm : sub_VI0201G0S0, keySbm : sub_VI0201G0K0
 					,srchGrp : pgm_header, keyColumn : "CPLNT_ID", focusColumn : "CPLNT_ID", name :  "민원 이력 목록"}
@@ -119,16 +125,13 @@
 		var mainOptions = {
 			ADD : {}
 			,DEL : {}
+			,SEARCH : {}
 		}
 		
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions);
-		
-		var codeOptions = [ 
-							{code : "JUDG_TYPE", compID : "JUDG_TYPE, VI0201G0:JUDG_TYPE" }
-							,{code : "JUDG_RLT", compID : "JUDG_RLT, VI0201G0:JUDG_RLT" }
-							,{code : "CPLNT_TYPE", compID : "CPLNT_TYPE, VI0201G0:CPLNT_TYPE" }
-							,{code : "CPLNT_DIV", compID : "VI0201G0:CPLNT_DIV" }
-					];
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions, codeOptions);
+		var mainSrhOptions = {
+		};	
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions, codeOptions);
 					
 		com.executeSubmission(sub_VI0201SHI0);
 		
@@ -367,68 +370,81 @@
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-			<xf:group id="pgm_header" class="pgm_header" style="">
-				<xf:group id="" style="" class="gr_search">
-					<xf:group id="" style="" class="label">
-						<w2:span id="" class="" label="검색 항목"></w2:span>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+		
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:group id="" style="" class="search">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="sbx_ChoiceBox"
-							optionOrder="false" ref="data:dma_search.TYPE" style="" class="search_type" submenuSize="auto" textAlign="left">
-							<xf:choices>
-								<xf:item>
-									<xf:label><![CDATA[-전체-]]></xf:label>
-									<xf:value><![CDATA[ALL]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[민원구분]]></xf:label>
-									<xf:value><![CDATA[CPLNT_DIV]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[진행상태]]></xf:label>
-									<xf:value><![CDATA[JUDG_RLT]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[민원자명]]></xf:label>
-									<xf:value><![CDATA[CPLNT_NM]]></xf:value>
-								</xf:item>
-							</xf:choices>
-						</xf:select1>
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="민원구분 또는 진행상태 또는 민원자명" style=""></xf:input>
-						<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
-							chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
-							ev:onviewchange="" id="acb_autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start"
-							selectedData="" style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false" visibleRowNum="">
-							<w2:choices>
-								<w2:itemset nodeset="data:dlt_grgSearchItem">
-									<w2:label ref="GRG_ID"></w2:label>
-									<w2:value ref="GRG_ID"></w2:value>
-								</w2:itemset>
-							</w2:choices>
-						</w2:autoComplete>
-						<xf:group id="" class="label" style="margin-left:10px">
-							<w2:span class="" id="" label="접수일시"></w2:span>
-						</xf:group>
-						<w2:inputCalendar footerDiv="false" id="" class="search_calendar" renderDiv="true" focusOnDateSelect="false"
-							calendarValueType="yearMonthDate" rightAlign="false" renderType="component" ref="data:dma_search.APPL_DTM">
-						</w2:inputCalendar>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group>
-			<xf:group id="pgm_content" class="pgm_content grdc_5f_20_5f" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
+		
+			<xf:group id="pgm_content" class="pgm_content grdc_5f_0_5f" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="민원 목록" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl list ico-list" id="" label="민원 목록" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
-					<xf:group></xf:group>
+					
+					<xf:group id="" class="" style="">
+						<xf:group id="" style="" class="gr_search">
+							<xf:group id="" style="" class="label">
+									<w2:span id="" class="" label="검색 항목"></w2:span>
+							</xf:group>
+							<xf:group id="pgm_search" style="" class="search">
+								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="sbx_ChoiceBox"
+									optionOrder="false" ref="data:dma_search.TYPE" style="" class="search_type" submenuSize="auto" textAlign="left">
+									<xf:choices>
+										<xf:item>
+											<xf:label><![CDATA[-전체-]]></xf:label>
+											<xf:value><![CDATA[ALL]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[민원구분]]></xf:label>
+											<xf:value><![CDATA[CPLNT_DIV]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[진행상태]]></xf:label>
+											<xf:value><![CDATA[JUDG_RLT]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[민원자명]]></xf:label>
+											<xf:value><![CDATA[CPLNT_NM]]></xf:value>
+										</xf:item>
+									</xf:choices>
+								</xf:select1>
+								<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="민원구분 또는 진행상태 또는 민원자명" style=""></xf:input>
+								<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
+									chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
+									ev:onviewchange="" id="acb_autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT" search="start"
+									selectedData="" style="display:none" submenuSize="auto" textAlign="left" useKeywordHighlight="false" visibleRowNum="">
+									<w2:choices>
+										<w2:itemset nodeset="data:dlt_grgSearchItem">
+											<w2:label ref="GRG_ID"></w2:label>
+											<w2:value ref="GRG_ID"></w2:value>
+										</w2:itemset>
+									</w2:choices>
+								</w2:autoComplete>
+								<xf:group id="" class="label" style="margin-left:10px">
+									<w2:span class="" id="" label="접수일시"></w2:span>
+								</xf:group>
+								<w2:inputCalendar footerDiv="false" id="" class="search_calendar" renderDiv="true" focusOnDateSelect="false"
+									calendarValueType="yearMonthDate" rightAlign="false" renderType="component" ref="data:dma_search.APPL_DTM">
+								</w2:inputCalendar>
+							</xf:group>
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>							
+						</xf:group>
+					</xf:group>
+				
 					<xf:group id="" class="" style="">
 						<w2:gridView id="VI0201G0" defaultCellHeight="20" rowNumVisible="true" useShiftKey="true" scrollByColumn="false"
 							owNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태" overflowX="scroll" overflowY="scroll" rowStatusVisible="false"
@@ -540,11 +556,11 @@
 						</w2:gridView>
 					</xf:group>
 				</xf:group>
-				<xf:group id="" class="vertical_line"></xf:group>
-				<xf:group class="pgm_detail grdr_20_2_300_a">
+				<xf:group id="" class=""></xf:group>
+				<xf:group class="pgm_detail grdr_20_2_300_a bms_box_wrap">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="민원 조치 상세 정보" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl view" id="" label="민원 조치 상세 정보" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
 					<xf:group class="" id="" style=""></xf:group>
