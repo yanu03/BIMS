@@ -45,6 +45,7 @@ public class PI0202Service extends ServiceSupport{
 					
 					if(Constants.NODE_TYPE_VERTEX.equals((String) data.get("NODE_TYPE"))==false
 						&&Constants.NODE_TYPE_SOUND.equals((String) data.get("NODE_TYPE"))==false
+						&&(Constants.NODE_TYPE_SIGNAL.equals((String) data.get("NODE_TYPE"))==false)
 					) {
 						data.put("LINK_NODE_YN","Y");
 					}
@@ -53,6 +54,7 @@ public class PI0202Service extends ServiceSupport{
 				} else if (rowStatus.equals("U")) {
 					if(Constants.NODE_TYPE_VERTEX.equals((String) data.get("NODE_TYPE"))==false
 						&&Constants.NODE_TYPE_SOUND.equals((String) data.get("NODE_TYPE"))==false
+						&&(Constants.NODE_TYPE_SIGNAL.equals((String) data.get("NODE_TYPE"))==false)
 					) {
 						data.put("LINK_NODE_YN","Y");
 					}

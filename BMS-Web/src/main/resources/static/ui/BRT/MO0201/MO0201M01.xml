@@ -1332,21 +1332,21 @@
 									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px" id="column11" value="대표노선명"
 										blockSelect="false" displayMode="label">
 									</w2:column>								
-									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:25px" id="column7"
+									<!-- <w2:column removeBorderStyle="false" width="90" inputType="text" style="height:25px" id="column7"
 										value="운행상태" blockSelect="false" displayMode="label">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:25px" id="column6"
 										value="차량번호" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="column10"
+									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="column10"
 										value="속도(km/h)" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px" id="column2"
+									</w2:column> -->
+									<!-- <w2:column removeBorderStyle="false" width="80" inputType="text" style="height:25px" id="column2"
 										value="이벤트 표시" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="85" inputType="text" style="height:25px" id="column1"
 										value="디스패치 표시" blockSelect="false" displayMode="label">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="30" inputType="text" style="height:25px" id="column0"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -1366,21 +1366,21 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="REP_ROUT_NM" value=""
 										blockSelect="false" displayMode="label">
 									</w2:column>								
-									<w2:column removeBorderStyle="false" width="138" inputType="select" style="height:25px" id="OPER_STS"
+									<!-- <w2:column removeBorderStyle="false" width="138" inputType="select" style="height:25px" id="OPER_STS"
 										value="" blockSelect="false" displayMode="label">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="138" inputType="text" style="height:25px" id="VHC_NO"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="CUR_SPD"
+									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="CUR_SPD"
 										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column falseValue="0" defaultValue="" trueValue="1" width="70" readOnly="false" style="height:25px" inputType="checkbox"
+									</w2:column> -->
+									<!-- <w2:column falseValue="0" defaultValue="" trueValue="1" width="70" readOnly="false" style="height:25px" inputType="checkbox"
 										id="EVT_YN" blockSelect="false">
 									</w2:column>
 									<w2:column falseValue="0" defaultValue="" trueValue="1" width="70" readOnly="false" style="height:25px" inputType="checkbox"
 										id="DSPTCH_YN" blockSelect="false">
-									</w2:column>
+									</w2:column> -->
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id=""
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
