@@ -413,8 +413,8 @@
 
 				</xf:group>
 				<xf:group id="" class=""></xf:group>
-				<xf:group class="pgm_detail grdr_177_0_a">
-					<xf:group class="pgm_detail grdr_20_2_155 bms_box_wrap">
+				<xf:group class="pgm_detail grdr_177_0_a bms_box_wrap">
+					<xf:group class="pgm_detail grdr_20_2_155">
 						<xf:group id="" class="gr_sub_header" style="">
 							<xf:group class="defaultbox" id="" style="">
 								<w2:textbox class="df_tt fl view" id="" label="편성 정보" style=""></w2:textbox>
@@ -496,11 +496,11 @@
 					<xf:group id="" class="">
 					</xf:group>
 					
-					<xf:group id="pgm_content2" class="pgm_content grdc_5f_70_5f bms_box_wrap" style="">
+					<xf:group id="pgm_content2" class="pgm_content grdc_5f_70_5f" style="">
 						<xf:group id="pgm_list2" class="pgm_list grdr_20_2_30_a" style="">
 							<xf:group id="" class="gr_sub_header" style="">
 								<xf:group class="defaultbox" id="" style="">
-									<w2:textbox class="df_tt fl list" id="" label="정류소 음성 목록" style=""></w2:textbox>
+									<w2:textbox class="df_tt fl view" id="" label="정류소 음성 목록" style=""></w2:textbox>
 								</xf:group>
 							</xf:group>
 							<xf:group class="" id="" style="">

@@ -648,8 +648,8 @@
 				
 				<xf:group id="" class="">
 				</xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_5f_0_5f" style="">
-					<xf:group id="" class="grdr_20_2_a bms_box_wrap" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_5f_20_5f bms_box_wrap" style="">
+					<xf:group id="" class="grdr_20_2_a" style="">
 						<xf:group id="" class="" style="">
 							<xf:group class="defaultbox" id="" style="">
 								<w2:textbox class="df_tt fl view" id="" label="예약 정보" style=""></w2:textbox>
@@ -753,7 +753,7 @@
 					</xf:group>
 					<xf:group id="" class=""></xf:group>		
 										
-					<xf:group id="" style="" class="pgm_detail grdr_20_50_a bms_box_wrap">
+					<xf:group id="" style="" class="pgm_detail grdr_20_50_a">
 						<xf:group id="" class="gr_sub_header" style="">
 							<xf:group class="defaultbox" id="" style="">
 								<w2:textbox class="df_tt fl view" id="" label="예약 상세정보" style=""></w2:textbox>
@@ -819,7 +819,7 @@
 														
 							</xf:group>
 						</xf:group>					
-						<xf:group id="pgm_sub_list" class="" style="">
+						<xf:group id="" class="" style="">
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid right"
 								dataList="data:dlt_BMS_ED_RSV_RST_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.PI0902G2_oncellclick" ev:oneditkeyup="" ev:onkeyup=""
 								ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true" id="PI0902G2" ignoreCellClick="false"

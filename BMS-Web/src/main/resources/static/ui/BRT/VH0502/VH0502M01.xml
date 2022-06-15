@@ -55,12 +55,19 @@
 	scwin.onpageload = function() {
 		//결과상세코드가 뭔지 알아야함
 		 var autoOptions = {
-			Main : { grid : VH0502G0, srchSbm : sub_VH0502G0R0, keyColumn : "REQ_DTM", srchGrp : pgm_header, name : "Dispatch 전송 이력",
+			Main : { grid : VH0502G0, srchSbm : sub_VH0502G0R0, keyColumn : "REQ_DTM", srchGrp : pgm_search, name : "Dispatch 전송 이력",
 						focusColumn : "REQ_DTM"}
 		 };
 		 
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions);
-
+		 var mainOptions = {
+			SEARCH: {}
+		}
+		 
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions);
+		var mainSrhOptions = {
+		};
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions);			
+		
 		var date = new Date();
 		var year = date.getFullYear().toString();
 		var month = (date.getMonth()+1).toString();
@@ -188,162 +195,180 @@
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-			<xf:group class="pgm_header" id="pgm_header" style="">
-				<xf:group class="gr_search" id="" style="">
-					<xf:group class="label" id="" style="">
-						<w2:span class="" id="" label="요청IP"></w2:span>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:group class="search" id="" style="">
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT1" placeholder="10.0.0.1"></xf:input>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<xf:group class="label" id="" style="margin-left: 10px;">
-						<w2:span class="" id="" label="결과" style=""></w2:span>
-					</xf:group>	
-					<xf:group class="search" id="" style="width:">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE2_onviewchange" id="" optionOrder="false"
-							ref="data:dma_search.TYPE" class="search_type_100" style="width: 125px;" submenuSize="auto" textAlign="center"
-							chooseOptionLabel="-전체-">
-							<xf:choices>
-								<xf:item>
-									<xf:label><![CDATA[SUCCESS]]></xf:label>
-									<xf:value><![CDATA[SUCCESS]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[FAIL]]></xf:label>
-									<xf:value><![CDATA[FAIL]]></xf:value>
-								</xf:item>
-							</xf:choices>
-						</xf:select1>
-					</xf:group>									
-					<xf:group class="label" id="" style="">
-						<w2:span class="" id="" label="기간"></w2:span>
-					</xf:group>
-					<xf:group class="search" id="" style="">
-						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
-							style="width:120px; margin-right: 10px; float: left;margin-top: 3px;" id="F_DATE" renderType="component" renderDiv="true"
-							calendarValueType="yearMonthDate" ref="data:dma_search.F_DATE" ev:onviewchange="scwin.F_DATE_onviewchange" placeholder="yyyymmdd">
-						</w2:inputCalendar>
-						<w2:span label="~" style="float: left;margin-right: 10px;margin-top: 5px;" id=""></w2:span>
-						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
-							style="width: 120px;float: left;margin-top: 3px;" id="L_DATE" renderType="component" renderDiv="true"
-							calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange" placeholder="yyyymmdd">
-						</w2:inputCalendar>
-						<xf:group id="" style="margin-left: 10px;" class="radio">
-							<xf:select1 id="calendar_radio" ref="" selectedIndex="1" cols="" appearance="full"
-								style="margin-light: 10px;min-width: 200px;" rows="1" ev:onviewchange="scwin.calendar_radio_onviewchange">
-								<xf:choices>
-									<xf:item>
-										<xf:label><![CDATA[직접입력]]></xf:label>
-										<xf:value><![CDATA[DIRECT]]></xf:value>
-									</xf:item>
-									<xf:item>
-										<xf:label><![CDATA[금일]]></xf:label>
-										<xf:value><![CDATA[TODAY]]></xf:value>
-									</xf:item>
-									<xf:item>
-										<xf:label><![CDATA[일주일]]></xf:label>
-										<xf:value><![CDATA[WEEK]]></xf:value>
-									</xf:item>
-									<xf:item>
-										<xf:label><![CDATA[1개월]]></xf:label>
-										<xf:value><![CDATA[MONTH]]></xf:value>
-									</xf:item>
-								</xf:choices>
-							</xf:select1>
-						</xf:group>
-					</xf:group>
-					<w2:wframe class="" id="wfm_mainBtn" scope="true" src="/cm/common/wf_mainBtn.xml" style=""></w2:wframe>
 				</xf:group>
 			</xf:group>
-			<xf:group id="pgm_content" class="pgm_content grdc_a" style="" >
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
-					<xf:group class="defaultbox" id="" style="">
-						<w2:textbox class="df_tt fl" id="" label="API 요청 이력" style=""></w2:textbox>
-					</xf:group>
-					<xf:group></xf:group>
+
+			<xf:group id="pgm_content" class="pgm_content grdc_a" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
-						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
-							dataList="data:dlt_BMS_API_CALL_HIS" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
-							ev:onrowindexchange="scwin.VH0502G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true"
-							id="VH0502G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusHeaderValue=""
-							rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows=""
-							autoFitMinWidth="0" disabledScrollHidden="" editModeEvent="" editModeEventIcon="" checkEditableInputClass="" keyMoveEditMode=""
-							moveKeyEditMode="" moveKeyEditModeAll="" ignoreNonEditableCellTabEnter="" readOnly="true" keepDefaultColumnWidth=""
-							oddEvenColorDisplay="" rowNumWidth="" summaryAuto="" excludeDeletedRows="" useCtrlOnMultisort="" useFilterList=""
-							useFilterListSync="" sortedIconPosition="" sortable="true" sortOrderReverse="" showSortableUseFilter="" focusMode="row"
-							rowNumStatusUniqueId="" rowNumStatusResize="" ev:onbeforecolumnmove="" userData1="" preventMultisort="" showSortableImage="false"
-							sortEvent="onclick" noResultMessage="기간내 이력 없음">
-							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
-							<w2:header style="" id="header1">
-								<w2:row style="" id="row1">
-									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column8"
-										value="요청일" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column7"
-										value="순번" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="140" inputType="text" style="height:20px" id="column6"
-										value="요청일시" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column2"
-										value="결과" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column1"
-										value="결과상세코드" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column3"
-										value="요청IP" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="250" inputType="text" style="height:20px" id="column5"
-										value="요청API" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="800" inputType="text" style="height:20px" id="column4"
-										value="요청쿼리" blockSelect="false" displayMode="label">
-									</w2:column>
-								</w2:row>
-							</w2:header>
-							<w2:gBody style="" id="gBody1">
-								<w2:row style="" id="row2">
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REQ_DT"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="SEQ"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REQ_DTM"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="RESULT_CD"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="RESULT_DTL_CD"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REQ_IP"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REQ_END_POINT"
-										value="" blockSelect="false" displayMode="label" textAlign="left">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REQ_QUERY"
-										value="" blockSelect="false" displayMode="label" textAlign="left">
-									</w2:column>
-								</w2:row>
-							</w2:gBody>
-							<w2:footer id="footer1" style="">
-								<w2:row id="row3" style="">
-									<w2:column blockSelect="false" colSpan="14" displayMode="label"
-										expression="custom(scwin.getFooterDiv, 'RESULT_CD')" id="column42" inputType="expression" removeBorderStyle="false"
-										style="height:28px;" textAlign="left" width="" importExp="" excelExpression="">
-									</w2:column>
-								</w2:row>
-							</w2:footer>							
-						</w2:gridView>
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl list ico-list" id="" label="API 요청 이력" style=""></w2:textbox>
+						</xf:group>
+					</xf:group>
+
+					<xf:group id="" class="" style="">
+						<xf:group id="pgm_search" style="" class="gr_search">
+							<xf:group class="label" id="" style="">
+								<w2:span class="" id="" label="요청IP"></w2:span>
+							</xf:group>
+							<xf:group class="search" id="" style="">
+								<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT1" placeholder="10.0.0.1"></xf:input>
+							</xf:group>
+							<xf:group class="label" id="" style="margin-left: 10px;">
+								<w2:span class="" id="" label="결과" style=""></w2:span>
+							</xf:group>	
+							<xf:group class="search" id="" style="width:">
+								<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE2_onviewchange" id="" optionOrder="false"
+									ref="data:dma_search.TYPE" class="search_type_100" style="width: 125px;" submenuSize="auto" textAlign="center"
+									chooseOptionLabel="-전체-">
+									<xf:choices>
+										<xf:item>
+											<xf:label><![CDATA[SUCCESS]]></xf:label>
+											<xf:value><![CDATA[SUCCESS]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[FAIL]]></xf:label>
+											<xf:value><![CDATA[FAIL]]></xf:value>
+										</xf:item>
+									</xf:choices>
+								</xf:select1>
+							</xf:group>									
+							<xf:group class="label" id="" style="">
+								<w2:span class="" id="" label="기간"></w2:span>
+							</xf:group>
+							<xf:group class="search" id="" style="">
+								<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+									style="width:120px; margin-right: 10px; float: left;margin-top: 3px;" id="F_DATE" renderType="component" renderDiv="true"
+									calendarValueType="yearMonthDate" ref="data:dma_search.F_DATE" ev:onviewchange="scwin.F_DATE_onviewchange" placeholder="yyyymmdd">
+								</w2:inputCalendar>
+								<w2:span label="~" style="float: left;margin-right: 10px;margin-top: 5px;" id=""></w2:span>
+								<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+									style="width: 120px;float: left;margin-top: 3px;" id="L_DATE" renderType="component" renderDiv="true"
+									calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange" placeholder="yyyymmdd">
+								</w2:inputCalendar>
+								<xf:group id="" style="margin-left: 10px;" class="radio">
+									<xf:select1 id="calendar_radio" ref="" selectedIndex="1" cols="" appearance="full"
+										style="margin-light: 10px;min-width: 200px;" rows="1" ev:onviewchange="scwin.calendar_radio_onviewchange">
+										<xf:choices>
+											<xf:item>
+												<xf:label><![CDATA[직접입력]]></xf:label>
+												<xf:value><![CDATA[DIRECT]]></xf:value>
+											</xf:item>
+											<xf:item>
+												<xf:label><![CDATA[금일]]></xf:label>
+												<xf:value><![CDATA[TODAY]]></xf:value>
+											</xf:item>
+											<xf:item>
+												<xf:label><![CDATA[일주일]]></xf:label>
+												<xf:value><![CDATA[WEEK]]></xf:value>
+											</xf:item>
+											<xf:item>
+												<xf:label><![CDATA[1개월]]></xf:label>
+												<xf:value><![CDATA[MONTH]]></xf:value>
+											</xf:item>
+										</xf:choices>
+									</xf:select1>
+								</xf:group>
+							</xf:group>
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>
+						</xf:group>
+					</xf:group> <!-- pgm_header -->
+					<xf:group id="" class="pgm_list grdr_2_a" style="">
+
+						<xf:group></xf:group>
+						<xf:group id="" class="" style="">
+							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
+								dataList="data:dlt_BMS_API_CALL_HIS" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
+								ev:onrowindexchange="scwin.VH0502G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true"
+								id="VH0502G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusHeaderValue=""
+								rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows=""
+								autoFitMinWidth="0" disabledScrollHidden="" editModeEvent="" editModeEventIcon="" checkEditableInputClass="" keyMoveEditMode=""
+								moveKeyEditMode="" moveKeyEditModeAll="" ignoreNonEditableCellTabEnter="" readOnly="true" keepDefaultColumnWidth=""
+								oddEvenColorDisplay="" rowNumWidth="" summaryAuto="" excludeDeletedRows="" useCtrlOnMultisort="" useFilterList=""
+								useFilterListSync="" sortedIconPosition="" sortable="true" sortOrderReverse="" showSortableUseFilter="" focusMode="row"
+								rowNumStatusUniqueId="" rowNumStatusResize="" ev:onbeforecolumnmove="" userData1="" preventMultisort="" showSortableImage="false"
+								sortEvent="onclick" noResultMessage="기간내 이력 없음">
+								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
+								<w2:header style="" id="header1">
+									<w2:row style="" id="row1">
+										<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column8"
+											value="요청일" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column7"
+											value="순번" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="140" inputType="text" style="height:20px" id="column6"
+											value="요청일시" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column2"
+											value="결과" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column1"
+											value="결과상세코드" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column3"
+											value="요청IP" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="250" inputType="text" style="height:20px" id="column5"
+											value="요청API" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="800" inputType="text" style="height:20px" id="column4"
+											value="요청쿼리" blockSelect="false" displayMode="label">
+										</w2:column>
+									</w2:row>
+								</w2:header>
+								<w2:gBody style="" id="gBody1">
+									<w2:row style="" id="row2">
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REQ_DT"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="SEQ"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REQ_DTM"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="RESULT_CD"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="RESULT_DTL_CD"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REQ_IP"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REQ_END_POINT"
+											value="" blockSelect="false" displayMode="label" textAlign="left">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="REQ_QUERY"
+											value="" blockSelect="false" displayMode="label" textAlign="left">
+										</w2:column>
+									</w2:row>
+								</w2:gBody>
+								<w2:footer id="footer1" style="">
+									<w2:row id="row3" style="">
+										<w2:column blockSelect="false" colSpan="14" displayMode="label"
+											expression="custom(scwin.getFooterDiv, 'RESULT_CD')" id="column42" inputType="expression" removeBorderStyle="false"
+											style="height:28px;" textAlign="left" width="" importExp="" excelExpression="">
+										</w2:column>
+									</w2:row>
+								</w2:footer>							
+							</w2:gridView>
+						</xf:group>
 					</xf:group>
 				</xf:group><!-- pgm_list end -->
 			</xf:group> <!-- end content --> 

@@ -77,6 +77,7 @@
 .grdc_a_20_900 {display:grid; grid-template-columns:auto 20px 900px;} /* 왼쪽 오른쪽 구분선 추가 */
 .grdc_a_0_900 {display:grid; grid-template-columns:auto 0px 900px;} /* 왼쪽 오른쪽 구분선 추가 */
 .grdc_a_20_900_minmax {display:grid; grid-template-columns:minmax(340px, auto) 20px 900px;} /* 왼쪽 오른쪽 구분선 추가 */
+.grdc_a_0_900_minmax {display:grid; grid-template-columns:minmax(340px, auto) 0px 900px;} /* 왼쪽 오른쪽 구분선 추가 */
 .grdc_a_20_1000 {display:grid; grid-template-columns:auto 20px 1000px;} /* 왼쪽 오른쪽 구분선 추가 */
 .grdc_a_20_1100_minmax {display:grid; grid-template-columns:minmax(380px, auto) 20px 1100px;} /* 왼쪽 오른쪽 구분선 추가 */
 .grdc_a_20_1200 {display:grid; grid-template-columns:auto 20px 1200px;}
@@ -96,14 +97,18 @@
 .grdc_550_20_a {display:grid; grid-template-columns:550px 20px auto;}
 .grdc_600_20_a {display:grid; grid-template-columns:600px 20px auto;}
 .grdc_600_0_a {display:grid; grid-template-columns:600px 0px auto;}
+.grdc_650_0_a {display:grid; grid-template-columns:650px 0px auto;}
+.grdc_700_0_a {display:grid; grid-template-columns:700px 0px auto;}
 .grdc_a_20_850 {display:grid; grid-template-columns:auto 20px minmax(850px, auto);}
 .grdc_650_20_a {display:grid; grid-template-columns:650px 20px auto;}
 .grdc_800_20_a {display:grid; grid-template-columns:800px 20px auto;}
+.grdc_800_0_a {display:grid; grid-template-columns:800px 0px auto;}
 .grdc_1000_20_a {display:grid; grid-template-columns:1000px 20px auto;}
 .grdc_870_20_a {display:grid; grid-template-columns:870px 20px auto;}
 .grdc_1200_20_a {display:grid; grid-template-columns:1200px 20px auto;}
 .grdc_1300_20_a {display:grid; grid-template-columns:1300px 20px auto;}
 .grdc_1400_20_a {display:grid; grid-template-columns:1400px 20px auto;}
+.grdc_1400_0_a {display:grid; grid-template-columns:1400px 0px auto;}
 .grdc_1200_20_550_a {display:grid; grid-template-columns:1200px 20px 550px auto;}
 .grdc_400_20_900_20_a {display:grid; grid-template-columns:400px 20px 900px 20px auto;}
 .grdc_500_20_900_20_a {display:grid; grid-template-columns:500px 20px 900px 20px auto;}
@@ -145,6 +150,7 @@
 .grdc_400_20_a_20_400 {display:grid; grid-template-columns:400px 20px auto 20px 400px;}
 
 .grdr_20_a {display:grid; grid-template-rows: minmax(20px, max-content) auto;}
+.grdr_25_a {display:grid; grid-template-rows: minmax(25px, max-content) auto;}
 .grdr_40_a {display:grid; grid-template-rows: minmax(40px, max-content) auto;}
 .grdr_41_a {display:grid; grid-template-rows: minmax(41px, max-content) auto;}
 .grdr_60_a {display:grid; grid-template-rows: minmax(60px, max-content) auto;}
@@ -181,6 +187,7 @@
 .grdr_177_0_a {display:grid; grid-template-rows: 177px minmax(0px, max-content) auto;}
 .grdr_20_2_155 {display:grid; grid-template-rows: minmax(20px, max-content) 2px 155px;}
 .grdr_20_2_187_2_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 187px 2px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
+.grdr_187_10_20_2_a {display:grid; grid-template-rows: 187px 10px minmax(20px, max-content) 2px auto;} /* 왼쪽그리드 2개 layout*/
 .grdr_20_2_200_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 200px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
 .grdr_20_2_212_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 212px minmax(20px, max-content) auto;} /* 왼쪽그리드 2개 layout*/
 .grdr_20_50_212 {display:grid; grid-template-rows: minmax(20px, max-content) 50px 212px} /* 왼쪽그리드 2개 layout*/
@@ -208,6 +215,7 @@
 .grdr_20_2_280_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(280px, max-content) minmax(20px, max-content) minmax(20px, max-content) auto;} /* 왼쪽그리드 하단 */
 .grdr_20_2_170_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(170px, max-content) minmax(20px, max-content) minmax(20px, max-content) auto;}
 .grdr_20_2_1f_20_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
+.grdr_2_1f_20_20_1f {display:grid; grid-template-rows: minmax(2px, max-content) 1fr minmax(20px, max-content) minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_1f_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_4f_20_20_6f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 4fr minmax(20px, max-content) minmax(20px, max-content) 6fr;} /* 왼쪽그리드 하단 */
@@ -223,10 +231,12 @@
 .grdr_20_2_7f_20_3f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 7fr minmax(20px, max-content) 3fr;} /* 왼쪽그리드 하단 */
 .grdr_20_50_a {display:grid; grid-template-rows: minmax(20px, max-content) 50px auto; }
 .grdr_20_80_a {display:grid; grid-template-rows: minmax(20px, max-content) 80px auto; }
+.grdr_20_110_a {display:grid; grid-template-rows: minmax(20px, max-content) 110px auto; }
 .grdr_5f_0_5f {display:grid; grid-template-rows:5fr 0px 5fr;}
 .grdr_5f_20_5f {display:grid; grid-template-rows:5fr 20px 5fr;}
 
 .grdr_20_50_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) 50px 1fr minmax(20px, max-content) 1fr; }
+.grdr_20_50_250_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 50px 200px minmax(20px, max-content) auto; }
 .grdr_50_a {display:grid; grid-template-rows: 50px auto; }
 .grdr_20_20_2_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) 1fr minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
@@ -304,6 +314,7 @@
 
 .grdr_20_2_563 {display:grid; grid-template-rows: minmax(20px, max-content) 2px 563px;}
 .grdr_20_2_474 {display:grid; grid-template-rows: minmax(20px, max-content) 2px 474px;}
+.grdr_20_2_514 {display:grid; grid-template-rows: minmax(20px, max-content) 2px 514px;}
 .grdr_20_240_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 240px minmax(20px, max-content) auto;}
 
 

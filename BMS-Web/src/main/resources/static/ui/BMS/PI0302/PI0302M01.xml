@@ -275,7 +275,7 @@
 				<xf:group id="" style="" class=""></xf:group>
 				<xf:group class="pgm_detail grdr_20_2_a bms_box_wrap">
 					<xf:group id="" style="" class="defaultbox">
-						<w2:textbox id="" style="" class="df_tt fl list" label="뉴스 최근 전송 이력"></w2:textbox>
+						<w2:textbox id="" style="" class="df_tt fl view" label="뉴스 최근 전송 이력"></w2:textbox>
 					</xf:group>
 					<xf:group></xf:group>
 					<xf:group id="" style="">

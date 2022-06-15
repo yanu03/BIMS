@@ -164,9 +164,9 @@
 		<script type="text/javascript" lazy="false"><![CDATA[ 
 	scwin.onpageload = function() {
 		var autoOptions = {
-			Main : { grid : PI0206G0, srchSbm : sub_PI0206G0R0, keyColumn : "REP_ROUT_ID", srchGrp : pgm_header, name :  "코스 목록"},
+			Main : { grid : PI0206G0, srchSbm : sub_PI0206G0R0, keyColumn : "REP_ROUT_ID", srchGrp : pgm_search, name :  "코스 목록"},
 			Sub1 : { grid : PI0206G1, srchSbm : sub_PI0206G1R0, keyColumn : "VHC_ID",savSbm : sub_PI0206G1S0, keySbm : sub_PI0206G0K0, srchGrp : gr_sub_header, name :  "차량 정보"},
-			Sub2 : { grid : PI0206G2, srchSbm : sub_PI0206G2R0, srchGrp : gr_sub_header, name :  "예약 상세정보"}
+			Sub2 : { grid : PI0206G2, srchSbm : sub_PI0206G2R0, srchGrp :gr_sub_header2, name :  "예약 상세정보"}
 			
 		 };				
 		 
@@ -175,25 +175,29 @@
 			RESERV_CNL : {}
 		};		 
 		 
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainOptions);		 
 		
 		var codeOptions = [ {code : "WAY_DIV", compID : "PI0206G0:WAY_DIV"},
-		
-							{code : "AREA", compID : "PI0206G1:AREA"},
-							{code : "ROUT_DIV", compID : "PI0206G1:ROUT_DIV"},
-							{code : "VHC_TYPE", compID : "PI0206G1:VHC_TYPE"},
-							{code : "VHC_FUEL", compID : "PI0206G1:VHC_FUEL"},
-							{code : "VHC_KIND", compID : "PI0206G1:VHC_KIND"},
+			{code : "AREA", compID : "PI0206G1:AREA"},
+			{code : "ROUT_DIV", compID : "PI0206G1:ROUT_DIV"},
+			{code : "VHC_TYPE", compID : "PI0206G1:VHC_TYPE"},
+			{code : "VHC_FUEL", compID : "PI0206G1:VHC_FUEL"},
+			{code : "VHC_KIND", compID : "PI0206G1:VHC_KIND"},
 							
-							{code : "VHC_KIND", compID : "PI0206G2:VHC_KIND"},
-							{code : "ROUT_DIV", compID : "PI0206G2:ROUT_DIV"},
-							{code : "VHC_TYPE", compID : "PI0206G2:VHC_TYPE"},
-							{code : "VHC_FUEL", compID : "PI0206G2:VHC_FUEL"},
-							{code : "AREA", compID : "PI0206G2:AREA"},
-							{code : "INST_LOC", compID : "PI0206G2:INST_LOC"},
-							{code : "PROCE_RST", compID : "PI0206G2:PROCE_RST"}
+			{code : "VHC_KIND", compID : "PI0206G2:VHC_KIND"},
+			{code : "ROUT_DIV", compID : "PI0206G2:ROUT_DIV"},
+			{code : "VHC_TYPE", compID : "PI0206G2:VHC_TYPE"},
+			{code : "VHC_FUEL", compID : "PI0206G2:VHC_FUEL"},
+			{code : "AREA", compID : "PI0206G2:AREA"},
+			{code : "INST_LOC", compID : "PI0206G2:INST_LOC"},
+			{code : "PROCE_RST", compID : "PI0206G2:PROCE_RST"}
 		 ];	
 		
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID, autoOptions, mainOptions, codeOptions);		 
+
+		var mainSrhOptions = {
+		};	
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRIDDUAL_GRID, autoOptions, mainSrhOptions, codeOptions);		 
+
 		com.setCommonDtl(codeOptions, function() {
 			com.searchGrid(PI0206G0, sub_PI0206G0R0);
 		});			
@@ -436,59 +440,73 @@
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-			<xf:group id="pgm_header" class="pgm_header" style="">
-				<xf:group id="" style="" class="gr_search">
-					<xf:group id="" style="" class="label">
-						<w2:span id="" class="" label="검색 항목"></w2:span>
-					</xf:group>
-					<xf:group id="" style="" class="search">
-						<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-							disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="sbx_ChoiceBox"
-							optionOrder="false" ref="data:dma_search.TYPE" style="height:20px;width:100px;margin-right:10px;float:left;" submenuSize="auto"
-							textAlign="left">
-							<xf:choices>
-								<xf:item>
-									<xf:label><![CDATA[전체]]></xf:label>
-									<xf:value><![CDATA[ALL]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[코스ID]]></xf:label>
-									<xf:value><![CDATA[COR_ID]]></xf:value>
-								</xf:item>
-								<xf:item>
-									<xf:label><![CDATA[코스명]]></xf:label>
-									<xf:value><![CDATA[COR_NM]]></xf:value>
-								</xf:item>
-							</xf:choices>
-						</xf:select1>
-						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="코스ID 또는 코스명"></xf:input>
-						<w2:autoComplete interactionMode="" chooseOptionValue="" chooseOptionLabel="-전체-" visibleRowNum=""
-							chooseOption="true" caseSensitive="false" displayMode="label" ev:onviewchange="" id="autoChoiceBox" useKeywordHighlight="false"
-							ref="data:dma_search.CONTENT" class="search_auto" search="start" ev:onchange="" allOption=""
-							submenuSize="auto" editType="select" emptyItem="" selectedData="" emptyValue="" noResult="useData" textAlign="left" style="display: none">
-							<w2:choices>
-								<w2:itemset nodeset="data:dlt_SearchItem">
-									<w2:label ref="ROUT_NM"></w2:label>
-									<w2:value ref="ROUT_ID"></w2:value>
-								</w2:itemset>
-							</w2:choices>
-						</w2:autoComplete>
-					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+		
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
 				</xf:group>
-			</xf:group><!-- pgm_header -->
-			<xf:group id="pgm_content" class="pgm_content grdc_4f_20_6f" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_a" style="">
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
+					</xf:group>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					</xf:group>
+				</xf:group>
+			</xf:group>
+		
+			<xf:group id="pgm_content" class="pgm_content grdc_4f_0_6f" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style=""> <!-- auto 영역 -->
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl" id="" label="코스 목록" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl list ico-list" id="" label="코스 목록" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
-					<xf:group></xf:group> <!-- margin-->
+					
+					<xf:group id="" class="" style="">
+						<xf:group id="" style="" class="gr_search">
+							<xf:group id="" style="" class="label">
+									<w2:span id="" class="" label="검색 항목"></w2:span>
+							</xf:group>
+							<xf:group class="search" id="pgm_search" style="">
+								<xf:select1 allOption="" appearance="minimal" chooseOption="" direction="auto" disabled="false"
+									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.sbx_ChoiceBox_onviewchange" id="sbx_ChoiceBox"
+									optionOrder="false" ref="data:dma_search.TYPE"  class="search_type_100" style="" submenuSize="auto"
+									textAlign="left">
+									<xf:choices>
+										<xf:item>
+											<xf:label><![CDATA[전체]]></xf:label>
+											<xf:value><![CDATA[ALL]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[코스ID]]></xf:label>
+											<xf:value><![CDATA[COR_ID]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[코스명]]></xf:label>
+											<xf:value><![CDATA[COR_NM]]></xf:value>
+										</xf:item>
+									</xf:choices>
+								</xf:select1>
+								<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="코스ID 또는 코스명"></xf:input>
+								<w2:autoComplete interactionMode="" chooseOptionValue="" chooseOptionLabel="-전체-" visibleRowNum=""
+									chooseOption="true" caseSensitive="false" displayMode="label" ev:onviewchange="" id="autoChoiceBox" useKeywordHighlight="false"
+									ref="data:dma_search.CONTENT" class="search_auto" search="start" ev:onchange="" allOption=""
+									submenuSize="auto" editType="select" emptyItem="" selectedData="" emptyValue="" noResult="useData" textAlign="left" style="display: none">
+									<w2:choices>
+										<w2:itemset nodeset="data:dlt_SearchItem">
+											<w2:label ref="ROUT_NM"></w2:label>
+											<w2:value ref="ROUT_ID"></w2:value>
+										</w2:itemset>
+									</w2:choices>
+								</w2:autoComplete>
+							</xf:group>
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>							
+						</xf:group>
+					</xf:group>
+				
+
 					<xf:group id="" class="" style="">
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
 								dataList="data:dlt_BRT_COR_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.PI0206G0_oncellclick" ev:oneditkeyup="" ev:onkeyup=""
@@ -544,11 +562,11 @@
 							</w2:gridView>
 					</xf:group>
 				</xf:group><!-- pgm_list -->
-				<xf:group id="" class="vertical_line">
+				<xf:group id="" class="">
 				</xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_20_36_1f_20_20_36_1f" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_36_1f_20_20_36_1f bms_box_wrap" style="">
 					<xf:group class="defaultbox" id="" style="">
-						<w2:textbox class="df_tt fl" id="" label="차량 목록" style=""></w2:textbox>
+						<w2:textbox class="df_tt fl view" id="" label="차량 목록" style=""></w2:textbox>
 					</xf:group>
 					<xf:group id="gr_sub_header" class="gr_sub_header" style="margin-top:4px">
 						<xf:group class="gr_sub_search" id="" style="">
@@ -681,9 +699,9 @@
 							</w2:footer>
 						</w2:gridView>
 					</xf:group>
-					<xf:group id="" class="horizontal_line"></xf:group>					
+					<xf:group id="" class=""></xf:group>					
 					<xf:group class="defaultbox" id="" style="">
-						<w2:textbox class="df_tt fl" id="" label="예약 상세정보" style=""></w2:textbox>
+						<w2:textbox class="df_tt fl view" id="" label="예약 상세정보" style=""></w2:textbox>
 					</xf:group>
 					<xf:group id="gr_sub_header2" class="gr_sub_header" style="">
 						<xf:group class="gr_sub_search" id="" style="">

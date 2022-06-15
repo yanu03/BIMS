@@ -405,7 +405,7 @@ a:hover,a:active,a:focus{text-decoration:none}
 .innerTab .w2tabcontrol_tabhost .w2tabcontrol_tab_center:first-child {border-left:none;} */
 
 .innerTab .w2tabcontrol_container{
-	bottom: 0;
+	bottom: 0 !important;
 	border-top: none;
 }
 
@@ -418,7 +418,7 @@ a:hover,a:active,a:focus{text-decoration:none}
 .innerTab .w2tabcontrol_tabhost li a {font-weight:inherit; color: #333333;}
 .innerTab .w2tabcontrol_selected a {font-weight: bold !important ;}
 .innerTab .w2tabcontrol_container {margin-top: 10px;}
-
+.innerTab .w2tabcontrol_contents_wrapper { background: #fff;}
 /* button */
 /*
 .btn_cm{position:relative;display:inline-block;padding:0 1px 0 0;margin:0 0 0 3px;background:url(/cm/images/contents/bg_btn_cm.gif) no-repeat 100% 0;vertical-align:middle}

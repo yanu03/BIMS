@@ -419,7 +419,7 @@
 							</w2:footer>							
 						</w2:gridView>
 					</xf:group>
-					<xf:group id="" class="horizontal_line">
+					<xf:group id="" class="">
 					</xf:group>
 					
 					

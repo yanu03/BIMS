@@ -501,11 +501,11 @@
 				
 				<xf:group id="" class="">
 				</xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_5f_0_5f" style="">
-					<xf:group id="" class="grdr_20_2_a bms_box_wrap" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_5f_20_5f bms_box_wrap" style="">
+					<xf:group id="" class="grdr_20_2_a" style="">
 						<xf:group id="" class="" style="">
 							<xf:group class="defaultbox" id="" style="">
-								<w2:textbox class="df_tt fl list" id="" label="시설물 목록" style=""></w2:textbox>
+								<w2:textbox class="df_tt fl view" id="" label="시설물 목록" style=""></w2:textbox>
 							</xf:group>
 						</xf:group>
 						<xf:group id="" class="" style=""></xf:group>
@@ -591,10 +591,10 @@
 					
 					<xf:group id="" class=""></xf:group>	
 										
-					<xf:group id="" style="" class="pgm_detail grdr_20_40_a bms_box_wrap">
+					<xf:group id="" style="" class="pgm_detail grdr_20_40_a">
 						<xf:group id="" class="gr_sub_header" style="">
 							<xf:group class="defaultbox" id="" style="">
-								<w2:textbox class="df_tt fl list" id="" label="유지보수/장애발생 이력" style=""></w2:textbox>
+								<w2:textbox class="df_tt fl view" id="" label="유지보수/장애발생 이력" style=""></w2:textbox>
 							</xf:group>
 						</xf:group>
 						<xf:group class="" id="" style="">

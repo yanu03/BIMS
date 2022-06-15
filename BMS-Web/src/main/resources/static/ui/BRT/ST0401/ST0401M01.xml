@@ -80,16 +80,20 @@
 		<script type="text/javascript" lazy="false"><![CDATA[ 
 	scwin.onpageload = function() {
 		var autoOptions = {
-			Main : { grid : ST0401G0, srchSbm : sub_ST0401G0R0, srchGrp : pgm_header}
+			Main : { grid : ST0401G0, srchSbm : sub_ST0401G0R0, srchGrp : pgm_search}
 		 };
 		 				
 		var mainOptions = {
 			EXL:scwin.btn_excel_onclick,
-			CLOSE:scwin.btn_close_onclick
+			CLOSE:scwin.btn_close_onclick,
+			SEARCH:{}
 		};
 		
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
 		
+		var mainSrhOptions = {
+		};	
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainSrhOptions);
 		var date = new Date();
 		var year = date.getFullYear().toString();
 		var month = (date.getMonth()+1).toString();
@@ -400,82 +404,98 @@
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
-		<xf:group id="pgm_container" class="pgm_container grdr_41_36_a" style="">
-			<xf:group id="pgm_navi" class="pgm_navi" style="">
-				<w2:wframe id="wfm_navi" style="" src="/cm/common/wf_navi.xml" scope="true"></w2:wframe>
-			</xf:group>
-			<xf:group id="pgm_header" class="pgm_header" style="">
-				<xf:group id="" style="" class="gr_search">
-					<xf:group id="" style="" class="label">
-						<w2:span id="" class="" label="일시  " style="margin-bottom: 5px;"></w2:span>
-						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false" style="width:120px; margin-right: 10px; margin-bottom: 5px;" id="F_DATE" renderType="component" renderDiv="true" calendarValueType="yearMonthDate" ref="data:dma_search.F_DATE" ev:onviewchange="scwin.F_DATE_onviewchange">
-						</w2:inputCalendar>
-						<w2:span label="~" style="margin-right: 10px;margin-bottom: 5px;" id="">
-						</w2:span>
-						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false" style="width:120px; margin-right: 10px; margin-bottom: 5px;" id="L_DATE" renderType="component" renderDiv="true" calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange">
-						</w2:inputCalendar>
-					</xf:group>				
-					<w2:wframe id="wfm_mainBtn" class="main_Btn" style="bottom: 8px;" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
 				</xf:group>
-			</xf:group><!-- pgm_header -->
-			<xf:group id="pgm_content" class="pgm_content grdc_870_20_a" style="">
-				<xf:group id="pgm_list" class="pgm_list grdr_20_2_1f_20_20_1f" style="">
-					<xf:group id=""></xf:group>
-					<xf:group id=""></xf:group>
-					
-					<xf:group style="position:relative;" id="" class="">
-						<canvas id="chart_ST0401" style="position: absolute;"></canvas>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
 					</xf:group>
-					
-					<xf:group id=""></xf:group>
-					<xf:group id=""></xf:group>
-					<!-- <xf:group style="" id="" class="label">
-						<w2:span label="단위 : [돌발건수:건]" style="float: left;margin-right: 3px; margin-top:5px;" id="">
-						</w2:span>
-					</xf:group> -->
-					<xf:group id="" class="" style="position:relative;">
-						<w2:pivot style="position:absolute;width:100%;height:100%;" dataList="data:dlt_BRT_OPER_VIOLT_STAT" vals="SUM_CNT" rows="OPER_DT" cols="VIOLT_TYPE" defaultAggregator="Sum" valuesAxis="col" id="ST0401G0" renderMode="compact" autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Sum" allTotalName="총계" digitsAfterDecimal="0" useNumberFormat="true" scaler="1" grandTotalName="" suffix="건" prefix="" noResultMessageVisible="true" noResultMessage="데이터 없음" ev:onrefresh="scwin.ST0401G0_onrefresh" hiddenHeaderList="">
-							<w2:fieldInfo>
-								<w2:field id="REP_ROUT_ID" name="대표노선아이디">
-								</w2:field>
-								<w2:field id="ROUT_ID" name="노선아이디">
-								</w2:field>
-								<w2:field id="VHC_ID" name="차량아이디">
-								</w2:field>
-								<w2:field id="DRV_ID" name="운전자아이디">
-								</w2:field>
-								<w2:field id="STAT_H" name="통계시간">
-								</w2:field>
-								<w2:field id="VIOLT_TYPE" name="위반유형">
-								</w2:field>
-								<w2:field id="VIOLT_CNT" name="위반건수">
-								</w2:field>
-								<w2:field id="JUDGE_TYPE" name="위반조치유형">
-								</w2:field>
-								<w2:field id="JUDGE_CNT" name="위반조치건수">
-								</w2:field>
-								<w2:field id="UPD_DTM" name="갱신일시">
-								</w2:field>
-								<w2:field id="ROUT_NM" name="노선명">
-								</w2:field>
-								<w2:field id="VHC_NO" name="차량번호">
-								</w2:field>
-								<w2:field id="OPER_DT" name="운행일">
-								</w2:field>
-								<w2:field id="SUM_CNT" name="총계">
-								</w2:field>
-							</w2:fieldInfo>
-					</w2:pivot>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-				</xf:group><!-- pgm_list -->
-				<xf:group id="" class="vertical_line"></xf:group>
-					<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a" style="">
-						<xf:group id=""></xf:group>
-						<xf:group id=""></xf:group>
-						<xf:group style="position:relative;" id="" class="">
-							<canvas id="chart_ST0401_2" style = "position:absolute;"></canvas>	
-						</xf:group>			
-					</xf:group>								
+				</xf:group>
+			</xf:group>
+
+			<xf:group id="" class="pgm_content grdc_a" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_50_a bms_box_wrap" style=""> <!-- auto 영역 -->
+					<xf:group id="" class="" style="">
+						<xf:group id="pgm_search" style="" class="gr_search">
+							<xf:group id="" style="" class="label">
+								<w2:span id="" class="" label="일시  " style="margin-bottom: 5px;"></w2:span>
+								<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false" style="width:120px; margin-right: 10px; margin-bottom: 5px;" id="F_DATE" renderType="component" renderDiv="true" calendarValueType="yearMonthDate" ref="data:dma_search.F_DATE" ev:onviewchange="scwin.F_DATE_onviewchange">
+								</w2:inputCalendar>
+								<w2:span label="~" style="margin-right: 10px;margin-bottom: 5px;" id="">
+								</w2:span>
+								<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false" style="width:120px; margin-right: 10px; margin-bottom: 5px;" id="L_DATE" renderType="component" renderDiv="true" calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange">
+								</w2:inputCalendar>
+							</xf:group>				
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>
+						</xf:group>
+					</xf:group>
+					<xf:group id="pgm_content" class="pgm_content grdc_870_20_a" style="">
+						<xf:group id="" class="pgm_list grdr_20_2_1f_20_20_1f" style="">
+							<xf:group id=""></xf:group>
+							<xf:group id=""></xf:group>
+					
+							<xf:group style="position:relative;" id="" class="bms_box_wrap">
+								<canvas id="chart_ST0401" style="position: absolute; width:95%; height:92%"></canvas>
+							</xf:group>
+					
+							<xf:group id=""></xf:group>
+							<xf:group id=""></xf:group>
+							<!-- <xf:group style="" id="" class="label">
+								<w2:span label="단위 : [돌발건수:건]" style="float: left;margin-right: 3px; margin-top:5px;" id="">
+								</w2:span>
+							</xf:group> -->
+							<xf:group id="" class="" style="position:relative;">
+								<w2:pivot style="position:absolute;width:100%;height:100%;" dataList="data:dlt_BRT_OPER_VIOLT_STAT" vals="SUM_CNT" rows="OPER_DT" cols="VIOLT_TYPE" defaultAggregator="Sum" valuesAxis="col" id="ST0401G0" renderMode="compact" autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Sum" allTotalName="총계" digitsAfterDecimal="0" useNumberFormat="true" scaler="1" grandTotalName="" suffix="건" prefix="" noResultMessageVisible="true" noResultMessage="데이터 없음" ev:onrefresh="scwin.ST0401G0_onrefresh" hiddenHeaderList="">
+									<w2:fieldInfo>
+										<w2:field id="REP_ROUT_ID" name="대표노선아이디">
+										</w2:field>
+										<w2:field id="ROUT_ID" name="노선아이디">
+										</w2:field>
+										<w2:field id="VHC_ID" name="차량아이디">
+										</w2:field>
+										<w2:field id="DRV_ID" name="운전자아이디">
+										</w2:field>
+										<w2:field id="STAT_H" name="통계시간">
+										</w2:field>
+										<w2:field id="VIOLT_TYPE" name="위반유형">
+										</w2:field>
+										<w2:field id="VIOLT_CNT" name="위반건수">
+										</w2:field>
+										<w2:field id="JUDGE_TYPE" name="위반조치유형">
+										</w2:field>
+										<w2:field id="JUDGE_CNT" name="위반조치건수">
+										</w2:field>
+										<w2:field id="UPD_DTM" name="갱신일시">
+										</w2:field>
+										<w2:field id="ROUT_NM" name="노선명">
+										</w2:field>
+										<w2:field id="VHC_NO" name="차량번호">
+										</w2:field>
+										<w2:field id="OPER_DT" name="운행일">
+										</w2:field>
+										<w2:field id="SUM_CNT" name="총계">
+										</w2:field>
+									</w2:fieldInfo>
+								</w2:pivot>
+							</xf:group>
+						</xf:group><!-- pgm_list -->
+						<xf:group id="" class=""></xf:group>
+						<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a" style="">
+							<xf:group id=""></xf:group>
+							<xf:group id=""></xf:group>
+							<xf:group style="position:relative;" id="" class="bms_box_wrap">
+								<canvas id="chart_ST0401_2" style = "position:absolute; width:95%; height:92%"></canvas>	
+							</xf:group>			
+						</xf:group>								
+					</xf:group>
+				</xf:group>
 			</xf:group>
 		</xf:group>
 	</body>

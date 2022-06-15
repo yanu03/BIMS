@@ -549,7 +549,7 @@
 										<w2:colspan>4</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
-									<xf:group style="padding:10px; background-color: #f7f7f7; display: grid; grid-template-rows: 30px minmax(280px, max-content);">
+									<xf:group style="padding:10px; background-color: #f7f7f7; display: grid; grid-template-rows: 30px minmax(415px, max-content);">
 										<xf:group id="" class="gr_sub_header" style="">
 											<xf:group class="defaultbox" id="" style="">
 												<w2:textbox class="df_tt fl map" id="" label="지도" style=""></w2:textbox>
