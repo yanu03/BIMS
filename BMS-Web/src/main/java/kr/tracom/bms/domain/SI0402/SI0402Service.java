@@ -250,6 +250,7 @@ public class SI0402Service extends ServiceSupport {
 					//정류소별 링크
 					for (int i = 0; i < routNodeList.size()-1; i++) {
 						Map data = routNodeList.get(i);
+						data.put("ROUT_LINK_ID", data.get("LINK_ID"));
 						String nodeType = (String) data.get("NODE_TYPE");
 						
 						if(!Constants.NODE_TYPE_BUSSTOP.equals(nodeType)){
