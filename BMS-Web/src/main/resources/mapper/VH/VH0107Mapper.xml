@@ -18,8 +18,8 @@
 		,A.NODE_TYPE
 		,A.VHC_ID
 		,A.VHC_NO
-		,A.PSG_CNT
-		,A.GET_OFF_CNT
+		<!-- ,A.PSG_CNT
+		,A.GET_OFF_CNT -->
 		,A.PL_ARRV_TM
 		,A.ARRV_TM
 		,A.ARRV_TM_GAP

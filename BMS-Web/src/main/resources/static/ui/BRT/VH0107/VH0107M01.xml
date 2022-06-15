@@ -426,8 +426,8 @@
 									<w2:column width="70" id="column14" value="배차번호"></w2:column>
 									<w2:column width="70" id="column16" value="상하행구분"></w2:column>
 									<w2:column width="70" id="column22" value="노드유형"></w2:column>
-									<w2:column width="70" id="column25" value="승차인원"></w2:column>
-									<w2:column width="70" id="column26" value="하차인원"></w2:column>
+									<!-- <w2:column width="70" id="column25" value="승차인원"></w2:column>
+									<w2:column width="70" id="column26" value="하차인원"></w2:column> -->
 									<w2:column width="80" id="column27" value="계획도착시간"></w2:column>
 									<w2:column width="80" id="column28" value="도착시간"></w2:column>
 									<w2:column width="80" id="column29" value="도착시간차이"></w2:column>
@@ -453,8 +453,8 @@
 									<w2:column width="70" id="ALLOC_NO" textAlign="right"></w2:column>
 									<w2:column width="70" id="WAY_DIV" inputType="select"></w2:column>
 									<w2:column width="70" id="NODE_TYPE" inputType="select"></w2:column>
-									<w2:column width="70" id="PSG_CNT" textAlign="right"></w2:column>
-									<w2:column width="70" id="GET_OFF_CNT" textAlign="right"></w2:column>
+									<!-- <w2:column width="70" id="PSG_CNT" textAlign="right"></w2:column>
+									<w2:column width="70" id="GET_OFF_CNT" textAlign="right"></w2:column> -->
 									<w2:column width="70" id="PL_ARRV_TM"></w2:column>
 									<w2:column width="70" id="ARRV_TM"></w2:column>
 									<w2:column width="70" id="ARRV_TM_GAP"></w2:column>
