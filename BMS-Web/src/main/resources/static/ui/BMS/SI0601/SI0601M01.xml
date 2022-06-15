@@ -153,7 +153,7 @@
 	
 	scwin.btn_address_onclick = function(row) {
 		var row = SI0601G0.getFocusedRowIndex();
-
+	
 		var options = {
 			id : "SI0601P01",
 			popupName : "주소 검색",
@@ -217,11 +217,11 @@
 											<xf:value><![CDATA[ALL]]></xf:value>
 										</xf:item>
 										<xf:item>
-											<xf:label><![CDATA[기관명]]></xf:label>
+											<xf:label><![CDATA[기관ID]]></xf:label>
 											<xf:value><![CDATA[PARTNER_ID]]></xf:value>
 										</xf:item>
 										<xf:item>
-											<xf:label><![CDATA[기관ID]]></xf:label>
+											<xf:label><![CDATA[기관명]]></xf:label>
 											<xf:value><![CDATA[PARTNER_NM]]></xf:value>
 										</xf:item>
 									</xf:choices>
