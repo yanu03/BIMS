@@ -397,7 +397,7 @@
 				var dlCdNm = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD_NM");
 				
 				gridHeader +='<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="h_colunm'+i+3+'" value="'+dlCdNm+'" blockSelect="false" displayMode="label"></w2:column>';
-				gridHeader +='<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="h_colunm'+i+4+'" value="'+dlCdNm+'자동'+'" blockSelect="false" displayMode="label"></w2:column>';
+				//gridHeader +='<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="h_colunm'+i+4+'" value="'+dlCdNm+'자동'+'" blockSelect="false" displayMode="label"></w2:column>';
 			}
 			
 		}
@@ -420,7 +420,7 @@
 			
 			if(paramKind != '' && paramKind != 'PK001'){
 				gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'" value="" blockSelect="false" displayMode="label" displayFormatter="'+displayForMatter+'"></w2:column>';
-				gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'_AUTO_YN'+'" value="" blockSelect="false" displayMode="label" displayFormatter="scwin.AutoDisFormatter"></w2:column>';
+				//gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'_AUTO_YN'+'" value="" blockSelect="false" displayMode="label" displayFormatter="scwin.AutoDisFormatter"></w2:column>';
 			}
 		}
 		
@@ -598,7 +598,7 @@
 		
 		var topCoords = null;
 		var leftCoords = null;
-		//$("#mf_tac_layout_contents_"+ param.menuCode+ "_body_busImage").empty();
+		$("#mf_tac_layout_contents_"+ param.menuCode+ "_body_busImage").empty();
 				
 		for(var i=0; i<dlt_BMS_DVC_INFO.getDataLength(); i++) {
 			var imgSrc = null;
@@ -685,13 +685,30 @@
 				var imgId = dlt_BMS_DVC_INFO.getCellData(i, "DVC_ID");
 				
 				var str = "";
-				str = "<div id='"+ imgId+ "' style='position:absolute; top:"+topCoords+ "px; left:"+leftCoords+"px;' class='w2group' onclick='imgOnclick(this.id);'>"
+				str = "<div id='"+ imgId+ "' style='z-index:1;position:absolute; top:"+topCoords+ "px; left:"+leftCoords+"px;' class='w2group' onclick='imgOnclick(this.id);'>"
 				+ "<img xmlns='http://www.w3.org/1999/xhtml' src='"+ imgSrc+ "'>"
 				+ "</div>";
 				$("#mf_tac_layout_contents_"+ param.menuCode+ "_body_busImage").append(str);				
 			} // end if
 
 		} // end for
+		
+		var imgSrc = null;
+		var vhcKind = dlt_BRT_CUR_OPER_INFO.getCellData(VD0202G0.getFocusedRowIndex(), "VHC_KIND");
+		if (vhcKind == "VK001") {
+			imgSrc = "/cm/images/bms/CNG_front_bus.png";	
+		} else if (vhcKind == "VK002") {
+			imgSrc = "/cm/images/bms/woojin_front_bus.png";	
+		} else if (vhcKind == "VK003") {
+			imgSrc = "/cm/images/bms/normal_front_bus.png";	
+		} else {
+			imgSrc = "/cm/images/bms/normal_front_bus.png";	
+		}
+		
+		var vhcId = dlt_BRT_CUR_OPER_INFO.getCellData(VD0202G0.getFocusedRowIndex(), "VHC_ID");
+		str += '<img xmlns="http://www.w3.org/1999/xhtml" style="position:absolute; cursor:default" src="'+imgSrc+'" id="'+vhcId+'img'+'">';
+		
+		$("#mf_tac_layout_contents_"+ param.menuCode+ "_body_busImage").append(str);
 	 
 	  var selectedDvcKind = dlt_BMS_DVC_INFO.getCellData(row, "DVC_KIND");
 	  var dvc_cond = dlt_BMS_DVC_INFO.getCellData(row, "DVC_COND");
@@ -1013,8 +1030,6 @@
 				
 					<xf:group id="" class="" style="">
 						<w2:gridView sortEvent="onclick" ev:onrowindexchange="scwin.VD0202G0_onrowindexchange" ev:oncellclick=""
-							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="No."
-							sortable="true" rowStatusHeaderValue="상태" overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
 							showSortableImage="" rowNumVisible="true" useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순서"
 							sortable="true" rowStatusHeaderValue="상태" overflowX="hidden" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true"
 							dataList="data:dlt_BRT_CUR_OPER_INFO" ignoreCellClick="false" style="" autoFit="lastColumn" visibleRowNum="" id="VD0202G0"
@@ -1069,6 +1084,7 @@
 						</w2:gridView>
 					</xf:group>			
 				</xf:group><!-- grdr_20_50_a end -->
+				
 				<xf:group id="" class=""></xf:group>				
 				<xf:group id="pgm_detail" class="pgm_detail grdr_20_230_20_20_a bms_box_wrap" style="">
 					<xf:group class="gr_sub_header" id="" style="">
@@ -1077,48 +1093,19 @@
 						</xf:group>
 						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 					</xf:group>
-					<!-- <xf:group class="brt_bus_img">
-						</xf:group> -->
 					<!-- 버스 이미지 -->
 					<xf:group id="busImage" class="" style="position:relative; overflow:auto"></xf:group>
-					<!-- <xf:group id="busImage" class="woojin_bus_img"></xf:group> -->
+					
 					<xf:group id="" class="horizontal_line"></xf:group>
-		
-
+					
 					<xf:group class="gr_map_header" id="" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl view" id="" label="차내장치 정보" style=""></w2:textbox>
 						</xf:group>
 					</xf:group>
+					
 					<xf:group id="" class="" style="">
-						<!-- <w2:pivot style="position:absolute;width:100%;height:100%;" 
-<<<<<<< HEAD
-							dataList="data:dlt_BMS_DVC_INFO" vals="" rows="DVC_ID" 
-							cols="INCDNT_TYPE" defaultAggregator="Sum" valuesAxis="col" id="VD0202G2" renderMode="compact" autoFit="allColumn" 
-							grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Sum" allTotalName="총계" digitsAfterDecimal="0" useNumberFormat="true" scaler="1" grandTotalName="" suffix="건" prefix="" noResultMessageVisible="true" noResultMessage="데이터 없음" ev:onrefresh="">
-							<w2:fieldInfo>
-							<w2:field id="DVC_ID" name="장치ID"></w2:field>
-							<w2:field id="ORG_ID" name="기관ID"></w2:field>
-							<w2:field id="DVC_KIND" name="장치종류"></w2:field>
-							<w2:field id="DVC_TYPE" name="장치유형"></w2:field>
-							<w2:field id="DVC_COND" name="장치상태"></w2:field>
-							<w2:field id="USE_YN" name="사용여부"></w2:field>
-							<w2:field id="INST_LOC" name="설치위치"></w2:field>
-							<w2:field id="ORG_NM" name="기관명"></w2:field>
-							<w2:field id="DVC_POWER" name="전원종료"></w2:field>
-							<w2:field id="DVC_RESET" name="리셋"></w2:field>
-							<w2:field id="MNG_ID" name="관리ID"></w2:field>
-							<w2:field id="REMARK" name="비고"></w2:field>
-							<w2:field id="DVC_IP" name="장치IP"></w2:field>
-							<w2:field id="CTR_YN" name="제어여부"></w2:field>
-							<w2:field id="SEND_DATE" name="갱신일시"></w2:field>
-							<w2:field id="DVC_COORDS" name="장치좌표"></w2:field>
-							<w2:field id="PARAM_DIV" name="매개변수구분"></w2:field>
-							<w2:field id="PARAM_KIND" name="매개변수종류"></w2:field>
-							</w2:fieldInfo>
-							</w2:pivot>	 -->
-				    						
-							<w2:gridView id="VD0202G1" style="width:98%;height:98%" defaultCellHeight="20" rowNumVisible="true" 
+						<w2:gridView id="VD0202G1" style="width:98%;height:98%" defaultCellHeight="20" rowNumVisible="true"
 							useShiftKey="true" readOnly="true" scrollByColumn="false" rowNumHeaderValue="순번" sortable="true" rowStatusHeaderValue="상태"
 							overflowX="auto" overflowY="scroll" rowStatusVisible="false" fixedColumnWithHidden="true" ignoreCellClick="false"
 							dataList="data:dlt_BMS_DVC_INFO" class="cm_grid" autoFit="lastColumn" fixedColumnScrollHidden=""
@@ -1227,12 +1214,6 @@
 							</w2:footer>
 						</w2:gridView>
 					</xf:group>
-					<!-- 					<xf:group id="" style="">
-						<div id="map_VD0202" style="overflow:hidden;">
-						<ul id="category_map_VD0202" class="category">
-						</ul>											
-						</div>
-						</xf:group>	 -->
 				</xf:group><!-- pgm_detail end -->
 			</xf:group> <!-- end content --> 
 		</xf:group> <!-- end container -->

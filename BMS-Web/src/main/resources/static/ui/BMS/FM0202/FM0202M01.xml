@@ -407,7 +407,7 @@
 				var dlCdNm = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD_NM");
 				
 				gridHeader +='<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="h_colunm'+i+3+'" value="'+dlCdNm+'" blockSelect="false" displayMode="label"></w2:column>';
-				gridHeader +='<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="h_colunm'+i+4+'" value="'+dlCdNm+'자동'+'" blockSelect="false" displayMode="label"></w2:column>';
+				//gridHeader +='<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="h_colunm'+i+4+'" value="'+dlCdNm+'자동'+'" blockSelect="false" displayMode="label"></w2:column>';
 			}
 			
 		}
@@ -430,7 +430,7 @@
 			
 			if(paramKind != '' && paramKind != 'PK001'){
 				gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'" value="" blockSelect="false" displayMode="label" displayFormatter="'+displayForMatter+'"></w2:column>';
-				gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'_AUTO_YN'+'" value="" blockSelect="false" displayMode="label" displayFormatter="scwin.AutoDisFormatter"></w2:column>';
+				//gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'_AUTO_YN'+'" value="" blockSelect="false" displayMode="label" displayFormatter="scwin.AutoDisFormatter"></w2:column>';
 			}
 		}
 		
@@ -865,7 +865,7 @@
 				</xf:group>
 			</xf:group>
 		
-			<xf:group id="pgm_content" class="pgm_content grdc_600_0_a" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_550_0_a" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
@@ -959,14 +959,11 @@
 									<!--  <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column57"
 										value="노드타입" blockSelect="false" displayMode="label">
 									</w2:column>-->
-									<w2:column removeBorderStyle="false" width="180" inputType="text" style="height:20px" id="column56"
+									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column56"
 										value="정류소명" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column1"
+									<w2:column removeBorderStyle="false" width="60" inputType="text" style="height:20px" id="column1"
 										value="정류소번호" blockSelect="false" displayMode="label" sortable="false">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="5" inputType="text" style="height:20px" id="column55"
-										value="" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
 								</w2:row>
 							</w2:header>
@@ -989,9 +986,6 @@
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="STTN_NO"
 										value="" blockSelect="false" displayMode="label" textAlign="right">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id=""
-										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
 							</w2:gBody>

@@ -172,7 +172,7 @@
 		SI0402G0.mergeCells("byrestriccol");
 		
 
-		routMap.initMap("map_SI0402", {width:"100%"
+		routMap.initMap2("map_SI0402", {width:"100%"
 			, height:"100%"
 			, onClick: scwin.onClickMap
 			, nodeChangeCb: scwin.nodeChangeCb
