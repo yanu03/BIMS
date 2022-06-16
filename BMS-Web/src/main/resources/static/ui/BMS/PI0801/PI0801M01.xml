@@ -302,13 +302,13 @@
 		com.addGridForm(PI0801G0, PI0801F0, dma_SEQ_BMS_INNER_LED_INFO_0, "ILD_ID", "ILD_NM");	
 		
 		//??? 기존에 써있던거. 함수 없음.
-		//com.setserialNumberToData(PI0801G0, "SN");
+		com.setSerialNumberToData(PI0801G0, "SN");
 		
-		var data = dlt_BMS_INNER_LED_INFO.getAllJSON();
+		/*var data = dlt_BMS_INNER_LED_INFO.getAllJSON();
 		var count = data.length;		
 		for(i=0; i<count; i++) {
 			dlt_BMS_INNER_LED_INFO.setCellData(i, "SN", i+1);	
-		}		
+		}*/		
 		
 	};
 	

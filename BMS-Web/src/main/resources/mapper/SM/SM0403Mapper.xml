@@ -23,13 +23,13 @@
 				AND USER_NM LIKE CONCAT('%',#{CONTENT},'%') 
 			</if>
 			<if test="(F_DATE != null and F_DATE != '') and (L_DATE == null or L_DATE == '')">
-				<![CDATA[AND OCR_DTM >= #{F_DATE}]]>
+				<![CDATA[AND DATE_FORMAT(OCR_DTM, '%Y%m%d') >= #{F_DATE}]]>
 			</if>
 			<if test="(F_DATE == null or F_DATE == '') and L_DATE != null and L_DATE != '' ">
-				<![CDATA[AND OCR_DTM <= #{L_DATE}]]>
+				<![CDATA[AND DATE_FORMAT(OCR_DTM, '%Y%m%d') <= #{L_DATE}]]>
 			</if>
 			<if test="F_DATE != null and F_DATE != '' and L_DATE != null and L_DATE != '' ">
-				AND OCR_DTM between #{F_DATE} and #{L_DATE}
+				AND DATE_FORMAT(OCR_DTM, '%Y%m%d') between #{F_DATE} and #{L_DATE}
 			</if>			
 			
 		</where>
