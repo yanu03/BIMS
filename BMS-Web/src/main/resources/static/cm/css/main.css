@@ -914,8 +914,8 @@ background-color: #EBEBEB;
 .bus.blue {background-image: url('/cm/images/tmap/bus-blue.svg');}
 .bus.black {background-image: url('/cm/images/tmap/bus-black.svg');}
 .bus span.number {position:absolute; top: -20px; left: 50%; transform: translateX(-50%); width: 100px; background-color: #ffffff; text-align: center;}
-.cross {position: absolute; transform: translate(-7px, -7px); width: 14px; height: 14px; background:url('/cm/images/tmap/cross.svg') no-repeat; z-index: 3;}
-.cross span.name {display:inline-block; width: 120px; position: absolute; top: 55px; left: 5px; transform: rotate(45deg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cross_route_map_area {position: absolute; transform: translate(-7px, -7px); width: 14px; height: 14px; background:url('/cm/images/tmap/cross.svg') no-repeat; z-index: 3;}
+.cross_route_map_area span.name {display:inline-block; width: 120px; position: absolute; top: 55px; left: 5px; transform: rotate(45deg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .light {position: absolute; transform: translate(-13px, -18px); width: 27px; height: 33px; background-position: center center; background-repeat: no-repeat; z-index: 3;}
 .light.red {background-image: url('/cm/images/tmap/light-red.svg');}
 .light.green {background-image: url('/cm/images/tmap/light-green.svg');}

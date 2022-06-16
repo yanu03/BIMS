@@ -906,8 +906,10 @@
 			dlt_BRT_CUR_OPER_INFO.setCellData(0, "ROUT_ID", "RT00000049");
 			dlt_BRT_CUR_OPER_INFO.setCellData(0, "VHC_NO", "정류장도착차량");
 			dlt_BRT_CUR_OPER_INFO.setCellData(0, "VHC_ID", "AAAAAAAAA1");
-			dlt_BRT_CUR_OPER_INFO.setCellData(0, "GPS_X", "127.27322");
-			dlt_BRT_CUR_OPER_INFO.setCellData(0, "GPS_Y", "36.47078");
+//			dlt_BRT_CUR_OPER_INFO.setCellData(0, "GPS_X", "127.27322");
+//			dlt_BRT_CUR_OPER_INFO.setCellData(0, "GPS_Y", "36.47078");
+			dlt_BRT_CUR_OPER_INFO.setCellData(0, "GPS_X", "127.279115");
+			dlt_BRT_CUR_OPER_INFO.setCellData(0, "GPS_Y", "36.474084");
 			dlt_BRT_CUR_OPER_INFO.setCellData(0, "ROUT_NM", "B0하(순환)");
 			dlt_BRT_CUR_OPER_INFO.setCellData(0, "EVT_TYPE", "ET002");
 			dlt_BRT_CUR_OPER_INFO.setCellData(0, "CUR_SPD", "55");
@@ -979,7 +981,8 @@
 		
 		// 마커 이미지를 생성합니다    
 		var sampleMarker = new kakao.maps.Marker({
-			position : new kakao.maps.LatLng(36.47078, 127.27322), // Marker의 중심좌표 // 설정.
+			//position : new kakao.maps.LatLng(36.47078, 127.27322), // Marker의 중심좌표 // 설정.
+			position : new kakao.maps.LatLng(36.474084, 127.279115), // Marker의 중심좌표 // 설정.
 			image : sampleMarkerImage,
 			zIndex: 5
 		});		
