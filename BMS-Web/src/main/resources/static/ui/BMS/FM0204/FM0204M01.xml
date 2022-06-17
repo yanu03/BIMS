@@ -1675,6 +1675,7 @@
 		}else{
 			value = "off";
 			T0_PK022.setDisabled(true);
+			T0_PK022.setValue();
 		}
 		dma_sendtest.set("POWER", value);
 		
@@ -1985,7 +1986,7 @@
 														</xf:select>
 													</xf:group>
 													<xf:group tagname="td" style="" class="w2tb_td" id="">
-														<xf:input adjustMaxLength="false" id="T0_PK022" style="" type="number"></xf:input>
+														<xf:input adjustMaxLength="false" id="T0_PK022" style="" type="number" allowChar="0-9" maxlength="2"></xf:input>
 													</xf:group>
 												</xf:group>
 												<!-- <xf:group tagname="tr" style="height:5px;">

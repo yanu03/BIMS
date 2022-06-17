@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import kr.tracom.platform.attribute.BisAtCode;
 import kr.tracom.platform.attribute.bis.AtFacilityParam;
+import kr.tracom.platform.attribute.integration.bluemobile.AtBluemobileStatus;
 import kr.tracom.platform.net.protocol.TimsMessage;
 import kr.tracom.platform.net.protocol.attribute.AtData;
 import kr.tracom.platform.net.protocol.attribute.AtMessage;
@@ -38,12 +39,12 @@ public class SetRequest {
              switch(attrId){
              
 	             case BisAtCode.FACILITY_PARAM:
-	                 facilityParam.handle((AtFacilityParam) atMessage.getAttrData(), sessionId);
+	                 facilityParam.handle(attrId, atMessage.getAttrData(), sessionId);
 	                 break;
 	             
-	            /* case BisAtCode.BLUEMOBILE_STATUS_INFO:
-	                 facilityParam.handle((AtFacilityParam) atMessage.getAttrData(), sessionId);
-	                 break;*/
+	             case BisAtCode.BLUEMOBILE_STATUS_INFO:
+	            	 facilityParam.handle(attrId,  atMessage.getAttrData(), sessionId);
+	                 break;
 	         }
              
          }    	

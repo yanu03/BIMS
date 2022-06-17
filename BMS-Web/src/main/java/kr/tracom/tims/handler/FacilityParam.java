@@ -1,6 +1,9 @@
 package kr.tracom.tims.handler;
 
+import kr.tracom.platform.attribute.BisAtCode;
 import kr.tracom.platform.attribute.bis.AtFacilityParam;
+import kr.tracom.platform.attribute.integration.bluemobile.AtBluemobileStatus;
+import kr.tracom.platform.net.protocol.attribute.AtData;
 import kr.tracom.tims.domain.BisMapper;
 
 import java.util.Map;
@@ -18,9 +21,23 @@ public class FacilityParam {
     @Autowired
     private BisMapper bisMapper;
     
-    public void handle(AtFacilityParam facilityParam, String sessionId){
-        updateFacilityParam(facilityParam);
+    public void handle(short attrId, AtData atData, String sessionId){
+    	
+        switch(attrId){
+        
+            case BisAtCode.FACILITY_PARAM:
+            	AtFacilityParam facilityParam = (AtFacilityParam)atData;
+            	updateFacilityParam(facilityParam);
+                break;
+            
+            case BisAtCode.BLUEMOBILE_STATUS_INFO:
+            	AtBluemobileStatus bluemobileStatus = (AtBluemobileStatus)atData;
+                break;
+                
+            
+        }
     }
+    
 
 
     @Transactional
