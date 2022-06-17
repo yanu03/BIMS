@@ -69,38 +69,46 @@ public class FM0204Service extends ServiceSupport {
 		return FM0204Mapper.FM0204G2R2(param);
 	}
 	
-	//에어컨 제어 테스트
+	//에어컨 제어 테스트!!!
 	public List sendtest() throws Exception {
 		Map param = getSimpleDataMap("dma_sendtest");
 		String intgFcltId = (String) param.get("INTG_FCLT_ID");
 		String power = (String) param.get("POWER");
+		String degree = (String) param.get("DEGREE");
 		
 		List<Map<String, Object>> token = intgMapper.selectIntgMstList(param);
 		String key = (String) token.get(0).get("INTG_API_KEY");
 		String intgUrl = (String) token.get(0).get("INTG_URL");
 		
 		//String api = apiGatewayUrl + intgUrl + key + "&deviceId=" + intgFcltId + "&value=" + power;
-		String api = apiGatewayUrl + intgUrl + key + "&deviceId=" + "18e8acbb-f959-119f-9cfd-000001200001" + "&value=" + power;
+		
+		//intgUrl - "local/smartthings/getDevices?token=" => local/smartthings/까지만 연계관리에 두고 뒷부분은 파라미터 속성1에서 가져오기!! 작업해야함.
+		String[] api = {apiGatewayUrl + intgUrl + key + "&deviceId=" + "18e8acbb-f959-119f-9cfd-000001200001" + "&value=" + power
+						,apiGatewayUrl + "local/smartthings/setCoolingSetpoint?token=" + key + "&deviceId=" + "18e8acbb-f959-119f-9cfd-000001200001" + "&value=" + degree};
 		
 		BufferedReader in = null;
 		
-		
-		try {
-			URL url = new URL(api);
+		for(int i=0; i<api.length; i++) {
 			try {
-				HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // 접속 
-				conn.setRequestMethod("GET"); // 전송 방식은 GET
+				URL url = new URL(api[i]);
+				try {
+					HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // 접속 
+					conn.setRequestMethod("GET"); // 전송 방식은 GET
+					
+					in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+					
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				
-				in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-				
-				
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
-		} catch (Exception e) {
-			e.printStackTrace();
 		}
+		
+		
 		
 		
 		

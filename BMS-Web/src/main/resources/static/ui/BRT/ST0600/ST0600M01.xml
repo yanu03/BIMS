@@ -318,6 +318,7 @@
 			        type: 'spline', //라인그래프
 			        name: '일반',
 			        data: basicLineData,
+			        //data: [5000,3000],
 			        color:'grey',
 			        marker: {
 			            lineWidth: 2,
@@ -328,6 +329,7 @@
 			        type: 'spline', //라인그래프
 			        name: '운행중',
 			        data: operLineData,
+			        //data: [30000,40000],
 			        color:'grey',
 			        marker: {
 			            lineWidth: 2,
@@ -338,6 +340,7 @@
 			        type: 'spline', //라인그래프
 			        name: '정차중',
 			        data: stopLineData,
+			        //data: [20000,10000],
 			        color:'grey',
 			        marker: {
 			            lineWidth: 2,
@@ -441,6 +444,7 @@
 			        type: 'spline', //라인그래프
 			        name: '일반',
 			        data: basicLineData,
+			       // data: [10000, 8000],
 			        color:'grey',
 			        marker: {
 			            lineWidth: 2,
@@ -451,6 +455,7 @@
 			        type: 'spline', //라인그래프
 			        name: '운행중',
 			        data: operLineData,
+			       // data: [5000, 7500],
 			        color:'grey',
 			        marker: {
 			            lineWidth: 2,
@@ -461,6 +466,7 @@
 			        type: 'spline', //라인그래프
 			        name: '정차중',
 			        data: stopLineData,
+			       // data: [550, 800],
 			        color:'grey',
 			        marker: {
 			            lineWidth: 2,
@@ -569,7 +575,7 @@
 					<xf:group id="ST0600T0" class="" style="position: relative;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_OPER_DSPTCH_STAT_2" vals="DSPTCH_CNT"
 							rows="OPER_DT" cols="REP_ROUT_NM" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0600T0" renderMode="compact"
-							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Sum" allTotalName="전체횟수"
+							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Sum" allTotalName="합계"
 							digitsAfterDecimal="" useNumberFormat="true" autoFitMinWidth="" autoPopupInvalidMessage="" headerTextAlign="center"
 							noResultMessage="">
 							<w2:fieldInfo>
@@ -580,7 +586,7 @@
 								<w2:field id="ROUT_ID" name="노선ID"></w2:field>
 								<w2:field id="ROUT_NM" name="노선명"></w2:field>
 								<w2:field id="STAT_H" name="시간"></w2:field>
-								<w2:field id="DSPTCH_CNT" name="디스패치횟수"></w2:field>
+								<w2:field id="DSPTCH_CNT" name="합계"></w2:field>
 							</w2:fieldInfo>
 						</w2:pivot>
 					</xf:group>
@@ -613,7 +619,7 @@
 					<xf:group id="ST0600T1" class="" style="position: relative;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_OPER_DSPTCH_STAT_P1" vals="DSPTCH_CNT"
 							rows="OPER_DT" cols="ROUT_NM" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0600T1" renderMode="compact"
-							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Sum" allTotalName="전체횟수"
+							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Sum" allTotalName="합계"
 							digitsAfterDecimal="" useNumberFormat="true" autoFitMinWidth="" autoPopupInvalidMessage="" headerTextAlign="center"
 							noResultMessage="">
 							<w2:fieldInfo>
@@ -624,7 +630,7 @@
 								<w2:field id="ROUT_ID" name="노선ID"></w2:field>
 								<w2:field id="ROUT_NM" name="노선명"></w2:field>
 								<w2:field id="STAT_H" name="시간"></w2:field>
-								<w2:field id="DSPTCH_CNT" name="디스패치횟수"></w2:field>
+								<w2:field id="DSPTCH_CNT" name="합계"></w2:field>
 							</w2:fieldInfo>
 						</w2:pivot>
 					</xf:group>

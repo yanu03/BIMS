@@ -685,6 +685,7 @@
 		//제어 서브미션 테스트
 		dma_sendtest.set("INTG_FCLT_ID", dlt_BMS_STTN_FCLT_COND_PARAM_INFO.getCellData(FM0204G0.getFocusedRowIndex(), "INTG_FCLT_ID"));
 		dma_sendtest.set("INTG_TYPE", "PC");
+		dma_sendtest.set("DEGREE", T0_PK022.getValue());
 		com.executeSubmission(sub_sendtest);
 	}
 	
@@ -1670,10 +1671,13 @@
 		var value = "";
 		if(info.newValue == '1'){
 			value = "on";
+			T0_PK022.setDisabled(false);
 		}else{
 			value = "off";
+			T0_PK022.setDisabled(true);
 		}
 		dma_sendtest.set("POWER", value);
+		
 	};
 	]]></script>
 	</head>
@@ -1824,7 +1828,7 @@
 								<xf:group id="" class="grdr_20_2_a" style="">
 									<xf:group id="" class="gr_sub_header" style="">
 										<xf:group class="defaultbox" id="" style="">
-											<w2:textbox class="df_tt fl view" id="" label="프로세스" style=""></w2:textbox>
+											<w2:textbox class="df_tt fl list" id="" label="프로세스" style=""></w2:textbox>
 										</xf:group>
 									</xf:group>
 									<xf:group id="" class="" style=""></xf:group>
@@ -1915,7 +1919,7 @@
 									<xf:group id="" class="grdr_20_2_a bms_box_wrap">
 										<xf:group id="" class="gr_sub_header" style="">
 											<xf:group class="defaultbox" id="" style="">
-												<w2:textbox class="df_tt fl" id="" label="제어" style=""></w2:textbox>
+												<w2:textbox class="df_tt fl view" id="" label="제어" style=""></w2:textbox>
 											</xf:group>
 											<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 										</xf:group>
@@ -1929,9 +1933,7 @@
 													<xf:group style="width:120px;" tagname="col"></xf:group>
 													<xf:group style="width:80px;" tagname="col"></xf:group>
 													<xf:group style="width:120px;" tagname="col"></xf:group>
-													<xf:group style="width:120px;" tagname="col"></xf:group>
 													<xf:group style="width:80px;" tagname="col"></xf:group>
-													<xf:group style="width:120px;" tagname="col"></xf:group>
 												</xf:group>
 												<xf:group tagname="tr" style="height:5px;">
 													<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
@@ -1967,7 +1969,7 @@
 														</xf:select1>
 													</xf:group>
 													<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
-														온도
+														온도(℃)
 														<w2:attributes>
 															<w2:scope>row</w2:scope>
 														</w2:attributes>

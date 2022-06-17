@@ -22,7 +22,6 @@
 						<w2:column id="STAT_H" name="통계시간" dataType="text"></w2:column>
 						<w2:column id="PNCTLTY_CNT" name="정시성횟수" dataType="text"></w2:column>
 						<w2:column id="PNCTLTY_VIOLT_DELAY_CNT" name="정시성위반지연횟수" dataType="text"></w2:column>
-						<w2:column id="PNCTLTY_VIOLT_FAST_CNT" name="정시성위반신속횟수" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BRT_OPER_PNCTLTY_STAT_2" saveRemovedData="true">
@@ -37,7 +36,6 @@
 						<w2:column id="STAT_H" name="통계시간" dataType="text"></w2:column>
 						<w2:column id="PNCTLTY_CNT" name="정시성횟수" dataType="text"></w2:column>
 						<w2:column id="PNCTLTY_VIOLT_DELAY_CNT" name="정시성위반지연횟수" dataType="text"></w2:column>
-						<w2:column id="PNCTLTY_VIOLT_FAST_CNT" name="정시성위반신속횟수" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BRT_OPER_PNCTLTY_STAT_C1" saveRemovedData="true">
@@ -52,7 +50,6 @@
 						<w2:column id="STAT_H" name="통계시간" dataType="text"></w2:column>
 						<w2:column id="PNCTLTY_CNT" name="정시성횟수" dataType="text"></w2:column>
 						<w2:column id="PNCTLTY_VIOLT_DELAY_CNT" name="정시성위반지연횟수" dataType="text"></w2:column>
-						<w2:column id="PNCTLTY_VIOLT_FAST_CNT" name="정시성위반신속횟수" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BRT_OPER_PNCTLTY_STAT_P1" saveRemovedData="true">
@@ -67,7 +64,6 @@
 						<w2:column id="STAT_H" name="통계시간" dataType="text"></w2:column>
 						<w2:column id="PNCTLTY_CNT" name="정시성횟수" dataType="text"></w2:column>
 						<w2:column id="PNCTLTY_VIOLT_DELAY_CNT" name="정시성위반지연횟수" dataType="text"></w2:column>
-						<w2:column id="PNCTLTY_VIOLT_FAST_CNT" name="정시성위반신속횟수" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ROUT_MST" saveRemovedData="true">
@@ -138,6 +134,10 @@
 				customHandler="" mode="asynchronous" processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_ST0804G1R0_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
+			<xf:submission id="sub_repRoutItem" ref="" target="data:json,dlt_repRoutItem" action="/repRout/selectRepRoutItem" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
+				ev:submit="" ev:submitdone="scwin.sub_repRoutItem_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
 		</xf:model>
 		<script src="https://code.highcharts.com/highcharts.js"></script>
 		<script src="https://code.highcharts.com/modules/series-label.js"></script>
@@ -182,6 +182,7 @@
 		F_DATE.setValue(todaysDate-1);
 		L_DATE.setValue(todaysDate);
 		
+		com.executeSubmission(sub_repRoutItem);
 		com.executeSubmission(sub_ST0804G0R0);
 	};
 	
@@ -248,7 +249,6 @@
 			
 			//라인 데이터 정의
 			vdLineData[x] = dlt_BRT_OPER_PNCTLTY_STAT.getCellData(x, "PNCTLTY_VIOLT_DELAY_CNT");
-			vfLineData[x] = dlt_BRT_OPER_PNCTLTY_STAT.getCellData(x, "PNCTLTY_VIOLT_FAST_CNT");
 			
 		}
 	
@@ -256,7 +256,7 @@
 		var ctx = document.getElementById('mf_tac_layout_contents_'+param.menuCode+'_body_chart_ST0804C0');
 		var highChart = new Highcharts.chart(ctx, {
 			    title: {
-			        text: '주요노선별 정시성 횟수'
+			        text: '운행대비 정시성 위반'
 			    },
 			    yAxis: {
 			    	title:{
@@ -281,7 +281,7 @@
 			    },*/
 			    series: [{ //바 그래프
 			        type: 'column',
-			        name: '횟수',
+			        name: '정상횟수',
 			        color:'grey',
 			        data: barData,
 			        cursor: 'pointer',
@@ -298,7 +298,7 @@
 			        
 			    }, {
 			        type: 'spline', //라인그래프
-			        name: '위반지연횟수',
+			        name: '지연횟수',
 			        data: vdLineData,
 			        color:'grey',
 			        marker: {
@@ -306,7 +306,7 @@
 			            lineColor: Highcharts.getOptions().colors[0],
 			            fillColor: 'white'
 			        }
-			    }, {
+			    }, /*{
 			        type: 'spline', //라인그래프
 			        name: '위반신속횟수',
 			        data: vfLineData,
@@ -316,7 +316,7 @@
 			            lineColor: Highcharts.getOptions().colors[1],
 			            fillColor: 'white'
 			        }
-			    },{
+			    },*/{
 			        type: 'pie', //파이차트
 			        name: '정시성 횟수',
 			        data: barData,
@@ -359,7 +359,6 @@
 			//라인 데이터 정의
 			var lineJsonData = new Object();
 			vdLineData[x] = dlt_BRT_OPER_PNCTLTY_STAT.getCellData(x, "PNCTLTY_VIOLT_DELAY_CNT");
-			vfLineData[x] = dlt_BRT_OPER_PNCTLTY_STAT.getCellData(x, "PNCTLTY_VIOLT_FAST_CNT");
 			
 		}
 	
@@ -367,11 +366,11 @@
 		var ctx = document.getElementById('mf_tac_layout_contents_'+param.menuCode+'_body_chart_ST0804C1');
 		var highChart = new Highcharts.chart(ctx, {
 			    title: {
-			        text: repRoutNm + '노선별 정시성 횟수'
+			        text: repRoutNm + '노선별 정시성 지연시간'
 			    },
 			    yAxis: {
 			    	title:{
-			    		text:'횟수'
+			    		text:'시간'
 			    	}
 			    },
 			    xAxis: {
@@ -392,7 +391,7 @@
 			    },*/
 			    series: [{ //바 그래프
 			        type: 'column',
-			        name: '횟수',
+			        name: '지연시간',
 			        color:'grey',
 			        data: barData,
 			        cursor: 'pointer',
@@ -407,9 +406,9 @@
 		                }
 		            }*/
 			        
-			    }, {
+			    }, /*{
 			        type: 'spline', //라인그래프
-			        name: '위반지연횟수',
+			        name: '위반지연시간',
 			        data: vdLineData,
 			        color:'grey',
 			        marker: {
@@ -427,7 +426,7 @@
 			            lineColor: Highcharts.getOptions().colors[1],
 			            fillColor: 'white'
 			        }
-			    }, {
+			    }, */{
 			        type: 'pie', //파이차트
 			        name: '평균속도',
 			        data: barData,
@@ -490,7 +489,23 @@
 				<xf:group id="" style="" class="">
 					<xf:group id="pgm_search" style="" class="gr_search">
 						<xf:group class="label" id="" style="">
-							<w2:span label="일시" style="margin-right: 3px; margin-left: 15px;" id=""></w2:span>
+							<w2:span class="" id="" label="대표노선"></w2:span>
+						</xf:group>
+						<xf:group class="search" id="" style="">
+							<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+								disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE1_onviewchange" id="TYPE1"
+								optionOrder="false" ref="data:dma_search.CONTENT1" class="search_type_100" style="" submenuSize="auto" textAlign="center"
+								chooseOptionLabel="-전체-">
+								<xf:choices>
+									<xf:itemset nodeset="data:dlt_repRoutItem">
+										<xf:label ref="REP_ROUT_NM"></xf:label>
+										<xf:value ref="REP_ROUT_ID"></xf:value>
+									</xf:itemset>
+								</xf:choices>
+							</xf:select1>
+						</xf:group>
+						<xf:group class="label" id="" style="">
+							<w2:span label="일시" style="margin-right: 3px; " id=""></w2:span>
 						</xf:group>
 						<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
 						style="width:120px; margin-right: 10px; float:left;" id="F_DATE" renderType="component" renderDiv="true"
@@ -529,7 +544,7 @@
 					<xf:group id="ST0804T0" class="" style="position: relative;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_OPER_PNCTLTY_STAT_2" vals="PNCTLTY_CNT"
 							rows="OPER_DT" cols="REP_ROUT_NM" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0804T0" renderMode="compact"
-							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Sum" allTotalName="전체횟수"
+							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Sum" allTotalName="합계"
 							digitsAfterDecimal="" useNumberFormat="true" autoFitMinWidth="" autoPopupInvalidMessage="" headerTextAlign="center"
 							noResultMessage="">
 							<w2:fieldInfo>
@@ -541,9 +556,8 @@
 								<w2:field id="ROUT_ID" name="노선ID"></w2:field>
 								<w2:field id="ROUT_NM" name="노선명"></w2:field>
 								<w2:field id="STAT_H" name="시간"></w2:field>
-								<w2:field id="PNCTLTY_CNT" name="정시성횟수"></w2:field>
+								<w2:field id="PNCTLTY_CNT" name="합계"></w2:field>
 								<w2:field id="PNCTLTY_VIOLT_DELAY_CNT" name="정시성위반지연횟수"></w2:field>
-								<w2:field id="PNCTLTY_VIOLT_FAST_CNT" name="정시성위반신속횟수"></w2:field>
 							</w2:fieldInfo>
 						</w2:pivot>
 					</xf:group>
@@ -563,8 +577,8 @@
 					</xf:group> -->
 					<xf:group></xf:group><!-- margin-->
 					
-					<xf:group style="overflow:auto; position:relative" id="" class="">
-						<xf:group id="chart_ST0804C1" class="" style="position:absolute; width:930px; height:100%"></xf:group>
+					<xf:group style="overflow:auto; position:relative" id="" class="bms_box_wrap">
+						<xf:group id="chart_ST0804C1" class="" style="position:absolute; width:95%; height:92%"></xf:group>
 					</xf:group>
 					
 					<!-- <xf:group style="position:relative;" id="" class="">
@@ -576,7 +590,7 @@
 					<xf:group id="ST0804T1" class="" style="position: relative;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_OPER_PNCTLTY_STAT_P1" vals="PNCTLTY_CNT"
 							rows="OPER_DT" cols="ROUT_NM" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0804T1" renderMode="compact"
-							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Sum" allTotalName="전체횟수"
+							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Sum" allTotalName="합계"
 							digitsAfterDecimal="" useNumberFormat="true" autoFitMinWidth="" autoPopupInvalidMessage="" headerTextAlign="center"
 							noResultMessage="">
 							<w2:fieldInfo>
@@ -588,9 +602,8 @@
 								<w2:field id="ROUT_ID" name="노선ID"></w2:field>
 								<w2:field id="ROUT_NM" name="노선명"></w2:field>
 								<w2:field id="STAT_H" name="시간"></w2:field>
-								<w2:field id="PNCTLTY_CNT" name="정시성횟수"></w2:field>
+								<w2:field id="PNCTLTY_CNT" name="합계"></w2:field>
 								<w2:field id="PNCTLTY_VIOLT_DELAY_CNT" name="정시성위반지연횟수"></w2:field>
-								<w2:field id="PNCTLTY_VIOLT_FAST_CNT" name="정시성위반신속횟수"></w2:field>
 							</w2:fieldInfo>
 						</w2:pivot>
 					</xf:group>

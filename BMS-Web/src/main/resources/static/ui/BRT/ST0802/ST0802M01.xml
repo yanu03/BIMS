@@ -37,7 +37,6 @@
 						<w2:column id="DRV_NM" name="운전자명" dataType="text"></w2:column>
 						<w2:column id="PNCTLTY_CNT" name="정시성횟수" dataType="text"></w2:column>
 						<w2:column id="PNCTLTY_VIOLT_DELAY_CNT" name="정시성위반지연횟수" dataType="text"></w2:column>
-						<w2:column id="PNCTLTY_VIOLT_FAST_CNT" name="정시성위반신속횟수" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				
@@ -54,7 +53,6 @@
 						<w2:column id="DRV_NM" name="운전자명" dataType="text"></w2:column>
 						<w2:column id="PNCTLTY_CNT" name="정시성횟수" dataType="text"></w2:column>
 						<w2:column id="PNCTLTY_VIOLT_DELAY_CNT" name="정시성위반지연횟수" dataType="text"></w2:column>
-						<w2:column id="PNCTLTY_VIOLT_FAST_CNT" name="정시성위반신속횟수" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 
@@ -210,13 +208,6 @@
 				pivot_ST0802.setVals("PNCTLTY_VIOLT_DELAY_CNT");
 				pivot_ST0802_sub.setVals("PNCTLTY_VIOLT_DELAY_CNT");
 				pivot_ST0802_sub2.setVals("PNCTLTY_VIOLT_DELAY_CNT");
-				com.executeSubmission(sub_ST0802G1R1);
-			}
-			else if(li_id == "li_PNCTLTY_VIOLT_FAST_CNT") {
-				dma_sub_search.set("TAB_DIV", "PNCTLTY_VIOLT_FAST_CNT");
-				pivot_ST0802.setVals("PNCTLTY_VIOLT_FAST_CNT");
-				pivot_ST0802_sub.setVals("PNCTLTY_VIOLT_FAST_CNT");
-				pivot_ST0802_sub2.setVals("PNCTLTY_VIOLT_FAST_CNT");
 				com.executeSubmission(sub_ST0802G1R1);
 			}
 		});
@@ -510,8 +501,6 @@
 					var val = transData[y].PNCTLTY_CNT;
 				}else if(dma_sub_search.get("TAB_DIV") == 'PNCTLTY_VIOLT_DELAY_CNT'){
 					var val = transData[y].PNCTLTY_VIOLT_DELAY_CNT;
-				}else if(dma_sub_search.get("TAB_DIV") == 'PNCTLTY_VIOLT_FAST_CNT'){
-					var val = transData[y].PNCTLTY_VIOLT_FAST_CNT;
 				}
 				
 				var statH = transData[y].STAT_H;
@@ -620,8 +609,6 @@
 					var val = transData[y].PNCTLTY_CNT;
 				}else if(dma_sub_search.get("TAB_DIV") == 'PNCTLTY_VIOLT_DELAY_CNT'){
 					var val = transData[y].PNCTLTY_VIOLT_DELAY_CNT;
-				}else if(dma_sub_search.get("TAB_DIV") == 'PNCTLTY_VIOLT_FAST_CNT'){
-					var val = transData[y].PNCTLTY_VIOLT_FAST_CNT;
 				}
 				
 				//var statH = transData[y].STAT_H;
@@ -737,10 +724,7 @@
 					var val = transData[y].PNCTLTY_CNT;
 				}else if(dma_sub_search.get("TAB_DIV") == 'PNCTLTY_VIOLT_DELAY_CNT'){
 					var val = transData[y].PNCTLTY_VIOLT_DELAY_CNT;
-				}else if(dma_sub_search.get("TAB_DIV") == 'PNCTLTY_VIOLT_FAST_CNT'){
-					var val = transData[y].PNCTLTY_VIOLT_FAST_CNT;
 				}
-				
 				//var statH = transData[y].STAT_H;
 				var operDt = transData[y].OPER_DT;
 				
@@ -1177,9 +1161,7 @@
 									<li id="li_PNCTLTY_VIOLT_DELAY_CNT" class="" >
 										위반지연횟수
 									</li>
-									<li id="li_PNCTLTY_VIOLT_FAST_CNT" class="" >
-										위반신속횟수
-									</li>
+									
 								</ul>
 						</xf:group>
 						<xf:group style="height:10px"></xf:group><!-- margin -->
@@ -1207,7 +1189,6 @@
 									<w2:field id="STAT_H" name="통계시간"></w2:field>
 									<w2:field id="PNCTLTY_CNT" name="정시성횟수"></w2:field>
 									<w2:field id="PNCTLTY_VIOLT_DELAY_CNT" name="정시성위반지연횟수"></w2:field>
-									<w2:field id="PNCTLTY_VIOLT_FAST_CNT" name="정시성위반신속횟수"></w2:field>
 								</w2:fieldInfo>
 							</w2:pivot>
 						</xf:group>
@@ -1225,7 +1206,6 @@
 									<w2:field id="STAT_H" name="통계시간"></w2:field>
 									<w2:field id="PNCTLTY_CNT" name="정시성횟수"></w2:field>
 									<w2:field id="PNCTLTY_VIOLT_DELAY_CNT" name="정시성위반지연횟수"></w2:field>
-									<w2:field id="PNCTLTY_VIOLT_FAST_CNT" name="정시성위반신속횟수"></w2:field>
 								</w2:fieldInfo>
 							</w2:pivot>
 						</xf:group>
@@ -1243,7 +1223,6 @@
 									<w2:field id="STAT_H" name="통계시간"></w2:field>
 									<w2:field id="PNCTLTY_CNT" name="정시성횟수"></w2:field>
 									<w2:field id="PNCTLTY_VIOLT_DELAY_CNT" name="정시성위반지연횟수"></w2:field>
-									<w2:field id="PNCTLTY_VIOLT_FAST_CNT" name="정시성위반신속횟수"></w2:field>
 								</w2:fieldInfo>
 							</w2:pivot>
 						</xf:group>

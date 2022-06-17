@@ -822,7 +822,7 @@
 	
 	//15분마다 장치상태 리로드함
 	var period = 1000 * 60 * 15;
-	setInterval(reloadDvcCond, period);
+	//setInterval(reloadDvcCond, period);
 	
 	//openMenu클릭 이벤트
 	scwin.moveCtrlClick = function() {

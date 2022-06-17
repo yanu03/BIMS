@@ -843,7 +843,7 @@
 	
 	//15분마다 시설물상태 리로드함
 	var period = 1000 * 60 * 15;
-	setInterval(reloadFcltCond, period);
+	//setInterval(reloadFcltCond, period);
 	
 	
 	]]></script>
@@ -925,7 +925,7 @@
 								<xf:group class="label" id="" style="">
 									<w2:span class="" id="" label="검색"></w2:span>
 								</xf:group>
-								<xf:input id="search_input" class="search_input"  style="width:150px" ref="data:dma_search.CONTENT3" placeholder="정류소ID 또는 정류소명">
+								<xf:input id="search_input" class="search_input"  style="width:100px" ref="data:dma_search.CONTENT3" placeholder="정류소ID 또는 정류소명">
 								</xf:input>
 								<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>							
 							</xf:group>

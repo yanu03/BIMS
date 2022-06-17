@@ -60,15 +60,6 @@
 					,CONCAT(A.STAT_H, '시') AS STAT_H
 					,A.PNCTLTY_VIOLT_DELAY_CNT
 	  			</when>
-	  			<when test="TAB_DIV == 'PNCTLTY_VIOLT_FAST_CNT'">
-	  				DATE_FORMAT(A.OPER_DT, '%Y-%m-%d') OPER_DT
-					,A.REP_ROUT_ID
-					,A.ROUT_ID
-					,A.NODE_ID
-					,B.STTN_NM
-					,CONCAT(A.STAT_H, '시') AS STAT_H
-					,A.PNCTLTY_VIOLT_FAST_CNT
-	  			</when>
 	  		</choose>
 		</if>
 		<if test="SELECT_DIV == 'DAY'">
@@ -91,15 +82,6 @@
 					,CONCAT(A.STAT_H, '시') AS STAT_H
 					,SUM(A.PNCTLTY_VIOLT_DELAY_CNT) AS PNCTLTY_VIOLT_DELAY_CNT
 	  			</when>
-	  			<when test="TAB_DIV == 'PNCTLTY_VIOLT_FAST_CNT'">
-	  				DATE_FORMAT(DATE(A.OPER_DT), '%Y-%m-%d') OPER_DT
-					,A.REP_ROUT_ID
-					,A.ROUT_ID
-					,A.NODE_ID
-					,B.STTN_NM
-					,CONCAT(A.STAT_H, '시') AS STAT_H
-					,SUM(A.PNCTLTY_VIOLT_FAST_CNT) AS PNCTLTY_VIOLT_FAST_CNT
-	  			</when>
 	  		</choose>
 		</if>
 		<if test="SELECT_DIV == 'MONTH'">
@@ -121,15 +103,6 @@
 					,B.STTN_NM
 					,CONCAT(A.STAT_H, '시') AS STAT_H
 					,SUM(PNCTLTY_VIOLT_DELAY_CNT) AS PNCTLTY_VIOLT_DELAY_CNT
-	  			</when>
-	  			<when test="TAB_DIV == 'PNCTLTY_VIOLT_FAST_CNT'">
-	  				MONTH(A.OPER_DT) AS OPER_DT
-					,A.REP_ROUT_ID
-					,A.ROUT_ID
-					,A.NODE_ID
-					,B.STTN_NM
-					,CONCAT(A.STAT_H, '시') AS STAT_H
-					,SUM(PNCTLTY_VIOLT_FAST_CNT) AS PNCTLTY_VIOLT_FAST_CNT
 	  			</when>
 	  		</choose>
 		</if>
@@ -188,15 +161,6 @@
 					,CONCAT(A.STAT_H, '시') AS STAT_H
 					,AVG(A.PNCTLTY_VIOLT_DELAY_CNT) AS PNCTLTY_VIOLT_DELAY_CNT
 	  			</when>
-	  			<when test="TAB_DIV == 'PNCTLTY_VIOLT_FAST_CNT'">
-	  				DATE_FORMAT(A.OPER_DT, '%Y-%m-%d') OPER_DT
-					,A.REP_ROUT_ID
-					,A.ROUT_ID
-					,A.NODE_ID
-					,B.STTN_NM
-					,CONCAT(A.STAT_H, '시') AS STAT_H
-					,AVG(A.PNCTLTY_VIOLT_FAST_CNT) AS PNCTLTY_VIOLT_FAST_CNT
-	  			</when>
 	  		</choose>
 		</if>
 		<if test="SELECT_DIV == 'DAY'">
@@ -219,15 +183,6 @@
 					,CONCAT(A.STAT_H, '시') AS STAT_H
 					,SUM(A.PNCTLTY_VIOLT_DELAY_CNT) AS PNCTLTY_VIOLT_DELAY_CNT
 	  			</when>
-	  			<when test="TAB_DIV == 'PNCTLTY_VIOLT_FAST_CNT'">
-	  				DATE_FORMAT(DATE(A.OPER_DT), '%Y-%m-%d') OPER_DT
-					,A.REP_ROUT_ID
-					,A.ROUT_ID
-					,A.NODE_ID
-					,B.STTN_NM
-					,CONCAT(A.STAT_H, '시') AS STAT_H
-					,SUM(A.PNCTLTY_VIOLT_FAST_CNT) AS PNCTLTY_VIOLT_FAST_CNT
-	  			</when>
 	  		</choose>
 		</if>
 		<if test="SELECT_DIV == 'MONTH'">
@@ -249,15 +204,6 @@
 					,B.STTN_NM
 					,CONCAT(A.STAT_H, '시') AS STAT_H
 					,SUM(PNCTLTY_VIOLT_DELAY_CNT) AS PNCTLTY_VIOLT_DELAY_CNT
-	  			</when>
-	  			<when test="TAB_DIV == 'PNCTLTY_VIOLT_FAST_CNT'">
-	  				MONTH(A.OPER_DT) AS OPER_DT
-					,A.REP_ROUT_ID
-					,A.ROUT_ID
-					,A.NODE_ID
-					,B.STTN_NM
-					,CONCAT(A.STAT_H, '시') AS STAT_H
-					,SUM(PNCTLTY_VIOLT_FAST_CNT) AS PNCTLTY_VIOLT_FAST_CNT
 	  			</when>
 	  		</choose>
 		</if>
