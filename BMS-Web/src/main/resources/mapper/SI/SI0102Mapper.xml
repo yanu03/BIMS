@@ -50,7 +50,13 @@
          #{PHONE}, #{FAX}, #{EMAIL}, #{DRV_CNT}, #{SVC_ROUT_CNT}, #{LIC_VHC_CNT}, #{SPR_VHC_CNT}, #{REMARK}) -->
    insert into BMS_TRANSCOMP_MST(COMP_ID, AREA, COMP_NM, COMP_ENM, REP_NM, COMP_REG_NO, ADDR,
          PHONE, FAX, EMAIL, DRV_CNT, SVC_ROUT_CNT, LIC_VHC_CNT, SPR_VHC_CNT, REMARK, UPD_DTM, UPD_ID, 
-         GPS_X, GPS_Y, TM_X, TM_Y )
+         <if test="@kr.tracom.util.CommonUtil@notEmpty(GPS_X)">
+    	     GPS_X, 
+         </if>
+         <if test="@kr.tracom.util.CommonUtil@notEmpty(GPS_Y)">
+	         GPS_Y,
+         </if>
+          TM_X, TM_Y )
    values (#{COMP_ID}, #{AREA}, #{COMP_NM}, #{COMP_ENM}, #{REP_NM}, 
    		 AES_ENCRYPT(#{COMP_REG_NO}, HEX(SHA2('TRACOM', 512))), 
    		 #{ADDR},
@@ -58,7 +64,14 @@
          AES_ENCRYPT(#{FAX}, HEX(SHA2('TRACOM', 512))),
          AES_ENCRYPT(#{EMAIL}, HEX(SHA2('TRACOM', 512))),
          #{DRV_CNT}, #{SVC_ROUT_CNT}, #{LIC_VHC_CNT}, #{SPR_VHC_CNT}, #{REMARK}, #{UPD_DTM}, #{SSN_USER_ID},
-         127.256252, 36.502246, 333824.0303, 222954.4859)
+         <if test="@kr.tracom.util.CommonUtil@notEmpty(GPS_X)">
+         	#{GPS_X},
+         </if>
+         <if test="@kr.tracom.util.CommonUtil@notEmpty(GPS_Y)">
+         	#{GPS_Y},
+         </if>
+         <!-- 127.256252, 36.502246, --> 
+         333824.0303, 222954.4859)
 </insert>
 
 <update id="SI0102G0U0" parameterType="Map">
@@ -79,8 +92,12 @@
    ,   REMARK = #{REMARK}
    ,   UPD_DTM = #{UPD_DTM}
    ,   UPD_ID = #{SSN_USER_ID}
+   <if test="@kr.tracom.util.CommonUtil@notEmpty(GPS_X)">
    ,   GPS_X = #{GPS_X}
+   </if>
+   <if test="@kr.tracom.util.CommonUtil@notEmpty(GPS_Y)">
    ,   GPS_Y = #{GPS_Y}
+   </if>
    ,   TM_X = #{TM_X}
    ,   TM_Y = #{TM_Y}
    where COMP_ID = #{COMP_ID}

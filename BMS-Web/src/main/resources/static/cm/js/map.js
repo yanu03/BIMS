@@ -13,7 +13,7 @@ var routMap = {
 	},
 	MAX_NODE_CNT : 800,
 	LIMIT_SPEED : 50,
-	MIN_LEVEL : 4,
+	MIN_LEVEL : 1,
 	MAX_LEVEL : 7
 }
 

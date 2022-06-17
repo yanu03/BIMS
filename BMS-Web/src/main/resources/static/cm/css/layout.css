@@ -28,6 +28,7 @@
 .popup_header2 { overflow:hidden;}
 .popup_content { gap: 0px 5px; margin-bottom: 10px;  }
 
+.popup_bottom { gap: 0px 5px; margin-bottom: 5px; text-align:center; }
 .grdc_main_container {display:grid; justify-items: center; grid-template-rows:minmax(30x, max-content)}
 .grdc_brt_main {display:grid; grid-template-columns:minmax(1280px,1830px)}
 .grdc_brt_main_content {display:grid; grid-template-columns:4.8fr 25px 5.2fr}
@@ -37,6 +38,8 @@
 .grdr_20_5_320 {display:grid; grid-template-rows: minmax(20px, max-content) 5px 320px;}
 .grdr_20_5_280 {display:grid; grid-template-rows: minmax(20px, max-content) 5px 280px;}
 .grdr_20_5_350 {display:grid; grid-template-rows: minmax(20px, max-content) 5px 350px;}
+.grdr_20_5_290 {display:grid; grid-template-rows: minmax(20px, max-content) 5px 290px;}
+.grdr_20_5_a {display:grid; grid-template-rows: minmax(20px, max-content) 5px auto;}
 
 .grdc_bms_main {display:grid; grid-template-columns:minmax(1280px,1830px)}
 .grdc_bms_main_content {display:grid; grid-template-columns:2.5fr 20px 5.2fr}
@@ -165,6 +168,7 @@
 
 .grdr_20_40_a {display:grid; grid-template-rows: 20px 40px auto;}
 
+.grdr_3f_2f_2f {display:grid; grid-template-rows: 5fr 4fr 4fr;}
 .grdr_a {display:grid; grid-template-rows:auto;}
 .grdr_2_a {display:grid; grid-template-rows: 2px auto;}
 .grdr_20_20_a {display:grid; grid-template-rows: minmax(20px, max-content) minmax(20px, max-content) auto;}
@@ -194,7 +198,8 @@
 .grdr_20_50_212 {display:grid; grid-template-rows: minmax(20px, max-content) 50px 212px} /* 왼쪽그리드 2개 layout*/
 .grdr_20_50_212 {display:grid; grid-template-rows: minmax(20px, max-content) 50px 212px} /* 왼쪽그리드 2개 layout*/
 .grdr_20_2_250_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 250px minmax(20px, max-content) auto;} 
-.grdr_20_2_250_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 250px auto;} 
+.grdr_20_2_250_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 250px auto;}
+.grdr_20_2_210_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 210px auto;} 
 .grdr_20_2_280_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 280px minmax(20px, max-content) auto;} 
 .grdr_20_2_290_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 288px minmax(20px, max-content) auto;} 
 .grdr_20_2_320_20_a {display:grid; grid-template-rows: minmax(20px, max-content) 2px 320px minmax(20px, max-content) auto;} 

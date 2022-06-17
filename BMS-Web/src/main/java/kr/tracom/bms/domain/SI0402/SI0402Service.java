@@ -98,6 +98,7 @@ public class SI0402Service extends ServiceSupport {
 					if((Constants.NODE_TYPE_VERTEX.equals(nodeType)==false)
 						&&(Constants.NODE_TYPE_SOUND.equals(nodeType)==false)
 						&&(Constants.NODE_TYPE_GARAGE.equals(nodeType)==false)
+						&&(Constants.NODE_TYPE_SIGNAL.equals(nodeType)==false)
 					) {
 						if(CommonUtil.empty(nodeType2)||(Constants.NODE_TYPE_GARAGE.equals(nodeType2)==false)
 							&&(data.get("NODE_ID").equals(lastNodeId)==false))
@@ -149,6 +150,7 @@ public class SI0402Service extends ServiceSupport {
 					if((Constants.NODE_TYPE_VERTEX.equals(nodeType)==false)
 						&&(Constants.NODE_TYPE_SOUND.equals(nodeType)==false)
 						&&(Constants.NODE_TYPE_GARAGE.equals(nodeType)==false)
+						&&(Constants.NODE_TYPE_SIGNAL.equals(nodeType)==false)
 					) {
 						if((CommonUtil.empty(nodeType2)||(Constants.NODE_TYPE_GARAGE.equals(nodeType2)==false))
 							&&CommonUtil.empty(data.get("LINK_ID"))&&(data.get("NODE_ID").equals(lastNodeId)==false))
@@ -248,6 +250,7 @@ public class SI0402Service extends ServiceSupport {
 					//정류소별 링크
 					for (int i = 0; i < routNodeList.size()-1; i++) {
 						Map data = routNodeList.get(i);
+						data.put("ROUT_LINK_ID", data.get("LINK_ID"));
 						String nodeType = (String) data.get("NODE_TYPE");
 						
 						if(!Constants.NODE_TYPE_BUSSTOP.equals(nodeType)){

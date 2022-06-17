@@ -149,6 +149,7 @@ a:hover,a:active,a:focus{text-decoration:none}
  /* .defaultbox .df_tt:after {content:'';display:block;width: 9px;height: 9px;background: #333333;position: absolute;top: 5px;left: 8px;border-radius: 0;opacity: 0.8;}
  .defaultbox .df_tt:before {content:'';display:block;width: 9px;height: 9px;background: #eb4545;position: absolute;top: 0;left: 2px;opacity: 1;box-sizing: border-box;} */
  .defaultbox .df_tt.bus {background: url(/cm/images/bms/blt-bus.svg) no-repeat 0 50%;}
+ .defaultbox .df_tt.bus2 {background: url(/cm/images/bms/blt-bus.svg) no-repeat 0 50%;} /* bus 사용시 이미지가 깨져 bus2 사용함 */
  .defaultbox .df_tt.news {background: url(/cm/images/bms/blt-news.svg) no-repeat 0 50%;}
  .defaultbox .df_tt.list {background: url(/cm/images/bms/blt-list.svg) no-repeat 0 50%;}
  .defaultbox .df_tt.view {background: url(/cm/images/bms/blt-view.svg) no-repeat 0 50%;}
@@ -1151,7 +1152,7 @@ ul.question li a:hover {font-weight:bold;}
     bottom: -12px;
     width: 22px;
     height: 12px;
-    background: url(/cm/images/tmap/vertex_dark.svg) no-repeat;
+    background: url(/cm/images/tmap/vertex_white.png) no-repeat;
 }
 
 .sttnInfopopup {
@@ -1172,15 +1173,14 @@ ul.question li a:hover {font-weight:bold;}
 }
 
 .busInfoPopup {
-    background: #333333;
+    background: #ffffff;
     position: absolute;
 /*     bottom: 57px;
     left:2px; */
     bottom: 42px;
     left: -178px;
-    border-radius: 5px;
-    border-bottom: 2px solid #333333;
-    overflow: hidden;
+    border: 1px solid #888888;
+    border-top: 3px solid #A13E3E;
     float: left;	
     /* position: absolute;
     left: 761px;
@@ -1191,7 +1191,6 @@ ul.question li a:hover {font-weight:bold;}
 .bustraffic {
 	left: 0px;
     top: 10px;
-    z-index: 10000000;	
 }
 
 .event_type {
@@ -1215,13 +1214,14 @@ ul.question li a:hover {font-weight:bold;}
 }
 
 .dsptchMessagePopup {
-    background: #333333;
+    background: #ffffff;
     position: absolute;
 /*     bottom: 57px;
     left:2px; */
     bottom: 42px;
     left: -180px;
-    border-radius: 6px;
+    border: 1px solid #888888;
+    border-top: 3px solid #A13E3E;
     float: left;	
     /* position: absolute;
     left: 761px;
@@ -1252,17 +1252,16 @@ ul.question li a:hover {font-weight:bold;}
 }
 
 .clickoverlay .tit {
-	padding: 11px 11px 0;
-	/* padding: 14px 40px 14px 14px; */
-    font-size: 12px;
-    color: #ffffff;
-    background-color: #333333;
+  padding: 10px 40px 10px 10px;
+  font-size: 12px;
+  background: #F6F6F6;
+  border-bottom: 1px solid #888888;
 }
 
 .clickoverlay #popup-refresh{
     right: 40px;
     background: url(/cm/images/tmap/layer_refresh.png) center center no-repeat;
-	position: absolute;
+	  position: absolute;
     width: 15px;
     height: 15px;
     top: 15px;
@@ -1283,7 +1282,7 @@ ul.question li a:hover {font-weight:bold;}
 }
 
 .clickoverlay #busInfo-closer{
-    background: url(/cm/images/tmap/layer_close.svg) center center no-repeat;
+    background: url(/cm/images/tmap/layer_close_black.svg) center center no-repeat;
 	position: absolute;
     width: 15px;
     height: 15px;
@@ -1308,25 +1307,30 @@ ul.question li a:hover {font-weight:bold;}
     max-height: 200px;
     overflow-y: auto;
 }
-
+.clickoverlay table {
+  border-collapse:collapse; 
+}
 .clickoverlay table.tby03 {
 	border-spacing: 0px;
 	width: 100%;
 }
-
 .clickoverlay table.tby03 th {
     padding: 8px 10px;
     background-color: #f3f5f8;
     font-weight: bold;
-    border: 1px solid #d2d2d2;
+    border: 1px solid #888888;
     text-align: center;
+    border-collapse: collapse;
+    border-spacing: 0px;
 }
 
 .clickoverlay table.tby03 td {
     padding: 8px 10px;
-    border: 1px solid #d2d2d2;
+    border: 1px solid #888888;
     background-color: #fff;
     word-break: break-all;
+    border-collapse: collapse;
+    border-spacing: 0px;
 }
 
 .rightclickoverlay {
@@ -1689,22 +1693,23 @@ ul.question li a:hover {font-weight:bold;}
     position: absolute;
     width: 210px;
     border-spacing: 0;
-    border-radius: 5px;
+    border-collapse: collapse;
     overflow: hidden;
-    border: 1px solid #333333;
+    border: 1px solid #888888;
+    box-shadow: 2px 2px 5px 0px rgb(0 0 0 / 25%);
 }
 .map_status th
 {
   padding: 7px;
-  background-color: #333333;
-  color: #ffffff;
   font-size: 12px;
   font-weight: bold;
+  border-top: 2px solid #A13E3E;
+  background-color: #F6F6F6;
 }
 
 .map_status td
 {
-    border: 1px solid #dddddd;
+    border: 1px solid #888888;
     padding: 7px;
     font-size: 12px;	
 }
