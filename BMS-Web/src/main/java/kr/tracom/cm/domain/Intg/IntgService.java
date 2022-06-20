@@ -3,12 +3,15 @@ package kr.tracom.cm.domain.Intg;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
+import org.assertj.core.util.Arrays;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -19,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import kr.tracom.cm.support.ServiceSupport;
 
@@ -34,18 +39,16 @@ public class IntgService extends ServiceSupport {
 	@Autowired
 	private IntgMapper intgMapper;
 	
+	//에어컨 정보 select
 	public List<Map<String, Object>> selectIntgList() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
-		
-		//String api = apiGatewayUrl + "/local/smartthings/getDevices?token=58b54327-bbd0-4d13-9767-c9c29bd285e0";
-		//URL url = new URL(api);
-		
 		return intgMapper.selectIntgList(map);
 		
 	}
 	
+	//에어컨 정보 insert 
 	public String insertIntgList() throws Exception {
-		Map param = null;
+		Map<String, Object> param = getSimpleDataMap("dma_search");
 		List<Map<String, Object>> token = intgMapper.selectIntgMstList(param);
 		String key = (String) token.get(0).get("INTG_API_KEY");
 		String intgUrl = (String) token.get(0).get("INTG_URL");
@@ -69,21 +72,20 @@ public class IntgService extends ServiceSupport {
 				try {
 					result = sb.toString();
 					
-					String[] array = result.split("},");
-					int len = array.length;
-					array[0].replaceAll("[", "");
-					array[len].replaceAll("[", "");
-					array[len].replaceAll("]", "");
+					Gson gson = new Gson();
+					Type resultType = new TypeToken<List<Map<String, Object>>>(){}.getType();
+					List<Map<String, Object>> jsonList = gson.fromJson(result, resultType);
 					
-					for(int i = 0; i < array.length; i++) {
-						array[i] = array[i] + "}";
-							
-						JSONParser parser = new JSONParser();
-						Object obj = parser.parse(array[i]);
-						JSONObject jsonObj = (JSONObject) obj;
-					}
-					
-					//JSONArray jsonArr = new JSONArray(result);
+					for (int i = 0; i < jsonList.size(); i++) {
+						Map data = (Map) jsonList.get(i);
+						data.put("INTG_FCLT_ID", data.get("deviceId"));
+						data.put("FCLT_NM", data.get("name"));
+						data.put("FCLT_LABEL", data.get("label"));
+						data.put("LOC_ID", data.get("locationId"));
+						data.put("ROOM_ID", data.get("roomId"));
+						
+						intgMapper.insertAirconInfo(data);
+					}			
 					
 				} catch (Exception e) {
 					//logger.error("error");

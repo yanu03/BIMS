@@ -16,5 +16,8 @@ public interface BisMapper {
 	//스크린도어 현정보 insert
 	int insertFacilityStatus(Map<String, Object> paramMap);
 	
+	//태그리스 현정보 insert
+	int insertBluemobileFacilityStatus(Map<String, Object> paramMap);
+	
 
 }

@@ -1675,7 +1675,7 @@
 		}else{
 			value = "off";
 			T0_PK022.setDisabled(true);
-			T0_PK022.setValue();
+			T0_PK022.setValue("");
 		}
 		dma_sendtest.set("POWER", value);
 		

@@ -49,5 +49,34 @@
 		
 </select>
 
+<insert id="insertAirconInfo" parameterType="Map">
+	INSERT INTO 
+		BMS_INTG_AIRCON_INFO(
+			INTG_FCLT_ID
+			,FCLT_NM
+			,FCLT_LABEL
+			,MAKER
+			,PRES_ID
+			,MAKER_CODE
+			,LOC_ID
+			,OWNR_ID
+			,ROOM_ID
+			,FCLT_TYPE_NM
+		)VALUES(
+			#{INTG_FCLT_ID}
+			,#{FCLT_NM}
+			,#{FCLT_LABEL}
+			,#{MAKER}
+			,#{PRES_ID}
+			,#{MAKER_CODE}
+			,#{LOC_ID}
+			,#{OWNR_ID}
+			,#{ROOM_ID}
+			,#{FCLT_TYPE_NM}
+		)
+		ON DUPLICATE KEY UPDATE
+		INTG_FCLT_ID	= VALUES(INTG_FCLT_ID)
+</insert>
+
 
 </mapper>

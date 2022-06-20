@@ -814,9 +814,10 @@
 		var routId = dlt_BMS_ROUT_MST.getCellData(ST0605G0.getFocusedRowIndex(), "ROUT_ID");
 		var dayDiv = dlt_BMS_ROUT_MST.getCellData(ST0605G0.getFocusedRowIndex(), "DAY_DIV");
 		var routNm = dlt_BMS_ROUT_MST.getCellData(ST0605G0.getFocusedRowIndex(), "ROUT_NM");
-		var operDt = dma_sub_search.get("OPER_DT");
+		var fDate = dma_sub_search.get("F_DATE");
+		var lDate = dma_sub_search.get("L_DATE");
 		
-		 var data = { data : routId, data2 : dayDiv, data3 : routNm, data4 : operSn, data5:transData, data6:realData, operDt : operDt, callbackFn : "" };
+		 var data = { data : routId, data2 : dayDiv, data3 : routNm, data4 : operSn, data5:transData, data6:realData, fDate : fDate, lDate : lDate, callbackFn : "" };
          var options = { id : "ST0605P0",
          				 width : "1800px",
          				 height : "900px",

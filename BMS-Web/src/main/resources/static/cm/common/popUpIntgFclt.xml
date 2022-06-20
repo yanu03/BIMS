@@ -31,6 +31,7 @@
 						<w2:key id="USE_YN" name="name3" dataType="text"></w2:key>
 						<w2:key id="REP_ROUT_ID" name="name3" dataType="text"></w2:key>
 						<w2:key id="VHC_ID" name="제외차량ID" dataType="text"></w2:key>
+						<w2:key id="INTG_TYPE" name="연계유형" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 			</w2:dataCollection>
@@ -53,7 +54,7 @@
 		];
 		com.setMainBtn3(wfm_mainBtn, btnOptions);
 		
-		
+		dma_search.set("INTG_TYPE", "AR");
 		com.executeSubmission(sub_intgIdList);
 	};
 	
@@ -67,34 +68,7 @@
 	
 	scwin.btn_confirm_onclick = function() {
 		var data = intgListGrid.getCheckedJSON("chk");
-		var vhcId = dma_search.get("VHC_ID");
-		var chk = false;
-		
-		if(data == null || data == ''){
-			var nullData = [{"VHC_ID" : '', "VHC_NO" : '', "COMP_NM" : ''}];
-			
-			com.closePopup(scwin.closeCallbackFncName, nullData);
-		}
-		else{
-			for(var x = 0; x < vhcId.length; x++){
-				if(data[0].VHC_ID == vhcId[x]){
-					chk = true;
-				}
-			}
-			
-			if(chk){
-				var str = "이미 등록된 차량입니다. 선택하시겠습니까?";
-				com.confirm(str, function(rtn) {
-				if (rtn) {
-						com.closePopup(scwin.closeCallbackFncName, data);
-					}
-				});
-			}else{
-				com.closePopup(scwin.closeCallbackFncName, data);
-			}
-			
-		}
-		
+		com.closePopup(scwin.closeCallbackFncName, data);
 	};
 		
 	scwin.btn_cancel_onclick = function() {
@@ -182,7 +156,7 @@
 							</xf:choices>
 						</xf:select>
 					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_popUpBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group>
 			<xf:group style="" id="" class="popup_content">
@@ -193,16 +167,11 @@
 						<w2:row style="" id="row1">
 							<w2:column width="39" inputType="radio" style="height:20px" id="chkHeader" value="선택" blockSelect="true">
 							</w2:column>
-							<w2:column width="120" id="column4" value="연계시설물아이디"></w2:column>
+							<w2:column width="250" id="column4" value="연계시설물아이디"></w2:column>
 							<w2:column width="150" id="column7" value="시설물이름"></w2:column>
 							<w2:column width="150" id="column9" value="시설물라벨명"></w2:column>
-							<w2:column width="100" id="column10" value="제조사"></w2:column>
-							<w2:column width="100" id="column11" value=""></w2:column>
-							<w2:column width="100" id="column12" value="제조사코드"></w2:column>
-							<w2:column width="100" id="column13" value="지역아이디"></w2:column>
-							<w2:column width="70" id="column14" value=""></w2:column>
-							<w2:column width="70" id="column15" value=""></w2:column>
-							<w2:column width="70" id="column16" value=""></w2:column>
+							<w2:column width="250" id="column13" value="지역아이디"></w2:column>
+							<w2:column width="250" id="column16" value="룸아이디"></w2:column>
 						</w2:row>
 					</w2:header>
 					<w2:gBody id="gBody1" style="">
@@ -213,13 +182,8 @@
 							<w2:column width="70" id="INTG_FCLT_ID"></w2:column>
 							<w2:column width="70" id="FCLT_NM"></w2:column>
 							<w2:column width="70" id="FCLT_LABEL"></w2:column>
-							<w2:column width="70" id="MAKER"></w2:column>
-							<w2:column width="70" id="PRES_ID"></w2:column>
-							<w2:column width="70" id="MAKER_CODE"></w2:column>
 							<w2:column width="70" id="LOC_ID"></w2:column>
-							<w2:column width="70" id="OWNR_ID"></w2:column>
 							<w2:column width="70" id="ROOM_ID"></w2:column>
-							<w2:column width="70" id="FCLT_TYPE_NM"></w2:column>
 						</w2:row>
 					</w2:gBody>
 				</w2:gridView>

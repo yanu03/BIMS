@@ -25,20 +25,20 @@ public class FacilityParam {
     	
         switch(attrId){
         
+        	//스크린도어
             case BisAtCode.FACILITY_PARAM:
             	AtFacilityParam facilityParam = (AtFacilityParam)atData;
             	updateFacilityParam(facilityParam);
                 break;
             
+            //태그리스
             case BisAtCode.BLUEMOBILE_STATUS_INFO:
-            	AtBluemobileStatus bluemobileStatus = (AtBluemobileStatus)atData;
+            	//추후에 웹소켓 작업 해야함
+//            	//AtBluemobileStatus bluemobileStatus = (AtBluemobileStatus)atData;
+            	//updateBluemobileFacilityParam(bluemobileStatus);
                 break;
-                
-            
         }
     }
-    
-
 
     @Transactional
     protected void updateFacilityParam(AtFacilityParam atData) {
@@ -66,6 +66,33 @@ public class FacilityParam {
         }
 
     }
+    
+    /*@Transactional
+    protected void updateBluemobileFacilityParam(AtBluemobileStatus atData) {
+    	
+    	try {
+            logger.debug("updateBlumobileFacilityParam {}",atData);
+            
+            //paramKind 코드값 select
+            Map paramKind = bisMapper.selectDlCdParamKindInfo(atData.toMap());
+            
+            //paramDiv 코드값 select
+            Map paramDiv = bisMapper.selectDlCdParamDivInfo(atData.toMap());
+            
+            Map param = null;
+            param.putAll(paramKind);
+            param.putAll(paramDiv);
+            param.putAll((Map) atData);
+            
+            //태그리스 현정보 insert
+            bisMapper.insertBluemobileFacilityStatus(param);
+            
+            
+        } catch (Exception e) {
+            logger.info("", e);
+        }
+    	
+    }*/
 
 
 
