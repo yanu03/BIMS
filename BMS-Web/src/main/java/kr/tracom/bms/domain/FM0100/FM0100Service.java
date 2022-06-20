@@ -58,19 +58,22 @@ public class FM0100Service extends ServiceSupport {
 				String rowStatus = (String) data.get("rowStatus");
 				if (rowStatus.equals("C")) {
 					iCnt += fm0100Mapper.FM0100G1I0(data);
-					if(data.getOrDefault("MNG_ID", "").toString().length() == 10) {
+					//if(data.getOrDefault("MNG_ID", "").toString().length() == 10) {
+					if(data.getOrDefault("MNG_ID", "").toString().startsWith("IMP")) {
 						//INSERT
 						fm0100Mapper.FM0100G0I2(data);
 					}
 				} else if (rowStatus.equals("U")) {
 					uCnt += fm0100Mapper.FM0100G1U0(data);
-					if(data.getOrDefault("MNG_ID", "").toString().length() == 10) {
+					//if(data.getOrDefault("MNG_ID", "").toString().length() == 10) {
+					if(data.getOrDefault("MNG_ID", "").toString().startsWith("IMP")) {
 						//UPDATE
 						fm0100Mapper.FM0100G0U2(data);
 					}
 				} else if (rowStatus.equals("D")) {
 					dCnt += fm0100Mapper.FM0100G1D0(data);
-					if(data.getOrDefault("MNG_ID", "").toString().length() == 10) {
+					//if(data.getOrDefault("MNG_ID", "").toString().length() == 10) {
+					if(data.getOrDefault("MNG_ID", "").toString().startsWith("IMP")) {
 						//DELETE
 						fm0100Mapper.FM0100G0D2(data);
 					}

@@ -54,6 +54,7 @@
 					,A.MAKER
 					,A.FCLT_KIND
 					,A.CLSFCTN_ID
+					,A.INTG_FCLT_ID
 					,A.INST_LOC
 					,A.MODEL_NM
 					,DATE_FORMAT(A.BUY_DT, '%Y%m%d') BUY_DT
@@ -76,6 +77,8 @@
 		  		
 	WHERE
 		A.NODE_ID = 	#{NODE_ID}
+	ORDER BY
+		A.FCLT_KIND, A.FCLT_ID 
 	
 </select>
 
@@ -109,6 +112,7 @@
 						,NODE_ID
 						,MAKER
 						,CLSFCTN_ID
+						,INTG_FCLT_ID
 						,FCLT_KIND
 						,FCLT_TYPE
 						,INST_LOC
@@ -141,6 +145,7 @@
 						,#{NODE_ID}
 						,#{MAKER}
 						,#{CLSFCTN_ID}
+						,#{INTG_FCLT_ID}
 						,#{FCLT_KIND}
 						,#{FCLT_TYPE}
 						,#{INST_LOC}
@@ -178,6 +183,7 @@
 					,INST_LOC = #{INST_LOC}
 					,MODEL_NM = #{MODEL_NM}
 					,CLSFCTN_ID = #{CLSFCTN_ID}	
+					,INTG_FCLT_ID = #{INTG_FCLT_ID}	
 					,MNG_ID = #{MNG_ID}	
 					,FCLT_COORDS = #{FCLT_COORDS}	
 					,USE_YN = #{USE_YN}	

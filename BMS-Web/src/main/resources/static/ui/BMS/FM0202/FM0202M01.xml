@@ -221,6 +221,10 @@
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_FM0202SHI3_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
+			<xf:submission id="sub_selectAirconInfo" ref="" target="" action="" method="post" mediatype="application/json" encoding="UTF-8"
+				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
+				ev:submiterror="" abortTrigger="">
+			</xf:submission>
 		</xf:model>
 
 		<style type='text/css'>
@@ -277,7 +281,6 @@
 	
 	}	
 	
-	
 	function onConnected(frame) {
 		//setConnected(true);
 		
@@ -289,7 +292,6 @@
 	    stompClient.subscribe('/topic/public', scwin.onMessageReceived);
 	
 	}
-	
 	
 	function onError(error) {
 		showMessage('Could not connect to WebSocket server. ' + error);
@@ -394,7 +396,7 @@
 		var rowCntParamKind = dlt_PARAM_KIND.getRowCount();
 		
 		//헤더 시작
-		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_5" value="시설물상태" blockSelect="false" displayMode="label"></w2:column>';
+		gridHeader +='<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="h_colunm_5" value="상태" blockSelect="false" displayMode="label"></w2:column>';
 		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_3" value="시설물ID" blockSelect="false" displayMode="label" sortable="true"></w2:column>';
 		gridHeader +='<w2:column removeBorderStyle="false" width="170" inputType="text" style="height:20px" id="h_colunm_4" value="시설물종류" blockSelect="false" displayMode="label"></w2:column>';
 		

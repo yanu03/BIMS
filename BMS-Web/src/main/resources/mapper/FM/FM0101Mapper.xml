@@ -41,6 +41,8 @@
 		ON A.CLSFCTN_ID = B.CLSFCTN_ID
 	WHERE
 		A.NODE_ID = 	#{NODE_ID}
+	ORDER BY
+		A.FCLT_KIND, A.FCLT_ID
 </select>
 
 <select id="FM0101G2R0" resultType="Map">

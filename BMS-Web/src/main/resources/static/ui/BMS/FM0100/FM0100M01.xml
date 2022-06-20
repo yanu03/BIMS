@@ -52,6 +52,7 @@
 						<w2:column id="MAKER" name="제조사" dataType="text"></w2:column>
 						<w2:column id="FCLT_KIND" name="시설물유형" dataType="text"></w2:column>
 						<w2:column id="CLSFCTN_ID" name="유지보수기관" dataType="text"></w2:column>
+						<w2:column id="INTG_FCLT_ID" name="연계시설물아이디" dataType="text"></w2:column>
 						<w2:column id="INST_LOC" name="장착위치" dataType="text"></w2:column>
 						<w2:column id="MODEL_NM" name="모델명" dataType="text"></w2:column>
 						<w2:column id="BUY_DT" name="구매일" dataType="date" defaultValue=""></w2:column>
@@ -346,8 +347,8 @@
 	};
 	
 	scwin.searchIntgFcltIdCallback = function(returnValue) {
-		INTG_FCLT_ID.setValue(returnValue.INTG_FCLT_ID);
-		dlt_BMS_FCLT_INFO.setCellData(FM0100G1.getFocusedRowIndex(), "INTG_FCLT_ID", returnValue.INTG_FCLT_ID);
+		INTG_FCLT_ID.setValue(returnValue[0].INTG_FCLT_ID);
+		dlt_BMS_FCLT_INFO.setCellData(FM0100G1.getFocusedRowIndex(), "INTG_FCLT_ID", returnValue[0].INTG_FCLT_ID);
 	};
 	
 	scwin.btn_sub_move = function() {
@@ -556,6 +557,8 @@
 										</w2:column>
 										<w2:column width="150" id="column100" value="관리아이디">
 										</w2:column>
+										<w2:column width="250" id="column100" value="연계시설물아이디">
+										</w2:column>
 										<w2:column width="90" id="column55" value="구매일">
 										</w2:column>
 										<w2:column width="90" id="column56" value="설치일">
@@ -601,6 +604,8 @@
 											id="MODEL_NM" value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column width="70" id="MNG_ID" textAlign="left">
+										</w2:column>
+										<w2:column width="70" id="INTG_FCLT_ID" textAlign="left">
 										</w2:column>
 										<w2:column width="70" id="BUY_DT">
 										</w2:column>
