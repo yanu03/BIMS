@@ -31,6 +31,10 @@
 						<w2:key id="SKY_COND" name="하늘상태" dataType="text"></w2:key>
 						<w2:key id="TEMPC" name="온도" dataType="text"></w2:key>
 						<w2:key id="HUMI" name="습도" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+				<w2:dataMap baseNode="list" repeatNode="map" id="dma_BMS_ATMO_INFO" saveRemovedData="true">
+					<w2:keyInfo>
 						<w2:key id="DUSTC" name="미세먼지농도" dataType="text"></w2:key>
 						<w2:key id="OZONEC" name="오존농도" dataType="text"></w2:key>
 						<w2:key id="NDC" name="이산화질소농도" dataType="text"></w2:key>
@@ -53,7 +57,7 @@
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_bmsMainF0R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_bmsMainF1R0" ref="" target="data:json,dma_BMS_WEAT_INFO" action="/bm/bmsMainF1" method="post"
+			<xf:submission id="sub_bmsMainF1R0" ref="" target="data:json,dma_BMS_ATMO_INFO" action="/bm/bmsMainF1" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_bmsMainF1R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -238,11 +242,11 @@
 	};
 	
 	scwin.sub_bmsMainF1R0_submitdone = function(e) {
-		var dustc = dma_BMS_WEAT_INFO.get("DUSTC");
-		var ozon = dma_BMS_WEAT_INFO.get("OZONEC");
-		var ndc = dma_BMS_WEAT_INFO.get("NDC");
-		var cmc = dma_BMS_WEAT_INFO.get("CMC");
-		var sdc = dma_BMS_WEAT_INFO.get("SDC");
+		var dustc = dma_BMS_ATMO_INFO.get("DUSTC");
+		var ozon = dma_BMS_ATMO_INFO.get("OZONEC");
+		var ndc = dma_BMS_ATMO_INFO.get("NDC");
+		var cmc = dma_BMS_ATMO_INFO.get("CMC");
+		var sdc = dma_BMS_ATMO_INFO.get("SDC");
 		
 		var imagePath = "";
 		if(dustc >= 0 && dustc < 31){
