@@ -8,6 +8,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,6 +50,9 @@ public class IntgService extends ServiceSupport {
 	//에어컨 정보 insert 
 	public String insertIntgList() throws Exception {
 		Map<String, Object> param = getSimpleDataMap("dma_search");
+		Map<String, Object> paramSl = new HashMap();
+		paramSl.put("INTG_TYPE", "SL");
+		
 		List<Map<String, Object>> token = intgMapper.selectIntgMstList(param);
 		String key = (String) token.get(0).get("INTG_API_KEY");
 		String intgUrl = (String) token.get(0).get("INTG_URL");
@@ -56,12 +60,24 @@ public class IntgService extends ServiceSupport {
 		String api = apiGatewayUrl + intgUrl + key;
 		HttpURLConnection conn = null;
 		String result = "";
+		
+		List<Map<String, Object>> tokenSl = intgMapper.selectIntgMstList(paramSl);
+		String keySl = (String) tokenSl.get(0).get("INTG_API_KEY");
+		String intgUrlSl = (String) tokenSl.get(0).get("INTG_URL");
+		
+		String apiSl = apiGatewayUrl + intgUrlSl + keySl;
+		HttpURLConnection connSl = null;
+		String resultSl = "";
 
 		try {
 			URL url = new URL(api);
+			URL urlSl = new URL(apiSl);
 			try {
 				conn = (HttpURLConnection) url.openConnection();
 				conn.setRequestMethod("GET");
+				
+				connSl = (HttpURLConnection) urlSl.openConnection();
+				connSl.setRequestMethod("GET");
 
 				BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 				StringBuilder sb = new StringBuilder();
@@ -69,12 +85,24 @@ public class IntgService extends ServiceSupport {
 				while ((line = br.readLine()) != null) {
 					sb.append(line);
 				}
+				
+				BufferedReader brSl = new BufferedReader(new InputStreamReader(connSl.getInputStream()));
+				StringBuilder sbSl = new StringBuilder();
+				String lineSl = "";
+				while ((lineSl = brSl.readLine()) != null) {
+					sbSl.append(lineSl);
+				}
 				try {
 					result = sb.toString();
+					resultSl = sbSl.toString();
 					
 					Gson gson = new Gson();
+					Gson gsonSl = new Gson();
 					Type resultType = new TypeToken<List<Map<String, Object>>>(){}.getType();
 					List<Map<String, Object>> jsonList = gson.fromJson(result, resultType);
+					
+					Type resultTypeSl = new TypeToken<List<Map<String, Object>>>(){}.getType();
+					List<Map<String, Object>> jsonListSl = gsonSl.fromJson(resultSl, resultTypeSl);
 					
 					for (int i = 0; i < jsonList.size(); i++) {
 						Map data = (Map) jsonList.get(i);
@@ -83,6 +111,13 @@ public class IntgService extends ServiceSupport {
 						data.put("FCLT_LABEL", data.get("label"));
 						data.put("LOC_ID", data.get("locationId"));
 						data.put("ROOM_ID", data.get("roomId"));
+						
+						for(int x = 0; x < jsonListSl.size(); x++) {
+							Map dataSl = (Map) jsonListSl.get(x);
+							if(data.get("LOC_ID").equals(dataSl.get("locationId"))) {
+								data.put("LOC_NM", dataSl.get("name"));
+							}
+						}
 						
 						intgMapper.insertAirconInfo(data);
 					}			

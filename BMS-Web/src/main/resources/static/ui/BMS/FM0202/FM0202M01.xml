@@ -78,6 +78,18 @@
 						<w2:column id="PK037" name="" dataType="text"></w2:column>
 						<w2:column id="PK038" name="" dataType="text"></w2:column>
 						<w2:column id="PK039" name="" dataType="text"></w2:column>
+						<w2:column id="PK040" name="" dataType="text"></w2:column>
+						<w2:column id="PK041" name="" dataType="text"></w2:column>
+						<w2:column id="PK042" name="" dataType="text"></w2:column>
+						<w2:column id="PK043" name="" dataType="text"></w2:column>
+						<w2:column id="PK044" name="" dataType="text"></w2:column>
+						<w2:column id="PK045" name="" dataType="text"></w2:column>
+						<w2:column id="PK046" name="" dataType="text"></w2:column>
+						<w2:column id="PK047" name="" dataType="text"></w2:column>
+						<w2:column id="PK048" name="" dataType="text"></w2:column>
+						<w2:column id="PK049" name="" dataType="text"></w2:column>
+						<w2:column id="PK050" name="" dataType="text"></w2:column>
+						<w2:column id="PK051" name="" dataType="text"></w2:column>
 						<w2:column id="PK001_AUTO_YN" name="리셋" dataType="text"></w2:column>
 						<w2:column id="PK002_AUTO_YN" name="전원(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK003_AUTO_YN" name="화면(ON/OFF)" dataType="text"></w2:column>
@@ -396,9 +408,9 @@
 		var rowCntParamKind = dlt_PARAM_KIND.getRowCount();
 		
 		//헤더 시작
-		gridHeader +='<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="h_colunm_5" value="상태" blockSelect="false" displayMode="label"></w2:column>';
+		gridHeader +='<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="h_colunm_5" value="상태" blockSelect="false" displayMode="label"></w2:column>';
 		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_3" value="시설물ID" blockSelect="false" displayMode="label" sortable="true"></w2:column>';
-		gridHeader +='<w2:column removeBorderStyle="false" width="170" inputType="text" style="height:20px" id="h_colunm_4" value="시설물종류" blockSelect="false" displayMode="label"></w2:column>';
+		gridHeader +='<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="h_colunm_4" value="시설물종류" blockSelect="false" displayMode="label"></w2:column>';
 		
 		//동적 헤더 시작
 		for(var i = 0; i < rowCntParamKind; i++) {
@@ -408,7 +420,7 @@
 				var dlCd = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD");
 				var dlCdNm = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD_NM");
 				
-				gridHeader +='<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="h_colunm'+i+3+'" value="'+dlCdNm+'" blockSelect="false" displayMode="label"></w2:column>';
+				gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm'+i+3+'" value="'+dlCdNm+'" blockSelect="false" displayMode="label"></w2:column>';
 				//gridHeader +='<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="h_colunm'+i+4+'" value="'+dlCdNm+'자동'+'" blockSelect="false" displayMode="label"></w2:column>';
 			}
 			
@@ -446,7 +458,7 @@
 		gridStr += '<w2:header style="" id="header2">'
 		+ '<w2:row style="" id="row3">'
 		+ gridHeader
-		+'<w2:column removeBorderStyle="false" width="170" inputType="text" style="height:20px" id="h_colunm_5" value="" blockSelect="false" displayMode="label"></w2:column>'
+		+'<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_5" value="" blockSelect="false" displayMode="label"></w2:column>'
 		+'</w2:row>'
 		+'</w2:header>'
 		+'<w2:gBody style="" id="gBody2">'
@@ -509,6 +521,8 @@
 				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
 			}else if(fcltKind == 'FK007' && (fcltCond == 'FC020' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
+			}else if(fcltKind == 'FK006' && (fcltCond == 'FC020' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
 			}
 			
 			//시설물 이미지
@@ -642,6 +656,8 @@
 				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
 			}else if(fcltKind == 'FK007' && (fcltCond == 'FC020' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
+			}else if(fcltKind == 'FK006' && (fcltCond == 'FC020' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
 			}
 			
 			str += '<div id="'+fcltId+'"style="z-index: 1;position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
@@ -867,7 +883,7 @@
 				</xf:group>
 			</xf:group>
 		
-			<xf:group id="pgm_content" class="pgm_content grdc_550_0_a" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_470_0_a" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
@@ -882,7 +898,7 @@
 							<xf:group class="search" id="" style="">
 								<xf:select1 allOption="true" appearance="minimal" chooseOption="" direction="auto" disabled="false"
 									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE1_onviewchange" id="TYPE1" optionOrder="false"
-									ref="data:dma_search.CONTENT1" class="search_type_100" style="width:70px" submenuSize="auto" textAlign="" chooseOptionLabel="-선택-">
+									ref="data:dma_search.CONTENT1" class="search_type_100" style="width:100px" submenuSize="auto" textAlign="" chooseOptionLabel="-선택-">
 									<xf:choices>
 										<xf:itemset nodeset="data:dlt_repRoutItem">
 											<xf:label ref="REP_ROUT_NM"></xf:label>
@@ -890,21 +906,6 @@
 										</xf:itemset>
 									</xf:choices>
 								</xf:select1>
-								<xf:group class="label" id="" style="">
-									<w2:span class="" id="" label="노선"></w2:span>
-								</xf:group>
-								<xf:group class="search" id="" style="">
-									<xf:select1 allOption="true" appearance="minimal" chooseOption="" direction="auto" disabled="false"
-										disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.TYPE2_onviewchange" id="TYPE2" optionOrder="false"
-										ref="data:dma_search.CONTENT2" class="search_type_100" style="width:80px" submenuSize="auto" textAlign="" chooseOptionLabel="-선택-">
-										<xf:choices>
-											<xf:itemset nodeset="data:dlt_searchitem4">
-												<xf:label ref="ROUT_NM"></xf:label>
-												<xf:value ref="ROUT_ID"></xf:value>
-											</xf:itemset>
-										</xf:choices>
-									</xf:select1>
-								</xf:group>
 								<!--  <xf:group class="label" id="" style="">
 									<w2:span class="" id="" label="노드타입"></w2:span>
 								</xf:group>
@@ -927,7 +928,7 @@
 								<xf:group class="label" id="" style="">
 									<w2:span class="" id="" label="검색"></w2:span>
 								</xf:group>
-								<xf:input id="search_input" class="search_input"  style="width:100px" ref="data:dma_search.CONTENT3" placeholder="정류소ID 또는 정류소명">
+								<xf:input id="search_input" class="search_input"  style="width:110px" ref="data:dma_search.CONTENT3" placeholder="정류소ID 또는 정류소명">
 								</xf:input>
 								<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>							
 							</xf:group>
@@ -952,16 +953,13 @@
 									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column58"
 										value="대표노선명" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="column59"
-										value="노선명" blockSelect="false" displayMode="label" sortable="false">
-									</w2:column>
 									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column61"
 										value="정류소ID" blockSelect="false" displayMode="label">
 									</w2:column>
 									<!--  <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column57"
 										value="노드타입" blockSelect="false" displayMode="label">
 									</w2:column>-->
-									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column56"
+									<w2:column removeBorderStyle="false" width="140" inputType="text" style="height:20px" id="column56"
 										value="정류소명" blockSelect="false" displayMode="label" sortable="false">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="60" inputType="text" style="height:20px" id="column1"
@@ -972,9 +970,6 @@
 							<w2:gBody style="" id="gBody2">
 								<w2:row style="" id="row4">
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="REP_ROUT_NM"
-										value="" blockSelect="false" displayMode="label"  textAlign="">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="ROUT_NM"
 										value="" blockSelect="false" displayMode="label"  textAlign="">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="NODE_ID"

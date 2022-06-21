@@ -12,6 +12,7 @@
 		,PRES_ID
 		,MAKER_CODE
 		,LOC_ID
+		,LOC_NM
 		,OWNR_ID
 		,ROOM_ID
 		,FCLT_TYPE_NM
@@ -46,6 +47,12 @@
 		<if test="INTG_TYPE == 'DC'">
 			INTG_ID = 'IT00000028'
 		</if>
+		<if test="INTG_TYPE == 'SL'">
+			INTG_ID = 'IT00000037'
+		</if>
+		<if test="INTG_TYPE == 'SR'">
+			INTG_ID = 'IT00000038'
+		</if>
 		
 </select>
 
@@ -59,6 +66,7 @@
 			,PRES_ID
 			,MAKER_CODE
 			,LOC_ID
+			,LOC_NM
 			,OWNR_ID
 			,ROOM_ID
 			,FCLT_TYPE_NM
@@ -70,12 +78,14 @@
 			,#{PRES_ID}
 			,#{MAKER_CODE}
 			,#{LOC_ID}
+			,#{LOC_NM}
 			,#{OWNR_ID}
 			,#{ROOM_ID}
 			,#{FCLT_TYPE_NM}
 		)
 		ON DUPLICATE KEY UPDATE
 		INTG_FCLT_ID	= VALUES(INTG_FCLT_ID)
+		,LOC_NM	= VALUES(LOC_NM)
 </insert>
 
 
