@@ -99,6 +99,18 @@
 						<w2:column id="PK037" name="" dataType="text"></w2:column>
 						<w2:column id="PK038" name="" dataType="text"></w2:column>
 						<w2:column id="PK039" name="" dataType="text"></w2:column>
+						<w2:column id="PK040" name="" dataType="text"></w2:column>
+						<w2:column id="PK041" name="" dataType="text"></w2:column>
+						<w2:column id="PK042" name="" dataType="text"></w2:column>
+						<w2:column id="PK043" name="" dataType="text"></w2:column>
+						<w2:column id="PK044" name="" dataType="text"></w2:column>
+						<w2:column id="PK045" name="" dataType="text"></w2:column>
+						<w2:column id="PK046" name="" dataType="text"></w2:column>
+						<w2:column id="PK047" name="" dataType="text"></w2:column>
+						<w2:column id="PK048" name="" dataType="text"></w2:column>
+						<w2:column id="PK049" name="" dataType="text"></w2:column>
+						<w2:column id="PK050" name="" dataType="text"></w2:column>
+						<w2:column id="PK051" name="" dataType="text"></w2:column>
 						<w2:column id="PK001_AUTO_YN" name="리셋" dataType="text"></w2:column>
 						<w2:column id="PK002_AUTO_YN" name="전원(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK003_AUTO_YN" name="화면(ON/OFF)" dataType="text"></w2:column>
