@@ -149,7 +149,7 @@
 						</xf:select1>
 						<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="사용자ID 또는 사용자명"></xf:input>
 					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_popUpBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group>
 			<xf:group style="" id="" class="popup_content">

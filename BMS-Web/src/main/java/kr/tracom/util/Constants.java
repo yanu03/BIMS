@@ -13,6 +13,8 @@ public class Constants {
 	public static final String NODE_TYPE_SOUND = "NT006"; //음성노드
 	public static final String NODE_TYPE_ENTRY = "NT007"; //교통진출입점
 	public static final String NODE_TYPE_SIGNAL = "NT008"; //신호
+	public static final String NODE_TYPE_DP = "NT009"; //DP(화면 표출용)
+	public static final String NODE_TYPE_BOARD = "NT010"; //횡당보도
 	
 	public static final String MOCK_NODE_TYPE_CROSS = "101"; //교차로
 	public static final String MOCK_NODE_TYPE_END = "102"; //시종점
@@ -187,4 +189,7 @@ public class Constants {
 
     public static String Separator = "TRACOM";
     public static String SsoCookieName = "TracomSSO";
+    
+    public static double AVG_ERAD =6376.5;//(6378.137)   //Average Earth Radius
+    public static double PIE = 3.1415926535898;
 }

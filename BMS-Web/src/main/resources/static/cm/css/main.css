@@ -588,7 +588,7 @@ background-color: #EBEBEB;
     transform: translateX(calc(-50% + -40px));
 	width: 150px;
 	height: 150px;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 }
 .bms_weather .bms_cont_up .weather_temp > ul > li:nth-child(2) {
 	position: absolute;
@@ -673,7 +673,7 @@ background-color: #EBEBEB;
 	transform: translateY(-50%);
 	content: '';
 	display: block;
-	background-color: #ffffff;
+	/* background-color: #ffffff; */
 	width: 33px;
 	height: 33px;
 }

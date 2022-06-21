@@ -17,8 +17,8 @@
 			PERIOD_CNT,
 			USE_YN,
 			IMP_YN,
+			MAIN_CRS_YN,
 			REMARK
-			
 	FROM BMS_CRS_MST
 	WHERE DEL_YN != 'Y'
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT)">
@@ -55,7 +55,8 @@
 				REMARK,
 				UPD_DTM,
 				UPD_ID,
-				IMP_YN
+				IMP_YN,
+				MAIN_CRS_YN
 			)
 	
 	values		
@@ -68,7 +69,8 @@
 				#{REMARK},
 				#{UPD_DTM},
 				#{SSN_USER_ID},		
-				#{IMP_YN}		
+				#{IMP_YN},
+				#{MAIN_CRS_YN}
 			);
 </insert>
 
@@ -81,7 +83,8 @@
 			REMARK = #{REMARK},
 			UPD_DTM = #{UPD_DTM},
 			UPD_ID = #{SSN_USER_ID},
-			IMP_YN = #{IMP_YN}
+			IMP_YN = #{IMP_YN},
+			MAIN_CRS_YN = #{MAIN_CRS_YN}
 
 	where CRS_ID = #{CRS_ID};
 	

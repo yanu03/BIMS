@@ -187,6 +187,135 @@ public class DataInterface {
 		}
 	}
 	
+
+	//*************************************
+	// Unit: m
+	// 두 지점 사이의 거리 :: 지구 곡률 반영
+	//*************************************
+	double IMP_GetDistance_Curve(LocationVO P1, LocationVO P2 ) 
+	{
+		double salpha;
+		double sbeta;
+		double galpha;
+		double gbeta;
+		double distance;
+
+		double T, theta, dsgm, psqr;
+		double rmconv=3437.7387;
+	    double dbSM=1.852;
+
+		salpha	= (double)(P1.getY());
+		sbeta	= (double)(P1.getX());
+		galpha	= (double)(P2.getY());
+		gbeta	= (double)(P2.getX());
+
+		salpha	= (double)(salpha/1000000.0);
+		sbeta	= (double)(sbeta/1000000.0);
+		galpha	= (double)(galpha/1000000.0);
+		gbeta	= (double)(gbeta/1000000.0);
+		
+		//printf("\n\rBB:%10.6f %10.6f %10.6f %10.6f", salpha ,sbeta, galpha, gbeta);
+
+		//Get RAD
+		salpha = salpha * Constants.PIE/180.0 ;
+	    sbeta = sbeta * Constants.PIE/180.0 ;
+	    galpha = galpha * Constants.PIE/180.0;
+	    gbeta = gbeta * Constants.PIE/180.0;
+
+		//printf("\n\rCC:%10.6f %10.6f %10.6f %10.6f", salpha ,sbeta, galpha, gbeta);
+
+	    T=Math.sin(salpha)*Math.sin(galpha)+Math.cos(salpha)*Math.cos(galpha)*Math.cos(sbeta-gbeta);
+
+	    if(T>1.0)
+	    {
+		    T=1.0;
+		    //printf("TTTTTTT@@@@@@@@@@@@@@@");
+		}
+	    theta=Math.acos(T);
+	    dsgm=theta*rmconv;
+	    
+	    //printf("\n\rAAA %10.5f %10.5f %10.5f", theta, dsgm, dsgm*dbSM);
+	    return dsgm*dbSM*1000.0;
+	}
+	
+	float getDegreeBetweenTwoPoints_new(LocationVO startPoint, LocationVO endPoint)
+	{
+		// 두 점을 잇는 직선의 정북방향 각도 계산 
+		float fAngle;
+		int ndX;
+		int ndY;
+		double dbX, dbY, dbZ, dbACos;
+		LocationVO d3 = new LocationVO();
+
+		ndX = (int) (endPoint.getX() - startPoint.getX());
+		ndY = (int) (endPoint.getX() - startPoint.getX());
+
+		if(ndX == 0 )
+		{
+			if(ndY >= 0) return (float) 0.0; 
+			else return (float) 180.0;
+		}
+		else if(ndY == 0)
+		{
+			if(ndX >= 0) return (float) 90.0; 
+			else return (float) 270.0;
+		} 
+
+		d3.setY(endPoint.getY());
+		d3.setX(startPoint.getX());
+
+		dbY = IMP_GetDistance_Curve(startPoint, d3);	// 대각거리
+		dbX = IMP_GetDistance_Curve(d3, endPoint);	// 수평거리
+
+		fAngle = (float) Math.atan2(dbX, dbY);
+
+		fAngle = (float) ((fAngle * 180)/Constants.PIE);
+		//printf("1 fAngle(%f) dbY(%lf) dbX(%lf)\n", fAngle, dbY, dbX);
+
+		if(ndX >= 0 && ndY >= 0){	// 1사분면
+			fAngle = fAngle;
+		}
+		else if(ndX >= 0 && ndY < 0){	// 2사분면
+			fAngle = 180 - fAngle;
+		}	
+		else if(ndX < 0 && ndY < 0){	// 3사분면
+			fAngle = 180 + fAngle;
+		}
+		else if(ndX < 0 && ndY >= 0){	// 4사분면
+			fAngle = 360 - fAngle;
+		}
+		
+		//printf("2 fAngle(%f) ndX(%d) ndY(%d)\n", fAngle, ndX, ndY);
+		return fAngle;
+	}	
+	
+	public static LocationVO getPointFromDistance(double x, double y, double length, double heading) {
+		LocationVO point = new LocationVO();
+		if(heading > 180){
+			heading = heading- 360;
+		}
+		else{
+			heading = heading;
+		}
+		
+		double DE2RA    = Constants.PIE/180.0;
+		double RA2DE    = 180.0/Constants.PIE;
+
+		
+		double b = length / Constants.AVG_ERAD;
+		double sinb = Math.sin(b);
+		double cosb = Math.cos(b);
+		double sinc = Math.sin(DE2RA * (90.0 - y));
+		double cosc = Math.cos(DE2RA * (90.0 - y));
+		double azrad =  heading * DE2RA;
+		
+		double a = Math.acos(cosb*cosc + sinc*sinb*Math.cos(azrad));
+		double B = Math.asin(sinb*Math.sin(azrad)/Math.sin(a));
+		point.setY(RA2DE * ((Constants.PIE/2.0) - a));
+		point.setX(RA2DE * B + x);
+		return point;
+	}
+	
 	public static List insertNodeToNode(List<Map<String, Object>> nodeList, List<Map<String, Object>> sourceList) {
 		// 정류장 갯수만큼 for문 돌릴거임
 		for (Map<String, Object> sta : sourceList) {
