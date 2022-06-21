@@ -75,6 +75,9 @@ public class Constants {
 	//공공데이터포털 도시코드 연계
 	public static String OPENAPI_CITY_CODE_ID = "IT00000021";
 	
+	//국토교통부_(TAGO)_버스도착정보
+	public static String OPENAPI_BIT_ID = "IT00000035";
+	
 	//===================테이블 사용 이전 함수========================
 	//세종 노선검색 URL
 	public static String URL_CODE_SEJONG_ROUT = "IU001";

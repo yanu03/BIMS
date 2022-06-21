@@ -46,7 +46,24 @@
 		<if test="INTG_TYPE == 'DC'">
 			INTG_ID = 'IT00000028'
 		</if>
-		
+</select>
+
+<select id="selectIntg" resultType="Map">
+	SELECT			INTG_ID
+				,	INTG_NM
+				,	INTG_ENM
+				,	INTG_TYPE
+				,	INTG_URL
+				,	INTG_API_KEY
+				,	ID
+				,	PWD
+				,	REMARK
+				,	UPD_DTM
+				,	UPD_ID
+	FROM			BMS_INTG_MST
+	
+	WHERE			INTG_ID = #{INTG_ID}			
+				
 </select>
 
 <insert id="insertAirconInfo" parameterType="Map">

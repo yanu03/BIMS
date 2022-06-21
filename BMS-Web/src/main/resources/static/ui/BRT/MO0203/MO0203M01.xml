@@ -34,13 +34,17 @@
 						<w2:key id="CONTENT1" name="name2" dataType="text"></w2:key>
 						<w2:key id="CONTENT2" name="name3" dataType="text"></w2:key>
 						<w2:key id="CONTENT3" name="name4" dataType="text"></w2:key>
+						<w2:key id="PUB_STTN_ID" name="연계정류장ID" dataType="text"></w2:key>
+						<w2:key id="AREA" name="권역" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataMap baseNode="map" id="dma_sub_search">
 					<w2:keyInfo>
 						<w2:key id="NODE_ID" name="노드ID" dataType="text"></w2:key>
+						<w2:key id="NODE_NM" name="노드명" dataType="text"></w2:key>
 						<w2:key id="STTN_ID" name="정류소ID" dataType="text"></w2:key>
 						<w2:key id="ROUT_ID" name="노선ID" dataType="text"></w2:key>
+						<w2:key id="STTN_FCLT_TYPE" name="name3" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_routItem" saveRemovedData="true">
@@ -70,6 +74,7 @@
 						<w2:column id="MORN_STD" name="집중모니터링기준" dataType="text"></w2:column>
 						<w2:column id="COND_ERROR" name="정류소고장여부" dataType="text"></w2:column>
 						<w2:column id="STTN_FCLT_TYPE" name="정류소시설유형" dataType="text"></w2:column>
+						<w2:column id="PUB_STTN_ID" name="공공연계정류소ID" dataType="text"></w2:column>
 					</w2:columnInfo>
 					<w2:data use="false">
 						<w2:row></w2:row>
@@ -154,23 +159,104 @@
 						<w2:column id="REP_ROUT_NM" name="대표노선명" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_vhcBit" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="REMAIN_STTN" name="남은정거장수" dataType="text"></w2:column>
+						<w2:column id="REMAIN_TM" name="남은시간(초)" dataType="text"></w2:column>
+						<w2:column id="NODE_ID" name="정류소ID" dataType="text"></w2:column>
+						<w2:column id="NODE_NM" name="정류소명" dataType="text"></w2:column>
+						<w2:column id="ROUT_ID" name="노선ID" dataType="text"></w2:column>
+						<w2:column id="ROUT_NM" name="노선명" dataType="text"></w2:column>
+						<w2:column id="VHC_KIND" name="차량종류" dataType="text"></w2:column>
+						<w2:column id="VHC_TYPE" name="차량유형" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_FCLT_INFO" saveRemovedData="true">
+				<w2:columnInfo>
+					<w2:column id="FCLT_ID" name="시설아이디" dataType="text"></w2:column>
+					<w2:column id="STTN_NM" name="정류소명" dataType="text"></w2:column>
+					<w2:column id="NODE_ID" name="노드아이디" dataType="text"></w2:column>
+					<w2:column id="MAKER" name="제조사" dataType="text"></w2:column>
+					<w2:column id="CLSFCTN_ID" name="유지보수기관ID" dataType="text"></w2:column>
+					<w2:column id="FCLT_KIND" name="시설종류" dataType="text"></w2:column>
+					<w2:column id="FCLT_TYPE" name="시설유형" dataType="text"></w2:column>
+					<w2:column id="INST_LOC" name="설치위치" dataType="text"></w2:column>
+					<w2:column id="MNG_ID" name="관리아이디" dataType="text"></w2:column>
+					<w2:column id="FILE_NM" name="파일명" dataType="text"></w2:column>
+					<w2:column id="GPS_X" name="GPS_X좌표" dataType="text"></w2:column>
+					<w2:column id="GPS_Y" name="GPS_Y좌표" dataType="text"></w2:column>
+					<w2:column id="FCLT_IP" name="시설IP" dataType="text"></w2:column>
+					<w2:column id="REL_KIND" name="관계종류" dataType="text"></w2:column>
+					<w2:column id="REL_ID" name="관계아이디" dataType="text"></w2:column>
+					<w2:column id="DEV_SERIAL_NO" name="시리얼번호" dataType="text"></w2:column>
+					<w2:column id="MODEL_NM" name="모델명" dataType="text"></w2:column>
+					<w2:column id="INST_DT" name="설치일" dataType="text"></w2:column>
+					<w2:column id="BUY_DT" name="구매일" dataType="text"></w2:column>
+					<w2:column id="CCTV_URL" name="CCTV_URL" dataType="text"></w2:column>
+					<w2:column id="USE_YN" name="사용여부" dataType="text"></w2:column>
+					<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
+					<w2:column id="FCLT_COND" name="시설물상태" dataType="text"></w2:column>
+					<w2:column id="SEND_DATE" name="갱신일시" dataType="text"></w2:column>
+					<w2:column id="CTR_YN" name="제어여부" dataType="text"></w2:column>
+					<w2:column id="FCLT_COORDS" name="시설물위치좌표" dataType="text"></w2:column>
+					<w2:column id="PK001" name="리셋" dataType="text"></w2:column>
+					<w2:column id="PK002" name="전원(ON/OFF)" dataType="text"></w2:column>
+					<w2:column id="PK003" name="화면(ON/OFF)" dataType="text"></w2:column>
+					<w2:column id="PK004" name="사운드 음량" dataType="text"></w2:column>
+					<w2:column id="PK005" name="LCD 휘도" dataType="text"></w2:column>
+					<w2:column id="PK006" name="히터(ON/OFF)" dataType="text"></w2:column>
+					<w2:column id="PK007" name="FAN(ON/OFF)" dataType="text"></w2:column>
+					<w2:column id="PK008" name="커맨드" dataType="text"></w2:column>
+					<w2:column id="PK009" name="BIT 캡쳐" dataType="text"></w2:column>
+					<w2:column id="PK010" name="BIT 영상 녹화" dataType="text"></w2:column>
+					<w2:column id="PK011" name="로그레벨" dataType="text"></w2:column>
+					<w2:column id="PK012" name="IP/PORT" dataType="text"></w2:column>
+					<w2:column id="PK013" name="통신" dataType="text"></w2:column>
+					<w2:column id="PK014" name="AP" dataType="text"></w2:column>
+					<w2:column id="PK015" name="GPS" dataType="text"></w2:column>
+					<w2:column id="PK016" name="집중모니터링 여부" dataType="text"></w2:column>
+					<w2:column id="PK017" name="정주기 주기" dataType="text"></w2:column>
+					<w2:column id="PK018" name="배터리" dataType="text"></w2:column>
+					<w2:column id="PK019" name="" dataType="text"></w2:column>
+					<w2:column id="PK020" name="" dataType="text"></w2:column>
+					<w2:column id="PK021" name="" dataType="text"></w2:column>
+					<w2:column id="PK022" name="" dataType="text"></w2:column>
+					<w2:column id="PK023" name="" dataType="text"></w2:column>
+					<w2:column id="PK024" name="" dataType="text"></w2:column>
+					<w2:column id="PK025" name="" dataType="text"></w2:column>
+					<w2:column id="PK026" name="" dataType="text"></w2:column>
+					<w2:column id="PK027" name="" dataType="text"></w2:column>
+					<w2:column id="PK028" name="" dataType="text"></w2:column>
+					<w2:column id="PK029" name="" dataType="text"></w2:column>
+					<w2:column id="PK030" name="" dataType="text"></w2:column>
+					<w2:column id="PK031" name="" dataType="text"></w2:column>
+					<w2:column id="PK032" name="" dataType="text"></w2:column>
+					<w2:column id="PK033" name="" dataType="text"></w2:column>
+					<w2:column id="PK034" name="" dataType="text"></w2:column>
+					<w2:column id="PK035" name="" dataType="text"></w2:column>
+					<w2:column id="PK036" name="" dataType="text"></w2:column>
+					<w2:column id="PK037" name="" dataType="text"></w2:column>
+					<w2:column id="PK038" name="" dataType="text"></w2:column>
+				</w2:columnInfo>
+			</w2:dataList>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
 			<xf:submission id="sub_MO0203G0R0" ref='data:json,dma_search' target='data:json,dlt_BMS_NODE_MST' action="/mo/MO0203G0R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="조회 중입니다.." ev:submit="" ev:submitdone="scwin.sub_MO0203G0R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_MO0203SHI0" ref="data:json,dma_search" target="data:json,dlt_routItem" action="/rout/selectRoutItem" method="post"
-				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
-				ev:submit="" ev:submitdone="scwin.sub_MO0203SHI0_submitdone" ev:submiterror="" abortTrigger="">
+			<xf:submission id="sub_MO0203SHI0" ref="data:json,dma_search" target="data:json,dlt_routItem" action="/rout/selectRoutItem"
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="" ev:submit="" ev:submitdone="scwin.sub_MO0203SHI0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_MO0203G2R0" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_ROUT_NODE_DISP_VW"
-				action="/rout/selectNodeDispListByRout" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
-				customHandler="" mode="asynchronous" processMsg="조회 중입니다.." ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+			<xf:submission id="sub_MO0203G2R0" ref="data:json,dma_search" target="data:json,dlt_BMS_ROUT_NODE_DISP_VW"
+				action="/rout/selectNodeDispListByRepRout" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+				errorHandler="" customHandler="" mode="asynchronous" processMsg="조회 중입니다.." ev:submit="" ev:submitdone="scwin.sub_MO0203G2R0_submitdone" ev:submiterror=""
+				abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_MO0203SCK" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_ETA_INFO" action="/mo/MO0203SCK" method="post"
-				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
-				ev:submit="" ev:submitdone="scwin.sub_MO0203SCK_submitdone" ev:submiterror="" abortTrigger="">
+			<xf:submission id="sub_MO0203SCK" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_ETA_INFO" action="/mo/MO0203SCK"
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="" ev:submit="" ev:submitdone="scwin.sub_MO0203SCK_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_MO0203G1R0" ref="data:json,dma_search" target="data:json,dlt_BRT_CUR_OPER_INFO" action="/mo/MO0101G0R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
@@ -179,6 +265,14 @@
 			<xf:submission id="sub_MO0203SHI1" ref="" target="data:json,dlt_repRoutItem" action="/repRout/selectRepRoutItem" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_MO0203SHI1_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_selectVhcBit" ref="data:json,dma_search" target="data:json,dlt_vhcBit" action="/vhc/selectVhcBit" method="post" mediatype="application/json"
+				encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
+				ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_MO0203P0R0" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_FCLT_INFO" action="/mo/MO0203P0R0"
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="" ev:submit="" ev:submitdone="scwin.sub_MO0203P0R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>			
 		</xf:model>
 
@@ -202,6 +296,7 @@
 		 
 		var codeOptions = [ {code : "NODE_TYPE", compID : "MO0203G0:NODE_TYPE" }
 							,{code : "COND_ERROR", compID : "MO0203G0:COND_ERROR" }
+							,{code : "STTN_FCLT_TYPE", compID : "MO0203G0:STTN_FCLT_TYPE" }
 						
 		 ];
 		 
@@ -528,6 +623,13 @@
 		dlt_BMS_SOONETA_INFO.removeAll();
 		dma_sub_search.set("NODE_ID", dlt_BMS_NODE_MST.getCellData(row, "NODE_ID"));
 		
+		dma_search.set("PUB_STTN_ID", dlt_BMS_NODE_MST.getCellData(row, "PUB_STTN_ID"));
+		dma_search.set("AREA", dlt_BMS_NODE_MST.getCellData(row, "AREA"));
+		
+		//한차장님 완료하면 주석 풀어야됨
+		//com.executeSubmission(sub_selectVhcBit);
+		
+		
 		var allDataList = dlt_BMS_NODE_MST.getAllJSON();
 		var focusIdx = MO0203G0.getFocusedRowIndex();
 		
@@ -538,17 +640,32 @@
 		//카테고리 뿌리기
 		routMap.showCategory("map_MO0203", allDataList, focusIdx, MO0203G0);
 		
-		com.executeSubmission(sub_MO0203SCK);
+		//com.executeSubmission(sub_MO0203SCK);
 		
 		var nodeId = dlt_BMS_NODE_MST.getCellData(MO0203G0.getFocusedRowIndex(), "NODE_ID");
 		dma_NODE_ID.set("NODE_ID", "(정류소 ID : "+nodeId+")");
+		
+		
+		dma_sub_search.set("STTN_FCLT_TYPE", dlt_BMS_NODE_MST.getCellData(row, "STTN_FCLT_TYPE"));
+		com.executeSubmission(sub_MO0203P0R0);
+		
+		if(dlt_BMS_NODE_MST.getCellData(row,"STTN_FCLT_TYPE") == 'ST003'){
+			document.getElementById(STTN_IMG.getID()).className = "ST003_station";
+		}else{
+			document.getElementById(STTN_IMG.getID()).className = 'ST002_station_1';
+		}			
+		
+		
 		
 	};
 	
 	scwin.sub_MO0203G0R0_submitdone = function(e) {
 	
-		//시설물상태에 따라 클래스(백그라운드 색) 설정
+		//상태에 따라 클래스(백그라운드 색) 설정
 		for (i=0; i<dlt_BMS_NODE_MST.getDataLength(); i++) {
+			
+			/*
+			
 			//비정상
 			if (dlt_BMS_NODE_MST.getCellData(i, "COND_ERROR") == "CE001") {
 				MO0203G0.setCellClass(i, "COND_ERROR", "cond_abnormal");
@@ -557,6 +674,12 @@
 			else if (dlt_BMS_NODE_MST.getCellData(i, "COND_ERROR") == "CE002") {
 				MO0203G0.setCellClass(i, "COND_ERROR", "cond_normal");
 			}
+			
+			*/
+			if (dlt_BMS_NODE_MST.getCellData(i, "STTN_FCLT_TYPE") == "ST003") {
+				MO0203G0.setCellClass(i, "STTN_FCLT_TYPE", "cond_normal");
+			}
+			
 		}
 		
 		var allDataList = dlt_BMS_NODE_MST.getAllJSON();
@@ -572,27 +695,33 @@
 		com.setFocusedCell(MO0203G0, "NODE_NM");
 	};
 	
-	scwin.sub_MO0203SHI0_submitdone = function(e) {
-		dma_sub_search.set("ROUT_ID",TYPE.getValue());
-		$p.executeSubmission(sub_MO0203G2R0);
-		com.searchGrid(MO0203G0, sub_MO0203G0R0);
-	};
+//	scwin.sub_MO0203SHI0_submitdone = function(e) {
+//		TYPE.setValue("RT00000049");
+//		
+//		dma_sub_search.set("ROUT_ID",TYPE.getValue());
+//		$p.executeSubmission(sub_MO0203G2R0);
+//		com.searchGrid(MO0203G0, sub_MO0203G0R0);
+//	};
 	
-	scwin.TYPE_onviewchange = function(info) {
-		dma_sub_search.set("ROUT_ID",TYPE.getValue());		
-		$p.executeSubmission(sub_MO0203G2R0);
-		com.searchGrid(MO0203G0, sub_MO0203G0R0);
-	};
+//	scwin.TYPE_onviewchange = function(info) {
+//		dma_sub_search.set("ROUT_ID",TYPE.getValue());		
+//		$p.executeSubmission(sub_MO0203G2R0);
+//		com.searchGrid(MO0203G0, sub_MO0203G0R0);
+//	};
 
 
 	scwin.TYPE1_onviewchange = function(info) {
-		$p.executeSubmission(sub_MO0203SHI0);
+		//$p.executeSubmission(sub_MO0203SHI0);
+		$p.executeSubmission(sub_MO0203G2R0);
+		com.searchGrid(MO0203G0, sub_MO0203G0R0);
 	}	
 	
 	
 	scwin.sub_MO0203SHI1_submitdone = function(e) {
 		TYPE1.setValue("RR00000002");
-		$p.executeSubmission(sub_MO0203SHI0);
+		$p.executeSubmission(sub_MO0203G2R0);
+		com.searchGrid(MO0203G0, sub_MO0203G0R0);
+		//$p.executeSubmission(sub_MO0203SHI0);
 	};
 	
 	scwin.sttninfo_onclick = function() {
@@ -611,7 +740,65 @@
 		};
 		
 		com.openPopup(("/ui/BRT/MO0203/MO0203P01.xml"), options, data);
-	}	
+	}
+	
+	//이미지 생성 함수
+	scwin.makeImage = function(){
+		var str = ""
+		var imgSrc = ""
+		var imgId = ""
+		
+		for (i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++) {
+			
+			var coord = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COORDS").split(',');
+			var top = coord[0];
+			var left = coord[1];
+			var fcltKind = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_KIND");
+			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
+			var fcltCond = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND");
+			
+			if(fcltKind == 'FK001' && (fcltCond == 'FC020'|| fcltCond == '')){
+				imgSrc = "/cm/images/bms/BIT_RED_normal.png";
+			}else if(fcltKind == 'FK001' && (fcltCond == 'FC021' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/BIT_RED_abnormal.png";
+			}else if(fcltKind == 'FK004' && (fcltCond == 'FC020' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
+			}else if(fcltKind == 'FK004' && (fcltCond == 'FC021' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/AIRTUBE_abnormal.png";
+			}else if(fcltKind == 'FK005' && (fcltCond == 'FC020' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/AIRCON_normal.png";
+			}else if(fcltKind == 'FK005' && (fcltCond == 'FC021' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
+			}else if(fcltKind == 'FK007' && (fcltCond == 'FC020' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
+			}
+			
+			//시설물 이미지
+			str += '<div id="'+fcltId+'" style="z-index: 1; position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
+			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			str += '</div>'
+			
+		}
+		
+		//정류소 이미지
+		//반개방형때문인데 현재 안쓴다고함
+//		if(dlt_BMS_NODE_MST.getCellData(FM0202G0.getFocusedRowIndex(), "STTN_FCLT_TYPE") == 'ST003'){
+//			var imgSrc = "/cm/images/bms/ST003_1.png"
+//		}else{
+//			var imgSrc = "/cm/images/bms/ST002_2.jpg"
+//		}
+		
+		var nodeId = dlt_BMS_NODE_MST.getCellData(MO0203G0.getFocusedRowIndex(), "NODE_ID");
+		
+		str += '<img xmlns="http://www.w3.org/1999/xhtml" style="position:absolute; cursor:default" src="'+imgSrc+'" id="'+nodeId+'img'+'">';
+		
+		$('#'+STTN_IMG.getID()).html(str);
+		
+	}		
+	
+	scwin.sub_MO0203P0R0_submitdone = function(e) {
+		scwin.makeImage();
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -631,7 +818,7 @@
 				</xf:group>
 			</xf:group>
 		
-			<xf:group id="pgm_content" class="pgm_content grdc_500_0_a" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_470_0_a" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
@@ -656,7 +843,7 @@
 									</xf:choices>
 								</xf:select1>
 							</xf:group>
-							<xf:group id="" style="" class="label">
+							<!-- <xf:group id="" style="" class="label">
 									<w2:span id="" class="" label="노선"></w2:span>
 							</xf:group>
 							<xf:group id="" style="" class="search">
@@ -671,7 +858,7 @@
 										</xf:itemset>
 									</xf:choices>
 								</xf:select1>
-							</xf:group>	
+							</xf:group>	 -->
 							<xf:group class="label" id="" style="">
 								<w2:span class="" id="" label="검색"></w2:span>
 							</xf:group>
@@ -706,7 +893,7 @@
 										value="정류소명" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column1"
-										value="정류소상태" blockSelect="false" displayMode="label">
+										value="정류소형태" blockSelect="false" displayMode="label">
 									</w2:column>
 								</w2:row>
 							</w2:header>
@@ -715,7 +902,7 @@
 									<w2:column removeBorderStyle="false" width="161" inputType="text" style="height:20px" id="NODE_NM"
 										value="" blockSelect="false" displayMode="label" textAlign="left">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="161" inputType="select" style="height:20px" id="COND_ERROR"
+									<w2:column removeBorderStyle="false" width="161" inputType="select" style="height:20px" id="STTN_FCLT_TYPE"
 										value="" blockSelect="false" displayMode="label" textAlign="">
 									</w2:column>
 								</w2:row>
@@ -737,7 +924,7 @@
 				
 							<div id="map_MO0203" style="padding:0 !important"  class="bms_box_wrap">
 								<ul id="category_map_MO0203" class="category"></ul>
-								<xf:group id="brt_div" class="pgm_detail" style="z-index: 10000;position: absolute;right: 52px;margin-top: 152px;margin-right: -20px;width: 140px;height: 399px;">
+								<xf:group id="brt_div" class="pgm_detail" style="z-index: 10000;position: absolute;right: 52px;margin-top: 280px;margin-right: -49px;width: 140px;height: 399px;">
 									<xf:group style="width: 100%; height:100%" id="bit_img">
 										<xf:group id="" class="brt_bit" style="background-size: cover; height: 393px; position: relative;"></xf:group>
 									</xf:group>
@@ -761,7 +948,15 @@
 										</w2:span>
 									</xf:group> -->
 									<xf:group style="" id=""></xf:group>
-								</xf:group>								
+								</xf:group>
+								<xf:group id="routeMap" style="z-index: 10000; position: absolute;background: white;bottom: 0px;">
+									<div id="test" style="background: white;width: 1248px;height: 330px;">
+										<xf:group style="" id="STTN_IMG" class="ST003_station"></xf:group>
+										<!-- <xf:group style="overflow:auto; position:relative;" id="">
+										</xf:group>										 -->
+									</div>
+									<!-- <canvas id="canvas" width="1270" height="150"></canvas> -->					
+								</xf:group>									
 							</div>
 
 			</xf:group><!-- end content -->

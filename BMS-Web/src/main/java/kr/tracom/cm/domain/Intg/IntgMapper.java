@@ -15,4 +15,6 @@ public interface IntgMapper {
 	
 	public void insertAirconInfo(Map param);
 	
+	public List<Map<String, Object>> selectIntg(Map param);
+	
 }

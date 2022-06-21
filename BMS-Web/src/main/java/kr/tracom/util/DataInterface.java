@@ -138,6 +138,7 @@ public class DataInterface {
 			return nodeList;
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}

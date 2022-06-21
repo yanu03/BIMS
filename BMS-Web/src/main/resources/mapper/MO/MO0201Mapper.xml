@@ -268,6 +268,7 @@
 									
 		WHERE			A.NODE_TYPE = 'NT001'
 		AND				C.DEL_YN != 'Y'
+		AND				C.MAIN_CRS_YN = 'Y'
 		<if test="CONTENT1 != 'all'">
 			AND D.REP_ROUT_ID = #{CONTENT1}			
 		</if>
@@ -414,6 +415,7 @@
 		WHERE			A.NODE_TYPE = 'NT008'
 		AND				A.PHASE_NO IS NOT NULL
 		AND				C.DEL_YN != 'Y'
+		AND				C.MAIN_CRS_YN = 'Y'
 		AND				E.CRS_ID IS NOT NULL
 		<if test="CONTENT1 != 'all'">
 			AND D.REP_ROUT_ID = #{CONTENT1}			
