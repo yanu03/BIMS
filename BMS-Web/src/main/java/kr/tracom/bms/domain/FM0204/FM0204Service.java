@@ -1,16 +1,24 @@
 package kr.tracom.bms.domain.FM0204;
 
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 
 import sun.misc.BASE64Encoder;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.core.util.Base64;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DuplicateKeyException;
@@ -22,6 +30,8 @@ import kr.tracom.bms.domain.FM0204.FM0204Mapper;
 import kr.tracom.cm.domain.Intg.IntgMapper;
 import kr.tracom.cm.support.ServiceSupport;
 import kr.tracom.cm.support.exception.MessageException;
+import kr.tracom.tims.domain.HistoryMapper;
+import kr.tracom.util.CommonUtil;
 import kr.tracom.util.Result;
 
 @Service
@@ -30,11 +40,16 @@ public class FM0204Service extends ServiceSupport {
 	@Value("${api.gateway.url}")
 	private String apiGatewayUrl;
 	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private FM0204Mapper FM0204Mapper;
 	
 	@Autowired
 	private IntgMapper intgMapper;
+	
+	@Autowired
+	private HistoryMapper historyMapper;
 	
 	public List FM0204G0R0() throws Exception {
 		Map param = getSimpleDataMap("dma_search");
@@ -42,6 +57,68 @@ public class FM0204Service extends ServiceSupport {
 	}
 	
 	public List FM0204G0R1() throws Exception {
+		List<Map<String, Object>> param = getSimpleList("dlt_airconItem");
+		
+		Map<String, Object> paramSr = new HashMap();
+		paramSr.put("INTG_TYPE", "SR");
+		
+		List<Map<String, Object>> token = intgMapper.selectIntgMstList(paramSr);
+		String key = (String) token.get(0).get("INTG_API_KEY");
+		String intgUrl = (String) token.get(0).get("INTG_URL");
+		
+		HttpURLConnection conn = null;
+		String result = "";
+		
+		for (int i = 0; i < param.size(); i++) {
+			Map data = (Map) param.get(i);
+			String api = apiGatewayUrl + intgUrl + key;
+			api = api + "&deviceId=" + data.get("INTG_FCLT_ID");
+			
+			try {
+				URL url = new URL(api);
+				try {
+					conn = (HttpURLConnection) url.openConnection();
+					conn.setRequestMethod("GET");
+					
+
+					BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+					StringBuilder sb = new StringBuilder();
+					String line = "";
+					while ((line = br.readLine()) != null) {
+						sb.append(line);
+					}
+					
+					try {
+						result = sb.toString();
+						
+						Gson gson = new Gson();
+						Gson gsonSl = new Gson();
+						Type resultType = new TypeToken<List<Map<String, Object>>>(){}.getType();
+						List<Map<String, Object>> jsonList = gson.fromJson(result, resultType);
+						
+						for (int j = 0; j < jsonList.size(); j++) {
+							Map data2 = (Map) jsonList.get(j);
+							
+							data2.put("COOL_SET", data2.get("coolingSetpoint"));
+							data2.put("TEMP", data2.get("temperature"));
+							data2.put("SWITCH", data2.get("switch"));
+							data2.put("FCLT_ID", data.get("FCLT_ID"));
+							
+							historyMapper.updateFcltCondParamInfo(data2);
+						}			
+						
+					} catch (Exception e) {
+						//logger.error("error");
+						logger.error("error : {}", e );
+					}
+				} catch (IOException e) {
+					logger.error("IOException");
+				}
+			} catch (MalformedURLException e) {
+				logger.error("MalformedURLException");
+			}
+		}			
+		
 		return FM0204Mapper.FM0204G0R1();
 	}
 	
@@ -69,34 +146,32 @@ public class FM0204Service extends ServiceSupport {
 		return FM0204Mapper.FM0204G2R2(param);
 	}
 	
-	//에어컨 제어 테스트!!!
-	public List sendtest() throws Exception {
-		Map param = getSimpleDataMap("dma_sendtest");
+	//에어컨 제어
+	public List airconControl() throws Exception {
+		Map param = getSimpleDataMap("dma_airconControl");
 		String intgFcltId = (String) param.get("INTG_FCLT_ID");
 		String power = (String) param.get("POWER");
 		String degree = (String) param.get("DEGREE");
 		
-		List<Map<String, Object>> token = intgMapper.selectIntgMstList(param);
-		String key = (String) token.get(0).get("INTG_API_KEY");
-		String intgUrl = (String) token.get(0).get("INTG_URL");
-		
-		//String api = apiGatewayUrl + intgUrl + key + "&deviceId=" + intgFcltId + "&value=" + power;
-		
-		//intgUrl - "local/smartthings/getDevices?token=" => local/smartthings/까지만 연계관리에 두고 뒷부분은 파라미터 속성1에서 가져오기!! 작업해야함.
-		String[] api = {apiGatewayUrl + intgUrl + key + "&deviceId=" + "18e8acbb-f959-119f-9cfd-000001200001" + "&value=" + power
-						,apiGatewayUrl + "local/smartthings/setCoolingSetpoint?token=" + key + "&deviceId=" + "18e8acbb-f959-119f-9cfd-000001200001" + "&value=" + degree};
-		
-		BufferedReader in = null;
-		
-		for(int i=0; i<api.length; i++) {
+		//전원제어
+		if(power.isEmpty()==false) {
+			param.put("INTG_TYPE", "PC");
+			
+			List<Map<String, Object>> token = intgMapper.selectIntgMstList(param);
+			String key = (String) token.get(0).get("INTG_API_KEY");
+			String intgUrl = (String) token.get(0).get("INTG_URL");
+			
+			String api = apiGatewayUrl + intgUrl + key + "&deviceId=" + intgFcltId + "&value=" + power;
+			
+			BufferedReader in = null;
+			
 			try {
-				URL url = new URL(api[i]);
+				URL url = new URL(api);
 				try {
 					HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // 접속 
 					conn.setRequestMethod("GET"); // 전송 방식은 GET
 					
 					in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-					
 					
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -108,9 +183,35 @@ public class FM0204Service extends ServiceSupport {
 			
 		}
 		
-		
-		
-		
+		//온도제어
+		if(degree.isEmpty()==false) {
+			param.put("INTG_TYPE", "DC");
+			
+			List<Map<String, Object>> token = intgMapper.selectIntgMstList(param);
+			String key = (String) token.get(0).get("INTG_API_KEY");
+			String intgUrl = (String) token.get(0).get("INTG_URL");
+			
+			String api = apiGatewayUrl + intgUrl + key + "&deviceId=" + intgFcltId + "&value=" + degree;
+			
+			BufferedReader in = null;
+			
+			try {
+				URL url = new URL(api);
+				try {
+					HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // 접속 
+					conn.setRequestMethod("GET"); // 전송 방식은 GET
+					
+					in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+				
+		}
 		
 		return null;
 	}

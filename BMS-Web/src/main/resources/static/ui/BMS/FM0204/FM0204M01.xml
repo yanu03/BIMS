@@ -73,6 +73,14 @@
 						<w2:column id="PK041" name="" dataType="text"></w2:column>
 						<w2:column id="PK042" name="" dataType="text"></w2:column>
 						<w2:column id="PK043" name="" dataType="text"></w2:column>
+						<w2:column id="PK044" name="" dataType="text"></w2:column>
+						<w2:column id="PK045" name="" dataType="text"></w2:column>
+						<w2:column id="PK046" name="" dataType="text"></w2:column>
+						<w2:column id="PK047" name="" dataType="text"></w2:column>
+						<w2:column id="PK048" name="" dataType="text"></w2:column>
+						<w2:column id="PK049" name="" dataType="text"></w2:column>
+						<w2:column id="PK050" name="" dataType="text"></w2:column>
+						<w2:column id="PK051" name="" dataType="text"></w2:column>
 						<w2:column id="PK001_AUTO_YN" name="리셋" dataType="text"></w2:column>
 						<w2:column id="PK002_AUTO_YN" name="전원(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK003_AUTO_YN" name="화면(ON/OFF)" dataType="text"></w2:column>
@@ -183,6 +191,14 @@
 						<w2:column id="PK041" name="" dataType="text"></w2:column>
 						<w2:column id="PK042" name="" dataType="text"></w2:column>
 						<w2:column id="PK043" name="" dataType="text"></w2:column>
+						<w2:column id="PK044" name="" dataType="text"></w2:column>
+						<w2:column id="PK045" name="" dataType="text"></w2:column>
+						<w2:column id="PK046" name="" dataType="text"></w2:column>
+						<w2:column id="PK047" name="" dataType="text"></w2:column>
+						<w2:column id="PK048" name="" dataType="text"></w2:column>
+						<w2:column id="PK049" name="" dataType="text"></w2:column>
+						<w2:column id="PK050" name="" dataType="text"></w2:column>
+						<w2:column id="PK051" name="" dataType="text"></w2:column>
 						<w2:column id="PK001_AUTO_YN" name="리셋" dataType="text"></w2:column>
 						<w2:column id="PK002_AUTO_YN" name="전원(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK003_AUTO_YN" name="화면(ON/OFF)" dataType="text"></w2:column>
@@ -292,6 +308,14 @@
 						<w2:column id="PK041" name="" dataType="text"></w2:column>
 						<w2:column id="PK042" name="" dataType="text"></w2:column>
 						<w2:column id="PK043" name="" dataType="text"></w2:column>
+						<w2:column id="PK044" name="" dataType="text"></w2:column>
+						<w2:column id="PK045" name="" dataType="text"></w2:column>
+						<w2:column id="PK046" name="" dataType="text"></w2:column>
+						<w2:column id="PK047" name="" dataType="text"></w2:column>
+						<w2:column id="PK048" name="" dataType="text"></w2:column>
+						<w2:column id="PK049" name="" dataType="text"></w2:column>
+						<w2:column id="PK050" name="" dataType="text"></w2:column>
+						<w2:column id="PK051" name="" dataType="text"></w2:column>
 						<w2:column id="PK001_AUTO_YN" name="리셋" dataType="text"></w2:column>
 						<w2:column id="PK002_AUTO_YN" name="전원(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK003_AUTO_YN" name="화면(ON/OFF)" dataType="text"></w2:column>
@@ -507,6 +531,12 @@
 						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_airconItem" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="FCLT_ID" name="시설물id" dataType="text"></w2:column>
+						<w2:column id="INTG_FCLT_ID" name="연계시설물id" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_search">
 					<w2:keyInfo>
 						<w2:key id="TYPE" name="name1" dataType="text"></w2:key>
@@ -527,7 +557,7 @@
 				</w2:dataMap>
 				
 				<!-- 제어 -->
-				<w2:dataMap baseNode="map" id="dma_sendtest">
+				<w2:dataMap baseNode="map" id="dma_airconControl">
 					<w2:keyInfo>
 						<w2:key id="INTG_FCLT_ID" name="연계장치아이디" dataType="text"></w2:key>
 						<w2:key id="INTG_TYPE" name="연계유형" dataType="text"></w2:key>
@@ -543,7 +573,7 @@
 				customHandler="" mode="asynchronous" processMsg="조회 중입니다.." ev:submit="" ev:submitdone="scwin.sub_FM0204G0R0_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_FM0204G0R1" ref="" target="data:json,dlt_PARAM_KIND" action="/fm/FM0204G0R1" method="post"
+			<xf:submission id="sub_FM0204G0R1" ref="data:json,dlt_airconItem" target="data:json,dlt_PARAM_KIND" action="/fm/FM0204G0R1" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="조회중입니다..."
 				ev:submit="" ev:submitdone="scwin.sub_FM0204G0R1_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -571,9 +601,9 @@
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_sendtest" ref="data:json,dma_sendtest" target="" action="/fm/sendtest" method="post"
-				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
-				ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+			<xf:submission id="sub_airconControl" ref="data:json,dma_airconControl" target="" action="/fm/airconControl" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="전송중입니다..."
+				ev:submit="" ev:submitdone="scwin.sub_airconControl_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			
 		</xf:model>
@@ -610,13 +640,13 @@
 		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainSrhOptions, codeOptions);
 			
 		var subOptions2 = {
-			SAVE:[{cbFnc:scwin.selectControl,nm:"전송", class:"send"}]
+			SAVE:[{cbFnc:scwin.airconControl,nm:"전송", class:"send"}]
 		};
 		
 		com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions2);
 		
 		var subOptions3 = {
-			SAVE:[{cbFnc:scwin.selectControl2,nm:"전송", class:"send"}]
+			SAVE:[{cbFnc:scwin.airtubeControl,nm:"전송", class:"send"}]
 		};
 		
 		com.setSubBtn2(wfm_subBtn3, autoOptions, subOptions3);
@@ -681,16 +711,16 @@
 	}
 	
 	//정류소제어 전송 버튼 클릭 이벤트
-	scwin.selectControl = function() {
+	scwin.airconControl = function() {
 		//제어 서브미션 테스트
-		dma_sendtest.set("INTG_FCLT_ID", dlt_BMS_STTN_FCLT_COND_PARAM_INFO.getCellData(FM0204G0.getFocusedRowIndex(), "INTG_FCLT_ID"));
-		dma_sendtest.set("INTG_TYPE", "PC");
-		dma_sendtest.set("DEGREE", T0_PK022.getValue());
-		com.executeSubmission(sub_sendtest);
+		dma_airconControl.set("INTG_FCLT_ID", dlt_BMS_STTN_FCLT_COND_PARAM_INFO.getCellData(FM0204G0.getFocusedRowIndex(), "INTG_FCLT_ID"));
+		//dma_airconControl.set("INTG_TYPE", "PC");
+		dma_airconControl.set("DEGREE", T0_PK022.getValue());
+		com.executeSubmission(sub_airconControl);
 	}
 	
 	//에어튜브제어 버튼 클릭 이벤트
-	scwin.selectControl2 = function() {
+	scwin.airtubeControl = function() {
 		com.alert("전송입니다. (후 작업 필요)");
 	}
 	
@@ -712,7 +742,16 @@
 			}
 		}
 		
-		com.executeSubmission(sub_FM0204G0R1);	
+		var rowCnt = dlt_BMS_FCLT_COND_PARAM_INFO.getRowCount();
+		var index = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedIndex("FCLT_KIND", "FK005");
+		
+		for(var x = 0; x < index.length; x++){
+			dlt_airconItem.insertRow(x);
+			dlt_airconItem.setCellData(x, "FCLT_ID", dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(index[x], "FCLT_ID"));
+			dlt_airconItem.setCellData(x, "INTG_FCLT_ID", dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(index[x], "INTG_FCLT_ID"));
+		}
+		
+		com.executeSubmission(sub_FM0204G0R1);
 	};
 	
 	//PARAM_KIND헤더 동적으로 가져오는 서브미션 콜백 메소드
@@ -1624,6 +1663,8 @@
 			return "ON";
 		}else if(data == '0'){
 			return "OFF";
+		}else{
+			return data;
 		}
 	}
 	
@@ -1669,7 +1710,7 @@
 	
 	scwin.T0_PK002_onviewchange = function(info) {
 		var value = "";
-		if(info.newValue == '1'){
+		if(info.newValue == 'on'){
 			value = "on";
 			T0_PK022.setDisabled(false);
 		}else{
@@ -1677,8 +1718,12 @@
 			T0_PK022.setDisabled(true);
 			T0_PK022.setValue("");
 		}
-		dma_sendtest.set("POWER", value);
+		dma_airconControl.set("POWER", value);
 		
+	};
+	
+	scwin.sub_airconControl_submitdone = function(e) {
+		com.alert("전송되었습니다.");
 	};
 	]]></script>
 	</head>
@@ -1956,15 +2001,16 @@
 													</xf:group>
 													<xf:group tagname="td" style="" class="w2tb_td" id="">
 														<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="" direction="auto" disabled="false"
-															disabledClass="w2selectbox_disabled" id='T0_PK002' ref="" style="" submenuSize="auto" ev:onviewchange="scwin.T0_PK002_onviewchange">
+															disabledClass="w2selectbox_disabled" id='T0_PK002' ref="data:dlt_BMS_STTN_FCLT_COND_PARAM_INFO.PK002" style="" 
+															submenuSize="auto" ev:onviewchange="scwin.T0_PK002_onviewchange">
 															<xf:choices>
 																<xf:item>
 																	<xf:label><![CDATA[ON]]></xf:label>
-																	<xf:value><![CDATA[1]]></xf:value>
+																	<xf:value><![CDATA[on]]></xf:value>
 																</xf:item>
 																<xf:item>
 																	<xf:label><![CDATA[OFF]]></xf:label>
-																	<xf:value><![CDATA[0]]></xf:value>
+																	<xf:value><![CDATA[off]]></xf:value>
 																</xf:item>
 															</xf:choices>
 														</xf:select1>
@@ -1986,7 +2032,7 @@
 														</xf:select>
 													</xf:group>
 													<xf:group tagname="td" style="" class="w2tb_td" id="">
-														<xf:input adjustMaxLength="false" id="T0_PK022" style="" type="number" allowChar="0-9" maxlength="2"></xf:input>
+														<xf:input adjustMaxLength="false" id="T0_PK022" style="" type="number" allowChar="0-9" maxlength="2" ref="data:dlt_BMS_STTN_FCLT_COND_PARAM_INFO.PK022"></xf:input>
 													</xf:group>
 												</xf:group>
 												<!-- <xf:group tagname="tr" style="height:5px;">
@@ -2355,16 +2401,16 @@
 														<w2:colspan>2</w2:colspan>
 														<w2:rowspan>1</w2:rowspan>
 													</w2:attributes>
-													<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="" direction="auto"
-														disabled="false" disabledClass="w2selectbox_disabled" id="T1_PK002" ref="" style="" submenuSize="auto">
+													<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel=""
+														direction="auto" disabled="false" disabledClass="w2selectbox_disabled" id="T1_PK002" ref="" style="" submenuSize="auto">
 														<xf:choices>
 															<xf:item>
 																<xf:label><![CDATA[ON]]></xf:label>
-																<xf:value><![CDATA[1]]></xf:value>
+																<xf:value><![CDATA[on]]></xf:value>
 															</xf:item>
 															<xf:item>
 																<xf:label><![CDATA[OFF]]></xf:label>
-																<xf:value><![CDATA[0]]></xf:value>
+																<xf:value><![CDATA[off]]></xf:value>
 															</xf:item>
 														</xf:choices>
 													</xf:select1>
