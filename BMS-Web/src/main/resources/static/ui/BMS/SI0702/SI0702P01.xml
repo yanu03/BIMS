@@ -127,7 +127,7 @@
     						ref="data:dma_sub_search.CONTENT">
     					</xf:input>
     				</xf:group>
-    				<w2:wframe class="" id="wfm_mainBtn" scope="true" src="/cm/common/wf_mainBtn.xml" style=""></w2:wframe>
+    				<w2:wframe class="" id="wfm_mainBtn" scope="true" src="/cm/common/wf_popUpBtn.xml" style=""></w2:wframe>
     			</xf:group>
     		</xf:group>
     		<xf:group class="popup_content" style="">
