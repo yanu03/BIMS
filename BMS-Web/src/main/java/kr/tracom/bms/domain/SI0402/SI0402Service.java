@@ -1,5 +1,6 @@
 package kr.tracom.bms.domain.SI0402;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -213,13 +214,80 @@ public class SI0402Service extends ServiceSupport {
 			if((isLinkChange==true)&&(param.size()>0)) {
 				int sttnCnt = 0;
 				double routLen = 0;
+				int sttnCrsCnt = 0;
+				
 				si0402Mapper.SI0402G1DA1(map);
 				si0402Mapper.SI0402G1DA2(map);
 				si0402Mapper.SI0402G1DA3(map);
 				si0402Mapper.SI0402G1DA4(map);
 				List<Map<String, Object>> routNodeList = si0402Mapper.SI0402G1R1(map);
+				
+				//List<Map<Object, Object>> routSttnLinkIdList = new ArrayList();
+				List<Object> routSttnLinkIdKeysList = new ArrayList();
+				List<Object> routSttnLinkIdValuesList = new ArrayList();
+				
 				if(routNodeList.size()>0) {
+					
+					//정류소별 링크
 					for (int i = 0; i < routNodeList.size()-1; i++) {
+						Map sttnData = routNodeList.get(i);
+						sttnData.put("ROUT_LINK_ID", sttnData.get("LINK_ID"));
+						String nodeType = (String) sttnData.get("NODE_TYPE");
+						
+						if(!Constants.NODE_TYPE_BUSSTOP.equals(nodeType)){
+							continue;
+						}						
+						
+						Map sttnData2 = null;
+						
+						for(int j = i+1; j < routNodeList.size()-1; j++ ) {
+							sttnData2 = routNodeList.get(j);
+							String nodeType2 = (String) sttnData2.get("NODE_TYPE");
+							if(Constants.NODE_TYPE_BUSSTOP.equals(nodeType2)) {
+								break;
+							}
+						}
+						
+						if(sttnData2 == null) {
+							continue;
+						}
+						
+						Map linkKeyMap = si0402Mapper.SI0402G1K2();
+						
+						//매핑링크 List 
+						Map<Object, Object> routSttnLinkIdMap = new HashMap<>();
+						//routSttnLinkIdMap.put(linkKeyMap.get("SEQ"), data.get("NODE_ID"));
+						//routSttnLinkIdList.add(routSttnLinkIdMap);
+						
+						routSttnLinkIdKeysList.add(linkKeyMap.get("SEQ")); //ROUT_STTN_LINK_ID
+						routSttnLinkIdValuesList.add(sttnData2.get("NODE_ID")); //도착 정류소ID
+						
+						//sttnData.put("LINK_ID",linkKeyMap.get("SEQ"));
+						sttnData.put("STTN_LINK_ID",linkKeyMap.get("SEQ"));
+						sttnData.put("LINK_SN",(i+1));
+						sttnData.put("ST_NODE_ID",sttnData.get("NODE_ID"));
+						sttnData.put("ED_NODE_ID",sttnData2.get("NODE_ID"));
+						String linkNm = sttnData.get("NODE_NM") + "-" + sttnData2.get("NODE_NM");
+						sttnData.put("LINK_NM",linkNm);
+						double len = DataInterface.getDistanceBetween(CommonUtil.decimalToDouble(sttnData.get("GPS_X")), CommonUtil.decimalToDouble(sttnData.get("GPS_Y")), 
+								CommonUtil.decimalToDouble(sttnData2.get("GPS_X")), CommonUtil.decimalToDouble(sttnData2.get("GPS_Y")));
+						
+//						if(i==0) {
+//							data.put("ACCRU_LEN",0);
+//							si0402Mapper.updateLengthRoutNodeCmpstn(data);
+//						}
+						sttnData.put("LEN",CommonUtil.pointRound(len,3));
+						routLen += len;
+						si0402Mapper.SI0402G1I2(sttnData); //링크 insert
+						
+//						data2.put("ACCRU_LEN",(int)routLen);
+//						si0402Mapper.updateLengthRoutNodeCmpstn(data2);
+					}					
+					
+					
+					//BMS_ROUT_LINK_CMPSTN
+					for (int i = 0; i < routNodeList.size()-1; i++) {
+						
 						Map data = routNodeList.get(i);
 						String nodeType = (String) data.get("NODE_TYPE");
 						
@@ -227,6 +295,18 @@ public class SI0402Service extends ServiceSupport {
 						if(Constants.NODE_TYPE_BUSSTOP.equals(nodeType)){
 							sttnCnt++;
 						}
+						
+						
+						
+						//if(data.get("NODE_ID") != routSttnLinkIdList.get(sttnCrsCnt).get("NODE_ID")) {
+						
+						//data.put("ROUT_STTN_LINK_ID", routSttnLinkIdList.get(sttnCrsCnt).get("SEQ"));
+						data.put("ROUT_STTN_LINK_ID", routSttnLinkIdKeysList.get(sttnCrsCnt));
+						if(data.get("NODE_ID") == routSttnLinkIdValuesList.get(sttnCrsCnt)) {
+							
+							sttnCrsCnt++;
+						}
+						
 						data.put("LINK_SN",(i+1));
 						data.put("ST_NODE_ID",data.get("NODE_ID"));
 						data.put("ED_NODE_ID",data2.get("NODE_ID"));
@@ -245,52 +325,6 @@ public class SI0402Service extends ServiceSupport {
 						
 						data2.put("ACCRU_LEN",(int)routLen);
 						si0402Mapper.updateLengthRoutNodeCmpstn(data2);
-					}
-					
-					//정류소별 링크
-					for (int i = 0; i < routNodeList.size()-1; i++) {
-						Map data = routNodeList.get(i);
-						data.put("ROUT_LINK_ID", data.get("LINK_ID"));
-						String nodeType = (String) data.get("NODE_TYPE");
-						
-						if(!Constants.NODE_TYPE_BUSSTOP.equals(nodeType)){
-							continue;
-						}						
-						
-						Map data2 = null;
-						
-						for(int j = i+1; j < routNodeList.size()-1; j++ ) {
-							data2 = routNodeList.get(j);
-							String nodeType2 = (String) data2.get("NODE_TYPE");
-							if(Constants.NODE_TYPE_BUSSTOP.equals(nodeType2)) {
-								break;
-							}
-						}
-						
-						if(data2 == null) {
-							continue;
-						}
-						
-						Map linkKeyMap = si0402Mapper.SI0402G1K2();
-						data.put("LINK_ID",linkKeyMap.get("SEQ"));
-						data.put("LINK_SN",(i+1));
-						data.put("ST_NODE_ID",data.get("NODE_ID"));
-						data.put("ED_NODE_ID",data2.get("NODE_ID"));
-						String linkNm = data.get("NODE_NM") + "-" + data2.get("NODE_NM");
-						data.put("LINK_NM",linkNm);
-						double len = DataInterface.getDistanceBetween(CommonUtil.decimalToDouble(data.get("GPS_X")), CommonUtil.decimalToDouble(data.get("GPS_Y")), 
-								CommonUtil.decimalToDouble(data2.get("GPS_X")), CommonUtil.decimalToDouble(data2.get("GPS_Y")));
-						
-//						if(i==0) {
-//							data.put("ACCRU_LEN",0);
-//							si0402Mapper.updateLengthRoutNodeCmpstn(data);
-//						}
-						data.put("LEN",CommonUtil.pointRound(len,3));
-						routLen += len;
-						si0402Mapper.SI0402G1I2(data); //링크 insert
-						
-//						data2.put("ACCRU_LEN",(int)routLen);
-//						si0402Mapper.updateLengthRoutNodeCmpstn(data2);
 					}
 					
 					//정류소/교차로별 링크

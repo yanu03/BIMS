@@ -366,7 +366,8 @@ routMap.drawLine = function(mapId, first, last, color, eventKinds, clickEvent, r
 		strokeColor: color, // 라인 색상
 		strokeWeight: 5, // 라인 두께
 		strokeStyle:'solid',
-		strokeOpacity: 0.8
+		strokeOpacity: 0.8,
+		endArrow: true
 	});
 
 	if(typeof eventKinds != "undefined") {

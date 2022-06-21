@@ -17,6 +17,8 @@
 					,	A.USE_YN
 					,	A.UPD_DTM
 					,	A.UPD_ID
+					,	G.PUB_STTN_ID
+					,	G.AREA
 					,	IF(D.CNT > 0 , 'CE001','CE002') COND_ERROR
 					, 	E.ROUT_ID
 					,	E.NODE_SN
@@ -30,6 +32,8 @@
 			ON			E.ROUT_ID = F.ROUT_ID AND E.LINK_ID = F.LINK_ID
 		LEFT JOIN	    BMS_NODE_MST A
 			ON E.NODE_ID = A.NODE_ID
+		LEFT JOIN		BMS_STTN_MST G	
+			ON	A.NODE_ID = G.STTN_ID			
 		LEFT JOIN			(SELECT B.NODE_ID, COUNT(B.NODE_ID) CNT
 		            		FROM BMS_FCLT_INFO B
 		         			LEFT JOIN BMS_FCLT_COND_INFO C 
@@ -95,7 +99,7 @@
 	</select>
 	
 	<select id="MO0203P0R0" resultType="Map" parameterType="Map">
-		CALL	PROC_FCLT_MONITOR(#{NODE_ID})
+		CALL	PROC_FCLT_MONITOR2(#{NODE_ID})
 	</select>	
 	
 	<select id="MO0203P0R1" resultType="Map">
