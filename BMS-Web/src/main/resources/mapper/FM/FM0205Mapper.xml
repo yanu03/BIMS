@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.tracom.bms.domain.FM0204.FM0204Mapper">
+<mapper namespace="kr.tracom.bms.domain.FM0205.FM0205Mapper">
 
 <!-- 시설물 상태 파라미터 조회 프로시서 -->
-<select id="FM0204G0R0" resultType="Map">
-	<if test="@kr.tracom.util.CommonUtil@notEmpty(FCLT_KIND)">			 
-		CALL PROC_FCLT_STATUS(#{FCLT_KIND});
+<select id="FM0205G0R0" resultType="Map">
+	<if test="@kr.tracom.util.CommonUtil@notEmpty(NODE_ID)">			 
+		CALL PROC_FCLT_AIRCON_STATUS(#{NODE_ID});
 	</if>
-	<if test="@kr.tracom.util.CommonUtil@empty(FCLT_KIND)">			 
-		CALL PROC_FCLT_STATUS();
+	<if test="@kr.tracom.util.CommonUtil@empty(NODE_ID)">			 
+		CALL PROC_FCLT_AIRCON_STATUS();
 	</if>
 </select>
 
 <!-- 시설물(에어튜브) 상태 파라미터 조회 프로시서-->
-<select id="FM0204G2R0" resultType="Map">
+<select id="FM0205G2R0" resultType="Map">
 	CALL PROC_FCLT_AIRTUBE_STATUS()
 </select>
 
 <!-- 시설물 파라미터 헤더 조회-->
-<select id="FM0204G0R1" resultType="Map">
+<select id="FM0205G0R1" resultType="Map">
 	SELECT 
 		A.PARAM_KIND
 		,B.NODE_TYPE
@@ -34,7 +34,7 @@
 </select>
 
 <!-- 시설물(에어튜브) 파라미터 헤더 조회-->
-<select id="FM0204G2R1" resultType="Map">
+<select id="FM0205G2R1" resultType="Map">
 	SELECT 
 		A.PARAM_KIND
 	FROM 
@@ -46,7 +46,7 @@
 </select>
 
 <!-- 시설물 제어 조회-->
-<select id="FM0204G0R2" resultType="Map">
+<select id="FM0205G0R2" resultType="Map">
 	SELECT 
 		A.PARAM_KIND
 		,A.AUTO_YN
@@ -61,7 +61,7 @@
 </select>
 
 <!-- 시설물(에어튜브) 제어 조회-->
-<select id="FM0204G2R2" resultType="Map">
+<select id="FM0205G2R2" resultType="Map">
 	SELECT 
 		A.PARAM_KIND
 		,A.AUTO_YN
@@ -76,7 +76,7 @@
 </select>
 
 <!-- 프로세스 조회-->
-<select id="FM0204G1R0" resultType="Map">
+<select id="FM0205G1R0" resultType="Map">
 	SELECT 			DATE_FORMAT(LAST_DTM, '%Y-%m-%d %H:%i:%s') LAST_DTM
 					<!-- ,DATE_FORMAT(REG_DTM, '%Y-%m-%d %H:%i:%s') REG_DTM -->
 					,IMP_ID
