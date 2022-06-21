@@ -249,9 +249,9 @@
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="" ev:submit="" ev:submitdone="scwin.sub_MO0203SHI0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_MO0203G2R0" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_ROUT_NODE_DISP_VW"
-				action="/rout/selectNodeDispListByRout" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
-				errorHandler="" customHandler="" mode="asynchronous" processMsg="조회 중입니다.." ev:submit="" ev:submitdone="" ev:submiterror=""
+			<xf:submission id="sub_MO0203G2R0" ref="data:json,dma_search" target="data:json,dlt_BMS_ROUT_NODE_DISP_VW"
+				action="/rout/selectNodeDispListByRepRout" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+				errorHandler="" customHandler="" mode="asynchronous" processMsg="조회 중입니다.." ev:submit="" ev:submitdone="scwin.sub_MO0203G2R0_submitdone" ev:submiterror=""
 				abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_MO0203SCK" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_ETA_INFO" action="/mo/MO0203SCK"
@@ -695,27 +695,33 @@
 		com.setFocusedCell(MO0203G0, "NODE_NM");
 	};
 	
-	scwin.sub_MO0203SHI0_submitdone = function(e) {
-		dma_sub_search.set("ROUT_ID",TYPE.getValue());
-		$p.executeSubmission(sub_MO0203G2R0);
-		com.searchGrid(MO0203G0, sub_MO0203G0R0);
-	};
+//	scwin.sub_MO0203SHI0_submitdone = function(e) {
+//		TYPE.setValue("RT00000049");
+//		
+//		dma_sub_search.set("ROUT_ID",TYPE.getValue());
+//		$p.executeSubmission(sub_MO0203G2R0);
+//		com.searchGrid(MO0203G0, sub_MO0203G0R0);
+//	};
 	
-	scwin.TYPE_onviewchange = function(info) {
-		dma_sub_search.set("ROUT_ID",TYPE.getValue());		
-		$p.executeSubmission(sub_MO0203G2R0);
-		com.searchGrid(MO0203G0, sub_MO0203G0R0);
-	};
+//	scwin.TYPE_onviewchange = function(info) {
+//		dma_sub_search.set("ROUT_ID",TYPE.getValue());		
+//		$p.executeSubmission(sub_MO0203G2R0);
+//		com.searchGrid(MO0203G0, sub_MO0203G0R0);
+//	};
 
 
 	scwin.TYPE1_onviewchange = function(info) {
-		$p.executeSubmission(sub_MO0203SHI0);
+		//$p.executeSubmission(sub_MO0203SHI0);
+		$p.executeSubmission(sub_MO0203G2R0);
+		com.searchGrid(MO0203G0, sub_MO0203G0R0);
 	}	
 	
 	
 	scwin.sub_MO0203SHI1_submitdone = function(e) {
 		TYPE1.setValue("RR00000002");
-		$p.executeSubmission(sub_MO0203SHI0);
+		$p.executeSubmission(sub_MO0203G2R0);
+		com.searchGrid(MO0203G0, sub_MO0203G0R0);
+		//$p.executeSubmission(sub_MO0203SHI0);
 	};
 	
 	scwin.sttninfo_onclick = function() {
@@ -734,7 +740,65 @@
 		};
 		
 		com.openPopup(("/ui/BRT/MO0203/MO0203P01.xml"), options, data);
-	}	
+	}
+	
+	//이미지 생성 함수
+	scwin.makeImage = function(){
+		var str = ""
+		var imgSrc = ""
+		var imgId = ""
+		
+		for (i=0; i<dlt_BMS_FCLT_INFO.getDataLength(); i++) {
+			
+			var coord = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COORDS").split(',');
+			var top = coord[0];
+			var left = coord[1];
+			var fcltKind = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_KIND");
+			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
+			var fcltCond = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND");
+			
+			if(fcltKind == 'FK001' && (fcltCond == 'FC020'|| fcltCond == '')){
+				imgSrc = "/cm/images/bms/BIT_RED_normal.png";
+			}else if(fcltKind == 'FK001' && (fcltCond == 'FC021' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/BIT_RED_abnormal.png";
+			}else if(fcltKind == 'FK004' && (fcltCond == 'FC020' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
+			}else if(fcltKind == 'FK004' && (fcltCond == 'FC021' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/AIRTUBE_abnormal.png";
+			}else if(fcltKind == 'FK005' && (fcltCond == 'FC020' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/AIRCON_normal.png";
+			}else if(fcltKind == 'FK005' && (fcltCond == 'FC021' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
+			}else if(fcltKind == 'FK007' && (fcltCond == 'FC020' || fcltCond == '')){
+				imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
+			}
+			
+			//시설물 이미지
+			str += '<div id="'+fcltId+'" style="z-index: 1; position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
+			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			str += '</div>'
+			
+		}
+		
+		//정류소 이미지
+		//반개방형때문인데 현재 안쓴다고함
+//		if(dlt_BMS_NODE_MST.getCellData(FM0202G0.getFocusedRowIndex(), "STTN_FCLT_TYPE") == 'ST003'){
+//			var imgSrc = "/cm/images/bms/ST003_1.png"
+//		}else{
+//			var imgSrc = "/cm/images/bms/ST002_2.jpg"
+//		}
+		
+		var nodeId = dlt_BMS_NODE_MST.getCellData(MO0203G0.getFocusedRowIndex(), "NODE_ID");
+		
+		str += '<img xmlns="http://www.w3.org/1999/xhtml" style="position:absolute; cursor:default" src="'+imgSrc+'" id="'+nodeId+'img'+'">';
+		
+		$('#'+STTN_IMG.getID()).html(str);
+		
+	}		
+	
+	scwin.sub_MO0203P0R0_submitdone = function(e) {
+		scwin.makeImage();
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -754,7 +818,7 @@
 				</xf:group>
 			</xf:group>
 		
-			<xf:group id="pgm_content" class="pgm_content grdc_500_0_a" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_470_0_a" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
@@ -779,7 +843,7 @@
 									</xf:choices>
 								</xf:select1>
 							</xf:group>
-							<xf:group id="" style="" class="label">
+							<!-- <xf:group id="" style="" class="label">
 									<w2:span id="" class="" label="노선"></w2:span>
 							</xf:group>
 							<xf:group id="" style="" class="search">
@@ -794,7 +858,7 @@
 										</xf:itemset>
 									</xf:choices>
 								</xf:select1>
-							</xf:group>	
+							</xf:group>	 -->
 							<xf:group class="label" id="" style="">
 								<w2:span class="" id="" label="검색"></w2:span>
 							</xf:group>
