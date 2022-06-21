@@ -543,7 +543,7 @@
 									<w2:column id="column32" blockSelect="false" style="height:20px" width="90" inputType="number" value="속성6(숫자)"
 										displayMode="label">
 									</w2:column>
-									<w2:column id="column33" blockSelect="false" style="height:20px" width="70" inputType="text" value="비고"
+									<w2:column id="column33" blockSelect="false" style="height:20px" width="1000" inputType="text" value="비고"
 										displayMode="label">
 									</w2:column>
 								</w2:row>

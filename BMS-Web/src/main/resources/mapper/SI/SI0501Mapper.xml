@@ -19,6 +19,7 @@
 			A.BAY_TYPE,
 			A.BAY_LEN,
 			A.LINE_CNT,
+			A.PUB_STTN_ID,
 			A.USE_YN,
 			A.STOP_TM_PEAK,
 			A.STOP_TM_NONE_PEAK,
@@ -67,6 +68,7 @@
 			BAY_TYPE,
 			BAY_LEN,
 			LINE_CNT,
+			PUB_STTN_ID,
 			USE_YN,
 			STOP_TM_PEAK,
 			STOP_TM_NONE_PEAK,
@@ -85,11 +87,12 @@
 			#{CENTER_YN},
 			#{STTN_FCLT_TYPE},
 			#{VHC_DOOR_DIR_TYPE},
-			#{WAY_DIV,},
+			#{WAY_DIV},
 			#{APPL_RDS},
 			#{BAY_TYPE},
 			#{BAY_LEN},
 			#{LINE_CNT},
+			#{PUB_STTN_ID},
 			#{USE_YN},
 			#{STOP_TM_PEAK},
 			#{STOP_TM_NONE_PEAK},
@@ -113,6 +116,7 @@
 			BAY_TYPE =#{BAY_TYPE},
 			BAY_LEN =#{BAY_LEN},
 			LINE_CNT =#{LINE_CNT},
+			PUB_STTN_ID = #{PUB_STTN_ID},
 			USE_YN = #{USE_YN},
 			STOP_TM_PEAK = #{STOP_TM_PEAK},
 			STOP_TM_NONE_PEAK = #{STOP_TM_NONE_PEAK},
@@ -128,7 +132,7 @@
 			UPD_ID = #{SSN_USER_ID}
 	WHERE NODE_ID = #{STTN_ID};
 	
-	UPDATE BMS_ROUT_MST
+	<!-- UPDATE BMS_ROUT_MST
 	SET		ST_STTN_NM = #{STTN_NM},
 			ST_STTN_ENM = #{STTN_ENM},
 			UPD_DTM = #{UPD_DTM},
@@ -141,7 +145,7 @@
 			UPD_DTM = #{UPD_DTM},
 			UPD_ID = #{SSN_USER_ID}
 	WHERE ED_STTN_ID = #{STTN_ID};
-
+ -->
 </update>
 
 <delete id="SI0501G0D0" parameterType="Map">

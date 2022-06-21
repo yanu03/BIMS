@@ -393,7 +393,7 @@
 			routDivResult += '<div class="route-line h-line '+ routLineColor +'" style="width:calc(100% / '+ topHorizontal+ '); '; 
 			routDivResult += 'top:calc(100% / '+vertical+' * '+ 0 +');left:calc(100% / '+topHorizontal+' * '+ i +')"></div>';
 			if(dlt_BMS_STTNCRS_LINK_CMPSTN.getCellData(sttnCrsCount, "NODE_TYPE") == "NT001") {
-				crsDivResult += '<div class="cross" style="top:calc(100% / ' + vertical +'* ' + 0 + ');left:calc(100% / '+ topHorizontal +' * ' + i + ')">';	
+				crsDivResult += '<div class="cross_route_map_area" style="top:calc(100% / ' + vertical +'* ' + 0 + ');left:calc(100% / '+ topHorizontal +' * ' + i + ')">';	
 				crsDivResult += '<span class="name">' + sttnCrsList.getCellData(sttnCrsCount, "NODE_NM") +'</span>';
 				crsDivResult += '<span class="nodeId" style="display:none" data-value="' + sttnCrsList.getCellData(sttnCrsCount, "NODE_ID") +'"></span></div>';
 			}
@@ -409,7 +409,7 @@
 			routDivResult += '<div class="route-line v-line '+ routLineColor +'" style="height:calc(100% / '+ vertical+ '); '; 
 			routDivResult += 'top:calc(100% / '+vertical+' * '+ i +');left:calc(100% / '+topHorizontal+' * '+ topHorizontal +')"></div>';
 			if(dlt_BMS_STTNCRS_LINK_CMPSTN.getCellData(sttnCrsCount, "NODE_TYPE") == "NT001") {
-				crsDivResult += '<div class="cross" style="top:calc(100% / ' + vertical +'* ' + i + ');left:calc(100% / '+ topHorizontal +' * ' + topHorizontal + ')">';
+				crsDivResult += '<div class="cross_route_map_area" style="top:calc(100% / ' + vertical +'* ' + i + ');left:calc(100% / '+ topHorizontal +' * ' + topHorizontal + ')">';
 				crsDivResult += '<span class="name">' + sttnCrsList.getCellData(sttnCrsCount, "NODE_NM") +'</span>';
 				crsDivResult += '<span class="nodeId" style="display:none" data-value="' + sttnCrsList.getCellData(sttnCrsCount, "NODE_ID") +'"></span></div>';	
 			}			
@@ -425,7 +425,7 @@
 			routDivResult += '<div class="route-line h-line '+ routLineColor +'" style="width:calc(100% / '+ topHorizontal+ '); '; 
 			routDivResult += 'top:calc(100% / '+vertical+' * '+ vertical +');left:calc(100% / '+topHorizontal+' * '+ i +')"></div>';
 			if(dlt_BMS_STTNCRS_LINK_CMPSTN.getCellData(sttnCrsCount, "NODE_TYPE") == "NT001") {
-				crsDivResult += '<div class="cross" style="top:calc(100% / ' + vertical +'* ' + vertical + ');left:calc(100% / '+ topHorizontal +' * ' + (i+1) + ')">';
+				crsDivResult += '<div class="cross_route_map_area" style="top:calc(100% / ' + vertical +'* ' + vertical + ');left:calc(100% / '+ topHorizontal +' * ' + (i+1) + ')">';
 				crsDivResult += '<span class="name">' + sttnCrsList.getCellData(sttnCrsCount, "NODE_NM") +'</span>';
 				crsDivResult += '<span class="nodeId" style="display:none" data-value="' + sttnCrsList.getCellData(sttnCrsCount, "NODE_ID") +'"></span></div>';	
 			}			
@@ -441,7 +441,7 @@
 			routDivResult += '<div class="route-line v-line '+ routLineColor +'" style="height:calc(100% / '+ vertical+ '); '; 
 			routDivResult += 'top:calc(100% / '+vertical+' * '+ i +');left:calc(100% / '+topHorizontal+' * '+ 0 +')"></div>';
 			if(dlt_BMS_STTNCRS_LINK_CMPSTN.getCellData(sttnCrsCount, "NODE_TYPE") == "NT001") {
-				crsDivResult += '<div class="cross" style="top:calc(100% / ' + vertical +'* ' + (i+1) + ');left:calc(100% / '+ topHorizontal +' * ' + 0 + ')">';
+				crsDivResult += '<div class="cross_route_map_area" style="top:calc(100% / ' + vertical +'* ' + (i+1) + ');left:calc(100% / '+ topHorizontal +' * ' + 0 + ')">';
 				crsDivResult += '<span class="name">' + sttnCrsList.getCellData(sttnCrsCount, "NODE_NM") +'</span>';
 				crsDivResult += '<span class="nodeId" style="display:none" data-value="' + sttnCrsList.getCellData(sttnCrsCount, "NODE_ID") +'"></span></div>';	
 			}	
@@ -815,13 +815,13 @@
                                             <div class="bus black" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 14)"><span class="number">318(7분)</span></div>
                                             버스:202205//
                                             //교차로:202205
-                                            <div class="cross" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 5.5)"></div>
-                                            <div class="cross" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 8.5)"></div>
-                                            <div class="cross" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 12.5)"></div>
-                                            <div class="cross" style="top:calc(100% / 3 * 1.5); left:calc(100% / 14 * 14)"></div>
-                                            <div class="cross" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 10.5)"></div>
-                                            <div class="cross" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 5.5)"></div>
-                                            <div class="cross" style="top:calc(100% / 3 * 0.5); left:calc(100% / 14 * 0)"></div>
+                                            <div class="cross_route_map_area" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 5.5)"></div>
+                                            <div class="cross_route_map_area" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 8.5)"></div>
+                                            <div class="cross_route_map_area" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 12.5)"></div>
+                                            <div class="cross_route_map_area" style="top:calc(100% / 3 * 1.5); left:calc(100% / 14 * 14)"></div>
+                                            <div class="cross_route_map_area" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 10.5)"></div>
+                                            <div class="cross_route_map_area" style="top:calc(100% / 3 * 3); left:calc(100% / 14 * 5.5)"></div>
+                                            <div class="cross_route_map_area" style="top:calc(100% / 3 * 0.5); left:calc(100% / 14 * 0)"></div>
                                             교차로:202205//
                                             //신호등:202205
                                             <div class="light red" style="top:calc(100% / 3 * 0); left:calc(100% / 14 * 4.5)"></div>
