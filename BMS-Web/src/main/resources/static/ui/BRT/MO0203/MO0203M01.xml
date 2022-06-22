@@ -310,7 +310,7 @@
 				, height:"100%"
 		});
 		
-			
+		
 		 
 		com.setCommonDtl(codeOptions//, function(){
 			//com.searchGrid(MO0203G0, sub_MO0203G0R0);
@@ -649,10 +649,12 @@
 		dma_sub_search.set("STTN_FCLT_TYPE", dlt_BMS_NODE_MST.getCellData(row, "STTN_FCLT_TYPE"));
 		com.executeSubmission(sub_MO0203P0R0);
 		
-		if(dlt_BMS_NODE_MST.getCellData(row,"STTN_FCLT_TYPE") == 'ST003'){
+		if(dlt_BMS_NODE_MST.getCellData(row,"STTN_FCLT_TYPE") == 'ST003'){ //폐쇄형
 			document.getElementById(STTN_IMG.getID()).className = "ST003_station";
+			imgDiv.show();
 		}else{
 			document.getElementById(STTN_IMG.getID()).className = 'ST002_station_1';
+			imgDiv.hide();
 		}			
 		
 		
@@ -660,7 +662,6 @@
 	};
 	
 	scwin.sub_MO0203G0R0_submitdone = function(e) {
-	
 		//상태에 따라 클래스(백그라운드 색) 설정
 		for (i=0; i<dlt_BMS_NODE_MST.getDataLength(); i++) {
 			
@@ -693,6 +694,7 @@
 		routMap.showCategory("map_MO0203", allDataList, focusIdx, MO0203G0);
 		
 		com.setFocusedCell(MO0203G0, "NODE_NM");
+		
 	};
 	
 //	scwin.sub_MO0203SHI0_submitdone = function(e) {
@@ -797,7 +799,13 @@
 	}		
 	
 	scwin.sub_MO0203P0R0_submitdone = function(e) {
+		//폐쇄형정류장 임의 하드코딩
+		var rowIndexArr = dlt_BMS_NODE_MST.getMatchedIndex("NODE_ID", "293064211");
+		if(rowIndexArr.length > 0) {
+			MO0203G0.setFocusedCell(rowIndexArr[0], "NODE_NM");	
+		}
 		scwin.makeImage();
+		
 	};
 	]]></script>
 	</head>
@@ -889,6 +897,9 @@
 							<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
 							<w2:header style="" id="header2">
 								<w2:row style="" id="row3">
+									<w2:column removeBorderStyle="false" width="0" inputType="text" style="height:20px" id="column2"
+										value="정류소ID" blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column56"
 										value="정류소명" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -899,6 +910,9 @@
 							</w2:header>
 							<w2:gBody style="" id="gBody2">
 								<w2:row style="" id="row4">
+									<w2:column removeBorderStyle="false" width="161" inputType="text" style="height:20px" id="NODE_ID"
+										value="" blockSelect="false" displayMode="label" textAlign="left">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="161" inputType="text" style="height:20px" id="NODE_NM"
 										value="" blockSelect="false" displayMode="label" textAlign="left">
 									</w2:column>
@@ -924,7 +938,7 @@
 				
 							<div id="map_MO0203" style="padding:0 !important"  class="bms_box_wrap">
 								<ul id="category_map_MO0203" class="category"></ul>
-								<xf:group id="brt_div" class="pgm_detail" style="z-index: 10000;position: absolute;right: 52px;margin-top: 280px;margin-right: -49px;width: 140px;height: 399px;">
+								<xf:group id="brt_div" class="pgm_detail" style="z-index: 10000;position: absolute;right: 52px;margin-top: 8px;margin-right: -49px;width: 140px;height: 399px;">
 									<xf:group style="width: 100%; height:100%" id="bit_img">
 										<xf:group id="" class="brt_bit" style="background-size: cover; height: 393px; position: relative;"></xf:group>
 									</xf:group>
@@ -949,12 +963,10 @@
 									</xf:group> -->
 									<xf:group style="" id=""></xf:group>
 								</xf:group>
-								<xf:group id="routeMap" style="z-index: 10000; position: absolute;background: white;bottom: 0px;">
-									<div id="test" style="background: white;width: 1248px;height: 330px;">
+								<xf:group id="routeMap" style="z-index: 10000; position: absolute;background: white;bottom: 0px;left: 20px;">
+									<xf:group id="imgDiv" style="background: white;width: 1370px;height: 280px;">
 										<xf:group style="" id="STTN_IMG" class="ST003_station"></xf:group>
-										<!-- <xf:group style="overflow:auto; position:relative;" id="">
-										</xf:group>										 -->
-									</div>
+									</xf:group>
 									<!-- <canvas id="canvas" width="1270" height="150"></canvas> -->					
 								</xf:group>									
 							</div>

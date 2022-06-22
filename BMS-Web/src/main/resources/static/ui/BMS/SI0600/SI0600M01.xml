@@ -333,7 +333,7 @@
 	
 	
 	scwin.insertSubGrid = function(obj) {
-		
+		debugger;
 		var dLength = obj.length;
 		for (i = 0; i < dLength; i++) {
 			var data = dlt_BMS_EMER_MEMBER_CMPSTN.getMatchedIndex("MEMBER_ID", obj[i].MEMBER_ID, true);
