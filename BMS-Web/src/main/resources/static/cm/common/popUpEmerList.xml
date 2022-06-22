@@ -192,7 +192,7 @@
 							</xf:choices>
 						</xf:select>						
 					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_popUpBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group>
 			

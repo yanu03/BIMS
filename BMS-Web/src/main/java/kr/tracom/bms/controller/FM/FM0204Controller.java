@@ -61,10 +61,10 @@ public class FM0204Controller extends ControllerSupport {
 		return result.getResult();
 	}
 	
-	//제어 테스트
-	@RequestMapping("/fm/sendtest")
-	public @ResponseBody Map<String, Object> sendtest() throws Exception {
-		FM0204Service.sendtest();
+	//에어컨 제어
+	@RequestMapping("/fm/airconControl")
+	public @ResponseBody Map<String, Object> airconControl() throws Exception {
+		FM0204Service.airconControl();
 		return result.getResult();
 	}
 	

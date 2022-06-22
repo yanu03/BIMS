@@ -82,6 +82,10 @@
 				imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
 			}else if(fcltKind == 'FK005'){
 				imgSrc = "/cm/images/bms/AIRCON_normal.png";
+			}else if(fcltKind == 'FK007'){
+				imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
+			}else if(fcltKind == 'FK006'){
+				imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
 			}
 			
 			str += '<div id="'+fcltId+'"style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group " onmousedown="startDrag(event, this)">';
@@ -122,6 +126,8 @@
 			imgPath = "/cm/images/bms/AIRCON_normal.png";
 		}else if(fcltKind == 'FK007'){
 			imgPath = "/cm/images/bms/SCREENDOOR_normal.png";
+		}else if(fcltKind == 'FK006'){
+			imgPath = "/cm/images/bms/PEOPLECOUNT_normal.png";
 		}
 		
 		/* 저장한 이미지 경로 가져오기 - 수정필요
@@ -250,7 +256,7 @@
 							</xf:choices>
 						</xf:select1>
 					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_popUpBtn.xml" scope="true"></w2:wframe>
 				</xf:group>-->
 			</xf:group>
 			<xf:group style="cursor:crosshair" id="STTN_IMG" class="" ev:onclick="clickImg()">

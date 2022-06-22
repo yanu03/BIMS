@@ -129,7 +129,7 @@
 						</xf:select1>
 						<xf:input id="search_input" class="search_input" ref="data:dma_MEMBER_MST.CONTENT" placeholder="구성원ID 또는 구성원명" numberMask=""></xf:input>
 					</xf:group>
-					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_popUpBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group>
 			

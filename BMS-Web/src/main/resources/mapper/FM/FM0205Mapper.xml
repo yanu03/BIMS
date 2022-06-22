@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.tracom.bms.domain.FM0205.FM0205Mapper">
+
+<!-- 시설물 상태 파라미터 조회 프로시서 -->
+<select id="FM0205G0R0" resultType="Map">
+	<if test="@kr.tracom.util.CommonUtil@notEmpty(NODE_ID)">			 
+		CALL PROC_FCLT_AIRCON_STATUS(#{NODE_ID});
+	</if>
+	<if test="@kr.tracom.util.CommonUtil@empty(NODE_ID)">			 
+		CALL PROC_FCLT_AIRCON_STATUS();
+	</if>
+</select>
+
+<!-- 시설물(에어튜브) 상태 파라미터 조회 프로시서-->
+<select id="FM0205G2R0" resultType="Map">
+	CALL PROC_FCLT_AIRTUBE_STATUS()
+</select>
+
+<!-- 시설물 파라미터 헤더 조회-->
+<select id="FM0205G0R1" resultType="Map">
+	SELECT 
+		A.PARAM_KIND
+		,B.NODE_TYPE
+	FROM 
+		BMS_FCLT_PARAM_INFO A
+		LEFT JOIN BMS_NODE_MST B
+		ON A.NODE_ID = B.NODE_ID
+	WHERE 
+		A.FCLT_KIND != 'FK004' AND A.PARAM_DIV = 'PD003'
+	GROUP BY
+		PARAM_KIND, NODE_TYPE
+</select>
+
+<!-- 시설물(에어튜브) 파라미터 헤더 조회-->
+<select id="FM0205G2R1" resultType="Map">
+	SELECT 
+		A.PARAM_KIND
+	FROM 
+		BMS_FCLT_PARAM_INFO A
+	WHERE 
+		A.FCLT_KIND = 'FK004' AND A.PARAM_DIV = 'PD003'
+	GROUP BY
+		PARAM_KIND
+</select>
+
+<!-- 시설물 제어 조회-->
+<select id="FM0205G0R2" resultType="Map">
+	SELECT 
+		A.PARAM_KIND
+		,A.AUTO_YN
+	FROM 
+		BMS_FCLT_PARAM_INFO A
+	WHERE 
+		A.FCLT_ID = #{FCLT_ID} 
+		AND A.FCLT_KIND != 'FK004' 
+		AND A.PARAM_DIV = 'PD002'
+	GROUP BY 
+		PARAM_KIND
+</select>
+
+<!-- 시설물(에어튜브) 제어 조회-->
+<select id="FM0205G2R2" resultType="Map">
+	SELECT 
+		A.PARAM_KIND
+		,A.AUTO_YN
+	FROM 
+		BMS_FCLT_PARAM_INFO A
+	WHERE 
+		A.FCLT_ID = #{FCLT_ID} 
+		AND A.FCLT_KIND = 'FK004' 
+		AND A.PARAM_DIV = 'PD002'
+	GROUP BY 
+		PARAM_KIND
+</select>
+
+<!-- 프로세스 조회-->
+<select id="FM0205G1R0" resultType="Map">
+	SELECT 			DATE_FORMAT(LAST_DTM, '%Y-%m-%d %H:%i:%s') LAST_DTM
+					<!-- ,DATE_FORMAT(REG_DTM, '%Y-%m-%d %H:%i:%s') REG_DTM -->
+					,IMP_ID
+					,PRCS_NM
+					,PRCS_IDX
+					,CONCAT(VER_HIGH, '.', VER_MID, '.', VER_LOW) AS VER_TOTAL
+					,VER_HIGH
+					,VER_MID
+					,VER_LOW
+					<!-- ,CPU_USG
+					,MEM_USG -->
+					,DATE_FORMAT(ST_DTM, '%Y-%m-%d %H:%i:%s') ST_DTM
+					,DATE_FORMAT(BLD_DTM, '%Y-%m-%d %H:%i:%s') BLD_DTM
+					,DATE_FORMAT(UPD_DTM, '%Y-%m-%d %H:%i:%s') UPD_DTM
+					
+	FROM			PLF_IMP_VER_INFO
+	
+	WHERE			IMP_ID = #{MNG_ID}
+	GROUP BY		IMP_ID, PRCS_NM
+</select>
+
+
+
+</mapper>

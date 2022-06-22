@@ -690,7 +690,7 @@
 									<xf:group id="" style=""></xf:group>
 									<xf:input allowChar="0-9" customModelFormatter="com.transPhone" dataType="text"
 										displayFormatter="com.transPhone" id="OFFICE_PHONE1" maxlength="13" ref="data:dlt_BMS_TRANSCOMP_MST.FAX"
-										style="width:110px;" placeholder="0441234567">
+										style="width:110px;" placeholder="000-000-0000">
 									</xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" style="" tagname="th">메일</xf:group>
@@ -757,7 +757,7 @@
 									<xf:input adjustMaxLength="" allowChar="0-9" applyFormat="" class="" customModelFormatter="com.checkBizID"
 										dataType="text" disabled="" displayFormat="" displayFormatter="com.checkBizID" escape="" euroMask="" id="COMP_REG_NO" imeMode="" ioFormat=""
 										mandatory="" maskFormat="" maskFormatModelExcludeChar="" maxlength="10" ref="data:dlt_BMS_TRANSCOMP_MST.COMP_REG_NO"
-										style="width:110px;" validator="" displaymessage="true" placeholder="0001122222">
+										style="width:110px;" validator="" displaymessage="true" placeholder="000-00-00000">
 									</xf:input>
 								</xf:group>
 							</xf:group>
@@ -785,7 +785,7 @@
 									<w2:attributes></w2:attributes>
 									<xf:input allowChar="0-9" customModelFormatter="com.transPhone" customModelUnformatter=""
 										dataType="text" disabled="" displayFormatter="com.transPhone" id="" maskFormat="" maxlength="13" minByteLength=""
-										ref="data:dlt_BMS_TRANSCOMP_MST.PHONE" style="width:110px;" validator="" placeholder="0441234567">
+										ref="data:dlt_BMS_TRANSCOMP_MST.PHONE" style="width:110px;" validator="" placeholder="000-000-0000">
 									</xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" tagname="td" style="">

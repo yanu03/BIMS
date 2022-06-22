@@ -205,7 +205,7 @@
 		<xf:group class="popup_container grdr_36_a" id="popup_container" style="">
 			<xf:group id="popup_header" style="" class="popup_header">
 				<xf:group class="gr_search" id="" style="">
-					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_popUpBtn.xml" scope="true"></w2:wframe>
 				</xf:group>
 			</xf:group>
 			<xf:group style="" id="" class="popup_content">

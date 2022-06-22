@@ -19,6 +19,7 @@
 						<w2:column id="PRES_ID" name="" dataType="text"></w2:column>
 						<w2:column id="MAKER_CODE" name="제조사코드" dataType="text"></w2:column>
 						<w2:column id="LOC_ID" name="지역아이디" dataType="text"></w2:column>
+						<w2:column id="LOC_NM" name="지역명" dataType="text"></w2:column>
 						<w2:column id="OWNR_ID" name="" dataType="text"></w2:column>
 						<w2:column id="ROOM_ID" name="" dataType="text"></w2:column>
 						<w2:column id="FCLT_TYPE_NM" name="" dataType="text"></w2:column>
@@ -170,6 +171,7 @@
 							<w2:column width="250" id="column4" value="연계시설물아이디"></w2:column>
 							<w2:column width="150" id="column7" value="시설물이름"></w2:column>
 							<w2:column width="150" id="column9" value="시설물라벨명"></w2:column>
+							<w2:column width="100" id="column13" value="지역명"></w2:column>
 							<w2:column width="250" id="column13" value="지역아이디"></w2:column>
 							<w2:column width="250" id="column16" value="룸아이디"></w2:column>
 						</w2:row>
@@ -182,6 +184,7 @@
 							<w2:column width="70" id="INTG_FCLT_ID"></w2:column>
 							<w2:column width="70" id="FCLT_NM"></w2:column>
 							<w2:column width="70" id="FCLT_LABEL"></w2:column>
+							<w2:column width="70" id="LOC_NM"></w2:column>
 							<w2:column width="70" id="LOC_ID"></w2:column>
 							<w2:column width="70" id="ROOM_ID"></w2:column>
 						</w2:row>

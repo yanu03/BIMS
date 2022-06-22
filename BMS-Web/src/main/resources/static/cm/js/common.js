@@ -5246,7 +5246,20 @@ com.setMainSrhBtn = function(wfm_mainBtn,type, autoOpt, usrOpt, codeOptions) {
 							}
 						}
 					}
-					
+					else if( type == gcm.DISP_TYPE.DUAL_GRID_FORM){ //복함 그리드와 폼
+						if(i == gcm.BTN.SEARCH.nm){
+							item.cbFnc = function(){
+
+								var sub = autoOpt.Sub1;
+								if ((typeof sub !== "undefined")&&(sub !== null)){
+									com.searchDualGrid(main.grid, sub.grid, main.frm, main.srchSbm, main.savSbm, main.allSavSbm, sub.savSbm)
+								}
+								else{
+									com.searchGrid(main.grid, main.srchSbm , main.savSbm);
+								}
+							}
+						}
+					}
 					else if( type == gcm.DISP_TYPE.DUAL_GRID_FORM2){ //복함 그리드와 폼
 						if(i == gcm.BTN.SEARCH.nm){
 							item.cbFnc = function(){
