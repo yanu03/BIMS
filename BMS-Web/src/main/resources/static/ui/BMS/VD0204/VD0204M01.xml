@@ -528,7 +528,7 @@
 		gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="VHC_ID" value="" blockSelect="false" displayMode="label"></w2:column>';
 		gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="VHC_NO" value="" blockSelect="false" displayMode="label"></w2:column>';
 		gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="DVC_ID" value="" blockSelect="false" displayMode="label"></w2:column>';
-		gridBody += '<w2:column removeBorderStyle="false" width="117" inputType="drilldown" style="height:20px" id="DVC_KIND_NM" value="" blockSelect="false" displayMode="label" showDepth="2" depthColumn="LEVEL" depthType="div" textAlign="left"></w2:column>';
+		gridBody += '<w2:column removeBorderStyle="false" width="117" inputType="drilldown" style="height:20px" id="DVC_KIND_NM" value="" blockSelect="false" displayMode="label" showDepth="1" depthColumn="LEVEL" depthType="div" textAlign="left"></w2:column>';
 		
 		
 		//동적 바디 시작

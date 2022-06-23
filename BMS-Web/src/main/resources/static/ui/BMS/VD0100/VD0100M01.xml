@@ -674,7 +674,7 @@
 										value="" blockSelect="false" displayMode="label" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="128" inputType="drilldown" style="height:20px"
-										id="DVC_KIND_NM" value="" blockSelect="false" displayMode="label" userData1="" showDepth="2" depthColumn="LEVEL" depthType="div"
+										id="DVC_KIND_NM" value="" blockSelect="false" displayMode="label" userData1="" showDepth="1" depthColumn="LEVEL" depthType="div"
 										textAlign="left">
 									</w2:column>
 									<w2:column id="ORG_ID" blockSelect="false" readOnly="true" style="height:20px;" width=""
