@@ -11,9 +11,9 @@
 			BMS_DL_CD_INFO
 		WHERE
 			CO_CD = "PARAM_KIND"
-			AND NUM_VAL4 = #{paramKind}
+		  AND NUM_VAL4 = #{PARAM_KIND}
 	</select>
-	
+
 	<!--ParamDiv코드값 select-->
 	<select id="selectDlCdParamDivInfo" resultType="Map">
 		SELECT
@@ -22,20 +22,20 @@
 			BMS_DL_CD_INFO
 		WHERE
 			CO_CD = "PARAM_DIV"
-			AND NUM_VAL4 = #{paramDiv}
+		  AND NUM_VAL4 = #{PARAM_DIV}
 	</select>
-	
+
 	<!--스크린도어 현정보 insert-->
-	<update id="insertFacilityStatus" parameterType="Map">
+	<update id="insertFacilityParam" parameterType="Map">
 		UPDATE
 			BMS_FCLT_COND_PARAM_INFO
 		SET
-			DATA_VAL = #{dataValue}
-			,SEND_DTM = #{ocrDtm}
+			DATA_VAL = #{DATA_VAL}
+		  ,SEND_DTM = #{OCR_DTM}
+		  ,UPD_DTM = NOW(3)
 		WHERE
-			MNG_ID = #{fcltMngID}
-			AND PARAM_DIV = #{paramDiv}
-			AND PARAM_KIND = #{paramKind}
+			MNG_ID = #{MNG_ID}
+		  AND PARAM_DIV = #{PARAM_DIV}
+		  AND PARAM_KIND = #{PARAM_KIND}
 	</update>
-	
 </mapper>
