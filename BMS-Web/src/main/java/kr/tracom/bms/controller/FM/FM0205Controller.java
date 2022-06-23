@@ -61,12 +61,18 @@ public class FM0205Controller extends ControllerSupport {
 		return result.getResult();
 	}
 	
-	//에어컨 제어
-	@RequestMapping("/fm/airtubeControl")
-	public @ResponseBody Map<String, Object> airtubeControl() throws Exception {
-		FM0205Service.airtubeControl();
+	@RequestMapping("/fm/FM0205P0R0")
+	public @ResponseBody Map<String, Object> FM0205P0R0() throws Exception {
+		result.setData("dlt_BMS_FCLT_COND_PARAM_INFO_HIS", FM0205Service.FM0205P0R0());
 		return result.getResult();
 	}
+	
+	//에어컨 제어
+	/*@RequestMapping("/fm/airconControl")
+	public @ResponseBody Map<String, Object> airconControl() throws Exception {
+		FM0205Service.airconControl();
+		return result.getResult();
+	}*/
 	
 	
 }

@@ -57,69 +57,76 @@ public class FM0204Service extends ServiceSupport {
 	}
 	
 	public List FM0204G0R1() throws Exception {
-		List<Map<String, Object>> param = getSimpleList("dlt_airconItem");
+		Map searchParam = getSimpleDataMap("dma_search");
+		String fcltKind = (String) searchParam.get("FCLT_KIND");
 		
-		Map<String, Object> paramSr = new HashMap();
-		paramSr.put("INTG_TYPE", "SR");
-		
-		List<Map<String, Object>> token = intgMapper.selectIntgMstList(paramSr);
-		String key = (String) token.get(0).get("INTG_API_KEY");
-		String intgUrl = (String) token.get(0).get("INTG_URL");
-		
-		HttpURLConnection conn = null;
-		String result = "";
-		
-		for (int i = 0; i < param.size(); i++) {
-			Map data = (Map) param.get(i);
-			String api = apiGatewayUrl + intgUrl + key;
-			api = api + "&deviceId=" + data.get("INTG_FCLT_ID");
+		//텝이 에어컨 일때만 에어컨 정보 UPDATE
+		if(fcltKind.equals("FK005")) {
+			List<Map<String, Object>> param = getSimpleList("dlt_airconItem");
 			
-			try {
-				URL url = new URL(api);
+			Map<String, Object> paramSr = new HashMap();
+			paramSr.put("INTG_TYPE", "SR");
+			
+			List<Map<String, Object>> token = intgMapper.selectIntgMstList(paramSr);
+			String key = (String) token.get(0).get("INTG_API_KEY");
+			String intgUrl = (String) token.get(0).get("INTG_URL");
+			
+			HttpURLConnection conn = null;
+			String result = "";
+			
+			for (int i = 0; i < param.size(); i++) {
+				Map data = (Map) param.get(i);
+				String api = apiGatewayUrl + intgUrl + key;
+				api = api + "&deviceId=" + data.get("INTG_FCLT_ID");
+				
 				try {
-					conn = (HttpURLConnection) url.openConnection();
-					conn.setRequestMethod("GET");
-					
-
-					BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-					StringBuilder sb = new StringBuilder();
-					String line = "";
-					while ((line = br.readLine()) != null) {
-						sb.append(line);
-					}
-					
+					URL url = new URL(api);
 					try {
-						result = sb.toString();
+						conn = (HttpURLConnection) url.openConnection();
+						conn.setRequestMethod("GET");
 						
-						Gson gson = new Gson();
-						Gson gsonSl = new Gson();
-						Type resultType = new TypeToken<List<Map<String, Object>>>(){}.getType();
-						List<Map<String, Object>> jsonList = gson.fromJson(result, resultType);
 						
-						for (int j = 0; j < jsonList.size(); j++) {
-							Map data2 = (Map) jsonList.get(j);
+						BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+						StringBuilder sb = new StringBuilder();
+						String line = "";
+						while ((line = br.readLine()) != null) {
+							sb.append(line);
+						}
+						
+						try {
+							result = sb.toString();
 							
-							data2.put("COOL_SET", data2.get("coolingSetpoint"));
-							data2.put("TEMP", data2.get("temperature"));
-							data2.put("SWITCH", data2.get("switch"));
-							data2.put("FCLT_ID", data.get("FCLT_ID"));
+							Gson gson = new Gson();
+							Gson gsonSl = new Gson();
+							Type resultType = new TypeToken<List<Map<String, Object>>>(){}.getType();
+							List<Map<String, Object>> jsonList = gson.fromJson(result, resultType);
 							
-							historyMapper.updateFcltCondParamInfo(data2);
-						}			
-						
-					} catch (Exception e) {
-						//logger.error("error");
-						logger.error("error : {}", e );
+							for (int j = 0; j < jsonList.size(); j++) {
+								Map data2 = (Map) jsonList.get(j);
+								
+								data2.put("COOL_SET", data2.get("coolingSetpoint"));
+								data2.put("TEMP", data2.get("temperature"));
+								data2.put("SWITCH", data2.get("switch"));
+								data2.put("FCLT_ID", data.get("FCLT_ID"));
+								
+								historyMapper.updateFcltCondParamInfo(data2);
+							}			
+							
+						} catch (Exception e) {
+							//logger.error("error");
+							logger.error("error : {}", e );
+						}
+					} catch (IOException e) {
+						logger.error("IOException");
 					}
-				} catch (IOException e) {
-					logger.error("IOException");
+				} catch (MalformedURLException e) {
+					logger.error("MalformedURLException");
 				}
-			} catch (MalformedURLException e) {
-				logger.error("MalformedURLException");
-			}
-		}			
+			}			
+			
+		}
 		
-		return FM0204Mapper.FM0204G0R1();
+		return FM0204Mapper.FM0204G0R1(searchParam);
 	}
 	
 	public List FM0204G0R2() throws Exception {
@@ -148,70 +155,77 @@ public class FM0204Service extends ServiceSupport {
 	
 	//에어컨 제어
 	public List airconControl() throws Exception {
-		Map param = getSimpleDataMap("dma_airconControl");
-		String intgFcltId = (String) param.get("INTG_FCLT_ID");
-		String power = (String) param.get("POWER");
-		String degree = (String) param.get("DEGREE");
+		List<Map<String, Object>> param = getSimpleList("dlt_airconControl");
 		
-		//전원제어
-		if(power.isEmpty()==false) {
-			param.put("INTG_TYPE", "PC");
+		for(int x = 0; x < param.size(); x++) {
+			Map data = (Map) param.get(x);
+			String intgFcltId = (String) data.get("INTG_FCLT_ID");
+			String power = (String) data.get("POWER");
+			String degree = (String) data.get("DEGREE");
 			
-			List<Map<String, Object>> token = intgMapper.selectIntgMstList(param);
-			String key = (String) token.get(0).get("INTG_API_KEY");
-			String intgUrl = (String) token.get(0).get("INTG_URL");
-			
-			String api = apiGatewayUrl + intgUrl + key + "&deviceId=" + intgFcltId + "&value=" + power;
-			
-			BufferedReader in = null;
-			
-			try {
-				URL url = new URL(api);
+			//전원제어
+			if(power.isEmpty()==false) {
+				data.put("INTG_TYPE", "PC");
+				
+				List<Map<String, Object>> token = intgMapper.selectIntgMstList(data);
+				String key = (String) token.get(0).get("INTG_API_KEY");
+				String intgUrl = (String) token.get(0).get("INTG_URL");
+				
+				String api = apiGatewayUrl + intgUrl + key + "&deviceId=" + intgFcltId + "&value=" + power;
+				
+				BufferedReader in = null;
+				
 				try {
-					HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // 접속 
-					conn.setRequestMethod("GET"); // 전송 방식은 GET
+					URL url = new URL(api);
+					try {
+						HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // 접속 
+						conn.setRequestMethod("GET"); // 전송 방식은 GET
+						
+						in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+						
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					
-					in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-					
-				} catch (IOException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 				
-			} catch (Exception e) {
-				e.printStackTrace();
+			}
+			
+			//온도제어
+			if(degree.isEmpty()==false) {
+				data.put("INTG_TYPE", "DC");
+				
+				List<Map<String, Object>> token = intgMapper.selectIntgMstList(data);
+				String key = (String) token.get(0).get("INTG_API_KEY");
+				String intgUrl = (String) token.get(0).get("INTG_URL");
+				
+				String api = apiGatewayUrl + intgUrl + key + "&deviceId=" + intgFcltId + "&value=" + degree;
+				
+				BufferedReader in = null;
+				
+				try {
+					URL url = new URL(api);
+					try {
+						HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // 접속 
+						conn.setRequestMethod("GET"); // 전송 방식은 GET
+						
+						in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+						
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
 			}
 			
 		}
 		
-		//온도제어
-		if(degree.isEmpty()==false) {
-			param.put("INTG_TYPE", "DC");
-			
-			List<Map<String, Object>> token = intgMapper.selectIntgMstList(param);
-			String key = (String) token.get(0).get("INTG_API_KEY");
-			String intgUrl = (String) token.get(0).get("INTG_URL");
-			
-			String api = apiGatewayUrl + intgUrl + key + "&deviceId=" + intgFcltId + "&value=" + degree;
-			
-			BufferedReader in = null;
-			
-			try {
-				URL url = new URL(api);
-				try {
-					HttpURLConnection conn = (HttpURLConnection) url.openConnection(); // 접속 
-					conn.setRequestMethod("GET"); // 전송 방식은 GET
-					
-					in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-					
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-				
-		}
+		
 		
 		return null;
 	}
