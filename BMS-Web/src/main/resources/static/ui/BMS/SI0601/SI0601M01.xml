@@ -379,7 +379,7 @@
 								<xf:group class="w2tb_th" tagname="th">사업자등록번호</xf:group>
 								<xf:group class="w2tb_td" tagname="td">
 									<xf:input id="COMP_REG_NO" ref="data:dlt_BMS_PARTNER_MST.COMP_REG_NO" style="" readOnly="" readOnlyClass="" 
-									initValue="" allowChar="0-9-" maxlength="12" placeholder="0001122222" customModelFormatter="com.checkBizID"
+									initValue="" allowChar="0-9-" maxlength="12" placeholder="000-00-00000" customModelFormatter="com.checkBizID"
 									displayFormatter="com.checkBizID">
 									</xf:input>
 								</xf:group>
@@ -409,7 +409,7 @@
 								<xf:group style="" class="w2tb_td" tagname="td">
 									<xf:input disabled="" id="PHONE" ref="data:dlt_BMS_PARTNER_MST.PHONE" refSync="" style=""
 									 initValue="" allowChar="0-9" maxlength="13" customModelFormatter="com.transPhone"
-									  displayFormatter="com.transPhone" placeholder="0441234567"></xf:input>
+									  displayFormatter="com.transPhone" placeholder="000-000-0000"></xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" tagname="th">이메일</xf:group>
 								<xf:group class="w2tb_td" tagname="td">
@@ -423,7 +423,7 @@
 								<xf:group class="w2tb_td" tagname="td">
 									<xf:input id="FAX" ref="data:dlt_BMS_PARTNER_MST.FAX" style="" 
 									disabled="" refSync="" allowChar="0-9" maxlength="13" customModelFormatter="com.transPhone" 
-									displayFormatter="com.transPhone" placeholder="0441234567"></xf:input>
+									displayFormatter="com.transPhone" placeholder="000-000-0000"></xf:input>
 								</xf:group>
 								<xf:group class="w2tb_th" tagname="th"><w2:attributes><w2:colspan>2</w2:colspan><w2:rowspan>1</w2:rowspan></w2:attributes></xf:group>
 							</xf:group>
