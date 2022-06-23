@@ -710,17 +710,17 @@
 		}
 	};
 	
-	//FM0204G3그리드 cell 클릭 이벤트 - 피플카운트
-	scwin.FM0204G3_oncellclick = function(row,col,colId) {
+	//FM0204G2그리드 cell 클릭 이벤트 - 피플카운트
+	scwin.FM0204G2_oncellclick = function(row,col,colId) {
 		var rowCount = dlt_BMS_FCLT_COND_PARAM_INFO.getRowCount();
 		
 		//chk말고 다른 cell클릭시
 		if (col != "0"){
-			if(FM0204G3.getCellChecked(row, 'chk')==0){
+			if(FM0204G2.getCellChecked(row, 'chk')==0){
 				for(var i = 0; i < rowCount; i++){
-					FM0204G3.setCellChecked(i, 'chk', false);			
+					FM0204G2.setCellChecked(i, 'chk', false);			
 				}
-			   	FM0204G3.setCellChecked(row, 'chk', true);
+			   	FM0204G2.setCellChecked(row, 'chk', true);
 			   	
 				/*var chk = dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(row, "chk");
 				if(chk == 1){
@@ -1167,10 +1167,6 @@
 		}else if(data == '1'){
 			return "ON";
 		}else if(data == '0'){
-			return "OFF";
-		}else if(data == 'on'){
-			return "ON";
-		}else if(data == 'off'){
 			return "OFF";
 		}else{
 			return data;
@@ -1875,11 +1871,11 @@
 														<xf:choices>
 															<xf:item>
 																<xf:label><![CDATA[ON]]></xf:label>
-																<xf:value><![CDATA[on]]></xf:value>
+																<xf:value><![CDATA[1]]></xf:value>
 															</xf:item>
 															<xf:item>
 																<xf:label><![CDATA[OFF]]></xf:label>
-																<xf:value><![CDATA[off]]></xf:value>
+																<xf:value><![CDATA[0]]></xf:value>
 															</xf:item>
 														</xf:choices>
 													</xf:select1>

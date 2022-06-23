@@ -97,17 +97,22 @@ public class FM0204Service extends ServiceSupport {
 							result = sb.toString();
 							
 							Gson gson = new Gson();
-							Gson gsonSl = new Gson();
 							Type resultType = new TypeToken<List<Map<String, Object>>>(){}.getType();
 							List<Map<String, Object>> jsonList = gson.fromJson(result, resultType);
 							
 							for (int j = 0; j < jsonList.size(); j++) {
-								Map data2 = (Map) jsonList.get(j);
+								Map<String, Object> data2 = (Map) jsonList.get(j);
 								
 								data2.put("COOL_SET", data2.get("coolingSetpoint"));
 								data2.put("TEMP", data2.get("temperature"));
-								data2.put("SWITCH", data2.get("switch"));
+								/*data2.put("SWITCH", data.get("switch"));*/
 								data2.put("FCLT_ID", data.get("FCLT_ID"));
+								
+								if(data2.get("switch").equals("on")) {
+									data2.put("SWITCH", "1");
+								}else if(data2.get("switch").equals("off")) {
+									data2.put("SWITCH", "0");
+								}
 								
 								historyMapper.updateFcltCondParamInfo(data2);
 							}			

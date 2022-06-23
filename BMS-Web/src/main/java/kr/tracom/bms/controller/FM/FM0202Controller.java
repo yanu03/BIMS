@@ -26,7 +26,13 @@ public class FM0202Controller extends ControllerSupport {
 	
 	@RequestMapping("/fm/FM0202G1R0")
 	public @ResponseBody Map<String, Object> fm0202G1R0() throws Exception {
-		result.setData("dlt_BMS_FCLT_INFO", fm0202Service.fm0202G1R0());
+		result.setData("dlt_BMS_CRS_MST", fm0202Service.fm0202G1R0());
+		return result.getResult();
+	}
+	
+	@RequestMapping("/fm/FM0202G2R0")
+	public @ResponseBody Map<String, Object> FM0202G2R0() throws Exception {
+		result.setData("dlt_BMS_FCLT_INFO", fm0202Service.fm0202G2R0());
 		return result.getResult();
 	}
 	
