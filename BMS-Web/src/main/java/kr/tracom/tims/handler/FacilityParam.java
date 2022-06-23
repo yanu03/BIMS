@@ -45,7 +45,7 @@ public class FacilityParam {
 
         try {
             logger.debug("updateFacilityParam {}",atData);
-            
+            /*
             //paramKind 코드값 select
             Map paramKind = bisMapper.selectDlCdParamKindInfo(atData.toMap());
             
@@ -59,7 +59,26 @@ public class FacilityParam {
             
             //스크린도어 현정보 insert
             bisMapper.insertFacilityStatus(param);
+            */
             
+            /*logger.debug("updateFacilityParam {}",atData);
+            Map<String, Object> param = new HashMap<String, Object>();
+
+            //paramKind 코드값 select
+            Map paramKind = bisMapper.selectDlCdParamKindInfo(atData.toMap());
+
+            //paramDiv 코드값 select
+            Map paramDiv = bisMapper.selectDlCdParamDivInfo(atData.toMap());
+
+            //param.putAll(paramKind);
+            //param.putAll(paramDiv);
+
+            param.putAll(atData.toMap());
+            param.put("PARAM_KIND",paramKind.get("DL_CD"));
+            param.put("PARAM_DIV",paramDiv.get("DL_CD"));
+
+            //스크린도어 현정보 insert
+            bisMapper.insertFacilityParam(param);*/
             
         } catch (Exception e) {
             logger.info("", e);
