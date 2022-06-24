@@ -212,6 +212,7 @@
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_PARAM_KIND" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="PARAM_KIND" name="매개변수종류" dataType="text"></w2:column>
+						<w2:column id="FCLT_KIND" name="시설종류" dataType="text"></w2:column>
 					</w2:columnInfo>
 					<w2:data use="false"></w2:data>
 				</w2:dataList>
@@ -461,78 +462,131 @@
 	
 	//동적 그리드 함수
 	scwin.setGridViewInfo = function() {
-		var gridHeader ="", gridBody=""; 
-		var rowData = dlt_BMS_FCLT_INFO.getAllJSON();
-		var paramKindJson = dlt_PARAM_KIND.getAllJSON();
-		var rowCntParamKind = dlt_PARAM_KIND.getRowCount();
+		var gridId = "";
+		var fcltKind = ["FK005", "FK007","FK004","FK006"]; //에어컨, 스크린도어, 에어튜브, 승객감지장치
 		
-		//헤더 시작
-		//gridHeader +='<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="h_colunm_5" value="상태" blockSelect="false" displayMode="label"></w2:column>';
-		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_3" value="시설물ID" blockSelect="false" displayMode="label" sortable="true"></w2:column>';
-		gridHeader +='<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="h_colunm_4" value="시설물종류" blockSelect="false" displayMode="label"></w2:column>';
-		
-		//동적 헤더 시작
-		for(var i = 0; i < rowCntParamKind; i++) {
-			var paramKind = dlt_PARAM_KIND.getCellData(i, "PARAM_KIND");
+		for(var x = 0; x < fcltKind.length; x++){
+			switch (fcltKind[x]) {
+			case "FK005":
+				gridId = "FM0202G2"
+				break;
+			case "FK007":
+				gridId = "FM0202G3"
+				break;
+			case "FK004":
+				gridId = "FM0202G4"
+				break;
+			case "FK006":
+				gridId = "FM0202G5"
+				break;
+			}
 			
-			if(paramKind != '' && paramKind != 'PK001'){
+			var gridHeader ="", gridBody=""; 
+			var rowData = dlt_BMS_FCLT_INFO.getAllJSON();
+			var paramKindJson = dlt_PARAM_KIND.getAllJSON();
+			var rowCntParamKind = dlt_PARAM_KIND.getRowCount();
+			
+			//헤더 시작
+			gridHeader +='<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="h_colunm_3" value="시설물ID" blockSelect="false" displayMode="label" sortable="true"></w2:column>';
+			//gridHeader +='<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="h_colunm_4" value="시설물종류" blockSelect="false" displayMode="label"></w2:column>';
+			
+			//동적 헤더 시작
+			for(var i = 0; i < rowCntParamKind; i++) {
+				var headerWith = "100";
+				var paramKind = dlt_PARAM_KIND.getCellData(i, "PARAM_KIND");
+				var fcltKindParam = dlt_PARAM_KIND.getCellData(i, "FCLT_KIND");
+				
+				if(paramKind != '' && fcltKind[x] == fcltKindParam){
+					var dlCd = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD");
+					var dlCdNm = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD_NM");
+					
+					if(dlCd == "PK041" || dlCd == "PK043"){
+						headerWith = "150";
+					}
+					
+					gridHeader +='<w2:column removeBorderStyle="false" width="'+headerWith+'" inputType="text" style="height:20px" id="h_colunm'+i+3+'" value="'+dlCdNm+'" blockSelect="false" displayMode="label"></w2:column>';
+					//gridHeader +='<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="h_colunm'+i+4+'" value="'+dlCdNm+'자동'+'" blockSelect="false" displayMode="label"></w2:column>';
+				}
+				
+			}
+			
+			//바디 시작
+			gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="FCLT_ID" value="" blockSelect="false" displayMode="label"></w2:column>';
+			//gridBody += '<w2:column removeBorderStyle="false" width="117" inputType="select" style="height:20px" id="FCLT_KIND" value="" blockSelect="false" displayMode="label"></w2:column>';
+			
+			//동적 바디 시작
+			for(var i = 0; i < rowCntParamKind; i++) {
+				var paramKind = dlt_PARAM_KIND.getCellData(i, "PARAM_KIND");
 				var dlCd = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD");
 				var dlCdNm = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD_NM");
+				var fcltKindParam = dlt_PARAM_KIND.getCellData(i, "FCLT_KIND");
+				var displayForMatter = '';
 				
-				gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm'+i+3+'" value="'+dlCdNm+'" blockSelect="false" displayMode="label"></w2:column>';
-				//gridHeader +='<w2:column removeBorderStyle="false" width="110" inputType="text" style="height:20px" id="h_colunm'+i+4+'" value="'+dlCdNm+'자동'+'" blockSelect="false" displayMode="label"></w2:column>';
+				if(dlCd == 'PK002' || dlCd == 'PK003' || dlCd == 'PK006' || dlCd == 'PK007'){
+					displayForMatter = 'scwin.onOffDisFormatter'; //데이터유형이 ON/OFF인 경우 displayformaatter 추가
+				}else if(dlCd == 'PK025'){
+					displayForMatter = 'scwin.openCloseDisFormatter'; //데이터유형이 문 열림/닫힘인 경우 displayformaatter 추가
+				}else if(dlCd == 'PK030'){
+					displayForMatter = 'scwin.statusDisFormatter'; //데이터유형이 장치 상태 경우 displayformaatter 추가
+				}else if(dlCd == 'PK039'){
+					displayForMatter = 'scwin.fcltContModeFormatter'; //데이터유형이 신호제어 모드인 경우 displayformaatter 추가
+				}
+				
+				if(paramKind != '' && fcltKind[x] == fcltKindParam){
+					if(dlCd == "PK046"){
+						gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="button" style="height:20px" id="'+paramKind+'" value="보기" blockSelect="false" displayMode="label" displayFormatter="'+displayForMatter+'"></w2:column>';
+					}else{
+						gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'" value="" blockSelect="false" displayMode="label" displayFormatter="'+displayForMatter+'"></w2:column>';
+					}
+					//gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'_AUTO_YN'+'" value="" blockSelect="false" displayMode="label" displayFormatter="scwin.AutoDisFormatter"></w2:column>';
+				}
 			}
 			
+			//gridView 정보 정의 
+			//xml 형식을 정의 하면 <w2:gridView 에 xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" 포함 합니다.
+			var gridStr = '<w2:gridView xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" '
+								+'autoFit="lastColumn" class="cm_grid left" dataList="data:dlt_BMS_FCLT_INFO" ev:oncellclick="scwin.'+gridId+'_oncellclick" '
+								+'ev:onrowindexchange="scwin.'+gridId+'_onrowindexchange" fixedColumnWithHidden="true" id="'+gridId+'" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" '
+								+'rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" autoFitMinWidth="0" readOnly="true" '
+								+'sortable="false" focusMode="row" showSortableImage="true" sortEvent="onclick" ev:onheaderclick="scwin.FM0202G2_onheaderclick">';
+			gridStr += '<w2:header style="" id="header2">'
+			+ '<w2:row style="" id="row3">'
+			+ gridHeader
+			//+'<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_5" value="" blockSelect="false" displayMode="label"></w2:column>'
+			+'</w2:row>'
+			+'</w2:header>'
+			+'<w2:gBody style="" id="gBody2">'
+			+'<w2:row id="row2" style="">'
+			+ gridBody
+			//+'<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px" id="" value="" blockSelect="false" displayMode="label"></w2:column>'
+			+'</w2:row>'
+			+'</w2:gBody>';
+			gridStr += '<w2:footer id="footer1" style=""><w2:row id="row3" style=""><w2:column blockSelect="false" colSpan="30" displayMode="label" expression="&quot;데이터 개수 : &quot; + COUNT(\'COMP_ID\')" id="column42" inputType="expression" removeBorderStyle="false" style="height:20px;" textAlign="left" width="2386"></w2:column></w2:row></w2:footer>';
+			gridStr += '</w2:gridView>';
+			
+			
+			switch (fcltKind[x]) {
+			case "FK005":
+				FM0202G2.setGridStyle(WebSquare.xml.parse(gridStr , true ));
+				break;
+			case "FK007":
+				FM0202G3.setGridStyle(WebSquare.xml.parse(gridStr , true ));
+				break;
+			case "FK004":
+				FM0202G4.setGridStyle(WebSquare.xml.parse(gridStr , true ));
+				break;
+			case "FK006":
+				FM0202G5.setGridStyle(WebSquare.xml.parse(gridStr , true ));
+				break;
+			}
+			
+			
+			//dlt_BMS_FCLT_COND_PARAM_INFO.removeAll();
+			//autoOptions.Sub1.grid = FM0202G2;
+			scwin.commonCode();
+		
 		}
 		
-		//바디 시작
-		//gridBody += '<w2:column removeBorderStyle="false" width="117" inputType="select" style="height:20px" id="FCLT_COND" value="" blockSelect="false" displayMode="label"></w2:column>';
-		gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="FCLT_ID" value="" blockSelect="false" displayMode="label"></w2:column>';
-		gridBody += '<w2:column removeBorderStyle="false" width="117" inputType="select" style="height:20px" id="FCLT_KIND" value="" blockSelect="false" displayMode="label"></w2:column>';
-		
-		//동적 바디 시작
-		for(var i = 0; i < rowCntParamKind; i++) {
-			var paramKind = dlt_PARAM_KIND.getCellData(i, "PARAM_KIND");
-			var dlCd = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD");
-			var dlCdNm = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD_NM");
-			var displayForMatter = '';
-			
-			if(dlCd == 'PK002' || dlCd == 'PK003' || dlCd == 'PK006' || dlCd == 'PK007'){
-				displayForMatter = 'scwin.onOffDisFormatter'; //데이터유형이 ON/OFF인 경우 displayformaatter 추가
-			}
-			
-			if(paramKind != '' && paramKind != 'PK001'){
-				gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'" value="" blockSelect="false" displayMode="label" displayFormatter="'+displayForMatter+'"></w2:column>';
-				//gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'_AUTO_YN'+'" value="" blockSelect="false" displayMode="label" displayFormatter="scwin.AutoDisFormatter"></w2:column>';
-			}
-		}
-		
-		//gridView 정보 정의 
-		//xml 형식을 정의 하면 <w2:gridView 에 xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" 포함 합니다.
-		var gridStr = '<w2:gridView xmlns:w2="http://www.inswave.com/websquare" xmlns:ev="http://www.w3.org/2001/xml-events" '
-							+'autoFit="lastColumn" class="cm_grid left" dataList="data:dlt_BMS_FCLT_INFO" ev:oncellclick="scwin.FM0202G2_oncellclick" '
-							+'ev:onrowindexchange="scwin.FM0202G2_onrowindexchange" fixedColumnWithHidden="true" id="FM0202G2" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" '
-							+'rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true" autoFitMinWidth="0" readOnly="true" '
-							+'sortable="false" focusMode="row" showSortableImage="true" sortEvent="onclick" ev:onheaderclick="scwin.FM0202G2_onheaderclick">';
-		gridStr += '<w2:header style="" id="header2">'
-		+ '<w2:row style="" id="row3">'
-		+ gridHeader
-		+'<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_5" value="" blockSelect="false" displayMode="label"></w2:column>'
-		+'</w2:row>'
-		+'</w2:header>'
-		+'<w2:gBody style="" id="gBody2">'
-		+'<w2:row id="row2" style="">'
-		+ gridBody
-		+'<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px" id="" value="" blockSelect="false" displayMode="label"></w2:column>'
-		+'</w2:row>'
-		+'</w2:gBody>';
-		gridStr += '<w2:footer id="footer1" style=""><w2:row id="row3" style=""><w2:column blockSelect="false" colSpan="30" displayMode="label" expression="&quot;데이터 개수 : &quot; + COUNT(\'COMP_ID\')" id="column42" inputType="expression" removeBorderStyle="false" style="height:20px;" textAlign="left" width="2386"></w2:column></w2:row></w2:footer>';
-		gridStr += '</w2:gridView>';
-
-		FM0202G2.setGridStyle(WebSquare.xml.parse(gridStr , true ));
-		//dlt_BMS_FCLT_COND_PARAM_INFO.removeAll();
-		//autoOptions.Sub1.grid = FM0202G2;
-		scwin.commonCode();
 		
 		//이미지 생성 함수
 		scwin.makeImage();
@@ -903,6 +957,49 @@
 		}
 	};
 	
+	//데이터유형이 ON/OFF인 경우 disformatter 추가 함수
+	scwin.onOffDisFormatter = function(data){
+		if(data == ""){
+			return "";
+		}else if(data == '1'){
+			return "ON";
+		}else if(data == '0'){
+			return "OFF";
+		}else if(data == 'on'){
+			return "ON";
+		}else if(data == 'off'){
+			return "OFF";
+		}else{
+			return data;
+		}
+	}
+	
+	//데이터유형이 장치상태인 경우 disformatter 추가 함수
+	scwin.statusDisFormatter = function(data){
+		if(data == ""){
+			return "";
+		}else if(data == '0'){
+			return "통신이상";
+		}else if(data == '1'){
+			return "정상";
+		}else{
+			return data;
+		}
+	}
+	
+	//데이터유형이 문 열림/닫힘인 경우 disformatter 추가 함수
+	scwin.openCloseDisFormatter = function(data){
+		if(data == ""){
+			return "";
+		}else if(data == '1'){
+			return "열림";
+		}else if(data == '0'){
+			return "닫힘";
+		}else{
+			return data;
+		}
+	}
+	
 	//데이터유형이 자동여부인 경우 disformatter 추가 함수
 	scwin.AutoDisFormatter = function(data){
 		if(data == ""){
@@ -912,16 +1009,31 @@
 		}else if(data == 'N'){
 			return "아니요";
 		}
-	};
+	}
 	
-	//데이터유형이 ON/OFF인 경우 disformatter 추가 함수
-	scwin.onOffDisFormatter = function(data){
+	//신호제어기 장치상태 disformatter 함수
+	scwin.fcltCondFormatter = function(data){
 		if(data == ""){
 			return "";
-		}else if(data == '1'){
-			return "ON";
 		}else if(data == '0'){
-			return "OFF";
+			return "통신이상";
+		}else if(data == '1'){
+			return "정상";
+		}else{
+			return data;
+		}
+	}
+	
+	//신호제어기 신호제어 모드 disformatter 함수
+	scwin.fcltContModeFormatter = function(data){
+		if(data == ""){
+			return "";
+		}else if(data == '0'){
+			return "오프라인";
+		}else if(data == '2'){
+			return "온라인";
+		}else if(data == '3'){
+			return "전이";
 		}else{
 			return data;
 		}
@@ -1119,7 +1231,7 @@
 					
 				</xf:group><!-- pgm_list end -->
 				<xf:group id="" class="" style=""></xf:group>
-				<xf:group id="pgm_subList" class="pgm_subList grdr_20_1f_20_20_1f bms_box_wrap" style="">
+				<xf:group id="pgm_subList" class="pgm_subList grdr_20_1f_20_1f bms_box_wrap" style="">
 					<xf:group class="gr_map_header" id="" style="">
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl view" id="" label="시설물 상태" style=""></w2:textbox>
@@ -1132,112 +1244,253 @@
 					
 					<xf:group id="" class="horizontal_line"></xf:group>
 					
-					<xf:group class="defaultbox" id="" style="">
-						<w2:textbox class="df_tt fl view" id="" label="시설물 상태 " style=""></w2:textbox>
-					</xf:group>
-					<xf:group id="" class="" style="">
-						<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
-							checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_FCLT_INFO" disabledScrollHidden="" editModeEvent=""
-							editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="scwin.FM0202G2_oncellclick"
-							ev:oneditkeyup="" ev:onkeyup="" ev:onrowindexchange="scwin.FM0202G2_onrowindexchange" ev:ontextimageclick="" ev:onviewchange=""
-							excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row" id="FM0202G2" ignoreCellClick="false"
-							ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll="" nextTabID=""
-							oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="No." rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true"
-							rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false" scrollByColumn="false" showSortableUseFilter="" sortOrderReverse=""
-							sortable="true" sortedIconPosition="" summaryAuto="" useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true"
-							visibleRowNum="" sortEvent="onclick">
-							<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
-							<w2:header style="" id="header1">
-								<w2:row style="" id="row1">
-									<w2:column width="120" id="column99" value="시설물상태"></w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column12"
-										sortable="true" value="시설물ID" blockSelect="false" displayMode="label" class="">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column8"
-										value="시설물유형" blockSelect="false" displayMode="label">
-									</w2:column>
-									<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="column6"
-										value="리셋" blockSelect="false" displayMode="label">
-									</w2:column> -->
-									<w2:column width="100" id="column3" value="제조사"></w2:column>
-									<w2:column width="150" id="column5" value="유지보수기관"></w2:column>
-									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px" id="column13"
-										value="장착위치" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="200" userData3="" inputType="text" style="height:20px"
-										id="column15" value="모델명" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column width="130" id="column100" value="갱신일시"></w2:column>
-									<w2:column width="200" id="column81" value="비고"></w2:column>
-								</w2:row>
-							</w2:header>
-							<w2:gBody style="" id="gBody1">
-								<w2:row style="" id="row2">
-									<w2:column removeBorderStyle="false" width="107" inputType="select" style="height:25px" id="FCLT_COND"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px" id="FCLT_ID"
-										value="" blockSelect="false" displayMode="label" userData1="M">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="109" inputType="select" style="height:20px" id="FCLT_KIND"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<!-- <w2:column width="70" id="FCLT_CTR" value="리셋" inputType="button" disabled=""></w2:column> -->
-									<w2:column id="MAKER" blockSelect="false" readOnly="true" style="height:25px;" width=""
-										inputType="select" displayMode="label" textAlign="center" chooseOption="false" chooseOptionLabel="" checkboxLabelFormatter=""
-										allOption="" ref="">
-										<w2:choices>
-											<w2:itemset nodeset="data:dlt_searchitem2">
-												<w2:label ref="ORG_NM"></w2:label>
-												<w2:value ref="ORG_ID"></w2:value>
-											</w2:itemset>
-										</w2:choices>
-									</w2:column>
-									<w2:column id="CLSFCTN_ID" blockSelect="false" readOnly="true" style="height:25px;" width=""
-										inputType="select" displayMode="label" textAlign="center" chooseOption="false" chooseOptionLabel="" checkboxLabelFormatter=""
-										allOption="" ref="">
-										<w2:choices>
-											<w2:itemset nodeset="data:dlt_searchitem3">
-												<w2:label ref="CLSFCTN_NM"></w2:label>
-												<w2:value ref="CLSFCTN_ID"></w2:value>
-											</w2:itemset>
-										</w2:choices>
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="117" inputType="select" style="height:20px" id="INST_LOC"
-										value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column textAlign="" removeBorderStyle="false" width="86" inputType="text" style="height:20px"
-										id="MODEL_NM" value="" blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column width="70" id="SEND_DATE" textAlign=""></w2:column>
-									<w2:column width="70" id="REMARK" textAlign="left"></w2:column>
-								</w2:row>
-							</w2:gBody>
-							<w2:footer id="footer1" style="">
-								<w2:row id="row3" style="">
-									<w2:column blockSelect="false" colSpan="14" displayMode="label"
-										expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
-										style="height:20px;" textAlign="left" width="2777">
-									</w2:column>
-								</w2:row>
-							</w2:footer>
-						</w2:gridView>
-					</xf:group>
-				</xf:group><!-- end pgm_subList -->
-				<!--  <xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a" style="">
-					<xf:group class="gr_map_header" id="" style="">
-						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl map" id="" label="지도" style=""></w2:textbox>
+					
+					<xf:group id="pgm_subList2" class="pgm_subList grdc_1f_20_1f_20_1f_20_1f" style="">
+						<xf:group id="" class="pgm_subList grdr_20_a" style="">
+							<xf:group class="defaultbox" id="" style="">
+								<w2:textbox class="df_tt fl list" id="" label="에어컨 " style=""></w2:textbox>
+							</xf:group>
+							<xf:group id="FM0202G2_grid" class="" style="">
+								<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
+									checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_FCLT_INFO" disabledScrollHidden="" editModeEvent=""
+									editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="scwin.FM0202G2_oncellclick"
+									ev:oneditkeyup="" ev:onkeyup="" ev:onrowindexchange="scwin.FM0202G2_onrowindexchange" ev:ontextimageclick="" ev:onviewchange=""
+									excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row" id="FM0202G2" ignoreCellClick="false"
+									ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll="" nextTabID=""
+									oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="No." rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true"
+									rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false" scrollByColumn="false" showSortableUseFilter="" sortOrderReverse=""
+									sortable="true" sortedIconPosition="" summaryAuto="" useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true"
+									visibleRowNum="" sortEvent="onclick">
+									<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
+									<w2:header style="" id="header1">
+										<w2:row style="" id="row1">
+											<w2:column width="120" id="column99" value="시설물상태"></w2:column>
+											<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
+												id="column12" sortable="true" value="시설물ID" blockSelect="false" displayMode="label" class="">
+											</w2:column>
+											<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px"
+												id="column8" value="시설물유형" blockSelect="false" displayMode="label">
+											</w2:column>
+											<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="column6"
+												value="리셋" blockSelect="false" displayMode="label">
+												</w2:column> -->
+											<w2:column width="100" id="column3" value="제조사"></w2:column>
+											<w2:column width="150" id="column5" value="유지보수기관"></w2:column>
+											<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
+												id="column13" value="장착위치" blockSelect="false" displayMode="label">
+											</w2:column>
+											<w2:column removeBorderStyle="false" width="200" userData3="" inputType="text"
+												style="height:20px" id="column15" value="모델명" blockSelect="false" displayMode="label">
+											</w2:column>
+											<w2:column width="130" id="column100" value="갱신일시"></w2:column>
+											<w2:column width="200" id="column81" value="비고"></w2:column>
+										</w2:row>
+									</w2:header>
+									<w2:gBody style="" id="gBody1">
+										<w2:row style="" id="row2">
+											<w2:column removeBorderStyle="false" width="107" inputType="select" style="height:25px"
+												id="FCLT_COND" value="" blockSelect="false" displayMode="label">
+											</w2:column>
+											<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
+												id="FCLT_ID" value="" blockSelect="false" displayMode="label" userData1="M">
+											</w2:column>
+											<w2:column removeBorderStyle="false" width="109" inputType="select" style="height:20px"
+												id="FCLT_KIND" value="" blockSelect="false" displayMode="label">
+											</w2:column>
+											<!-- <w2:column width="70" id="FCLT_CTR" value="리셋" inputType="button" disabled=""></w2:column> -->
+											<w2:column id="MAKER" blockSelect="false" readOnly="true" style="height:25px;" width=""
+												inputType="select" displayMode="label" textAlign="center" chooseOption="false" chooseOptionLabel="" checkboxLabelFormatter=""
+												allOption="" ref="">
+												<w2:choices>
+													<w2:itemset nodeset="data:dlt_searchitem2">
+														<w2:label ref="ORG_NM"></w2:label>
+														<w2:value ref="ORG_ID"></w2:value>
+													</w2:itemset>
+												</w2:choices>
+											</w2:column>
+											<w2:column id="CLSFCTN_ID" blockSelect="false" readOnly="true" style="height:25px;" width=""
+												inputType="select" displayMode="label" textAlign="center" chooseOption="false" chooseOptionLabel="" checkboxLabelFormatter=""
+												allOption="" ref="">
+												<w2:choices>
+													<w2:itemset nodeset="data:dlt_searchitem3">
+														<w2:label ref="CLSFCTN_NM"></w2:label>
+														<w2:value ref="CLSFCTN_ID"></w2:value>
+													</w2:itemset>
+												</w2:choices>
+											</w2:column>
+											<w2:column removeBorderStyle="false" width="117" inputType="select" style="height:20px"
+												id="INST_LOC" value="" blockSelect="false" displayMode="label">
+											</w2:column>
+											<w2:column textAlign="" removeBorderStyle="false" width="86" inputType="text"
+												style="height:20px" id="MODEL_NM" value="" blockSelect="false" displayMode="label">
+											</w2:column>
+											<w2:column width="70" id="SEND_DATE" textAlign=""></w2:column>
+											<w2:column width="70" id="REMARK" textAlign="left"></w2:column>
+										</w2:row>
+									</w2:gBody>
+									<w2:footer id="footer1" style="">
+										<w2:row id="row3" style="">
+											<w2:column blockSelect="false" colSpan="14" displayMode="label"
+												expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
+												style="height:20px;" textAlign="left" width="2777">
+											</w2:column>
+										</w2:row>
+									</w2:footer>
+								</w2:gridView>
+							</xf:group>
+						</xf:group>
+
+						<xf:group style="" id=""></xf:group>
+
+						<xf:group id="" class="pgm_subList grdr_20_a" style="">
+							<xf:group class="defaultbox" id="" style="">
+								<w2:textbox class="df_tt fl list" id="" label="스크린도어 " style=""></w2:textbox>
+							</xf:group>
+							<xf:group id="FM0202G3_grid" class="" style="">
+								<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
+									checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_FCLT_INFO" disabledScrollHidden="" editModeEvent=""
+									editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="scwin.FM0202G3_oncellclick"
+									ev:oneditkeyup="" ev:onkeyup="" ev:onrowindexchange="scwin.FM0202G3_onrowindexchange" ev:ontextimageclick="" ev:onviewchange=""
+									excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row" id="FM0202G3" ignoreCellClick="false"
+									ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll="" nextTabID=""
+									oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="No." rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true"
+									rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false" scrollByColumn="false" showSortableUseFilter="" sortOrderReverse=""
+									sortable="true" sortedIconPosition="" summaryAuto="" useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true"
+									visibleRowNum="" sortEvent="onclick">
+									<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
+									<w2:header style="" id="header1">
+										<w2:row style="" id="row1">
+											<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
+												id="column12" sortable="true" value="시설물ID" blockSelect="false" displayMode="label" class="">
+											</w2:column>
+											<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px"
+												id="column8" value="시설물종류" blockSelect="false" displayMode="label">
+											</w2:column>
+										</w2:row>
+									</w2:header>
+									<w2:gBody style="" id="gBody1">
+										<w2:row style="" id="row2">
+											<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
+												id="FCLT_ID" value="" blockSelect="false" displayMode="label" userData1="M">
+											</w2:column>
+											<w2:column removeBorderStyle="false" width="109" inputType="select" style="height:20px"
+												id="FCLT_KIND" value="" blockSelect="false" displayMode="label">
+											</w2:column>
+										</w2:row>
+									</w2:gBody>
+									<w2:footer id="footer1" style="">
+										<w2:row id="row3" style="">
+											<w2:column blockSelect="false" colSpan="14" displayMode="label"
+												expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
+												style="height:20px;" textAlign="left" width="2777">
+											</w2:column>
+										</w2:row>
+									</w2:footer>
+								</w2:gridView>
+							</xf:group>
+						</xf:group>
+
+						<xf:group style="" id=""></xf:group>
+
+						<xf:group id="" class="pgm_subList grdr_20_a" style="">
+							<xf:group class="defaultbox" id="" style="">
+								<w2:textbox class="df_tt fl list" id="" label="에어튜브" style=""></w2:textbox>
+							</xf:group>
+							<xf:group id="FM0202G4_grid" class="" style="">
+								<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
+									checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_FCLT_INFO" disabledScrollHidden="" editModeEvent=""
+									editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="scwin.FM0202G4_oncellclick"
+									ev:oneditkeyup="" ev:onkeyup="" ev:onrowindexchange="scwin.FM0202G4_onrowindexchange" ev:ontextimageclick="" ev:onviewchange=""
+									excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row" id="FM0202G4" ignoreCellClick="false"
+									ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll="" nextTabID=""
+									oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="No." rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true"
+									rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false" scrollByColumn="false" showSortableUseFilter="" sortOrderReverse=""
+									sortable="true" sortedIconPosition="" summaryAuto="" useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true"
+									visibleRowNum="" sortEvent="onclick">
+									<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
+									<w2:header style="" id="header1">
+										<w2:row style="" id="row1">
+											<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
+												id="column12" sortable="true" value="시설물ID" blockSelect="false" displayMode="label" class="">
+											</w2:column>
+											<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px"
+												id="column8" value="시설물종류" blockSelect="false" displayMode="label">
+											</w2:column>
+										</w2:row>
+									</w2:header>
+									<w2:gBody style="" id="gBody1">
+										<w2:row style="" id="row2">
+											<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
+												id="FCLT_ID" value="" blockSelect="false" displayMode="label" userData1="M">
+											</w2:column>
+											<w2:column removeBorderStyle="false" width="109" inputType="select" style="height:20px"
+												id="FCLT_KIND" value="" blockSelect="false" displayMode="label">
+											</w2:column>
+										</w2:row>
+									</w2:gBody>
+									<w2:footer id="footer1" style="">
+										<w2:row id="row3" style="">
+											<w2:column blockSelect="false" colSpan="14" displayMode="label"
+												expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
+												style="height:20px;" textAlign="left" width="2777">
+											</w2:column>
+										</w2:row>
+									</w2:footer>
+								</w2:gridView>
+							</xf:group>
+						</xf:group>
+						<xf:group style="" id=""></xf:group>
+						<xf:group id="" class="pgm_subList grdr_20_a" style="">
+							<xf:group class="defaultbox" id="" style="">
+								<w2:textbox class="df_tt fl list" id="" label="승객감지장치 " style=""></w2:textbox>
+							</xf:group>
+							<xf:group id="FM0202G5_grid" class="" style="">
+								<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
+									checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_FCLT_INFO" disabledScrollHidden="" editModeEvent=""
+									editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="scwin.FM0202G5_oncellclick"
+									ev:oneditkeyup="" ev:onkeyup="" ev:onrowindexchange="scwin.FM0202G5_onrowindexchange" ev:ontextimageclick="" ev:onviewchange=""
+									excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row" id="FM0202G5" ignoreCellClick="false"
+									ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll="" nextTabID=""
+									oddEvenColorDisplay="" readOnly="true" rowNumHeaderValue="No." rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true"
+									rowNumWidth="" rowStatusHeaderValue="" rowStatusVisible="false" scrollByColumn="false" showSortableUseFilter="" sortOrderReverse=""
+									sortable="true" sortedIconPosition="" summaryAuto="" useCtrlOnMultisort="" useFilterList="" useFilterListSync="" useShiftKey="true"
+									visibleRowNum="" sortEvent="onclick">
+									<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
+									<w2:header style="" id="header1">
+										<w2:row style="" id="row1">
+											<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
+												id="column12" sortable="true" value="시설물ID" blockSelect="false" displayMode="label" class="">
+											</w2:column>
+											<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px"
+												id="column8" value="시설물종류" blockSelect="false" displayMode="label">
+											</w2:column>
+										</w2:row>
+									</w2:header>
+									<w2:gBody style="" id="gBody1">
+										<w2:row style="" id="row2">
+											<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
+												id="FCLT_ID" value="" blockSelect="false" displayMode="label" userData1="M">
+											</w2:column>
+											<w2:column removeBorderStyle="false" width="109" inputType="select" style="height:20px"
+												id="FCLT_KIND" value="" blockSelect="false" displayMode="label">
+											</w2:column>
+										</w2:row>
+									</w2:gBody>
+									<w2:footer id="footer1" style="">
+										<w2:row id="row3" style="">
+											<w2:column blockSelect="false" colSpan="14" displayMode="label"
+												expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
+												style="height:20px;" textAlign="left" width="2777">
+											</w2:column>
+										</w2:row>
+									</w2:footer>
+								</w2:gridView>
+							</xf:group>
 						</xf:group>
 					</xf:group>
-					<xf:group></xf:group>
-					<xf:group id="" style="">
-						<div id="map_FM0202" style="overflow:hidden;">
-							<ul id="category_map_FM0202" class="category">
-					   		 </ul>	
-						</div>
-					</xf:group>
-				</xf:group>--><!-- pgm_detail end -->
+
+
+				</xf:group><!-- end pgm_subList -->
 				
 			</xf:group> <!-- end content --> 
 		</xf:group> <!-- end container -->

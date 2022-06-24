@@ -133,6 +133,7 @@
 <select id="FM0202G0R1" resultType="Map">
 	SELECT 
 		A.PARAM_KIND
+		,A.FCLT_KIND
 	FROM 
 		BMS_FCLT_PARAM_INFO A
 	WHERE 

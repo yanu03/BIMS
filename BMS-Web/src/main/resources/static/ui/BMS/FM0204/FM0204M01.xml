@@ -1240,12 +1240,12 @@
 	
 	//에어컨 전원 onviewchange
 	scwin.T0_PK002_onviewchange = function(info) {
-		if(info.newValue == 'on'){
+		if(info.newValue == '1'){
 			T0_PK047.setDisabled(false);
 			
 			var index = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedIndex("chk", "1");
 			for(var x = 0; x < index.length; x++){
-				dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(index[x], "PK002", "on");
+				dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(index[x], "PK002", "1");
 			}
 		}else{
 			T0_PK047.setDisabled(true);
@@ -1253,7 +1253,7 @@
 			
 			var index = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedIndex("chk", "1");
 			for(var x = 0; x < index.length; x++){
-				dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(index[x], "PK002", "off");
+				dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(index[x], "PK002", "0");
 				dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(index[x], "PK047", "");
 			}
 		}

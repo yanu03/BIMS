@@ -5,6 +5,7 @@ import kr.tracom.platform.attribute.bis.AtFacilityParam;
 import kr.tracom.platform.attribute.integration.bluemobile.AtBluemobileStatus;
 import kr.tracom.platform.net.protocol.attribute.AtData;
 import kr.tracom.tims.domain.BisMapper;
+import kr.tracom.ws.WsClient;
 
 import java.util.Map;
 
@@ -20,6 +21,9 @@ public class FacilityParam {
 
     @Autowired
     private BisMapper bisMapper;
+    
+    @Autowired
+	WsClient webSocketClient;
     
     public void handle(short attrId, AtData atData, String sessionId){
     	
@@ -79,6 +83,11 @@ public class FacilityParam {
 
             //스크린도어 현정보 insert
             bisMapper.insertFacilityParam(param);*/
+            
+            //웹소켓 전송이 필요한 경우
+	        /*if(param != null) {
+	    		webSocketClient.sendMessage(param);
+	        }*/
             
         } catch (Exception e) {
             logger.info("", e);

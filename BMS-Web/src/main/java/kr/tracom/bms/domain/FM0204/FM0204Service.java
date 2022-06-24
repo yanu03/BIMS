@@ -33,6 +33,7 @@ import kr.tracom.cm.support.exception.MessageException;
 import kr.tracom.tims.domain.HistoryMapper;
 import kr.tracom.util.CommonUtil;
 import kr.tracom.util.Result;
+import kr.tracom.ws.WsClient;
 
 @Service
 public class FM0204Service extends ServiceSupport {
@@ -51,6 +52,9 @@ public class FM0204Service extends ServiceSupport {
 	@Autowired
 	private HistoryMapper historyMapper;
 	
+	@Autowired
+	WsClient webSocketClient;
+	
 	public List FM0204G0R0() throws Exception {
 		Map param = getSimpleDataMap("dma_search");
 		return FM0204Mapper.FM0204G0R0(param);
@@ -60,8 +64,10 @@ public class FM0204Service extends ServiceSupport {
 		Map searchParam = getSimpleDataMap("dma_search");
 		String fcltKind = (String) searchParam.get("FCLT_KIND");
 		
+		//scheduler.schedule_10sec();
+		
 		//텝이 에어컨 일때만 에어컨 정보 UPDATE
-		if(fcltKind.equals("FK005")) {
+		/*if(fcltKind.equals("FK005")) {
 			List<Map<String, Object>> param = getSimpleList("dlt_airconItem");
 			
 			Map<String, Object> paramSr = new HashMap();
@@ -105,7 +111,7 @@ public class FM0204Service extends ServiceSupport {
 								
 								data2.put("COOL_SET", data2.get("coolingSetpoint"));
 								data2.put("TEMP", data2.get("temperature"));
-								/*data2.put("SWITCH", data.get("switch"));*/
+								//data2.put("SWITCH", data.get("switch"));
 								data2.put("FCLT_ID", data.get("FCLT_ID"));
 								
 								if(data2.get("switch").equals("on")) {
@@ -115,6 +121,7 @@ public class FM0204Service extends ServiceSupport {
 								}
 								
 								historyMapper.updateFcltCondParamInfo(data2);
+								
 							}			
 							
 						} catch (Exception e) {
@@ -129,7 +136,7 @@ public class FM0204Service extends ServiceSupport {
 				}
 			}			
 			
-		}
+		}*/
 		
 		return FM0204Mapper.FM0204G0R1(searchParam);
 	}

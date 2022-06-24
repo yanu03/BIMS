@@ -278,11 +278,12 @@
 	
 	//위치좌표 팝업
 	scwin.TEMP_COORDS_onclick = function(e) {
-		
+		var json = dlt_BMS_FCLT_INFO.getAllJSON();
 		var data = { FCLT_ID : dlt_BMS_FCLT_INFO.getCellData(FM0100G1.getFocusedRowIndex(), "FCLT_ID"),
 						FCLT_KIND : dlt_BMS_FCLT_INFO.getCellData(FM0100G1.getFocusedRowIndex(), "FCLT_KIND"),
 						STTN_FCLT_TYPE : dlt_BMS_NODE_MST.getCellData(FM0100G0.getFocusedRowIndex(), "STTN_FCLT_TYPE"),
 						FCLT_COORDS : dlt_BMS_FCLT_INFO.getCellData(FM0100G1.getFocusedRowIndex(), "FCLT_COORDS"),
+						json : json,
 				   	 	callbackFn : "scwin.searchCOORDSCallback" };
 				   	 
 		var opt = { id : "FM0100P01", 
@@ -294,7 +295,7 @@
 					popupName : "시설물 위치 좌표 설정",
 					modal : true,  
 					width : 600, height: 500 };
-					
+		
 		if(data.FCLT_KIND != null && data.FCLT_KIND != ''){
 			if(dlt_BMS_NODE_MST.getCellData(FM0100G0.getFocusedRowIndex(), "STTN_FCLT_TYPE") == 'ST003'){
 				com.openPopup("/ui/BMS/FM0100/FM0100P01.xml", opt, data);

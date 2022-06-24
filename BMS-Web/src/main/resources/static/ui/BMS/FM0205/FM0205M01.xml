@@ -474,7 +474,7 @@
 				displayForMatter = 'scwin.onOffDisFormatter'; //데이터유형이 ON/OFF인 경우 displayformaatter 추가
 			}else if(dlCd == 'PK025'){
 				displayForMatter = 'scwin.openCloseDisFormatter'; //데이터유형이 문 열림/닫힘인 경우 displayformaatter 추가
-			}else if(dlCd == 'PK030'){ 
+			}else if(dlCd == 'PK030'){
 				displayForMatter = 'scwin.statusDisFormatter'; //데이터유형이 장치 상태 경우 displayformaatter 추가
 			}else if(dlCd == 'PK039'){
 				displayForMatter = 'scwin.fcltContModeFormatter'; //데이터유형이 신호제어 모드인 경우 displayformaatter 추가
