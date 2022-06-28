@@ -24,4 +24,6 @@ public interface FM0202Mapper {
 	
 	public List fm0202SHI3(Map param);	
 	
+	public List<Map> FM0202P0R0(Map param);
+	
 }

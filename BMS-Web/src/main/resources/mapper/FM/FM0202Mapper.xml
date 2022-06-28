@@ -140,7 +140,7 @@
 		A.PARAM_DIV = 'PD003'
 		AND A.NODE_ID = #{NODE_ID}
 	GROUP BY
-		PARAM_KIND
+		PARAM_KIND, FCLT_KIND
 </select>
 	
 	<select id="fm0202G2R0" resultType="Map" parameterType="Map">
@@ -179,6 +179,25 @@
 			</if>
 		</where>
 	</select>	
+	
+	<!-- 스냅샷 조회 -->
+	<select id="FM0202P0R0" resultType="Map">
+		SELECT 
+			DATE_FORMAT(UPD_DTM, '%Y-%m-%d %H:%i:%s') UPD_DTM
+			,DATE_FORMAT(SEND_DTM, '%Y-%m-%d %H:%i:%s') SEND_DTM
+			,FCLT_ID
+			,MAX(CASE WHEN PARAM_KIND = 'PK045' THEN DATA_VAL END) AS 'PK045'
+			,MAX(CASE WHEN PARAM_KIND = 'PK046' THEN DATA_VAL END) AS 'PK046'
+		FROM 
+			BMS_FCLT_COND_PARAM_INFO_HIS
+		WHERE 
+			FCLT_ID = #{FCLT_ID}
+			AND PARAM_DIV = 'PD003'
+		GROUP BY
+			UPD_DTM
+		ORDER BY
+			UPD_DTM DESC
+	</select>
 	
 	<!--  <select id="fm0202G2R0" resultType="Map">
 	 	SELECT a.ROUT_ID, a.LINK_ID, a.LINK_SN, a.MORN_STD, b.LINK_NM, b.ST_NODE_ID AS NODE_ID, b.ED_NODE_ID, 

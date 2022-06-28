@@ -66,4 +66,10 @@ public class FM0202Controller extends ControllerSupport {
 		return result.getResult();
 	}	
 	
+	@RequestMapping("/fm/FM0202P0R0")
+	public @ResponseBody Map<String, Object> FM0202P0R0() throws Exception {
+		result.setData("dlt_BMS_FCLT_COND_PARAM_INFO_HIS", fm0202Service.FM0202P0R0());
+		return result.getResult();
+	}
+	
 }
