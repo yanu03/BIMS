@@ -130,18 +130,18 @@
 	</select> -->
 	
 	<!-- 시설물 파라미터종류 조회-->
-<select id="FM0202G0R1" resultType="Map">
-	SELECT 
-		A.PARAM_KIND
-		,A.FCLT_KIND
-	FROM 
-		BMS_FCLT_PARAM_INFO A
-	WHERE 
-		A.PARAM_DIV = 'PD003'
-		AND A.NODE_ID = #{NODE_ID}
-	GROUP BY
-		PARAM_KIND, FCLT_KIND
-</select>
+	<select id="FM0202G0R1" resultType="Map">
+		SELECT 
+			A.PARAM_KIND
+			,A.FCLT_KIND
+		FROM 
+			BMS_FCLT_PARAM_INFO A
+		WHERE 
+			A.PARAM_DIV = 'PD003'
+			AND A.NODE_ID = #{NODE_ID}
+		GROUP BY
+			PARAM_KIND, FCLT_KIND
+	</select>
 	
 	<select id="fm0202G2R0" resultType="Map" parameterType="Map">
 		CALL	PROC_FCLT_MONITOR2(#{NODE_ID})

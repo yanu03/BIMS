@@ -105,13 +105,17 @@
 	         }else if(fcltKind == 'FK005'){
 	            imgSrc = "/cm/images/bms/AIRCON_normal.png";
 	         }else if(fcltKind == 'FK007'){
-	            imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
+	            imgSrc = "/cm/images/bms/ClosedDoor.gif";
 	         }else if(fcltKind == 'FK006'){
 	            imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
 	         }
 	         
 	         str += '<div id="'+fcltId+'"style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group " onmousedown="startDrag(event, this)">';
-	         str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'">';
+	        if(fcltKind == 'FK004'){
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgSrc+'" id="'+fcltId+'">';
+			}else{
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'">';
+			}
 	         str += '</div>'
 	      
 	         $('#'+STTN_IMG.getID()).html(str);
@@ -146,13 +150,17 @@
 				}else if(fcltKind == 'FK005'){
 					imgSrc = "/cm/images/bms/AIRCON_normal.png";
 				}else if(fcltKind == 'FK007'){
-					imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
+					imgSrc = "/cm/images/bms/ClosedDoor.gif";
 				}else if(fcltKind == 'FK006'){
 					imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
 				}
 				
 				str += '<div id="'+fcltId+'"style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group " onmousedown="startDrag(event, this)">';
-				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'">';
+				if(fcltKind == 'FK004'){
+					str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgSrc+'" id="'+fcltId+'">';
+				}else{
+					str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'">';
+				}
 				str += '</div>'
 			}
 		}
@@ -192,7 +200,7 @@
 		}else if(fcltKind == 'FK005'){
 			imgPath = "/cm/images/bms/AIRCON_normal.png";
 		}else if(fcltKind == 'FK007'){
-			imgPath = "/cm/images/bms/SCREENDOOR_normal.png";
+			imgPath = "/cm/images/bms/ClosedDoor.gif";
 		}else if(fcltKind == 'FK006'){
 			imgPath = "/cm/images/bms/PEOPLECOUNT_normal.png";
 		}
@@ -203,7 +211,11 @@
 		*/
 		
 		str += '<div id="'+fcltId+'" style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group " onmousedown="startDrag(event, this)">';
-		str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgPath+'" id="'+imgId+'"  >';
+		if(fcltKind == 'FK004'){
+			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgPath+'" id="'+fcltId+'">';
+		}else{
+			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgPath+'" id="'+fcltId+'">';
+		}
 		str += '</div>'
 		
 		$('#'+STTN_IMG.getID()).html(str);

@@ -774,13 +774,13 @@
 		};		
 		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions, codeOptions);		
 		var subOptions = {
-			SEARCH:[{cbFnc:scwin.moveCtrlClick,nm:"상태 및 제어",class:"gear"}]
+			SEARCH:[{cbFnc:scwin.sttnMoveCtrlClick,nm:"상태 및 제어",class:"gear"}]
 		};		
 		
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);	
 		
 		var subOptions = {
-			SEARCH:[{cbFnc:scwin.moveCtrlClick2,nm:"상태 및 제어",class:"gear"}]
+			SEARCH:[{cbFnc:scwin.crsMoveCtrlClick,nm:"상태 및 제어",class:"gear"}]
 		};		
 		
 		com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions);			
@@ -1330,6 +1330,7 @@
 			var fcltKind = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_KIND");
 			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
 			var fcltCond = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_COND");
+			var doorStatus = dlt_BMS_FCLT_INFO.getCellData(i, "PK025");
 			
 			if(fcltKind == 'FK001' && (fcltCond == 'FC020'|| fcltCond == '')){
 				imgSrc = "/cm/images/bms/BIT_RED_normal.png";
@@ -1343,15 +1344,21 @@
 				imgSrc = "/cm/images/bms/AIRCON_normal.png";
 			}else if(fcltKind == 'FK005' && (fcltCond == 'FC021' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
-			}else if(fcltKind == 'FK007' && (fcltCond == 'FC020' || fcltCond == '')){
-				imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
+			}else if(fcltKind == 'FK007' && doorStatus == '0'){
+				imgSrc = "/cm/images/bms/ClosedDoor.gif";
+			}else if(fcltKind == 'FK007' && doorStatus == '1'){
+				imgSrc = "/cm/images/bms/OpeningDoor.gif";
 			}else if(fcltKind == 'FK006' && (fcltCond == 'FC020' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
 			}
 			
 			//시설물 이미지
 			str += '<div id="'+fcltId+'" style="z-index: 1; position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
-			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			if(fcltKind == 'FK004'){
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			}else{
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			}
 			str += '</div>'
 			
 		}
@@ -1453,13 +1460,16 @@
 			var fcltKind = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_KIND");
 			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
 			var fcltCond = dlt_BMS_FCLT_INFO.getCellData(i, "PK030");
+			var doorStatus = dlt_BMS_FCLT_INFO.getCellData(i, "PK025");
 			
 			if(fcltKind == 'FK005' && (fcltCond == '1' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRCON_normal.png";
 			}else if(fcltKind == 'FK005' && (fcltCond == '0' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
-			}else if(fcltKind == 'FK007' && (fcltCond == '1' || fcltCond == '')){
-				imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
+			}else if(fcltKind == 'FK007' && doorStatus == '0'){
+				imgSrc = "/cm/images/bms/ClosedDoor.gif";
+			}else if(fcltKind == 'FK007' && doorStatus == '1'){
+				imgSrc = "/cm/images/bms/OpeningDoor.gif";
 			}else if(fcltKind == 'FK004' && (fcltCond == '1' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
 			}else if(fcltKind == 'FK004' && (fcltCond == '0' || fcltCond == '')){
@@ -1469,7 +1479,11 @@
 			}
 			
 			str += '<div id="'+fcltId+'"style="z-index: 1;position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
-			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			if(fcltKind == 'FK004'){
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			}else{
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			}
 			str += '</div>'
 			
 		}
@@ -1518,13 +1532,16 @@
 			var fcltKind = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_KIND");
 			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
 			var fcltCond = dlt_BMS_FCLT_INFO.getCellData(i, "PK030");
+			var doorStatus = dlt_BMS_FCLT_INFO.getCellData(i, "PK025");
 			
 			if(fcltKind == 'FK005' && (fcltCond == '1' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRCON_normal.png";
 			}else if(fcltKind == 'FK005' && (fcltCond == '0' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
-			}else if(fcltKind == 'FK007' && (fcltCond == '1' || fcltCond == '')){
-				imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
+			}else if(fcltKind == 'FK007' && doorStatus == '0'){
+				imgSrc = "/cm/images/bms/ClosedDoor.gif";
+			}else if(fcltKind == 'FK007' && doorStatus == '1'){
+				imgSrc = "/cm/images/bms/OpeningDoor.gif";
 			}else if(fcltKind == 'FK004' && (fcltCond == '1' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
 			}else if(fcltKind == 'FK004' && (fcltCond == '0' || fcltCond == '')){
@@ -1534,7 +1551,11 @@
 			}
 			
 			str += '<div id="'+fcltId+'"style="z-index: 1;position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
-			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			if(fcltKind == 'FK004'){
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			}else{
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			}
 			str += '</div>'
 			
 		}
@@ -1581,13 +1602,16 @@
 			var fcltKind = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_KIND");
 			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
 			var fcltCond = dlt_BMS_FCLT_INFO.getCellData(i, "PK030");
+			var doorStatus = dlt_BMS_FCLT_INFO.getCellData(i, "PK025");
 			
 			if(fcltKind == 'FK005' && (fcltCond == '1' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRCON_normal.png";
 			}else if(fcltKind == 'FK005' && (fcltCond == '0' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
-			}else if(fcltKind == 'FK007' && (fcltCond == '1' || fcltCond == '')){
-				imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
+			}else if(fcltKind == 'FK007' && doorStatus == '0'){
+				imgSrc = "/cm/images/bms/ClosedDoor.gif";
+			}else if(fcltKind == 'FK007' && doorStatus == '1'){
+				imgSrc = "/cm/images/bms/OpeningDoor.gif";
 			}else if(fcltKind == 'FK004' && (fcltCond == '1' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
 			}else if(fcltKind == 'FK004' && (fcltCond == '0' || fcltCond == '')){
@@ -1597,7 +1621,11 @@
 			}
 			
 			str += '<div id="'+fcltId+'"style="z-index: 1;position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
-			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			if(fcltKind == 'FK004'){
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			}else{
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			}
 			str += '</div>'
 			
 		}
@@ -1622,8 +1650,10 @@
 		//이미지 변경
 		if(fcltKind == 'FK004' && (fcltCond == '1' || fcltCond == '')){
 			$('#'+fcltID).children('img').attr("src", '/cm/images/bms/AIRTUBE_normal_selected.png');
+			$('#'+fcltID).children('img').css("width", '24px');
 		}else if(fcltKind == 'FK004' && (fcltCond == '0' || fcltCond == '')){
 			$('#'+fcltID).children('img').attr("src", '/cm/images/bms/AIRTUBE_abnormal_selected.png');
+			$('#'+fcltID).children('img').css("width", '24px');
 		}
 		
 		oriBgWidth = document.getElementById(STTN_IMG.getID()).offsetWidth;
@@ -1646,13 +1676,16 @@
 			var fcltKind = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_KIND");
 			var fcltId = dlt_BMS_FCLT_INFO.getCellData(i, "FCLT_ID");
 			var fcltCond = dlt_BMS_FCLT_INFO.getCellData(i, "PK030");
+			var doorStatus = dlt_BMS_FCLT_INFO.getCellData(i, "PK025");
 			
 			if(fcltKind == 'FK005' && (fcltCond == '1' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRCON_normal.png";
 			}else if(fcltKind == 'FK005' && (fcltCond == '0' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRCON_abnormal.png";
-			}else if(fcltKind == 'FK007' && (fcltCond == '1' || fcltCond == '')){
-				imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
+			}else if(fcltKind == 'FK007' && doorStatus == '0'){
+				imgSrc = "/cm/images/bms/ClosedDoor.gif";
+			}else if(fcltKind == 'FK007' && doorStatus == '1'){
+				imgSrc = "/cm/images/bms/OpeningDoor.gif";
 			}else if(fcltKind == 'FK004' && (fcltCond == '1' || fcltCond == '')){
 				imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
 			}else if(fcltKind == 'FK004' && (fcltCond == '0' || fcltCond == '')){
@@ -1662,7 +1695,11 @@
 			}
 			
 			str += '<div id="'+fcltId+'"style="z-index: 1;position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick(this.id);">';
-			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			if(fcltKind == 'FK004'){
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			}else{
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img'+'">';
+			}
 			str += '</div>'
 			
 		}
@@ -1854,15 +1891,37 @@
 		}
 	};
 	
-	scwin.moveCtrlClick = function() {
-		var fcltId = dlt_BMS_FCLT_INFO.getCellData(FM0202G2.getFocusedRowIndex(), "FCLT_ID");
+	scwin.sttnMoveCtrlClick = function() {
+		var airconFcltId = dlt_BMS_AIRCON_FCLT_INFO.getCellData(FM0202G2.getFocusedRowIndex(), "FCLT_ID");
+		var scndoorFcltId = dlt_BMS_SCRDOOR_FCLT_INFO.getCellData(FM0202G3.getFocusedRowIndex(), "FCLT_ID");
+		var airtubeFcltId = dlt_BMS_AIRTUBE_FCLT_INFO.getCellData(FM0202G4.getFocusedRowIndex(), "FCLT_ID");
+		var plecntFcltId = dlt_BMS_PLECNT_FCLT_INFO.getCellData(FM0202G5.getFocusedRowIndex(), "FCLT_ID");
 		
-		if(fcltId == null || fcltId == ''){
-			com.alert("시설물을 선택해주세요.");
+		if(airconFcltId != null && airconFcltId != ''){
+			scwin.openMenu("정류소 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",airconFcltId);
+		}else if(scndoorFcltId != null && scndoorFcltId != ''){
+			scwin.openMenu("정류소 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",scndoorFcltId);
+		}else if(airtubeFcltId != null && airtubeFcltId != ''){
+			scwin.openMenu("정류소 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",airtubeFcltId);
+		}else if(plecntFcltId != null && plecntFcltId != ''){
+			scwin.openMenu("정류소 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",plecntFcltId);
 		}else{
-			scwin.openMenu("정류소 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",fcltId);
-			var bac= null;		
+			com.alert("시설물을 선택해주세요.");
 		}
+	};
+	
+	scwin.crsMoveCtrlClick = function() {
+		var sigconFcltId = dlt_BMS_SIGCON_FCLT_INFO.getCellData(FM0202G6.getFocusedRowIndex(), "FCLT_ID");
+		var psgFcltId = dlt_BMS_PSG_FCLT_INFO.getCellData(FM0202G7.getFocusedRowIndex(), "FCLT_ID");
+		
+		if(sigconFcltId != null && sigconFcltId != ''){
+			scwin.openMenu("교차로 상태 및 제어","/ui/BMS/FM0205/FM0205M01.xml", "MN00040403",sigconFcltId);
+		}else if(psgFcltId != null && psgFcltId != ''){
+			scwin.openMenu("교차로 상태 및 제어","/ui/BMS/FM0205/FM0205M01.xml", "MN00040403",psgFcltId);
+		}else{
+			com.alert("시설물을 선택해주세요.");
+		}
+		
 	};
 	
 	//데이터유형이 ON/OFF인 경우 disformatter 추가 함수
@@ -2151,7 +2210,6 @@
 					<xf:group style="overflow:auto; position:relative;" id="STTN_IMG" class=""></xf:group>
 					
 					<xf:group id="" class="horizontal_line"></xf:group>
-					
 					
 					<xf:group id="pgm_subList2" class="pgm_subList grdc_1f_20_1f_20_1f_20_1f" style="">
 						<xf:group id="" class="pgm_subList grdr_20_a" style="">
