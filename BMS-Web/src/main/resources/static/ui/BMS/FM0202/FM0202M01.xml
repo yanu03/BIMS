@@ -2320,68 +2320,22 @@
 									<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 									<w2:header style="" id="header1">
 										<w2:row style="" id="row1">
-											<w2:column width="120" id="column99" value="시설물상태"></w2:column>
 											<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px"
 												id="column12" sortable="true" value="시설물ID" blockSelect="false" displayMode="label" class="">
 											</w2:column>
-											<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px"
-												id="column8" value="시설물유형" blockSelect="false" displayMode="label">
+											<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px"
+												id="column8" value="시설물종류" blockSelect="false" displayMode="label">
 											</w2:column>
-											<!-- <w2:column removeBorderStyle="false" width="70" inputType="text" style="height:25px" id="column6"
-												value="리셋" blockSelect="false" displayMode="label">
-												</w2:column> -->
-											<w2:column width="100" id="column3" value="제조사"></w2:column>
-											<w2:column width="150" id="column5" value="유지보수기관"></w2:column>
-											<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px"
-												id="column13" value="장착위치" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="200" userData3="" inputType="text"
-												style="height:20px" id="column15" value="모델명" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column width="130" id="column100" value="갱신일시"></w2:column>
-											<w2:column width="200" id="column81" value="비고"></w2:column>
 										</w2:row>
 									</w2:header>
 									<w2:gBody style="" id="gBody1">
 										<w2:row style="" id="row2">
-											<w2:column removeBorderStyle="false" width="107" inputType="select" style="height:25px"
-												id="FCLT_COND" value="" blockSelect="false" displayMode="label">
-											</w2:column>
 											<w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px"
 												id="FCLT_ID" value="" blockSelect="false" displayMode="label" userData1="M">
 											</w2:column>
 											<w2:column removeBorderStyle="false" width="109" inputType="select" style="height:20px"
 												id="FCLT_KIND" value="" blockSelect="false" displayMode="label">
 											</w2:column>
-											<!-- <w2:column width="70" id="FCLT_CTR" value="리셋" inputType="button" disabled=""></w2:column> -->
-											<w2:column id="MAKER" blockSelect="false" readOnly="true" style="height:25px;" width=""
-												inputType="select" displayMode="label" textAlign="center" chooseOption="false" chooseOptionLabel="" checkboxLabelFormatter=""
-												allOption="" ref="">
-												<w2:choices>
-													<w2:itemset nodeset="data:dlt_searchitem2">
-														<w2:label ref="ORG_NM"></w2:label>
-														<w2:value ref="ORG_ID"></w2:value>
-													</w2:itemset>
-												</w2:choices>
-											</w2:column>
-											<w2:column id="CLSFCTN_ID" blockSelect="false" readOnly="true" style="height:25px;" width=""
-												inputType="select" displayMode="label" textAlign="center" chooseOption="false" chooseOptionLabel="" checkboxLabelFormatter=""
-												allOption="" ref="">
-												<w2:choices>
-													<w2:itemset nodeset="data:dlt_searchitem3">
-														<w2:label ref="CLSFCTN_NM"></w2:label>
-														<w2:value ref="CLSFCTN_ID"></w2:value>
-													</w2:itemset>
-												</w2:choices>
-											</w2:column>
-											<w2:column removeBorderStyle="false" width="117" inputType="select" style="height:20px"
-												id="INST_LOC" value="" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column textAlign="" removeBorderStyle="false" width="86" inputType="text"
-												style="height:20px" id="MODEL_NM" value="" blockSelect="false" displayMode="label">
-											</w2:column>
-											<w2:column width="70" id="SEND_DATE" textAlign=""></w2:column>
-											<w2:column width="70" id="REMARK" textAlign="left"></w2:column>
 										</w2:row>
 									</w2:gBody>
 									<w2:footer id="footer1" style="">

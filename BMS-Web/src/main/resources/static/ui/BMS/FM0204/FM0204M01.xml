@@ -374,7 +374,13 @@
 			for(var x = 0; x < index.length; x++){
 				dlt_airconControl.insertRow(x);
 				dlt_airconControl.setCellData(x, "INTG_FCLT_ID", dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(index[x], "INTG_FCLT_ID"));
-				dlt_airconControl.setCellData(x, "POWER", T0_PK002.getValue());
+				var power = T0_PK002.getValue();
+				if(power == "0"){
+					power = "off";
+				}else if(power == "1"){
+					power = "on";
+				}
+				dlt_airconControl.setCellData(x, "POWER", power);
 				dlt_airconControl.setCellData(x, "DEGREE", T0_PK047.getValue());
 			}
 			
