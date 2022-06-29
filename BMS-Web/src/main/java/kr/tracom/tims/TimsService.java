@@ -52,7 +52,7 @@ public class TimsService {
     public void notifyOperAllocCompleted() {
     	
     	
-    	refreshCurOperAllocPL(); //ÇöÀç¿îÇà°èÈ¹ °»½Å
+    	refreshCurOperAllocPL(); //í˜„ì¬ìš´í–‰ê³„íš ê°±ì‹ 
     	
     	
     	AtBrtAction brtRequest = new AtBrtAction();
@@ -67,7 +67,7 @@ public class TimsService {
         TimsMessageBuilder builder = new TimsMessageBuilder(timsConfig);
         TimsMessage tMessage = builder.actionRequest(brtRequest);
         
-        logger.info("======== ¿îÇà°èÈ¹ »ı¼º ¿Ï·á Àü¼Û : {}", tMessage);		
+        logger.info("======== ìš´í–‰ê³„íš ìƒì„± ì™„ë£Œ ì „ì†¡ : {}", tMessage);		
         
         kafkaProducer.sendKafka(KafkaTopics.T_BRT, tMessage, "");	
     }
