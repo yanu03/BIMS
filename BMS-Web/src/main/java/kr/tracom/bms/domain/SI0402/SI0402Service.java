@@ -198,6 +198,9 @@ public class SI0402Service extends ServiceSupport {
 						}
 					}
 					else {
+						data.put("TYPE","NODE_ID");
+						routMapper.updateRoutNodeToAnotherRoute(data);
+						routMapper.updateMainRoutNodeToAnotherRoute(data);
 						uCnt += si0402Mapper.SI0402G1U0(data);
 					}
 					
@@ -243,7 +246,7 @@ public class SI0402Service extends ServiceSupport {
 						Map sttnData2 = null;
 						
 						Map beforeNode = sttnData;
-						for(int j = i+1; j < routNodeList.size()-1; j++ ) {
+						for(int j = i+1; j < routNodeList.size(); j++ ) {
 							Map curNode = routNodeList.get(j);
 							String nodeType2 = (String) curNode.get("NODE_TYPE");
 							len += DataInterface.getDistanceBetween(CommonUtil.decimalToDouble(beforeNode.get("GPS_X")), CommonUtil.decimalToDouble(beforeNode.get("GPS_Y")), 
@@ -360,7 +363,7 @@ public class SI0402Service extends ServiceSupport {
 						Map sttnCrsdata2 = null;
 						
 						Map beforeNode = sttnCrsdata;
-						for(int j = i+1; j < routNodeList.size()-1; j++ ) {
+						for(int j = i+1; j < routNodeList.size(); j++ ) {
 							Map curNode = routNodeList.get(j);
 							String nodeType2 = (String) curNode.get("NODE_TYPE");
 							len += DataInterface.getDistanceBetween(CommonUtil.decimalToDouble(beforeNode.get("GPS_X")), CommonUtil.decimalToDouble(beforeNode.get("GPS_Y")), 
@@ -427,7 +430,7 @@ public class SI0402Service extends ServiceSupport {
 						Map sttnMoCrsdata2 = null;
 						Map beforeNode = sttnMoCrsdata;
 						
-						for(int j = i+1; j < routNodeList.size()-1; j++ ) {
+						for(int j = i+1; j < routNodeList.size(); j++ ) {
 							Map curNode = routNodeList.get(j);
 							String nodeType2 = (String) curNode.get("NODE_TYPE");
 							len += DataInterface.getDistanceBetween(CommonUtil.decimalToDouble(beforeNode.get("GPS_X")), CommonUtil.decimalToDouble(beforeNode.get("GPS_Y")), 

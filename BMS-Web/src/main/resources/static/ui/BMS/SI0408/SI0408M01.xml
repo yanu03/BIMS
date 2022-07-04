@@ -266,6 +266,7 @@
 		scwin.releaseGeoBtn();
 		routMap.setDispCheck("map_SI0408", disp_check.getValue());
 		routMap.drawRoute("map_SI0408", SI0408G1, SI0408G1.getFocusedRowIndex());
+		//routMap.drawRouteExceptCross("map_SI0408", SI0408G1, SI0408G1.getFocusedRowIndex());
 	}
 	
 	scwin.SI0408G1_onrowindexchange = function(row,oldRow) {
@@ -388,6 +389,7 @@
 					BMS_ROUT_NODE_DISP_CMPSTN.setCellData(focusIndex, "GPS_Y", BMS_ROUT_NODE_DISP_CMPSTN.getCellData(focusIndex,"ORG_GPS_Y"));
 				}
 				routMap.drawRoute("map_SI0408", SI0408G1, SI0408G1.getFocusedRowIndex(), false);
+				//routMap.drawRouteExceptCross("map_SI0408", SI0408G1, SI0408G1.getFocusedRowIndex(), false);
 				return;
 			});
 		}
