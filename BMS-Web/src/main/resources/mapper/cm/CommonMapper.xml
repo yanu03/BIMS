@@ -71,7 +71,10 @@
 	<select id="selectCommonDtlImg" resultType="Map">
 		SELECT CO_CD, DL_CD, IMG_PATH, IMG_NM, FOCUS, STATUS, IMG_PATH AS IMG_PATH_ORI
 		  FROM BMS_DL_CD_IMG_INFO 
-		 WHERE CO_CD = #{CO_CD}
+	  <where>
+	  	<if test="CO_CD != '' and CO_CD != null">
+			CO_CD = #{CO_CD}
+		</if>
 		<if test="DL_CD != '' and DL_CD != null">
 			AND DL_CD = #{DL_CD}
 		</if>
@@ -81,6 +84,7 @@
 		<if test="FOCUS != '' and FOCUS != null">
 			AND FOCUS = #{FOCUS}
 		</if>
+	  </where>
 	</select>	
 	
 	<select id="selectCommonSearchItem" resultType="Map">
@@ -222,26 +226,40 @@
 	
 	<!-- 이미지경로 추가 -->
 	<insert id="insertCommonDtlImgPath" parameterType="Map">
-		INSERT INTO BMS_DL_CD_IMG_INFO(CO_CD, DL_CD, IMG_PATH, IMG_NM, FOCUS, STATUS)
-		VALUES (#{CO_CD}, #{DL_CD}, #{IMG_PATH}, #{IMG_NM}, #{FOCUS}, #{STATUS})
+		INSERT INTO BMS_DL_CD_IMG_INFO(CO_CD, DL_CD,  FOCUS, STATUS, IMG_PATH, IMG_NM)
+		VALUES (#{CO_CD}, #{DL_CD}, #{FOCUS}, #{STATUS},#{IMG_PATH}, #{IMG_NM})
 		ON DUPLICATE KEY UPDATE
 		CO_CD = #{CO_CD},
 		DL_CD = #{DL_CD},
-		IMG_PATH = #{IMG_PATH},
-		IMG_NM = #{IMG_NM},
 		FOCUS = #{FOCUS},
-		STATUS = #{STATUS}
+		STATUS = #{STATUS},
+		IMG_PATH = #{IMG_PATH},
+		IMG_NM = #{IMG_NM}
 	</insert>
 	
 	<!-- 이미지경로 수정 -->
 	<update id="updateCommonDtlImgPath" parameterType="Map">
-		UPDATE BMS_DL_CD_IMG_INFO 
-		SET 	IMG_PATH = #{IMG_PATH},
-				FOCUS = #{FOCUS},
-				STATUS = #{STATUS}
-		WHERE	CO_CD = #{CO_CD}
-				AND DL_CD = #{DL_CD_ORG}
-				AND IMG_PATH = #{IMG_PATH_ORI}
+			UPDATE BMS_DL_CD_IMG_INFO 
+			SET 	IMG_PATH = #{IMG_PATH},
+			 		IMG_NM = #{IMG_NM},
+					FOCUS = #{FOCUS},
+					STATUS = #{STATUS}
+			WHERE	CO_CD = #{CO_CD}
+					AND DL_CD = #{DL_CD_ORG}
+					AND FOCUS = #{FOCUS}
+					AND STATUS = #{STATUS}
+					AND IMG_PATH = #{IMG_PATH_ORI}
+		
+		<!-- <if test="DL_CD_ORG == 'FK007'">
+			UPDATE BMS_DL_CD_IMG_INFO 
+			SET 	IMG_PATH = #{IMG_PATH},
+					FOCUS = #{FOCUS},
+					STATUS = #{STATUS}
+			WHERE	CO_CD = #{CO_CD}
+					AND DL_CD = #{DL_CD_ORG}
+					AND STATUS = #{STATUS}
+					AND FOCUS = #{FOCUS}
+		</if> -->
 	</update>
 
 	<!-- 시스템  테이블의  데이타 읽어오기 -->

@@ -114,11 +114,11 @@
 			SEARCH : {}
 		}; 
 		var codeOptions = [ {code : "VHC_FUEL", compID : "AL0104G1:VHC_FUEL, AL0104G2:VHC_FUEL" } ];			 
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID3, autoOptions, mainOptions, codeOptions);
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainOptions, codeOptions);
 
 		var mainSrhOptions = {
 		};	
-		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRID3, autoOptions, mainSrhOptions, codeOptions);		 
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainSrhOptions, codeOptions);		 
 
 		var subOptions = {
 			//DEL:scwin.btn_sub_del,

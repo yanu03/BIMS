@@ -18,6 +18,7 @@
 					,	E.NODE_SN
 					,	H.STTN_FCLT_TYPE
 					,	H.STTN_NO
+					,	H.CONGESTION
 					,	G.REP_ROUT_NM
 					,	G.ROUT_NM
 		FROM	BMS_ROUT_NODE_CMPSTN E

@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 
+
 import sun.misc.BASE64Encoder;
 
 import com.google.gson.Gson;
@@ -34,6 +35,7 @@ import kr.tracom.tims.domain.HistoryMapper;
 import kr.tracom.util.CommonUtil;
 import kr.tracom.util.Result;
 import kr.tracom.ws.WsClient;
+import kr.tracom.util.Constants;
 
 @Service
 public class FM0204Service extends ServiceSupport {
