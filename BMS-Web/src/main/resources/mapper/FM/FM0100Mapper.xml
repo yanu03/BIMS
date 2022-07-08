@@ -196,7 +196,23 @@
 					,BUY_DT = STR_TO_DATE(#{BUY_DT}, '%Y%m%d')
 					</if>
 					
-	WHERE			FCLT_ID = #{FCLT_ID}							 	
+	WHERE			FCLT_ID = #{FCLT_ID};
+	
+	UPDATE
+		BMS_FCLT_COND_PARAM_INFO
+	SET
+		 MNG_ID = #{MNG_ID}
+	WHERE
+		FCLT_ID = #{FCLT_ID};
+		
+	UPDATE
+		BMS_FCLT_PARAM_INFO
+	SET
+		 MNG_ID = #{MNG_ID}
+	WHERE
+		FCLT_ID = #{FCLT_ID};
+		
+	
 </update>
 
 <delete id="FM0100G1D0" parameterType="Map">

@@ -169,7 +169,21 @@ ORDER BY
 					,UPD_ID = #{SSN_USER_ID}
 					,CLSFCTN_ID	= #{CLSFCTN_ID}
 					
-	WHERE			DVC_ID = #{DVC_ID}							 	
+	WHERE			DVC_ID = #{DVC_ID};
+	
+	UPDATE
+		BMS_DVC_COND_PARAM_INFO
+	SET
+		 MNG_ID = #{MNG_ID}
+	WHERE
+		DVC_ID = #{DVC_ID};
+		
+	UPDATE
+		BMS_DVC_PARAM_INFO
+	SET
+		 MNG_ID = #{MNG_ID}
+	WHERE
+		DVC_ID = #{DVC_ID};						 	
 </update>
 
 <delete id="VD0100G0D0" parameterType="Map">
