@@ -135,11 +135,16 @@
 			(SELECT ROUT_ID, WAY_DIV FROM BMS_ROUT_MST WHERE ROUT_ID = #{ROUT_ID}) Y
 			ON X.ROUT_ID != Y.ROUT_ID AND X.WAY_DIV = Y.WAY_DIV
 		)
+		<!-- WHERE ROUT_ID != #{ROUT_ID} -->
 		AND NODE_TYPE = 'NT001' AND NODE_ID = #{CRS_ID}
 		</if>
 		<if test="TYPE == 'STTN_ID'">
 		WHERE ROUT_ID != #{ROUT_ID}
 		AND NODE_TYPE = 'NT002' AND NODE_ID = #{STTN_ID}
+		</if>
+		<if test="TYPE == 'NODE_ID'">
+		WHERE ROUT_ID != #{ROUT_ID}
+		AND NODE_ID = #{NODE_ID}
 		</if>
 	</update>
 	
@@ -165,6 +170,9 @@
 			</if>
 			<if test="TYPE == 'STTN_ID'">
 			AND NODE_TYPE = 'NT002' AND NODE_ID = #{STTN_ID}
+			</if>
+			<if test="TYPE == 'NODE_ID'">
+			AND NODE_ID = #{NODE_ID}
 			</if>
 	</update>
 	
@@ -509,6 +517,7 @@
 		<foreach collection="ROUT_IDS" item="item" index="index"  open="(" close=")" separator=",">
 			#{item}
 		</foreach>
+			AND A.NODE_TYPE != 'NT001'
 			<choose>
 				<when test="@kr.tracom.util.CommonUtil@notEmpty(NODE_TYPE)">
 					AND A.NODE_TYPE = #{NODE_TYPE}
@@ -539,6 +548,7 @@
 			LEFT OUTER JOIN BMS_ROUT_LINK_CMPSTN B
 				ON A.ROUT_ID = B.ROUT_ID AND A.LINK_ID = B.LINK_ID
 			WHERE A.ROUT_ID  = #{ROUT_ID}
+			AND A.NODE_TYPE != 'NT001'
 			<choose>
 				<when test="@kr.tracom.util.CommonUtil@notEmpty(NODE_TYPE)">
 					AND A.NODE_TYPE = #{NODE_TYPE}
@@ -568,7 +578,7 @@
 		FROM BMS_ROUT_NODE_DISP_VW A 
 		LEFT OUTER JOIN BMS_ROUT_LINK_CMPSTN B
 			ON A.ROUT_ID = B.ROUT_ID AND A.LINK_ID = B.LINK_ID
-		<where>
+		WHERE A.NODE_TYPE != 'NT001'
 <!-- 			<if test="CONTENT3 != null and CONTENT3 != ''">
 				AND (A.NODE_ID LIKE CONCAT('%',#{CONTENT3},'%') || A.NODE_NM LIKE CONCAT('%',#{CONTENT3},'%'))
 			</if>	 -->		
@@ -600,7 +610,7 @@
 					</if>
 				</otherwise>
 			</choose>
-		</where>	
+		
 		ORDER BY ROUT_ID, NODE_SN, NODE_CHILD_SN
 	</select>
 	
@@ -614,6 +624,7 @@
 		<foreach collection="REP_ROUT_IDS" item="item" index="index"  open="(" close=")" separator=",">
 			#{item}
 		</foreach>
+			AND A.NODE_TYPE != 'NT001'
 			<choose>
 				<when test="@kr.tracom.util.CommonUtil@notEmpty(NODE_TYPE)">
 					AND A.NODE_TYPE = #{NODE_TYPE}

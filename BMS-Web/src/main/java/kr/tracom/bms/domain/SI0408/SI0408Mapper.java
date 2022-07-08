@@ -18,7 +18,10 @@ public interface SI0408Mapper {
 	
 	public int SI0408G1D1(Map param);
 	
-	public int SI0408G1U1(Map param);	
+	public int SI0408G1U1(Map param);
+	
+	public int SI0408G1U2(Map param);
+	
 	
 	public List selectRoutNodeAllByRepRout(Map param);
 	
