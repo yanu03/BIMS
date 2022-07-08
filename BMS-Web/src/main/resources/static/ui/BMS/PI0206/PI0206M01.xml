@@ -344,8 +344,8 @@
 	};
 	
 	scwin.PI0206G1_onrowindexchange = function(row,oldRow) {
-		var focusOption = {keyMap : dma_subsearch2};
-		com.changeDualGrid(PI0206G1, PI0206G2, null, sub_PI0206G2R0, focusOption, row, oldRow);			
+		//var focusOption = {keyMap : dma_subsearch2};
+		//com.changeDualGrid(PI0206G1, PI0206G2, null, sub_PI0206G2R0, focusOption, row, oldRow);			
 	};
 	
 	scwin.PI0206G0_oncellclick = function(row,col,colId) {

@@ -143,7 +143,7 @@
 			</xf:submission>
 			<xf:submission id="sub_PI0702G2R0" ref="data:json,dma_subsearch2" target="data:json,dlt_BMS_DESTI_RSV_RST_INFO"
 				action="/pi/PI0702G2R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
-				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
+				customHandler="" mode="asynchronous" processMsg="조회중입니다..." ev:submit="" ev:submitdone="" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI0702G1R1" ref="" target="data:json,dlt_VHC_MST_MNG_LIST" action="/pi/PI0702G1R1" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
@@ -353,8 +353,8 @@
 	};
 	
 	scwin.PI0702G1_onrowindexchange = function(row,oldRow) {
-		var focusOption = {keyMap : dma_subsearch2};
-		com.changeDualGrid(PI0702G1, PI0702G2, null, sub_PI0702G2R0, focusOption, row, oldRow);			
+		//var focusOption = {keyMap : dma_subsearch2};
+		//com.changeDualGrid(PI0702G1, PI0702G2, null, sub_PI0702G2R0, focusOption, row, oldRow);			
 	};
 	
 	scwin.sub_PI0702G0K0_submitdone = function(e) {

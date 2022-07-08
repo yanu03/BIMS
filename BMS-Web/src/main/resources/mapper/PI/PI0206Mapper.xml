@@ -155,23 +155,24 @@
 			ON RST.RSV_ID = RSV.RSV_ID
 			LEFT JOIN BMS_TRANSCOMP_MST	TSM
 			ON VHC.COMP_ID = TSM.COMP_ID
-		WHERE		
-			VHC.VHC_ID = #{VHC_ID}
-		<if test="RSV_STATE == '예약중'">
-			AND RST.COMPLETE_YN = 'N'
-		</if>
-		<if test="RSV_STATE == '예약종료'">
-			AND RST.COMPLETE_YN = 'Y'
-		</if>			
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
-			<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') >= #{F_DATE}]]>
-		</if>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
-			<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') <= #{L_DATE}]]>
-		</if>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
-			AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
-		</if>
+		<where>
+			<!-- VHC.VHC_ID = #{VHC_ID} --> <!-- 선택한 차량이 아닌 전체 차량의 예약 상세정보가 나오게 수정 kbs 2022-07-07 -->
+			<if test="RSV_STATE == '예약중'">
+				RST.COMPLETE_YN = 'N'
+			</if>
+			<if test="RSV_STATE == '예약종료'">
+				AND RST.COMPLETE_YN = 'Y'
+			</if>			
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
+				<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') >= #{F_DATE}]]>
+			</if>
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
+				<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') <= #{L_DATE}]]>
+			</if>
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
+				AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+			</if>
+		</where>		
 		ORDER BY
 			RSV.RSV_DT DESC
 	</select>

@@ -134,8 +134,9 @@
 			ON			DVC.MNG_ID = RST.MNG_ID
 			LEFT JOIN  	BMS_ED_RSV_INFO RSV
 			ON			RST.RSV_ID = RSV.RSV_ID
-		WHERE		VHC.VHC_ID = #{VHC_ID}
-		AND  		DVC.DVC_KIND = 'DK004'
+		<where>
+			<!-- VHC.VHC_ID = #{VHC_ID} --> <!-- 선택한 차량이 아닌 전체 차량의 예약 상세정보가 나오게 수정 kbs 2022-07-07 -->
+			DVC.DVC_KIND = 'DK004'
 			<if test="RSV_STATE == '예약중'">
 				AND RST.COMPLETE_YN = 'N'
 			</if>
@@ -154,7 +155,8 @@
 			<!-- <if test="RSV_DT != null">
 				AND DATE_FORMAT(RSV.RSV_DT, '%Y%m') = ${RSV_DT}
 			</if>	 -->		
-		ORDER BY	RSV.RSV_DT
+		</where>
+		ORDER BY	RSV.RSV_DT DESC
 	</select>
 	
 	<select id="PI0902G1R1" resultType="Map">
