@@ -40,7 +40,7 @@ public class SI0402Service extends ServiceSupport {
 	
 	public List SI0402SHI0() throws Exception {
 		return si0402Mapper.SI0402SHI0();
-	}	
+	}
 	
 	public Map SI0402G1S0() throws Exception {
 		int iCnt = 0;
@@ -154,13 +154,14 @@ public class SI0402Service extends ServiceSupport {
 						&&(Constants.NODE_TYPE_GARAGE.equals(nodeType)==false)
 						&&(Constants.NODE_TYPE_SIGNAL.equals(nodeType)==false)
 					) {
+						int nodeSn = Integer.parseInt((String)data.get("NODE_SN"));
 						if((CommonUtil.empty(nodeType2)||(Constants.NODE_TYPE_GARAGE.equals(nodeType2)==false))
 							&&CommonUtil.empty(data.get("LINK_ID"))&&(data.get("NODE_ID").equals(lastNodeId)==false))
 						{
 							Map linkKeyMap = si0402Mapper.SI0402G1K1();
 							data.put("LINK_ID",linkKeyMap.get("SEQ"));	
 						}
-						else if(data.get("NODE_ID").equals(lastNodeId)){
+						else if(data.get("NODE_ID").equals(lastNodeId) && nodeSn > 10){
 							data.put("LINK_ID","");	
 						}
 						data.put("LINK_NODE_YN","Y");
@@ -218,7 +219,7 @@ public class SI0402Service extends ServiceSupport {
 			if((isLinkChange==true)&&(param.size()>0)) {
 				int sttnCnt = 0;
 				double routLen = 0;
-				int sttnCrsCnt = 0;
+				int sttnIndex = 0;
 				
 				si0402Mapper.SI0402G1DA1(map);
 				si0402Mapper.SI0402G1DA2(map);
@@ -320,14 +321,21 @@ public class SI0402Service extends ServiceSupport {
 						
 						
 						
-						//if(data.get("NODE_ID") != routSttnLinkIdList.get(sttnCrsCnt).get("NODE_ID")) {
+						//if(data.get("NODE_ID") != routSttnLinkIdList.get(sttnIndex).get("NODE_ID")) {
 						
-						//data.put("ROUT_STTN_LINK_ID", routSttnLinkIdList.get(sttnCrsCnt).get("SEQ"));
-						if(sttnCrsCnt<routSttnLinkIdKeysList.size()) {
-							data.put("ROUT_STTN_LINK_ID", routSttnLinkIdKeysList.get(sttnCrsCnt));
-							if(data.get("NODE_ID") == routSttnLinkIdValuesList.get(sttnCrsCnt)) {
-								
-								sttnCrsCnt++;
+						//data.put("ROUT_STTN_LINK_ID", routSttnLinkIdList.get(sttnIndex).get("SEQ"));
+						if(sttnIndex<routSttnLinkIdKeysList.size()) {
+							data.put("ROUT_STTN_LINK_ID", routSttnLinkIdKeysList.get(sttnIndex));
+							/*if(sttnIndex==0) {
+								if(data.get("NODE_ID") == routSttnLinkIdValuesList.get(sttnIndex)) {
+									sttnIndex++;
+								}
+							}
+							else*/ 
+							{
+								if(data2.get("NODE_ID") == routSttnLinkIdValuesList.get(sttnIndex)) {
+									sttnIndex++;
+								}
 							}
 						}
 						
