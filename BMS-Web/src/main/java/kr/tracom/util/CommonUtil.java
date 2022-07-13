@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -525,6 +526,13 @@ public class CommonUtil {
 		return result;
 	}
 	
+	public static Map<String, Object> deepCopy(Map<String, Object> input) {
+		Map<String, Object> output  = new HashMap<>();
+		for (Map.Entry<String, Object> entry : input.entrySet()) {
+			output.put(entry.getKey(), entry.getValue());
+		}
+		return output;
+	}
 	
 	/**
 	 * Object type 변수가 비어있는지 체크
