@@ -74,6 +74,7 @@
 						<w2:column id="ORG_NM" name="제조사" dataType="text"></w2:column>
 						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
 						<w2:column id="INST_LOC" name="설치위치" dataType="text"></w2:column>
+						<w2:column id="RSV_ID" name="예약날짜" dataType="text"></w2:column>
 						<w2:column id="RSV_DT" name="예약날짜" dataType="date"></w2:column>
 						<w2:column id="RSV_STATE" name="예약상태" dataType="text"></w2:column>
 					</w2:columnInfo>
@@ -107,7 +108,7 @@
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_PI0503G1R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_PI0503G1U0" ref='data:json,{"action":"modified","id":"dlt_DVC_INFO"}' target="data:json,dma_result"
+			<xf:submission id="sub_PI0503G1U0" ref='data:json,{"action":"modified","id":"dlt_BMS_VDO_RSV_RST_INFO"}' target="data:json,dma_result"
 				action="/pi/PI0503G1U0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
 				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI0503G1U0_submitdone" ev:submiterror=""
 				abortTrigger="">
@@ -300,12 +301,6 @@
 		if(RSV_STATE.getValue() == '예약종료') {
 			rsvState = false;	
 		}
-//		for(var x = 0; x < count; x++){
-//			if(rows[x].RSV_STATE == '예약종료'){
-//				rsvState = false;
-//				break;
-//			}
-//		}
 		
 		if(rsvState){
 			if(count > 0) {
@@ -366,7 +361,7 @@
 		var dataCheck = true;
 		
 		//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
-		if(chkLen > 1 ){
+		/*if(chkLen > 1 ){
 			for(var i=0; i<chkLen; i++)
 			{
 				if(chkData[0].VHC_ID != chkData[i].VHC_ID){
@@ -386,20 +381,12 @@
 			}			
 			
 			
-//			PI0702G2.hide();
-//			gr_sub_header2.hide();
-//			PI0702_ul.show("");
-			
-			//FM0204G1.setDisabled("grid", true);
-			//FM0204F0.setDisabled(true);
 		}else if(chkLen < 2){
 			PI0503G2.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
 			gr_sub_header2.show("");
 			PI0503_ul.hide();
 			
-			//FM0204G1.setDisabled("grid", false);
-			//FM0204F0.setDisabled(false);
-		}	
+		}	*/
 		
 	};
 	
@@ -423,6 +410,7 @@
 	
 	scwin.sub_PI0503G1R0_submitdone = function(e) {
 		com.setFocusedCell(PI0503G1, "VHC_ID");
+		com.executeSubmission(sub_PI0503G2R0);
 	};
 	
 	scwin.sub_PI0503G2R0_submitdone = function(e) {

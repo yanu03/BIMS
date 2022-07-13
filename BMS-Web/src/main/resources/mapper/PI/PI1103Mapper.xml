@@ -11,7 +11,7 @@
 					,FRAME
 					,FONT
 					,REMARK
-		FROM		BMS_ED_INFO
+		FROM		BMS_TRAN_INFO
 		<where>
 			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
 				AND SET_ID LIKE CONCAT('%',#{CONTENT},'%') || SET_NM LIKE CONCAT('%',#{CONTENT},'%') 
@@ -28,16 +28,16 @@
 	<select id="PI1103SHI0" resultType="Map">
 		SELECT		SET_ID
 					,SET_NM
-		FROM 		BMS_ED_INFO
+		FROM 		BMS_TRAN_INFO
 	</select>
 
 
 	<select id="PI1103G0K0" resultType="Map">
-		SELECT CONCAT('RP', LPAD(NEXTVAL(SEQ_BMS_ED_INFO_0), 8, '0')) AS 'SEQ'
+		SELECT CONCAT('TI', LPAD(NEXTVAL(SEQ_BMS_TRAN_INFO_0), 8, '0')) AS 'SEQ'
 	</select>
 
 	<insert id="PI1103G0I0" parameterType="Map">
-		INSERT INTO BMS_ED_INFO
+		INSERT INTO BMS_TRAN_INFO
 				   (
 					SET_ID
 					,SET_NM
@@ -62,7 +62,7 @@
 	</insert>
 
 	<update id="PI1103G0U0" parameterType="Map">
-		UPDATE 		BMS_ED_INFO
+		UPDATE 		BMS_TRAN_INFO
 		SET 		SET_NM = #{SET_NM}
 					,TIME_KO = #{TIME_KO}
 					,TIME_EN = #{TIME_EN}
@@ -75,7 +75,7 @@
 	
 	<delete id="PI1103G0D0" parameterType="Map">
 		DELETE
-		FROM 		BMS_ED_INFO
+		FROM 		BMS_TRAN_INFO
 		WHERE 		SET_ID = #{SET_ID}
 	</delete>
 

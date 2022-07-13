@@ -33,6 +33,13 @@
 		<!-- <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&amp;appkey=l7xx6099b61644bf40d78594611b250c9694"></script> -->
 		<script type="text/javascript" src="/cm/js/Chart.js/3.6.0/chart.js"></script>
 	    <script type="text/javascript" src="/cm/js/Chart.js/3.6.0/Chart.min.js"></script>
+	    
+	    <!-- Highchart -->
+	    <script type="text/javascript" src="/cm/js/Highcharts-Gantt-10.2.0/code/highcharts.js"></script>
+	    
+	    <!-- Highchart gantt -->
+	    <script type="text/javascript" src="/cm/js/Highcharts-Gantt-10.2.0/code/highcharts-gantt.js"></script>
+	    
 	    <!-- <script type="text/javascript" src="/cm/js/moment.js/2.27.0/moment.min.js" integrity="sha512-rmZcZsyhe0/MAjquhTgiUcb4d9knaFc7b5xAfju483gbEXTkeJRUMIPk6s3ySZMYUHEcjKbjLjyddGWMrNEvZg==" crossorigin="anonymous"></script> -->
 			
 		<!-- BMS kakao key -->	

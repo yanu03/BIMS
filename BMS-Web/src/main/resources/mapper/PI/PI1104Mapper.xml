@@ -11,7 +11,7 @@
 					,FRAME
 					,FONT
 					,REMARK
-		FROM		BMS_ED_INFO
+		FROM		BMS_TRAN_INFO
 		<where>
 			<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
 				AND SET_ID LIKE CONCAT('%',#{CONTENT},'%') || SET_NM LIKE CONCAT('%',#{CONTENT},'%') 
@@ -32,7 +32,7 @@
 	<select id="PI1104SHI0" resultType="Map">
 		SELECT		 SET_ID
 					,SET_NM
-		FROM	     BMS_ED_INFO
+		FROM	     BMS_TRAN_INFO
 	</select>
 
 	<select id="PI1104G1R0" resultType="Map">
@@ -45,12 +45,19 @@
 			, DATE_FORMAT(RSV.RSV_DT, '%Y-%m-%d') RSV_DT
 			, RSV.RSV_ID
 			, DVC.INST_LOC
+			, (SELECT COUNT(*) FROM BMS_TRAN_RSV_RST_INFO TRR WHERE TRR.COMPLETE_YN = 'N' AND TRR.MNG_ID = RST.MNG_ID) AS RSV_CNT
 		FROM 		
 			BMS_VHC_MST VHC
-		    LEFT JOIN BMS_DVC_INFO DVC ON VHC.VHC_ID = DVC.VHC_ID
-		    LEFT JOIN BMS_DL_CD_INFO DL ON DVC.DVC_KIND = DL.DL_CD AND DL.CO_CD = 'DVC_KIND'
-		    LEFT JOIN BMS_ED_RSV_RST_INFO RST ON DVC.MNG_ID = RST.MNG_ID AND COMPLETE_YN = 'N'
-			LEFT JOIN BMS_ED_RSV_INFO RSV ON RST.RSV_ID = RSV.RSV_ID
+		    LEFT JOIN BMS_DVC_INFO DVC 
+		    ON VHC.VHC_ID = DVC.VHC_ID
+		    LEFT JOIN BMS_DL_CD_INFO DL 
+		    ON DVC.DVC_KIND = DL.DL_CD 
+		    AND DL.CO_CD = 'DVC_KIND'
+		    LEFT JOIN BMS_TRAN_RSV_RST_INFO RST 
+		    ON DVC.MNG_ID = RST.MNG_ID 
+		    AND COMPLETE_YN = 'N'
+			LEFT JOIN BMS_TRAN_RSV_INFO RSV 
+			ON RST.RSV_ID = RSV.RSV_ID
 		WHERE
 			VHC.USE_YN = 'Y'
 			AND DVC.USE_YN = 'Y'
@@ -67,11 +74,11 @@
 	<insert id="PI1104G1I0" parameterType="Map">
 	
 		<selectKey keyProperty="RSV_ID" resultType="String" order="BEFORE">
-    		SELECT CONCAT('ER', LPAD(NEXTVAL(SEQ_BMS_ED_RSV_INFO_0), 8, '0')) AS RSV_ID
+    		SELECT CONCAT('NR', LPAD(NEXTVAL(SEQ_BMS_TRAN_RSV_INFO_0), 8, '0')) AS RSV_ID
     	</selectKey>	
 	
 			
-		INSERT INTO BMS_ED_RSV_INFO
+		INSERT INTO BMS_TRAN_RSV_INFO
 				(
 					RSV_ID
 					,RSV_DT
@@ -86,7 +93,7 @@
 					,#{SSN_USER_ID}
 				);
 	
-		INSERT INTO BMS_ED_RSV_RST_INFO
+		INSERT INTO BMS_TRAN_RSV_RST_INFO
 				(
 					RSV_ID
 					,MNG_ID
@@ -102,7 +109,7 @@
 	</insert>
 
 	<update id="PI1104G1U0" parameterType="Map">
-		UPDATE		BMS_ED_RSV_RST_INFO
+		UPDATE		BMS_TRAN_RSV_RST_INFO
 		SET			
 					PROCE_RST = 'PR008'
 				,	SEND_DTM = NOW()
@@ -121,6 +128,7 @@
 					,DVC.DVC_KIND
 					,DVC.INST_LOC
 					,DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') RSV_DT
+					,RSV.RSV_ID
 					,IF(RST.COMPLETE_YN = 'N', '예약중', '예약종료') RSV_STATE					
 		FROM		BMS_VHC_MST VHC
 			LEFT JOIN 	BMS_DVC_INFO DVC
@@ -129,21 +137,34 @@
 			ON			DVC.ORG_ID = ORG.ORG_ID AND ORG.ORG_DIV = 'OD008'
 			LEFT JOIN	BMS_DL_CD_INFO DL
 			ON			DVC.DVC_KIND = DL.DL_CD AND DL.CO_CD = 'DVC_KIND'
-			LEFT JOIN	BMS_ED_RSV_RST_INFO RST
+			LEFT JOIN	BMS_TRAN_RSV_RST_INFO RST
 			ON			DVC.MNG_ID = RST.MNG_ID
-			LEFT JOIN  	BMS_ED_RSV_INFO RSV
+			LEFT JOIN  	BMS_TRAN_RSV_INFO RSV
 			ON			RST.RSV_ID = RSV.RSV_ID
-		WHERE		VHC.VHC_ID = #{VHC_ID}
-		AND  		DVC.DVC_KIND = 'DK010'
+		<where>
+			<!-- VHC.VHC_ID = #{VHC_ID} --> <!-- 선택한 차량이 아닌 전체 차량의 예약 상세정보가 나오게 수정 kbs 2022-07-07 -->
+			DVC.DVC_KIND = 'DK010'
 			<if test="RSV_STATE == '예약중'">
 				AND RST.COMPLETE_YN = 'N'
 			</if>
 			<if test="RSV_STATE == '예약종료'">
 				AND RST.COMPLETE_YN = 'Y'
-			</if>			
-			<if test="RSV_DT != null">
+			</if>		
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
+				<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') >= #{F_DATE}]]>
+			</if>
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
+				<![CDATA[AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') <= #{L_DATE}]]>
+			</if>
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
+					AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
+			</if>		
+			<!-- <if test="RSV_DT != null">
 				AND DATE_FORMAT(RSV.RSV_DT, '%Y%m') = ${RSV_DT}
-			</if>			
+			</if>	 -->		
+		</where>
+		GROUP BY
+			RSV.RSV_ID			
 		ORDER BY	RSV.RSV_DT
 	</select>
 	

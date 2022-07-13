@@ -90,8 +90,19 @@
 	LEFT JOIN		BMS_DL_CD_INFO E
 	ON				A.INST_LOC = E.DL_CD
 	AND				E.CO_CD = 'INST_LOC'
-WHERE
-	A.DVC_ID IS NOT NULL
+	<where>	
+		A.DVC_ID IS NOT NULL
+		<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
+			AND F.VHC_ID LIKE CONCAT('%',#{CONTENT},'%') || F.VHC_NO LIKE CONCAT('%',#{CONTENT},'%') 
+		</if>
+		<if test="TYPE == 'VHC_NO'">
+			AND F.VHC_NO LIKE CONCAT('%',#{CONTENT},'%')
+		</if>
+		<if test="TYPE == 'VHC_ID'">
+			AND F.VHC_ID LIKE CONCAT('%',#{CONTENT},'%') 
+		</if>
+	</where>
+	
 ORDER BY
 	F.VHC_ID, A.DVC_ID
 	

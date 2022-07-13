@@ -39,6 +39,7 @@
 						<w2:column id="SEND_DATE" name="갱신일시" dataType="text"></w2:column>
 						<w2:column id="CTR_YN" name="제어여부" dataType="text"></w2:column>
 						<w2:column id="FCLT_COORDS" name="시설물위치좌표" dataType="text"></w2:column>
+						<w2:column id="SEND_DTM" name="전송일시" dataType="date"></w2:column>
 						<w2:column id="PK001" name="리셋" dataType="text"></w2:column>
 						<w2:column id="PK002" name="전원(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK003" name="화면(ON/OFF)" dataType="text"></w2:column>
@@ -159,6 +160,7 @@
 						<w2:column id="SEND_DATE" name="갱신일시" dataType="text"></w2:column>
 						<w2:column id="CTR_YN" name="제어여부" dataType="text"></w2:column>
 						<w2:column id="FCLT_COORDS" name="시설물위치좌표" dataType="text"></w2:column>
+						<w2:column id="SEND_DTM" name="전송일시" dataType="date"></w2:column>
 						<w2:column id="PK001" name="리셋" dataType="text"></w2:column>
 						<w2:column id="PK002" name="전원(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK003" name="화면(ON/OFF)" dataType="text"></w2:column>
@@ -240,6 +242,7 @@
 						<w2:column id="SEND_DATE" name="갱신일시" dataType="text"></w2:column>
 						<w2:column id="CTR_YN" name="제어여부" dataType="text"></w2:column>
 						<w2:column id="FCLT_COORDS" name="시설물위치좌표" dataType="text"></w2:column>
+						<w2:column id="SEND_DTM" name="전송일시" dataType="date"></w2:column>
 						<w2:column id="PK001" name="리셋" dataType="text"></w2:column>
 						<w2:column id="PK002" name="전원(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK003" name="화면(ON/OFF)" dataType="text"></w2:column>
@@ -321,6 +324,7 @@
 						<w2:column id="SEND_DATE" name="갱신일시" dataType="text"></w2:column>
 						<w2:column id="CTR_YN" name="제어여부" dataType="text"></w2:column>
 						<w2:column id="FCLT_COORDS" name="시설물위치좌표" dataType="text"></w2:column>
+						<w2:column id="SEND_DTM" name="전송일시" dataType="date"></w2:column>
 						<w2:column id="PK001" name="리셋" dataType="text"></w2:column>
 						<w2:column id="PK002" name="전원(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK003" name="화면(ON/OFF)" dataType="text"></w2:column>
@@ -402,6 +406,7 @@
 						<w2:column id="SEND_DATE" name="갱신일시" dataType="text"></w2:column>
 						<w2:column id="CTR_YN" name="제어여부" dataType="text"></w2:column>
 						<w2:column id="FCLT_COORDS" name="시설물위치좌표" dataType="text"></w2:column>
+						<w2:column id="SEND_DTM" name="전송일시" dataType="date"></w2:column>
 						<w2:column id="PK001" name="리셋" dataType="text"></w2:column>
 						<w2:column id="PK002" name="전원(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK003" name="화면(ON/OFF)" dataType="text"></w2:column>
@@ -483,6 +488,7 @@
 						<w2:column id="SEND_DATE" name="갱신일시" dataType="text"></w2:column>
 						<w2:column id="CTR_YN" name="제어여부" dataType="text"></w2:column>
 						<w2:column id="FCLT_COORDS" name="시설물위치좌표" dataType="text"></w2:column>
+						<w2:column id="SEND_DTM" name="전송일시" dataType="date"></w2:column>
 						<w2:column id="PK001" name="리셋" dataType="text"></w2:column>
 						<w2:column id="PK002" name="전원(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK003" name="화면(ON/OFF)" dataType="text"></w2:column>
@@ -564,6 +570,7 @@
 						<w2:column id="SEND_DATE" name="갱신일시" dataType="text"></w2:column>
 						<w2:column id="CTR_YN" name="제어여부" dataType="text"></w2:column>
 						<w2:column id="FCLT_COORDS" name="시설물위치좌표" dataType="text"></w2:column>
+						<w2:column id="SEND_DTM" name="전송일시" dataType="date"></w2:column>
 						<w2:column id="PK001" name="리셋" dataType="text"></w2:column>
 						<w2:column id="PK002" name="전원(ON/OFF)" dataType="text"></w2:column>
 						<w2:column id="PK003" name="화면(ON/OFF)" dataType="text"></w2:column>
@@ -632,6 +639,8 @@
 						<w2:key id="NODE_ID" name="노드ID" dataType="text"></w2:key>
 						<w2:key id="STTN_ID" name="정류소ID" dataType="text"></w2:key>
 						<w2:key id="ROUT_ID" name="노선ID" dataType="text"></w2:key>
+						<w2:key id="F_DATE" name="name4" dataType="date"></w2:key>
+						<w2:key id="L_DATE" name="name5" dataType="date"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_repRoutItem" saveRemovedData="true">
@@ -730,10 +739,10 @@
 			</xf:submission>
 			<xf:submission id="sub_FM0202G2R0" ref="data:json,dma_sub_search" target='data:json,dlt_BMS_FCLT_INFO' action="/fm/FM0202G2R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="" ev:submit="" ev:submitdone="scwin.sub_FM0202G2R0_submitdone" ev:submiterror="" abortTrigger="">
+				processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_FM0202G2R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_FM0202G0R1" ref="data:json,dma_sub_search" target="data:json,dlt_PARAM_KIND" action="/fm/FM0202G0R1" method="post"
-				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="조회중입니다..."
 				ev:submit="" ev:submitdone="scwin.sub_FM0202G0R1_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_FM0202SHI0" ref="" target="data:json,dlt_repRoutItem" action="/repRout/selectRepRoutItem" method="post"
@@ -786,8 +795,10 @@
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions, codeOptions);
 				
 		var mainSrhOptions = {
+		
 		};		
-		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions, codeOptions);		
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions, codeOptions);	
+			
 		var subOptions = {
 			SEARCH:[{cbFnc:scwin.sttnMoveCtrlClick,nm:"상태 및 제어",class:"gear"}]
 		};		
@@ -798,8 +809,38 @@
 			SEARCH:[{cbFnc:scwin.crsMoveCtrlClick,nm:"상태 및 제어",class:"gear"}]
 		};		
 		
-		com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions);			
+		com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions);
 		
+		var subOptions = {
+			SEARCH:[{cbFnc:scwin.searchParamHis,nm:"조회",class:"search"}]
+		};		
+		
+		com.setSubBtn2(wfm_subBtn3, autoOptions, subOptions);				
+		
+		var date = new Date();
+		var year = date.getFullYear().toString();
+		var month = (date.getMonth()+1).toString();
+		var day = date.getDate().toString();
+		var zero = 0;
+		
+		//글자수 맞추기
+		if(day.length == 1){
+			day = zero + day;
+		}
+		
+		if(month.length == 1){
+			month = zero + month;
+		}
+		
+		var weekAgoDay = parseInt(day) - 7;
+		var todaysDate = year+month+day;
+		var weekAgoDate = year+month+weekAgoDay;
+		var firstday = year+month+"01";	
+
+		F_DATE.setValue(todaysDate);
+		L_DATE.setValue(todaysDate);
+		dma_sub_search.set("F_DATE", todaysDate);
+		dma_sub_search.set("L_DATE", todaysDate);
 		
 		FM0202G1_grid.hide();
 		pgm_subList3.hide();
@@ -1015,8 +1056,8 @@
 			scwin.setSttnGridViewInfo(); //정류소 동적 그리드
 			
 			//에어컨 그리드 상태 설정
-			var index = dlt_BMS_AIRCON_FCLT_INFO.getRowCount();
-			for(var x = 0; x < index; x++){ 
+			var airconIndex = dlt_BMS_AIRCON_FCLT_INFO.getRowCount();
+			for(var x = 0; x < airconIndex; x++){ 
 				var fcltKind = dlt_BMS_AIRCON_FCLT_INFO.getCellData(x, "FCLT_KIND");
 				
 				switch (fcltKind) {
@@ -1035,6 +1076,26 @@
 					//정상 - class추가
 					else if (dlt_BMS_AIRCON_FCLT_INFO.getCellData(x, "PK030") == "1") {
 						FM0202G2.setCellClass(x, "PK030", "cond_normal");
+					}
+					break;
+	
+				}
+			}
+			
+			//승객감지장치 그리드 상태 설정 
+			var ppcIndex = dlt_BMS_PLECNT_FCLT_INFO.getRowCount();
+			for(var x = 0; x < ppcIndex; x++){ 
+				var fcltKind = dlt_BMS_PLECNT_FCLT_INFO.getCellData(x, "FCLT_KIND");
+				
+				switch (fcltKind) {
+				case "FK006":
+					//통신에러 - class추가
+					if (dlt_BMS_PLECNT_FCLT_INFO.getCellData(x, "PK030") == "0") {
+						FM0202G5.setCellClass(x, "PK030", "cond_abnormal");
+					}
+					//정상 - class추가
+					else if (dlt_BMS_PLECNT_FCLT_INFO.getCellData(x, "PK030") == "1") {
+						FM0202G5.setCellClass(x, "PK030", "cond_normal");
 					}
 					break;
 	
@@ -1121,6 +1182,7 @@
 			
 			//헤더 시작
 			gridHeader +='<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="h_colunm_3" value="시설물ID" blockSelect="false" displayMode="label" sortable="true"></w2:column>';
+			gridHeader +='<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="h_colunm_4" value="전송일시" blockSelect="false" displayMode="label" sortable="true"></w2:column>';
 			//gridHeader +='<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="h_colunm_4" value="시설물종류" blockSelect="false" displayMode="label"></w2:column>';
 			
 			//동적 헤더 시작
@@ -1145,6 +1207,7 @@
 			
 			//바디 시작
 			gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="FCLT_ID" value="" blockSelect="false" displayMode="label"></w2:column>';
+			gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="SEND_DTM" value="" blockSelect="false" displayMode="label"></w2:column>';
 			//gridBody += '<w2:column removeBorderStyle="false" width="117" inputType="select" style="height:20px" id="FCLT_KIND" value="" blockSelect="false" displayMode="label"></w2:column>';
 			
 			//동적 바디 시작
@@ -1167,7 +1230,7 @@
 				
 				if(paramKind != '' && fcltKind[x] == fcltKindParam){
 					if(dlCd == "PK046"){
-						gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="button" style="height:20px" id="'+paramKind+'" value="보기" blockSelect="false" displayMode="label" displayFormatter="'+displayForMatter+'"></w2:column>';
+						gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="button" style="height:20px" id="'+paramKind+'_img" value="보기" blockSelect="false" displayMode="label" displayFormatter=""></w2:column>';
 					}else{
 						gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'" value="" blockSelect="false" displayMode="label" displayFormatter="'+displayForMatter+'"></w2:column>';
 					}
@@ -1521,7 +1584,7 @@
 			
 			var psgNum = 0;
 			for(var i = 0; i < dlt_BMS_PLECNT_FCLT_INFO.getRowCount(); i++){
-				psgNum += dlt_BMS_PLECNT_FCLT_INFO.getCellData(i, "PK029");
+				psgNum += parseInt(dlt_BMS_PLECNT_FCLT_INFO.getCellData(i, "PK029"));
 			}
 			
 			//피플카운트 vms
@@ -1994,7 +2057,7 @@
 	scwin.FM0202G5_oncellclick = function(row,col,colId) {
 		var gridColumn = FM0202G5.getColumnID(col);
 		
-		if (gridColumn == "PK046") { 
+		if (gridColumn == "PK046_img") { 
 			var fcltId = dlt_BMS_PLECNT_FCLT_INFO.getCellData(row, "FCLT_ID");
 			var mngId = dlt_BMS_PLECNT_FCLT_INFO.getCellData(row, "MNG_ID");
 			
@@ -2454,7 +2517,24 @@
 					<!-- 정류소 이미지 -->
 					<xf:group style="overflow:auto; position:relative;" id="STTN_IMG" class=""></xf:group>
 					
-					<xf:group id="" class="horizontal_line"></xf:group>
+					<!-- <xf:group id="" class="horizontal_line"></xf:group> -->
+					<xf:group class="gr_search" id="" style="">
+						<xf:group class="label" id="" style="">
+								<w2:span label="전송일시" style="margin-right: 3px; margin-left: 15px;" id=""></w2:span>
+							</xf:group>
+							<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+								style="width:120px; margin-right: 10px; float:left;" id="F_DATE" renderType="component" renderDiv="true"
+								calendarValueType="yearMonthDate" ref="data:dma_sub_search.F_DATE" ev:onviewchange="scwin.F_DATE_onviewchange" minYear="2000"
+								maxYear="2025">
+							</w2:inputCalendar>
+							<w2:span label="~" style="margin-right: 10px; float:left;" id=""></w2:span>
+							<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+								style="width: 120px; float:left; margin-right:10px" id="L_DATE" renderType="component" renderDiv="true" calendarValueType="yearMonthDate"
+								ref="data:dma_sub_search.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange" minYear="2000"
+								maxYear="2025">
+							</w2:inputCalendar>
+							<w2:wframe id="wfm_subBtn3" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
+					</xf:group>
 					
 					<xf:group id="pgm_subList2" class="pgm_subList grdc_1f_20_1f_20_1f_20_1f" style="">
 						<xf:group id="" class="pgm_subList grdr_20_a" style="">

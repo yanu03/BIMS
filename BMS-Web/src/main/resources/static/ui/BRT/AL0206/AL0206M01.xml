@@ -106,8 +106,8 @@
 				ev:submit="" ev:submitdone="scwin.sub_selectCorCnt_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 		</xf:model>
-		<script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
-		<script src="https://code.highcharts.com/gantt/modules/exporting.js"></script>
+		<!-- <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
+		<script src="https://code.highcharts.com/gantt/modules/exporting.js"></script> -->
 		<script type="text/javascript" lazy="false"><![CDATA[
         
 	scwin.onpageload = function() {
@@ -342,6 +342,11 @@
 		  title: {
 		    text: TYPE1.getText()+' 배차시각화('+TYPE2.getText()+')'
 		  },
+		  
+		  credits: {
+		        enabled: false //워터마크 제거
+		  },
+		    
 		  tooltip: {
 		    pointFormat: '배차번호 : {point.allocNo}<b></b><br>운행순번 : {point.operSn}<b></b><br>노선명 : {point.routNm}<b></b><br>코스명 : {point.corNm}<b></b><br>시작(시분) : {point.overlayFrom}<b></b><br>종료(시분) : {point.overlayTo}' //오버레이
 		  },

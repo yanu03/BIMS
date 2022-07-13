@@ -66,6 +66,7 @@
 				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_TRAN_VDO_RSV_RST_INFO" saveRemovedData="true">
 					<w2:columnInfo>
+						<w2:column id="chk" name="name10" dataType="text"></w2:column>
 						<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
 						<w2:column id="PROCE_RST" name="예약결과" dataType="text"></w2:column>
 						<w2:column id="SEND_DTM" name="처리일시" dataType="date"></w2:column>
@@ -73,6 +74,7 @@
 						<w2:column id="ORG_NM" name="제조사" dataType="text"></w2:column>
 						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
 						<w2:column id="INST_LOC" name="설치위치" dataType="text"></w2:column>
+						<w2:column id="RSV_ID" name="예약ID" dataType="text"></w2:column>
 						<w2:column id="RSV_DT" name="예약날짜" dataType="date"></w2:column>
 						<w2:column id="RSV_STATE" name="예약상태" dataType="text"></w2:column>
 					</w2:columnInfo>
@@ -105,7 +107,7 @@
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_PI1102G1R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_PI1102G1U0" ref='data:json,{"action":"modified","id":"dlt_DVC_INFO"}' target="data:json,dma_result"
+			<xf:submission id="sub_PI1102G1U0" ref='data:json,{"action":"modified","id":"dlt_BMS_TRAN_VDO_RSV_RST_INFO"}' target="data:json,dma_result"
 				action="/pi/PI1102G1U0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
 				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI1102G1U0_submitdone" ev:submiterror=""
 				abortTrigger="">
@@ -230,16 +232,27 @@
 	}
 	
 	scwin.btn_resrvcnl_onclick = function() {
-		var rows = PI1102G1.getCheckedIndex("chk");
+		var rows = PI1102G2.getCheckedIndex("chk");
 		var count = rows.length;
 		var str = count + " 건의 데이터를 예약 취소 하시겠습니까?";
+		var rsvState = true;
 		
-		if(count > 0) {
-			com.confirm(str, function(rtn) {
-				if (rtn) {
-					com.executeSubmission(sub_PI1102G1U0);
-				}	
-			});
+		if(RSV_STATE.getValue() == '예약종료') {
+			rsvState = false;	
+		}
+		
+		if(rsvState){
+			if(count > 0) {
+				com.confirm(str, function(rtn) {
+					if (rtn) {
+						com.executeSubmission(sub_PI1102G1U0);
+					}	
+				});
+			}else{
+				com.alert("선택된 예약정보가 없습니다.");
+			}
+		}else{
+			com.alert("이미 취소된 예약정보 입니다.");
 		}
 		
 	}
@@ -291,6 +304,7 @@
 	
 	scwin.sub_PI1102G1R0_submitdone = function(e) {
 		com.setFocusedCell(PI1102G1, "VHC_ID");
+		com.executeSubmission(sub_PI1102G2R0);		
 	};
 	
 	scwin.sub_PI1102G2R0_submitdone = function(e) {
@@ -305,6 +319,16 @@
 	scwin.calendar_radio_onviewchange = function(info) {
 		com.setCalendarRadioChange(F_DATE, L_DATE, info);
 	};	
+	
+	scwin.PI1102G2_oncellclick = function(row,col,colId) {
+		if (col != "0"){
+	         if(PI1102G2.getCellChecked(row, 'chk')==0){
+	            PI1102G2.setCellChecked(row, 'chk', true);
+	         }else if(PI1102G2.getCellChecked(row, 'chk')==1){
+	            PI1102G2.setCellChecked(row, 'chk', false);
+	         }
+	      }
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -607,7 +631,7 @@
 						</xf:group>					
 						<xf:group id="" class="" style="">
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
-								dataList="data:dlt_BMS_TRAN_VDO_RSV_RST_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
+								dataList="data:dlt_BMS_TRAN_VDO_RSV_RST_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.PI1102G2_oncellclick" ev:oneditkeyup="" ev:onkeyup=""
 								ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true" id="PI1102G2" ignoreCellClick="false"
 								nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40"
 								scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows="" autoFitMinWidth="0" disabledScrollHidden=""
@@ -619,6 +643,9 @@
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
+										<w2:column removeBorderStyle="false" width="40" inputType="checkbox" style="height:20px" id="chkHeader"
+											value="선택" blockSelect="false" displayMode="label" sortable="false">
+										</w2:column>
 										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column7"
 											value="차량번호" blockSelect="false" displayMode="label">
 										</w2:column>
@@ -650,6 +677,9 @@
 								</w2:header>
 								<w2:gBody style="" id="gBody1">
 									<w2:row style="" id="row2">
+										<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:25px"
+											inputType="checkbox" id="chk" blockSelect="false">
+										</w2:column>
 										<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="VHC_NO"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>

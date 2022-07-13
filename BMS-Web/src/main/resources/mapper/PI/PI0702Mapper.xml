@@ -149,6 +149,7 @@
 					,DVC.DVC_KIND
 					,DVC.INST_LOC
 					,DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') RSV_DT
+					,RSV.RSV_ID
 					,IF(RST.COMPLETE_YN = 'N', '예약중', '예약종료') RSV_STATE					
 		FROM		BMS_VHC_MST VHC
 			LEFT JOIN 	BMS_DVC_INFO DVC
@@ -183,7 +184,10 @@
 				AND DATE_FORMAT(RSV.RSV_DT, '%Y%m') = ${RSV_DT}
 			</if>	 -->		
 		</where>
-		ORDER BY	RSV.RSV_DT DESC
+		GROUP BY
+			RSV.RSV_ID
+		ORDER BY	
+			RSV.RSV_DT DESC
 	</select>
 	
 	<select id="PI0702G1R1" resultType="Map">

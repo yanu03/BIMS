@@ -670,7 +670,7 @@ public class FTPHandler {
 		String localPath = Paths.get(getRootLocalPath(), "/vehicle/", impId, "/device/" + dvcId, "/config").toString();
 		String ftpPath = getRootServerPath() + "/vehicle/" + impId + "/device/" + dvcId + "/config";
 
-		File dir = new File(localPath);
+		File dir = new File(localPath); 
 
 		if (!dir.isDirectory()) {
 			dir.mkdirs();
