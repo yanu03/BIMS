@@ -936,48 +936,77 @@
 		
 		//////////////////////////////////////////샘플용/////////////////////////////////////////////////////////
 		var eventMsg = "";
-		eventMsg += '<div class="busInfoPopup clickoverlay" id="busInfoPopup" style=""><div class="bustraffic">'	
-		eventMsg += '<a href="javascript:void(0)" id="busInfo-closer" class="close"><span class="blind">닫기</span></a>'
-		eventMsg += '<div id="popup-content">'
-		eventMsg += '<div class="tit"><span class="event_type"><strong>정류장 도착</strong></span></div>' 
-		eventMsg += '<div class="content">' 
-		eventMsg += '<div class="trafficInfor">' 
-		eventMsg += '<table class="tby03">' 
-		eventMsg += '<caption>이벤트정보</caption>' 
-		eventMsg += '<colgroup>' 
-		eventMsg += '<col style="width:*">' 
-		eventMsg += '<col style="width:19%">' 
-		eventMsg += '<col style="width:13%">' 
-		eventMsg += '<col style="width:19%">' 
-		eventMsg += '<col style="width:13%">' 
-		eventMsg += '<col style="width:19%">' 
-		eventMsg += '<col style="width:13%">' 
-		eventMsg += '<col style="width:19%">' 
-		eventMsg += '<col style="width:13%">' 
-		eventMsg += '</colgroup>' 
-		eventMsg += '<tbody id="overlay_tbody">' 
-		eventMsg += '<tr>'
-		eventMsg += '<th>현재 정류소</th>' 
-		eventMsg += '<td colspan="4" id="">'
-		eventMsg +=  '<div>세종고속시외버스터미널</div></td>' 
-		eventMsg += '<th>다음 정류소</th>' 
-		eventMsg += '<td colspan="4" id="">'
-		eventMsg +=  '<div>한솔동</div></td>' 
-		eventMsg += '</tr>'
-		eventMsg += '<tr>'
-		eventMsg += '<th>현재정차시간</th>' 
-		eventMsg += '<td colspan="8" id="">'
-		eventMsg +=  '<div id="cur_stop_tm">0초</div></td>' 
-		eventMsg += '</tr>'
-		eventMsg += '<tr>'
-		eventMsg += '<th>정차메시지</th>' 
-		eventMsg += '<td colspan="8" id="">'
-		eventMsg +=  '<div id="stopMessage">20초 정차하세요</div></td>' 
-		eventMsg += '</tr>'
-		eventMsg += '</tbody>' 
-		eventMsg += '</table>' 
-		eventMsg += '</div> </div>'
-		eventMsg += '</div></div>'		
+//		eventMsg += '<div class="busInfoPopup clickoverlay" id="busInfoPopup" style=""><div class="bustraffic">'	
+//		eventMsg += '<a href="javascript:void(0)" id="busInfo-closer" class="close"><span class="blind">닫기</span></a>'
+//		eventMsg += '<div id="popup-content">'
+//		eventMsg += '<div class="tit"><span class="event_type"><strong>정류장 도착</strong></span></div>' 
+//		eventMsg += '<div class="content">' 
+//		eventMsg += '<div class="trafficInfor">' 
+//		eventMsg += '<table class="tby03">' 
+//		eventMsg += '<caption>이벤트정보</caption>' 
+//		eventMsg += '<colgroup>' 
+//		eventMsg += '<col style="width:*">' 
+//		eventMsg += '<col style="width:19%">' 
+//		eventMsg += '<col style="width:13%">' 
+//		eventMsg += '<col style="width:19%">' 
+//		eventMsg += '<col style="width:13%">' 
+//		eventMsg += '<col style="width:19%">' 
+//		eventMsg += '<col style="width:13%">' 
+//		eventMsg += '<col style="width:19%">' 
+//		eventMsg += '<col style="width:13%">' 
+//		eventMsg += '</colgroup>' 
+//		eventMsg += '<tbody id="overlay_tbody">' 
+//		eventMsg += '<tr>'
+//		eventMsg += '<th>현재 정류소</th>' 
+//		eventMsg += '<td colspan="4" id="">'
+//		eventMsg +=  '<div>세종고속시외버스터미널</div></td>' 
+//		eventMsg += '<th>다음 정류소</th>' 
+//		eventMsg += '<td colspan="4" id="">'
+//		eventMsg +=  '<div>한솔동</div></td>' 
+//		eventMsg += '</tr>'
+//		eventMsg += '<tr>'
+//		eventMsg += '<th>현재정차시간</th>' 
+//		eventMsg += '<td colspan="8" id="">'
+//		eventMsg +=  '<div id="cur_stop_tm">0초</div></td>' 
+//		eventMsg += '</tr>'
+//		eventMsg += '<tr>'
+//		eventMsg += '<th>정차메시지</th>' 
+//		eventMsg += '<td colspan="8" id="">'
+//		eventMsg +=  '<div id="stopMessage">20초 정차하세요.</div></td>' 
+//		eventMsg += '</tr>'
+//		eventMsg += '<th>우선신호메시지</th>' 
+//		eventMsg += '<td colspan="8" id="">'
+//		eventMsg +=  '<div id="stopMessage">18초 정차하세요.</div></td>' 
+//		eventMsg += '</tr>'
+//		eventMsg += '</tbody>' 
+//		eventMsg += '</table>' 
+//		eventMsg += '</div> </div>'
+//		eventMsg += '</div></div>'		
+		
+		eventMsg += '<div class="event map_info" id="busInfoPopup">';
+		eventMsg += '   <h3 class="blind">이벤트 안내</h3>';
+		eventMsg += '   <p class="action">정류장도착</p>';
+		eventMsg += '   <p class="stay_sec">(현재정차시간 : <span id="cur_spd">'+0+'</span>초))</p>';
+		eventMsg += '   <table class="station_info">';
+		eventMsg += '      <colgroup>';
+		eventMsg += '         <col style="width: 90px;">';
+		eventMsg += '         <col style="width: auto;">';
+		eventMsg += '      </colgroup>';
+		eventMsg += '      <tbody><tr>';
+		eventMsg += '         <th>현재 정류장</th>';
+		eventMsg += '         <td>세종고속시외버스터미널</td>';
+		eventMsg += '      </tr>';
+		eventMsg += '      <tr>';
+		eventMsg += '         <th>다음 정류장</th>';
+		eventMsg += '         <td>한솔동</td>';
+		eventMsg += '      </tr>';
+		eventMsg += '   </tbody></table>';
+		eventMsg += '   <dl class="event_mesage">';
+		eventMsg += '     <dt class="blind">이벤트 메시지</dt>';
+		eventMsg += '      <dd id="stopMessage">20초 정차하세요.</dd>';
+		eventMsg += '   </dl>';
+		eventMsg += '   <button class="close_mesage ir_pm" id="busInfo-closer">닫기</button>';
+		eventMsg += '</div>';
 		
 		var imageSize = new kakao.maps.Size(35, 35); 
 		var sampleMarkerImage = new kakao.maps.MarkerImage("/cm/images/tmap/bus_red.png", imageSize);
@@ -1010,31 +1039,38 @@
 		sampleMarker2.setMap(routMap.mapInfo["map_MO0101_vehicle"].map);			
 		var dsptchMsg = "";
 		
-		dsptchMsg += '<div class="dsptchMessagePopup clickoverlay"><div class="bustraffic">'
-		dsptchMsg += '<a href="javascript:void(0)" id="busInfo-closer" class="close"><span class="blind">닫기</span></a>'
-		dsptchMsg += '<div id="popup-content">'
-		dsptchMsg += '<div class="tit"><span><strong>디스패치차량</strong></span></div>' 
-		dsptchMsg += '<div class="content">' 
-		dsptchMsg += '<div class="trafficInfor">' 
-		dsptchMsg += '<table class="tby03">' 
-		dsptchMsg += '<caption>디스패치메시지</caption>' 
-		dsptchMsg += '<colgroup>' 
-		dsptchMsg += '<col style="width:*">' 
-		dsptchMsg += '<col style="width:19%">' 
-		dsptchMsg += '<col style="width:13%">' 
-		dsptchMsg += '<col style="width:19%">' 
-		dsptchMsg += '<col style="width:13%">' 
-		dsptchMsg += '</colgroup>' 
-		dsptchMsg += '<tbody id="overlay_tbody">' 
-		dsptchMsg += '<tr> '
-		dsptchMsg += '<th>메시지내용</th>' 
-		dsptchMsg += '<td colspan="4">'
-		dsptchMsg +=  '<div>40초 빠릅니다.</div></td>' 
-		dsptchMsg += '</tr>'
-		dsptchMsg += '</tbody>' 
-		dsptchMsg += '</table>' 
-		dsptchMsg += '</div> </div>'
-		dsptchMsg += '</div></div>'		
+//		dsptchMsg += '<div class="dispatch map_mesage clickoverlay"><div class="bustraffic">'
+//		dsptchMsg += '<a href="javascript:void(0)" id="busInfo-closer" class="close"><span class="blind">닫기</span></a>'
+//		dsptchMsg += '<div id="popup-content">'
+//		dsptchMsg += '<div class="tit"><span><strong>디스패치차량</strong></span></div>' 
+//		dsptchMsg += '<div class="content">' 
+//		dsptchMsg += '<div class="trafficInfor">' 
+//		dsptchMsg += '<table class="tby03">' 
+//		dsptchMsg += '<caption>디스패치메시지</caption>' 
+//		dsptchMsg += '<colgroup>' 
+//		dsptchMsg += '<col style="width:*">' 
+//		dsptchMsg += '<col style="width:19%">' 
+//		dsptchMsg += '<col style="width:13%">' 
+//		dsptchMsg += '<col style="width:19%">' 
+//		dsptchMsg += '<col style="width:13%">' 
+//		dsptchMsg += '</colgroup>' 
+//		dsptchMsg += '<tbody id="overlay_tbody">' 
+//		dsptchMsg += '<tr> '
+//		dsptchMsg += '<th>메시지내용</th>' 
+//		dsptchMsg += '<td colspan="4">'
+//		dsptchMsg +=  '<div>40초 빠릅니다.</div></td>' 
+//		dsptchMsg += '</tr>'
+//		dsptchMsg += '</tbody>' 
+//		dsptchMsg += '</table>' 
+//		dsptchMsg += '</div> </div>'
+//		dsptchMsg += '</div></div>'	
+		
+		dsptchMsg += '<div class="dispatch map_mesage">';
+		dsptchMsg += '  <h3 class="blind">디스패치 메시지</h3>'
+		dsptchMsg += '   <span>디스패치 관련 안내글입니다.</span>'
+		dsptchMsg += '   <button class="close_mesage ir_pm">닫기</button> '
+		dsptchMsg += '</div>'		 
+		
 		
 		sampleDsptchOverlay = new kakao.maps.CustomOverlay({
 			content: dsptchMsg,
