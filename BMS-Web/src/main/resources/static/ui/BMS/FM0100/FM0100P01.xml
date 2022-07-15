@@ -19,6 +19,27 @@
 						<w2:column id="FOCUS" name="포커스" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_FCLT_INFO" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="FCLT_ID" name="시설물ID" dataType="text"></w2:column>
+						<w2:column id="MAKER" name="제조사" dataType="text"></w2:column>
+						<w2:column id="FCLT_KIND" name="시설물유형" dataType="text"></w2:column>
+						<w2:column id="CLSFCTN_ID" name="유지보수기관" dataType="text"></w2:column>
+						<w2:column id="INTG_FCLT_ID" name="연계시설물아이디" dataType="text"></w2:column>
+						<w2:column id="INST_LOC" name="장착위치" dataType="text"></w2:column>
+						<w2:column id="MODEL_NM" name="모델명" dataType="text"></w2:column>
+						<w2:column id="BUY_DT" name="구매일" dataType="date" defaultValue=""></w2:column>
+						<w2:column id="INST_DT" name="설치일" dataType="date"></w2:column>
+						<w2:column id="USE_YN" name="사용여부" dataType="text" defaultValue="Y"></w2:column>
+						<w2:column id="CTR_YN" name="제어여부" dataType="text" defaultValue="Y"></w2:column><w2:column id="REMARK" name="비고" dataType="text"></w2:column>
+						<w2:column id="NODE_ID" name="노드ID" dataType="text"></w2:column>
+						<w2:column id="MNG_ID" name="관리아이디" dataType="text"></w2:column>
+						<w2:column id="FCLT_COORDS" name="시설물위치정보" dataType="text"></w2:column>
+						<w2:column id="FCLT_IP" name="시설IP" dataType="text"></w2:column>
+						<w2:column id="CLSFCTN_NM" name="분류명" dataType="text"></w2:column>
+						<w2:column id="MAKER_NM" name="제조사명" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_search">
 					<w2:keyInfo>
 						<w2:key id="TYPE" name="name1" dataType="text"></w2:key>
@@ -51,6 +72,7 @@
 		dma_searchitem.set("FCLT_KIND", scwin.param.FCLT_KIND);   
 		dma_searchitem.set("STTN_FCLT_TYPE", scwin.param.STTN_FCLT_TYPE);   
 		dma_searchitem.set("FCLT_COORDS", scwin.param.FCLT_COORDS);   
+		dlt_BMS_FCLT_INFO.setJSON(scwin.param.json, true);
 		
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
 		
@@ -67,37 +89,90 @@
 		}
 		
 		//시설물 좌표값이 있을 경우
-		if(dma_searchitem.get("FCLT_COORDS") != ''){
-			var coord = dma_searchitem.get("FCLT_COORDS").split(',');
-			var top = coord[0];
-			var left = coord[1];
-			var fcltKind = dma_searchitem.get("FCLT_KIND");
-			var fcltId = dma_searchitem.get("FCLT_ID") + '_popup';
-			var str = ""
-			var imgSrc = ""
-			
-			if(fcltKind == 'FK001'){
-				imgSrc = "/cm/images/bms/BIT_RED_normal.png";
-			}else if(fcltKind == 'FK004'){
-				imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
-			}else if(fcltKind == 'FK005'){
-				imgSrc = "/cm/images/bms/AIRCON_normal.png";
-			}else if(fcltKind == 'FK007'){
-				imgSrc = "/cm/images/bms/SCREENDOOR_normal.png";
-			}else if(fcltKind == 'FK006'){
-				imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
+	      if(dma_searchitem.get("FCLT_COORDS") != ''){
+	         var coord = dma_searchitem.get("FCLT_COORDS").split(',');
+	         var top = coord[0];
+	         var left = coord[1];
+	         var fcltKind = dma_searchitem.get("FCLT_KIND");
+	         var fcltId = dma_searchitem.get("FCLT_ID") + '_popup';
+	         var str = ""
+	         var imgSrc = ""
+	         
+	         if(fcltKind == 'FK001'){
+	            imgSrc = "/cm/images/bms/BIT_RED_normal.png";
+	         }else if(fcltKind == 'FK004'){
+	            imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
+	         }else if(fcltKind == 'FK005'){
+	            imgSrc = "/cm/images/bms/AIRCON_normal.png";
+	         }else if(fcltKind == 'FK007'){
+	            imgSrc = "/cm/images/bms/ClosedDoor.gif";
+	         }else if(fcltKind == 'FK006'){
+	            imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
+	         }
+	         
+	         str += '<div id="'+fcltId+'"style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group " onmousedown="startDrag(event, this)">';
+	        if(fcltKind == 'FK004'){
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgSrc+'" id="'+fcltId+'">';
+			}else{
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'">';
 			}
-			
-			str += '<div id="'+fcltId+'"style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group " onmousedown="startDrag(event, this)">';
-			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'">';
-			str += '</div>'
+	         str += '</div>'
+	      
+	         $('#'+STTN_IMG.getID()).html(str);
+	         
+	         $("#"+fcltId).on("click", function(e) {
+	             e.stopPropagation();
+	          });
+	      }
+
+ 		
+ 		
+ 		//전체 시설물 다 보여주기 (클릭 이벤트 쪽 수정해야함)
+		/*var rowCnt = dlt_BMS_FCLT_INFO.getRowCount();
+		var str = ""
+		var imgSrc = ""
 		
-			$('#'+STTN_IMG.getID()).html(str);
+		for(var x = 0; x < rowCnt; x++){
+			var fcltCoords = dlt_BMS_FCLT_INFO.getCellData(x, "FCLT_COORDS");
 			
-			$("#"+fcltId).on("click", function(e) {
-	 			e.stopPropagation();
-	 		});
+			if(fcltCoords != ''){
+				var coord = fcltCoords.split(',');
+				var top = coord[0];
+				var left = coord[1];
+				var fcltKind = dlt_BMS_FCLT_INFO.getCellData(x, "FCLT_KIND");
+				var fcltId = dlt_BMS_FCLT_INFO.getCellData(x, "FCLT_ID") + '_popup';
+				
+				
+				if(fcltKind == 'FK001'){
+					imgSrc = "/cm/images/bms/BIT_RED_normal.png";
+				}else if(fcltKind == 'FK004'){
+					imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
+				}else if(fcltKind == 'FK005'){
+					imgSrc = "/cm/images/bms/AIRCON_normal.png";
+				}else if(fcltKind == 'FK007'){
+					imgSrc = "/cm/images/bms/ClosedDoor.gif";
+				}else if(fcltKind == 'FK006'){
+					imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
+				}
+				
+				str += '<div id="'+fcltId+'"style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group " onmousedown="startDrag(event, this)">';
+				if(fcltKind == 'FK004'){
+					str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgSrc+'" id="'+fcltId+'">';
+				}else{
+					str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'">';
+				}
+				str += '</div>'
+			}
 		}
+		
+		$('#'+STTN_IMG.getID()).html(str);
+		
+		$("#"+fcltId).on("click", function(e) {
+ 			e.stopPropagation();
+ 		});*/
+		
+		
+		
         
 	};
 	
@@ -125,7 +200,7 @@
 		}else if(fcltKind == 'FK005'){
 			imgPath = "/cm/images/bms/AIRCON_normal.png";
 		}else if(fcltKind == 'FK007'){
-			imgPath = "/cm/images/bms/SCREENDOOR_normal.png";
+			imgPath = "/cm/images/bms/ClosedDoor.gif";
 		}else if(fcltKind == 'FK006'){
 			imgPath = "/cm/images/bms/PEOPLECOUNT_normal.png";
 		}
@@ -136,7 +211,11 @@
 		*/
 		
 		str += '<div id="'+fcltId+'" style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group " onmousedown="startDrag(event, this)">';
-		str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgPath+'" id="'+imgId+'"  >';
+		if(fcltKind == 'FK004'){
+			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgPath+'" id="'+fcltId+'">';
+		}else{
+			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgPath+'" id="'+fcltId+'">';
+		}
 		str += '</div>'
 		
 		$('#'+STTN_IMG.getID()).html(str);

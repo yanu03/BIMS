@@ -104,7 +104,7 @@ public class SI0408Service extends ServiceSupport {
 						if(param.size()>0) { //동일 대표노선의 다른 노선 갱신 용 삭제해도 됨
 							
 							
-							if(routId.equals(param.get(0).get("ROUT_ID"))||wayDiv.equals(param.get(0).get("WAY_DIV"))==false)continue;
+							if(routId.equals(param.get(0).get("ROUT_ID"))||wayDiv.equals(param.get(0).get("WAY_DIV"))==false&&data.get("NODE_TYPE").equals("NT001")==false)continue;
 							
 							map2.put("ROUT_ID",routId);
 							
@@ -123,7 +123,8 @@ public class SI0408Service extends ServiceSupport {
 								String nodeType = (String)CommonUtil.bigDecimalToString(data.get("NODE_TYPE"));
 								String nodeNm = (String)CommonUtil.bigDecimalToString(data.get("NODE_NM"));
 								
-								if(cOrgGpsX.equals(orgGpsX)&&cOrgGpsY.equals(orgGpsY)) {
+								if(cOrgGpsX.equals(orgGpsX)&&cOrgGpsY.equals(orgGpsY)
+										||cNodeNm.equals(nodeNm)&&cNodeType.equals(nodeType)) {
 									isUpdate = true;
 								}
 								
@@ -189,7 +190,10 @@ public class SI0408Service extends ServiceSupport {
 												}
 												else*/ 
 												{
-													uCnt += SI0408Mapper.SI0408G1U1(data);
+													if(cNodeNm.equals(nodeNm)&&cNodeType.equals(nodeType))
+														uCnt += SI0408Mapper.SI0408G1U2(input);
+													
+													//uCnt += SI0408Mapper.SI0408G1U1(data);
 												}
 											}
 										}

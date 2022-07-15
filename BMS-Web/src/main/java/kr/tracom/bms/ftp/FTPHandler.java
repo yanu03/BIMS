@@ -195,8 +195,19 @@ public class FTPHandler {
 				if (!sftp.isConnected()) {
 
 					LOGGER.info("sftpChannel is not connected. connecting...");
-
-					sftp.connect();
+					try {
+						sftp.connect();
+					} catch (Exception e) {
+						LOGGER.error("sftpChannel() in Exception {}",e);
+						try {
+							sftp.disconnect();
+							sftp.exit();
+						}
+						catch (Exception e1) {
+							LOGGER.error("sftpChannel() 2 Exception {}",e1);
+						}
+						sftp = SftpManager.getSftpChannel(sftpHost, sftpPort, sftpUser, sftpPasword); //세션 아웃이 ftp 새로 생성
+					}
 				}
 			}
 
@@ -659,7 +670,7 @@ public class FTPHandler {
 		String localPath = Paths.get(getRootLocalPath(), "/vehicle/", impId, "/device/" + dvcId, "/config").toString();
 		String ftpPath = getRootServerPath() + "/vehicle/" + impId + "/device/" + dvcId + "/config";
 
-		File dir = new File(localPath);
+		File dir = new File(localPath); 
 
 		if (!dir.isDirectory()) {
 			dir.mkdirs();

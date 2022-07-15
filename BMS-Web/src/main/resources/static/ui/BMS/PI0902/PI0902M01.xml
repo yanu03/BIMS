@@ -69,6 +69,7 @@
 						<w2:column id="ORG_NM" name="제조사" dataType="text"></w2:column>
 						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
 						<w2:column id="INST_LOC" name="설치위치" dataType="text"></w2:column>
+						<w2:column id="RSV_ID" name="예약ID" dataType="text"></w2:column>
 						<w2:column id="RSV_DT" name="예약날짜" dataType="date"></w2:column>
 						<w2:column id="RSV_STATE" name="예약상태" dataType="text"></w2:column>
 					</w2:columnInfo>
@@ -132,14 +133,14 @@
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI0902G1R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_PI0902G1U0" ref='data:json,{"action":"modified","id":"dlt_VHC_MST"}' target="data:json,dma_result"
+			<xf:submission id="sub_PI0902G1U0" ref='data:json,{"action":"modified","id":"dlt_BMS_ED_RSV_RST_INFO"}' target="data:json,dma_result"
 				action="/pi/PI0902G1U0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
 				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI0902G1U0_submitdone" ev:submiterror=""
 				abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI0902G2R0" ref="data:json,dma_subsearch2" target="data:json,dlt_BMS_ED_RSV_RST_INFO"
 				action="/pi/PI0902G2R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
-				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI0902G2R0_submitdone" ev:submiterror="" abortTrigger="">
+				customHandler="" mode="asynchronous" processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_PI0902G2R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI0902G1R1" ref="" target="data:json,dlt_VHC_MST_MNG_LIST" action="/pi/PI0902G1R1" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
@@ -360,8 +361,8 @@
 	};
 	
 	scwin.PI0902G1_onrowindexchange = function(row,oldRow) {
-		var focusOption = {keyMap : dma_subsearch2};
-		com.changeDualGrid(PI0902G1, PI0902G2, null, sub_PI0902G2R0, focusOption, row, oldRow);
+		//var focusOption = {keyMap : dma_subsearch2};
+		//com.changeDualGrid(PI0902G1, PI0902G2, null, sub_PI0902G2R0, focusOption, row, oldRow);
 			
 	};
 	
@@ -386,7 +387,7 @@
 		var dataCheck = true;
 		
 		//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
-		if(chkLen > 1 ){
+		/*if(chkLen > 1 ){
 			for(var i=0; i<chkLen; i++)
 			{
 				if(chkData[0].VHC_ID != chkData[i].VHC_ID){
@@ -405,16 +406,12 @@
 				PI0902_ul.hide();	
 			}
 			
-			//FM0204G1.setDisabled("grid", true);
-			//FM0204F0.setDisabled(true);
 		}else if(chkLen < 2){
 			PI0902G2.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
 			gr_sub_header2.show("");
 			PI0902_ul.hide();
 			
-			//FM0204G1.setDisabled("grid", false);
-			//FM0204F0.setDisabled(false);
-		}      
+		}      */
       	
 	};
 	
@@ -428,6 +425,7 @@
 	
 	scwin.sub_PI0902G1R0_submitdone = function(e) {
 		com.setFocusedCell(PI0902G1, "VHC_ID");
+		com.executeSubmission(sub_PI0902G2R0);	
 	};
 	
 	scwin.sub_PI0902G2R0_submitdone = function(e) {

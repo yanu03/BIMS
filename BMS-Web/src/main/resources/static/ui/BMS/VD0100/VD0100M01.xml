@@ -118,7 +118,7 @@
 			</xf:submission>
 			<xf:submission id="sub_VD0100G0R0" ref="data:json,dma_subsearch" target="data:json,dlt_BMS_DVC_INFO" action="/vd/VD0100G0R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="" ev:submit="" ev:submitdone="scwin.sub_VD0100G0R0_submitdone" ev:submiterror="" abortTrigger="">
+				processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_VD0100G0R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_VD0100G0S0" ref='data:json,{"action":"modified","id":"dlt_BMS_DVC_INFO"}' target="data:json,dma_result"
 				action="/vd/VD0100G0S0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
@@ -145,14 +145,10 @@
 			//Sub1 : { grid : VD0100G0, srchSbm : sub_VD0100G0R0, savSbm : sub_VD0100G0S0,  keySbm : sub_VD0100G0K0, name :  "장치 목록"}
 		 };
 		 
-		/*var mainOptions = {
-			ADD: scwin.execute_key
-			,SAVE: scwin.saveDvc
-		};*/
-		
 		var mainOptions = {
-			ADD: com.addGrid2, SEARCH : {}
-			
+			ADD: scwin.execute_key
+			//,ADD: scwin.btn_addDvc_onclick
+			//,SAVE: scwin.saveDvc
 		};
 		
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
@@ -175,23 +171,6 @@
 
 	};
 	
-	com.addGrid2 = function(){
-		com.executeSubmission(sub_VD0100G0K0);
-	};
-	
-	//키값 추가 submission done
-	scwin.sub_VD0100G0K0_submitdone = function(e) {
-		//com.addGridForm(VD0100G0, VD0100F0, dma_SEQ_BMS_DVC_INFO_0, "DVC_ID", "DVC_ID");
-		var data = com.getGridViewDataList(VD0100G0);
-		var insertIndex = data.insertRow(VD0100G0.getFocusedRowIndex()+1);
-		
-		VD0100G0.setFocusedCell(insertIndex, 'VHC_ID', true);
-		data.setCellData(insertIndex, "DVC_ID", dma_SEQ_BMS_DVC_INFO_0.get("SEQ"));
-		
-		//장치 추가 버튼 클릭
-		//scwin.btn_addDvc_onclick();
-	};	
-	
 	scwin.sub_VD0100SHI0_submitdone = function(e) {
 		com.executeSubmission(sub_VD0100SHI1);	
 	};
@@ -211,9 +190,6 @@
 		});
 	};
 	
-	scwin.sub_VD0100G0R0_submitdone = function(e) {
-		com.setFocusedCell(VD0100G0, "DVC_ID");		
-	};
 	
 	/**
 	 * 저장 버튼 클릭
@@ -264,12 +240,28 @@
 	}
 	
 	/**
+	 * 키값 추가 submission done
+	 */
+	scwin.sub_VD0100G0K0_submitdone = function(e) {
+		//com.addGridForm(VD0100G0, VD0100F0, dma_SEQ_BMS_DVC_INFO_0, "DVC_ID", "DVC_ID");
+		/*var data = com.getGridViewDataList(VD0100G0);
+		
+		var insertIndex = data.insertRow(VD0100G0.getRealRowIndex(VD0100G0.getFocusedRowIndex())+1);
+		
+		VD0100G0.setFocusedCell(insertIndex, 'VHC_ID', true);
+		data.setCellData(insertIndex, "DVC_ID", dma_SEQ_BMS_DVC_INFO_0.get("SEQ"));*/
+		
+		//장치 추가 버튼 클릭
+		scwin.btn_addDvc_onclick();
+	};
+	
+	/**
 	 * 장치 추가 버튼 클릭
 	 */
 	scwin.btn_addDvc_onclick = function() {
-		var menu_cnt = dlt_BMS_DVC_INFO.getTotalRow();
+		var dvc_cnt = dlt_BMS_DVC_INFO.getTotalRow();
 
-		if (menu_cnt == 0) {
+		if (dvc_cnt == 0) {
 			com.alert("조회 후 이용하세요.");
 			return;
 		}
@@ -278,14 +270,14 @@
 			VD0100G0.setFocusedCell(0, "DVC_ID");
 		}
 		
-		var currMenuNm = dlt_BMS_DVC_INFO.getCellData(VD0100G0.getFocusedRealRowIndex(), "DVC_KIND_NM");
-		var currMenuLevel = WebSquare.util.getNumber(dlt_BMS_DVC_INFO.getCellData(VD0100G0.getFocusedRealRowIndex(), "LEVEL"));
+		var currDvcNm = dlt_BMS_DVC_INFO.getCellData(VD0100G0.getFocusedRealRowIndex(), "DVC_KIND_NM");
+		var currDvcLevel = WebSquare.util.getNumber(dlt_BMS_DVC_INFO.getCellData(VD0100G0.getFocusedRealRowIndex(), "LEVEL"));
 		
-		if (menu_cnt != 0 && VD0100G0.getFocusedRowIndex() == -1) {
+		if (dvc_cnt != 0 && VD0100G0.getFocusedRowIndex() == -1) {
 			com.alert("메뉴코드를 클릭하셔야 합니다.");
 		} else {
-			if (currMenuLevel < 2) {
-				scwin.selectLevel(currMenuNm);
+			if (currDvcLevel < 2) {
+				scwin.selectLevel(currDvcNm);
 			} else {
 				scwin.equalLevel();
 			}
@@ -309,24 +301,25 @@
 	};
 	
 	/**
-	 * 하위 레벨의 노드에 메뉴를 추가한다.(포커스가 잡혔는데 depth가 1일 경우)
+	 * 하위 레벨의 노드에 장치를 추가한다.(포커스가 잡혔는데 depth가 1일 경우)
 	 */
 	scwin.lowerLevel = function() {
+		debugger;
 		var focusedRowIndex = VD0100G0.getFocusedRealRowIndex();
-		var parentMenuCd = dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "PARENT_ID");
-		var menuLevel = WebSquare.util.getNumber(dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "LEVEL")) + 1;
+		var parentId = dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "DVC_ID");
+		var DvcLevel = WebSquare.util.getNumber(dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "LEVEL")) + 1;
 		var sortOrder = 1
-		var insertRowIndex = scwin.getInsertRowIndex(parentMenuCd);
+		var insertRowIndex = scwin.getInsertRowIndex(parentId);
 
 		if (insertRowIndex === -1) {
 			insertRowIndex = focusedRowIndex + 1;
 		}
-		//var menuCd = scwin.getInsertRowMenuCd(parentMenuCd, menuLevel, true);
+		//var menuCd = scwin.getInsertRowMenuCd(parentId, DvcLevel, true);
 		
 		var insertJson = [{
 			"DVC_ID" : dma_SEQ_BMS_DVC_INFO_0.get("SEQ"),
-			"PARENT_ID" : parentMenuCd,
-			"LEVEL" : menuLevel,
+			"PARENT_ID" : parentId,
+			"LEVEL" : DvcLevel,
 			"VHC_ID" : dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "VHC_ID"),
 			"VHC_NO" : dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "VHC_NO")
 			//"SORT" : sortOrder
@@ -335,25 +328,25 @@
 		dlt_BMS_DVC_INFO.insertJSON(insertRowIndex, insertJson);
 		//dlt_BMS_DVC_INFO.setCellData(insertRowIndex, "USE_YN", 'Y');
 		VD0100G0.setFocusedCell(insertRowIndex, "DVC_ID", true);
-
 	};
 	
 	/**
-	 * 같은 레벨의 노트에 메뉴를 추가한다.
+	 * 같은 레벨의 노트에 장치를 추가한다.
 	 */
 	scwin.equalLevel = function() {
+		debugger;
 		var focusedRowIndex = VD0100G0.getFocusedRealRowIndex();
-		var parentMenuCd = dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "PARENT_ID");
-		var rowIndexArr = dlt_BMS_DVC_INFO.getMatchedIndex("PARENT_ID", parentMenuCd, true, 0, dlt_BMS_DVC_INFO.getTotalRow());
-		var menuLevel = WebSquare.util.getNumber(dlt_BMS_DVC_INFO.getCellData(rowIndexArr[rowIndexArr.length - 1], "LEVEL"));
+		var parentId = dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "PARENT_ID");
+		var rowIndexArr = dlt_BMS_DVC_INFO.getMatchedIndex("PARENT_ID", parentId, true, 0, dlt_BMS_DVC_INFO.getTotalRow());
+		var DvcLevel = WebSquare.util.getNumber(dlt_BMS_DVC_INFO.getCellData(rowIndexArr[rowIndexArr.length - 1], "LEVEL"));
 		//var sortOrder = WebSquare.util.getNumber(dlt_BMS_DVC_INFO.getCellData(rowIndexArr[rowIndexArr.length - 1], "SORT")) + 1;
-		var insertRowIndex = scwin.getInsertRowIndex(parentMenuCd);
-		//var menuCd = scwin.getInsertRowMenuCd(parentMenuCd, menuLevel, false);
+		var insertRowIndex = scwin.getInsertRowIndex(parentId);
+		//var menuCd = scwin.getInsertRowMenuCd(parentId, DvcLevel, false);
 		
 		var insertJson = [{
 			"DVC_ID" : dma_SEQ_BMS_DVC_INFO_0.get("SEQ"),
-			"PARENT_ID" : parentMenuCd,
-			"LEVEL" : menuLevel,
+			"PARENT_ID" : parentId,
+			"LEVEL" : DvcLevel,
 			"VHC_ID" : dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "VHC_ID"),
 			"VHC_NO" : dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "VHC_NO")
 			//"SORT" : sortOrder
@@ -362,39 +355,16 @@
 		dlt_BMS_DVC_INFO.insertJSON(insertRowIndex, insertJson);
 		//dlt_BMS_DVC_INFO.setCellData(insertRowIndex, "USE_YN", 'Y');
 		VD0100G0.setFocusedCell(insertRowIndex, "DVC_ID", true);
-	};
-	
-	/**
-	 * 새로 추가되는 메뉴의 메뉴 코드를 반환한다. ( LEVEL 3일 경우 하위메뉴 생성 )
-	 */
-	scwin.getInsertRowMenuCd = function(parentMenuCd, menuLevel, isBottom) {
-	
-		var prefix = 'MN00';
-		var menuCdArr = dlt_BMS_DVC_INFO.getMatchedColumnData("PARENT_ID", parentMenuCd, "DVC_ID", true, 0, dlt_BMS_DVC_INFO.getTotalRow());
-		if (menuCdArr.length > 0) {
-			var lastMenuCd = menuCdArr[menuCdArr.length - 1];
-			var nodeIndex = prefix.length+(menuLevel - 1) * 2;
-			var preNodeCd = lastMenuCd.substr(nodeIndex, 2);
-			var newNodeCd = com.fillZero(WebSquare.util.getNumber(preNodeCd) + 1, 2);
-			return lastMenuCd.substr(0, nodeIndex) + lastMenuCd.substr(nodeIndex).replace(preNodeCd, newNodeCd);
-		} else {
-			if (isBottom) {
-				var nodeIndex = prefix.length + parentMenuCd.indexOf("00");
-				return parentMenuCd.substr(0, nodeIndex) + parentMenuCd.substr(nodeIndex).replace("00", "01");
-			} else {
-				var nodeIndex = prefix.length + parentMenuCd.indexOf("00");
-				var preNodeCd = parentMenuCd.substr(nodeIndex, 2);
-				var newNodeCd = com.fillZero(WebSquare.util.getNumber(preNodeCd) + 1, 2);
-				return parentMenuCd.substr(0, nodeIndex) + parentMenuCd.substr(nodeIndex).replace(preNodeCd, newNodeCd);
-			}
-		}
-	};
 
+		
+	};
+	
 	/**
-	 * 새로 추가되는 메뉴로 RowIndex를 반환한다.
+	 * 새로 추가되는 장치로 RowIndex를 반환한다.
 	 */
-	scwin.getInsertRowIndex = function(parentMenuCd) {
-		var rowIndexArr = dlt_BMS_DVC_INFO.getMatchedIndex("PARENT_ID", parentMenuCd, true, 0, dlt_BMS_DVC_INFO.getTotalRow());
+	scwin.getInsertRowIndex = function(parentId) {
+		debugger;
+		var rowIndexArr = dlt_BMS_DVC_INFO.getMatchedIndex("PARENT_ID", parentId, true, 0, dlt_BMS_DVC_INFO.getTotalRow());
 		var rowIdx = "";
 		
 		if (rowIndexArr.length > 0) {
@@ -405,8 +375,8 @@
 				rowIdx = dlt_BMS_DVC_INFO.getMatchedIndex("DVC_ID", dlt_BMS_DVC_INFO.getRowJSON(lastIndex).DVC_ID, true, 0, dlt_BMS_DVC_INFO.getTotalRow());
 			}
 			
-			var lastMenuCd = dlt_BMS_DVC_INFO.getCellData(rowIdx[rowIdx.length - 1], "DVC_ID");
-			var rowIndex = scwin.getInsertRowIndex(lastMenuCd);
+			var lastParentId = dlt_BMS_DVC_INFO.getCellData(rowIdx[rowIdx.length - 1], "DVC_ID");
+			var rowIndex = scwin.getInsertRowIndex(lastParentId);
 			if (rowIndex !== -1) {
 				return rowIndex;
 			} else {
@@ -414,6 +384,31 @@
 			}
 		} else {
 			return -1;
+		}
+	};
+	
+	/**
+	 * 새로 추가되는 메뉴의 메뉴 코드를 반환한다. ( LEVEL 3일 경우 하위메뉴 생성 )
+	 */
+	scwin.getInsertRowMenuCd = function(parentId, DvcLevel, isBottom) {
+		var prefix = 'MN00';
+		var parentIdArr = dlt_BMS_DVC_INFO.getMatchedColumnData("PARENT_ID", parentId, "DVC_ID", true, 0, dlt_BMS_DVC_INFO.getTotalRow());
+		if (parentIdArr.length > 0) {
+			var lastParentId = parentIdArr[parentIdArr.length - 1];
+			var nodeIndex = prefix.length+(DvcLevel - 1) * 2;
+			var preNodeCd = lastParentId.substr(nodeIndex, 2);
+			var newNodeCd = com.fillZero(WebSquare.util.getNumber(preNodeCd) + 1, 2);
+			return lastParentId.substr(0, nodeIndex) + lastParentId.substr(nodeIndex).replace(preNodeCd, newNodeCd);
+		} else {
+			if (isBottom) {
+				var nodeIndex = prefix.length + parentId.indexOf("00");
+				return parentId.substr(0, nodeIndex) + parentId.substr(nodeIndex).replace("00", "01");
+			} else {
+				var nodeIndex = prefix.length + parentId.indexOf("00");
+				var preNodeCd = parentId.substr(nodeIndex, 2);
+				var newNodeCd = com.fillZero(WebSquare.util.getNumber(preNodeCd) + 1, 2);
+				return parentId.substr(0, nodeIndex) + parentId.substr(nodeIndex).replace(preNodeCd, newNodeCd);
+			}
 		}
 	};
 
@@ -427,15 +422,12 @@
 		com.saveDone(VD0100G0,sub_VD0100G0R0);
 	};
 	
-	
-	
 	scwin.sub_VD0100G0S0_submitdone = function(e) {
 		var sCode = com.getResultCode(e);
 		if (sCode == gcm.MESSAGE_CODE.STATUS_SAVE) {
 			com.saveDone(VD0100G0,sub_VD0100G0R0);
 		}
 	};
-		
 		
 	scwin.sbx_ChoiceBox_onviewchange = function(info) {
 		
@@ -461,12 +453,12 @@
 		com.changeDualGrid(VD0100G0, VD0100G0, sub_VD0100G0S0, sub_VD0100G0R0, focusOption, row, oldRow);*/
 		
 		var parentId = dlt_BMS_DVC_INFO.getCellData(VD0100G0.getRealRowIndex(row), "PARENT_ID");
-		if(parentId != null && parentId != ''){
+		if(parentId != null && parentId != '' && parentId != 'DV00000000'){
 			PARENT_YN.setValue("Y");
-			PARENT_ID10.setDisabled(false);
+			//PARENT_ID10.setDisabled(false);
 		}else{
 			PARENT_YN.setValue("N");
-			PARENT_ID10.setDisabled(true);
+			//PARENT_ID10.setDisabled(true);
 		}
 		
 	};
@@ -534,23 +526,6 @@
 		CLSFCTN_NM.setValue("");
 	}
 	
-	scwin.PARENT_YN_onviewchange = function(info) {
-		if(info.value == 'N'){
-			PARENT_ID10.setDisabled(true);
-			PARENT_ID10.setValue("");
-		}else{
-			PARENT_ID10.setDisabled(false);
-		}
-	};
-	
-	//level 설정
-	scwin.DVC_KIND_onviewchange = function(info) {
-		if(info.newValue == 'DK002' || info.newValue == 'DK003' || info.newValue == 'DK004'){
-			dlt_BMS_DVC_INFO.setCellData(VD0100G0.getFocusedRowIndex(), "LEVEL", 2);
-		}else{
-			dlt_BMS_DVC_INFO.setCellData(VD0100G0.getFocusedRowIndex(), "LEVEL", 1);
-		}
-	};
 	]]></script>
 	</head>
     <body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -891,7 +866,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group class="w2tb_th" style="" tagname="th">상위장치</xf:group>
+								<!-- <xf:group class="w2tb_th" style="" tagname="th">상위장치</xf:group>
 								<xf:group class="w2tb_td" style="" tagname="td">
 									<w2:attributes>
 										<w2:colspan>1</w2:colspan>
@@ -900,7 +875,7 @@
 									<xf:group id="" style=""></xf:group>
 									<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="-선택-"
 										customLabelFormatter="scwin.customLabel" direction="auto" disabled="false" disabledClass="w2selectbox_disabled" ev:onchange=""
-										id="PARENT_ID10" ref="data:dlt_BMS_DVC_INFO.PARENT_ID" style="width: 160px;" submenuSize="auto">
+										id="PARENT_ID10" ref="" style="width: 160px;" submenuSize="auto">
 										<xf:choices>
 											<xf:itemset nodeset="data:dlt_BMS_DVC_INFO">
 												<xf:label ref="DVC_KIND_NM_LOC"></xf:label>
@@ -908,8 +883,20 @@
 											</xf:itemset>
 										</xf:choices>
 									</xf:select1>
+								</xf:group> -->
+								<xf:group tagname="th" class="w2tb_th">
+									장치IP
+									<w2:attributes>
+										<w2:scope>row</w2:scope>
+									</w2:attributes>
 								</xf:group>
-								
+								<xf:group tagname="td" class="w2tb_td">
+									<w2:attributes></w2:attributes>
+									<xf:input allowChar="0-9." customModelFormatter="" customModelUnformatter="" dataType="text" disabled=""
+										displayFormatter="com.transPhone" id="DVC_IP10" maskFormat="" maxlength="16" minByteLength="" ref="data:dlt_BMS_DVC_INFO.DVC_IP"
+										style="width:100%;" validator="">
+									</xf:input>
+								</xf:group>
 								<xf:group tagname="td" class="w2tb_th">
 									비상연락망
 									<w2:attributes></w2:attributes>
@@ -938,7 +925,7 @@
 								</xf:group>
 								<xf:group tagname="td" class="w2tb_td">
 									<w2:attributes>
-										<w2:colspan>1</w2:colspan>
+										<w2:colspan>3</w2:colspan>
 										<w2:rowspan>1</w2:rowspan>
 									</w2:attributes>
 									<xf:input allowChar="" customModelFormatter="" dataType="text" displayFormatter="" displaymessage=""
@@ -949,19 +936,7 @@
 										<xf:label>좌표</xf:label>
 									</xf:trigger>
 								</xf:group>
-								<xf:group tagname="th" class="w2tb_th">
-									장치IP
-									<w2:attributes>
-										<w2:scope>row</w2:scope>
-									</w2:attributes>
-								</xf:group>
-								<xf:group tagname="td" class="w2tb_td">
-									<w2:attributes></w2:attributes>
-									<xf:input allowChar="0-9." customModelFormatter="" customModelUnformatter="" dataType="text" disabled=""
-										displayFormatter="com.transPhone" id="DVC_IP10" maskFormat="" maxlength="16" minByteLength="" ref="data:dlt_BMS_DVC_INFO.DVC_IP"
-										style="width:100%;" validator="">
-									</xf:input>
-								</xf:group>
+								
 							</xf:group>
 							<xf:group tagname="tr" style="">
 								<xf:group tagname="th" class="w2tb_th" style="vertical-align: top;" id="" tabIndex="">

@@ -5,6 +5,7 @@ import kr.tracom.platform.attribute.bis.AtFacilityParam;
 import kr.tracom.platform.attribute.integration.bluemobile.AtBluemobileStatus;
 import kr.tracom.platform.net.protocol.attribute.AtData;
 import kr.tracom.tims.domain.BisMapper;
+import kr.tracom.ws.WsClient;
 
 import java.util.Map;
 
@@ -20,6 +21,9 @@ public class FacilityParam {
 
     @Autowired
     private BisMapper bisMapper;
+    
+    @Autowired
+	WsClient webSocketClient;
     
     public void handle(short attrId, AtData atData, String sessionId){
     	
@@ -45,7 +49,7 @@ public class FacilityParam {
 
         try {
             logger.debug("updateFacilityParam {}",atData);
-            
+            /*
             //paramKind 코드값 select
             Map paramKind = bisMapper.selectDlCdParamKindInfo(atData.toMap());
             
@@ -59,7 +63,31 @@ public class FacilityParam {
             
             //스크린도어 현정보 insert
             bisMapper.insertFacilityStatus(param);
+            */
             
+            /*logger.debug("updateFacilityParam {}",atData);
+            Map<String, Object> param = new HashMap<String, Object>();
+
+            //paramKind 코드값 select
+            Map paramKind = bisMapper.selectDlCdParamKindInfo(atData.toMap());
+
+            //paramDiv 코드값 select
+            Map paramDiv = bisMapper.selectDlCdParamDivInfo(atData.toMap());
+
+            //param.putAll(paramKind);
+            //param.putAll(paramDiv);
+
+            param.putAll(atData.toMap());
+            param.put("PARAM_KIND",paramKind.get("DL_CD"));
+            param.put("PARAM_DIV",paramDiv.get("DL_CD"));
+
+            //스크린도어 현정보 insert
+            bisMapper.insertFacilityParam(param);*/
+            
+            //웹소켓 전송이 필요한 경우
+	        /*if(param != null) {
+	    		webSocketClient.sendMessage(param);
+	        }*/
             
         } catch (Exception e) {
             logger.info("", e);

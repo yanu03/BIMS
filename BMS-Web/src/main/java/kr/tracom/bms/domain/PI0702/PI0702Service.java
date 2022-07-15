@@ -121,7 +121,7 @@ public class PI0702Service extends ServiceSupport {
 		int uCnt = 0;
 		int dCnt = 0;		
 		
-		List<Map<String, Object>> param = getSimpleList("dlt_VHC_MST");
+		List<Map<String, Object>> param = getSimpleList("dlt_BMS_DESTI_RSV_RST_INFO");
 		try {
 			for (int i = 0; i < param.size(); i++) {
 				Map data = (Map) param.get(i);

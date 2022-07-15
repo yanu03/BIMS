@@ -20,8 +20,13 @@ public class FM0202Service extends ServiceSupport{
 	}
 	
 	public List<Map> fm0202G1R0() throws Exception{
-		Map param = getSimpleDataMap("dma_sub_search");
+		Map param = getSimpleDataMap("dma_search");
 		return fm0202Mapper.fm0202G1R0(param);
+	}
+	
+	public List<Map> fm0202G2R0() throws Exception{
+		Map param = getSimpleDataMap("dma_sub_search");
+		return fm0202Mapper.fm0202G2R0(param);
 	}
 	
 	public List FM0202G0R1() throws Exception {
@@ -45,4 +50,9 @@ public class FM0202Service extends ServiceSupport{
 		Map param = getSimpleDataMap("dma_search");		
 		return fm0202Mapper.fm0202SHI3(param);
 	}	
+	
+	public List FM0202P0R0() throws Exception {
+		Map param = getSimpleDataMap("dma_search");
+		return fm0202Mapper.FM0202P0R0(param);
+	}
 }

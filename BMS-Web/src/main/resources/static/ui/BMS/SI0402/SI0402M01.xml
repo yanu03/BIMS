@@ -26,6 +26,7 @@
 						<w2:key id="TYPE" name="TYPE" dataType="text"></w2:key>
 						<w2:key id="LAST_NODE_ID" name="마지막노드ID" dataType="text"></w2:key>
 						<w2:key id="EXL_UPDATE" name="엑셀업데이트" dataType="text"></w2:key>
+						<w2:key id="RE_INSTALL" name="재구성" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataMap baseNode="map" id="dma_result">
@@ -154,7 +155,7 @@
 		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainSrhOptions, codeOptions);
 	
 		var subOptions = {
-			SAVE:[{cbFnc:scwin.subGridUp, nm:"상",class:"up"},{cbFnc:scwin.subGridDown,nm:"하",class:"down"}]
+			SAVE:[{cbFnc:scwin.subGridUp, nm:"상",class:"up"},{cbFnc:scwin.subGridDown,nm:"하",class:"down"},{cbFnc:scwin.reInstall,nm:"재구성",class:"init"}]
 			, DEL:scwin.btn_sub_del
 			, SEARCH: scwin.btn_sub_move
 		};
@@ -304,6 +305,7 @@
 			scwin.releaseGeoBtn();
 			routMap.initMapInfo("map_SI0402");
 			com.saveDone(SI0402G1,sub_SI0402G1R0);
+			dma_sub_search.set("RE_INSTALL" , "N");
 		}
 	}
 	
@@ -706,6 +708,13 @@
 		com.getGridViewDataList(SI0402G1).rowMoveDown(idx);
 	}
 	
+	scwin.reInstall = function(){
+		com.getGridViewDataList(SI0402G1).modifyAllStatus("U");
+		dma_sub_search.set("RE_INSTALL" , "Y");
+		com.alert("재구성 하였습니다");
+	}
+
+	
 	scwin.refreshGridStatus = function(){
 		var routeData = dlt_BMS_ROUT_NODE_CMPSTN.getAllJSON();
 		for(var i = 0; i < routeData.length; i++) {
@@ -948,7 +957,7 @@
 									<w2:span class="" id="" label="찾기"></w2:span>
 								</xf:group>
 								<xf:group class="search" id="" style="">
-									<xf:input id="search_sub_input" class="search_input" ref="data:dma_sub_search.CONTENT" placeholder="노드ID 또는 노드명"></xf:input>
+									<xf:input id="search_sub_input" class="search_input" ref="data:dma_sub_search.CONTENT" style="width:150px" placeholder="노드ID 또는 노드명"></xf:input>
 								</xf:group>
 								<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 							</xf:group>

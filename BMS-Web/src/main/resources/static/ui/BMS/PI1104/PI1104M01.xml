@@ -21,6 +21,7 @@
 						<w2:column id="MNG_ID" name="관리ID" dataType="text"></w2:column>
 						<w2:column id="INST_LOC" name="설치위치" dataType="text"></w2:column>
 						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
+						<w2:column id="RSV_CNT" name="예약건수" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataMap baseNode="map" id="dma_search">
@@ -58,8 +59,9 @@
 						<w2:key id="SEQ" name="name1" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ED_RSV_RST_INFO" saveRemovedData="true">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_TRAN_RSV_RST_INFO" saveRemovedData="true">
 					<w2:columnInfo>
+						<w2:column id="chk" name="선택" dataType="text" defaultValue="0"></w2:column>
 						<w2:column id="VHC_NO" name="차량번호" dataType="text"></w2:column>
 						<w2:column id="PROCE_RST" name="예약결과" dataType="text"></w2:column>
 						<w2:column id="SEND_DTM" name="처리일시" dataType="date"></w2:column>
@@ -67,6 +69,7 @@
 						<w2:column id="ORG_NM" name="제조사" dataType="text"></w2:column>
 						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
 						<w2:column id="INST_LOC" name="설치위치" dataType="text"></w2:column>
+						<w2:column id="RSV_ID" name="예약ID" dataType="text"></w2:column>
 						<w2:column id="RSV_DT" name="예약날짜" dataType="date"></w2:column>
 						<w2:column id="RSV_STATE" name="예약상태" dataType="text"></w2:column>
 					</w2:columnInfo>
@@ -76,6 +79,8 @@
 						<w2:key id="VHC_ID" name="차량ID" dataType="text"></w2:key>
 						<w2:key id="RSV_STATE" name="예약상태" dataType="text"></w2:key>
 						<w2:key id="RSV_DT" name="예약날짜" dataType="text"></w2:key>
+						<w2:key id="F_DATE" name="name4" dataType="text"></w2:key>
+						<w2:key id="L_DATE" name="name5" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_VHC_MST_MNG_LIST" saveRemovedData="true">
@@ -84,7 +89,7 @@
 						<w2:column id="DVC_ID" name="장치ID" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_ED_INFO" saveRemovedData="true">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_TRAN_INFO" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="SET_ID" name="설정ID" dataType="text"></w2:column>
 						<w2:column id="SET_NM" name="설정명" dataType="text"></w2:column>
@@ -96,7 +101,7 @@
 						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
-				<w2:dataMap baseNode="map" id="dma_BMS_ED_INFO">
+				<w2:dataMap baseNode="map" id="dma_BMS_TRAN_INFO">
 					<w2:keyInfo>
 						<w2:key id="SET_ID" name="설정ID" dataType="text"></w2:key>
 						<w2:key id="SET_NM" name="설정명" dataType="text"></w2:key>
@@ -110,12 +115,12 @@
 				</w2:dataMap>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
-			<xf:submission id="sub_PI1104G0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_ED_INFO" action="/pi/PI1104G0R0"
+			<xf:submission id="sub_PI1104G0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_TRAN_INFO" action="/pi/PI1104G0R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="조회 중입니다..." ev:submit="" ev:submitdone="scwin.sub_PI1104G0R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI1104G1S0"
-				ref='data:json,[{"action":"modified","id":"dlt_VHC_MST"},"dma_BMS_ED_INFO"]'
+				ref='data:json,[{"action":"modified","id":"dlt_VHC_MST"},"dma_BMS_TRAN_INFO"]'
 				target="data:json,dma_result" action="/pi/PI1104G1S0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
 				errorHandler="" customHandler="" mode="asynchronous" processMsg="저장 중입니다..." ev:submit=""
 				ev:submitdone="scwin.sub_PI1104G1S0_submitdone" ev:submiterror="" abortTrigger="">
@@ -128,14 +133,14 @@
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI1104G1R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_PI1104G1U0" ref='data:json,{"action":"modified","id":"dlt_VHC_MST"}' target="data:json,dma_result"
+			<xf:submission id="sub_PI1104G1U0" ref='data:json,{"action":"modified","id":"dlt_BMS_TRAN_RSV_RST_INFO"}' target="data:json,dma_result"
 				action="/pi/PI1104G1U0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
 				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI1104G1U0_submitdone" ev:submiterror=""
 				abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_PI1104G2R0" ref="data:json,dma_subsearch2" target="data:json,dlt_BMS_ED_RSV_RST_INFO"
+			<xf:submission id="sub_PI1104G2R0" ref="data:json,dma_subsearch2" target="data:json,dlt_BMS_TRAN_RSV_RST_INFO"
 				action="/pi/PI1104G2R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
-				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_PI1104G2R0_submitdone" ev:submiterror="" abortTrigger="">
+				customHandler="" mode="asynchronous" processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_PI1104G2R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_PI1104G1R1" ref="" target="data:json,dlt_VHC_MST_MNG_LIST" action="/pi/PI1104G1R1" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
@@ -150,24 +155,24 @@
 	scwin.onpageload = function() {
 		var autoOptions = {
 			Main : { grid : PI1104G0, srchSbm : sub_PI1104G0R0, keyColumn : "SET_ID", srchGrp : pgm_header, name :  "노선 목록"},
-			Sub1 : { grid : PI1104G1, srchSbm : sub_PI1104G1R0, keyColumn : "VHC_ID", savSbm : sub_PI1104G1S0, keySbm : sub_PI1104G0K0, srchGrp : gr_sub_header, name :  "전자노선도 목록"},
+			Sub1 : { grid : PI1104G1, srchSbm : sub_PI1104G1R0, keyColumn : "VHC_ID", savSbm : sub_PI1104G1S0, keySbm : sub_PI1104G0K0, srchGrp : gr_sub_header, name :  "투명디스플레이 목록"},
 			Sub2 : { grid : PI1104G2, srchSbm : sub_PI1104G2R0, srchGrp : gr_sub_header, name :  "예약 상세정보"}
 			
 		 };				
 		 
 		var mainOptions = {
 			RESERV : scwin.btn_resrv_onclick,
-			RESERV_CNL : scwin.btn_resrvcnl_onclick
-		};		 
+			RESERV_CNL : {},
+			SEARCH : {}
+		};		 		 
 		
 		var codeOptions = [ {code : "CATEGORY", compID : "PI1104G0:CATEGORY"},
-							{code : "FRAME", compID : "PI1104G0:FRAME"},
-							{code : "FONT", compID : "PI1104G0:FONT"},
-							{code : "DVC_KIND", compID : "PI1104G1:DVC_KIND, PI1104G2:DVC_KIND"},
-							{code : "INST_LOC", compID : "PI1104G1:INST_LOC, PI1104G2:INST_LOC"},
-							{code : "PROCE_RST", compID : "PI1104G2:PROCE_RST"}
+			{code : "FRAME", compID : "PI1104G0:FRAME"},
+			{code : "FONT", compID : "PI1104G0:FONT"},
+			{code : "DVC_KIND", compID : "PI1104G1:DVC_KIND, PI1104G2:DVC_KIND"},
+			{code : "INST_LOC", compID : "PI1104G1:INST_LOC, PI1104G2:INST_LOC"},
+			{code : "PROCE_RST", compID : "PI1104G2:PROCE_RST"}
 		 ];	
-		 
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID, autoOptions, mainOptions, codeOptions);
 		var mainSrhOptions = {
 		};	
@@ -183,14 +188,44 @@
 		PI1104G1.mergeCells("byrestriccol");
 		
 		var subOptions = {
-			SEARCH: {}
+			SEARCH: scwin.btn_sub_move
 		};
 		
-		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);		
+		var subOptions2 = {
+			SEARCH: scwin.btn_sub_move2,
+			RESERV_CNL : scwin.btn_resrvcnl_onclick
+		};		
+		
+		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);
+		com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions2);		
 		com.executeSubmission(sub_PI1104G1R1);
 		com.executeSubmission(sub_PI1104SHI0);
 		
-		RSV_DT.setValue($p.getCurrentServerDate("yyyyMM"));
+		//RSV_DT.setValue($p.getCurrentServerDate("yyyyMM"));
+		
+		PI1104_ul.hide();
+		
+		var date = new Date();
+		var year = date.getFullYear().toString();
+		var month = (date.getMonth()+1).toString();
+		var day = date.getDate().toString();
+		var zero = 0;		
+		
+		if(day.length == 1){
+			day = zero + day;
+		}
+		
+		if(month.length == 1){
+			month = zero + month;
+		}
+		
+		var weekAgoDay = parseInt(day) - 7;
+		var todaysDate = year+month+day;
+		var weekAgoDate = year+month+weekAgoDay;
+		var firstday = year+month+"01";	
+
+		F_DATE.setValue(todaysDate);
+		L_DATE.setValue(todaysDate);		
 	};
 	
 	scwin.onpageunload = function() {
@@ -205,19 +240,18 @@
 	scwin.PI1104G0_onrowindexchange = function(row,oldRow) {
 		//Service에 선택한 row 데이터 넘겨주기용
 		
-//		dlt_BMS_ED_RSV_RST_INFO.getCellData(row, "SET_ID")
-//		dma_BMS_ED_INFO.set("SET_ID", dlt_BMS_ED_INFO.getCellData(row, "SET_ID"));
-//		dma_BMS_ED_INFO.set("SET_NM", dlt_BMS_ED_INFO.getCellData(row, "SET_NM"));
-//		dma_BMS_ED_INFO.set("TIME_KO", dlt_BMS_ED_INFO.getCellData(row, "TIME_KO"));
-//		dma_BMS_ED_INFO.set("TIME_EN", dlt_BMS_ED_INFO.getCellData(row, "TIME_EN"));
-//		dma_BMS_ED_INFO.set("CATEGORY", dlt_BMS_ED_INFO.getCellData(row, "CATEGORY"));
-//		dma_BMS_ED_INFO.set("FRAME", dlt_BMS_ED_INFO.getCellData(row, "FRAME"));
-//		dma_BMS_ED_INFO.set("FONT", dlt_BMS_ED_INFO.getCellData(row, "FONT"));
-//		dma_BMS_ED_INFO.set("REMARK", dlt_BMS_ED_INFO.getCellData(row, "REMARK"));
+//		dlt_BMS_TRAN_RSV_RST_INFO.getCellData(row, "SET_ID")
+//		dma_BMS_TRAN_INFO.set("SET_ID", dlt_BMS_TRAN_INFO.getCellData(row, "SET_ID"));
+//		dma_BMS_TRAN_INFO.set("SET_NM", dlt_BMS_TRAN_INFO.getCellData(row, "SET_NM"));
+//		dma_BMS_TRAN_INFO.set("TIME_KO", dlt_BMS_TRAN_INFO.getCellData(row, "TIME_KO"));
+//		dma_BMS_TRAN_INFO.set("TIME_EN", dlt_BMS_TRAN_INFO.getCellData(row, "TIME_EN"));
+//		dma_BMS_TRAN_INFO.set("CATEGORY", dlt_BMS_TRAN_INFO.getCellData(row, "CATEGORY"));
+//		dma_BMS_TRAN_INFO.set("FRAME", dlt_BMS_TRAN_INFO.getCellData(row, "FRAME"));
+//		dma_BMS_TRAN_INFO.set("FONT", dlt_BMS_TRAN_INFO.getCellData(row, "FONT"));
+//		dma_BMS_TRAN_INFO.set("REMARK", dlt_BMS_TRAN_INFO.getCellData(row, "REMARK"));		
 		
-		
-		var jsonData = dlt_BMS_ED_INFO.getAllJSON()[row];
-		dma_BMS_ED_INFO.setJSON(jsonData);
+		var jsonData = dlt_BMS_TRAN_INFO.getAllJSON()[row];
+		dma_BMS_TRAN_INFO.setJSON(jsonData);
 		
 		//var focusOption = {keyMap : dma_subsearch};
 		//com.changeDualGrid(PI1104G0, PI1104G1, sub_PI1104G1S0, sub_PI1104G1R0, focusOption, row, oldRow);
@@ -271,17 +305,36 @@
 	}
 	
 	scwin.btn_resrvcnl_onclick = function() {
-		var rows = PI1104G1.getCheckedIndex("chk");
+		var rows = PI1104G2.getCheckedIndex("chk");
 		var count = rows.length;
 		var str = count + " 건의 데이터를 예약 취소 하시겠습니까?";
+		var rsvState = true;
 		
-		if(count > 0) {
-			com.confirm(str, function(rtn) {
-				if (rtn) {
-					com.executeSubmission(sub_PI1104G1U0);
-				}	
-			});
+		if(RSV_STATE.getValue() == '예약종료') {
+			rsvState = false;	
+		}		
+		
+//		if(count > 0) {
+//			com.confirm(str, function(rtn) {
+//				if (rtn) {
+//					com.executeSubmission(sub_PI1104G1U0);
+//				}	
+//			});
+//		}
+		if(rsvState){
+			if(count > 0) {
+				com.confirm(str, function(rtn) {
+					if (rtn) {
+						com.executeSubmission(sub_PI1104G1U0);
+					}	
+				});
+			}else{
+				com.alert("선택된 예약정보가 없습니다.");
+			}
+		}else{
+			com.alert("이미 취소된 예약정보 입니다.");
 		}
+		
 		
 	}
 	
@@ -308,8 +361,8 @@
 	};
 	
 	scwin.PI1104G1_onrowindexchange = function(row,oldRow) {
-		var focusOption = {keyMap : dma_subsearch2};
-		com.changeDualGrid(PI1104G1, PI1104G2, null, sub_PI1104G2R0, focusOption, row, oldRow);
+		//var focusOption = {keyMap : dma_subsearch2};
+		//com.changeDualGrid(PI1104G1, PI1104G2, null, sub_PI1104G2R0, focusOption, row, oldRow);
 			
 	};
 	
@@ -318,13 +371,48 @@
 	};
 	
 	scwin.PI1104G1_oncellclick = function(row,col,colId) {
-      if (col != "0"){
+	  var rowCount = dlt_VHC_MST.getRowCount();
+      
+	  if (col != "0"){
          if(PI1104G1.getCellChecked(row, 'chk')==0){
-            PI1104G1.setCellChecked(row, 'chk', true);
-         }else if(PI1104G1.getCellChecked(row, 'chk')==1){
-            PI1104G1.setCellChecked(row, 'chk', false);
+	         for(var i=0; i<rowCount; i++) {
+		          PI1104G1.setCellChecked(i, 'chk', false);
+	        }
+	         PI1104G1.setCellChecked(row, 'chk', true);
          }
       }		
+		var chkCount = dlt_VHC_MST.getMatchedColumnData('chk', '1', 'chk');
+		var chkLen = chkCount.length; 
+		var chkData = PI1104G1.getCheckedJSON('chk');
+		var dataCheck = true;
+		
+		//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
+		/*if(chkLen > 1 ){
+			for(var i=0; i<chkLen; i++)
+			{
+				if(chkData[0].VHC_ID != chkData[i].VHC_ID){
+					dataCheck = false;
+				}	 
+			}
+				
+			if(!dataCheck) {
+				PI1104G2.hide();
+				gr_sub_header2.hide();
+				PI1104_ul.show("");
+			}
+			else if(dataCheck) {
+				PI1104G2.show("");
+				gr_sub_header2.show("");
+				PI1104_ul.hide();	
+			}
+			
+		}else if(chkLen < 2){
+			PI1104G2.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
+			gr_sub_header2.show("");
+			PI1104_ul.hide();
+			
+		}      */
+      	
 	};
 	
 	scwin.RSV_STATE_onchange = function(info) {
@@ -337,10 +425,74 @@
 	
 	scwin.sub_PI1104G1R0_submitdone = function(e) {
 		com.setFocusedCell(PI1104G1, "VHC_ID");
+		com.executeSubmission(sub_PI1104G2R0);	
 	};
 	
 	scwin.sub_PI1104G2R0_submitdone = function(e) {
 		com.setFocusedCell(PI1104G2, "VHC_NO");
+	};
+	
+	scwin.rsvCnt = function(obj){
+		var rsvCnt = obj + '건';
+		return rsvCnt
+	};	
+	
+	scwin.btn_sub_move = function() {
+		if(com.isEmpty(dma_subsearch.get("CONTENT"))==false){
+			com.gridMove(PI1104G1, "VHC_NO", dma_subsearch.get("CONTENT"), PI1104G1.getFocusedRowIndex());
+		}
+	};	
+	
+	scwin.F_DATE_onviewchange = function(info) {
+		var ldate = L_DATE.getValue();
+		var fdate = F_DATE.getValue();
+		
+		if (fdate > ldate && ldate != ""){
+			com.messagBox("alert", "지정할 수 없는 날짜입니다.",scwin.checkCLoseF(info));
+		}
+		
+		else{
+			calendar_radio.setValue("DIRECT");
+		}
+		
+	};	
+	
+	scwin.checkCLoseF = function(info) {
+		F_DATE.setValue(info.oldValue);
+	}
+	scwin.checkCLoseL = function(info) {
+		L_DATE.setValue(info.oldValue);
+	}		
+	
+	scwin.L_DATE_onviewchange = function(info) {
+		var ldate = L_DATE.getValue();
+		var fdate = F_DATE.getValue();
+		
+		if (fdate > ldate){
+			com.messagBox("alert", "지정할 수 없는 날짜입니다.",scwin.checkCLoseL(info));
+		}
+		
+		else{
+			calendar_radio.setValue("DIRECT");
+		}		
+	};		
+	
+	scwin.calendar_radio_onviewchange = function(info) {
+		com.setCalendarRadioChange(F_DATE, L_DATE, info);
+	};			
+	
+	scwin.btn_sub_move2 = function() {
+		 com.executeSubmission(sub_PI1104G2R0);
+	}	
+	
+	scwin.PI1104G2_oncellclick = function(row,col,colId) {
+		if (col != "0"){
+	         if(PI1104G2.getCellChecked(row, 'chk')==0){
+	            PI1104G2.setCellChecked(row, 'chk', true);
+	         }else if(PI1104G2.getCellChecked(row, 'chk')==1){
+	            PI1104G2.setCellChecked(row, 'chk', false);
+	         }
+	      }
 	};
 	]]></script>
 	</head>
@@ -414,7 +566,7 @@
 
 					<xf:group id="" class="" style="">
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid left"
-								dataList="data:dlt_BMS_ED_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup=""
+								dataList="data:dlt_BMS_TRAN_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.PI1104G0_oncellclick" ev:oneditkeyup=""
 								ev:onkeyup="" ev:onrowindexchange="scwin.PI1104G0_onrowindexchange" ev:ontextimageclick="" ev:onviewchange=""
 								fixedColumnWithHidden="true" id="PI1104G0" ignoreCellClick="false" nextTabID="" rowNumHeaderValue="No." rowNumVisible="true"
 								rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" style="" useShiftKey="true"
@@ -432,7 +584,7 @@
 										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column7"
 											value="설정명" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column6"
+										<!-- <w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column6"
 											value="국문표출시간" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column5"
@@ -440,13 +592,13 @@
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column4"
 											value="범례표출위치" blockSelect="false" displayMode="label">
-										</w2:column>
+										</w2:column> -->
 										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column3"
 											value="프레임표출모양" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column2"
+										<!-- <w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column2"
 											value="폰트종류" blockSelect="false" displayMode="label">
-										</w2:column>
+										</w2:column> -->
 										<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column1"
 											value="비고" blockSelect="false" displayMode="label">
 										</w2:column>
@@ -460,7 +612,7 @@
 										<w2:column removeBorderStyle="false" width="135" inputType="text" style="height:20px" id="SET_NM"
 											value="" blockSelect="false" displayMode="label" textAlign="left">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="105" inputType="text" style="height:20px" id="TIME_KO"
+										<!-- <w2:column removeBorderStyle="false" width="105" inputType="text" style="height:20px" id="TIME_KO"
 											value="" blockSelect="false" displayMode="label" textAlign="right">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="TIME_EN"
@@ -468,13 +620,13 @@
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="111" inputType="select" style="height:20px" id="CATEGORY"
 											value="" blockSelect="false" displayMode="label">
-										</w2:column>
+										</w2:column> -->
 										<w2:column removeBorderStyle="false" width="114" inputType="select" style="height:20px" id="FRAME"
 											value="" blockSelect="false" displayMode="label" textAlign="left">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="102" inputType="select" style="height:20px" id="FONT"
+										<!-- <w2:column removeBorderStyle="false" width="102" inputType="select" style="height:20px" id="FONT"
 											value="" blockSelect="false" displayMode="label" textAlign="left">
-										</w2:column>
+										</w2:column> -->
 										<w2:column removeBorderStyle="false" width="114" inputType="text" style="height:20px" id="REMARK"
 											value="" blockSelect="false" displayMode="label" textAlign="left">
 										</w2:column>
@@ -494,8 +646,8 @@
 				
 				<xf:group id="" class="">
 				</xf:group>
-				<xf:group id="pgm_detail" class="pgm_detail grdr_5f_0_5f" style="">
-					<xf:group id="" class="grdr_20_2_a bms_box_wrap" style="">
+				<xf:group id="pgm_detail" class="pgm_detail grdr_5f_20_5f bms_box_wrap" style="">
+					<xf:group id="" class="grdr_20_2_a" style="">
 						<xf:group id="" class="" style="">
 							<xf:group class="defaultbox" id="" style="">
 								<w2:textbox class="df_tt fl view" id="" label="예약 정보" style=""></w2:textbox>
@@ -517,7 +669,7 @@
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid right"
 								dataList="data:dlt_VHC_MST" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.PI1104G1_oncellclick" ev:oneditkeyup="" ev:onkeyup=""
 								ev:onrowindexchange="scwin.PI1104G1_onrowindexchange" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true" id="PI1104G1" ignoreCellClick="false"
-								nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40"
+								nextTabID="" rowNumHeaderValue="No." rowNumVisible="" rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40"
 								scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows="" autoFitMinWidth="0" disabledScrollHidden=""
 								editModeEvent="" editModeEventIcon="" checkEditableInputClass="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll=""
 								ignoreNonEditableCellTabEnter="" readOnly="true" keepDefaultColumnWidth="" oddEvenColorDisplay="" rowNumWidth="" summaryAuto=""
@@ -529,26 +681,29 @@
 										<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" 
 											value="선택" blockSelect="false" sortable="false">
 										</w2:column>								
-										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column14"
-											value="예약상태" blockSelect="false" displayMode="label">
+										<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column15"
+											value="예약건수" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column14"
+										<!-- <w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column14"
 											value="예약날짜" blockSelect="false" displayMode="label">
-										</w2:column>
+										</w2:column> -->
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column10"
 											value="차량ID" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column9"
 											value="차량번호" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column8"
-											value="장치종류" blockSelect="false" displayMode="label">
-										</w2:column>
 										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column19"
 											value="설치위치" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column13"
+										<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column8"
+											value="장치종류" blockSelect="false" displayMode="label">
+										</w2:column>
+										<!-- <w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column13"
 											value="관리ID" blockSelect="false" displayMode="label">
+										</w2:column> -->
+										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column13"
+											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 									</w2:row>
 								</w2:header>
@@ -557,25 +712,28 @@
 					    				<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
 					    					inputType="checkbox" id="chk" blockSelect="false">
 					    				</w2:column>								
-										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="RSV_STATE"
-											userData1="" value="" blockSelect="false" displayMode="label">
+										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:25px" id="RSV_CNT"
+											userData1="" value="" blockSelect="false" displayMode="label" displayFormatter="scwin.rsvCnt" textAlign="right">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="RSV_DT"
+										<!-- <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="RSV_DT"
 											userData1="" value="" blockSelect="false" displayMode="label">
-										</w2:column>
+										</w2:column> -->
 										<w2:column removeBorderStyle="false" width="146" inputType="text" style="height:20px" id="VHC_ID"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="118" inputType="text" style="height:20px" id="VHC_NO"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="118" inputType="select" style="height:20px" id="DVC_KIND"
-											value="" blockSelect="false" displayMode="label">
-										</w2:column>
 										<w2:column removeBorderStyle="false" width="118" inputType="select" style="height:20px" id="INST_LOC"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="MNG_ID"
+										<w2:column removeBorderStyle="false" width="118" inputType="select" style="height:20px" id="DVC_KIND"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<!-- <w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="MNG_ID"
+											userData1="" value="" blockSelect="false" displayMode="label">
+										</w2:column> -->
+										<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id=""
 											userData1="" value="" blockSelect="false" displayMode="label">
 										</w2:column>
 									</w2:row>
@@ -593,7 +751,7 @@
 					</xf:group>
 					<xf:group id="" class=""></xf:group>		
 										
-					<xf:group id="" style="" class="pgm_detail grdr_20_50_a bms_box_wrap">
+					<xf:group id="" style="" class="pgm_detail grdr_20_50_a">
 						<xf:group id="" class="gr_sub_header" style="">
 							<xf:group class="defaultbox" id="" style="">
 								<w2:textbox class="df_tt fl view" id="" label="예약 상세정보" style=""></w2:textbox>
@@ -620,16 +778,50 @@
 								<xf:group id="" class="label" style="margin-left:10px">
 									<w2:span class="" id="" label="예약날짜"></w2:span>
 								</xf:group>
-								<w2:inputCalendar footerDiv="false" id="RSV_DT" class="search_calendar" style="" renderDiv="true"
+								<!-- <w2:inputCalendar footerDiv="false" id="RSV_DT" class="search_calendar" style="" renderDiv="true"
 									focusOnDateSelect="false" calendarValueType="yearMonth" rightAlign="false" renderType="component" ref="data:dma_subsearch2.RSV_DT" alt="" buttonTitle="" defaultDate="" ev:onchange="scwin.RSV_DT_onchange">
+								</w2:inputCalendar> -->
+								<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
+								<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+									style="width:120px; margin-right: 10px; float: left;margin-top: 3px;" id="F_DATE" renderType="component" renderDiv="true"
+									calendarValueType="yearMonthDate" ref="data:dma_subsearch2.F_DATE" ev:onviewchange="scwin.F_DATE_onviewchange" placeholder="yyyymmdd">
 								</w2:inputCalendar>
+								<w2:span label="~" style="float: left;margin-right: 10px;margin-top: 5px;" id=""></w2:span>
+								<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+									style="width: 120px;float: left;margin-top: 3px;" id="L_DATE" renderType="component" renderDiv="true"
+									calendarValueType="yearMonthDate" ref="data:dma_subsearch2.L_DATE" ev:onviewchange="scwin.L_DATE_onviewchange" placeholder="yyyymmdd">
+								</w2:inputCalendar>	
+								<xf:group id="" style="margin-left: 20px;" class="radio">
+									<xf:select1 id="calendar_radio" ref="" selectedIndex="1" cols="" appearance="full"
+										style="margin-left: 10px;min-width: 200px;" rows="1" ev:onviewchange="scwin.calendar_radio_onviewchange">
+										<xf:choices>
+											<xf:item>
+												<xf:label><![CDATA[직접입력]]></xf:label>
+												<xf:value><![CDATA[DIRECT]]></xf:value>
+											</xf:item>
+											<xf:item>
+												<xf:label><![CDATA[금일]]></xf:label>
+												<xf:value><![CDATA[TODAY]]></xf:value>
+											</xf:item>
+											<xf:item>
+												<xf:label><![CDATA[일주일]]></xf:label>
+												<xf:value><![CDATA[WEEK]]></xf:value>
+											</xf:item>
+											<xf:item>
+												<xf:label><![CDATA[1개월]]></xf:label>
+												<xf:value><![CDATA[MONTH]]></xf:value>
+											</xf:item>
+										</xf:choices>
+									</xf:select1>
+								</xf:group>	
+														
 							</xf:group>
 						</xf:group>					
 						<xf:group id="" class="" style="">
 							<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" captionTitle="" class="cm_grid right"
-								dataList="data:dlt_BMS_ED_RSV_RST_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
+								dataList="data:dlt_BMS_TRAN_RSV_RST_INFO" enterKeyMove="" ev:onafteredit="" ev:oncellclick="scwin.PI1104G2_oncellclick" ev:oneditkeyup="" ev:onkeyup=""
 								ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" fixedColumnWithHidden="true" id="PI1104G2" ignoreCellClick="false"
-								nextTabID="" rowNumHeaderValue="No." rowNumVisible="true" rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40"
+								nextTabID="" rowNumHeaderValue="No." rowNumVisible="" rowStatusHeaderValue="" rowStatusVisible="false" rowStatusWidth="40"
 								scrollByColumn="false" style="" useShiftKey="true" visibleRowNum="" wheelRows="" autoFitMinWidth="0" disabledScrollHidden=""
 								editModeEvent="" editModeEventIcon="" checkEditableInputClass="" keyMoveEditMode="" moveKeyEditMode="" moveKeyEditModeAll=""
 								ignoreNonEditableCellTabEnter="" readOnly="true" keepDefaultColumnWidth="" oddEvenColorDisplay="" rowNumWidth="" summaryAuto=""
@@ -639,6 +831,9 @@
 								<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 								<w2:header style="" id="header3">
 									<w2:row style="" id="row3">
+										<w2:column removeBorderStyle="false" width="40" inputType="checkbox" style="height:20px" id="chkHeader"
+											value="선택" blockSelect="false" displayMode="label" sortable="false">
+										</w2:column>
 										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column7"
 											value="차량번호" blockSelect="false" displayMode="label">
 										</w2:column>
@@ -654,22 +849,28 @@
 										<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column5"
 											value="처리일시" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column4"
+										<w2:column removeBorderStyle="false" width="200" inputType="text" style="height:20px" id="column2"
+											value="장치종류" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column0"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<!-- <w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column4"
 											value="관리ID" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column3"
 											value="제조사" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column2"
-											value="장치종류" blockSelect="false" displayMode="label">
-										</w2:column>
 										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column1"
 											value="설치위치" blockSelect="false" displayMode="label">
-										</w2:column>
+										</w2:column> -->
 									</w2:row>
 								</w2:header>
 								<w2:gBody style="" id="gBody1">
 									<w2:row style="" id="row2">
+										<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:25px"
+											inputType="checkbox" id="chk" blockSelect="false">
+										</w2:column>
 										<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="VHC_NO"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
@@ -685,18 +886,21 @@
 										<w2:column removeBorderStyle="false" width="104" inputType="text" style="height:20px" id="SEND_DTM"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="151" inputType="text" style="height:20px" id="MNG_ID"
+										<w2:column removeBorderStyle="false" width="146" inputType="select" style="height:20px" id="DVC_KIND"
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<w2:column removeBorderStyle="false" width="146" inputType="text" style="height:20px" id=""
+											value="" blockSelect="false" displayMode="label">
+										</w2:column>
+										<!-- <w2:column removeBorderStyle="false" width="151" inputType="text" style="height:20px" id="MNG_ID"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="149" inputType="text" style="height:20px" id="ORG_NM"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="146" inputType="select" style="height:20px" id="DVC_KIND"
-											value="" blockSelect="false" displayMode="label">
-										</w2:column>
 										<w2:column removeBorderStyle="false" width="141" inputType="select" style="height:20px" id="INST_LOC"
 											value="" blockSelect="false" displayMode="label">
-										</w2:column>
+										</w2:column> -->
 									</w2:row>
 								</w2:gBody>
 								<w2:footer style="" id="footer1">
@@ -708,6 +912,18 @@
 									</w2:row>
 								</w2:footer>							
 							</w2:gridView>
+							
+							<xf:group style="" id="PI1104_ul" class="" tagname="ul">
+								<xf:group style="" id="" class="" tagname="li">
+									<xf:group tagname="ul">
+										<xf:group tagname="li">
+											<xf:group class="repeat" tagname="li">
+												<w2:textbox label="예약 상세정보는 한 차량만 선택하여 확인할 수 있습니다." style="" id="" tagname="strong" ref=""></w2:textbox>
+											</xf:group>
+										</xf:group>
+									</xf:group>
+								</xf:group>
+							</xf:group>
 						</xf:group>					
 					</xf:group><!-- pgm_detail -->
 				</xf:group>

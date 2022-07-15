@@ -143,7 +143,7 @@
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_PI0206G1R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_PI0206G1U0" ref='data:json,{"action":"modified","id":"dlt_VHC_MST"}' target="data:json,dma_result"
+			<xf:submission id="sub_PI0206G1U0" ref='data:json,{"action":"modified","id":"dlt_BMS_VOC_RSV_RST_INFO"}' target="data:json,dma_result"
 				action="/pi/PI0206G1U0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
 				customHandler="" mode="asynchronous" processMsg="저장중입니다..." ev:submit="" ev:submitdone="scwin.sub_PI0206G1U0_submitdone" ev:submiterror=""
 				abortTrigger="">
@@ -344,8 +344,8 @@
 	};
 	
 	scwin.PI0206G1_onrowindexchange = function(row,oldRow) {
-		var focusOption = {keyMap : dma_subsearch2};
-		com.changeDualGrid(PI0206G1, PI0206G2, null, sub_PI0206G2R0, focusOption, row, oldRow);			
+		//var focusOption = {keyMap : dma_subsearch2};
+		//com.changeDualGrid(PI0206G1, PI0206G2, null, sub_PI0206G2R0, focusOption, row, oldRow);			
 	};
 	
 	scwin.PI0206G0_oncellclick = function(row,col,colId) {
@@ -359,8 +359,6 @@
 	};
 	
 	scwin.PI0206G1_oncellclick = function(row,col,colId) {
-      
-      
       //수정전, 클릭마다 무조건 체크 on/off	
       /*if (col != "0"){
          if(PI0206G1.getCellChecked(row, 'chk')==0){
@@ -386,7 +384,7 @@
 		var dataCheck = true;
 		
 		//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
-		if(chkLen > 1 ){
+		/*if(chkLen > 1 ){
 			for(var i=0; i<chkLen; i++)
 			{
 				if(chkData[0].VHC_ID != chkData[i].VHC_ID){
@@ -408,25 +406,14 @@
 			PI0206G2.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
 			gr_sub_header2.show("");
 			PI0206_ul.hide();
-		}		     
+		}	*/	     
       
       
-	};
-	
-	scwin.RSV_STATE_onchange = function(info) {
-		//com.executeSubmission(sub_PI0206G2R0);
-	};
-	
-	scwin.F_DATE_onchange = function() {
-		//com.executeSubmission(sub_PI0206G2R0);		
-	};
-	
-	scwin.L_DATE_onchange = function() {
-		//com.executeSubmission(sub_PI0206G2R0);		
 	};
 	
 	scwin.sub_PI0206G1R0_submitdone = function(e) {
 		com.setFocusedCell(PI0206G1, "VHC_ID");
+		com.executeSubmission(sub_PI0206G2R0);
 	};
 	
 	scwin.rsvCnt = function(obj){

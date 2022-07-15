@@ -117,6 +117,7 @@
 					,DVC.DVC_KIND
 					,DVC.INST_LOC
 					,DATE_FORMAT(RSV.RSV_DT, '%Y-%m-%d') RSV_DT
+					,RSV.RSV_ID
 					,IF(RST.COMPLETE_YN = 'N', '예약중', '예약종료') RSV_STATE					
 		FROM	  		BMS_TRAN_VDO_RSV_RST_INFO RST
 			INNER JOIN	BMS_TRAN_VDO_RSV_INFO RSV
@@ -130,9 +131,10 @@
 			LEFT JOIN	BMS_DL_CD_INFO DL
 			ON			DVC.DVC_KIND = DL.DL_CD AND DL.CO_CD = 'DVC_KIND'
 			
-		WHERE		VHC.VHC_ID = #{VHC_ID}
+		<where>
+			<!-- VHC.VHC_ID = #{VHC_ID} --> <!-- 선택한 차량이 아닌 전체 차량의 예약 상세정보가 나오게 수정 kbs 2022-07-07 -->
 			<if test="RSV_STATE == '예약중'">
-				AND RST.COMPLETE_YN = 'N'
+				RST.COMPLETE_YN = 'N'
 			</if>
 			<if test="RSV_STATE == '예약종료'">
 				AND RST.COMPLETE_YN = 'Y'
@@ -145,8 +147,12 @@
 			</if>
 			<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
 				AND DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') BETWEEN #{F_DATE} AND #{L_DATE}
-			</if>		
-		ORDER BY	RSV.RSV_DT
+			</if>
+		</where>
+		GROUP BY
+			RSV.RSV_ID
+		ORDER BY	
+			RSV.RSV_DT DESC
 	</select>
 
 	<update id="PI1102G1U0" parameterType="Map">

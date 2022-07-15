@@ -120,6 +120,7 @@ public class PI0206Service extends ServiceSupport {
 			if (e instanceof DuplicateKeyException) {
 				throw new MessageException(Result.ERR_KEY, "중복된 키값의 데이터가 존재합니다.");
 			} else {
+				logger.error("[PI0206Service] Exception {}",e);
 				throw e;
 			}
 		}
@@ -136,7 +137,8 @@ public class PI0206Service extends ServiceSupport {
 		int uCnt = 0;
 		int dCnt = 0;
 
-		List<Map<String, Object>> param = getSimpleList("dlt_VHC_MST");
+		//List<Map<String, Object>> param = getSimpleList("dlt_VHC_MST");
+		List<Map<String, Object>> param = getSimpleList("dlt_BMS_VOC_RSV_RST_INFO");
 		try {
 			for (int i = 0; i < param.size(); i++) {
 				Map data = (Map) param.get(i);
@@ -173,7 +175,7 @@ public class PI0206Service extends ServiceSupport {
 		List<Map<String, Object>> nodeList = pi0206Mapper.selectAllNodeList();
 
 		// station맵에 지역정보 추가
-		List<Map<String, Object>> stnAndLocList = stnPlusLocation(stationList);
+		//List<Map<String, Object>> stnAndLocList = stnPlusLocation(stationList);
 
 		// 차고지 리스트 //bhmin 220119
 		List<Map<String, Object>> garageList = pi0206Mapper.selectAllGarageList();
@@ -351,7 +353,8 @@ public class PI0206Service extends ServiceSupport {
 					logger.error("error");
 				}
 			} catch (IOException e) {
-				logger.error("IOException");
+				logger.error("api = "+api);
+				logger.error("IOException {}",e);
 			}
 		} catch (MalformedURLException e) {
 			logger.error("MalformedURLException");

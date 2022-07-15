@@ -50,9 +50,15 @@ public interface SI0402Mapper {
 	
 	public int SI0402G1I2(Map param);
 	
+	public int SI0402G1I2_2(Map param);
+	
 	public int SI0402G1I3(Map param);
 	
+	public int SI0402G1I3_2(Map param);
+	
 	public int SI0402G1I4(Map param);
+	
+	public int SI0402G1I4_2(Map param);
 	
 	public List SI0402P0R0(Map param);
 	
@@ -76,5 +82,11 @@ public interface SI0402Mapper {
 	
 	public int SI0402P3U0(Map param);
 	
-	public List SI0402P5R0(Map param);	
+	public List SI0402P5R0(Map param);
+	
+	public Map getSttnLinkIdByNode(Map param);
+	
+	public Map getSttnCrsLinkIdByNode(Map param);
+	
+	public Map getSttnMoCrsLinkIdByNode(Map param);
 }

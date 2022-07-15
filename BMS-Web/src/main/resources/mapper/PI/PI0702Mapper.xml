@@ -149,6 +149,7 @@
 					,DVC.DVC_KIND
 					,DVC.INST_LOC
 					,DATE_FORMAT(RSV.RSV_DT, '%Y%m%d') RSV_DT
+					,RSV.RSV_ID
 					,IF(RST.COMPLETE_YN = 'N', '예약중', '예약종료') RSV_STATE					
 		FROM		BMS_VHC_MST VHC
 			LEFT JOIN 	BMS_DVC_INFO DVC
@@ -161,8 +162,9 @@
 			ON			DVC.MNG_ID = RST.MNG_ID
 			LEFT JOIN  	BMS_DESTI_RSV_INFO RSV
 			ON			RST.RSV_ID = RSV.RSV_ID
-		WHERE		VHC.VHC_ID = #{VHC_ID}
-		AND			DL.TXT_VAL1 = 'RD'
+		<where>
+			<!-- VHC.VHC_ID = #{VHC_ID} --> <!-- 선택한 차량이 아닌 전체 차량의 예약 상세정보가 나오게 수정 kbs 2022-07-07 -->
+			DL.TXT_VAL1 = 'RD'
 			<if test="RSV_STATE == '예약중'">
 				AND RST.COMPLETE_YN = 'N'
 			</if>
@@ -181,7 +183,11 @@
 			<!-- <if test="RSV_DT != null">
 				AND DATE_FORMAT(RSV.RSV_DT, '%Y%m') = ${RSV_DT}
 			</if>	 -->		
-		ORDER BY	RSV.RSV_DT
+		</where>
+		GROUP BY
+			RSV.RSV_ID
+		ORDER BY	
+			RSV.RSV_DT DESC
 	</select>
 	
 	<select id="PI0702G1R1" resultType="Map">

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
+import kr.tracom.platform.net.protocol.TimsHeaderTypeA;
 import kr.tracom.platform.net.protocol.TimsMessage;
 import kr.tracom.platform.net.protocol.TimsPayload;
 import kr.tracom.platform.net.protocol.payload.PlCode;
@@ -77,15 +78,17 @@ public class KafkaConsumer {
         	//logger.info("tims message: {}", timsMessage);    	
             
         	if(timsMessage == null) {
-            	//logger.info("TimsMessage is NULL!!");        
+            	logger.info("TimsMessage is NULL!!");        
             	return;
             }
         	
             String impId = kafkaMessage.getSessionId();
+            
+            TimsHeaderTypeA header = (TimsHeaderTypeA) timsMessage.getHeader();
             TimsPayload timsPayload = timsMessage.getPayload();
             
             if(timsPayload == null) {
-            	//logger.info("TimsMessage Payload is NULL!!");        
+            	logger.info("TimsMessage Payload is NULL!!");        
             	return;
             }
             
@@ -119,7 +122,7 @@ public class KafkaConsumer {
 				
 			case PlCode.OP_EVENT_REQ:
 				//map = eventRequest.handle(timsMessage, sessionId);
-				eventRequest.receiveKafka(kafkaMessage); //이벤트는 쓰레드로 별도 처리
+				//eventRequest.receiveKafka(kafkaMessage); //이벤트는 쓰레드로 별도 처리
 				
 				break;
 				

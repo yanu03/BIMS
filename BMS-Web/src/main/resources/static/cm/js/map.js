@@ -4587,6 +4587,117 @@ routMap.drawRoute = function(mapId, grid, focusIdx) {
 	}
 }
 
+//교차로 제외 라인 표기
+routMap.drawRouteExceptCross = function(mapId, grid, focusIdx) {
+ 
+	var list = com.getGridDispJsonData(grid);
+
+	if(routMap.mapInfo[mapId].linkMode){
+		if(list.length>0){
+			var data = list[list.length-1];
+			var temp = {
+				NODE_ID: data.ED_NODE_ID,
+				GPS_Y: data.ED_GPS_Y,
+				GPS_X: data.ED_GPS_X,
+				NODE_NM: data.ED_NODE_NM,
+				NODE_TYPE: data.ED_NODE_TYPE
+			};
+			list.push(temp);
+		}
+	}
+	routMap.initDisplay(mapId);
+	
+	if(list != null && list.length != 0) {
+		var oldMornStd = "";
+		for(var i = 0; i < list.length; i++) {
+			
+			/**드래그이벤트**/
+			if(routMap.mapInfo[mapId].draggable){
+				list[i].click = function(e) {
+					routMap.mapInfo[mapId].dragging = false;
+					routMap.moveRoute(mapId,grid,e);
+				};
+			}
+			
+			list[i].index = i;
+			
+			/**드래그이벤트**/
+			list[i].draggable = routMap.mapInfo[mapId].draggable;
+			
+			/*if(list[i].NODE_TYPE != routMap.NODE_TYPE.VERTEX){
+				routMap.mapInfo[mapId].nodes.push(routMap.getDrawingNode(mapId,list[i].GPS_Y, list[i].GPS_X));
+			}*/
+			
+			// 노드 타입이 버스 정류소 마커 표시
+			
+			var isOverLayHidden = routMap.mapInfo[mapId].isOverLayHidden;
+			if(list[i].NODE_TYPE == routMap.NODE_TYPE.BUSSTOP && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.BUSSTOP)>=0) {
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, isOverLayHidden);
+			}
+			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.CROSS && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.CROSS)>=0) {
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, isOverLayHidden);
+			}
+			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.VERTEX && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.VERTEX)>=0) {
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, isOverLayHidden);
+			}
+			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.DISP && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.DISP)>=0) {
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, isOverLayHidden);
+			}
+			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.SOUND /*&& routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.SOUND)>=0*/) {
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, isOverLayHidden);
+			}			
+			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.SIGNAL && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.SIGNAL)>=0) {
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, isOverLayHidden);
+			}
+			// 아닐 경우(일반 노드) 네모 박스 표시
+			else if(list[i].NODE_TYPE == routMap.NODE_TYPE.NORMAL && routMap.mapInfo[mapId].dispCheck.indexOf(routMap.NODE_TYPE.NORMAL)>=0) {
+				routMap.addMarkerInter(mapId, list[i], grid, i, focusIdx, isOverLayHidden);
+			}
+			
+			if(i < list.length -1){
+				var mornStd = list[i].MORN_STD;
+				if(com.isEmpty(mornStd)){
+					mornStd = oldMornStd;
+				}
+				else {
+					oldMornStd = list[i].MORN_STD;
+				}
+				
+				var color = "#3396ff";
+				if(mornStd=='MS002'){
+					color = "#cd6c15";
+				}
+				else if(mornStd=='MS003'){
+					color = "#FF005E";
+				}
+				if(list[i].NODE_TYPE != routMap.NODE_TYPE.CROSS&&list[i+1].NODE_TYPE != routMap.NODE_TYPE.CROSS){
+					routMap.drawLine(mapId, list[i], list[i+1], color);
+				}
+				else if(list[i].NODE_TYPE == routMap.NODE_TYPE.CROSS){
+					if(list[i+1].NODE_TYPE == routMap.NODE_TYPE.CROSS){
+						routMap.drawLine(mapId, list[i-1], list[i+2], color);
+					}
+					else routMap.drawLine(mapId, list[i-1], list[i+1], color);
+				}
+				/*else if(list[i+1].NODE_TYPE == routMap.NODE_TYPE.CROSS){
+					routMap.drawLine(mapId, list[i], list[i+2], color);
+				}*/
+			}
+		}
+		routMap.mapInfo[mapId].dragging = false;
+
+		
+		if(list.length>0){
+			if(focusIdx!=-1){
+				routMap.moveMap(mapId, list[focusIdx].GPS_Y, list[focusIdx].GPS_X);
+			}
+			else {
+				routMap.moveMap(mapId, list[parseInt(list.length/2)].GPS_Y, list[parseInt(list.length/2)].GPS_X);
+			}
+		}
+	}
+}
+
 /**
  * 데이터 리스트로 노선에서 노드 그리기
  * @param mapId : 대상 map id

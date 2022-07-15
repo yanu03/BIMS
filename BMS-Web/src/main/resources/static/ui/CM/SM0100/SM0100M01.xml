@@ -372,6 +372,7 @@
 						IMG_NM : dlt_commonDtl.getCellData(grd_dtlView.getFocusedRowIndex(), "IMG_NM"),
 						FOCUS : dlt_commonDtl.getCellData(grd_dtlView.getFocusedRowIndex(), "FOCUS"),
 						STATUS : dlt_commonDtl.getCellData(grd_dtlView.getFocusedRowIndex(), "STATUS"),
+						NUM_VAL5 : dlt_commonDtl.getCellData(grd_dtlView.getFocusedRowIndex(), "NUM_VAL5"),
 						callbackFn : "scwin.imgPathCallback" };
 			
 			var dlCdNm = dlt_commonDtl.getCellData(row, "DL_CD_NM");

@@ -183,8 +183,8 @@
 	scwin.onpageload = function() {
 		var autoOptions = {
 			Main : { grid : FM0101G0, srchSbm : sub_FM0101G0R0, srchGrp : pgm_search, keyColumn : "NODE_ID", focusColumn : "VHC_NO", name :  "노드 목록"},
-			Sub1 : { grid : FM0101G2, srchSbm : sub_FM0101G2R0, savSbm : sub_FM0101G2S0, srchGrp : pgm_sub_search, name :  "파라미터 목록"}
-			/*Sub2 : { grid : FM0101G2, srchSbm : sub_FM0101G2R0, savSbm : sub_FM0101G2S0, name :  "파라미터 목록"}*/
+			Sub1 : { grid : FM0101G1, srchSbm : sub_FM0101G1R0, srchGrp : pgm_sub_search, name :  "파라미터 목록"},
+			Sub2 : { grid : FM0101G2, srchSbm : sub_FM0101G2R0, savSbm : sub_FM0101G2S0, name :  "파라미터 목록"}
 		 };
 		
 		var codeOptions = [ {code : "NODE_TYPE", compID : "FM0101G0:NODE_TYPE" },
@@ -201,7 +201,7 @@
 			SEARCH : {}
 		}
 		 
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainOptions, codeOptions);
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID3, autoOptions, mainOptions, codeOptions);
 		var mainSrhOptions = {
 		};	
 		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainSrhOptions, codeOptions);

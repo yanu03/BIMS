@@ -208,8 +208,8 @@
 	};
 	
 	scwin.VD0101G0_onrowindexchange = function(row,oldRow) {
-		dma_subsearch.set("DVC_ID", dlt_BMS_DVC_INFO.getCellData(VD0101G0.getFocusedRowIndex(), "DVC_ID"))
-		dma_subsearch.set("VHC_ID", dlt_BMS_DVC_INFO.getCellData(VD0101G0.getFocusedRowIndex(), "VHC_ID"))
+		dma_subsearch.set("DVC_ID", dlt_BMS_DVC_INFO.getCellData(VD0101G0.getRealRowIndex(VD0101G0.getFocusedRowIndex()), "DVC_ID"))
+		dma_subsearch.set("VHC_ID", dlt_BMS_DVC_INFO.getCellData(VD0101G0.getRealRowIndex(VD0101G0.getFocusedRowIndex()), "VHC_ID"))
 		com.executeSubmission(sub_VD0101G2R0);
 	};
 	
@@ -431,7 +431,7 @@
 										value="" blockSelect="false" displayMode="label" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="128" inputType="drilldown" style="height:20px"
-										id="DVC_KIND_NM" value="" blockSelect="false" displayMode="label" userData1="" showDepth="2" depthColumn="LEVEL" depthType="div"
+										id="DVC_KIND_NM" value="" blockSelect="false" displayMode="label" userData1="" showDepth="1" depthColumn="LEVEL" depthType="div"
 										textAlign="left">
 									</w2:column>
 									<w2:column id="ORG_ID" blockSelect="false" readOnly="true" style="height:20px;" width=""

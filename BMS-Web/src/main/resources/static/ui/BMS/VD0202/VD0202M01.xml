@@ -396,7 +396,7 @@
 		var rowCntParamKind = dlt_PARAM_KIND.getRowCount();
 		
 		//헤더 시작
-		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_5" value="장치상태" blockSelect="false" displayMode="label"></w2:column>';
+		//gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_5" value="장치상태" blockSelect="false" displayMode="label"></w2:column>';
 		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_3" value="장치ID" blockSelect="false" displayMode="label" sortable="true"></w2:column>';
 		gridHeader +='<w2:column removeBorderStyle="false" width="170" inputType="text" style="height:20px" id="h_colunm_4" value="장치종류" blockSelect="false" displayMode="label"></w2:column>';
 		
@@ -415,7 +415,7 @@
 		}
 		
 		//바디 시작
-		gridBody += '<w2:column removeBorderStyle="false" width="117" inputType="select" style="height:20px" id="DVC_COND" value="" blockSelect="false" displayMode="label"></w2:column>';
+		//gridBody += '<w2:column removeBorderStyle="false" width="117" inputType="select" style="height:20px" id="DVC_COND" value="" blockSelect="false" displayMode="label"></w2:column>';
 		gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="DVC_ID" value="" blockSelect="false" displayMode="label"></w2:column>';
 		gridBody += '<w2:column removeBorderStyle="false" width="117" inputType="select" style="height:20px" id="DVC_KIND" value="" blockSelect="false" displayMode="label"></w2:column>';
 		
@@ -579,7 +579,7 @@
 				}
 				var imgId = dlt_BMS_DVC_INFO.getCellData(i, "DVC_ID");
 				
-				str += "<div id='"+ imgId+ "' style='z-index: 1; position:absolute; top:"+topCoords+ "px; left:"+leftCoords+"px;' class='w2group' onclick='imgOnclick(this.id);'>"
+				str += "<div id='"+ imgId+ "' style='z-index: 1; position:absolute; top:"+topCoords+ "px; left:"+leftCoords+"px;' class='w2group' onclick='imgOnclick_VD0202(this.id);'>"
 				+ "<img xmlns='http://www.w3.org/1999/xhtml' src='"+ imgSrc+ "'>"
 				+ "</div>";
 			} // end if
@@ -697,7 +697,7 @@
 				var imgId = dlt_BMS_DVC_INFO.getCellData(i, "DVC_ID");
 				
 				var str = "";
-				str = "<div id='"+ imgId+ "' style='z-index:1;position:absolute; top:"+topCoords+ "px; left:"+leftCoords+"px;' class='w2group' onclick='imgOnclick(this.id);'>"
+				str = "<div id='"+ imgId+ "' style='z-index:1;position:absolute; top:"+topCoords+ "px; left:"+leftCoords+"px;' class='w2group' onclick='imgOnclick_VD0202(this.id);'>"
 				+ "<img xmlns='http://www.w3.org/1999/xhtml' src='"+ imgSrc+ "'>"
 				+ "</div>";
 				$("#mf_tac_layout_contents_"+ param.menuCode+ "_body_busImage").append(str);				
@@ -823,7 +823,7 @@
 		}		
 	};*/
 	
-	function imgOnclick(id) {
+	function imgOnclick_VD0202(id) {
 		var rowIndex = dlt_BMS_DVC_INFO.getMatchedIndex("DVC_ID", id);
 		VD0202G1.setFocusedCell(rowIndex, "DVC_ID", false);
 	}

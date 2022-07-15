@@ -136,7 +136,7 @@
 					</w2:columnInfo>
 					<w2:data use="false"></w2:data>
 				</w2:dataList>
-				
+
 				<!-- PARAM_KIND CTL데이터리스트 -->
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_CTL_PARAM_KIND" saveRemovedData="true">
 					<w2:columnInfo>
@@ -145,22 +145,7 @@
 					</w2:columnInfo>
 					<w2:data use="false"></w2:data>
 				</w2:dataList>
-				
-				<!-- PARAM_KIND 에어튜브 데이터리스트 -->
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_AIR_PARAM_KIND" saveRemovedData="true">
-					<w2:columnInfo>
-						<w2:column id="PARAM_KIND" name="매개변수종류" dataType="text"></w2:column>
-					</w2:columnInfo>
-					<w2:data use="false"></w2:data>
-				</w2:dataList>
-				
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_airconItem" saveRemovedData="true">
-					<w2:columnInfo>
-						<w2:column id="FCLT_ID" name="시설물id" dataType="text"></w2:column>
-						<w2:column id="INTG_FCLT_ID" name="연계시설물id" dataType="text"></w2:column>
-					</w2:columnInfo>
-				</w2:dataList>
-				
+
 				<w2:dataMap baseNode="map" id="dma_search">
 					<w2:keyInfo>
 						<w2:key id="TYPE" name="name1" dataType="text"></w2:key>
@@ -170,7 +155,7 @@
 						<w2:key id="FCLT_KIND" name="시설물유형" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
-				
+
 				<w2:dataMap baseNode="map" id="dma_subsearch">
 					<w2:keyInfo>
 						<w2:key id="MNG_ID" name="관리ID" dataType="text"></w2:key>
@@ -180,17 +165,25 @@
 						<w2:key id="USE_YN" name="name4" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
-				
-				<!-- 에어컨 제어 -->
-				<w2:dataMap baseNode="map" id="dma_airconControl">
-					<w2:keyInfo>
-						<w2:key id="INTG_FCLT_ID" name="연계장치아이디" dataType="text"></w2:key>
-						<w2:key id="INTG_TYPE" name="연계유형" dataType="text"></w2:key>
-						<w2:key id="POWER" name="전원" dataType="text"></w2:key>
-						<w2:key id="DEGREE" name="온도" dataType="text"></w2:key>
-					</w2:keyInfo>
-				</w2:dataMap>
-				
+
+				<!-- 에어컨 상태 list -->
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_airconItem" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="FCLT_ID" name="시설물id" dataType="text"></w2:column>
+						<w2:column id="INTG_FCLT_ID" name="연계시설물id" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+
+				<!-- 에어컨 제어 list -->
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_airconControl" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="INTG_FCLT_ID" name="연계시설물아이디" dataType="text"></w2:column>
+						<w2:column id="INTG_TYPE" name="연계유형" dataType="text"></w2:column>
+						<w2:column id="POWER" name="전원" dataType="text"></w2:column>
+						<w2:column id="DEGREE" name="온도" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+
 				<!-- 프로세스 데이터리스트 -->
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_PLF_IMP_VER_INFO" saveRemovedData="true">
 					<w2:columnInfo>
@@ -208,7 +201,7 @@
 					</w2:columnInfo>
 					<w2:data use="false"></w2:data>
 				</w2:dataList>
-				
+
 				<w2:dataMap baseNode="map" id="dma_result" ev:onmodelchange="">
 					<w2:keyInfo>
 						<w2:key id="STATUS" name="STATUS" dataType="text"></w2:key>
@@ -218,7 +211,7 @@
 						<w2:key id="TYPE" name="TYPE" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
-				
+
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
 			<xf:submission id="sub_FM0204G0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_FCLT_COND_PARAM_INFO"
@@ -226,54 +219,45 @@
 				customHandler="" mode="asynchronous" processMsg="조회 중입니다.." ev:submit="" ev:submitdone="scwin.sub_FM0204G0R0_submitdone"
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_FM0204G0R1" ref="data:json,dlt_airconItem" target="data:json,dlt_PARAM_KIND" action="/fm/FM0204G0R1" method="post"
-				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="조회중입니다..."
-				ev:submit="" ev:submitdone="scwin.sub_FM0204G0R1_submitdone" ev:submiterror="" abortTrigger="">
+			<xf:submission id="sub_FM0204G0R1" ref='data:json,["dlt_airconItem","dma_search"]' target="data:json,dlt_PARAM_KIND"
+				action="/fm/FM0204G0R1" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
+				customHandler="" mode="asynchronous" processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_FM0204G0R1_submitdone"
+				ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_FM0204G0R2" ref="data:json,dma_subsearch" target="data:json,dlt_CTL_PARAM_KIND" action="/fm/FM0204G0R2"
-				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_FM0204G0R2_submitdone" ev:submiterror="" abortTrigger="">
+			<xf:submission id="sub_FM0204G0R2" ref="data:json,dma_subsearch" target="data:json,dlt_CTL_PARAM_KIND"
+				action="/fm/FM0204G0R2" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
+				customHandler="" mode="asynchronous" processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_FM0204G0R2_submitdone"
+				ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_FM0204G1R0" ref="data:json,dma_subsearch" target="data:json,dlt_PLF_IMP_VER_INFO" action="/fm/FM0204G1R0"
-				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_FM0204G1R0_submitdone" ev:submiterror="" abortTrigger="">
+			<xf:submission id="sub_FM0204G1R0" ref="data:json,dma_subsearch" target="data:json,dlt_PLF_IMP_VER_INFO"
+				action="/fm/FM0204G1R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
+				customHandler="" mode="asynchronous" processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_FM0204G1R0_submitdone"
+				ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_FM0204G2R0" ref="data:json,dma_search" target="data:json,dlt_BMS_FCLT_AIR_COND_PARAM_INFO" action="/fm/FM0204G2R0"
-				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_FM0204G2R0_submitdone" ev:submiterror="" abortTrigger="">
+			<xf:submission id="sub_airconControl" ref="data:json,dlt_airconControl" target="" action="/fm/airconControl" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="전송중입니다..." ev:submit="" ev:submitdone="scwin.sub_airconControl_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_FM0204G2R1" ref="" target="data:json,dlt_AIR_PARAM_KIND" action="/fm/FM0204G2R1" method="post"
-				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="조회중입니다..."
-				ev:submit="" ev:submitdone="scwin.sub_FM0204G2R1_submitdone" ev:submiterror="" abortTrigger="">
-			</xf:submission>
-			<xf:submission id="sub_FM0204G2R2" ref="data:json,dma_subsearch" target="data:json,dlt_CTL_PARAM_KIND" action="/fm/FM0204G2R2"
-				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
-				processMsg="조회중입니다..." ev:submit="" ev:submitdone="scwin.sub_FM0204G2R2_submitdone" ev:submiterror="" abortTrigger="">
-			</xf:submission>
-			<xf:submission id="sub_airconControl" ref="data:json,dma_airconControl" target="" action="/fm/airconControl" method="post"
-				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="전송중입니다..."
-				ev:submit="" ev:submitdone="scwin.sub_airconControl_submitdone" ev:submiterror="" abortTrigger="">
-			</xf:submission>
-			
 		</xf:model>
 		<script type="text/javascript">
-	kakao.maps.load(function() {
-		// v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
-		var map = new kakao.maps.Map(node, options);
-	});
-	</script>
-	<script type="text/javascript" lazy="false"><![CDATA[
+			kakao.maps.load(function() {
+			// v3가 모두 로드된 후, 이 콜백 함수가 실행됩니다.
+			var map = new kakao.maps.Map(node, options);
+			});
+		</script>
+		<script type="text/javascript" lazy="false"><![CDATA[
 	var autoOptions = [];
 	
 	var checkBoxClick = false;
 	
 	scwin.onpageload = function() {
 		autoOptions = {
-			Main : { grid : FM0204G0, srchSbm : sub_FM0204G0R0, srchGrp : pgm_search, keyColumn : "NODE_ID", focusColumn : "NODE_NM", name :  "차량 목록"}
+			Main : { grid : FM0204G0, srchSbm : sub_FM0204G0R0, srchGrp : pgm_search, keyColumn : "NODE_ID", focusColumn : "NODE_NM", name :  "시설물 상태"}
 		 };
 		 
 		var mainOptions = {
-			SAVE:{cbFnc:scwin.selectReset,nm:"일괄리셋", class:"reset"}
+			//SAVE:{cbFnc:scwin.selectReset,nm:"일괄리셋", class:"reset"}
+			SAVE:{}
 			,ADD:{} ,DEL:{} ,CNL:{}, SEARCH:{}
 		}
 		 
@@ -288,16 +272,16 @@
 		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainSrhOptions, codeOptions);
 			
 		var subOptions2 = {
-			SAVE:[{cbFnc:scwin.airconControl,nm:"전송", class:"send"}]
+			SAVE:[{cbFnc:scwin.fcltControl,nm:"전송", class:"send"}]
 		};
 		
-		com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions2);
+		com.setSubBtn2(wfm_subBtn3, autoOptions, subOptions2);
 		
 		var subOptions3 = {
 			SAVE:[{cbFnc:scwin.airtubeControl,nm:"전송", class:"send"}]
 		};
 		
-		com.setSubBtn2(wfm_subBtn3, autoOptions, subOptions3);
+		com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions3);
 		
 		dma_search.set("FCLT_KIND", "FK005");
 		com.setCommonDtl(codeOptions, function() {
@@ -310,6 +294,7 @@
 		FM0204G2_grid.hide();
 		FM0204G3_grid.hide();
 		AIRTUBE_FORM.hide();
+		PEOPLECOUNT_FORM.hide();
 		
 		//탭 목록 클릭 이벤트
 		$("#FM0204_TAB").find("li").click( function() {
@@ -326,6 +311,7 @@
 				FM0204G3_grid.hide();
 				AIRCON_FORM.show("");
 				AIRTUBE_FORM.hide();
+				PEOPLECOUNT_FORM.hide();
 				
 				com.executeSubmission(sub_FM0204G0R0);
 			}
@@ -346,6 +332,7 @@
 				FM0204G3_grid.hide();
 				AIRTUBE_FORM.show("");
 				AIRCON_FORM.hide();
+				PEOPLECOUNT_FORM.hide();
 				
 				com.executeSubmission(sub_FM0204G0R0);
 			}
@@ -356,6 +343,7 @@
 				FM0204G3_grid.show("");
 				FM0204G0_grid.hide();
 				FM0204G2_grid.hide();
+				PEOPLECOUNT_FORM.show("");
 				AIRTUBE_FORM.hide();
 				AIRCON_FORM.hide();
 				
@@ -370,17 +358,39 @@
 	};
 	
 	//일괄 리셋 버튼 클릭 이벤트
-	scwin.selectReset = function() {
+	/*scwin.selectReset = function() {
 		com.alert("일괄 리셋입니다. (후 작업 필요)");
-	}
+	}*/
 	
-	//에어컨제어 전송 버튼 클릭 이벤트
-	scwin.airconControl = function() {
-		//제어 서브미션 테스트
-		dma_airconControl.set("INTG_FCLT_ID", dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(FM0204G0.getFocusedRowIndex(), "INTG_FCLT_ID"));
-		//dma_airconControl.set("INTG_TYPE", "PC");
-		dma_airconControl.set("DEGREE", T0_PK022.getValue());
-		com.executeSubmission(sub_airconControl);
+	//시설물 제어 전송 버튼 클릭 이벤트
+	scwin.fcltControl = function() {
+		var fcltKind = dma_search.get("FCLT_KIND");
+		
+		//에어컨 제어
+		if(fcltKind == "FK005"){
+			var index = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedIndex("chk", "1");
+			
+			dlt_airconControl.removeAll();
+			for(var x = 0; x < index.length; x++){
+				dlt_airconControl.insertRow(x);
+				dlt_airconControl.setCellData(x, "INTG_FCLT_ID", dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(index[x], "INTG_FCLT_ID"));
+				var power = T0_PK002.getValue();
+				if(power == "0"){
+					power = "off";
+				}else if(power == "1"){
+					power = "on";
+				}
+				dlt_airconControl.setCellData(x, "POWER", power);
+				dlt_airconControl.setCellData(x, "DEGREE", T0_PK047.getValue());
+			}
+			
+			com.executeSubmission(sub_airconControl);
+		
+		}
+		//에어튜브 제어
+		else if(fcltKind == "FK004"){
+			com.alert("작업중");
+		}
 	}
 	
 	//에어튜브제어 버튼 클릭 이벤트
@@ -390,42 +400,76 @@
 	
 	//FM0204G0그리드 조회 콜백 메소드
 	scwin.sub_FM0204G0R0_submitdone = function(e) {
-		var rowCnt = dlt_BMS_FCLT_COND_PARAM_INFO.getRowCount();
-		var index = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedIndex("FCLT_KIND", "FK005");
-		
-		for(var x = 0; x < index.length; x++){
-			dlt_airconItem.insertRow(x);
-			dlt_airconItem.setCellData(x, "FCLT_ID", dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(index[x], "FCLT_ID"));
-			dlt_airconItem.setCellData(x, "INTG_FCLT_ID", dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(index[x], "INTG_FCLT_ID"));
+		var fcltKind = dma_search.get("FCLT_KIND");
+		if(fcltKind == "FK005"){
+			var rowCnt = dlt_BMS_FCLT_COND_PARAM_INFO.getRowCount();
+			var index = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedIndex("FCLT_KIND", "FK005");
+			
+			dlt_airconItem.removeAll();
+			for(var x = 0; x < index.length; x++){
+				dlt_airconItem.insertRow(x);
+				dlt_airconItem.setCellData(x, "FCLT_ID", dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(index[x], "FCLT_ID"));
+				dlt_airconItem.setCellData(x, "INTG_FCLT_ID", dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(index[x], "INTG_FCLT_ID"));
+			}
 		}
-		
 		com.executeSubmission(sub_FM0204G0R1);
 	};
 	
 	//PARAM_KIND헤더 동적으로 가져오는 서브미션 콜백 메소드
 	scwin.sub_FM0204G0R1_submitdone = function(e) {
 		var fcltKind = dma_search.get("FCLT_KIND");
+		//동적그리드생성
 		scwin.setGridViewInfo(fcltKind);
-		//scwin.setCrsGridViewInfo();
 		
-		/*var codeOptions = [ {code : "FCLT_COND", compID : "FM0204G0:FCLT_COND"}];
-		com.setCommonDtl(codeOptions);
-		
-		for (i=0; i<dlt_BMS_FCLT_COND_PARAM_INFO.getDataLength(); i++) {
-			//비정상
-			if (dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(i, "FCLT_COND") == "FC021") {
-				FM0204G0.setCellClass(i, "FCLT_COND", "cond_abnormal");
+		switch (fcltKind) {
+		case "FK005":
+			FM0204G0.mergeCol(0,false);
+			FM0204G0.mergeCells("byrestriccol");
+			com.setFocusedCell(FM0204G0, "FCLT_ID");
+			wfm_subBtn3.show("");
+			
+			var index = dlt_BMS_FCLT_COND_PARAM_INFO.getRowCount();
+			for(var x = 0; x < index; x++){
+				var pk002 = dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(x, "PK002");
+				if(pk002 != '' && pk002 != null){
+					dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(x, "PK030", "1");
+				}else{
+					dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(x, "PK030", "0");
+				}
+				
+				//통신에러 - class추가
+				if (dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(x, "PK030") == "0") {
+					FM0204G0.setCellClass(x, "PK030", "cond_abnormal");
+				}
+				//정상 - class추가
+				else if (dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(x, "PK030") == "1") {
+					FM0204G0.setCellClass(x, "PK030", "cond_normal");
+				}
 			}
-			//정상
-			else if (dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(i, "FCLT_COND") == "FC020") {
-				FM0204G0.setCellClass(i, "FCLT_COND", "cond_normal");
-			}
-		}*/
-		
-		FM0204G0.mergeCol(0,false);
-		FM0204G0.mergeCells("byrestriccol");
-		FM0204G3.mergeCol(0,false);
-		FM0204G3.mergeCells("byrestriccol");
+			
+			break;
+		case "FK007":
+			//FM0204G1.mergeCol(0,false);
+			FM0204G1.mergeCells("byrestriccol");
+			com.setFocusedCell(FM0204G1, "FCLT_ID");
+			wfm_subBtn2.hide();
+			
+			break;
+		case "FK004":
+			FM0204G2.mergeCol(0,false);
+			FM0204G2.mergeCells("byrestriccol");
+			com.setFocusedCell(FM0204G2, "FCLT_ID");
+			wfm_subBtn3.show("");
+			
+			break;
+		case "FK006":
+			//FM0204G3.mergeCol(0,false);
+			FM0204G3.mergeCells("byrestriccol");
+			com.setFocusedCell(FM0204G3, "FCLT_ID");
+			wfm_subBtn3.hide();
+			
+			break;
+		}
 		
 	};
 	
@@ -454,7 +498,9 @@
 		var rowCntParamKind = dlt_PARAM_KIND.getRowCount();
 		
 		//헤더 시작
-		gridHeader +='<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택" blockSelect="false" sortable="false"></w2:column>';
+		if(fcltKind == "FK005" || fcltKind == "FK004"){
+			gridHeader +='<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택" blockSelect="false" sortable="false"></w2:column>';
+		}
 		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_1" value="정류소ID" blockSelect="false" displayMode="label" sortable="true"></w2:column>';
 		gridHeader +='<w2:column removeBorderStyle="false" width="160" inputType="text" style="height:20px" id="h_colunm_2" value="정류소명" blockSelect="false" displayMode="label"></w2:column>';
 		gridHeader +='<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_3" value="시설물ID" blockSelect="false" displayMode="label" sortable="true"></w2:column>';
@@ -463,9 +509,8 @@
 		//동적 헤더 시작
 		for(var i = 0; i < rowCntParamKind; i++) {
 			var paramKind = dlt_PARAM_KIND.getCellData(i, "PARAM_KIND");
-			var nodeType = dlt_PARAM_KIND.getCellData(i, "NODE_TYPE");
 			
-			if(paramKind != '' && paramKind != 'PK001' && nodeType =='NT002'){
+			if(paramKind != '' && paramKind != null){
 				var dlCd = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD");
 				var dlCdNm = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD_NM");
 				
@@ -476,7 +521,9 @@
 		}
 		
 		//바디 시작
-		gridBody += '<w2:column blockSelect="false" disabled="false" falseValue="0" defaultValue="" trueValue="1" id="chk" readOnly="false" style="height:20px" inputType="checkbox" width="39"></w2:column>';
+		if(fcltKind == "FK005" || fcltKind == "FK004"){
+			gridBody += '<w2:column blockSelect="false" disabled="false" falseValue="0" defaultValue="" trueValue="1" id="chk" readOnly="false" style="height:20px" inputType="checkbox" width="39"></w2:column>';
+		}
 		gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="NODE_ID" value="" blockSelect="false" displayMode="label"></w2:column>';
 		gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="NODE_NM" value="" blockSelect="false" displayMode="label"></w2:column>';
 		gridBody += '<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="FCLT_ID" value="" blockSelect="false" displayMode="label"></w2:column>';
@@ -485,7 +532,6 @@
 		//동적 바디 시작
 		for(var i = 0; i < rowCntParamKind; i++) {
 			var paramKind = dlt_PARAM_KIND.getCellData(i, "PARAM_KIND");
-			var nodeType = dlt_PARAM_KIND.getCellData(i, "NODE_TYPE");
 			var dlCd = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD");
 			var dlCdNm = dlt_commonDtlPARAM_KIND.getMatchedColumnData("DL_CD", paramKind, "DL_CD_NM");
 			var displayForMatter = '';
@@ -494,9 +540,11 @@
 				displayForMatter = 'scwin.onOffDisFormatter'; //데이터유형이 ON/OFF인 경우 displayformaatter 추가
 			}else if(dlCd == 'PK025'){
 				displayForMatter = 'scwin.openCloseDisFormatter'; //데이터유형이 문 열림/닫힘인 경우 displayformaatter 추가
+			}else if(dlCd == 'PK030'){
+				displayForMatter = 'scwin.statusDisFormatter'; //데이터유형이 장치 상태 경우 displayformaatter 추가
 			}
 			
-			if(paramKind != '' && paramKind != 'PK001' && nodeType =='NT002'){
+			if(paramKind != '' && paramKind != null){
 				gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'" value="" blockSelect="false" displayMode="label" displayFormatter="'+displayForMatter+'"></w2:column>';
 				//gridBody +='<w2:column removeBorderStyle="false" width="113" inputType="text" style="height:20px" id="'+paramKind+'_AUTO_YN'+'" value="" blockSelect="false" displayMode="label" displayFormatter="scwin.AutoDisFormatter"></w2:column>';
 			}
@@ -512,7 +560,7 @@
 		gridStr += '<w2:header style="" id="header2">'
 		+ '<w2:row style="" id="row3">'
 		+ gridHeader
-		+'<w2:column removeBorderStyle="false" width="170" inputType="text" style="height:20px" id="h_colunm_5" value="" blockSelect="false" displayMode="label"></w2:column>'
+		+'<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="h_colunm_5" value="" blockSelect="false" displayMode="label"></w2:column>'
 		+'</w2:row>'
 		+'</w2:header>'
 		+'<w2:gBody style="" id="gBody2">'
@@ -539,7 +587,6 @@
 			break;
 		}
 		
-		//dlt_BMS_FCLT_COND_PARAM_INFO.removeAll();
 		autoOptions.Main.grid = gridId;
 
 		//'시설물 모니터링'에서 받는 파라미터가 있다면 focus주기
@@ -561,33 +608,222 @@
 	
 	//FM0204G1그리드 row 변경 이벤트 - 스크린도어
 	scwin.FM0204G1_onrowindexchange = function(row,oldRow) {
+		
 		if (checkBoxClick == false) {
 			dma_subsearch.set("MNG_ID", dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(row, "MNG_ID"));
-			var focusOption = {keyMap : dma_subsearch};
-			com.changeDualGrid(FM0204G1, FM0204G4, null, sub_FM0204G1R0, focusOption, row, oldRow);
+			com.executeSubmission(sub_FM0204G1R0);
+			//var focusOption = {keyMap : dma_subsearch};
+			//com.changeDualGrid(FM0204G1, FM0204G4, null, sub_FM0204G1R0, focusOption, row, oldRow);
 		}else {
 			checkBoxClick = false;	
 		}
 		
-		dma_subsearch.set("FCLT_ID", dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(row, "FCLT_ID"));
-		com.executeSubmission(sub_FM0204G0R2);
+		//dma_subsearch.set("FCLT_ID", dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(row, "FCLT_ID"));
+		//com.executeSubmission(sub_FM0204G0R2);
 		
 	};
 	
-	//FM0204G3그리드 row 변경 이벤트
+	//FM0204G2그리드 row 변경 이벤트 - 에어튜브
+	scwin.FM0204G2_onrowindexchange = function(row,oldRow){
+		//dma_subsearch.set("FCLT_ID", dlt_BMS_FCLT_AIR_COND_PARAM_INFO.getCellData(row, "FCLT_ID"));
+		//com.executeSubmission(sub_FM0204G2R2);
+	}
+	
+	//FM0204G3그리드 row 변경 이벤트 - 피플카운트
 	scwin.FM0204G3_onrowindexchange = function(row,oldRow) {
 		
-		if (checkBoxClick == false) {
-			dma_subsearch.set("MNG_ID", dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(row, "MNG_ID"));
-			var focusOption = {keyMap : dma_subsearch};
-			com.changeDualGrid(FM0204G0, FM0204G4, null, sub_FM0204G1R0, focusOption, row, oldRow);
-		}else {
-			checkBoxClick = false;	
+	};
+	
+	//FM0204G0그리드 cell 클릭 이벤트 - 에어컨
+	scwin.FM0204G0_oncellclick = function(row,col,colId) {
+		var rowCount = dlt_BMS_FCLT_COND_PARAM_INFO.getRowCount();
+		
+		//chk말고 다른 cell클릭시
+		if (col != "0"){
+			if(FM0204G0.getCellChecked(row, 'chk')==0){
+				for(var i = 0; i < rowCount; i++){
+					FM0204G0.setCellChecked(i, 'chk', false);	
+				}
+			   	FM0204G0.setCellChecked(row, 'chk', true);
+			   	
+				/*var chk = dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(row, "chk");
+				if(chk == 1){
+					wfm_subBtn2.setDisabled(false);
+					wfm_subBtn2.setOpacity(1);
+				}else if(chk == 0){
+					wfm_subBtn2.setDisabled(true);
+					wfm_subBtn2.setOpacity(0.45);
+				}*/
+			}
+			
+			/*셀 클릭시 체크 지우기.
+			else if(FM0204G0.getCellChecked(row, 'chk')==1){
+			   	FM0204G0.setCellChecked(row, 'chk', false);
+			}*/
+			
+			var chkCount = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedColumnData('chk', '1', 'chk');
+			var chkLen = chkCount.length;
+			
+			//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
+			if(chkLen > 1 ){
+				pgm_sub_list.hide();
+				FM0204_ul.show("");
+				
+				//FM0204G1.setDisabled("grid", true);
+				//FM0204F0.setDisabled(true);
+			}else if(chkLen < 2){
+				pgm_sub_list.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
+				FM0204_ul.hide();
+				
+				//FM0204G1.setDisabled("grid", false);
+				//FM0204F0.setDisabled(false);
+			}
+			
 		}
+		//chk 클릭시
+		else if(col == "0"){
 		
-		dma_subsearch.set("FCLT_ID", dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(row, "FCLT_ID"));
-		com.executeSubmission(sub_FM0204G0R2);
+			checkBoxClick = true;
+			
+			var chkCount = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedColumnData('chk', '1', 'chk');
+			var chkLen = chkCount.length;
+			
+			//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
+			pgm_sub_list.hide();
+			FM0204_ul.show("");
+				
+			//FM0204G1.setDisabled("grid", true);
+			//FM0204F0.setDisabled(true);
+			/*
+			else if(chkLen < 2){
+				pgm_sub_list.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
+				FM0204_ul.hide();
+				
+				//FM0204G1.setDisabled("grid", false);
+				//FM0204F0.setDisabled(false);
+			}
+			*/
+			var matchChk = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedData('chk', '1');
+			
+			//하위 버튼 disable 및 투명도 처리
+			if(matchChk.length == 0 || matchChk.length == 1){
+				wfm_subBtn2.setDisabled(false);
+				wfm_subBtn2.setOpacity(1);
+			}else if(matchChk.length > 1){
+				wfm_subBtn2.setDisabled(true);
+				wfm_subBtn2.setOpacity(0.45);
+			}
+		}
+	};
+	
+	//FM0204G2그리드 cell 클릭 이벤트 - 피플카운트
+	scwin.FM0204G2_oncellclick = function(row,col,colId) {
+		var rowCount = dlt_BMS_FCLT_COND_PARAM_INFO.getRowCount();
 		
+		//chk말고 다른 cell클릭시
+		if (col != "0"){
+			if(FM0204G2.getCellChecked(row, 'chk')==0){
+				for(var i = 0; i < rowCount; i++){
+					FM0204G2.setCellChecked(i, 'chk', false);			
+				}
+			   	FM0204G2.setCellChecked(row, 'chk', true);
+			   	
+				/*var chk = dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(row, "chk");
+				if(chk == 1){
+					wfm_subBtn2.setDisabled(false);
+					wfm_subBtn2.setOpacity(1);
+				}else if(chk == 0){
+					wfm_subBtn2.setDisabled(true);
+					wfm_subBtn2.setOpacity(0.45);
+				}*/
+			}
+			
+			/*셀 클릭시 체크 지우기.
+			else if(FM0204G0.getCellChecked(row, 'chk')==1){
+			   	FM0204G0.setCellChecked(row, 'chk', false);
+			}*/
+			
+			var chkCount = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedColumnData('chk', '1', 'chk');
+			var chkLen = chkCount.length;
+			
+			//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
+			if(chkLen > 1 ){
+				pgm_sub_list.hide();
+				FM0204_ul.show("");
+				
+				//FM0204G1.setDisabled("grid", true);
+				//FM0204F0.setDisabled(true);
+			}else if(chkLen < 2){
+				pgm_sub_list.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
+				FM0204_ul.hide();
+				
+				//FM0204G1.setDisabled("grid", false);
+				//FM0204F0.setDisabled(false);
+			}
+			
+		}
+		//chk 클릭시
+		else if(col == "0"){
+		
+			checkBoxClick = true;
+			
+			var chkCount = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedColumnData('chk', '1', 'chk');
+			var chkLen = chkCount.length;
+			
+			//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
+			pgm_sub_list.hide();
+			FM0204_ul.show("");
+				
+			//FM0204G1.setDisabled("grid", true);
+			//FM0204F0.setDisabled(true);
+			/*
+			else if(chkLen < 2){
+				pgm_sub_list.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
+				FM0204_ul.hide();
+				
+				//FM0204G1.setDisabled("grid", false);
+				//FM0204F0.setDisabled(false);
+			}
+			*/
+			var matchChk = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedData('chk', '1');
+			
+			//하위 버튼 disable 및 투명도 처리
+			if(matchChk.length == 0 || matchChk.length == 1){
+				wfm_subBtn2.setDisabled(false);
+				wfm_subBtn2.setOpacity(1);
+			}else if(matchChk.length > 1){
+				wfm_subBtn2.setDisabled(true);
+				wfm_subBtn2.setOpacity(0.45);
+			}
+		}
+	};
+	
+	//FM0204G0 체크박스 header클릭시 이벤트
+	scwin.FM0204G0_onheaderclick = function(headerId) {
+		if(headerId == 'chkHeader'){
+			var rowCount = dlt_BMS_FCLT_COND_PARAM_INFO.getRowCount();
+			var chk = dlt_BMS_FCLT_COND_PARAM_INFO.getColData("chk");
+			
+			var equalChk = allEqual(chk);
+			
+			if(equalChk == true){
+				com.setFocusedCell(FM0204G0, "FCLT_ID");
+			}
+		}
+	};
+	
+	//FM0204G2 체크박스 header클릭시 이벤트
+	scwin.FM0204G2_onheaderclick = function(headerId) {
+		if(headerId == 'chkHeader'){
+			var rowCount = dlt_BMS_FCLT_COND_PARAM_INFO.getRowCount();
+			var chk = dlt_BMS_FCLT_COND_PARAM_INFO.getColData("chk");
+			
+			var equalChk = allEqual(chk);
+			
+			if(equalChk == true){
+				com.setFocusedCell(FM0204G2, "FCLT_ID");
+			}
+		}
 	};
 	
 	//제어 조회 서브미션 콜백 메소드
@@ -731,12 +967,12 @@
 				T0_PK021.setDisabled(false);
 				break;
 			case 'PK022':
-				T0_PK022.setDisabled(false);
-				T0_PK022_AUTO.setDisabled(false);
+				T0_PK047.setDisabled(false);
+				T0_PK047_AUTO.setDisabled(false);
 				if(autoYn[i] == 'Y'){
-					T0_PK022_AUTO.setValue(1);
+					T0_PK047_AUTO.setValue(1);
 				}else{
-					T0_PK022_AUTO.setValue(0);
+					T0_PK047_AUTO.setValue(0);
 				}
 				break;
 			case 'PK023':
@@ -763,12 +999,6 @@
 		}
 		
 	};
-	
-	//FM0204G2그리드 row 변경 이벤트
-	scwin.FM0204G2_onrowindexchange = function(row,oldRow){
-		dma_subsearch.set("FCLT_ID", dlt_BMS_FCLT_AIR_COND_PARAM_INFO.getCellData(row, "FCLT_ID"));
-		com.executeSubmission(sub_FM0204G2R2);
-	}
 	
 	//에어튜브 제어 조회 서브미션 콜백 메소드
 	scwin.sub_FM0204G2R2_submitdone = function(e) {
@@ -915,210 +1145,7 @@
 		}
 	};
 	
-	//FM0204G0그리드 cell 클릭 이벤트
-	scwin.FM0204G0_oncellclick = function(row,col,colId) {
-		var rowCount = dlt_BMS_FCLT_COND_PARAM_INFO.getRowCount();
-		
-		//chk말고 다른 cell클릭시
-		if (col != "0"){
-			if(FM0204G0.getCellChecked(row, 'chk')==0){
-				for(var i = 0; i < rowCount; i++){
-					FM0204G0.setCellChecked(i, 'chk', false);			
-				}
-			   	FM0204G0.setCellChecked(row, 'chk', true);
-			   	
-				/*var chk = dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(row, "chk");
-				if(chk == 1){
-					wfm_subBtn2.setDisabled(false);
-					wfm_subBtn2.setOpacity(1);
-				}else if(chk == 0){
-					wfm_subBtn2.setDisabled(true);
-					wfm_subBtn2.setOpacity(0.45);
-				}*/
-			}
-			
-			/*셀 클릭시 체크 지우기.
-			else if(FM0204G0.getCellChecked(row, 'chk')==1){
-			   	FM0204G0.setCellChecked(row, 'chk', false);
-			}*/
-			
-			var chkCount = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedColumnData('chk', '1', 'chk');
-			var chkLen = chkCount.length;
-			
-			//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
-			if(chkLen > 1 ){
-				pgm_sub_list.hide();
-				FM0204_ul.show("");
-				
-				//FM0204G1.setDisabled("grid", true);
-				//FM0204F0.setDisabled(true);
-			}else if(chkLen < 2){
-				pgm_sub_list.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
-				FM0204_ul.hide();
-				
-				//FM0204G1.setDisabled("grid", false);
-				//FM0204F0.setDisabled(false);
-			}
-			
-		}
-		//chk 클릭시
-		else if(col == "0"){
-		
-			checkBoxClick = true;
-			
-			var chkCount = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedColumnData('chk', '1', 'chk');
-			var chkLen = chkCount.length;
-			
-			//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
-			pgm_sub_list.hide();
-			FM0204_ul.show("");
-				
-			//FM0204G1.setDisabled("grid", true);
-			//FM0204F0.setDisabled(true);
-			/*
-			else if(chkLen < 2){
-				pgm_sub_list.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
-				FM0204_ul.hide();
-				
-				//FM0204G1.setDisabled("grid", false);
-				//FM0204F0.setDisabled(false);
-			}
-			*/
-			var matchChk = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedData('chk', '1');
-			
-			//하위 버튼 disable 및 투명도 처리
-			if(matchChk.length == 0 || matchChk.length == 1){
-				wfm_subBtn2.setDisabled(false);
-				wfm_subBtn2.setOpacity(1);
-			}else if(matchChk.length > 1){
-				wfm_subBtn2.setDisabled(true);
-				wfm_subBtn2.setOpacity(0.45);
-			}
-		}
-	};
 	
-	//FM0204G3그리드 cell 클릭 이벤트
-	scwin.FM0204G3_oncellclick = function(row,col,colId) {
-		var rowCount = dlt_BMS_FCLT_COND_PARAM_INFO.getRowCount();
-		
-		//chk말고 다른 cell클릭시
-		if (col != "0"){
-			if(FM0204G3.getCellChecked(row, 'chk')==0){
-				for(var i = 0; i < rowCount; i++){
-					FM0204G3.setCellChecked(i, 'chk', false);			
-				}
-			   	FM0204G3.setCellChecked(row, 'chk', true);
-			   	
-				/*var chk = dlt_BMS_FCLT_COND_PARAM_INFO.getCellData(row, "chk");
-				if(chk == 1){
-					wfm_subBtn2.setDisabled(false);
-					wfm_subBtn2.setOpacity(1);
-				}else if(chk == 0){
-					wfm_subBtn2.setDisabled(true);
-					wfm_subBtn2.setOpacity(0.45);
-				}*/
-			}
-			
-			/*셀 클릭시 체크 지우기.
-			else if(FM0204G0.getCellChecked(row, 'chk')==1){
-			   	FM0204G0.setCellChecked(row, 'chk', false);
-			}*/
-			
-			var chkCount = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedColumnData('chk', '1', 'chk');
-			var chkLen = chkCount.length;
-			
-			//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
-			if(chkLen > 1 ){
-				pgm_sub_list.hide();
-				FM0204_ul.show("");
-				
-				//FM0204G1.setDisabled("grid", true);
-				//FM0204F0.setDisabled(true);
-			}else if(chkLen < 2){
-				pgm_sub_list.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
-				FM0204_ul.hide();
-				
-				//FM0204G1.setDisabled("grid", false);
-				//FM0204F0.setDisabled(false);
-			}
-			
-		}
-		//chk 클릭시
-		else if(col == "0"){
-		
-			checkBoxClick = true;
-			
-			var chkCount = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedColumnData('chk', '1', 'chk');
-			var chkLen = chkCount.length;
-			
-			//체크가 2개 이상일 때 자식 그리드와 폼 disable처리
-			pgm_sub_list.hide();
-			FM0204_ul.show("");
-				
-			//FM0204G1.setDisabled("grid", true);
-			//FM0204F0.setDisabled(true);
-			/*
-			else if(chkLen < 2){
-				pgm_sub_list.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
-				FM0204_ul.hide();
-				
-				//FM0204G1.setDisabled("grid", false);
-				//FM0204F0.setDisabled(false);
-			}
-			*/
-			var matchChk = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedData('chk', '1');
-			
-			//하위 버튼 disable 및 투명도 처리
-			if(matchChk.length == 0 || matchChk.length == 1){
-				wfm_subBtn2.setDisabled(false);
-				wfm_subBtn2.setOpacity(1);
-			}else if(matchChk.length > 1){
-				wfm_subBtn2.setDisabled(true);
-				wfm_subBtn2.setOpacity(0.45);
-			}
-		}
-	};
-	
-	//배열 값 동일한지 테스트하는 함수
-	function allEqual(arr) {
-	  	return new Set(arr).size == 1;
-	}
-	
-	//FM0204G0 체크박스 header클릭시 이벤트
-	scwin.FM0204G0_onheaderclick = function(headerId) {
-		if(headerId == 'chkHeader'){
-			var rowCount = dlt_BMS_FCLT_COND_PARAM_INFO.getRowCount();
-			var chk = dlt_BMS_FCLT_COND_PARAM_INFO.getColData("chk");
-			
-			var equalChk = allEqual(chk);
-			
-			if(equalChk == true){
-				pgm_sub_list.hide();
-				FM0204_ul.show("");
-			}else{
-				pgm_sub_list.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
-				FM0204_ul.hide();
-			}
-		}
-	};
-	
-	//FM0204G3 체크박스 header클릭시 이벤트
-	scwin.FM0204G3_onheaderclick = function(headerId) {
-		if(headerId == 'chkHeader'){
-			var rowCount = dlt_BMS_FCLT_COND_PARAM_INFO.getRowCount();
-			var chk = dlt_BMS_FCLT_COND_PARAM_INFO.getColData("chk");
-			
-			var equalChk = allEqual(chk);
-			
-			if(equalChk == true){
-				pgm_sub_list.hide();
-				FM0204_ul.show("");
-			}else{
-				pgm_sub_list.show(""); //show사용할 때 "" 붙여야 원래 css적용 가능함!!!
-				FM0204_ul.hide();
-			}
-		}
-	};
 	
 	//프로세스 그리드 조회 콜백 메소드
 	scwin.sub_FM0204G1R0_submitdone = function(e) {
@@ -1147,6 +1174,19 @@
 			return "ON";
 		}else if(data == '0'){
 			return "OFF";
+		}else{
+			return data;
+		}
+	}
+	
+	//데이터유형이 장치상태인 경우 disformatter 추가 함수
+	scwin.statusDisFormatter = function(data){
+		if(data == ""){
+			return "";
+		}else if(data == '0'){
+			return "통신이상";
+		}else if(data == '1'){
+			return "정상";
 		}else{
 			return data;
 		}
@@ -1204,28 +1244,48 @@
 		}
 	}
 	
+	//에어컨 전원 onviewchange
 	scwin.T0_PK002_onviewchange = function(info) {
-		var value = "";
-		if(info.newValue == 'on'){
-			value = "on";
-			T0_PK022.setDisabled(false);
+		if(info.newValue == '1'){
+			T0_PK047.setDisabled(false);
+			
+			var index = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedIndex("chk", "1");
+			for(var x = 0; x < index.length; x++){
+				dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(index[x], "PK002", "1");
+			}
 		}else{
-			value = "off";
-			T0_PK022.setDisabled(true);
-			T0_PK022.setValue("");
+			T0_PK047.setDisabled(true);
+			T0_PK047.setValue("");
+			
+			var index = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedIndex("chk", "1");
+			for(var x = 0; x < index.length; x++){
+				dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(index[x], "PK002", "0");
+				dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(index[x], "PK047", "");
+			}
 		}
-		dma_airconControl.set("POWER", value);
-		
+	};
+	
+	//에어컨 온도 onviewchange
+	scwin.T0_PK047_onviewchange = function(info) {
+		var index = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedIndex("chk", "1");
+			for(var x = 0; x < index.length; x++){
+				dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(index[x], "PK047", info.newValue);
+			}
 	};
 	
 	scwin.sub_airconControl_submitdone = function(e) {
 		com.alert("전송되었습니다.");
 	};
+	
+	//배열 값 동일한지 테스트하는 함수
+	function allEqual(arr) {
+	  	return new Set(arr).size == 1;
+	}
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
-		
+
 			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
 				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
 					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
@@ -1239,7 +1299,7 @@
 					</xf:group>
 				</xf:group>
 			</xf:group>
-		
+
 			<xf:group id="" class="pgm_content grdc_a" style="">
 				<xf:group id="" class=" grdr_50_a bms_box_wrap" style="">
 
@@ -1247,20 +1307,10 @@
 						<xf:group id="" style="" class="gr_search">
 							<xf:group id="pgm_search" style="" class="search">
 								<xf:group class="label" id="" style="">
-									<w2:span class="" id="" label="시설물종류" style=""></w2:span>
+									<w2:span class="" id="" label="검색" style=""></w2:span>
 								</xf:group>
-								<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
-									chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
-									ev:onviewchange="" id="autoChoiceBox2" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT4" search="start"
-									selectedData="" style="width:150px" submenuSize="auto" textAlign="center" useKeywordHighlight="false" visibleRowNum="" nextTabByEnter=""
-									disableEdit="">
-									<w2:choices>
-										<w2:itemset nodeset="data:dlt_fcltKindItem">
-											<w2:label ref="FCLT_KIND"></w2:label>
-											<w2:value ref="FCLT_KIND"></w2:value>
-										</w2:itemset>
-									</w2:choices>
-								</w2:autoComplete>
+								<xf:input id="search_input" class="search_input" ref="data:dma_search.CONTENT" placeholder="정류소ID 또는 정류소명"
+									style="width:150px"></xf:input>
 							</xf:group>
 							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>
 						</xf:group>
@@ -1282,13 +1332,13 @@
 								<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 							</xf:group>
 							<xf:group></xf:group>
-							
+
 							<xf:group id="FM0204G1_grid" class="" style="">
 								<w2:gridView autoFit="allColumn" class="cm_grid left" dataList="data:dlt_BMS_FCLT_COND_PARAM_INFO"
 									ev:oncellclick="scwin.FM0204G1_oncellclick" ev:onrowindexchange="scwin.FM0204G1_onrowindexchange" fixedColumnWithHidden="true"
 									id="FM0204G1" ignoreCellClick="false" rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40"
-									scrollByColumn="false" useShiftKey="true" autoFitMinWidth="0" readOnly="true" sortable="false" focusMode="row" showSortableImage="true"
-									sortEvent="onclick">
+									scrollByColumn="false" useShiftKey="true" autoFitMinWidth="0" readOnly="true" sortable="false" focusMode="row"
+									showSortableImage="true" sortEvent="onclick">
 									<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
 									<w2:header style="" id="header2">
 										<w2:row style="" id="row3">
@@ -1313,9 +1363,9 @@
 									</w2:footer>
 								</w2:gridView>
 							</xf:group>
-							
+
 							<xf:group id="" class=""></xf:group>
-				
+
 							<xf:group style="" id="pgm_sub_list" class="pgm_list grdc_65f_25_35f">
 								<xf:group id="" class="grdr_20_2_a" style="">
 									<xf:group id="" class="gr_sub_header" style="">
@@ -1326,10 +1376,10 @@
 									<xf:group id="" class="" style=""></xf:group>
 									<xf:group id="" class="" style="">
 										<w2:gridView autoFit="lastColumn" autoFitMinWidth="0" checkEditableInputClass="" class="cm_grid right"
-											dataList="data:dlt_PLF_IMP_VER_INFO" ev:oncellclick="scwin.FM0204G4_oncellclick" ev:onrowindexchange="" fixedColumnWithHidden="true"
-											focusMode="row" id="FM0204G4" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="No." rowNumStatusResize=""
-											rowNumStatusUniqueId="" rowNumVisible="true" rowStatusVisible="false" scrollByColumn="false" sortable="false" useShiftKey="true"
-											sortEvent="onclick">
+											dataList="data:dlt_PLF_IMP_VER_INFO" ev:oncellclick="scwin.FM0204G4_oncellclick" ev:onrowindexchange=""
+											fixedColumnWithHidden="true" focusMode="row" id="FM0204G4" ignoreCellClick="false" readOnly="true" rowNumHeaderValue="No."
+											rowNumStatusResize="" rowNumStatusUniqueId="" rowNumVisible="true" rowStatusVisible="false" scrollByColumn="false"
+											sortable="false" useShiftKey="true" sortEvent="onclick">
 											<w2:caption style="" id="caption1" value="this is a grid caption."></w2:caption>
 											<w2:header style="" id="header1">
 												<w2:row style="" id="row1">
@@ -1341,10 +1391,10 @@
 													</w2:column>
 													<!-- <w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column1" value="CPU"
 														blockSelect="false" displayMode="label" class="">
-													</w2:column>
-													<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column10" value="MEMORY"
+														</w2:column>
+														<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column10" value="MEMORY"
 														blockSelect="false" displayMode="label" class="">
-													</w2:column> -->
+														</w2:column> -->
 													<w2:column removeBorderStyle="false" width="80" inputType="text" style="height:20px" id="column8" value="버전"
 														blockSelect="false" displayMode="label" class="">
 													</w2:column>
@@ -1372,10 +1422,10 @@
 													</w2:column>
 													<!-- <w2:column removeBorderStyle="false" width="115" inputType="text" style="height:20px" id="CPU_USG" value=""
 														blockSelect="false" displayMode="label" textAlign="right">
-													</w2:column>
-													<w2:column removeBorderStyle="false" width="128" inputType="text" style="height:20px" id="MEM_USG" value=""
+														</w2:column>
+														<w2:column removeBorderStyle="false" width="128" inputType="text" style="height:20px" id="MEM_USG" value=""
 														blockSelect="false" displayMode="label" textAlign="right">
-													</w2:column> -->
+														</w2:column> -->
 													<w2:column removeBorderStyle="false" width="109" inputType="text" style="height:20px" id="VER_TOTAL" value=""
 														blockSelect="false" displayMode="label" textAlign="right">
 													</w2:column>
@@ -1388,8 +1438,8 @@
 													<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px" id="BLD_DTM" value=""
 														blockSelect="false" displayMode="label" textAlign="">
 													</w2:column>
-													<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px" id="" value="" blockSelect="false"
-														displayMode="label" textAlign="">
+													<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px" id="" value=""
+														blockSelect="false" displayMode="label" textAlign="">
 													</w2:column>
 												</w2:row>
 											</w2:gBody>
@@ -1403,9 +1453,9 @@
 										</w2:gridView>
 									</xf:group>
 								</xf:group>
-				
+
 								<xf:group id="" class=""></xf:group>
-				
+
 								<xf:group id="pgm_detail" class="pgm_detail grdr_20_a ">
 									<xf:group id="" class=""></xf:group>
 									<xf:group id="" class="grdr_20_2_a bms_box_wrap">
@@ -1416,78 +1466,92 @@
 											<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 										</xf:group>
 										<xf:group class="" id="" style=""></xf:group>
-										<xf:group class="" id="" style=""></xf:group> <!-- 스크린도어 제어가 추가되면 추후작업 -->
-										<!-- <xf:group style="overflow:auto; position:relative;" id="">
-											<xf:group tagname="table" style="width:100%; position:absolute" id="FM0204F0" class="w2tb tb">
-												<w2:attributes>
-													<w2:summary></w2:summary>
-												</w2:attributes>
-												<xf:group tagname="colgroup">
-													<xf:group style="width:120px;" tagname="col"></xf:group>
-													<xf:group style="width:80px;" tagname="col"></xf:group>
-													<xf:group style="width:120px;" tagname="col"></xf:group>
-													<xf:group style="width:80px;" tagname="col"></xf:group>
-												</xf:group>
-												<xf:group tagname="tr" style="height:5px;">
-													<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
-														전원(ON/OFF)
-														<w2:attributes>
-															<w2:scope>row</w2:scope>
-														</w2:attributes>
-													</xf:group>
-													<xf:group tagname="td" style="" class="w2tb_td" id="">
-														<xf:select selectedindex="-1" id="T0_PK002_AUTO" appearance="full" style="margin-left: 10px;width: 50px;" cols="" rows=""
-															ref="">
-															<xf:choices>
-																<xf:item>
-																	<xf:label><![CDATA[자동]]></xf:label>
-																	<xf:value><![CDATA[1]]></xf:value>
-																</xf:item>
-															</xf:choices>
-														</xf:select>
-													</xf:group>
-													<xf:group tagname="td" style="" class="w2tb_td" id="">
-														<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="" direction="auto" disabled="false"
-															disabledClass="w2selectbox_disabled" id='T0_PK002' ref="data:dlt_BMS_FCLT_COND_PARAM_INFO.PK002" style="" 
-															submenuSize="auto" ev:onviewchange="scwin.T0_PK002_onviewchange">
-															<xf:choices>
-																<xf:item>
-																	<xf:label><![CDATA[ON]]></xf:label>
-																	<xf:value><![CDATA[on]]></xf:value>
-																</xf:item>
-																<xf:item>
-																	<xf:label><![CDATA[OFF]]></xf:label>
-																	<xf:value><![CDATA[off]]></xf:value>
-																</xf:item>
-															</xf:choices>
-														</xf:select1>
-													</xf:group>
-													<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
-														온도(℃)
-														<w2:attributes>
-															<w2:scope>row</w2:scope>
-														</w2:attributes>
-													</xf:group>
-													<xf:group tagname="td" style="" class="w2tb_td" id="">
-														<xf:select selectedindex="-1" id="T0_PK022_AUTO" appearance="full" style="margin-left: 10px;" cols="" rows="" ref="">
-															<xf:choices>
-																<xf:item>
-																	<xf:label><![CDATA[자동]]></xf:label>
-																	<xf:value><![CDATA[1]]></xf:value>
-																</xf:item>
-															</xf:choices>
-														</xf:select>
-													</xf:group>
-													<xf:group tagname="td" style="" class="w2tb_td" id="">
-														<xf:input adjustMaxLength="false" id="T0_PK022" style="" type="number" allowChar="0-9" maxlength="2" ref="data:dlt_BMS_FCLT_COND_PARAM_INFO.PK022"></xf:input>
+										
+										<!-- 스크린도어 제어가 추가되면 추후작업 -->
+										<xf:group class="" id="" style="">
+											<xf:group style="" id="FM0204G1_ul" class="" tagname="ul">
+												<xf:group style="" id="" class="" tagname="li">
+													<xf:group tagname="ul">
+														<xf:group tagname="li">
+															<xf:group class="repeat" tagname="li">
+																<w2:textbox label="※제어 기능 제공하지 않음" style="" id="" tagname="strong" ref=""></w2:textbox>
+															</xf:group>
+														</xf:group>
 													</xf:group>
 												</xf:group>
 											</xf:group>
-										</xf:group> -->
+										</xf:group> 
+										<!-- <xf:group style="overflow:auto; position:relative;" id="">
+											<xf:group tagname="table" style="width:100%; position:absolute" id="FM0204F0" class="w2tb tb">
+											<w2:attributes>
+											<w2:summary></w2:summary>
+											</w2:attributes>
+											<xf:group tagname="colgroup">
+											<xf:group style="width:120px;" tagname="col"></xf:group>
+											<xf:group style="width:80px;" tagname="col"></xf:group>
+											<xf:group style="width:120px;" tagname="col"></xf:group>
+											<xf:group style="width:80px;" tagname="col"></xf:group>
+											</xf:group>
+											<xf:group tagname="tr" style="height:5px;">
+											<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
+											전원(ON/OFF)
+											<w2:attributes>
+											<w2:scope>row</w2:scope>
+											</w2:attributes>
+											</xf:group>
+											<xf:group tagname="td" style="" class="w2tb_td" id="">
+											<xf:select selectedindex="-1" id="T0_PK002_AUTO" appearance="full" style="margin-left: 10px;width: 50px;" cols="" rows=""
+											ref="">
+											<xf:choices>
+											<xf:item>
+											<xf:label><![CDATA[자동]]></xf:label>
+											<xf:value><![CDATA[1]]></xf:value>
+											</xf:item>
+											</xf:choices>
+											</xf:select>
+											</xf:group>
+											<xf:group tagname="td" style="" class="w2tb_td" id="">
+											<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="" direction="auto" disabled="false"
+											disabledClass="w2selectbox_disabled" id='T0_PK002' ref="data:dlt_BMS_FCLT_COND_PARAM_INFO.PK002" style=""
+											submenuSize="auto" ev:onviewchange="scwin.T0_PK002_onviewchange">
+											<xf:choices>
+											<xf:item>
+											<xf:label><![CDATA[ON]]></xf:label>
+											<xf:value><![CDATA[on]]></xf:value>
+											</xf:item>
+											<xf:item>
+											<xf:label><![CDATA[OFF]]></xf:label>
+											<xf:value><![CDATA[off]]></xf:value>
+											</xf:item>
+											</xf:choices>
+											</xf:select1>
+											</xf:group>
+											<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
+											온도(℃)
+											<w2:attributes>
+											<w2:scope>row</w2:scope>
+											</w2:attributes>
+											</xf:group>
+											<xf:group tagname="td" style="" class="w2tb_td" id="">
+											<xf:select selectedindex="-1" id="T0_PK047_AUTO" appearance="full" style="margin-left: 10px;" cols="" rows="" ref="">
+											<xf:choices>
+											<xf:item>
+											<xf:label><![CDATA[자동]]></xf:label>
+											<xf:value><![CDATA[1]]></xf:value>
+											</xf:item>
+											</xf:choices>
+											</xf:select>
+											</xf:group>
+											<xf:group tagname="td" style="" class="w2tb_td" id="">
+											<xf:input adjustMaxLength="false" id="T0_PK047" style="" type="number" allowChar="0-9" maxlength="2" ref="data:dlt_BMS_FCLT_COND_PARAM_INFO.PK022"></xf:input>
+											</xf:group>
+											</xf:group>
+											</xf:group>
+											</xf:group> -->
 									</xf:group>
 								</xf:group>
 							</xf:group>
-				
+
 							<!-- 체크 안내문 -->
 							<xf:group style="" id="FM0204_ul" class="" tagname="ul">
 								<xf:group style="" id="" class="" tagname="li">
@@ -1506,14 +1570,14 @@
 								</xf:group>
 							</xf:group>
 						</xf:group><!-- pgm_list end -->
-						
+
 						<xf:group style="" id="pgm_list2" class="grdc_65f_25_35f">
 							<xf:group id="pgm_sub_list2" class="pgm_list grdr_20_2_a" style="">
 								<xf:group id="" class="gr_sub_header" style="">
 									<xf:group class="defaultbox" id="" style="">
 										<w2:textbox class="df_tt fl list" id="" label="시설물 상태" style=""></w2:textbox>
 									</xf:group>
-									<!--  <w2:wframe id="wfm_subBtn3" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>-->
+									<!-- <w2:wframe id="wfm_subBtn3" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe> -->
 								</xf:group>
 								<xf:group></xf:group>
 								<xf:group id="FM0204G0_grid" class="" style="">
@@ -1525,23 +1589,22 @@
 										<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
 										<w2:header style="" id="header2">
 											<w2:row style="" id="row3">
-												<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택"
-													blockSelect="false" sortable="false">
+												<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택" blockSelect="false"
+													sortable="false">
 												</w2:column>
 											</w2:row>
 										</w2:header>
 										<w2:gBody style="" id="gBody2">
 											<w2:row style="" id="row4">
-												<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false"
-													style="height:20px" inputType="checkbox" id="chk" blockSelect="false">
+												<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
+													inputType="checkbox" id="chk" blockSelect="false">
 												</w2:column>
 											</w2:row>
 										</w2:gBody>
 										<w2:footer id="footer1" style="">
 											<w2:row id="row3" style="">
-												<w2:column blockSelect="false" colSpan="30" displayMode="label"
-													expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
-													style="height:20px;" textAlign="left" width="2386">
+												<w2:column blockSelect="false" colSpan="30" displayMode="label" expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')"
+													id="column42" inputType="expression" removeBorderStyle="false" style="height:20px;" textAlign="left" width="2386">
 												</w2:column>
 											</w2:row>
 										</w2:footer>
@@ -1557,23 +1620,22 @@
 										<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
 										<w2:header style="" id="header2">
 											<w2:row style="" id="row3">
-												<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택"
-													blockSelect="false" sortable="false">
+												<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택" blockSelect="false"
+													sortable="false">
 												</w2:column>
 											</w2:row>
 										</w2:header>
 										<w2:gBody style="" id="gBody2">
 											<w2:row style="" id="row4">
-												<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false"
-													style="height:20px" inputType="checkbox" id="chk" blockSelect="false">
+												<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
+													inputType="checkbox" id="chk" blockSelect="false">
 												</w2:column>
 											</w2:row>
 										</w2:gBody>
 										<w2:footer id="footer1" style="">
 											<w2:row id="row3" style="">
-												<w2:column blockSelect="false" colSpan="30" displayMode="label"
-													expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
-													style="height:20px;" textAlign="left" width="2386">
+												<w2:column blockSelect="false" colSpan="30" displayMode="label" expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')"
+													id="column42" inputType="expression" removeBorderStyle="false" style="height:20px;" textAlign="left" width="2386">
 												</w2:column>
 											</w2:row>
 										</w2:footer>
@@ -1589,30 +1651,29 @@
 										<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
 										<w2:header style="" id="header2">
 											<w2:row style="" id="row3">
-												<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택"
-													blockSelect="false" sortable="false">
+												<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택" blockSelect="false"
+													sortable="false">
 												</w2:column>
 											</w2:row>
 										</w2:header>
 										<w2:gBody style="" id="gBody2">
 											<w2:row style="" id="row4">
-												<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false"
-													style="height:20px" inputType="checkbox" id="chk" blockSelect="false">
+												<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
+													inputType="checkbox" id="chk" blockSelect="false">
 												</w2:column>
 											</w2:row>
 										</w2:gBody>
 										<w2:footer id="footer1" style="">
 											<w2:row id="row3" style="">
-												<w2:column blockSelect="false" colSpan="30" displayMode="label"
-													expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')" id="column42" inputType="expression" removeBorderStyle="false"
-													style="height:20px;" textAlign="left" width="2386">
+												<w2:column blockSelect="false" colSpan="30" displayMode="label" expression="&quot;데이터 개수 : &quot; + COUNT('COMP_ID')"
+													id="column42" inputType="expression" removeBorderStyle="false" style="height:20px;" textAlign="left" width="2386">
 												</w2:column>
 											</w2:row>
 										</w2:footer>
 									</w2:gridView>
 								</xf:group><!-- gridView end -->
 							</xf:group><!-- pgm_sub_list2 end -->
-							
+
 							<xf:group id="" class=""></xf:group>
 
 							<xf:group id="" class="grdr_25_a">
@@ -1625,7 +1686,7 @@
 										<w2:wframe id="wfm_subBtn3" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 									</xf:group>
 									<xf:group class="" id="" style=""></xf:group>
-									
+
 									<xf:group style="overflow:auto; position:relative;" id="AIRTUBE_FORM">
 										<xf:group tagname="table" style="width:100%; position:absolute" id="FM0204F1" class="w2tb tb">
 											<w2:attributes>
@@ -1648,8 +1709,8 @@
 														<w2:colspan>2</w2:colspan>
 														<w2:rowspan>1</w2:rowspan>
 													</w2:attributes>
-													<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel=""
-														direction="auto" disabled="false" disabledClass="w2selectbox_disabled" id="T1_PK002" ref="" style="" submenuSize="auto">
+													<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="" direction="auto"
+														disabled="false" disabledClass="w2selectbox_disabled" id="T1_PK002" ref="" style="" submenuSize="auto">
 														<xf:choices>
 															<xf:item>
 																<xf:label><![CDATA[ON]]></xf:label>
@@ -1671,8 +1732,7 @@
 													</w2:attributes>
 												</xf:group>
 												<xf:group tagname="td" style="" class="w2tb_td" id="">
-													<xf:select selectedindex="-1" id="T1_PK027_AUTO" appearance="full"
-														style="margin-left: 10px;" cols="" rows="" ref="">
+													<xf:select selectedindex="-1" id="T1_PK027_AUTO" appearance="full" style="margin-left: 10px;" cols="" rows="" ref="">
 														<xf:choices>
 															<xf:item>
 																<xf:label><![CDATA[자동]]></xf:label>
@@ -1683,8 +1743,8 @@
 												</xf:group>
 												<xf:group tagname="td" class="w2tb_td" id="">
 													<w2:attributes></w2:attributes>
-													<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel=""
-														direction="auto" disabled="false" disabledClass="w2selectbox_disabled" id="T1_PK027" ref="" style="" submenuSize="auto">
+													<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="" direction="auto"
+														disabled="false" disabledClass="w2selectbox_disabled" id="T1_PK027" ref="" style="" submenuSize="auto">
 														<xf:choices>
 															<xf:item>
 																<xf:label><![CDATA[ON]]></xf:label>
@@ -1706,8 +1766,7 @@
 													</w2:attributes>
 												</xf:group>
 												<xf:group tagname="td" style="" class="w2tb_td" id="">
-													<xf:select selectedindex="-1" id="T1_PK028_AUTO" appearance="full"
-														style="margin-left: 10px;" cols="" rows="" ref="">
+													<xf:select selectedindex="-1" id="T1_PK028_AUTO" appearance="full" style="margin-left: 10px;" cols="" rows="" ref="">
 														<xf:choices>
 															<xf:item>
 																<xf:label><![CDATA[자동]]></xf:label>
@@ -1718,8 +1777,8 @@
 												</xf:group>
 												<xf:group tagname="td" id="" class="w2tb_td">
 													<w2:attributes></w2:attributes>
-													<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel=""
-														direction="auto" disabled="false" disabledClass="w2selectbox_disabled" id="T1_PK028" ref="" style="" submenuSize="auto">
+													<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="" direction="auto"
+														disabled="false" disabledClass="w2selectbox_disabled" id="T1_PK028" ref="" style="" submenuSize="auto">
 														<xf:choices>
 															<xf:item>
 																<xf:label><![CDATA[ON]]></xf:label>
@@ -1741,8 +1800,7 @@
 													</w2:attributes>
 												</xf:group>
 												<xf:group tagname="td" style="" class="w2tb_td" id="">
-													<xf:select selectedindex="-1" id="T1_PK031_AUTO" appearance="full"
-														style="margin-left: 10px;" cols="" rows="" ref="">
+													<xf:select selectedindex="-1" id="T1_PK031_AUTO" appearance="full" style="margin-left: 10px;" cols="" rows="" ref="">
 														<xf:choices>
 															<xf:item>
 																<xf:label><![CDATA[자동]]></xf:label>
@@ -1753,8 +1811,8 @@
 												</xf:group>
 												<xf:group tagname="td" id="" class="w2tb_td">
 													<w2:attributes></w2:attributes>
-													<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel=""
-														direction="auto" disabled="false" disabledClass="w2selectbox_disabled" id="T1_PK031" ref="" style="" submenuSize="auto">
+													<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="" direction="auto"
+														disabled="false" disabledClass="w2selectbox_disabled" id="T1_PK031" ref="" style="" submenuSize="auto">
 														<xf:choices>
 															<xf:item>
 																<xf:label><![CDATA[OFF]]></xf:label>
@@ -1782,74 +1840,123 @@
 											</xf:group>
 										</xf:group>
 									</xf:group>
-									
+
 									<xf:group style="overflow:auto; position:relative;" id="AIRCON_FORM">
-											<xf:group tagname="table" style="width:100%; position:absolute" id="FM0204F0" class="w2tb tb">
-												<w2:attributes>
-													<w2:summary></w2:summary>
-												</w2:attributes>
-												<xf:group tagname="colgroup">
-													<xf:group style="width:120px;" tagname="col"></xf:group>
-													<xf:group style="width:80px;" tagname="col"></xf:group>
-													<xf:group style="width:120px;" tagname="col"></xf:group>
-													<xf:group style="width:80px;" tagname="col"></xf:group>
+										<xf:group tagname="table" style="width:100%; position:absolute" id="FM0204F0" class="w2tb tb">
+											<w2:attributes>
+												<w2:summary></w2:summary>
+											</w2:attributes>
+											<xf:group tagname="colgroup">
+												<xf:group style="width:100px;" tagname="col"></xf:group>
+												<xf:group style="width:100px;" tagname="col"></xf:group>
+												<xf:group style="width:100px;" tagname="col"></xf:group>
+												<xf:group style="width:100px;" tagname="col"></xf:group>
+											</xf:group>
+											<xf:group tagname="tr" style="height:5px;">
+												<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
+													전원(ON/OFF)
+													<w2:attributes>
+														<w2:scope>row</w2:scope>
+													</w2:attributes>
 												</xf:group>
-												<xf:group tagname="tr" style="height:5px;">
-													<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
-														전원(ON/OFF)
-														<w2:attributes>
-															<w2:scope>row</w2:scope>
-														</w2:attributes>
-													</xf:group>
-													<xf:group tagname="td" style="" class="w2tb_td" id="">
-														<xf:select selectedindex="-1" id="T0_PK002_AUTO" appearance="full" style="margin-left: 10px;width: 50px;" cols="" rows=""
-															ref="">
-															<xf:choices>
-																<xf:item>
-																	<xf:label><![CDATA[자동]]></xf:label>
-																	<xf:value><![CDATA[1]]></xf:value>
-																</xf:item>
-															</xf:choices>
-														</xf:select>
-													</xf:group>
-													<xf:group tagname="td" style="" class="w2tb_td" id="">
-														<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="" direction="auto" disabled="false"
-															disabledClass="w2selectbox_disabled" id='T0_PK002' ref="data:dlt_BMS_FCLT_COND_PARAM_INFO.PK002" style="" 
-															submenuSize="auto" ev:onviewchange="scwin.T0_PK002_onviewchange">
-															<xf:choices>
-																<xf:item>
-																	<xf:label><![CDATA[ON]]></xf:label>
-																	<xf:value><![CDATA[on]]></xf:value>
-																</xf:item>
-																<xf:item>
-																	<xf:label><![CDATA[OFF]]></xf:label>
-																	<xf:value><![CDATA[off]]></xf:value>
-																</xf:item>
-															</xf:choices>
-														</xf:select1>
-													</xf:group>
-													<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
-														온도(℃)
-														<w2:attributes>
-															<w2:scope>row</w2:scope>
-														</w2:attributes>
-													</xf:group>
-													<xf:group tagname="td" style="" class="w2tb_td" id="">
-														<xf:select selectedindex="-1" id="T0_PK022_AUTO" appearance="full" style="margin-left: 10px;" cols="" rows="" ref="">
-															<xf:choices>
-																<xf:item>
-																	<xf:label><![CDATA[자동]]></xf:label>
-																	<xf:value><![CDATA[1]]></xf:value>
-																</xf:item>
-															</xf:choices>
-														</xf:select>
-													</xf:group>
-													<xf:group tagname="td" style="" class="w2tb_td" id="">
-														<xf:input adjustMaxLength="false" id="T0_PK022" style="" type="number" allowChar="0-9" maxlength="2" ref="data:dlt_BMS_FCLT_COND_PARAM_INFO.PK022"></xf:input>
+												<xf:group tagname="td" style="" class="w2tb_td" id="">
+													<xf:select selectedindex="-1" id="T0_PK002_AUTO" appearance="full" style="margin-left: 10px;width: 50px;" cols=""
+														rows="" ref="">
+														<xf:choices>
+															<xf:item>
+																<xf:label><![CDATA[자동]]></xf:label>
+																<xf:value><![CDATA[1]]></xf:value>
+															</xf:item>
+														</xf:choices>
+													</xf:select>
+												</xf:group>
+												<xf:group tagname="td" style="" class="w2tb_td" id="">
+													<xf:select1 allOption="" appearance="minimal" chooseOption="true" chooseOptionLabel="" direction="auto"
+														disabled="false" disabledClass="w2selectbox_disabled" id='T0_PK002' ref="data:dlt_BMS_FCLT_COND_PARAM_INFO.PK002" style=""
+														submenuSize="auto" ev:onviewchange="scwin.T0_PK002_onviewchange">
+														<xf:choices>
+															<xf:item>
+																<xf:label><![CDATA[ON]]></xf:label>
+																<xf:value><![CDATA[1]]></xf:value>
+															</xf:item>
+															<xf:item>
+																<xf:label><![CDATA[OFF]]></xf:label>
+																<xf:value><![CDATA[0]]></xf:value>
+															</xf:item>
+														</xf:choices>
+													</xf:select1>
+												</xf:group>
+												<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
+													희망 온도(℃)
+													<w2:attributes>
+														<w2:scope>row</w2:scope>
+													</w2:attributes>
+												</xf:group>
+												<xf:group tagname="td" style="" class="w2tb_td" id="">
+													<xf:select selectedindex="-1" id="T0_PK047_AUTO" appearance="full" style="margin-left: 10px;" cols="" rows="" ref="">
+														<xf:choices>
+															<xf:item>
+																<xf:label><![CDATA[자동]]></xf:label>
+																<xf:value><![CDATA[1]]></xf:value>
+															</xf:item>
+														</xf:choices>
+													</xf:select>
+												</xf:group>
+												<xf:group tagname="td" style="" class="w2tb_td" id="">
+													<xf:input adjustMaxLength="false" id="T0_PK047" style="text-align: right" type="number" allowChar="0-9." maxlength="4"
+														ref="data:dlt_BMS_FCLT_COND_PARAM_INFO.PK047" ev:onviewchange="scwin.T0_PK047_onviewchange"></xf:input>
+												</xf:group>
+											</xf:group>
+											<xf:group tagname="tr" style="height:5px;">
+												<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
+													온도(℃)
+													<w2:attributes>
+														<w2:scope>row</w2:scope>
+													</w2:attributes>
+												</xf:group>
+												<xf:group tagname="td" style="" class="w2tb_td" id="">
+													<xf:select selectedindex="-1" id="T0_PK022_AUTO" appearance="full" style="margin-left: 10px;" cols="" rows="" ref="">
+														<xf:choices>
+															<xf:item>
+																<xf:label><![CDATA[자동]]></xf:label>
+																<xf:value><![CDATA[1]]></xf:value>
+															</xf:item>
+														</xf:choices>
+													</xf:select>
+												</xf:group>
+												<xf:group tagname="td" style="" class="w2tb_td" id="">
+													<xf:input adjustMaxLength="false" id="T0_PK022" style="text-align: right;" type="number" allowChar="0-9." maxlength="4"
+														ref="data:dlt_BMS_FCLT_COND_PARAM_INFO.PK022" ev:onviewchange="scwin.T0_PK022_onviewchange" disabled="true"></xf:input>
+												</xf:group>
+												<xf:group tagname="th" style="height: 10px;" class="w2tb_th">
+													
+													<w2:attributes>
+														<w2:scope>row</w2:scope>
+													</w2:attributes>
+												</xf:group>
+												<xf:group tagname="td" style="" class="w2tb_td" id="">
+													
+												</xf:group>
+												<xf:group tagname="td" style="" class="w2tb_td" id="">
+													
+												</xf:group>
+											</xf:group>
+										</xf:group>
+									</xf:group>
+									
+									<xf:group style="overflow:auto; position:relative;" id="PEOPLECOUNT_FORM">
+										<xf:group style="" id="FM0204G3_ul" class="" tagname="ul">
+											<xf:group style="" id="" class="" tagname="li">
+												<xf:group tagname="ul">
+													<xf:group tagname="li">
+														<xf:group class="repeat" tagname="li">
+															<w2:textbox label="※제어 기능 제공하지 않음" style="" id="" tagname="strong" ref=""></w2:textbox>
+														</xf:group>
 													</xf:group>
 												</xf:group>
 											</xf:group>
 										</xf:group>
+									</xf:group>
 								</xf:group>
 							</xf:group>
 						</xf:group><!-- pgm_list2 end -->

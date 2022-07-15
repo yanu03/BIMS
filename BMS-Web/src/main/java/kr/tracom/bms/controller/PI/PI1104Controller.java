@@ -20,7 +20,7 @@ public class PI1104Controller extends ControllerSupport {
 	
 	@RequestMapping("/pi/PI1104G0R0")
 	public @ResponseBody Map<String, Object> PI1104G0R0() throws Exception {
-		result.setData("dlt_BMS_ED_INFO", pi1104Service.PI1104G0R0());
+		result.setData("dlt_BMS_TRAN_INFO", pi1104Service.PI1104G0R0());
 		return result.getResult();
 	}
 	
@@ -64,7 +64,7 @@ public class PI1104Controller extends ControllerSupport {
 	
 	@RequestMapping("/pi/PI1104G2R0")
 	public @ResponseBody Map<String, Object> PI1104G2R0() throws Exception {
-		result.setData("dlt_BMS_ED_RSV_RST_INFO", pi1104Service.PI1104G2R0());
+		result.setData("dlt_BMS_TRAN_RSV_RST_INFO", pi1104Service.PI1104G2R0());
 		return result.getResult();
 	}	
 	

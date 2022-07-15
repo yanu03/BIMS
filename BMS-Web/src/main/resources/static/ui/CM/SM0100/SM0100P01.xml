@@ -29,6 +29,7 @@
 						<w2:key id="DL_CD" name="상세코드" dataType="text"></w2:key>
 						<w2:key id="FOCUS" name="포커스" dataType="text"></w2:key>
 						<w2:key id="STATUS" name="상태" dataType="text"></w2:key>
+						<w2:key id="NUM_VAL5" name="속성5(숫자)" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 			</w2:dataCollection>
@@ -69,7 +70,12 @@
 		dma_search.set("STATUS", scwin.param.STATUS);
 		dma_search.set("CO_CD", scwin.param.CO_CD);
 		dma_search.set("DL_CD", scwin.param.DL_CD);
-				
+		dma_search.set("NUM_VAL5", scwin.param.NUM_VAL5);
+		DOOR_ALERT.hide();
+		
+		if(scwin.param.DL_CD == 'FK007'){
+			DOOR_ALERT.show("");
+		}
 		//$p.$("#image1").attr("src", dlt_BMS_DL_CD_IMG_INFO.getCellData(0, "IMG_PATH"));
 		
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
@@ -94,6 +100,7 @@
 		dlt_BMS_DL_CD_IMG_INFO.insertRow();
 		dlt_BMS_DL_CD_IMG_INFO.setCellData(0, "IMG_NM", real_fileName);
 		dlt_BMS_DL_CD_IMG_INFO.modifyAllStatus("R");
+		var num = dma_search.get("NUM_VAL5");
 		btn_upload.submit();
 		
 	};
@@ -113,11 +120,28 @@
 	 * 확인 버튼
 	 */
 	scwin.btn_confirm_onclick = function() {
-		dlt_BMS_DL_CD_IMG_INFO.setCellData(0, "FOCUS", dma_search.get("FOCUS"));
-		dlt_BMS_DL_CD_IMG_INFO.setCellData(0, "STATUS", dma_search.get("STATUS"));
+		var numVal5 = dma_search.get("NUM_VAL5");
+		var dlCd = dma_search.get("DL_CD");
 		
-		var data = dlt_BMS_DL_CD_IMG_INFO.getAllJSON();
-		com.closePopup(scwin.closeCallbackFncName, data);
+		if(dlCd == "FK007"){
+			if(numVal5 != '' && numVal5 != null){
+				dlt_BMS_DL_CD_IMG_INFO.setCellData(0, "FOCUS", dma_search.get("FOCUS"));
+				dlt_BMS_DL_CD_IMG_INFO.setCellData(0, "STATUS", dma_search.get("STATUS"));
+			
+				var data = dlt_BMS_DL_CD_IMG_INFO.getAllJSON();
+				com.closePopup(scwin.closeCallbackFncName, data);
+			}else{
+				com.alert("스크린도어는 상세코드 그리드의 속성5(숫자)를 입력해주시기 바랍니다.");
+				//com.closePopup(scwin.closeCallbackFncName, null);
+			}
+		}else{
+			dlt_BMS_DL_CD_IMG_INFO.setCellData(0, "FOCUS", dma_search.get("FOCUS"));
+			dlt_BMS_DL_CD_IMG_INFO.setCellData(0, "STATUS", dma_search.get("STATUS"));
+			
+			var data = dlt_BMS_DL_CD_IMG_INFO.getAllJSON();
+			com.closePopup(scwin.closeCallbackFncName, data);
+		}
+		
 	};
 		
 	/**
@@ -175,11 +199,11 @@
 							<xf:choices>
 								<xf:item>
 									<xf:label><![CDATA[기본]]></xf:label>
-									<xf:value><![CDATA[Y]]></xf:value>
+									<xf:value><![CDATA[N]]></xf:value>
 								</xf:item>
 								<xf:item>
 									<xf:label><![CDATA[선택]]></xf:label>
-									<xf:value><![CDATA[N]]></xf:value>
+									<xf:value><![CDATA[Y]]></xf:value>
 								</xf:item>
 							</xf:choices>
 						</xf:select1>
@@ -203,6 +227,9 @@
 							ev:onInputValueChange="scwin.upload0_onInputValueChange" ev:ondone="scwin.upload0_ondone" accept=".png,.jpg" title="" type=""
 							disabled="false" class="">
 						</w2:upload>
+					</xf:group>
+					<xf:group class="label" id="DOOR_ALERT" style="margin-left:10px;">
+						<w2:span class="" id="" label="※속성5(숫자)만큼 이미지가 업로드 됩니다."></w2:span>
 					</xf:group>
 					<!--<w2:wframe id="wfm_mainBtn" class="" style="" src="/cm/common/wf_popUpBtn.xml" scope="true"></w2:wframe> -->
 				</xf:group>

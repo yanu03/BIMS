@@ -10,7 +10,7 @@ public interface FM0204Mapper {
 
 	public List FM0204G0R0(Map param);
 	
-	public List FM0204G0R1();
+	public List FM0204G0R1(Map param);
 	
 	public List FM0204G0R2(Map param);
 	
