@@ -9,6 +9,30 @@
 		,A.DAY_DIV
 		,A.WAY_DIV
 		,B.REP_ROUT_NM
+	FROM BRT_OPER_PL_MST A
+		LEFT OUTER JOIN BMS_REP_ROUT_MST B
+		ON A.REP_ROUT_ID = B.REP_ROUT_ID
+	<where>
+		<if test="TYPE == 'ALL' and CONTENT != null and CONTENT != ''">
+			AND (B.REP_ROUT_ID LIKE CONCAT('%',#{CONTENT},'%') || B.REP_ROUT_NM LIKE CONCAT('%',#{CONTENT},'%'))
+		</if>
+		<if test="TYPE == 'REP_ROUT_ID'">
+			AND B.REP_ROUT_ID LIKE CONCAT('%',#{CONTENT},'%')
+		</if>
+		<if test="TYPE == 'REP_ROUT_NM'">
+			AND B.REP_ROUT_NM LIKE CONCAT('%',#{CONTENT},'%') 
+		</if>
+	</where>
+	GROUP BY
+		A.REP_ROUT_ID, A.DAY_DIV
+	ORDER BY
+		A.REP_ROUT_ID, A.DAY_DIV, A.WAY_DIV
+		
+	<!-- SELECT			
+		A.REP_ROUT_ID
+		,A.DAY_DIV
+		,A.WAY_DIV
+		,B.REP_ROUT_NM
 		,B.ROUT_TYPE
 		,(SELECT STTN_NM FROM BMS_STTN_MST WHERE STTN_ID = A.ST_STTN_ID AND DEL_YN!='Y') ST_STTN_NM
 		,(SELECT STTN_NM FROM BMS_STTN_MST WHERE STTN_ID = A.ED_STTN_ID AND DEL_YN!='Y') ED_STTN_NM
@@ -33,7 +57,7 @@
 	GROUP BY
 		C.ROUT_ID, A.DAY_DIV
 	ORDER BY
-		A.REP_ROUT_ID, A.DAY_DIV, A.WAY_DIV, C.ROUT_ID
+		A.REP_ROUT_ID, A.DAY_DIV, A.WAY_DIV, C.ROUT_ID -->
 </select>
 
 
@@ -42,6 +66,17 @@
 				,	ROUT_NM
 	FROM			BMS_ROUT_MST
 </select>
+
+<select id="AL0600SHI1" resultType="Map">
+	SELECT			ROUT_ID, ROUT_NM
+	FROM			BMS_ROUT_MST
+	WHERE			DEL_YN = 'N'	
+	AND 			WAY_DIV = #{WAY_DIV}
+	<if test="CONTENT1 != null">
+		AND			REP_ROUT_ID = #{CONTENT1}	
+	</if>
+	
+</select>	
 
 <select id="AL0600G1R0" resultType="Map" parameterType="Map">
 	SELECT
@@ -89,6 +124,23 @@
 			COUNT(*) CNT
 		FROM 
 			BRT_OPER_ALLOC_PL_NODE_INFO A
+		WHERE  
+			A.DAY_DIV = #{DAY_DIV} 
+			AND A.REP_ROUT_ID = #{REP_ROUT_ID}
+			AND A.WAY_DIV = #{WAY_DIV}
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(ROUT_ID)">
+				AND A.ROUT_ID = #{ROUT_ID} 
+			</if>
+			AND (A.NODE_TYPE = 'NT001' OR A.NODE_TYPE = 'NT002')
+		GROUP BY 
+			OPER_SN 
+		ORDER BY 
+			OPER_SN
+
+		<!-- SELECT 
+			COUNT(*) CNT
+		FROM 
+			BRT_OPER_ALLOC_PL_NODE_INFO A
 			INNER JOIN BMS_ROUT_NODE_CMPSTN B
 				ON	 A.ROUT_ID =  B.ROUT_ID AND A.NODE_ID = B.NODE_ID AND A.NODE_SN = B.NODE_SN
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(NODE_TYPE)">			 
@@ -98,7 +150,7 @@
 		GROUP BY 
 			OPER_SN 
 		ORDER BY 
-			OPER_SN
+			OPER_SN -->
 </select>
 
 

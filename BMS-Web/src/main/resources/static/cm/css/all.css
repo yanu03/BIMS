@@ -6529,7 +6529,8 @@ top: 52px;
 }
 
 /* 고병수 추가 */
-.station_display {width: 160px; padding: 5px; border: 1px solid #707070; border-radius: 5px; background-color: #303030;}
+/* .station_display {width: 160px; padding: 5px; border: 1px solid #707070; border-radius: 5px; background-color: #303030;} */
+.station_display {width: 130px; padding: 5px; border: 1px solid #707070; border-radius: 5px; background-color: #303030;}
 .station_display .mesage_wrap {background-color: #000000; border-radius: 2px;}
 .station_display .mesage_wrap .display_mesage {padding: 10px 0}
 .station_display .mesage_wrap .display_mesage span {font-size: 20px; font-weight: 800; text-align: center; width: 100%; display: block; color:white;}

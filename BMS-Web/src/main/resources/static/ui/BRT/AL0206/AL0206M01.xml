@@ -331,7 +331,7 @@
 		});
 				
 		//차트 그리는 부분
-		var param = com.getParameter();
+		var param = com.getParameter(); 
 		var ctx = document.getElementById('mf_tac_layout_contents_'+param.menuCode+'_body_high_chart');
 		var highChart = new Highcharts.ganttChart(ctx, {
 		  series: series,

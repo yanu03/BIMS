@@ -12,6 +12,8 @@ public interface AL0203Mapper {
 	
 	public List AL0203SHI0();
 	
+	public List AL0203SHI1(Map param);
+	
 	public List AL0203G1R0(Map param);
 	
 	public List AL0203G1CNT(Map param);

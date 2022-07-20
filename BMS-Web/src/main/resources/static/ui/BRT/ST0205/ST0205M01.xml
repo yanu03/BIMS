@@ -242,7 +242,7 @@
 			//바 데이터 정의
 			var barJsonData = new Object();
 			barJsonData.y = dlt_BRT_ROUT_AVER_OPER_SP_STAT.getCellData(x, "AVRG_SPD");
-			barJsonData.name = dlt_BRT_ROUT_AVER_OPER_SP_STAT.getCellData(x, "REP_ROUT_NM");
+			//barJsonData.name = dlt_BRT_ROUT_AVER_OPER_SP_STAT.getCellData(x, "REP_ROUT_NM");
 			barJsonData.repRoutId = dlt_BRT_ROUT_AVER_OPER_SP_STAT.getCellData(x, "REP_ROUT_ID");
 			barJsonData.color = colors[x];
 			barJsonData = JSON.stringify(barJsonData);
@@ -254,7 +254,7 @@
 			lineData[x] = dlt_BRT_ROUT_AVER_OPER_SP_STAT.getCellData(x, "MAX_SPD");
 			
 		}
-	
+	debugger;
 		var param = com.getParameter();
 		var ctx = document.getElementById('mf_tac_layout_contents_'+param.menuCode+'_body_chart_ST0205C0');
 		var highChart = new Highcharts.chart(ctx, {
@@ -335,7 +335,8 @@
 	scwin.drawLineChart_max = function(){
 		var xCategories = [];
 		var lineData = [];
-		var barData = new Array();
+		var barData = [];
+		//var barData = new Array();
 		var repRoutNm = dlt_BRT_ROUT_AVER_OPER_SP_STAT_C1.getCellData(0, 'REP_ROUT_NM');
 		
 		var rowCnt = dlt_BRT_ROUT_AVER_OPER_SP_STAT_C1.getRowCount();
@@ -345,8 +346,8 @@
 			//바 데이터 정의
 			var barJsonData = new Object();
 			barJsonData.y = dlt_BRT_ROUT_AVER_OPER_SP_STAT_C1.getCellData(x, "AVRG_SPD");
-			barJsonData.name = dlt_BRT_ROUT_AVER_OPER_SP_STAT_C1.getCellData(x, "ROUT_NM");
-			barJsonData.repRoutId = dlt_BRT_ROUT_AVER_OPER_SP_STAT_C1.getCellData(x, "REP_ROUT_ID");
+			//barJsonData.name = dlt_BRT_ROUT_AVER_OPER_SP_STAT_C1.getCellData(x, "ROUT_NM");
+			//barJsonData.repRoutId = dlt_BRT_ROUT_AVER_OPER_SP_STAT_C1.getCellData(x, "REP_ROUT_ID");
 			barJsonData.color = colors[x];
 			barJsonData = JSON.stringify(barJsonData);
 			

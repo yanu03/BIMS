@@ -267,9 +267,10 @@
 			{code : "LOG_LEVEL", compID : "LOG_LEVEL"}
 		 ];
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions, codeOptions);
+		
 		var mainSrhOptions = {
 		};		
-		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainSrhOptions, codeOptions);
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainSrhOptions, codeOptions);
 			
 		var subOptions2 = {
 			SAVE:[{cbFnc:scwin.fcltControl,nm:"전송", class:"send"}]
@@ -295,6 +296,30 @@
 		FM0204G3_grid.hide();
 		AIRTUBE_FORM.hide();
 		PEOPLECOUNT_FORM.hide();
+		
+		//'시설물 모니터링'에서 넘어온 값 체크
+		if(typeof(com.getParameter().paramObj) != 'undefined'){
+			var paramFcltKind = com.getParameter().paramObj.FCLT_KIND;
+			var paramFcltId = com.getParameter().paramObj.FCLT_ID;
+			if(paramFcltKind != '' && paramFcltId != ''){
+				$("#FM0204_TAB").find("li").removeClass("on");
+				
+				switch (paramFcltKind) {
+				case "FK005":
+					scwin.param_open("li_aircon", paramFcltId);
+					break;
+				case "FK007":
+					scwin.param_open("li_scndoor", paramFcltId);
+					break;
+				case "FK004":
+					scwin.param_open("li_airtube", paramFcltId);
+					break;
+				case "FK006":
+					scwin.param_open("li_peopleCnt", paramFcltId);
+					break;
+				}
+			}
+		}
 		
 		//탭 목록 클릭 이벤트
 		$("#FM0204_TAB").find("li").click( function() {
@@ -351,7 +376,66 @@
 			}
 		});
 		
+		
+		
 	};
+	
+	scwin.param_open = function(li_id, paramFcltId){
+		$("#FM0204_TAB").find("li").removeClass("on");
+		$("#FM0204_TAB").find("#"+li_id).addClass("on");
+		
+		if(li_id == "li_aircon") {
+			dma_search.set("FCLT_KIND", "FK005");
+			pgm_list.hide();
+			pgm_list2.show("");
+			FM0204G0_grid.show("");
+			FM0204G2_grid.hide();
+			FM0204G3_grid.hide();
+			AIRCON_FORM.show("");
+			AIRTUBE_FORM.hide();
+			PEOPLECOUNT_FORM.hide();
+			
+			com.executeSubmission(sub_FM0204G0R0);
+			
+		}
+		else if(li_id == "li_scndoor") {
+			dma_search.set("FCLT_KIND", "FK007");
+			pgm_list2.hide();
+			pgm_list.show("");
+			FM0204G1_grid.show("");
+			
+			com.executeSubmission(sub_FM0204G0R0);
+			
+		}
+		else if(li_id == "li_airtube") {
+			dma_search.set("FCLT_KIND", "FK004");
+			pgm_list.hide();
+			pgm_list2.show("");
+			FM0204G2_grid.show("");
+			FM0204G0_grid.hide();
+			FM0204G3_grid.hide();
+			AIRTUBE_FORM.show("");
+			AIRCON_FORM.hide();
+			PEOPLECOUNT_FORM.hide();
+			
+			com.executeSubmission(sub_FM0204G0R0);
+			
+		}
+		else if(li_id == "li_peopleCnt") {
+			dma_search.set("FCLT_KIND", "FK006");
+			pgm_list.hide();
+			pgm_list2.show("");
+			FM0204G3_grid.show("");
+			FM0204G0_grid.hide();
+			FM0204G2_grid.hide();
+			PEOPLECOUNT_FORM.show("");
+			AIRTUBE_FORM.hide();
+			AIRCON_FORM.hide();
+			
+			com.executeSubmission(sub_FM0204G0R0);
+			
+		}
+	}
 
 	scwin.onpageunload = function() {
 
@@ -471,6 +555,40 @@
 			break;
 		}
 		
+		//'시설물 모니터링'에서 받는 파라미터가 있다면 focus주기
+		var paramFcltId = com.getParameter().paramObj.FCLT_ID;
+		var paramFcltKind = com.getParameter().paramObj.FCLT_KIND;
+		
+		if(paramFcltId != '' && paramFcltKind != ''){ 
+			var index = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedIndex("FCLT_ID", paramFcltId)
+			if(index.length > 0){
+				switch (paramFcltKind) {
+				case "FK005":
+					FM0204G0.setFocusedCell(index[0], "FCLT_ID")
+					dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(index[0], 'chk', '1');
+					break;
+				case "FK007":
+					FM0204G1.setFocusedCell(index[0], "FCLT_ID")
+					//dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(index[0], 'chk', '1');
+					break;
+				case "FK004":
+					FM0204G2.setFocusedCell(index[0], "FCLT_ID")
+					dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(index[0], 'chk', '1');
+					break;
+				case "FK006":
+					FM0204G3.setFocusedCell(index[0], "FCLT_ID")
+					//dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(index[0], 'chk', '1');
+					break;
+				}
+			}else{
+				com.setFocusedCell(FM0204G0, "FCLT_ID");
+				dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(0, 'chk', '1');
+			}
+		}else{
+			com.setFocusedCell(FM0204G0, "FCLT_ID");
+			dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(0, 'chk', '1');
+		}
+		
 	};
 	
 	//동적 그리드 함수
@@ -588,21 +706,8 @@
 		}
 		
 		autoOptions.Main.grid = gridId;
-
-		//'시설물 모니터링'에서 받는 파라미터가 있다면 focus주기
-		if(com.isEmpty(com.getParameter("paramObj")) == false){
-			var index = dlt_BMS_FCLT_COND_PARAM_INFO.getMatchedIndex("FCLT_ID", com.getParameter("paramObj"))
-			if(index.length > 0){
-				FM0204G0.setFocusedCell(index[0], "FCLT_ID")
-				dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(index[0], 'chk', '1');
-			}else{
-				com.setFocusedCell(FM0204G0, "FCLT_ID");
-				dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(0, 'chk', '1');
-			}
-		}else{
-			com.setFocusedCell(FM0204G0, "FCLT_ID");
-			dlt_BMS_FCLT_COND_PARAM_INFO.setCellData(0, 'chk', '1');
-		}
+		
+		
 
 	};
 	
