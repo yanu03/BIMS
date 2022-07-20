@@ -478,6 +478,7 @@
 				{cbFnc:scwin.btn_sub_sel_mult_course,nm:"배차 코스 선택",class:"search"},
 				{cbFnc:scwin.btn_reInstall,nm:"재구성",class:"autoApply"},
 				{cbFnc:scwin.btn_add_cell,nm:"추가",class:"add"},
+				{cbFnc:scwin.btn_add_row,nm:"행추가",class:"add"},
 				{cbFnc:scwin.btn_del_cell,nm:"셀 삭제",class:"del"}
 			]
 			//SETTING:{cbFnc:scwin.popUp_chart,nm:"배차 시각화",class:"setting"}
@@ -516,6 +517,7 @@
 			
 			com.confirm(yesno_str, function(rtn) {
 				if (rtn) {
+					scwin.courseDtlToCourse();
 					com.executeSubmission(sub_AL0202G1S0);
 				}
 			});
@@ -547,6 +549,7 @@
 			}
 			oldroutSn = routSn;
 		}
+		dlt_BRT_OPER_ALLOC_PL_COR_INFO.modifyAllStatus("C");
 	}
 
 	scwin.AL0202G0_onrowindexchange = function(row, oldRow) {
@@ -841,19 +844,25 @@
 	
 	
 	scwin.insertOperRout = function(returnValue) {
+		debugger;
 		var focusIndex = AL0202G1.getFocusedRowIndex();
 		var index = parseInt(focusIndex/2);
+		var rIndex = scwin.getOperAllocIndexByView(focusIndex, AL0202G1.getFocusedColumnID());
 
-		dlt_OPER_ALLOC_PL_ROUT_INFO.setCellData(index,"ROUT_ID", returnValue[0].ROUT_ID);
-		dlt_OPER_ALLOC_PL_ROUT_INFO.setCellData(index,"ROUT_NM", returnValue[0].ROUT_NM);
-		dlt_OPER_ALLOC_PL_ROUT_INFO.setCellData(index,"OPER_SN", returnValue[0].OPER_SN);
-		dlt_OPER_ALLOC_PL_ROUT_INFO.setCellData(index,"ROUT_ST_TM", returnValue[0].ROUT_ST_TM);
-		dlt_OPER_ALLOC_PL_ROUT_INFO.setCellData(index,"ROUT_ED_TM", returnValue[0].ROUT_ED_TM);
+		if(com.isEmpty(returnValue[0].ROUT_ID)==false){
+			dlt_OPER_ALLOC_PL_ROUT_INFO.setCellData(rIndex,"ROUT_ID", returnValue[0].ROUT_ID);
+			dlt_OPER_ALLOC_PL_ROUT_INFO.setCellData(rIndex,"ROUT_NM", returnValue[0].ROUT_NM);
+		}
+		dlt_OPER_ALLOC_PL_ROUT_INFO.setCellData(rIndex,"OPER_SN", returnValue[0].OPER_SN);
+		dlt_OPER_ALLOC_PL_ROUT_INFO.setCellData(rIndex,"ROUT_ST_TM", returnValue[0].ROUT_ST_TM);
+		dlt_OPER_ALLOC_PL_ROUT_INFO.setCellData(rIndex,"ROUT_ED_TM", returnValue[0].ROUT_ED_TM);
+		dlt_OPER_ALLOC_PL_ROUT_INFO.setCellData(rIndex,"WAY_DIV", returnValue[0].WAY_DIV);
 		
-		scwin.setViewCellDataByFocus(focusIndex, AL0202G1.getFocusedColumnID(),"OPER_INFO_1", returnValue[0].ROUT_NM +"("+returnValue[0].OPER_SN+")");
-		scwin.setViewCellDataByFocus(focusIndex, AL0202G1.getFocusedColumnID(),"OPER_INFO_2", returnValue[0].ROUT_NM +"("+returnValue[0].OPER_SN+")");
+		scwin.setViewCellDataByFocus(focusIndex, AL0202G1.getFocusedColumnID(),"OPER_INFO_1", dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(rIndex,"ROUT_NM") +"("+returnValue[0].OPER_SN+")");
+		scwin.setViewCellDataByFocus(focusIndex, AL0202G1.getFocusedColumnID(),"OPER_INFO_2", dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(rIndex,"ROUT_NM") +"("+returnValue[0].OPER_SN+")");
+		
 		scwin.setViewCellDataByFocus(focusIndex+1, AL0202G1.getFocusedColumnID(),"OPER_INFO_1", returnValue[0].ROUT_ST_TM);
-		scwin.setViewCellDataByFocus(focusIndex+1, AL0202G1.getFocusedColumnID(),"OPER_INFO_2", returnValue[0].ROUT_ST_TM);
+		scwin.setViewCellDataByFocus(focusIndex+1, AL0202G1.getFocusedColumnID(),"OPER_INFO_2", returnValue[0].ROUT_ED_TM);
 	};
 
 	scwin.AL0202G1_onrightkeyup = function(row,col) {
@@ -895,11 +904,32 @@
 	
 	
 	scwin.setCourse = function(focusIndex, colViewIndex, data){
-		
+		debugger;
 		var index = parseInt(focusIndex/2);
 		var rIndex = scwin.getOperAllocIndexByView2(focusIndex, colViewIndex);
 		var allocOperCnt = scwin.getAllocCntData(index);
 		if((data.length+colViewIndex) > allocOperCnt){
+			var focusIndex = AL0202G0.getFocusedRowIndex();		
+			var dltBrtOperPlMst = dlt_BRT_OPER_PL_MST.getAllJSON();
+			var repRoutId = dltBrtOperPlMst[focusIndex].REP_ROUT_ID;
+			var repRoutNM = dltBrtOperPlMst[focusIndex].REP_ROUT_NM;
+			var dayDiv = dltBrtOperPlMst[focusIndex].DAY_DIV;
+			var routDiv = dltBrtOperPlMst[focusIndex].ROUT_DIV;
+			var wayYn = dltBrtOperPlMst[focusIndex].WAY_YN;
+			var wayAscNm = dltBrtOperPlMst[focusIndex].WAY_ASC_NM;
+			var wayDescNm = dltBrtOperPlMst[focusIndex].WAY_DESC_NM;
+				
+			var allocNo = index*1+1;
+			var rowData = {
+				REP_ROUT_ID : repRoutId,
+				REP_ROUT_NM : repRoutNM,
+				DAY_DIV : dayDiv,
+				WAY_ASC_NM : wayAscNm,
+				WAY_DESC_NM : wayDescNm,
+				ALLOC_NO : allocNo
+				//WAY_DIV : wayDiv
+			};
+			
 			for(var i = 0; i<data.length; i++){
 				if((colViewIndex + i) < allocOperCnt){
 					scwin.setOperAllocRowJsonData(rIndex+i, data[i]);
@@ -908,8 +938,11 @@
 				else{
 					scwin.insertOperAlloc(rIndex+i, data[i]);
 					scwin.insertCorDtl(rIndex+i, data[i]);
+					scwin.setOperAllocRowJsonData(rIndex+i,rowData);
+					scwin.setCorDtlRowJsonData(rIndex+i, rowData);
 				}
 			}
+				
 			OPER_CNT.setValue(dlt_OPER_ALLOC_PL_ROUT_INFO.getRowCount());
 			
 			//dlt_OPER_ALLOC_PL_ROUT_INFO.setCellData(AL0202G0.getFocusedRowIndex(), ", data)
@@ -965,7 +998,7 @@
 			}	
 			var color = dlt_OPER_ALLOC_PL_ROUT_INFO.getCellData(index, "COR_COLOR");
 		}
-		for(var j=i-1; j<allocOperCnt; j++){
+		for(var j=i; j<allocOperCnt; j++){
 			scwin.delOperAlloc(rIndex+j);
 		}
 	}
@@ -1334,6 +1367,72 @@
 		scwin.insertCorDtl(rIndex, rowData);
 		OPER_CNT.setValue(dlt_OPER_ALLOC_PL_ROUT_INFO.getRowCount());
 		scwin.setAllocCntData(index, allocOperCnt+1);
+		scwin.setGridExcelInfo(); //엑셀용 화면 및 데이터 구성
+		scwin.setGridViewInfo(); //그리드 화면 및 데이터 구성
+	}
+	
+	scwin.btn_add_row  = function() {
+		
+		//ST_WAY.setDisabled(false);
+		
+		var dltBrtOperPlRoutInfoAsc = dlt_BRT_OPER_PL_ROUT_INFO_ASC.getAllJSON();
+		var dltBrtOperPlRoutInfoDesc = dlt_BRT_OPER_PL_ROUT_INFO_DESC.getAllJSON();
+		
+		var allocCnt = ALLOC_CNT.getValue();
+
+		var operCnt = OPER_CNT.getValue();
+	
+		if((com.isEmpty(allocCnt)==false)&&(com.isEmpty(operCnt)==false)){
+			var columnCnt = parseInt(operCnt/allocCnt);
+			//dlt_OPER_ALLOC_PL_ROUT_INFO.removeAll();
+			//dlt_OPER_ALLOC_PL_ROUT_CNT.removeAll();
+			//dlt_VIEW_OPER_PL_ROUT_INFO.removeAll();
+			//dlt_EXL_OPER_PL_ROUT_INFO.removeAll();
+			//dlt_BRT_OPER_ALLOC_PL_COR_INFO.removeAll();
+			//dlt_BRT_OPER_ALLOC_PL_COR_DTL_INFO.removeAll();
+			var focusIndex = AL0202G0.getFocusedRowIndex();
+			
+			var dltBrtOperPlMst = dlt_BRT_OPER_PL_MST.getAllJSON();
+			var repRoutId = dltBrtOperPlMst[focusIndex].REP_ROUT_ID;
+			var repRoutNM = dltBrtOperPlMst[focusIndex].REP_ROUT_NM;
+			var dayDiv = dltBrtOperPlMst[focusIndex].DAY_DIV;
+			var routDiv = dltBrtOperPlMst[focusIndex].ROUT_DIV;
+			var wayYn = dltBrtOperPlMst[focusIndex].WAY_YN;
+			var wayAscNm = dltBrtOperPlMst[focusIndex].WAY_ASC_NM;
+			var wayDescNm = dltBrtOperPlMst[focusIndex].WAY_DESC_NM;
+				
+			var operIndex = 0;
+
+			var j=0;
+
+			var operAllocIndex = operCnt;
+			var allocNo = allocCnt*1+1;
+			for(j=0;j<columnCnt;j++){
+				var rowData = {
+					REP_ROUT_ID : repRoutId,
+					REP_ROUT_NM : repRoutNM,
+					DAY_DIV : dayDiv,
+					WAY_ASC_NM : wayAscNm,
+					WAY_DESC_NM : wayDescNm,
+					ALLOC_NO : allocNo
+					//WAY_DIV : wayDiv
+				};
+
+				
+				scwin.setOperAllocRowJsonData(operAllocIndex,rowData);
+				scwin.setCorDtlRowJsonData(operAllocIndex, rowData);
+				operAllocIndex++;
+				operIndex ++;
+				if(operIndex>=operCnt){
+					j++;
+					break;
+				}
+			}
+			scwin.setAllocCntData(allocCnt, 2);
+		}
+		allocCnt ++;
+		ALLOC_CNT.setValue(allocCnt);
+		debugger;
 		scwin.setGridExcelInfo(); //엑셀용 화면 및 데이터 구성
 		scwin.setGridViewInfo(); //그리드 화면 및 데이터 구성
 	}

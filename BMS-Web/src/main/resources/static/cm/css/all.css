@@ -1152,7 +1152,7 @@ ul.question li a:hover {font-weight:bold;}
     bottom: -12px;
     width: 22px;
     height: 12px;
-    background: url(/cm/images/tmap/vertex_white.png) no-repeat;
+    background: url(/cm/images/tmap/vertex_dark.svg) no-repeat;
 }
 
 .sttnInfopopup {
@@ -1173,14 +1173,15 @@ ul.question li a:hover {font-weight:bold;}
 }
 
 .busInfoPopup {
-    background: #ffffff;
+    background: #333333;
     position: absolute;
 /*     bottom: 57px;
     left:2px; */
     bottom: 42px;
     left: -178px;
-    border: 1px solid #888888;
-    border-top: 3px solid #A13E3E;
+    border-radius: 5px;
+    border-bottom: 2px solid #333333;
+    overflow: hidden;
     float: left;	
     /* position: absolute;
     left: 761px;
@@ -1191,6 +1192,7 @@ ul.question li a:hover {font-weight:bold;}
 .bustraffic {
 	left: 0px;
     top: 10px;
+    z-index: 10000000;	
 }
 
 .event_type {
@@ -1214,14 +1216,13 @@ ul.question li a:hover {font-weight:bold;}
 }
 
 .dsptchMessagePopup {
-    background: #ffffff;
+    background: #333333;
     position: absolute;
 /*     bottom: 57px;
     left:2px; */
     bottom: 42px;
     left: -180px;
-    border: 1px solid #888888;
-    border-top: 3px solid #A13E3E;
+    border-radius: 6px;
     float: left;	
     /* position: absolute;
     left: 761px;
@@ -1252,16 +1253,17 @@ ul.question li a:hover {font-weight:bold;}
 }
 
 .clickoverlay .tit {
-  padding: 10px 40px 10px 10px;
-  font-size: 12px;
-  background: #F6F6F6;
-  border-bottom: 1px solid #888888;
+	padding: 11px 11px 0;
+	/* padding: 14px 40px 14px 14px; */
+    font-size: 12px;
+    color: #ffffff;
+    background-color: #333333;
 }
 
 .clickoverlay #popup-refresh{
     right: 40px;
     background: url(/cm/images/tmap/layer_refresh.png) center center no-repeat;
-	  position: absolute;
+	position: absolute;
     width: 15px;
     height: 15px;
     top: 15px;
@@ -1282,7 +1284,7 @@ ul.question li a:hover {font-weight:bold;}
 }
 
 .clickoverlay #busInfo-closer{
-    background: url(/cm/images/tmap/layer_close_black.svg) center center no-repeat;
+    background: url(/cm/images/tmap/layer_close.svg) center center no-repeat;
 	position: absolute;
     width: 15px;
     height: 15px;
@@ -1307,30 +1309,25 @@ ul.question li a:hover {font-weight:bold;}
     max-height: 200px;
     overflow-y: auto;
 }
-.clickoverlay table {
-  border-collapse:collapse; 
-}
+
 .clickoverlay table.tby03 {
 	border-spacing: 0px;
 	width: 100%;
 }
+
 .clickoverlay table.tby03 th {
     padding: 8px 10px;
     background-color: #f3f5f8;
     font-weight: bold;
-    border: 1px solid #888888;
+    border: 1px solid #d2d2d2;
     text-align: center;
-    border-collapse: collapse;
-    border-spacing: 0px;
 }
 
 .clickoverlay table.tby03 td {
     padding: 8px 10px;
-    border: 1px solid #888888;
+    border: 1px solid #d2d2d2;
     background-color: #fff;
     word-break: break-all;
-    border-collapse: collapse;
-    border-spacing: 0px;
 }
 
 .rightclickoverlay {
@@ -1693,23 +1690,22 @@ ul.question li a:hover {font-weight:bold;}
     position: absolute;
     width: 210px;
     border-spacing: 0;
-    border-collapse: collapse;
+    border-radius: 5px;
     overflow: hidden;
-    border: 1px solid #888888;
-    box-shadow: 2px 2px 5px 0px rgb(0 0 0 / 25%);
+    border: 1px solid #333333;
 }
 .map_status th
 {
   padding: 7px;
+  background-color: #333333;
+  color: #ffffff;
   font-size: 12px;
   font-weight: bold;
-  border-top: 2px solid #A13E3E;
-  background-color: #F6F6F6;
 }
 
 .map_status td
 {
-    border: 1px solid #888888;
+    border: 1px solid #dddddd;
     padding: 7px;
     font-size: 12px;	
 }
@@ -1858,6 +1854,50 @@ ul.question li a:hover {font-weight:bold;}
 	background-image: url(/cm/images/tmap/trafficImage.png);
     /* background-size: 508px 492px;    */ 
 }
+
+
+.map_mesage, .map_info {box-sizing: border-box; position: relative;width: 360px; background-color: #ffffff; border: 1px solid #888888; box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.15);}
+.map_mesage::after, .map_info::after {content: ''; display: block; width: 22px; height: 12px; position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%); background: url('/cm/images/tmap/vertex_white.png') no-repeat;} 
+.dispatch, .mesage {height: 50px; padding:0 50px ; border-radius: 25px;}
+.map_mesage span {display: block; line-height: 46px; font-size: 14px !important; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+.event {box-sizing: border-box;}
+.map_mesage::before {display: block; width: 30px; height: 30px; position: absolute; border-radius: 100%; top: 50%; left: 10px; transform: translateY(-50%); line-height: 30px; text-align: center; color: #ffffff; font-weight: 800; }
+.dispatch::before {content: 'D'; background-color: #333333; font-size: 16px; }
+.mesage::before {content: '!'; background-color: #EB4545; font-size: 22px; }
+.map_mesage .close_mesage, .map_info .close_mesage {position: absolute; background: url('/bims/cm/images/tmap/layer_close.svg') no-repeat center; width: 30px; height: 30px; border: none; cursor: pointer;}
+.map_mesage .close_mesage {top: 50%; right: 10px; transform: translateY(-50%); }
+.map_info {padding: 20px; border-radius: 5px;}
+.map_info .action {display: inline-block; font-size: 14px; font-weight: 800;}
+.map_info .stay_sec {display: inline-block; color: #888888; margin-left: 10px;}
+.map_info .station_info {position: relative; margin-top: 10px;}
+.map_info .station_info::before {content: ''; display: block; width:3px; height: 25px; position: absolute; left: 5px; top: 50%; transform: translateY(-50%); background-color: #9BDAEE;}
+.map_info .station_info th {position: relative; padding-left: 16px; font-weight: 200; color: #888888; text-align: left;}
+.map_info .station_info th::before {content: ''; display: block; width: 9px; height: 9px; position: absolute; left: 0; top: 50%; transform: translateY(-50%); border-radius: 100%; background-color: #9BDAEE;}
+.map_info .event_mesage {background-color: #E9E9E9; padding: 10px; margin-top: 10px;}
+.map_info .event_mesage dd {margin: 0; display: block; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;}
+.map_info .close_mesage {top: 10px; right: 10px;}
+.cross_info {width: 160px; padding: 5px; border: 1px solid #707070; background-color: #303030; border-radius: 5px;}
+.cross_info .info_wrap {background-color: #000000; border-radius: 2px;}
+.cross_info .info_wrap .cross_img {width: 100%; height: 80px; display: block;}
+.cross_info .info_wrap .cross_mesages {padding: 5px 0}
+.cross_info .info_wrap .cross_mesages span {font-size: 20px; font-weight: 800; text-align: center; width: 100%; display: block;}
+.cross_info .info_wrap .cross_mesages .tx_green {color:#11FF00}
+.cross_info .info_wrap .cross_mesages .tx_red {color:#FF5151}
+.cross_info .info_wrap .cross_mesages .tx_yellow {color:#F7FF00}
+.map_icon {width: 360px; background-color: #ffffff; border-radius: 5px; border: 1px solid #888888;}
+.map_icon ul {display: flex; justify-content: space-between; }
+.map_icon ul li {width: calc(100% / 4); padding: 20px 0; text-align: center; border-right: 1px solid #888888;}
+.map_icon ul li:last-child {border: none;}
+.map_icon ul li img {width: 20px; height: 20px;}
+.map_icon ul li .icon_name {margin-top: 10px;}
+.station_display {width: 160px; padding: 5px; border: 1px solid #707070; border-radius: 5px; background-color: #303030;}
+.station_display .mesage_wrap {background-color: #000000; border-radius: 2px;}
+.station_display .mesage_wrap .display_mesage {padding: 10px 0}
+.station_display .mesage_wrap .display_mesage span {font-size: 20px; font-weight: 800; text-align: center; width: 100%; display: block; color:white;}
+.station_display .mesage_wrap .display_mesage .powerOnDiv span {font-size: 20px; font-weight: 800; text-align: center; width: 100%; display: block; color:white;}
+.station_display .mesage_wrap .display_mesage .tx_green {color:#11FF00}
+.station_display .mesage_wrap .display_mesage .tx_red {color:#FF5151}
+.station_display .mesage_wrap .display_mesage .tx_yellow {color:#F7FF00}
 
 
 
