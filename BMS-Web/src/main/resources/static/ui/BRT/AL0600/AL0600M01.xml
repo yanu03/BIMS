@@ -516,7 +516,7 @@
 		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRID2, autoOptions, mainSrhOptions, codeOptions);
 
 		var subOptions2 = {
-			SEARCH:[{cbFnc:scwin.openPopUpChart,nm:"거리 시공도 보기"}
+			SEARCH:[{cbFnc:scwin.openPopUpChart,nm:"거리 시공도 보기",class:"search"}
 			]
 		};
 
@@ -579,7 +579,6 @@
 	};
 	
 	scwin.setGridViewInfo = function() {
-		debugger;
 		var gridHeader ="", gridBody="";
 		var rowData = dlt_BRT_OPER_ALLOC_RL_NODE_INFO.getAllJSON();
 		var rowCntArr = dlt_BRT_OPER_ALLOC_PL_NODE_CNT.getAllJSON();

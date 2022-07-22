@@ -817,7 +817,11 @@ FROM BRT_OPER_ALLOC_PL_NODE_INFO A
 		AND F.OPER_DT BETWEEN #{F_DATE} AND #{L_DATE}
 	WHERE 
 		A.DAY_DIV = #{DAY_DIV} 
-		AND A.ROUT_ID = #{ROUT_ID}
+		AND A.REP_ROUT_ID = #{REP_ROUT_ID}
+		AND A.WAY_DIV = #{WAY_DIV}
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(ROUT_ID)">			 
+			AND A.ROUT_ID = #{ROUT_ID}
+		</if>
 		AND (A.NODE_TYPE = 'NT001'|| A.NODE_TYPE = 'NT002')
 	GROUP BY 
 		OPER_SN, NODE_SN
@@ -860,11 +864,28 @@ FROM BRT_OPER_ALLOC_PL_NODE_INFO A
 			COUNT(*) CNT
 		FROM 
 			BRT_OPER_ALLOC_PL_NODE_INFO A
+		WHERE  
+			A.DAY_DIV = #{DAY_DIV} 
+			AND A.REP_ROUT_ID = #{REP_ROUT_ID}
+			AND A.WAY_DIV = #{WAY_DIV}
+			<if test="@kr.tracom.util.CommonUtil@notEmpty(ROUT_ID)">
+				AND A.ROUT_ID = #{ROUT_ID} 
+			</if>
+			AND (A.NODE_TYPE = 'NT001' OR A.NODE_TYPE = 'NT002')
+		GROUP BY 
+			OPER_SN 
+		ORDER BY 
+			OPER_SN
+		
+		<!-- SELECT 
+			COUNT(*) CNT
+		FROM 
+			BRT_OPER_ALLOC_PL_NODE_INFO A
 		WHERE  A.DAY_DIV = #{DAY_DIV} AND A.ROUT_ID = #{ROUT_ID} AND (A.NODE_TYPE = 'NT001'|| A.NODE_TYPE = 'NT002')
 		GROUP BY 
 			OPER_SN
 		ORDER BY 
-			OPER_SN
+			OPER_SN -->
 </select>
 
 	<select id="selectCourseList" resultType="Map">

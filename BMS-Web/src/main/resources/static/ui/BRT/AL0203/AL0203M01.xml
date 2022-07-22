@@ -361,7 +361,7 @@
 		
 		var rowIndex = 0;
 		var rowCnt = 0;
-		
+
 		for(var i = 0; i < rowCntArr.length; i++) {
 			var j = 0;
 			rowIndex += rowCnt;
@@ -493,7 +493,7 @@
 			com.openPopup("/cm/common/popUpChart.xml", options, data);
 		
 		}else{
-			com.alert("운행계획을 선택해주세요.");
+			com.alert("운행순번을 선택해주세요.");
 		}
 		
 	};
@@ -608,7 +608,7 @@
 					</xf:group>
 				</xf:group>
 			</xf:group>
-			<xf:group id="pgm_content" class="pgm_content grdc_3f_20_7f" style="">
+			<xf:group id="pgm_content" class="pgm_content grdc_3f_0_7f" style="">
 				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
 					<xf:group id="" class="" style="">
 						<xf:group class="defaultbox" id="" style="">
@@ -748,7 +748,7 @@
 				<xf:group class="pgm_detail grdr_20_50_a bms_box_wrap">
 					<xf:group id="" class="gr_sub_header" style="">
 						<xf:group class="defaultbox" id="" style="">
-							<w2:textbox class="df_tt fl list ico-list" id="" label="운행계획 상세" style=""></w2:textbox>
+							<w2:textbox class="df_tt fl view" id="" label="운행계획 상세" style=""></w2:textbox>
 							<w2:span label="※정류소-빨강, 교차로-파랑" style="width: 100px;height: 23px; margin-left:10px;" id=""></w2:span>
 						</xf:group>
 					</xf:group>

@@ -63,7 +63,7 @@
 
 <select id="AL0203SHI0" resultType="Map">
 	SELECT			REP_ROUT_NM
-				,	ROUT_NM
+				,	REP_ROUT_ID
 	FROM			BMS_ROUT_MST
 </select>
 
