@@ -45,6 +45,7 @@
 						<w2:key id="TYPE" name="name1" dataType="text"></w2:key>
 						<w2:key id="CONTENT" name="name2" dataType="text"></w2:key>
 						<w2:key id="USE_YN" name="name3" dataType="text"></w2:key>
+						<w2:key id="CO_CD" name="공통코드" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
 				<w2:dataMap baseNode="map" id="dma_searchitem">
@@ -58,7 +59,7 @@
 				</w2:dataMap>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
-			<xf:submission id="sub_FM0100IMG" ref="" target="data:json,dlt_BMS_DL_CD_IMG_INFO" action="/img/selectImgPath" method="post"
+			<xf:submission id="sub_FM0100IMG" ref="data:json,dma_search" target="data:json,dlt_BMS_DL_CD_IMG_INFO" action="/common/selectCommonDtlImg" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_FM0100IMG_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -66,7 +67,7 @@
 		<script type="text/javascript" lazy="false"><![CDATA[
         
 	scwin.onpageload = function() {
-
+		debugger;
 		scwin.param = com.getParameter();
 		dma_searchitem.set("FCLT_ID", scwin.param.FCLT_ID);   
 		dma_searchitem.set("FCLT_KIND", scwin.param.FCLT_KIND);   
@@ -76,9 +77,17 @@
 		
 		scwin.closeCallbackFncName = scwin.param.callbackFn;
 		
+		dma_search.set("CO_CD", "FCLT_KIND");
 		//이미지 경로 불러오는 submission
 		com.executeSubmission(sub_FM0100IMG);
+        
+	};
+	
+	scwin.onpageunload = function() {
 		
+	};
+	
+	scwin.sub_FM0100IMG_submitdone = function(e) {
 		//정류소 이미지 경로 설정
 		if(dma_searchitem.get("STTN_FCLT_TYPE") == 'ST002'){
 			document.getElementById(STTN_IMG.getID()).className = "ST002_station_1";
@@ -98,7 +107,7 @@
 	         var str = ""
 	         var imgSrc = ""
 	         
-	         if(fcltKind == 'FK001'){
+	         /*if(fcltKind == 'FK001'){
 	            imgSrc = "/cm/images/bms/BIT_RED_normal.png";
 	         }else if(fcltKind == 'FK004'){
 	            imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
@@ -108,9 +117,65 @@
 	            imgSrc = "/cm/images/bms/ClosedDoor.gif";
 	         }else if(fcltKind == 'FK006'){
 	            imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
-	         }
+	         }*/
 	         
-	         str += '<div id="'+fcltId+'"style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group " onmousedown="startDrag(event, this)">';
+	        //DB저장한 이미지 불러오기  dlt_BMS_DL_CD_IMG_INFO
+			if(fcltKind == 'FK004'){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC020"){
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}else if(fcltKind == 'FK005'){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC020"){
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}else if(fcltKind == 'FK007'){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC025"){
+						//imgSrc = "/cm/images/bms/ClosedDoor.gif";
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}else if(fcltKind == 'FK006'){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC020"){
+						//imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}else if(fcltKind == 'FK010'){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC020"){
+						//imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}else if(fcltKind == 'FK011'){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC020"){
+						//imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}
+			
+	         
+	        str += '<div id="'+fcltId+'"style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group " onmousedown="startDrag(event, this)">';
 	        if(fcltKind == 'FK004'){
 				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgSrc+'" id="'+fcltId+'">';
 			}else{
@@ -170,51 +235,89 @@
 		$("#"+fcltId).on("click", function(e) {
  			e.stopPropagation();
  		});*/
-		
-		
-		
-        
-	};
-	
-	scwin.onpageunload = function() {
-		
-	};
-	
-	scwin.sub_FM0100IMG_submitdone = function(e) {
-		
 	};
 	
 	function clickImg(){
 		var str = ''
-		var imgPath = ''
+		var imgSrc = ''
 		var left = event.offsetX;
 		var top = event.offsetY;
 		var fcltKind = dma_searchitem.get('FCLT_KIND');
 		var fcltId = dma_searchitem.get("FCLT_ID") + '_popup';
 		var imgId = fcltId + 'img';
 		
-		if(fcltKind == 'FK001'){
-			imgPath = "/cm/images/bms/BIT_RED_normal.png";
+		/*if(fcltKind == 'FK001'){
+			imgSrc = "/cm/images/bms/BIT_RED_normal.png";
 		}else if(fcltKind == 'FK004'){
-			imgPath = "/cm/images/bms/AIRTUBE_normal.png";
+			imgSrc = "/cm/images/bms/AIRTUBE_normal.png";
 		}else if(fcltKind == 'FK005'){
-			imgPath = "/cm/images/bms/AIRCON_normal.png";
+			imgSrc = "/cm/images/bms/AIRCON_normal.png";
 		}else if(fcltKind == 'FK007'){
-			imgPath = "/cm/images/bms/ClosedDoor.gif";
+			imgSrc = "/cm/images/bms/ClosedDoor.gif";
 		}else if(fcltKind == 'FK006'){
-			imgPath = "/cm/images/bms/PEOPLECOUNT_normal.png";
-		}
+			imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
+		}*/
 		
-		/* 저장한 이미지 경로 가져오기 - 수정필요
-		var test = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
-		imgPath = "C:/sbrt-web" + test[0].IMG_PATH;
-		*/
+		 //DB저장한 이미지 불러오기  dlt_BMS_DL_CD_IMG_INFO
+			if(fcltKind == 'FK004'){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC020"){
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}else if(fcltKind == 'FK005'){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC020"){
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}else if(fcltKind == 'FK007'){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC025"){
+						//imgSrc = "/cm/images/bms/ClosedDoor.gif";
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}else if(fcltKind == 'FK006'){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC020"){
+						//imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}else if(fcltKind == 'FK010'){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC020"){
+						//imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}else if(fcltKind == 'FK011'){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC020"){
+						//imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}
 		
 		str += '<div id="'+fcltId+'" style="position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group " onmousedown="startDrag(event, this)">';
 		if(fcltKind == 'FK004'){
-			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgPath+'" id="'+fcltId+'">';
+			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgSrc+'" id="'+fcltId+'">';
 		}else{
-			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgPath+'" id="'+fcltId+'">';
+			str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'">';
 		}
 		str += '</div>'
 		

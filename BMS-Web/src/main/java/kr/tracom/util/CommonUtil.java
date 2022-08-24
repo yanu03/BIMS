@@ -471,7 +471,7 @@ public class CommonUtil {
 	public static double objectToDouble(Object object) {
 		double result = 0;
 		try {
-			result = (object==null||((String)object).isEmpty())?0:Double.parseDouble((String)object);
+			result = (object==null)?0:Double.parseDouble((String)object);
 		}catch (Exception e) {
 			result = 0;
 		}

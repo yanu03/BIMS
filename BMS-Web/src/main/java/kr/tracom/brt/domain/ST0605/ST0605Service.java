@@ -28,6 +28,11 @@ public class ST0605Service extends ServiceSupport {
 		return ST0605Mapper.ST0605SHI0();
 	}
 	
+	public List ST0605SHI1() throws Exception{
+		Map param = getSimpleDataMap("dma_search");		
+		return ST0605Mapper.ST0605SHI1(param);
+	}	
+	
 	public List ST0605G1R0() throws Exception {
 		// TODO Auto-generated method stub
 		Map param = getSimpleDataMap("dma_sub_search");

@@ -25,14 +25,14 @@ public interface CurInfoMapper {
     Map<String, Object> selectCurAllocPlInfoByOperVhcId(Map<String, Object> paramMap);
     int minAllocNoCurAllocPlInfo(Map<String, Object> params);
 
-	String getCurNearAllocPlInfo(Map<String, Object> paramMap);
-	String getCurNearAllocPlInfo2(Map<String, Object> paramMap);
+	String selectCurNearAllocPlInfo(Map<String, Object> paramMap);
+	String selectCurNearAllocPlInfo2(Map<String, Object> paramMap);
     int insertCurAllocPlInfo(Map<String, Object> paramMap);
     int updateOperVhcIdCurAllocPlInfo(Map<String, Object> paramMap);
     
     Map<String, Object> selectCurOperAllocPlRouteInfo(Map<String, Object> paramMap);
     
     String getEventCode(Map<String, Object> paramMap);
-    String selectCurNearAllocPl3(Map<String, Object> params);
+    String selectCurNearAllocPlInfo3(Map<String, Object> params);
 
 }

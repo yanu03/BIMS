@@ -234,7 +234,9 @@
 					dealsDataRota.from = Date.UTC(year, month-1, day, stHour, stMin);
 					dealsDataRota.to = Date.UTC(year, month-1, day, edHour, edMin);
 					
-					dealsRota.push(dealsDataRota);
+					if(dealsDataRota.vhcNo != ''){ //배차가 안되어 있다면 no push
+						dealsRota.push(dealsDataRota);
+					}
 				}else{
 					//1교대 데이터
 					if(rotaCnt == corCnt){
@@ -272,21 +274,27 @@
 					dealsData.from = Date.UTC(year, month-1, day, stHour, stMin);
 					dealsData.to = Date.UTC(year, month-1, day, edHour, edMin);
 					
-					deals.push(dealsData);
+					if(dealsData.vhcNo != ''){ //배차가 안되어 있다면 no push
+						deals.push(dealsData);
+					}
 				}
 			}
 			
 			//1교대
 			carsData.deals = deals
-			cars.push(carsData);
+			if(carsData.deals.length > 0){
+				cars.push(carsData);
+			}
 			
 			//2교대
 			carsDataRota.deals = dealsRota
-			carsRota.push(carsDataRota);
+			if(carsDataRota.deals.length > 0){
+				carsRota.push(carsDataRota);
+			}
 			
 		};
 		
-		var newCars = cars.concat(carsRota)
+		var newCars = cars.concat(carsRota);
 		
 		// Parse newCars data into series.
 		series = newCars.map(function(car, i) {
@@ -331,7 +339,7 @@
 		});
 				
 		//차트 그리는 부분
-		var param = com.getParameter();
+		var param = com.getParameter(); 
 		var ctx = document.getElementById('mf_tac_layout_contents_'+param.menuCode+'_body_high_chart');
 		var highChart = new Highcharts.ganttChart(ctx, {
 		  series: series,

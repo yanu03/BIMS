@@ -12,6 +12,8 @@ public interface AL0600Mapper {
 	
 	public List AL0600SHI0();
 	
+	public List AL0600SHI1(Map param);
+	
 	public List AL0600G1R0(Map param);
 	
 	public List AL0600G1CNT(Map param);

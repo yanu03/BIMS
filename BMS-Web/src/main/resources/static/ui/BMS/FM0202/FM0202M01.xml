@@ -800,10 +800,25 @@
 		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions, codeOptions);	
 			
 		var subOptions = {
-			SEARCH:[{cbFnc:scwin.sttnMoveCtrlClick,nm:"상태 및 제어",class:"gear"}]
+			SEARCH:[{cbFnc:scwin.airconMoveCtrlClick,nm:"상태 및 제어",class:"gear"}]
 		};		
 		
-		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);	
+		com.setSubBtn2(wfm_airconBtn, autoOptions, subOptions);	
+		
+		var subOptions = {
+			SEARCH:[{cbFnc:scwin.scndoorMoveCtrlClick,nm:"상태 및 제어",class:"gear"}]
+		};
+		com.setSubBtn2(wfm_scndoorBtn, autoOptions, subOptions);	
+		
+		var subOptions = {
+			SEARCH:[{cbFnc:scwin.airtubeMoveCtrlClick,nm:"상태 및 제어",class:"gear"}]
+		};
+		com.setSubBtn2(wfm_airtubeBtn, autoOptions, subOptions);	
+		
+		var subOptions = {
+			SEARCH:[{cbFnc:scwin.ppcMoveCtrlClick,nm:"상태 및 제어",class:"gear"}]
+		};
+		com.setSubBtn2(wfm_ppcBtn, autoOptions, subOptions);	
 		
 		var subOptions = {
 			SEARCH:[{cbFnc:scwin.crsMoveCtrlClick,nm:"상태 및 제어",class:"gear"}]
@@ -1510,7 +1525,7 @@
 						break;
 					}
 				}
-			}else if(fcltKind == 'FK006' && (fcltCond == '0' || fcltCond == '')){
+			}else if(fcltKind == 'FK006' && (fcltCond == '1' || fcltCond == '')){
 				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
 				for(var x = 0; x < imgJson.length; x++){
 					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC020"){
@@ -1519,7 +1534,43 @@
 						break;
 					}
 				}
-			}else if(fcltKind == 'FK006' && (fcltCond == '1' || fcltCond == '')){
+			}else if(fcltKind == 'FK006' && (fcltCond == '0' || fcltCond == '')){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC021"){
+						//imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}else if(fcltKind == 'FK010' && (fcltCond == '1' || fcltCond == '')){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC020"){
+						//imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}else if(fcltKind == 'FK010' && (fcltCond == '0' || fcltCond == '')){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC021"){
+						//imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}else if(fcltKind == 'FK011' && (fcltCond == '0' || fcltCond == '')){
+				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
+				for(var x = 0; x < imgJson.length; x++){
+					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC020"){
+						//imgSrc = "/cm/images/bms/PEOPLECOUNT_normal.png";
+						imgSrc = imgJson[x].IMG_PATH;
+						break;
+					}
+				}
+			}else if(fcltKind == 'FK011' && (fcltCond == '1' || fcltCond == '')){
 				var imgJson = dlt_BMS_DL_CD_IMG_INFO.getMatchedJSON("DL_CD", fcltKind);
 				for(var x = 0; x < imgJson.length; x++){
 					if(imgJson[x].FOCUS == "N" && imgJson[x].STATUS == "FC021"){
@@ -1533,7 +1584,9 @@
 			//시설물 이미지
 			str += '<div id="'+fcltId+'" style="z-index: 1; position: absolute; top:'+top+'px; left: '+left+'px;" class="w2group fclt_img" onclick="imgOnclick_FM0202(this.id);">';
 			if(fcltKind == 'FK004'){
-				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:16px" src="'+imgSrc+'" id="'+fcltId+'img_FM0202'+'">';
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:11px" src="'+imgSrc+'" id="'+fcltId+'img_FM0202'+'">';
+			}else if(fcltKind == 'FK010'){
+				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:35px" src="'+imgSrc+'" id="'+fcltId+'img_FM0202'+'">';
 			}else{
 				str += '<img xmlns="http://www.w3.org/1999/xhtml" style="" src="'+imgSrc+'" id="'+fcltId+'img_FM0202'+'">';
 			}
@@ -1571,6 +1624,23 @@
 			str +=  '</div>';				
 				
 				
+					
+			}
+			
+			//바이러스체크장치면 세균맨 이미지 추가
+			if(fcltKind == 'FK011') {
+				str +=	'<div id="virus_'+fcltId+'_FM0202" class="" style="position: absolute; z-index: 1; top:'+(parseInt(top)-30)+'px; left:'+(parseInt(left)+18)+'px">';
+				if(fcltCond == "1") {
+					str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:35px" src="/cm/images/bms/goodAir_normal.png" id="'+fcltId+'img_FM0202'+'">';
+				}
+				else if (fcltCond == "0") {
+					str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:35px" src="/cm/images/bms/badAir_normal.png" id="'+fcltId+'img_FM0202'+'">';
+				}
+				else if (fcltCond == "") {
+					str += '<img xmlns="http://www.w3.org/1999/xhtml" style="width:35px" src="/cm/images/bms/goodAir_normal.png" id="'+fcltId+'img_FM0202'+'">';
+				}
+
+			str +=  '</div>';				
 					
 			}
 			
@@ -1701,7 +1771,7 @@
 				switch (oldFcltKind) {
 				case 'FK004':
 					$('#'+oldFcltId+'img_FM0202').attr("src", imgSrc);
-					$('#'+oldFcltId+'img_FM0202').css("width", '16px');
+					$('#'+oldFcltId+'img_FM0202').css("width", '11px');
 					break;
 					
 				case 'FK005':
@@ -1747,7 +1817,7 @@
 				case 'FK004':
 					//$('#'+oldFcltId+'img_FM0202').attr("src", '/cm/images/bms/AIRTUBE_normal.png');
 					$('#'+oldFcltId+'img_FM0202').attr("src", imgSrc);
-					$('#'+oldFcltId+'img_FM0202').css("width", '16px');
+					$('#'+oldFcltId+'img_FM0202').css("width", '11px');
 					break;
 					
 				case 'FK005':
@@ -1800,7 +1870,7 @@
 				switch (oldFcltKind) {
 				case 'FK004':
 					$('#'+oldFcltId+'img_FM0202').attr("src", imgSrc);
-					$('#'+oldFcltId+'img_FM0202').css("width", '16px');
+					$('#'+oldFcltId+'img_FM0202').css("width", '11px');
 					break;
 					
 				case 'FK005':
@@ -1843,7 +1913,7 @@
 			}
 		
 			$('#'+fcltID+'img_FM0202').attr("src", imgSrc);
-			$('#'+fcltID+'img_FM0202').css("width", '24px');
+			$('#'+fcltID+'img_FM0202').css("width", '16px');
 			if(oldFcltId != ''){
 				var oldFcltJson = dlt_BMS_FCLT_INFO.getMatchedJSON("FCLT_ID", oldFcltId);
 				var oldFcltKind = oldFcltJson[0].FCLT_KIND;
@@ -1861,7 +1931,7 @@
 				switch (oldFcltKind) {
 				case 'FK004':
 					$('#'+oldFcltId+'img_FM0202').attr("src", imgSrc);
-					$('#'+oldFcltId+'img_FM0202').css("width", '16px');
+					$('#'+oldFcltId+'img_FM0202').css("width", '11px');
 					break;
 					
 				case 'FK005':
@@ -1887,7 +1957,7 @@
 				}
 			}
 			$('#'+fcltID+'img_FM0202').attr("src", imgSrc);
-			$('#'+fcltID+'img_FM0202').css("width", '24px');
+			$('#'+fcltID+'img_FM0202').css("width", '16px');
 			if(oldFcltId != ''){
 				var oldFcltJson = dlt_BMS_FCLT_INFO.getMatchedJSON("FCLT_ID", oldFcltId);
 				var oldFcltKind = oldFcltJson[0].FCLT_KIND;
@@ -1905,7 +1975,7 @@
 				switch (oldFcltKind) {
 				case 'FK004':
 					$('#'+oldFcltId+'img_FM0202').attr("src", imgSrc);
-					$('#'+oldFcltId+'img_FM0202').css("width", '16px');
+					$('#'+oldFcltId+'img_FM0202').css("width", '11px');
 					break;
 					
 				case 'FK005':
@@ -1964,7 +2034,7 @@
 				switch (oldFcltKind) {
 				case 'FK004':
 					$('#'+oldFcltId+'img_FM0202').attr("src", imgSrc);
-					$('#'+oldFcltId+'img_FM0202').css("width", '16px');
+					$('#'+oldFcltId+'img_FM0202').css("width", '11px');
 					break;
 					
 				case 'FK005':
@@ -2007,7 +2077,7 @@
 				switch (oldFcltKind) {
 				case 'FK004':
 					$('#'+oldFcltId+'img_FM0202').attr("src", imgSrc);
-					$('#'+oldFcltId+'img_FM0202').css("width", '16px');
+					$('#'+oldFcltId+'img_FM0202').css("width", '11px');
 					break;
 					
 				case 'FK005':
@@ -2199,23 +2269,48 @@
 		}
 	};
 	
-	scwin.sttnMoveCtrlClick = function() {
-		var airconFcltId = dlt_BMS_AIRCON_FCLT_INFO.getCellData(FM0202G2.getFocusedRowIndex(), "FCLT_ID");
-		var scndoorFcltId = dlt_BMS_SCRDOOR_FCLT_INFO.getCellData(FM0202G3.getFocusedRowIndex(), "FCLT_ID");
-		var airtubeFcltId = dlt_BMS_AIRTUBE_FCLT_INFO.getCellData(FM0202G4.getFocusedRowIndex(), "FCLT_ID");
-		var plecntFcltId = dlt_BMS_PLECNT_FCLT_INFO.getCellData(FM0202G5.getFocusedRowIndex(), "FCLT_ID");
+	scwin.airconMoveCtrlClick = function() {
+		var ariconJson = dlt_BMS_AIRCON_FCLT_INFO.getRowJSON(FM0202G2.getFocusedRowIndex());
 		
-		if(airconFcltId != null && airconFcltId != ''){
-			scwin.openMenu("정류소 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",airconFcltId);
-		}else if(scndoorFcltId != null && scndoorFcltId != ''){
-			scwin.openMenu("정류소 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",scndoorFcltId);
-		}else if(airtubeFcltId != null && airtubeFcltId != ''){
-			scwin.openMenu("정류소 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",airtubeFcltId);
-		}else if(plecntFcltId != null && plecntFcltId != ''){
-			scwin.openMenu("정류소 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",plecntFcltId);
+		if(ariconJson.FCLT_KIND != ''){
+			scwin.openMenu("정류소 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",ariconJson);
 		}else{
 			com.alert("시설물을 선택해주세요.");
 		}
+		
+	};
+	
+	scwin.scndoorMoveCtrlClick = function() {
+		var scndoorJson = dlt_BMS_SCRDOOR_FCLT_INFO.getRowJSON(FM0202G3.getFocusedRowIndex());
+		
+		if(scndoorJson.FCLT_KIND != ''){
+			scwin.openMenu("정류소 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",scndoorJson);
+		}else{
+			com.alert("시설물을 선택해주세요.");
+		}
+		
+	};
+	
+	scwin.airtubeMoveCtrlClick = function() {
+		var airtubeJson = dlt_BMS_AIRTUBE_FCLT_INFO.getRowJSON(FM0202G4.getFocusedRowIndex());
+		
+		if(airtubeJson.FCLT_KIND != ''){
+			scwin.openMenu("정류소 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",airtubeJson);
+		}else{
+			com.alert("시설물을 선택해주세요.");
+		}
+		
+	};
+	
+	scwin.ppcMoveCtrlClick = function() {
+		var plecntJson = dlt_BMS_PLECNT_FCLT_INFO.getRowJSON(FM0202G5.getFocusedRowIndex());
+		
+		if(plecntJson.FCLT_KIND != ''){
+			scwin.openMenu("정류소 상태 및 제어","/ui/BMS/FM0204/FM0204M01.xml", "MN00040402",plecntJson);
+		}else{
+			com.alert("시설물을 선택해주세요.");
+		}
+		
 	};
 	
 	scwin.crsMoveCtrlClick = function() {
@@ -2511,7 +2606,7 @@
 						<xf:group class="defaultbox" id="" style="">
 							<w2:textbox class="df_tt fl view" id="" label="시설물 상태" style=""></w2:textbox>
 						</xf:group>
-						<w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
+						<!-- <w2:wframe id="wfm_subBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe> -->
 					</xf:group>
 					
 					<!-- 정류소 이미지 -->
@@ -2538,8 +2633,11 @@
 					
 					<xf:group id="pgm_subList2" class="pgm_subList grdc_1f_20_1f_20_1f_20_1f" style="">
 						<xf:group id="" class="pgm_subList grdr_20_a" style="">
-							<xf:group class="defaultbox" id="" style="">
-								<w2:textbox class="df_tt fl list" id="" label="에어컨 " style=""></w2:textbox>
+							<xf:group class="gr_map_header" id="" style="">
+								<xf:group class="defaultbox" id="" style="">
+									<w2:textbox class="df_tt fl list" id="" label="에어컨 " style=""></w2:textbox>
+								</xf:group>
+								<w2:wframe id="wfm_airconBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 							</xf:group>
 							<xf:group id="FM0202G2_grid" class="" style="">
 								<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
@@ -2588,8 +2686,11 @@
 						<xf:group style="" id=""></xf:group>
 
 						<xf:group id="" class="pgm_subList grdr_20_a" style="">
-							<xf:group class="defaultbox" id="" style="">
-								<w2:textbox class="df_tt fl list" id="" label="스크린도어 " style=""></w2:textbox>
+							<xf:group class="gr_map_header" id="" style="">
+								<xf:group class="defaultbox" id="" style="">
+									<w2:textbox class="df_tt fl list" id="" label="스크린도어 " style=""></w2:textbox>
+								</xf:group>
+								<w2:wframe id="wfm_scndoorBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 							</xf:group>
 							<xf:group id="FM0202G3_grid" class="" style="">
 								<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
@@ -2638,8 +2739,11 @@
 						<xf:group style="" id=""></xf:group>
 
 						<xf:group id="" class="pgm_subList grdr_20_a" style="">
-							<xf:group class="defaultbox" id="" style="">
-								<w2:textbox class="df_tt fl list" id="" label="에어튜브" style=""></w2:textbox>
+							<xf:group class="gr_map_header" id="" style="">
+								<xf:group class="defaultbox" id="" style="">
+									<w2:textbox class="df_tt fl list" id="" label="에어튜브" style=""></w2:textbox>
+								</xf:group>
+								<w2:wframe id="wfm_airtubeBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 							</xf:group>
 							<xf:group id="FM0202G4_grid" class="" style="">
 								<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
@@ -2686,8 +2790,11 @@
 						</xf:group>
 						<xf:group style="" id=""></xf:group>
 						<xf:group id="" class="pgm_subList grdr_20_a" style="">
-							<xf:group class="defaultbox" id="" style="">
-								<w2:textbox class="df_tt fl list" id="" label="승객감지장치 " style=""></w2:textbox>
+							<xf:group class="gr_map_header" id="" style="">
+								<xf:group class="defaultbox" id="" style="">
+									<w2:textbox class="df_tt fl list" id="" label="승객감지장치" style=""></w2:textbox>
+								</xf:group>
+								<w2:wframe id="wfm_ppcBtn" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 							</xf:group>
 							<xf:group id="FM0202G5_grid" class="" style="">
 								<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
