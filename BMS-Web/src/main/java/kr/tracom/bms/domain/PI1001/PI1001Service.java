@@ -87,7 +87,7 @@ public class PI1001Service extends ServiceSupport {
 		} catch(Exception e) {
 			if (e instanceof DuplicateKeyException)
 			{
-				throw new MessageException(Result.ERR_KEY, "중복된 키값의 데이터가 존재합니다.");
+				throw new MessageException(Result.ERR_KEY, "");
 			}
 			else
 			{

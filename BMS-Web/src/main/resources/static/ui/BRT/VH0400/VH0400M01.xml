@@ -95,6 +95,7 @@
 						<w2:column id="NODE_ID" name="name27" dataType="text"></w2:column>
 						<w2:column id="LINK_ID" name="name28" dataType="text"></w2:column>
 						<w2:column id="NODE_SN" name="name29" dataType="text"></w2:column>
+						<w2:column id="UPD_DTM" name="업데이트일시" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 			</w2:dataCollection>
@@ -667,6 +668,9 @@
 									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column12"
 										value="발생일시" blockSelect="false" displayMode="label">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column12"
+										value="업데이트일시" blockSelect="false" displayMode="label">
+									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column11"
 										value="차량번호" blockSelect="false" displayMode="label">
 									</w2:column>
@@ -739,6 +743,9 @@
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="OCR_DTM"
+										value="" blockSelect="false" displayMode="label">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="UPD_DTM"
 										value="" blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="VHC_NO"

@@ -6,7 +6,7 @@
 	(SELECT				DATE_FORMAT(A.OPER_DT, '%Y-%m-%d') OPER_DT
 					,	A.REP_ROUT_ID
 					,	A.VHC_ID
-					,	A.UPD_DTM
+					,	DATE_FORMAT(A.UPD_DTM, '%Y-%m-%d %H:%i:%s') UPD_DTM
 					,	A.VHC_NO
 					,	A.DRV_ID
 					,	A.COR_ID
@@ -51,15 +51,15 @@
 	WHERE				A.OPER_DT IS NOT NULL
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
 			<!-- <![CDATA[AND A.OPER_DT >= #{F_DATE}]]> -->
-			<![CDATA[AND A.UPD_DTM >= #{F_DATE}]]>
+			<![CDATA[AND DATE_FORMAT(A.UPD_DTM, '%Y%m%d') >= #{F_DATE}]]>
 		</if>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
 			<!-- <![CDATA[AND A.OPER_DT <= #{L_DATE}]]> -->
-			<![CDATA[AND A.UPD_DTM <= #{L_DATE}]]>
+			<![CDATA[AND DATE_FORMAT(A.UPD_DTM, '%Y%m%d') <= #{L_DATE}]]>
 		</if>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
 			<!-- AND A.OPER_DT between #{F_DATE} and #{L_DATE} -->
-			AND A.UPD_DTM between #{F_DATE} and #{L_DATE}
+			AND DATE_FORMAT(A.UPD_DTM, '%Y%m%d') between #{F_DATE} and #{L_DATE}
 		</if>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT1)">
 				AND A.REP_ROUT_ID = #{CONTENT1}
@@ -78,7 +78,7 @@ UNION
 	(SELECT				DATE_FORMAT(A.OPER_DT, '%Y-%m-%d') OPER_DT
 					,	A.REP_ROUT_ID
 					,	A.VHC_ID
-					,	A.UPD_DTM
+					,	DATE_FORMAT(A.UPD_DTM, '%Y-%m-%d %H:%i:%s') UPD_DTM
 					,	A.VHC_NO
 					,	A.DRV_ID
 					,	A.COR_ID
@@ -134,17 +134,20 @@ UNION
 				AND A.EVT_TYPE = #{CONTENT4}
 		</if>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
-			<![CDATA[AND A.OPER_DT >= #{F_DATE}]]>
+			<!-- <![CDATA[AND A.OPER_DT >= #{F_DATE}]]> -->
+			<![CDATA[AND DATE_FORMAT(A.UPD_DTM, '%Y%m%d') >= #{F_DATE}]]>
 		</if>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
-			<![CDATA[AND A.OPER_DT <= #{L_DATE}]]>
+			<!-- <![CDATA[AND A.OPER_DT <= #{L_DATE}]]> -->
+			<![CDATA[AND DATE_FORMAT(A.UPD_DTM, '%Y%m%d') <= #{L_DATE}]]>
 		</if>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
-			AND A.OPER_DT between #{F_DATE} and #{L_DATE}
+			<!-- AND A.OPER_DT between #{F_DATE} and #{L_DATE} -->
+			AND DATE_FORMAT(A.UPD_DTM, '%Y%m%d') between #{F_DATE} and #{L_DATE}
 		</if>
 	)
 ORDER BY
-	OPER_DT DESC, OCR_DTM DESC
+	UPD_DTM DESC, OPER_DT DESC, OCR_DTM DESC
 </select>
 
 <select id="VH0400EVT" parameterType="Map" resultType="Map">
