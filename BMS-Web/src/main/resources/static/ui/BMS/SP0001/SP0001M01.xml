@@ -1065,11 +1065,20 @@
 //		dsptchMsg += '</div> </div>'
 //		dsptchMsg += '</div></div>'	
 		
+		/*
+		//디스패치 메세지
 		dsptchMsg += '<div class="dispatch map_mesage">';
 		dsptchMsg += '  <h3 class="blind">디스패치 메시지</h3>'
 		dsptchMsg += '   <span>디스패치 관련 안내글입니다.</span>'
 		dsptchMsg += '   <button class="close_mesage ir_pm">닫기</button> '
 		dsptchMsg += '</div>'		 
+		*/
+		
+		//차고지 출발 오버레이
+		dsptchMsg += '<div class="mesage map_mesage2">';
+		dsptchMsg += '<h3 class="blind"></h3>';
+		dsptchMsg += '<span>차고지출발</span>';
+		dsptchMsg += '<button class=close_mesage ir_pm"></button>';
 		
 		
 		sampleDsptchOverlay = new kakao.maps.CustomOverlay({

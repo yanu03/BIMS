@@ -50,13 +50,16 @@
 	ON 					A.NODE_ID = G.NODE_ID
 	WHERE				A.OPER_DT IS NOT NULL
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@empty(L_DATE)">
-			<![CDATA[AND A.OPER_DT >= #{F_DATE}]]>
+			<!-- <![CDATA[AND A.OPER_DT >= #{F_DATE}]]> -->
+			<![CDATA[AND A.UPD_DTM >= #{F_DATE}]]>
 		</if>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE) and @kr.tracom.util.CommonUtil@empty(F_DATE)">
-			<![CDATA[AND A.OPER_DT <= #{L_DATE}]]>
+			<!-- <![CDATA[AND A.OPER_DT <= #{L_DATE}]]> -->
+			<![CDATA[AND A.UPD_DTM <= #{L_DATE}]]>
 		</if>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE)">
-			AND A.OPER_DT between #{F_DATE} and #{L_DATE}
+			<!-- AND A.OPER_DT between #{F_DATE} and #{L_DATE} -->
+			AND A.UPD_DTM between #{F_DATE} and #{L_DATE}
 		</if>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT1)">
 				AND A.REP_ROUT_ID = #{CONTENT1}
