@@ -71,7 +71,7 @@ public class SI0801Service extends ServiceSupport{
 		int iCnt = 0;
 		int uCnt = 0;
 		int dCnt = 0;
-		List param = getSimpleList("dlt_BMS_FCLT_SCH_INFO");
+		List param = getSimpleList("dlt_BMS_FCLT_SCH_CFG_INFO");
 		Map sub_param = getSimpleDataMap("dma_sub_search");
 		
 		try {

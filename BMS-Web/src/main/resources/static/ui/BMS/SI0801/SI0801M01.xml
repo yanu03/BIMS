@@ -34,7 +34,7 @@
 					</w2:columnInfo>
 					<w2:data use="false"></w2:data>
 				</w2:dataList>
-				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_FCLT_SCH_INFO" saveRemovedData="true">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_FCLT_SCH_CFG_INFO" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="SN" name="순번" dataType="text"></w2:column>
 						<w2:column id="FCLT_KIND" name="시설물종류" dataType="text"></w2:column>
@@ -97,11 +97,11 @@
 				replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="저장중입니다..." ev:submit=""
 				ev:submitdone="scwin.sub_SI0801G0S0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_SI0801G1R0" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_FCLT_SCH_INFO" action="/si/SI0801G1R0"
+			<xf:submission id="sub_SI0801G1R0" ref="data:json,dma_sub_search" target="data:json,dlt_BMS_FCLT_SCH_CFG_INFO" action="/si/SI0801G1R0"
 				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
 				processMsg="" ev:submit="" ev:submitdone="scwin.sub_SI0801G1R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_SI0801G1S0" ref='data:json,[{"action":"modified","id":"dlt_BMS_FCLT_SCH_INFO"},"dma_sub_search"]'
+			<xf:submission id="sub_SI0801G1S0" ref='data:json,[{"action":"modified","id":"dlt_BMS_FCLT_SCH_CFG_INFO"},"dma_sub_search"]'
 				target="data:json,dma_result" action="/si/SI0801G1S0" method="post" mediatype="application/json" encoding="UTF-8" instance=""
 				replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="저장중입니다..." ev:submit=""
 				ev:submitdone="scwin.sub_SI0801G1S0_submitdone" ev:submiterror="" abortTrigger="">
@@ -157,15 +157,15 @@
 	scwin.subGridUp = function(){
 		var idx = SI0801G1.getFocusedRowIndex();
 		com.getGridViewDataList(SI0801G1).rowMoveUp(idx);
-		dlt_BMS_FCLT_SCH_INFO.setCellData(idx, "SN", idx+1);
-		dlt_BMS_FCLT_SCH_INFO.setCellData(idx-1, "SN", idx);
+		dlt_BMS_FCLT_SCH_CFG_INFO.setCellData(idx, "SN", idx+1);
+		dlt_BMS_FCLT_SCH_CFG_INFO.setCellData(idx-1, "SN", idx);
 	}
 	
 	scwin.subGridDown = function(){
 		var idx = SI0801G1.getFocusedRowIndex();
 		com.getGridViewDataList(SI0801G1).rowMoveDown(idx);
-		dlt_BMS_FCLT_SCH_INFO.setCellData(idx+1, "SN", idx+2);
-		dlt_BMS_FCLT_SCH_INFO.setCellData(idx, "SN", idx+1);
+		dlt_BMS_FCLT_SCH_CFG_INFO.setCellData(idx+1, "SN", idx+2);
+		dlt_BMS_FCLT_SCH_CFG_INFO.setCellData(idx, "SN", idx+1);
 	}
 	
 	//서브 추가버튼
@@ -176,11 +176,11 @@
 			return;
 		}else{
 			com.addGrid2(SI0801G1,"ST_TIME");
-			var sn = dlt_BMS_FCLT_SCH_INFO.getCellData(SI0801G1.getFocusedRowIndex()-1, "SN");
+			var sn = dlt_BMS_FCLT_SCH_CFG_INFO.getCellData(SI0801G1.getFocusedRowIndex()-1, "SN");
 			if(sn != null && sn != ''){
-				dlt_BMS_FCLT_SCH_INFO.setCellData(SI0801G1.getFocusedRowIndex(), "SN", parseInt(sn)+1);
+				dlt_BMS_FCLT_SCH_CFG_INFO.setCellData(SI0801G1.getFocusedRowIndex(), "SN", parseInt(sn)+1);
 			}else{
-				dlt_BMS_FCLT_SCH_INFO.setCellData(SI0801G1.getFocusedRowIndex(), "SN", 1);
+				dlt_BMS_FCLT_SCH_CFG_INFO.setCellData(SI0801G1.getFocusedRowIndex(), "SN", 1);
 			}
 			
 		}
@@ -205,10 +205,10 @@
 			com.saveGrid(SI0801G1, sub_SI0801G1S0);
 			
 			/*if (com.validateGridView(SI0801G1)) {
-				var rowCount = dlt_BMS_FCLT_SCH_INFO.getRowCount();
+				var rowCount = dlt_BMS_FCLT_SCH_CFG_INFO.getRowCount();
 				
 				for(var i = 0; i < rowCount; i++){
-					rowStatus[i] = dlt_BMS_FCLT_SCH_INFO.getRowStatus(i);
+					rowStatus[i] = dlt_BMS_FCLT_SCH_CFG_INFO.getRowStatus(i);
 				}
 				
 				for(var j = 0; j < rowStatus.length; j++){
@@ -333,7 +333,7 @@
 		var autoYn = dlt_BMS_FCLT_PARAM_CFG_INFO.getCellData(row, "AUTO_YN");
 		if(autoYn == 'Y'){
 			SI0801G1.setDisabled("grid", true);
-			dlt_BMS_FCLT_SCH_INFO.removeAll();
+			dlt_BMS_FCLT_SCH_CFG_INFO.removeAll();
 			wfm_subBtn.setDisabled(true);
 			wfm_subBtn.setOpacity(0.5);
 		}else{
@@ -458,18 +458,18 @@
 		var value = info.value;
 		if(value == 'Y'){
 			SI0801G1.setDisabled("grid", true);
-			//dlt_BMS_FCLT_SCH_INFO.removeAll();
-			dlt_BMS_FCLT_SCH_INFO.modifyAllStatus("D");
+			//dlt_BMS_FCLT_SCH_CFG_INFO.removeAll();
+			dlt_BMS_FCLT_SCH_CFG_INFO.modifyAllStatus("D");
 			wfm_subBtn.setDisabled(true);
 			wfm_subBtn.setOpacity(0.5);
-			var rowCnt = dlt_BMS_FCLT_SCH_INFO.getRowCount();
+			var rowCnt = dlt_BMS_FCLT_SCH_CFG_INFO.getRowCount();
 			if(rowCnt > 0){
 				
 			}
 			dlt_BMS_FCLT_PARAM_CFG_INFO.setCellData(SI0801G0.getFocusedRowIndex(), "SCHEDULE_YN", "N");
 		}else{
 			SI0801G1.setDisabled("grid", false);
-			dlt_BMS_FCLT_SCH_INFO.modifyAllStatus("R");
+			dlt_BMS_FCLT_SCH_CFG_INFO.modifyAllStatus("R");
 			wfm_subBtn.setDisabled(false);
 			wfm_subBtn.setOpacity(1);
 			dlt_BMS_FCLT_PARAM_CFG_INFO.setCellData(SI0801G0.getFocusedRowIndex(), "SCHEDULE_YN", "Y");
@@ -841,7 +841,7 @@
 
 									<xf:group id="" class="" style="">
 										<w2:gridView alwaysTriggerScrollStart="" autoFit="lastColumn" autoFitMinWidth="0" captionTitle=""
-											checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_FCLT_SCH_INFO" disabledScrollHidden="" editModeEvent=""
+											checkEditableInputClass="" class="cm_grid right" dataList="data:dlt_BMS_FCLT_SCH_CFG_INFO" disabledScrollHidden="" editModeEvent=""
 											editModeEventIcon="" enterKeyMove="" ev:onafteredit="" ev:onbeforecolumnmove="" ev:oncellclick="" ev:oneditkeyup="" ev:onkeyup=""
 											ev:onrowindexchange="" ev:ontextimageclick="" ev:onviewchange="" excludeDeletedRows="" fixedColumnWithHidden="true" focusMode="row"
 											id="SI0801G1" ignoreCellClick="false" ignoreNonEditableCellTabEnter="" keepDefaultColumnWidth="" keyMoveEditMode=""

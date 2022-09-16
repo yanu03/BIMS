@@ -354,6 +354,9 @@ public class SI0402Service extends ServiceSupport {
 						data.put("LINK_NM",linkNm);
 						double len = DataInterface.getDistanceBetween(CommonUtil.decimalToDouble(data.get("GPS_X")), CommonUtil.decimalToDouble(data.get("GPS_Y")), 
 								CommonUtil.decimalToDouble(data2.get("GPS_X")), CommonUtil.decimalToDouble(data2.get("GPS_Y")));
+						short bearing = DataInterface.bearingP1toP2(CommonUtil.decimalToDouble(data.get("GPS_X")), CommonUtil.decimalToDouble(data.get("GPS_Y")), 
+								CommonUtil.decimalToDouble(data2.get("GPS_X")), CommonUtil.decimalToDouble(data2.get("GPS_Y")));
+						data.put("BEARING",bearing);
 						
 						if(i==0) {
 							data.put("ACCRU_LEN",0);

@@ -334,25 +334,41 @@
 	 * 같은 레벨의 노트에 장치를 추가한다.
 	 */
 	scwin.equalLevel = function() {
-		debugger;
+		
 		var focusedRowIndex = VD0100G0.getFocusedRealRowIndex();
 		var parentId = dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "PARENT_ID");
 		var rowIndexArr = dlt_BMS_DVC_INFO.getMatchedIndex("PARENT_ID", parentId, true, 0, dlt_BMS_DVC_INFO.getTotalRow());
 		var DvcLevel = WebSquare.util.getNumber(dlt_BMS_DVC_INFO.getCellData(rowIndexArr[rowIndexArr.length - 1], "LEVEL"));
-		//var sortOrder = WebSquare.util.getNumber(dlt_BMS_DVC_INFO.getCellData(rowIndexArr[rowIndexArr.length - 1], "SORT")) + 1;
 		var insertRowIndex = scwin.getInsertRowIndex(parentId);
-		//var menuCd = scwin.getInsertRowMenuCd(parentId, DvcLevel, false);
-		
-		var insertJson = [{
-			"DVC_ID" : dma_SEQ_BMS_DVC_INFO_0.get("SEQ"),
-			"PARENT_ID" : parentId,
-			"LEVEL" : DvcLevel,
-			"VHC_ID" : dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "VHC_ID"),
-			"VHC_NO" : dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "VHC_NO")
-			//"SORT" : sortOrder
-		}];
-		
-		dlt_BMS_DVC_INFO.insertJSON(insertRowIndex, insertJson);
+		debugger;
+		if(DvcLevel == 1){
+			//var sortOrder = WebSquare.util.getNumber(dlt_BMS_DVC_INFO.getCellData(rowIndexArr[rowIndexArr.length - 1], "SORT")) + 1;
+			//var menuCd = scwin.getInsertRowMenuCd(parentId, DvcLevel, false);
+			
+			var insertJson = [{
+				"DVC_ID" : dma_SEQ_BMS_DVC_INFO_0.get("SEQ"),
+				"PARENT_ID" : parentId,
+				"LEVEL" : DvcLevel,
+				//"SORT" : sortOrder
+			}];
+			
+			dlt_BMS_DVC_INFO.insertJSON(insertRowIndex, insertJson);
+		}
+		else {
+			//var sortOrder = WebSquare.util.getNumber(dlt_BMS_DVC_INFO.getCellData(rowIndexArr[rowIndexArr.length - 1], "SORT")) + 1;
+			//var menuCd = scwin.getInsertRowMenuCd(parentId, DvcLevel, false);
+			
+			var insertJson = [{
+				"DVC_ID" : dma_SEQ_BMS_DVC_INFO_0.get("SEQ"),
+				"PARENT_ID" : parentId,
+				"LEVEL" : DvcLevel,
+				"VHC_ID" : dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "VHC_ID"),
+				"VHC_NO" : dlt_BMS_DVC_INFO.getCellData(focusedRowIndex, "VHC_NO")
+				//"SORT" : sortOrder
+			}];
+			
+			dlt_BMS_DVC_INFO.insertJSON(insertRowIndex, insertJson);
+		}
 		//dlt_BMS_DVC_INFO.setCellData(insertRowIndex, "USE_YN", 'Y');
 		VD0100G0.setFocusedCell(insertRowIndex, "DVC_ID", true);
 

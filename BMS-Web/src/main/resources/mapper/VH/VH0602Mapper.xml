@@ -30,8 +30,8 @@
 		
 
 	<where>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(TYPE1)">
-				AND A.REP_ROUT_ID = #{TYPE1}
+		<if test="TYPE1 == 'ROUT_MODE'">
+				AND A.REP_ROUT_ID = #{CONTENT1}
 		</if>			
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT1)">
 				AND B.CRS_NM LIKE CONCAT('%', #{CONTENT1}, '%')
