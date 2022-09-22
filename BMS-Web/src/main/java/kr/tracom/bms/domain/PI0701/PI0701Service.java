@@ -25,6 +25,9 @@ public class PI0701Service extends ServiceSupport {
 	
 	@Value("${fileupload.up.directory}")
 	private String UPLOAD_DIR;
+	
+	@Value("${sftp.destination.tempDirectory}")
+	private String TEMP_DESTINATION;
 
 	public List PI0701G0R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
@@ -72,7 +75,7 @@ public class PI0701Service extends ServiceSupport {
 		
 		//선택한 노선의 정보, fileNM
 		Map<String, Object> map_param = getSimpleDataMap("dma_ROUT_MST");
-		String path = "temp/destination/"+map_param.get("SELECTED_DL").toString()+"/";
+		String path = TEMP_DESTINATION+map_param.get("SELECTED_DL").toString()+"/";
 		String fileNM = map_param.get("FILE_NM").toString();
 		String schFileNM = map_param.get("SCH_FILE_NM").toString();
 		

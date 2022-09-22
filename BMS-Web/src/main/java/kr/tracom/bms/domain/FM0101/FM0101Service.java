@@ -92,5 +92,40 @@ public class FM0101Service extends ServiceSupport {
 		return FM0101Mapper.FM0101G3R0(param);
 	}
 	
+	public Map FM0101G3S0() throws Exception {
+		int iCnt = 0;
+		int uCnt = 0;
+		int dCnt = 0;		
+		
+		List<Map<String, Object>> param = getSimpleList("dlt_BMS_FCLT_SCH_INFO");
+		try {
+			for (int i = 0; i < param.size(); i++) {
+				Map data = (Map) param.get(i);
+				String rowStatus = (String) data.get("rowStatus");
+				if (rowStatus.equals("C")) {
+					iCnt += FM0101Mapper.FM0101G3I0(data);
+				} else if (rowStatus.equals("U")) {
+					uCnt += FM0101Mapper.FM0101G3U0(data);
+				} else if (rowStatus.equals("D")) {
+					dCnt += FM0101Mapper.FM0101G3D0(data);
+				} 
+			}			
+		} catch(Exception e) {
+			if (e instanceof DuplicateKeyException)
+			{
+				throw new MessageException(Result.ERR_KEY, "중복된 키값의 데이터가 존재합니다.");
+			}
+			else
+			{
+				throw e;
+			}		
+		}
+
+		
+		Map result = saveResult(iCnt, uCnt, dCnt);
+		
+		return result;		
+	}	
+	
 
 }

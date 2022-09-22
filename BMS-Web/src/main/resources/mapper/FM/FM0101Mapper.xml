@@ -80,15 +80,87 @@
 		,REMARK
 		,DATE_FORMAT(UPD_DTM, '%Y-%m-%d') UPD_DTM
 		,UPD_ID
+		,SN AS OLD_SN
+		,NODE_ID
+		,FCLT_ID
 	FROM 
 		BMS_FCLT_SCH_INFO
 	WHERE
 		FCLT_KIND = #{FCLT_KIND} 
 		AND PARAM_DIV = #{PARAM_DIV} 
 		AND PARAM_KIND = #{PARAM_KIND}
+		AND FCLT_ID = #{FCLT_ID}
 	ORDER BY
 		SN
 </select>
+
+<insert id="FM0101G3I0" parameterType="Map">
+	INSERT INTO		BMS_FCLT_SCH_INFO	
+					(
+						NODE_ID
+					,	FCLT_ID
+					,	FCLT_KIND
+					,	PARAM_DIV
+					,	PARAM_KIND
+					,	SN
+					,	ST_TIME
+					,	ED_TIME
+					,	DATA_VAL
+					,	REMARK
+					,	UPD_DTM
+					,	UPD_ID			
+					)
+					
+	VALUES			(
+						#{NODE_ID}
+					,	#{FCLT_ID}
+					,	#{FCLT_KIND}
+					,	#{PARAM_DIV}
+					,	#{PARAM_KIND}
+					,	#{SN}
+					,	#{ST_TIME}
+					,	#{ED_TIME}
+					,	#{DATA_VAL}
+					,	#{REMARK}
+					,	#{UPD_DTM}
+					,	#{UPD_ID}				
+					);
+</insert>
+
+<update id="FM0101G3U0" parameterType="Map">
+
+	UPDATE		BMS_FCLT_SCH_INFO
+	
+	SET			SN = #{SN}
+			,	ST_TIME = #{ST_TIME}
+			,	ED_TIME = #{ED_TIME}
+			,	DATA_VAL = #{DATA_VAL}
+			,	REMARK = #{REMARK}
+			,	UPD_DTM = #{UPD_DTM}
+			,	UPD_ID = #{SSN_USER_ID}		
+	
+	WHERE		NODE_ID = #{NODE_ID}
+	AND			FCLT_ID = #{FCLT_ID}
+	AND			FCLT_KIND = #{FCLT_KIND} 
+	AND 		PARAM_DIV = #{PARAM_DIV} 
+	AND 		PARAM_KIND = #{PARAM_KIND}
+	AND			SN = #{OLD_SN}
+	
+						
+</update>
+
+<delete id="FM0101G3D0" parameterType="Map">
+	DELETE	
+	FROM		BMS_FCLT_SCH_INFO
+	
+	WHERE		NODE_ID = #{NODE_ID}
+	AND			FCLT_ID = #{FCLT_ID}
+	AND			FCLT_KIND = #{FCLT_KIND} 
+	AND 		PARAM_DIV = #{PARAM_DIV} 
+	AND 		PARAM_KIND = #{PARAM_KIND}
+	AND			SN = #{OLD_SN}
+	<!-- 수정필요 -->
+</delete>
 
 <insert id="FM0101G2I0" parameterType="Map">
 	INSERT INTO		BMS_FCLT_PARAM_INFO	

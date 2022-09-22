@@ -81,6 +81,9 @@
 						<w2:column id="REMARK" name="비고" dataType="text"></w2:column>
 						<w2:column id="UPD_DTM" name="갱신일시" dataType="text"></w2:column>
 						<w2:column id="UPD_ID" name="갱신아이디" dataType="text"></w2:column>
+						<w2:column id="OLD_SN" name="순번2" dataType="text"></w2:column>
+						<w2:column id="NODE_ID" name="노드아이디" dataType="text"></w2:column>
+						<w2:column id="FCLT_ID" name="name13" dataType="text"></w2:column>
 					</w2:columnInfo>
 					<w2:data use="false"></w2:data>
 				</w2:dataList>
@@ -135,19 +138,17 @@
 				</w2:dataList>
 			</w2:dataCollection>
 			<w2:workflowCollection></w2:workflowCollection>
-			<xf:submission id="sub_FM0101G0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_NODE_MST"
-				action="/node/selectNodeList" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
-				customHandler="" mode="asynchronous" processMsg="조회 중입니다.." ev:submit="" ev:submitdone="scwin.sub_FM0101G0R0_submitdone"
-				ev:submiterror="" abortTrigger="">
+			<xf:submission id="sub_FM0101G0R0" ref="data:json,dma_search" target="data:json,dlt_BMS_NODE_MST" action="/node/selectNodeList"
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="조회 중입니다.." ev:submit="" ev:submitdone="scwin.sub_FM0101G0R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_FM0101SHI0" ref="" target="data:json,dlt_searchitem" action="/node/selectNodeItem" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
 				ev:submit="" ev:submitdone="scwin.sub_FM0101SHI0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_FM0101G1R0" ref="data:json,dma_subsearch" target="data:json,dlt_BMS_FCLT_INFO"
-				action="/fm/FM0101G1R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
-				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_FM0101G1R0_submitdone" ev:submiterror=""
-				abortTrigger="">
+			<xf:submission id="sub_FM0101G1R0" ref="data:json,dma_subsearch" target="data:json,dlt_BMS_FCLT_INFO" action="/fm/FM0101G1R0"
+				method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous"
+				processMsg="" ev:submit="" ev:submitdone="scwin.sub_FM0101G1R0_submitdone" ev:submiterror="" abortTrigger="">
 			</xf:submission>
 			<xf:submission id="sub_FM0101SHI1" ref="" target="data:json,dlt_searchitem2" action="/fm/FM0101SHI1" method="post"
 				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
@@ -172,6 +173,11 @@
 				customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone="scwin.sub_FM0101G3R0_submitdone" ev:submiterror=""
 				abortTrigger="">
 			</xf:submission>
+			<xf:submission id="sub_FM0101G3S0" ref='data:json,{"action":"modified","id":"dlt_BMS_FCLT_SCH_INFO"}'
+				target="data:json,dma_result" action="/fm/FM0101G3S0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace=""
+				errorHandler="" customHandler="" mode="asynchronous" processMsg="저장중입니다..." ev:submit="" ev:submitdone="" ev:submiterror=""
+				abortTrigger="">
+			</xf:submission>
 		</xf:model>
 		<script type="text/javascript">
 			kakao.maps.load(function() {
@@ -183,8 +189,11 @@
 	scwin.onpageload = function() {
 		var autoOptions = {
 			Main : { grid : FM0101G0, srchSbm : sub_FM0101G0R0, srchGrp : pgm_search, keyColumn : "NODE_ID", focusColumn : "VHC_NO", name :  "노드 목록"},
-			Sub1 : { grid : FM0101G1, srchSbm : sub_FM0101G1R0, srchGrp : pgm_sub_search, name :  "파라미터 목록"},
-			Sub2 : { grid : FM0101G2, srchSbm : sub_FM0101G2R0, savSbm : sub_FM0101G2S0, name :  "파라미터 목록"}
+			
+			//CRUD위해 Sub명 조정함
+			Sub3 : { grid : FM0101G1, srchSbm : sub_FM0101G1R0, srchGrp : pgm_sub_search, name :  "시설물 목록"},
+			Sub1 : { grid : FM0101G2, srchSbm : sub_FM0101G2R0, savSbm : sub_FM0101G2S0, name :  "파라미터 목록"},
+			Sub2 : { grid : FM0101G3, srchSbm : sub_FM0101G3R0, savSbm : sub_FM0101G3S0, name :  "스케줄 상세"}
 		 };
 		
 		var codeOptions = [ {code : "NODE_TYPE", compID : "FM0101G0:NODE_TYPE" },
@@ -210,6 +219,11 @@
 		};
 		com.setSubBtn2(wfm_subBtn, autoOptions, subOptions);
 
+		 var subOptions2 = {
+    	     ADD: scwin.btn_add2_onclick, DEL:scwin.btn_del_onclick, CNL:{}
+      	 };
+      	 
+      	 com.setSubBtn2(wfm_subBtn2, autoOptions, subOptions2);
 		 
 		com.setCommonDtl(codeOptions);
 						 
@@ -384,6 +398,40 @@
 			return "사용안함";
 		}
 	}
+	
+	scwin.btn_add2_onclick = function() {
+		
+		var nodeId = dma_subsearch.get("NODE_ID");
+		var fcltId = dma_subsearch.get("FCLT_ID");
+		var paramDiv = dma_subsearch.get("PARAM_DIV"); 
+		var fcltKind = dma_subsearch.get("FCLT_KIND"); 
+		var paramKind = dma_subsearch.get("PARAM_KIND"); 
+		
+		if(nodeId == null || nodeId == '') {
+			com.alert("노드를 선택해주세요.");
+			return;	
+		}	
+		if(fcltId == null || fcltId == '') {
+			com.alert("시설물을 선택해주세요.");
+			return;	
+		}	
+		if(paramKind == null || paramKind == '') {
+			com.alert("파라미터를 선택해주세요.");
+			return;	
+		}	
+		
+		var insertIndex = dlt_BMS_FCLT_SCH_INFO.insertRow();
+		dlt_BMS_FCLT_SCH_INFO.setCellData(insertIndex, "NODE_ID", nodeId);
+		dlt_BMS_FCLT_SCH_INFO.setCellData(insertIndex, "FCLT_ID", fcltId);
+		dlt_BMS_FCLT_SCH_INFO.setCellData(insertIndex, "PARAM_DIV", paramDiv);
+		dlt_BMS_FCLT_SCH_INFO.setCellData(insertIndex, "FCLT_KIND", fcltKind);
+		dlt_BMS_FCLT_SCH_INFO.setCellData(insertIndex, "PARAM_KIND", paramKind);
+			
+	}
+	
+	scwin.btn_del_onclick = function() {
+		com.delGrid(FM0101G3);
+	};
 	
 	
 	
@@ -789,9 +837,9 @@
 					<xf:group id="" class="pgm_list grdr_20_2_a" style="">
 						<xf:group id="SI0801_SCH" class="gr_sub_header" style="">
 							<xf:group class="defaultbox" id="" style="">
-								<w2:textbox class="df_tt fl view" id="" label="스케쥴 상세" style=""></w2:textbox>
+								<w2:textbox class="df_tt fl view" id="" label="스케줄 상세" style=""></w2:textbox>																																																																																																																																																																
 							</xf:group>
-							<!-- <w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe> -->
+							<w2:wframe id="wfm_subBtn2" class="" style="" src="/cm/common/wf_subBtn.xml" scope="true"></w2:wframe>
 						</xf:group>
 						<xf:group id="" class="" style=""></xf:group>
 						<xf:group id="" class="" style="">
@@ -809,13 +857,13 @@
 								<w2:header style="" id="header1">
 									<w2:row style="" id="row1">
 										<w2:column removeBorderStyle="false" width="50" inputType="text" style="height:20px" id="column13" value="순번"
-											blockSelect="false" displayMode="label" sortable="true">
+											blockSelect="false" displayMode="label" sortable="true" class="req">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column12" value="시작시간"
-											blockSelect="false" displayMode="label" sortable="true">
+											blockSelect="false" displayMode="label" sortable="true" class="req">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column1" value="종료시간"
-											blockSelect="false" displayMode="label">
+											blockSelect="false" displayMode="label" class="req">
 										</w2:column>
 										<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column10" value="설정값"
 											blockSelect="false" displayMode="label" sortable="true">
