@@ -40,7 +40,7 @@ public class SI0801Controller extends ControllerSupport {
 	
 	@RequestMapping("/si/SI0801G1R0")
 	public @ResponseBody Map<String, Object> SI0801G1R0() throws Exception {
-		result.setData("dlt_BMS_FCLT_SCH_INFO", si0801Service.SI0801G1R0());
+		result.setData("dlt_BMS_FCLT_SCH_CFG_INFO", si0801Service.SI0801G1R0());
 		return result.getResult();
 	}
 	

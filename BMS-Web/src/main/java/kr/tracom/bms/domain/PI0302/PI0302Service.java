@@ -1,5 +1,6 @@
 package kr.tracom.bms.domain.PI0302;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,12 +11,23 @@ import org.springframework.stereotype.Service;
 
 import kr.tracom.cm.support.ServiceSupport;
 import kr.tracom.cm.support.exception.MessageException;
+import kr.tracom.platform.attribute.common.AtBrtAction;
+import kr.tracom.platform.attribute.common.AtTimeStamp;
+import kr.tracom.platform.net.config.TimsConfig;
+import kr.tracom.platform.net.protocol.TimsMessage;
+import kr.tracom.platform.net.protocol.TimsMessageBuilder;
+import kr.tracom.platform.service.TService;
+import kr.tracom.platform.service.config.KafkaTopics;
+import kr.tracom.tims.kafka.KafkaProducer;
 import kr.tracom.util.DateUtil;
 import kr.tracom.util.Result;
 
 @Service
 public class PI0302Service extends ServiceSupport{
 
+	@Autowired
+	KafkaProducer kafkaProducer;
+	
 	@Autowired
 	private PI0302Mapper PI0302Mapper;
 		
@@ -64,5 +76,27 @@ public class PI0302Service extends ServiceSupport{
 		Map result = saveResult(iCnt, uCnt, dCnt);
 		
 		return result;		
+	}
+	
+	public Map AL0302G0SEND() throws Exception {
+		int iCnt = 0;
+		int uCnt = 0;
+		int dCnt = 0;
+	
+		
+		TimsConfig timsConfig = TService.getInstance().getTimsConfig();
+		TimsMessageBuilder builder = new TimsMessageBuilder(timsConfig);
+
+		AtBrtAction brtRequest = new AtBrtAction();
+
+		brtRequest.setTimeStamp(new AtTimeStamp(DateUtil.now("yyyyMMddHHmmssSSS")));
+		brtRequest.setActionCode(AtBrtAction.allocChangeRequest);
+		brtRequest.setData("");
+		TimsMessage timsMessage = builder.actionRequest(brtRequest);
+		kafkaProducer.sendKafka(KafkaTopics.T_BRT, timsMessage, "");
+		
+		Map result = saveResult(iCnt, uCnt, dCnt);
+		
+		return result;	
 	}
 }

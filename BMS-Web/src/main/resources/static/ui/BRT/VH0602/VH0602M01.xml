@@ -33,7 +33,7 @@
 						<w2:key id="CONTENT1" name="name1" dataType="text"></w2:key>
 						<w2:key id="F_DATE" name="name4" dataType="date"></w2:key>
 						<w2:key id="L_DATE" name="name5" dataType="date"></w2:key>
-						<w2:key id="TYPE1" name="name7" dataType="text" defaultValue="ROUT_MODE"></w2:key>
+						<w2:key id="TYPE1" name="name7" dataType="text" defaultValue=""></w2:key>
 						<w2:key id="TYPE2" name="name5" dataType="text"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
@@ -80,8 +80,12 @@
 		 var mainOptions = {
 			SEARCH: {}
 		}
-		 
-		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions);
+		var codeOptions = [{code : "SIG_CTL_TYPE", compID : "VH0602G0:CTRL_TYPE"}];
+		com.setCommonDtl(codeOptions, function() {
+			
+		});	
+		
+		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions, codeOptions);
 		var mainSrhOptions = {
 		};
 		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions);			
@@ -123,6 +127,7 @@
 	};
 	
 	scwin.sub_VH0602G0R0_submitdone = function(e) {
+
 		com.setFocusedCell(VH0602G0, "UPD_DTM");
 		
 		//교차로우선신호제어방식 결정되면 내부 내용 넣어야 함
@@ -178,6 +183,7 @@
 	};
 
 	scwin.getEventCount = function(data, dataType, footerPosition, dataColumn) {
+
 		var sum = 0;
 		
 		var result = "";
@@ -417,7 +423,7 @@
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="VHC_NO"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>
-										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="CTRL_TYPE"
+										<w2:column removeBorderStyle="false" width="70" inputType="select" style="height:20px" id="CTRL_TYPE"
 											value="" blockSelect="false" displayMode="label">
 										</w2:column>									
 										<w2:column removeBorderStyle="false" width="70" inputType="text" style="height:20px" id="CTRL_LV"

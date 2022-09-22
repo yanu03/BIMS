@@ -218,7 +218,7 @@ public class PI0801Service extends ServiceSupport {
     				
     				if(CommonUtil.notEmpty(data.get("VOC_ID"))&&CommonUtil.notEmpty(data.get("VOC_NM")))
 					{
-						ftpHandler.uploadVoice(data);
+						//ftpHandler.uploadVoice(data);
 						//doMoveFile(UPLOAD_DIR, UPLOAD_AUDIO_DIR, AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
 					}
     			} else if (rowStatus.equals("U")) {
@@ -226,7 +226,7 @@ public class PI0801Service extends ServiceSupport {
    
     				if(CommonUtil.notEmpty(data.get("VOC_ID"))&&CommonUtil.notEmpty(data.get("VOC_NM")))
 					{
-    					ftpHandler.uploadVoice(data);
+    					//ftpHandler.uploadVoice(data);
 						//doMoveFile(UPLOAD_DIR, UPLOAD_AUDIO_DIR, AUDIO_INFO.get("AUDIO_NM").toString(), AUDIO_INFO.get("VOC_ID").toString());
 					}
     				

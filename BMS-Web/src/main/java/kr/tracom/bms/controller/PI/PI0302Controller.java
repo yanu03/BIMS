@@ -43,4 +43,11 @@ public class PI0302Controller extends ControllerSupport {
 		result.setData("dlt_BMS_LIVING_LOG", PI0302Service.PI0302G1R0());
 		return result.getResult();
 	}	
+	
+	@RequestMapping("/al/AL0302G0SEND")
+	public @ResponseBody Map<String, Object> AL0305G0SEND() throws Exception {
+		Map map = PI0302Service.AL0302G0SEND();
+		result.setData("dma_result", map);
+		return result.getResultSave();
+	}	
 }
