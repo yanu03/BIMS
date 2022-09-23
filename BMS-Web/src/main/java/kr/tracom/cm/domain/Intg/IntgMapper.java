@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface IntgMapper {
 	
-	public List<Map<String, Object>> selectIntgList(Map param);
+	public List<Map<String, Object>> selectAirconIntgList(Map param);
 	
 	public List<Map<String, Object>> selectIntgMstList(Map param);
 	
