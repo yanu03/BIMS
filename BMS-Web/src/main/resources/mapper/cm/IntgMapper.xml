@@ -3,7 +3,7 @@
 
 <mapper namespace="kr.tracom.cm.domain.Intg.IntgMapper">
 
-<select id="selectIntgList" resultType="Map">
+<select id="selectAirconIntgList" resultType="Map">
 	SELECT
 		INTG_FCLT_ID
 		,FCLT_NM
