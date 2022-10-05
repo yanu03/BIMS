@@ -163,6 +163,10 @@ public class FTPHandler {
 	@Value("${fileupload.audio.directory}")
 	private String AUDIO_DIR;
 
+	@Value("${sftp.destination.tempDirectory}")
+	private String TEMP_DESTINATION;
+	
+
 	// @Autowired
 	// private ChannelSftp sftpChannel;
 	private ChannelSftp sftp = null;
@@ -434,8 +438,8 @@ public class FTPHandler {
 			String impId = String.valueOf(map.get("IMP_ID"));
 			String dlCd = String.valueOf(map.get("DL_CD"));
 
-			String localPath = Paths.get(getRootLocalPath(), "temp/destination/", dlCd).toString();
-			String localPath2 = Paths.get(getRootLocalPath(), "vehicle/", impId, "/device/destination/images/")
+			String localPath = Paths.get(getRootLocalPath(), TEMP_DESTINATION, dlCd).toString();
+			String localPath2 = Paths.get(getRootLocalPath(), getVehiclePath(), impId, getDestinationImagesPath() )
 					.toString();
 			// String ftpPath = getRootServerPath() + "/vehicle/"+ dcvo.getImpId()
 			// +"/device/destination/images/";
@@ -506,8 +510,11 @@ public class FTPHandler {
 
 			String txt = "";
 			String mngId = String.valueOf(vhc.get("MNG_ID"));
-			String impId = mngId.substring(0, Constants.IMP_ID_DIGIT);
-			String localPath2 = Paths.get(getRootLocalPath(), "vehicle/", impId, "/device/destination/images/")
+			String impId = mngId;
+			if (mngId.length() >= Constants.IMP_ID_DIGIT) {
+				impId = mngId.substring(0, Constants.IMP_ID_DIGIT);
+			}
+			String localPath2 = Paths.get(getRootLocalPath(), getVehiclePath(), impId, getDestinationImagesPath() )
 					.toString();
 			File fBmpFile = new File(localPath2 + "/FLOGO.BMP");
 			if (fBmpFile.exists()) {
@@ -558,7 +565,7 @@ public class FTPHandler {
 
 	/** 210826 행선지안내기 스케쥴 파일 Read jh **/
 	public List<Map<String, Object>> readSCH(String deviceCd, String fileName) throws IOException {
-		String path = Paths.get(getRootLocalPath(), "/temp/destination/", deviceCd).toString();
+		String path = Paths.get(getRootLocalPath(), TEMP_DESTINATION, deviceCd).toString();
 		File file = new File(path + "/" + fileName);
 		FileReader fr = null;
 		List<Map<String, Object>> scheduleList = new ArrayList<>();
@@ -621,7 +628,7 @@ public class FTPHandler {
 
 	/** 210826 행선지안내기 스케쥴 파일 write jh **/
 	public boolean writeSCH(List<Map<String, Object>> scheduleList, String deviceCd, String fileName) {
-		String path = Paths.get(getRootLocalPath(), "/temp/destination/", deviceCd).toString();
+		String path = Paths.get(getRootLocalPath(), TEMP_DESTINATION, deviceCd).toString();
 		String txt = "";
 
 		for (int i = 0; i < scheduleList.size(); i++) {
@@ -2160,7 +2167,7 @@ public class FTPHandler {
 	}
 
 	public String getDestinationImagesPath() {
-		return DESTINATION_IMAGES_PATH;
+		return DEVICE_PATH+DESTINATION_PATH+DESTINATION_IMAGES_PATH;
 	}
 
 	public String getDestinationListPath() {
