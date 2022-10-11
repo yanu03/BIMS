@@ -230,7 +230,7 @@
 	
 	scwin.SI0402G1_onviewchange = function(info) {
 
-		if(info.colIndex == 2){
+		if(info.colIndex == 3){
 			oldNodeType = info.oldValue;
 			
 			if (oldNodeType != "NT008" && info.newValue == "NT005") {
@@ -387,6 +387,7 @@
 	}
 	
 	scwin.add_cross_done = function(obj){
+	
 		if (typeof obj === "undefined") {
 			dlt_BMS_ROUT_NODE_CMPSTN.setCellData(SI0402G1.getFocusedRowIndex(),"NODE_TYPE", oldNodeType);
 		}
@@ -479,6 +480,11 @@
 			com.getGridViewDataList(grid).setCellData(index, "OLD_NODE_ID",nodeId);
 			com.getGridViewDataList(grid).setCellData(index, "NODE_ID",data.GRG_ID);
 			com.getGridViewDataList(grid).setCellData(index, "NODE_NM",data.GRG_NM);
+		}
+		
+		if(com.isEmpty(data.GPS_Y)==false && com.isEmpty(data.GPS_X)==false){
+			com.getGridViewDataList(grid).setCellData(index, "GPS_Y",data.GPS_Y);
+			com.getGridViewDataList(grid).setCellData(index, "GPS_X",data.GPS_X);
 		}
 		routMap.drawRoute(mapId, grid, index, draggable);
 	}
@@ -582,9 +588,11 @@
 		} else if (isGrgAdd) {
 			scwin.select_grg(true);
 		}
+		scwin.allUpdate();
 	}
 	
 	scwin.nodeChangeCb = function(idx) {
+
 		if(isPathAdd || isVertexAdd || isSttnAdd || isCrossAdd || isGrgAdd) return;
 		
 		SI0402G1.setFocusedCell(idx,"NODE_ID");
@@ -597,6 +605,7 @@
 		else if(nodeType == "NT001"){
 			scwin.select_cross(false);
 		}
+		scwin.allUpdate();
 	}
 	
 	
@@ -701,11 +710,13 @@
 	scwin.subGridUp = function(){
 		var idx = SI0402G1.getFocusedRowIndex();
 		com.getGridViewDataList(SI0402G1).rowMoveUp(idx);
+		scwin.allUpdate();
 	}
 	
 	scwin.subGridDown = function(){
 		var idx = SI0402G1.getFocusedRowIndex();
 		com.getGridViewDataList(SI0402G1).rowMoveDown(idx);
+		scwin.allUpdate();
 	}
 	
 	scwin.reInstall = function(){
@@ -713,7 +724,11 @@
 		dma_sub_search.set("RE_INSTALL" , "Y");
 		com.alert("재구성 하였습니다");
 	}
-
+	
+	scwin.allUpdate = function(){
+		com.getGridViewDataList(SI0402G1).modifyAllStatus("C");
+		dma_sub_search.set("RE_INSTALL" , "Y");
+	}
 	
 	scwin.refreshGridStatus = function(){
 		var routeData = dlt_BMS_ROUT_NODE_CMPSTN.getAllJSON();

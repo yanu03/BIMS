@@ -30,6 +30,12 @@ public class AL0600Controller extends ControllerSupport{
 		return result.getResult();
 	}
 	
+	@RequestMapping("/al/AL0600SHI1")
+	public @ResponseBody Map<String, Object> AL0600SHI1() throws Exception {
+		result.setData("dlt_searchitem2", al0600Service.AL0600SHI1());
+		return result.getResult();
+	}
+	
 	@RequestMapping("/al/AL0600G1R0")
 	public @ResponseBody Map<String, Object> AL0600G1R0() throws Exception {
 		result.setData("dlt_BRT_OPER_ALLOC_PL_NODE_INFO", al0600Service.AL0600G1R0());

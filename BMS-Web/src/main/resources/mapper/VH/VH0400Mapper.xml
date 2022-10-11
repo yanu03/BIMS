@@ -6,7 +6,7 @@
 	(SELECT				DATE_FORMAT(A.OPER_DT, '%Y-%m-%d') OPER_DT
 					,	A.REP_ROUT_ID
 					,	A.VHC_ID
-					,	A.UPD_DTM
+					,	DATE_FORMAT(A.UPD_DTM, '%Y-%m-%d %H:%i:%s') UPD_DTM
 					,	A.VHC_NO
 					,	A.DRV_ID
 					,	A.COR_ID

@@ -116,6 +116,7 @@
 		dlt_BRT_OPER_ALLOC_RL_NODE_INFO.setJSON(scwin.param.data6, true);
 		dma_sub_search.set("F_DATE", scwin.param.fDate);
 		dma_sub_search.set("L_DATE", scwin.param.lDate);
+		dma_sub_search.set("OPER_DT", scwin.param.operDt);
 		popup_title.setValue(scwin.param.data3 + " " + scwin.param.data4 + "회차");
 		
 		scwin.drawCompChart();		
@@ -174,7 +175,11 @@
 			
 			if(jsonData[y].ARRV_TM.substring(0,2) == '24' || jsonData[y].ARRV_TM.substring(0,2) == '25' || jsonData[y].ARRV_TM.substring(0,2) == '26'){
 				
-				var nextDay = new Date(com.transDate(dma_sub_search.get("L_DATE"), 'dash'));
+				if(dma_sub_search.get("OPER_DT") != ''){
+					var nextDay = new Date(com.transDate(dma_sub_search.get("OPER_DT"), 'dash'));
+				}else if(dma_sub_search.get("L_DATE") != ''){
+					var nextDay = new Date(com.transDate(dma_sub_search.get("L_DATE"), 'dash'));
+				}
 				nextDay.setDate(nextDay.getDate() +1).toLocaleString();
 				var day = nextDay.getDate().toString();
 				var year = nextDay.getFullYear().toString();
@@ -200,9 +205,15 @@
 				var dprtTm = newNextDate+' '+jsonDprtTm
 				
 			}else{
-				var updDtm = com.transDate(dma_sub_search.get("F_DATE"), 'dash');
-				var arrvTm = com.transDate(dma_sub_search.get("F_DATE"), 'dash')+' '+jsonData[y].ARRV_TM;
-				var dprtTm = com.transDate(dma_sub_search.get("F_DATE"), 'dash')+' '+jsonData[y].DPRT_TM;
+				if(dma_sub_search.get("OPER_DT") != ''){
+					var updDtm = com.transDate(dma_sub_search.get("OPER_DT"), 'dash');
+					var arrvTm = com.transDate(dma_sub_search.get("OPER_DT"), 'dash')+' '+jsonData[y].ARRV_TM;
+					var dprtTm = com.transDate(dma_sub_search.get("OPER_DT"), 'dash')+' '+jsonData[y].DPRT_TM;
+				}else if(dma_sub_search.get("F_DATE") != ''){
+					var updDtm = com.transDate(dma_sub_search.get("F_DATE"), 'dash');
+					var arrvTm = com.transDate(dma_sub_search.get("F_DATE"), 'dash')+' '+jsonData[y].ARRV_TM;
+					var dprtTm = com.transDate(dma_sub_search.get("F_DATE"), 'dash')+' '+jsonData[y].DPRT_TM;
+				}
 			}
 			
 			var accruLen = jsonData[y].ACCRU_LEN;
@@ -253,8 +264,12 @@
 			var operSn = rlAllJson[y].OPER_SN;
 			
 			if(rlAllJson[y].REAL_ARRV_TM.substring(0,2) == '24' || rlAllJson[y].REAL_ARRV_TM.substring(0,2) == '25' || rlAllJson[y].REAL_ARRV_TM.substring(0,2) == '26'){
+				if(dma_sub_search.get("OPER_DT") != ''){
+					var nextDay = new Date(com.transDate(dma_sub_search.get("OPER_DT"), 'dash'));
+				}else if(dma_sub_search.get("L_DATE") != ''){
+					var nextDay = new Date(com.transDate(dma_sub_search.get("F_DATE"), 'dash'));
+				}
 				
-				var nextDay = new Date(com.transDate(dma_sub_search.get("F_DATE"), 'dash'));
 				nextDay.setDate(nextDay.getDate() +1).toLocaleString();
 				var day = nextDay.getDate().toString();
 				var year = nextDay.getFullYear().toString();
@@ -280,9 +295,15 @@
 				var dprtTm = newNextDate+' '+jsonDprtTm
 				
 			}else{
-				var updDtm = com.transDate(dma_sub_search.get("F_DATE"), 'dash');
-				var arrvTm = com.transDate(dma_sub_search.get("F_DATE"), 'dash')+' '+rlAllJson[y].REAL_ARRV_TM;
-				var dprtTm = com.transDate(dma_sub_search.get("F_DATE"), 'dash')+' '+rlAllJson[y].REAL_DPRT_TM;
+				if(dma_sub_search.get("OPER_DT") != ''){
+					var updDtm = com.transDate(dma_sub_search.get("OPER_DT"), 'dash');
+					var arrvTm = com.transDate(dma_sub_search.get("OPER_DT"), 'dash')+' '+rlAllJson[y].REAL_ARRV_TM;
+					var dprtTm = com.transDate(dma_sub_search.get("OPER_DT"), 'dash')+' '+rlAllJson[y].REAL_DPRT_TM;
+				}else if(dma_sub_search.get("F_DATE") != ''){
+					var updDtm = com.transDate(dma_sub_search.get("F_DATE"), 'dash');
+					var arrvTm = com.transDate(dma_sub_search.get("F_DATE"), 'dash')+' '+rlAllJson[y].REAL_ARRV_TM;
+					var dprtTm = com.transDate(dma_sub_search.get("F_DATE"), 'dash')+' '+rlAllJson[y].REAL_DPRT_TM;
+				}
 			}
 			
 			var accruLen = rlAllJson[y].ACCRU_LEN;

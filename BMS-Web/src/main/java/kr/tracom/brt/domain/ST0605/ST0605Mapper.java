@@ -12,6 +12,8 @@ public interface ST0605Mapper {
 	
 	public List ST0605SHI0();
 	
+	public List ST0605SHI1(Map param);
+	
 	public List ST0605G1R0(Map param);
 	
 	public List ST0605G1CNT(Map param);

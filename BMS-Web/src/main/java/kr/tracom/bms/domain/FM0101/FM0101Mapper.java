@@ -29,4 +29,10 @@ public interface FM0101Mapper {
 	
 	public List<Map> FM0101P0R0(Map param);
 	
+	public int FM0101G3I0(Map param);
+	
+	public int FM0101G3U0(Map param);
+	
+	public int FM0101G3D0(Map param);	
+	
 }

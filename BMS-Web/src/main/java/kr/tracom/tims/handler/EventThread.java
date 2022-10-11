@@ -504,7 +504,7 @@ public class EventThread extends Thread {
 						if(curAllocPlInfo != null && CommonUtil.notEmpty(curAllocPlInfo.get("OPER_VHC_ID"))) {
 							busEventMap.put("ALLOC_NO", curAllocPlInfo.get("ALLOC_NO"));
 							//if ((eventCode == (byte) 0x03 || eventCode == (byte) 0x04)) {
-								//String routeCourseId = curInfoMapper.getCurNearAllocPlInfo2(busEventMap);
+								//String routeCourseId = curInfoMapper.selectCurNearAllocPlInfo2(busEventMap);
 								//logger.info("routeCourseId = ", routeCourseId);
 								//String routeCourseStr[] = routeCourseId.split(",");
 								//busEventMap.put("ROUT_ID", routeCourseStr[0]);
@@ -517,7 +517,7 @@ public class EventThread extends Thread {
 										"293055002".equals(busEventMap.get("NODE_ID"))&&"WD001".equals(busEventMap.get("WAY_DIV"))||
 										"293055001".equals(busEventMap.get("NODE_ID"))&&"WD002".equals(busEventMap.get("WAY_DIV"))
 									)&& (eventCode == (byte) 0x03 || eventCode == (byte) 0x04)) {
-									String curNearStr = curInfoMapper.getCurNearAllocPlInfo(busEventMap);
+									String curNearStr = curInfoMapper.selectCurNearAllocPlInfo(busEventMap);
 									String curNearArr[] = curNearStr.split(",");
 									busEventMap.put("ROUT_ID", curNearArr[0]);
 									busEventMap.put("COR_ID", curNearArr[1]);
@@ -531,7 +531,7 @@ public class EventThread extends Thread {
 								if (eventCode == (byte) 0x03 || eventCode == (byte) 0x04) {
 									// 현재운행정보도 업데이트
 	
-									String curNearStr = curInfoMapper.getCurNearAllocPlInfo2(busEventMap);
+									String curNearStr = curInfoMapper.selectCurNearAllocPlInfo2(busEventMap);
 									String curNearArr[] = curNearStr.split(",");
 									busEventMap.put("ROUT_ID", curNearArr[0]);
 									busEventMap.put("COR_ID", curNearArr[1]);
@@ -545,7 +545,7 @@ public class EventThread extends Thread {
 							
 							if(curAllocPlInfo==null) {
 								if (eventCode == (byte) 0x03 || eventCode == (byte) 0x04) {
-									String curNearStr = curInfoMapper.getCurNearAllocPlInfo(busEventMap);
+									String curNearStr = curInfoMapper.selectCurNearAllocPlInfo(busEventMap);
 									String curNearArr[] = curNearStr.split(",");
 									busEventMap.put("ROUT_ID", curNearArr[0]);
 									busEventMap.put("COR_ID", curNearArr[1]);
@@ -568,7 +568,7 @@ public class EventThread extends Thread {
 										busEventMap.put("NODE_ID", busEventMap.get("EVT_DATA"));
 									}
 									
-									curNearStr = curInfoMapper.selectCurNearAllocPl3(busEventMap);
+									curNearStr = curInfoMapper.selectCurNearAllocPlInfo3(busEventMap);
 									if(CommonUtil.notEmpty(curNearStr)) {
 										String routeCourseStr[] = curNearStr.split(","); 
 				                        logger.info("routeCourseId = " + curNearStr + ", routeCourseStr.length=" + routeCourseStr.length);
@@ -588,7 +588,7 @@ public class EventThread extends Thread {
 				                        }
 									}*/
 									if(CommonUtil.empty(curNearStr)) {
-										curNearStr = curInfoMapper.getCurNearAllocPlInfo2(busEventMap);
+										curNearStr = curInfoMapper.selectCurNearAllocPlInfo2(busEventMap);
 									}
 									
 									if(CommonUtil.notEmpty(curNearStr)) {

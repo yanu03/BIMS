@@ -266,7 +266,7 @@
 	};
 	
 	scwin.btn_setting_onclick = function() {
-		if(dlt_ROUT_MST.getFocusedRowIndex() == null) {
+		if(PI0701G0.getFocusedRowIndex() == null) {
 			com.alert("노선을 선택해주세요.");
 			return;	
 		}

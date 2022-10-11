@@ -850,11 +850,18 @@ public class OperPlanService extends ServiceSupport {
 
 
 						//현시정보 확인이 가능한 경우 [[
-						if(!StringUtils.isEmpty(sig_ctr_type)){
+						if(!StringUtils.isEmpty(sig_ctr_type)&&nextNodePhaseInfo!=null){
 
-							enter_phase_no1 = CommonUtil.bigDecimalToInt(nextNodePhaseInfo.get("ENT_PHASE_NO_1"));
-							enter_phase_no2 = CommonUtil.bigDecimalToInt(nextNodePhaseInfo.get("ENT_PHASE_NO_2"));
-							enter_phase_no3 = CommonUtil.bigDecimalToInt(nextNodePhaseInfo.get("ENT_PHASE_NO_3"));
+							if(CommonUtil.notEmpty(nextNodePhaseInfo.get("ENT_PHASE_NO_1"))) {
+								enter_phase_no1 = CommonUtil.bigDecimalToInt(nextNodePhaseInfo.get("ENT_PHASE_NO_1"));
+							}
+							if(CommonUtil.notEmpty(nextNodePhaseInfo.get("ENT_PHASE_NO_3"))) {
+								enter_phase_no2 = CommonUtil.bigDecimalToInt(nextNodePhaseInfo.get("ENT_PHASE_NO_2"));
+							}
+							if(CommonUtil.notEmpty(nextNodePhaseInfo.get("ENT_PHASE_NO_3"))) {
+									enter_phase_no3 = CommonUtil.bigDecimalToInt(nextNodePhaseInfo.get("ENT_PHASE_NO_3"));	
+							}
+							
 
 							if(enter_phase_no1 != 0) {
 								//교차로 도착예정 시각의 진입현시 확인

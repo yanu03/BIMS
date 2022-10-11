@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.assertj.core.util.Arrays;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -41,9 +40,9 @@ public class IntgService extends ServiceSupport {
 	private IntgMapper intgMapper;
 	
 	//에어컨 정보 select
-	public List<Map<String, Object>> selectIntgList() throws Exception {
+	public List<Map<String, Object>> selectAirconIntgList() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
-		return intgMapper.selectIntgList(map);
+		return intgMapper.selectAirconIntgList(map);
 		
 	}
 	

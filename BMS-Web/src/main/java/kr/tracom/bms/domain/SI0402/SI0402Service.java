@@ -63,6 +63,8 @@ public class SI0402Service extends ServiceSupport {
 					si0402Mapper.SI0402G1DA0(delParam);
 				}
 			}
+			
+			
 			for (int i = 0; i < param.size(); i++) {
 				Map data = (Map) param.get(i);
 				
@@ -102,8 +104,8 @@ public class SI0402Service extends ServiceSupport {
 						&&(Constants.NODE_TYPE_GARAGE.equals(nodeType)==false)
 						&&(Constants.NODE_TYPE_SIGNAL.equals(nodeType)==false)
 					) {
-						if(CommonUtil.empty(nodeType2)||(Constants.NODE_TYPE_GARAGE.equals(nodeType2)==false)
-							&&(data.get("NODE_ID").equals(lastNodeId)==false))
+						if((CommonUtil.empty(nodeType2)==false)&&(Constants.NODE_TYPE_GARAGE.equals(nodeType2)==false)
+							&&(CommonUtil.empty(lastNodeId)||data.get("NODE_ID").equals(lastNodeId)==false))
 						{
 							Map linkKeyMap = si0402Mapper.SI0402G1K1();
 							data.put("LINK_ID",linkKeyMap.get("SEQ"));	
@@ -122,7 +124,13 @@ public class SI0402Service extends ServiceSupport {
 						iCnt += si0402Mapper.SI0402G1I0(data);
 					}
 					else {
-						 iCnt += si0402Mapper.SI0402G1U0(data);
+						if(CommonUtil.empty(data.get("OLD_NODE_ID"))==false
+								&&data.get("OLD_NODE_ID").equals(data.get("NODE_ID"))==false){
+							iCnt += si0402Mapper.SI0402G1U0_1(data);
+						}
+						else{
+							iCnt += si0402Mapper.SI0402G1U0(data);
+						}
 					}
 					
 					if((Constants.NODE_TYPE_BUSSTOP.equals(nodeType)||Constants.NODE_TYPE_CROSS.equals(nodeType))
@@ -155,8 +163,8 @@ public class SI0402Service extends ServiceSupport {
 						&&(Constants.NODE_TYPE_SIGNAL.equals(nodeType)==false)
 					) {
 						int nodeSn = Integer.parseInt((String)data.get("NODE_SN"));
-						if((CommonUtil.empty(nodeType2)||(Constants.NODE_TYPE_GARAGE.equals(nodeType2)==false))
-							&&CommonUtil.empty(data.get("LINK_ID"))&&(data.get("NODE_ID").equals(lastNodeId)==false))
+						if((CommonUtil.empty(nodeType2)==false)&&(Constants.NODE_TYPE_GARAGE.equals(nodeType2)==false)
+							&&(CommonUtil.empty(lastNodeId)||data.get("NODE_ID").equals(lastNodeId)==false))
 						{
 							Map linkKeyMap = si0402Mapper.SI0402G1K1();
 							data.put("LINK_ID",linkKeyMap.get("SEQ"));	
@@ -346,6 +354,9 @@ public class SI0402Service extends ServiceSupport {
 						data.put("LINK_NM",linkNm);
 						double len = DataInterface.getDistanceBetween(CommonUtil.decimalToDouble(data.get("GPS_X")), CommonUtil.decimalToDouble(data.get("GPS_Y")), 
 								CommonUtil.decimalToDouble(data2.get("GPS_X")), CommonUtil.decimalToDouble(data2.get("GPS_Y")));
+						short bearing = DataInterface.bearingP1toP2(CommonUtil.decimalToDouble(data.get("GPS_X")), CommonUtil.decimalToDouble(data.get("GPS_Y")), 
+								CommonUtil.decimalToDouble(data2.get("GPS_X")), CommonUtil.decimalToDouble(data2.get("GPS_Y")));
+						data.put("BEARING",bearing);
 						
 						if(i==0) {
 							data.put("ACCRU_LEN",0);

@@ -28,6 +28,11 @@ public class AL0600Service extends ServiceSupport {
 		return al0600Mapper.AL0600SHI0();
 	}
 	
+	public List AL0600SHI1() throws Exception{
+		Map param = getSimpleDataMap("dma_search");		
+		return al0600Mapper.AL0600SHI1(param);
+	}	
+	
 	public List AL0600G1R0() throws Exception {
 		// TODO Auto-generated method stub
 		Map param = getSimpleDataMap("dma_sub_search");

@@ -67,4 +67,11 @@ public class FM0101Controller extends ControllerSupport {
 		return result.getResult();
 	}
 	
+	@RequestMapping("/fm/FM0101G3S0")
+	public @ResponseBody Map<String, Object> FM0101G3S0() throws Exception {
+		Map map = FM0101Service.FM0101G3S0();
+		result.setData("dma_result", map);
+		return result.getResultSave();
+	}	
+	
 }
