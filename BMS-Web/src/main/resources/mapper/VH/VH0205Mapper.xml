@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.tracom.brt.domain.VH0205.VH0205Mapper">
+
+<select id="VH0205G0R0" parameterType="Map" resultType="Map">
+	SELECT
+		DATE_FORMAT(A.UPD_DTM, '%Y-%m-%d %H:%i:%s') UPD_DTM 
+		,A.NODE_ID
+		,A.FCLT_ID
+		,A.FCLT_KIND
+		,A.PARAM_DIV
+		,A.PARAM_KIND
+		,A.MNG_ID
+		<![CDATA[ 
+		,CASE
+			WHEN A.PARAM_KIND = 'PK030' AND A.DATA_VAL = '0' THEN '꺼짐(Off)'
+			WHEN A.PARAM_KIND = 'PK030' AND A.DATA_VAL = '1' THEN '켜짐(On)'
+			ELSE A.DATA_VAL
+		END AS DATA_VAL
+		]]>
+		,DATE_FORMAT(A.SEND_DTM, '%Y-%m-%d %H:%i:%s') SEND_DTM 
+		,B.NODE_NM
+		
+	FROM
+		BMS_FCLT_COND_PARAM_INFO_HIS A
+		LEFT JOIN BMS_NODE_MST B
+		ON A.NODE_ID = B.NODE_ID
+	<where>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(NODE_ID)">
+				A.NODE_ID = #{NODE_ID}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(FCLT_KIND)">
+				AND A.FCLT_KIND = #{FCLT_KIND}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(PARAM_DIV)">
+				AND A.PARAM_DIV = #{PARAM_DIV}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(PARAM_KIND)">
+				AND A.PARAM_KIND = #{PARAM_KIND}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0205) and @kr.tracom.util.CommonUtil@empty(L_DATE_VH0205)">
+			<![CDATA[AND DATE_FORMAT(A.SEND_DTM, '%Y%m%d') >= #{F_DATE_VH0205}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0205) and @kr.tracom.util.CommonUtil@empty(F_DATE_VH0205)">
+			<![CDATA[AND DATE_FORMAT(A.SEND_DTM, '%Y%m%d') <= #{L_DATE_VH0205}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0205) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0205)">
+			AND DATE_FORMAT(A.SEND_DTM, '%Y%m%d') BETWEEN #{F_DATE_VH0205} AND #{L_DATE_VH0205}
+		</if>			
+	</where>
+	ORDER BY
+		SEND_DTM DESC
+</select>
+
+<select id="selectFcltItem" parameterType="Map" resultType="Map">
+	SELECT 
+		DL_CD
+		,DL_CD_NM
+
+	FROM 
+		BMS_DL_CD_INFO
+	
+	WHERE 
+		CO_CD = 'FCLT_KIND'
+		
+	AND	
+		USE_YN = 'Y'
+		
+	ORDER BY
+	 	SORT
+</select>
+
+<select id="selectParamItem" parameterType="Map" resultType="Map">
+	SELECT 
+		DL_CD
+		,DL_CD_NM
+
+	FROM 
+		BMS_DL_CD_INFO
+	
+	WHERE 
+		CO_CD = 'PARAM_KIND'
+	AND	
+		USE_YN = 'Y'
+		
+	ORDER BY
+	 	SORT
+</select>
+	
+</mapper>

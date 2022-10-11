@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.tracom.brt.domain.VH0206.VH0206Mapper">
+
+<select id="VH0206G0R0" parameterType="Map" resultType="Map">
+	SELECT
+		DATE_FORMAT(A.UPD_DTM, '%Y-%m-%d %H:%i:%s') UPD_DTM 
+		,A.VHC_ID
+		,A.DVC_ID
+		,A.DVC_KIND
+		,A.PARAM_DIV
+		,A.PARAM_KIND
+		,A.MNG_ID
+		,A.DATA_VAL
+		,DATE_FORMAT(A.SEND_DTM, '%Y-%m-%d %H:%i:%s') SEND_DTM 
+		,B.VHC_NO
+		
+	FROM
+		BMS_DVC_COND_PARAM_INFO_HIS A
+		LEFT JOIN BMS_VHC_MST B
+		ON A.VHC_ID = B.VHC_ID
+	<where>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(VHC_ID)">
+				A.VHC_ID = #{VHC_ID}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(DVC_KIND)">
+				AND A.DVC_KIND = #{DVC_KIND}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(PARAM_DIV)">
+				AND A.PARAM_DIV = #{PARAM_DIV}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(PARAM_KIND)">
+				AND A.PARAM_KIND = #{PARAM_KIND}
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0206) and @kr.tracom.util.CommonUtil@empty(L_DATE_VH0206)">
+			<![CDATA[AND DATE_FORMAT(A.SEND_DTM, '%Y%m%d') >= #{F_DATE_VH0206}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0206) and @kr.tracom.util.CommonUtil@empty(F_DATE_VH0206)">
+			<![CDATA[AND DATE_FORMAT(A.SEND_DTM, '%Y%m%d') <= #{L_DATE_VH0206}]]>
+		</if>
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(F_DATE_VH0206) and @kr.tracom.util.CommonUtil@notEmpty(L_DATE_VH0206)">
+			AND DATE_FORMAT(A.SEND_DTM, '%Y%m%d') BETWEEN #{F_DATE_VH0206} AND #{L_DATE_VH0206}
+		</if>			
+	</where>
+	ORDER BY
+		SEND_DTM DESC
+</select>
+
+<select id="selectDvcItem" parameterType="Map" resultType="Map">
+	SELECT 
+		DL_CD
+		,DL_CD_NM
+
+	FROM 
+		BMS_DL_CD_INFO
+	
+	WHERE 
+		CO_CD = 'DVC_KIND'
+		
+	AND	
+		USE_YN = 'Y'
+		
+	ORDER BY
+	 	SORT
+</select>
+
+<select id="selectDvcParamItem" parameterType="Map" resultType="Map">
+	SELECT 
+		DL_CD
+		,DL_CD_NM
+
+	FROM 
+		BMS_DL_CD_INFO
+	
+	WHERE 
+		CO_CD = 'PARAM_KIND'
+	AND	
+		USE_YN = 'Y'
+		
+	ORDER BY
+	 	SORT
+</select>
+	
+</mapper>

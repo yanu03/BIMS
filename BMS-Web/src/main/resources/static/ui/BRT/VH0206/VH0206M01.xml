@@ -1,0 +1,519 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:w2="http://www.inswave.com/websquare"
+	xmlns:xf="http://www.w3.org/2002/xforms">
+<head>
+	<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+	<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+		<w2:type>DEFAULT</w2:type>
+		<w2:buildDate />
+		<xf:model>
+			<xf:instance>
+				<data xmlns="" />
+			</xf:instance>
+			<w2:dataCollection baseNode="map">
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_DVC_COND_PARAM_INFO_HIS" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="UPD_DTM" name="갱신일시" dataType="date"></w2:column>
+						<w2:column id="VHC_ID" name="차량아이디" dataType="text"></w2:column>
+						<w2:column id="VHC_NO" name="차량명" dataType="text"></w2:column>
+						<w2:column id="DVC_ID" name="장치아이디" dataType="text"></w2:column>
+						<w2:column id="DVC_KIND" name="장치종류" dataType="text"></w2:column>
+						<w2:column id="PARAM_DIV" name="매개변수구분" dataType="text"></w2:column>
+						<w2:column id="PARAM_KIND" name="매개변수종류" dataType="text"></w2:column>
+						<w2:column id="MNG_ID" name="관리아이디" dataType="text"></w2:column>
+						<w2:column id="DATA_VAL" name="데이터값" dataType="text"></w2:column>
+						<w2:column id="SEND_DTM" name="전송일시" dataType="date"></w2:column>
+
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataMap baseNode="list" repeatNode="map" id="dma_search" saveRemovedData="true">
+					<w2:keyInfo>
+						<w2:key id="VHC_ID" name="차량" dataType="text"></w2:key>
+						<w2:key id="DVC_KIND" name="차량 내 장치" dataType="text"></w2:key>
+						<w2:key id="PARAM_DIV" name="매개변수구분" dataType="text"></w2:key>
+						<w2:key id="PARAM_KIND" name="매개변수종류" dataType="text"></w2:key>
+						<w2:key id="F_DATE_VH0206" name="name5" dataType="date"></w2:key>
+						<w2:key id="L_DATE_VH0206" name="name6" dataType="date"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_VHC_MST" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="VHC_ID" name="차량ID" dataType="text"></w2:column>
+						<w2:column id="VHC_NO" name="차량명" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_DvcItem" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="DL_CD" name="상세코드" dataType="text"></w2:column>
+						<w2:column id="DL_CD_NM" name="상세코드명" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+				<w2:dataList baseNode="list" repeatNode="map" id="dlt_DvcParamItem" saveRemovedData="true">
+					<w2:columnInfo>
+						<w2:column id="DL_CD" name="상세코드" dataType="text"></w2:column>
+						<w2:column id="DL_CD_NM" name="상세코드명" dataType="text"></w2:column>
+					</w2:columnInfo>
+				</w2:dataList>
+			</w2:dataCollection>
+			<w2:workflowCollection></w2:workflowCollection>
+			<xf:submission id="sub_VH0206G0R0" ref='data:json,dma_search' target="data:json,dlt_BMS_DVC_COND_PARAM_INFO_HIS"
+				action="/vh/VH0206G0R0" method="post" mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler=""
+				customHandler="" mode="asynchronous" processMsg="조회 중입니다.." ev:submit="" ev:submitdone="scwin.sub_VH0206G0R0_submitdone"
+				ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_vhcItem" ref="data:json,dma_search" target="data:json,dlt_BMS_VHC_MST" action="/vhc/selectVhcList" method="post"
+				mediatype="application/json" encoding="UTF-8" instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg=""
+				ev:submit="" ev:submitdone="scwin.sub_vhcItem_submitdone" ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_selectDvcItem" ref="" target="data:json,dlt_DvcItem" action="/vh/selectDvcItem" method="post" mediatype="application/json" encoding="UTF-8"
+				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
+				ev:submiterror="" abortTrigger="">
+			</xf:submission>
+			<xf:submission id="sub_selectDvcParamItem" ref="" target="data:json,dlt_DvcParamItem" action="/vh/selectDvcParamItem" method="post" mediatype="application/json" encoding="UTF-8"
+				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
+				ev:submiterror="" abortTrigger="">
+			</xf:submission>
+		</xf:model>
+
+		<style type='text/css'>
+		.VH0206T0 .w2tabcontrol_container{position: absolute; left:0; top:35px; right:0; bottom:0px; border:none; float:none; height:auto !important; border-top:1px solid #c4cad6;}
+		</style>
+
+		<script type="text/javascript" lazy="false"><![CDATA[
+			scwin.onpageload = function() {
+				 var autoOptions = {
+					Main : { grid : VH0206G0, srchSbm : sub_VH0206G0R0, keyColumn : "VHC_ID", srchGrp : pgm_header, name : "차량 매개변수 이력",focusColumn : "VHC_ID"}
+				 };
+				 var mainOptions = {
+					SEARCH: {}
+				}
+				 
+				var codeOptions = [ {code : "DVC_KIND", compID : "VH0206G0:DVC_KIND" }
+					,{code : "PARAM_KIND", compID : "VH0206G0:PARAM_KIND" }
+					,{code : "PARAM_DIV", compID : "VH0206G0:PARAM_DIV" }
+				 ];			
+				 
+				com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainOptions, codeOptions);
+				var mainSrhOptions = {
+				};
+				com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions, codeOptions);			
+		
+				dma_search.F_DATE_VH0206 = util.getCurrentDate2();
+				F_DATE_VH0206.setValue(util.getCurrentDate2());
+				
+				dma_search.L_DATE_VH0206 = util.getCurrentDate2();
+				L_DATE_VH0206.setValue(util.getCurrentDate2());
+				
+				/*routMap.initMap2("map_VH0206", 
+						{width:"100%"
+						, height:"100%"
+						, onClick: scwin.onClickMap
+				});*/
+				
+		
+				com.setCommonDtl(codeOptions, function() {
+					com.searchGrid(VH0206G0, sub_VH0206G0R0);
+				});
+				
+				com.executeSubmission(sub_vhcItem);
+				com.executeSubmission(sub_selectDvcItem);	
+				com.executeSubmission(sub_selectDvcParamItem);	
+				
+			};	
+			
+			scwin.VH0206G0_onrowindexchange = function(row,oldRow) {
+			
+			};
+			
+			scwin.sub_VH0206G0R0_submitdone = function(e) {
+				com.setFocusedCell(VH0206G0, "VHC_ID");
+				var hisDiv = "";
+				var phaseLen = "";
+				var periodCnt = "";
+				
+				
+				for (i=0; i<dlt_BMS_DVC_COND_PARAM_INFO_HIS.getDataLength(); i++) {
+					var phaseLenMin = "";
+					var phaseLenSec = "";
+					var periodCntMin = "";
+					var periodCntSec = "";	
+			
+					phaseLen = dlt_BMS_DVC_COND_PARAM_INFO_HIS.getCellData(i, "PERIOD_LEN");
+					periodCnt = dlt_BMS_DVC_COND_PARAM_INFO_HIS.getCellData(i, "PERIOD_CNT");
+					
+					if((parseInt(phaseLen) >= 60)) {
+						phaseLenMin = parseInt(phaseLen/60) + "분 ";
+					}
+					
+					phaseLenSec = parseInt(phaseLen%60) + "초";
+					phaseLen = phaseLenMin + phaseLenSec;
+					
+					
+					if((parseInt(periodCnt) >= 60)) {
+						periodCntMin = parseInt(periodCnt/60) + "분 ";
+					}
+					
+					periodCntSec = parseInt(periodCnt%60) + "초";
+					periodCnt = periodCntMin + periodCntSec;	
+					
+					dlt_BMS_DVC_COND_PARAM_INFO_HIS.setCellData(i, "PERIOD_LEN", phaseLen);
+					dlt_BMS_DVC_COND_PARAM_INFO_HIS.setCellData(i, "PERIOD_CNT", periodCnt);	
+				
+				
+					hisDiv = dlt_BMS_DVC_COND_PARAM_INFO_HIS.getCellData(i, "HIS_DIV");
+					
+					switch(hisDiv) {
+						case "HD001":
+						VH0206G0.setCellClass(i, "HIS_DIV", "color_div1");
+						break;
+						
+						case "HD002":
+						VH0206G0.setCellClass(i, "HIS_DIV", "color_div2");
+						break;
+						
+						case "HD003":
+						VH0206G0.setCellClass(i, "HIS_DIV", "color_div3");
+						break;
+					}
+					
+				}
+			};
+		
+			/*scwin.sub_VH0206G1R0_submitdone = function(e) {
+				routMap.showRoute("map_VH0206", dlt_BMS_ROUT_NODE_CMPSTN.getAllJSON(), null, "ONLYLINE");
+				
+				var focusIdx = VH0206G0.getFocusedRowIndex();
+				var focusDataList = dlt_BMS_DVC_COND_PARAM_INFO_HIS.getRowJSON(focusIdx);
+				
+				routMap.showVehicle3("map_VH0206", focusDataList,  VH0206G0);
+			};*/
+			
+			scwin.F_DATE_VH0206_onviewchange = function(info) {
+				var ldate = L_DATE_VH0206.getValue();
+				var fdate = F_DATE_VH0206.getValue();
+				calendar_radio.setValue("DIRECT");
+				if (fdate > ldate && ldate != ""){
+					com.messagBox("alert", "지정할 수 없는 날짜입니다.",scwin.checkCLoseF(info));
+				}
+			};
+			scwin.checkCLoseF = function(info) {
+				F_DATE_VH0206.setValue(info.oldValue);
+			}
+			scwin.checkCLoseL = function(info) {
+				L_DATE_VH0206.setValue(info.oldValue);
+			}	
+			scwin.L_DATE_VH0206_onviewchange = function(info) {
+				var ldate = L_DATE_VH0206.getValue();
+				var fdate = F_DATE_VH0206.getValue();
+				calendar_radio.setValue("DIRECT");
+				if (fdate > ldate){
+					com.messagBox("alert", "지정할 수 없는 날짜입니다.",scwin.checkCLoseL(info));
+				}
+			};
+			
+			//라디오 버튼에 따라 날짜 설정
+			scwin.calendar_radio_onviewchange = function(info) {
+				com.setCalendarRadioChange(F_DATE_VH0206, L_DATE_VH0206, info);
+			};
+			
+			scwin.getFooterDiv = function(data, dataType) {
+				var count01 = 0;
+				var count02 = 0;
+				var count03 = 0; 
+				var total = dlt_BMS_DVC_COND_PARAM_INFO_HIS.getRowCount();
+				var result = "";
+				
+				//추후 카운트 할 것 추가
+				if (data.length > 0) {
+					result = "총 : "+ total + "건";
+					return result;
+				}
+				else if(data.length == 0){
+				
+					result = "총 : "+ total + "건";
+					return result;
+				}
+				
+			};		
+			
+			scwin.ynDisplayFormatter = function(data){
+				if(data == ''){
+					return data;
+				}else if(data == 'Y'){
+					return '예'
+				}else if(data == 'N'){
+					return '아니요'
+				}else{
+					return data;
+				}
+			}
+		]]></script>
+	</head>
+	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
+		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
+
+			<xf:group id="" class="grdc_2f_8f title-wrap" style="">
+				<xf:group id="pgm_header_left" class="pgm_header_left" style="">
+					<w2:wframe id="wfm_title" style="" src="/cm/common/wf_title.xml" scope="true"></w2:wframe>
+				</xf:group>
+				<xf:group id="pgm_header_right" class="pgm_header_right" style="">
+					<xf:group id="pgm_rightNavi" class="pgm_rightNavi" style="">
+						<w2:wframe id="rightNavi" class="" style="" src="/cm/common/wf_rightNavi.xml" scope="true"></w2:wframe>
+					</xf:group>
+					<xf:group id="pgm_header" class="pgm_header" style="">
+						<w2:wframe id="wfm_mainBtn" class="main_Btn" style="float:right" src="/cm/common/wf_mainBtn.xml" scope="true"></w2:wframe>
+					</xf:group>
+				</xf:group>
+			</xf:group>
+
+			<xf:group id="pgm_content" class="pgm_content grdc_a" style="">
+				<xf:group id="pgm_list" class="pgm_list grdr_20_50_a bms_box_wrap" style="">
+					<xf:group id="" class="" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl list ico-list" id="" label="차량 매개변수 이력" style=""></w2:textbox>
+						</xf:group>
+					</xf:group>
+
+					<xf:group id="" class="" style="">
+						<xf:group id="" style="" class="gr_search">
+							<xf:group class="label" id="" style="margin-left:10px">
+								<w2:span class="" id="" label="차량번호" style=""></w2:span>
+							</xf:group>
+							<xf:group class="search" id="" style="">
+								<w2:autoComplete allOption="" caseSensitive="false" chooseOption="true" chooseOptionLabel="-전체-"
+									chooseOptionValue="" class="search_auto" displayMode="label" editType="select" emptyItem="" emptyValue="" ev:onchange=""
+									ev:onviewchange="" id="autoChoiceBox" interactionMode="" noResult="useData" ref="data:dma_search.CONTENT2" search="start"
+									selectedData="" style="width: 130px;" submenuSize="auto" textAlign="" useKeywordHighlight="false" visibleRowNum=""
+									nextTabByEnter="" disableEdit="">
+									<w2:choices>
+										<w2:itemset nodeset="data:dlt_BMS_VHC_MST">
+											<w2:label ref="VHC_NO"></w2:label>
+											<w2:value ref="VHC_ID"></w2:value>
+										</w2:itemset>
+									</w2:choices>
+								</w2:autoComplete>
+							</xf:group>		
+							<xf:group class="search" id="" style="">
+								<xf:group class="label" id="" style="margin-left:10px">
+									<w2:span class="" id="" label="장치종류" style=""></w2:span>
+								</xf:group>
+								<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="" id=""
+									optionOrder="false" ref="data:dma_search.DVC_KIND" class="search_type_100" style="" submenuSize="auto" textAlign="center"
+									chooseOptionLabel="-전체-">
+									<xf:choices>
+										<xf:itemset nodeset="data:dlt_DvcItem">
+											<xf:label ref="DL_CD_NM"></xf:label>
+											<xf:value ref="DL_CD"></xf:value>
+										</xf:itemset>
+									</xf:choices>
+								</xf:select1>
+								<xf:group class="label" id="" style="margin-left:10px">
+									<w2:span class="" id="" label="매개변수구분" style=""></w2:span>
+								</xf:group>
+								<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="" id=""
+									optionOrder="false" ref="data:dma_search.PARAM_DIV" class="search_type_100" style="" submenuSize="auto" textAlign="center"
+									chooseOptionLabel="-전체-">
+									<xf:choices>
+										<xf:item>
+											<xf:label><![CDATA[설정]]></xf:label>
+											<xf:value><![CDATA[PD001]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[제어]]></xf:label>
+											<xf:value><![CDATA[PD002]]></xf:value>
+										</xf:item>
+										<xf:item>
+											<xf:label><![CDATA[상태]]></xf:label>
+											<xf:value><![CDATA[PD003]]></xf:value>
+										</xf:item>
+									</xf:choices>
+								</xf:select1>
+								<xf:group class="label" id="" style="margin-left:10px">
+									<w2:span class="" id="" label="매개변수종류" style=""></w2:span>
+								</xf:group>
+								<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
+									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="" id=""
+									optionOrder="false" ref="data:dma_search.PARAM_KIND" class="search_type_100" style="" submenuSize="auto" textAlign="center"
+									chooseOptionLabel="-전체-">
+									<xf:choices>
+										<xf:itemset nodeset="data:dlt_DvcParamItem">
+											<xf:label ref="DL_CD_NM"></xf:label>
+											<xf:value ref="DL_CD"></xf:value>
+										</xf:itemset>
+									</xf:choices>
+								</xf:select1>
+								<xf:group class="label" id="" style="margin-left:10px;">
+									<w2:span class="" id="" label="기간"></w2:span>
+								</xf:group>
+								<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+									style="width:120px; margin-right: 5px; float: left;margin-top: 3px;" id="F_DATE_VH0206" renderType="component" renderDiv="true"
+									calendarValueType="yearMonthDate" ref="data:dma_search.F_DATE_VH0206" ev:onviewchange="scwin.F_DATE_VH0206_onviewchange" placeholder="yyyymmdd">
+								</w2:inputCalendar>
+								<w2:span label="~" style="float: left;margin-right: 5px;margin-top: 5px;" id=""></w2:span>
+								<w2:inputCalendar footerDiv="false" rightAlign="false" focusOnDateSelect="false"
+									style="width: 120px;float: left;margin-top: 3px;" id="L_DATE_VH0206" renderType="component" renderDiv="true" placeholder="yyyymmdd" calendarValueType="yearMonthDate" ref="data:dma_search.L_DATE_VH0206" ev:onviewchange="scwin.L_DATE_VH0206_onviewchange">
+								</w2:inputCalendar>
+								<xf:group id="" style="margin-left: 10px;" class="radio">
+									<xf:select1 id="calendar_radio" ref="" selectedIndex="1" cols="" appearance="full"
+										style="margin-light: 10px;min-width: 200px;" rows="1" ev:onviewchange="scwin.calendar_radio_onviewchange">
+										<xf:choices>
+											<xf:item>
+												<xf:label><![CDATA[직접입력]]></xf:label>
+												<xf:value><![CDATA[DIRECT]]></xf:value>
+											</xf:item>
+											<xf:item>
+												<xf:label><![CDATA[금일]]></xf:label>
+												<xf:value><![CDATA[TODAY]]></xf:value>
+											</xf:item>
+											<xf:item>
+												<xf:label><![CDATA[일주일]]></xf:label>
+												<xf:value><![CDATA[WEEK]]></xf:value>
+											</xf:item>
+											<xf:item>
+												<xf:label><![CDATA[1개월]]></xf:label>
+												<xf:value><![CDATA[MONTH]]></xf:value>
+											</xf:item>
+										</xf:choices>
+									</xf:select1>
+								</xf:group>
+							</xf:group>
+							<w2:wframe id="wfm_mainSearchBtn" class="wfm_mainSearchBtn" style="" src="/cm/common/wf_mainSrhBtn.xml" scope="true"></w2:wframe>
+						</xf:group>
+					</xf:group> <!-- pgm_header -->
+					<xf:group id="" class="pgm_list grdr_2_a" style="">
+
+						<xf:group></xf:group>
+						<xf:group id="" class="" style="">
+							<w2:gridView autoFit="lastColumn" class="cm_grid left" dataList="data:dlt_BMS_DVC_COND_PARAM_INFO_HIS"
+							ev:onrowindexchange="scwin.VH0206G0_onrowindexchange" fixedColumnWithHidden="true" id="VH0206G0" ignoreCellClick="false"
+							rowNumHeaderValue="No." rowNumVisible="true" rowStatusVisible="false" rowStatusWidth="40" scrollByColumn="false" useShiftKey="true"
+							autoFitMinWidth="0" readOnly="true" focusMode="row" showSortableImage="false" sortEvent="onclick" noResultMessage="기간내 이력 없음"
+							fixedColumn="2">
+							<w2:caption style="" id="caption2" value="this is a grid caption."></w2:caption>
+								<w2:header style="" id="header2">
+									<w2:row style="" id="row3">
+										<w2:column width="130" id="column6" value="전송일시"></w2:column>
+										<w2:column width="130" id="column1" value="갱신일시"></w2:column>
+										<w2:column width="100" id="column8" value="차량아이디"></w2:column>
+										<w2:column width="90" id="column15" value="차량번호"></w2:column>
+										<w2:column width="100" id="column9" value="장치아이디"></w2:column>
+										<w2:column width="170" id="column4" value="장치종류"></w2:column>
+										<w2:column width="100" id="column60" value="매개변수구분"></w2:column>
+										<w2:column width="150" id="column18" value="매개변수종류"></w2:column>
+										<w2:column width="130" id="column5" value="관리아이디"></w2:column>
+										<w2:column width="200" id="column17" value="데이터값"></w2:column>
+									</w2:row>
+								</w2:header>
+								<w2:gBody style="" id="gBody2">
+									<w2:row style="" id="row4">
+										<w2:column width="130" id="SEND_DTM"></w2:column>
+										<w2:column width="130" id="UPD_DTM"></w2:column>
+										<w2:column width="100" id="VHC_ID"></w2:column>
+										<w2:column width="90" id="VHC_NO"></w2:column>
+										<w2:column width="100" id="DVC_ID"></w2:column>
+										<w2:column width="170" id="DVC_KIND" inputType="select"></w2:column>
+										<w2:column width="100" id="PARAM_DIV" inputType="select"></w2:column>
+										<w2:column width="150" id="PARAM_KIND" inputType="select"></w2:column>
+										<w2:column width="130" id="MNG_ID"></w2:column>
+										<w2:column width="200" id="DATA_VAL" style="text-align:left;"></w2:column>
+									</w2:row>
+								</w2:gBody>
+								<w2:footer id="footer1" style="">
+									<w2:row id="row3" style="">
+										<w2:column blockSelect="false" colSpan="50" displayMode="label"
+											expression="custom(scwin.getFooterDiv, 'HIS_DIV')" id="column42" inputType="expression" removeBorderStyle="false"
+											style="height:28px;" textAlign="left" width="" importExp="" excelExpression="">
+										</w2:column>
+									</w2:row>
+								</w2:footer>
+							</w2:gridView>
+						</xf:group>
+					<!-- <xf:group id="" class="horizontal_line">
+						</xf:group>
+						<xf:group id="pgm_subList" class="pgm_subList grdr_20_2_a" style="">
+						<xf:group class="defaultbox" id="" style="">
+						<w2:textbox class="df_tt fl" id="" label="Dispatch 전송 정보" style=""></w2:textbox>
+						</xf:group>
+						<xf:group></xf:group>
+						<xf:group class="" id="" style="">
+						<xf:group class="w2tb tb" id="VH0206F0" style="width:100%;" tagname="table">
+						<w2:attributes>
+						<w2:summary></w2:summary>
+						</w2:attributes>
+						<xf:group tagname="colgroup">
+						<xf:group style="width:90px;" tagname="col"></xf:group>
+						<xf:group style="width:120px;" tagname="col"></xf:group>
+						<xf:group style="width:90px;" tagname="col"></xf:group>
+						<xf:group style="width:120px;" tagname="col"></xf:group>
+						</xf:group>
+						<xf:group style="" tagname="tr">
+						<xf:group class="w2tb_th req" style="" tagname="th">전송일시</xf:group>
+						<xf:group class="w2tb_td" style="" tagname="td">
+						<xf:input adjustMaxLength="false" id="" style="width: 100%;height: 21px;" readOnly="true" ref="data:dlt_BMS_DVC_COND_PARAM_INFO_HIS.OCR_DTM"></xf:input>
+						</xf:group>
+						<xf:group class="w2tb_th" style="" tagname="th" id="">차량번호</xf:group>
+						<xf:group class="w2tb_td" style="width: 160px;" tagname="td">
+						
+						<xf:input adjustMaxLength="false" id="" style="width: 100%;height: 21px;" readOnly="true" ref="data:dlt_BMS_DVC_COND_PARAM_INFO_HIS.VHC_NO"></xf:input>
+						</xf:group>
+						</xf:group>
+						<xf:group tagname="tr" style="">
+						<xf:group tagname="th" class="w2tb_th">GPS_X<w2:attributes>
+						<w2:scope>row</w2:scope>
+						</w2:attributes></xf:group>
+						<xf:group tagname="td" class="w2tb_td">
+						
+						<xf:input adjustMaxLength="false" id="" style="width: 100%;height: 21px;" readOnly="true" ref="data:dlt_BMS_DVC_COND_PARAM_INFO_HIS.GPS_X"></xf:input>
+						</xf:group>
+						<xf:group tagname="th" class="w2tb_th">GPS_Y<w2:attributes></w2:attributes></xf:group>
+						<xf:group tagname="td" class="w2tb_td">
+						
+						<xf:input adjustMaxLength="false" id="" style="width: 100%;height: 21px;" readOnly="true" ref="data:dlt_BMS_DVC_COND_PARAM_INFO_HIS.GPS_Y"></xf:input>
+						</xf:group>
+						</xf:group>
+						<xf:group style="" tagname="tr">
+						<xf:group class="w2tb_th" style="" tagname="th">전송&amp;nbsp;노드</xf:group>
+						<xf:group class="w2tb_td" style="" tagname="td">
+						
+						<xf:input adjustMaxLength="false" id="" style="width: 100%;height: 21px;" readOnly="true" ref="data:dlt_BMS_DVC_COND_PARAM_INFO_HIS.NODE_ID"></xf:input>
+						</xf:group>
+						<xf:group tagname="th" class="w2tb_th">전송&amp;nbsp;링크<w2:attributes></w2:attributes></xf:group>
+						<xf:group tagname="td" class="w2tb_td">
+						
+						<xf:input adjustMaxLength="false" id="" style="width: 100%;height: 21px;" readOnly="true" ref="data:dlt_BMS_DVC_COND_PARAM_INFO_HIS.NODE_ID"></xf:input>
+						</xf:group>
+						</xf:group>
+						<xf:group tagname="tr" style=""><xf:group tagname="th" class="w2tb_th">Dispatch&amp;nbsp;메시지&amp;nbsp;내용<w2:attributes><w2:scope>row</w2:scope></w2:attributes></xf:group>
+						<xf:group tagname="td" class="w2tb_td">
+						<w2:attributes>
+						<w2:colspan>3</w2:colspan>
+						<w2:rowspan>1</w2:rowspan>
+						</w2:attributes>
+						<xf:textarea id="" style="width: 100%;height: 125px;" readOnly="true" ref="data:dlt_BMS_DVC_COND_PARAM_INFO_HIS.DSPTCH_CONTS"></xf:textarea>
+						</xf:group></xf:group></xf:group>
+						</xf:group>	 
+						</xf:group>--><!-- end pgm_subList -->
+				</xf:group><!-- pgm_list end -->
+
+				<!-- <xf:group id="" class="vertical_line"></xf:group>
+				<xf:group id="pgm_detail" class="pgm_detail grdr_20_2_a" style="">
+					<xf:group class="gr_map_header" id="" style="">
+						<xf:group class="defaultbox" id="" style="">
+							<w2:textbox class="df_tt fl" id="" label="지도" style=""></w2:textbox>
+						</xf:group>
+					</xf:group>
+					<xf:group></xf:group>
+					<xf:group id="" style="">
+						<div id="map_VH0206" style="overflow:hidden;">
+							<ul id="category_map_VH0206" class="category">
+					   		 </ul>	
+						</div>
+					</xf:group>
+				</xf:group> -->
+				</xf:group>	
+			</xf:group> <!-- end content --> 
+		</xf:group> <!-- end container -->
+	</body>
+</html>
