@@ -185,15 +185,36 @@
 		if(month.length == 1){
 			month = zero + month;
 		}
+				
+		var weekAgoDate = new Date(date.setDate(date.getDate() - 7));
+		var weekAgoYear = weekAgoDate.getFullYear().toString();
+		var weekAgoMonth = (weekAgoDate.getMonth()+1).toString();
+		var weekAgoDay = weekAgoDate.getDate().toString();
+		if(weekAgoDay.length == 1){
+			weekAgoDay = zero + weekAgoDay;
+		}
 		
-		var weekAgoDay = parseInt(day) - 7;
+		if(weekAgoMonth.length == 1){
+			weekAgoMonth = zero + weekAgoMonth;
+		}		
+		
+		
+		date = new Date();
+		var monthAgoDate = new Date(date.setMonth(date.getMonth() - 1));
+		var monthAgoYear = monthAgoDate.getFullYear().toString();
+		var monthAgoMonth = (monthAgoDate.getMonth()+1).toString();
+		var monthAgoDay = monthAgoDate.getDate().toString();		
+		if(monthAgoDay.length == 1){
+			monthAgoDay = zero + monthAgoDay;
+		}
+		
+		if(monthAgoMonth.length == 1){
+			monthAgoMonth = zero + monthAgoMonth;
+		}			
+		
 		var todaysDate = year+month+day;
-		var weekAgoDate = year+month+weekAgoDay;
-		var firstday = year+month+"01";		
-		
-		if(parseInt(weekAgoDay) <= 0) {
-	         weekAgoDate = firstday;   
-	      }
+		weekAgoDate = weekAgoYear + weekAgoMonth + weekAgoDay;
+		monthAgoDate = monthAgoYear + monthAgoMonth + monthAgoDay;		
 		
 		if(info.value == "DIRECT") {
 			F_DATE.setValue();
@@ -211,7 +232,7 @@
 		}
 		
 		else if(info.value == "MONTH") {
-			F_DATE.setValue(firstday);
+			F_DATE.setValue(monthAgoDate);
 			L_DATE.setValue(todaysDate);				
 		}
 	};

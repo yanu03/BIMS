@@ -75,7 +75,7 @@ public class FM0203Service extends ServiceSupport {
 					//장치 펌웨어 업데이트
 					String mngId = String.valueOf(data.get("MNG_ID"));
 					String fileExt = String.valueOf(data.get("FILE_EXTENSION"));
-					String fileName = data.get("DVC_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString();
+					String fileName = data.get("FCLT_ID").toString()+ "."+ data.get("FILE_EXTENSION").toString();
 					
 					ftpHandler.uploadFM0203(mngId, "/firmware/", fileName, fileExt);
 					

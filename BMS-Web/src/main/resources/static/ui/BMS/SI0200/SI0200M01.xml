@@ -225,6 +225,19 @@
 	scwin.SI0200G0_onrowindexchange = function(row, oldRow) {
 		com.changeSingleGrid(SI0200G0, row, oldRow);
 	};
+	
+	scwin.PSG_CNT_onviewchange = function(info) {
+		if(isNaN(parseInt(info.newValue))) {
+			com.alert("숫자만 입력 가능합니다.");
+			PSG_CNT.setValue(info.oldValue);	
+			return;
+		}
+		
+		if(info.newValue > 999) {
+			com.alert("최대 999명까지 입력 가능합니다.");
+			PSG_CNT.setValue(info.oldValue);	
+		}
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
@@ -671,7 +684,7 @@
 								<xf:group class="w2tb_td" tagname="td">
 									<w2:attributes></w2:attributes>
 									<w2:spinner buttonSize="30" dataType="number" id="PSG_CNT" inputReadOnly="" min="0" ref="data:dlt_BMS_VHC_MST.PSG_CNT"
-										skin="type1" style="position: relative;width: 110px; height:21px;" max="9999999">
+										skin="type1" style="position: relative;width: 110px; height:21px;" max="999" ev:onviewchange="scwin.PSG_CNT_onviewchange">
 									</w2:spinner>
 								</xf:group>
 							</xf:group>

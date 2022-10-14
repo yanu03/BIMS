@@ -29,7 +29,7 @@
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(HIS_DIV)">
 				HIS_DIV = #{HIS_DIV}
 		</if>
-		<if test="@kr.tracom.util.CommonUtil@notEmpty(HIS_DIV)">
+		<if test="@kr.tracom.util.CommonUtil@notEmpty(CRS_KIND)">
 				AND CRS_KIND = #{CRS_KIND}
 		</if>
 		<if test="@kr.tracom.util.CommonUtil@notEmpty(CONTENT)">

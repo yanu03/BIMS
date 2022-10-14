@@ -340,7 +340,7 @@
 		var rowIndexArr = dlt_BMS_DVC_INFO.getMatchedIndex("PARENT_ID", parentId, true, 0, dlt_BMS_DVC_INFO.getTotalRow());
 		var DvcLevel = WebSquare.util.getNumber(dlt_BMS_DVC_INFO.getCellData(rowIndexArr[rowIndexArr.length - 1], "LEVEL"));
 		var insertRowIndex = scwin.getInsertRowIndex(parentId);
-		debugger;
+
 		if(DvcLevel == 1){
 			//var sortOrder = WebSquare.util.getNumber(dlt_BMS_DVC_INFO.getCellData(rowIndexArr[rowIndexArr.length - 1], "SORT")) + 1;
 			//var menuCd = scwin.getInsertRowMenuCd(parentId, DvcLevel, false);
@@ -636,14 +636,14 @@
 									<w2:column removeBorderStyle="false" width="170" inputType="text" style="height:20px" id="column10"
 										value="장치종류" blockSelect="false" displayMode="label" sortable="true" class="req">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column1"
-										value="제조사" blockSelect="false" displayMode="label" class="req">
+									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px" id="column6"
+										value="관리ID" blockSelect="false" displayMode="label" class="req">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column8"
 										value="설치위치" blockSelect="false" displayMode="label" class="req">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="130" inputType="text" style="height:20px" id="column6"
-										value="관리ID" blockSelect="false" displayMode="label" class="req">
+									<w2:column removeBorderStyle="false" width="150" inputType="text" style="height:20px" id="column1"
+										value="제조사" blockSelect="false" displayMode="label" class="">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="120" inputType="text" style="height:20px" id="column7"
 										value="장치IP" blockSelect="false" displayMode="label">
@@ -668,6 +668,12 @@
 										id="DVC_KIND_NM" value="" blockSelect="false" displayMode="label" userData1="" showDepth="2" depthColumn="LEVEL" depthType="div"
 										textAlign="left">
 									</w2:column>
+									<w2:column removeBorderStyle="false" width="86" inputType="text" style="height:20px" id="MNG_ID"
+										value="" blockSelect="false" displayMode="label" textAlign="left" userData1="M">
+									</w2:column>
+									<w2:column removeBorderStyle="false" width="109" inputType="select" style="height:20px" id="INST_LOC"
+										value="" blockSelect="false" displayMode="label" userData1="M">
+									</w2:column>
 									<w2:column id="ORG_ID" blockSelect="false" readOnly="true" style="height:20px;" width=""
 										inputType="select" displayMode="label" textAlign="left" chooseOption="false" chooseOptionLabel="" checkboxLabelFormatter=""
 										allOption="" ref="" userData1="">
@@ -677,12 +683,6 @@
 												<w2:value ref="PARTNER_ID"></w2:value>
 											</w2:itemset>
 										</w2:choices>
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="109" inputType="select" style="height:20px" id="INST_LOC"
-										value="" blockSelect="false" displayMode="label" userData1="M">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="86" inputType="text" style="height:20px" id="MNG_ID"
-										value="" blockSelect="false" displayMode="label" textAlign="left" userData1="M">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="117" inputType="text" style="height:20px" id="DVC_IP"
 										value="" blockSelect="false" displayMode="label" textAlign="right">
@@ -752,23 +752,13 @@
 										ref="data:dlt_BMS_DVC_INFO.DVC_ID" style="width:100px;">
 									</xf:input>
 								</xf:group>
-								<xf:group class="w2tb_th req" style="" tagname="th" id="">제조사</xf:group>
+								<xf:group class="w2tb_th req" style="" tagname="th">관리ID</xf:group>
 								<xf:group class="w2tb_td" style="" tagname="td">
-									<w2:attributes>
-										<w2:colspan>1</w2:colspan>
-										<w2:rowspan>1</w2:rowspan>
-									</w2:attributes>
-									<xf:select1 id="PARTNER_NM" chooseOption="true" style="width: 160px;" submenuSize="auto" allOption=""
-										disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled" ref="data:dlt_BMS_DVC_INFO.PARTNER_ID"
-										chooseOptionLabel="-선택-" ev:onchange="scwin.PARTNER_NM_onchange">
-										<xf:choices>
-											<xf:itemset nodeset="data:dlt_searchitem2">
-												<xf:label ref="PARTNER_NM"></xf:label>
-												<xf:value ref="PARTNER_ID"></xf:value>
-											</xf:itemset>
-										</xf:choices>
-									</xf:select1>
-								</xf:group>
+									<xf:group id="" style=""></xf:group>
+									<xf:input allowChar="" customModelFormatter="" dataType="text" displayFormatter="" displaymessage=""
+										id="MNG_ID" maxByteLength="" maxlength="16" ref="data:dlt_BMS_DVC_INFO.MNG_ID" style="width:100%;">
+									</xf:input>
+								</xf:group>								
 							</xf:group>
 							<xf:group tagname="tr" style="">
 								<xf:group tagname="th" class="w2tb_th req">
@@ -804,13 +794,23 @@
 								</xf:group>
 							</xf:group>
 							<xf:group style="" tagname="tr">
-								<xf:group class="w2tb_th req" style="" tagname="th">관리ID</xf:group>
+								<xf:group class="w2tb_th" style="" tagname="th" id="">제조사</xf:group>
 								<xf:group class="w2tb_td" style="" tagname="td">
-									<xf:group id="" style=""></xf:group>
-									<xf:input allowChar="" customModelFormatter="" dataType="text" displayFormatter="" displaymessage=""
-										id="MNG_ID" maxByteLength="" maxlength="16" ref="data:dlt_BMS_DVC_INFO.MNG_ID" style="width:100%;">
-									</xf:input>
-								</xf:group>
+									<w2:attributes>
+										<w2:colspan>1</w2:colspan>
+										<w2:rowspan>1</w2:rowspan>
+									</w2:attributes>
+									<xf:select1 id="PARTNER_NM" chooseOption="true" style="width: 160px;" submenuSize="auto" allOption=""
+										disabled="false" direction="auto" appearance="minimal" disabledClass="w2selectbox_disabled" ref="data:dlt_BMS_DVC_INFO.ORG_ID"
+										chooseOptionLabel="-선택-" ev:onchange="scwin.PARTNER_NM_onchange">
+										<xf:choices>
+											<xf:itemset nodeset="data:dlt_searchitem2">
+												<xf:label ref="PARTNER_NM"></xf:label>
+												<xf:value ref="PARTNER_ID"></xf:value>
+											</xf:itemset>
+										</xf:choices>
+									</xf:select1>
+								</xf:group>							
 								<xf:group tagname="th" class="w2tb_th">
 									제어여부
 									<w2:attributes>

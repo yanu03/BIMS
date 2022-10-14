@@ -136,7 +136,7 @@
 	var isEdit = false;
 	scwin.onpageload = function() {
 		var autoOptions = {
-			Main : { grid : SI0101G0, srchSbm : sub_SI0101G0R0, savSbm : sub_SI0101G0S0, keySbm : sub_SI0101G0K0 
+			Main : { grid : SI0101G0, frm: SI0100F0, srchSbm : sub_SI0101G0R0, savSbm : sub_SI0101G0S0, keySbm : sub_SI0101G0K0 
 					,srchGrp : pgm_search, keyColumn : "GRG_ID", focusColumn : "GRG_NM", name :  "차고지 목록", search_map : dma_search}
 		};
 		

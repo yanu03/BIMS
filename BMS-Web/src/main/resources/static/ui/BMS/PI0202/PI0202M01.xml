@@ -402,7 +402,16 @@
 		}
 	
 	}
-	]]></script>
+	
+	scwin.subGridUp = function() {
+		var idx = PI0202G1.getFocusedRowIndex();
+		com.getGridViewDataList(PI0202G1).rowMoveUp(idx);		
+	}
+	
+	scwin.subGridDown = function() {
+		var idx = PI0202G1.getFocusedRowIndex();
+		com.getGridViewDataList(PI0202G1).rowMoveDown(idx);	
+	}]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">

@@ -344,19 +344,19 @@
 										ref="data:dlt_BRT_INCDNT_SCNRO_MST.INCDNT_TYPE" chooseOptionLabel="-선택-">
 										<xf:choices>
 											<xf:item>
-												<xf:label><![CDATA[고장]]></xf:label>
+												<xf:label><![CDATA[사고]]></xf:label>
 												<xf:value><![CDATA[IC001]]></xf:value>
 											</xf:item>
 											<xf:item>
-												<xf:label><![CDATA[사고]]></xf:label>
+												<xf:label><![CDATA[낙하]]></xf:label>
 												<xf:value><![CDATA[IC002]]></xf:value>
 											</xf:item>
 											<xf:item>
-												<xf:label><![CDATA[긴급]]></xf:label>
+												<xf:label><![CDATA[고장]]></xf:label>
 												<xf:value><![CDATA[IC003]]></xf:value>
 											</xf:item>
 											<xf:item>
-												<xf:label><![CDATA[노선이탈]]></xf:label>
+												<xf:label><![CDATA[기타]]></xf:label>
 												<xf:value><![CDATA[IC004]]></xf:value>
 											</xf:item>
 										</xf:choices>
