@@ -443,7 +443,7 @@
 		 };
 		 
 		var mainOptions = {
-			EXL:scwin.btn_excel_onclick,
+			//EXL:scwin.btn_excel_onclick,
 			SEARCH:{}
 		};
 		 

@@ -54,6 +54,8 @@
 	SELECT			PARTNER_ID
 					,PARTNER_NM
 	FROM	  		BMS_PARTNER_MST
+	
+	WHERE			PARTNER_DIV = "PD008"
 </select>	
 	
 <select id="VD0100G0R0" resultType="Map">
@@ -139,7 +141,7 @@ ORDER BY
 	VALUES			(
 						#{VHC_ID}
 						,#{DVC_ID}
-						,#{PARTNER_ID}
+						,#{ORG_ID}
 						,#{DVC_KIND}
 						,#{DVC_COORDS}
 						,#{INST_LOC}
@@ -165,7 +167,7 @@ ORDER BY
 <update id="VD0100G0U0" parameterType="Map">
 	UPDATE			BMS_DVC_INFO
 	SET				VHC_ID = #{VHC_ID}
-					,ORG_ID = #{PARTNER_ID}
+					,ORG_ID = #{ORG_ID}
 					,DVC_KIND = #{DVC_KIND}
 					,DVC_COORDS = #{DVC_COORDS}
 					,INST_LOC = #{INST_LOC}

@@ -502,10 +502,10 @@
 										blockSelect="false" displayMode="label" displayFormatter="" userData1="M" textAlign="left">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="STTN_TEXT_B" value=""
-										blockSelect="false" displayMode="label" displayFormatter="" userData1="M" textAlign="left">
+										blockSelect="false" displayMode="label" displayFormatter="" userData1="" textAlign="left">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="STTN_TEXT_A_EN" value=""
-										blockSelect="false" displayMode="label" displayFormatter="" userData1="M" textAlign="left">
+										blockSelect="false" displayMode="label" displayFormatter="" userData1="" textAlign="left">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="" inputType="text" style="height:20px" id="STTN_TEXT_B_EN" value=""
 										blockSelect="false" displayMode="label" displayFormatter="" textAlign="left">
@@ -740,7 +740,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" style="" class="w2tb_th req">
+								<xf:group tagname="th" style="" class="w2tb_th">
 									다음정류장문구 (한글)
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
@@ -757,7 +757,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" style="" class="w2tb_th req">
+								<xf:group tagname="th" style="" class="w2tb_th">
 									이번정류장문구 (영문)
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
