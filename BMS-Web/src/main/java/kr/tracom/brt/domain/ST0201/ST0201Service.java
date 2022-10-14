@@ -16,34 +16,26 @@ public class ST0201Service extends ServiceSupport {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ServiceSupport.class);
 
 	@Autowired
-	private ST0201Mapper st02010Mapper;
+	private ST0201Mapper st0201Mapper;
 	
 	public List ST0201G0R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_search");
-		return st02010Mapper.ST0201G0R0(map);
+		return st0201Mapper.ST0201G0R0(map);
 	}
 	
-	public List ST0201SHI1() throws Exception {
+	public List ST0201G1R0() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_sub_search");
-		return st02010Mapper.ST0201SHI1(map);
+		return st0201Mapper.ST0201G1R0(map);
 	}
 	
-	public Map ST0201G1R0() throws Exception {
-		Map<String, Object> map = getSimpleDataMap("dma_sub_search2");
-		return st02010Mapper.ST0201G1R0(map);
-	}
-	
-	public Map ST0201G1R1() throws Exception {
-		Map<String, Object> map = getSimpleDataMap("dma_sub_search2");
-		return st02010Mapper.ST0201G1R1(map);
-	}
-	
-	public List ST0201G2R0() throws Exception {
+	public List ST0201G1R1() throws Exception {
 		Map<String, Object> map = getSimpleDataMap("dma_sub_search");
-		Map<String, Object> map1 = getSimpleDataMap("dma_sub_search3");
-		map.putAll(map1);
-		return st02010Mapper.ST0201G2R0(map);
+		return st0201Mapper.ST0201G1R1(map);
 	}
 	
+	public List ST0201G1R2() throws Exception {
+		Map<String, Object> map = getSimpleDataMap("dma_sub_search");
+		return st0201Mapper.ST0201G1R2(map);
+	}
 	
 }

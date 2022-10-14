@@ -236,6 +236,7 @@
 .grdr_20_2_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 1fr minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_2_1f_20_1f {display:grid; grid-template-rows: minmax(2px, max-content) 1fr minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_30_1f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(30px, max-content) 1fr minmax(20px, max-content) 1fr;} /* 왼쪽그리드 하단 */
+.grdr_20_2_30_2f_20_1f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) minmax(30px, max-content) 1.2fr minmax(20px, max-content) 0.8fr;} /* 차트 통계 */
 .grdr_20_2_3f_20_7f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 3fr minmax(20px, max-content) 7fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_6f_20_4f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 6fr minmax(20px, max-content) 4fr;} /* 왼쪽그리드 하단 */
 .grdr_20_2_7f_20_3f {display:grid; grid-template-rows: minmax(20px, max-content) minmax(2px, max-content) 7fr minmax(20px, max-content) 3fr;} /* 왼쪽그리드 하단 */

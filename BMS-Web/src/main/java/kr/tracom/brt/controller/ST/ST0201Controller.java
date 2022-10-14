@@ -16,38 +16,24 @@ import kr.tracom.cm.support.ControllerSupport;
 public class ST0201Controller extends ControllerSupport {
 
 	@Autowired
-	private ST0201Service ST0201Service;
-	
+	private ST0201Service st0201Service;
 	
 	@RequestMapping("/st/ST0201G0R0")
 	public @ResponseBody Map<String, Object> ST0201G0R0() throws Exception {
-		result.setData("dlt_BMS_ROUT_MST", ST0201Service.ST0201G0R0());
-		return result.getResult();
-	}
-	
-	@RequestMapping("/st/ST0201SHI1")
-	public @ResponseBody Map<String, Object> ST0201SHI1() throws Exception {
-		result.setData("dlt_BMS_ROUT_NODE_CMPSTN", ST0201Service.ST0201SHI1());
+		result.setData("dlt_BMS_ROUT_NODE_CMPSTN", st0201Service.ST0201G0R0());
 		return result.getResult();
 	}
 	
 	@RequestMapping("/st/ST0201G1R0")
 	public @ResponseBody Map<String, Object> ST0201G1R0() throws Exception {
-		result.setData("dma_sub_search3", ST0201Service.ST0201G1R0());
+		result.setData("dlt_BRT_ROUT_STTN_LINK_STAT", st0201Service.ST0201G1R0());
 		return result.getResult();
 	}
 	
 	@RequestMapping("/st/ST0201G1R1")
 	public @ResponseBody Map<String, Object> ST0201G1R1() throws Exception {
-		result.setData("dma_sub_search3", ST0201Service.ST0201G1R1());
+		result.setData("dlt_BRT_ROUT_STTN_LINK_STAT_2", st0201Service.ST0201G1R1());
 		return result.getResult();
 	}
-	
-	@RequestMapping("/st/ST0201G2R0")
-	public @ResponseBody Map<String, Object> ST0201G2R0() throws Exception {
-		result.setData("dlt_BRT_ROUT_LINK_STAT", ST0201Service.ST0201G2R0());
-		return result.getResult();
-	}
-	
 	
 }

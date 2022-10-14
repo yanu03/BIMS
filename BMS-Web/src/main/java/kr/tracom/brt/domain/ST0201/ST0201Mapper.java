@@ -10,12 +10,8 @@ public interface ST0201Mapper {
 
 	public List ST0201G0R0(Map param);
 	
-	public List ST0201SHI1(Map param);
-	
-	public Map ST0201G1R0(Map param);
-	
-	public Map ST0201G1R1(Map param);
-	
-	public List ST0201G2R0(Map param);
+	public List ST0201G1R0(Map param);
+	public List ST0201G1R1(Map param);
+	public List ST0201G1R2(Map param);
 	
 }
