@@ -97,7 +97,7 @@
 	 */
 	scwin.onpageload = function() {
 		var autoOptions = {
-			Main : { grid : grd_organizationBasic, srchSbm : sbm_searchOrganization, savSbm : sbm_saveOrganizationBasic
+			Main : { grid : grd_organizationBasic, frm : pgm_detail, srchSbm : sbm_searchOrganization, savSbm : sbm_saveOrganizationBasic
 				, keySbm : sbm_organizaionKey, srchGrp : pgm_search, keyColumn : "ORG_ID", focusColumn : "ORG_NM", name :  "조직정보" }
 		 };
 		var codeOptions = [ { "code" : "ORG_DIV", "compID" : "sbx_OrgDiv, grd_organizationBasic:ORG_DIV" } ];

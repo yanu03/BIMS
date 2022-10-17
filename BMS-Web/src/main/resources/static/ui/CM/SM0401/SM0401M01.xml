@@ -172,6 +172,9 @@
 	 * 인사기본관리 저장 버튼 클릭한다.
 	 */
 	scwin.btn_saveMember_onclick = function() {
+		if(com.validateGridTableView(grd_memberBasic, grp_memberBasicDetailTop) == false) {
+			return;
+		}
 		var modifiedIdx = dlt_memberBasic.getModifiedIndex();
 		var modifiedRowCount = modifiedIdx.length;
 		
@@ -185,6 +188,7 @@
 			if(rowStatus=="C"){
 				if(modifiedData.NEW_USER_PS.length==0){
 					com.alert("새 비밀번호를 입력해야 합니다.");
+					ibx_userPs.focus();
 					com.focusGridFrm(grd_memberBasic, grp_memberBasicDetailTop, index, "NEW_USER_PS", false);
 					return;
 				}
@@ -205,7 +209,7 @@
 		}
 
 		if (com.validateGridTableView(grd_memberBasic, grp_memberBasicDetailTop) && modifiedRowCount > 0) {
-			com.confirm(modifiedRowCount + "건의 데이타를 반영하시겠습니까", function(rtn) {
+			com.confirm(modifiedRowCount + "건의 데이타를 반영하시겠습니까?", function(rtn) {
 				if (rtn) { 
 					com.executeSubmission(sbm_saveMemberBasic);
 				}
@@ -438,7 +442,7 @@
 										</xf:choices>
 									</xf:select1>
 								</xf:group>
-								<xf:group style="" class="w2tb_th req" tagname="th">시스템</xf:group>
+								<xf:group style="" class="w2tb_th" tagname="th">시스템</xf:group>
 								<xf:group style="" class="w2tb_td" tagname="td">
 									<xf:select1 allOption="" appearance="minimal" direction="auto" disabled="false"
 										disabledClass="w2selectbox_disabled" displayMode="label" id="sbx_system" optionOrder="false" ref="data:dlt_memberBasic.SYSTEM_BIT"
@@ -448,7 +452,7 @@
 								</xf:group>
 							</xf:group>
 							<xf:group tagname="tr" style="">
-								<xf:group tagname="th" class="w2tb_th req">
+								<xf:group tagname="th" class="w2tb_th">
 									권한그룹
 									<w2:attributes>
 										<w2:scope>row</w2:scope>
