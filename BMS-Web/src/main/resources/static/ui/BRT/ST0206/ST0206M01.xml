@@ -45,6 +45,7 @@
 					<w2:columnInfo>
 						<w2:column id="chk" name="선택" dataType="text" defaultValue="0"></w2:column>
 						<w2:column id="REP_ROUT_ID" name="대표노선ID" dataType="text"></w2:column>
+						<w2:column id="REP_ROUT_NM" name="대표노선명" dataType="text"></w2:column>
 						<w2:column id="NODE_ID" name="노드ID" dataType="text"></w2:column>
 						<w2:column id="NODE_NM" name="노드명" dataType="text"></w2:column>
 						<w2:column id="WAY_DIV" name="상하행구분" dataType="text"></w2:column>
@@ -101,20 +102,18 @@
 	scwin.onpageload = function() {
 		
 		var autoOptions = {
-			Main : { grid : ST0206G0, srchSbm : sub_ST0206G0R0, keyColumn : "OPER_DT", srchGrp : pgm_search, name :  "정류장 목록"}
+			Main : { grid : ST0206G0, srchSbm : sub_ST0206G0R0, keyColumn : "NODE_ID", srchGrp : pgm_search, name :  "정류장 목록"}
 		 };		
 		 		
-		  var mainOptions = {
-	         EXL:scwin.btn_excel_onclick
-			 ,SEARCH:{}
-	      };
-	      
+		var mainOptions = {
+	        EXL:scwin.btn_excel_onclick
+			,SEARCH:{}
+	    };
+	    
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.SINGLE_GRID_FORM, autoOptions, mainOptions);
 		var mainSrhOptions = {
 		};
 		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.SINGLE_GRID, autoOptions, mainSrhOptions);
-		
-		com.executeSubmission(sub_ST0206SHI0);
 		
 		var date = new Date();
 		var year = date.getFullYear().toString();
@@ -134,6 +133,7 @@
 		F_DATE.setValue(firstday);
 		L_DATE.setValue(today);
 		
+		com.executeSubmission(sub_ST0206SHI0);
 	};
 	
 	scwin.onpageunload = function() {
@@ -169,7 +169,7 @@
 
 		//체크 가져오기
 		for(i; i<chkCnt; i++){
-			routId.push(chkJsonData[i].ROUT_ID);
+			nodeId.push(chkJsonData[i].NODE_ID);
 		}
 		
 		//조회구분도 넣어서 처리하기. 일별 월별 시간대별
@@ -728,13 +728,7 @@
 									<w2:column width="40" inputType="checkbox" style="height:20px" id="chkHeader" value="선택" blockSelect="false"
 										sortable="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column4" value="대표노선ID"
-										blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column2" value="상하행구분"
-										blockSelect="false" displayMode="label">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column3" value="정류소ID"
+									<w2:column removeBorderStyle="false" width="90" inputType="text" style="height:20px" id="column4" value="대표노선명"
 										blockSelect="false" displayMode="label">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="100" inputType="text" style="height:20px" id="column1" value="정류소명"
@@ -747,13 +741,7 @@
 									<w2:column falseValue="0" defaultValue="" trueValue="1" width="39" readOnly="false" style="height:20px"
 										inputType="checkbox" id="chk" blockSelect="false">
 									</w2:column>
-									<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="REP_ROUT_ID" value=""
-										blockSelect="false" displayMode="label" textAlign="">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="WAY_DIV" value=""
-										blockSelect="false" displayMode="label" textAlign="">
-									</w2:column>
-									<w2:column removeBorderStyle="false" width="85" inputType="text" style="height:20px" id="NODE_ID" value=""
+									<w2:column removeBorderStyle="false" width="94" inputType="text" style="height:20px" id="REP_ROUT_NM" value=""
 										blockSelect="false" displayMode="label" textAlign="">
 									</w2:column>
 									<w2:column removeBorderStyle="false" width="85" inputType="text" style="height:20px" id="NODE_NM" value=""

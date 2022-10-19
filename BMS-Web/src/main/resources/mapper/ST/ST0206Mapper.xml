@@ -10,18 +10,21 @@
 				,B.REP_ROUT_ID AS REP_ROUT_ID
 				,B.LINK_SN AS LINK_SN
 				,B.WAY_DIV AS WAY_DIV
+				,C.REP_ROUT_NM AS REP_ROUT_NM
 		FROM 
 				BMS_NODE_MST A
-				LEFT JOIN BRT_ROUT_STTN_STOP_STAT B
+				LEFT OUTER JOIN BRT_ROUT_STTN_STOP_STAT B
 				ON A.NODE_ID = B.NODE_ID
+				LEFT OUTER JOIN BMS_ROUT_MST C
+				ON B.REP_ROUT_ID = C.REP_ROUT_ID
 		WHERE 
-				USE_YN = 'Y'
-				AND NODE_TYPE = 'NT002'
+				A.USE_YN = 'Y'
+				AND A.NODE_TYPE = 'NT002'
 				<if test= "REP_ROUT_ID != null and REP_ROUT_ID != ''">
-					AND REP_ROUT_ID = #{REP_ROUT_ID}
+					AND B.REP_ROUT_ID = #{REP_ROUT_ID}
 				</if>
 				<if test= "WAY_DIV != null and WAY_DIV != ''">
-					AND WAY_DIV = #{WAY_DIV}
+					AND B.WAY_DIV = #{WAY_DIV}
 				</if>
 		GROUP BY 
 				NODE_ID

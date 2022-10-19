@@ -44,6 +44,8 @@
 	</where>
 	ORDER BY
 		SEND_DTM DESC
+	LIMIT 
+		10000
 </select>
 
 <select id="selectDvcItem" parameterType="Map" resultType="Map">

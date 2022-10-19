@@ -50,6 +50,8 @@
 	</where>
 	ORDER BY
 		SEND_DTM DESC
+	LIMIT 
+		10000
 </select>
 
 <select id="selectFcltItem" parameterType="Map" resultType="Map">
