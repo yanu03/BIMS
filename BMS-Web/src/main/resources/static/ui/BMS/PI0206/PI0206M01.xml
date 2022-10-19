@@ -172,7 +172,8 @@
 		 
 		var mainOptions = {
 			RESERV : scwin.btn_resrv_onclick,
-			RESERV_CNL : {}
+			RESERV_CNL : {},
+			SEARCH : {}
 		};		 
 		 
 		
@@ -183,7 +184,7 @@
 			{code : "VHC_FUEL", compID : "PI0206G1:VHC_FUEL"},
 			{code : "VHC_KIND", compID : "PI0206G1:VHC_KIND"},
 							
-			{code : "VHC_KIND", compID : "PI0206G2:VHC_KIND"},
+			{code : "VHC_KIND", compID : "PI0206G2:VHC_KIND"},	
 			{code : "ROUT_DIV", compID : "PI0206G2:ROUT_DIV"},
 			{code : "VHC_TYPE", compID : "PI0206G2:VHC_TYPE"},
 			{code : "VHC_FUEL", compID : "PI0206G2:VHC_FUEL"},
@@ -195,8 +196,9 @@
 		com.setMainBtn2(wfm_mainBtn, gcm.DISP_TYPE.DUAL_GRID, autoOptions, mainOptions, codeOptions);		 
 
 		var mainSrhOptions = {
+			SEARCH : {cbFnc:scwin.btn_mainSrch_move, nm:"조회", class:"search"}
 		};	
-		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRIDDUAL_GRID, autoOptions, mainSrhOptions, codeOptions);		 
+		com.setMainSrhBtn(wfm_mainSearchBtn, gcm.DISP_TYPE.DUAL_GRID, autoOptions, mainSrhOptions, codeOptions);		 
 
 		com.setCommonDtl(codeOptions, function() {
 			com.searchGrid(PI0206G0, sub_PI0206G0R0);
@@ -424,6 +426,10 @@
 	scwin.calendar_radio_onviewchange = function(info) {
 		com.setCalendarRadioChange(F_DATE, L_DATE, info);
 	};	
+	
+	scwin.btn_mainSrch_move = function() {
+		com.executeSubmission(sub_PI0206G0R0);				
+	};
 	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
