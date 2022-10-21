@@ -12,6 +12,6 @@ public interface VH0205Mapper {
 	
 	public List<Map> selectFcltItem();
 	
-	public List<Map> selectParamItem();
+	public List<Map> selectParamItem(Map param);
 	
 }

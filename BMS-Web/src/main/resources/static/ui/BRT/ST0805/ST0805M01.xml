@@ -382,7 +382,7 @@
 	
 		var ctx = document.getElementById('chart_ST0805');
 		chart_ST0805 = new Chart(ctx, {
-			    type: 'line',
+			    type: 'bar',
 				data: {
 					labels:xLabel,
 					datasets
@@ -960,8 +960,8 @@
 					<xf:group id="" class=""></xf:group>
 					<xf:group id="ST0805T0" class="" style="position: relative;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="data:dlt_BRT_STTN_PNCTLTY_STAT_PIVOT" vals="DELAY_TIME"
-							rows="OPER_DT,STAT_H" cols="STTN_NM" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0805" renderMode="compact"
-							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Average" allTotalName="평균지연시간"
+							rows="OPER_DT,STTN_NM" cols="STAT_H" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0805" renderMode="compact"
+							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Average" allTotalName="운행일 평균 지연시간"
 							digitsAfterDecimal="1" useNumberFormat="true" autoFitMinWidth="1300" autoPopupInvalidMessage="" headerTextAlign="center"
 							noResultMessage="">
 							<w2:fieldInfo>
@@ -971,14 +971,14 @@
 								<w2:field id="ROUT_NM" name="노선명"></w2:field>
 								<w2:field id="STTN_NM" name="정류소명"></w2:field>
 								<w2:field id="STAT_H" name="통계시간"></w2:field>
-								<w2:field id="DELAY_TIME" name="지연시간"></w2:field>
+								<w2:field id="DELAY_TIME" name="정류소 평균 지연시간"></w2:field>
 							</w2:fieldInfo>
 						</w2:pivot>
 					</xf:group>
 					<xf:group id="ST0805T1" class="" style="position: relative; display: none;visibility:hidden;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="data:dlt_BRT_STTN_PNCTLTY_STAT_PIVOT" vals="DELAY_TIME"
 							rows="STTN_NM" cols="DAY_WEEK" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0805_sub" renderMode="compact"
-							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Average" allTotalName="평균지연시간"
+							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Average" allTotalName="운행일 평균 지연시간"
 							digitsAfterDecimal="1" useNumberFormat="true" autoFitMinWidth="1300" autoPopupInvalidMessage="" headerTextAlign="center"
 							noResultMessage="" ev:onrefresh="scwin.ST0805T1_onrefresh">
 							<w2:fieldInfo>
@@ -988,7 +988,7 @@
 								<w2:field id="ROUT_NM" name="노선명"></w2:field>
 								<w2:field id="STTN_NM" name="정류소명"></w2:field>
 								<w2:field id="STAT_H" name="통계시간"></w2:field>
-								<w2:field id="DELAY_TIME" name="지연시간"></w2:field>
+								<w2:field id="DELAY_TIME" name="정류소 평균 지연시간"></w2:field>
 							</w2:fieldInfo>
 						</w2:pivot>
 					</xf:group>

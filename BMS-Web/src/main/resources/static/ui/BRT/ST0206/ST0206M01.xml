@@ -184,22 +184,22 @@
 	};
 	
 	scwin.ST0206G0_oncellclick = function(row,col,colId) {
-		var rowCount = dlt_BMS_NODE_MST.getRowCount();
+//		var rowCount = dlt_BMS_NODE_MST.getRowCount();
 		
 		//chk말고 다른 cell클릭시
 		if (col != "0"){
-			if(ST0206G0.getCellChecked(row, 'chk')==0){
-				for(var i = 0; i < rowCount; i++){
-					ST0206G0.setCellChecked(i, 'chk', false);			
-				}
-			   	ST0206G0.setCellChecked(row, 'chk', true);
-			}
+//			if(ST0206G0.getCellChecked(row, 'chk')==0){
+//				for(var i = 0; i < rowCount; i++){
+//					ST0206G0.setCellChecked(i, 'chk', false);			
+//				}
+//			   	ST0206G0.setCellChecked(row, 'chk', true);
+//			}
 		
-		   /*if(ST0206G0.getCellChecked(row, 'chk')==0){
+		   if(ST0206G0.getCellChecked(row, 'chk')==0){
 		      ST0206G0.setCellChecked(row, 'chk', true);
 		   }else if(ST0206G0.getCellChecked(row, 'chk')==1){
 		      ST0206G0.setCellChecked(row, 'chk', false);
-		   }*/
+		   }
 		}
 		
 		var chkJsonData = ST0206G0.getCheckedJSON("chk");
@@ -269,6 +269,8 @@
 	
 	var color = ["rgb(226,85,81)","rgb(226,137,85)","rgb(226,207,83)","rgb(174,226,85)","rgb(104,226,85)","rgb(85,85,137)"
 					,"rgb(85,226,207)","rgb(85,174,226)","rgb(85,104,226)","rgb(137,85,226)","rgb(207,85,226)","rgb(226,85,151)"
+					,"rgb(0,0,0)","rgb(255,215,0)","rgb(255,255,0)","rgb(154,205,50)","rgb(112,128,144)","rgb(127,255,212)"
+					,"rgb(30,144,255)","rgb(0,0,128)","rgb(138,43,226)","rgb(139,0,139)","rgb(219,112,147)","rgb(139,69,19)"
 		];
 	
 	var CharData = function(){
@@ -399,7 +401,7 @@
 				var label = transData[y].NODE_NM;
 				var avrgSpd = transData[y].AVRG_STOP_TIME;
 				//var statH = transData[y].STAT_H;
-				debugger;
+				
 				var operDt = transData[y].OPER_DT;
 				
 				if(operDt != null){
@@ -635,11 +637,53 @@
 		
 	};
 	
+	scwin.ST0206T0_onrefresh = function(options) {
+		
+		if(SELECT_DIV.getValue() == 'TIME'){
+			var pivotoffset = pivot_ST0206.pivotSheetInfo.headerX.depth.length;
+			if(pivotoffset == 0){
+				document.getElementById('mf_tac_layout_contents_MN00100507_body_pivot_ST0206_col3').style.width = '1200px';
+			}
+		}
+	};
 	
-	
-	
-	
-	]]></script>
+	scwin.ST0206T1_onrefresh = function(options) {
+		
+		if(SELECT_DIV.getValue() == 'DAY'){
+			var pivotoffset_sub = pivot_ST0206_sub.pivotSheetInfo.headerX.depth.length;
+			if(pivotoffset_sub == 0){
+				document.getElementById('mf_tac_layout_contents_MN00100507_body_pivot_ST0206_sub_col2').style.width = '1253px';
+			}
+			else {
+				var pivotscroll_sub = pivot_ST0206_sub.pivotSheetInfo.headerX.depth[0].valueArr.length;
+				var colgroup_sub = ['col2', 'col3', 'col4', 'col5', 'col6', 'col7', 'col8', 'col9', 'col10', 'col11', 'col12', 'col13', 'col14'];
+				var widthgroup_sub = ['586px', '390px', '293px', '234px', '195px', '167px', '146px', '130px', '117px', '106px', '97px', '90px'];
+
+				if(pivotscroll_sub < 13){
+					for(var i = 0; i <= pivotscroll_sub; i++){
+						document.getElementById('mf_tac_layout_contents_MN00100507_body_pivot_ST0206_sub_'+ colgroup_sub[i]).style.width = widthgroup_sub[pivotscroll_sub-1];
+					}
+				}
+			}
+		}
+		else if(SELECT_DIV.getValue() == 'MONTH'){
+			var pivotoffset_month = pivot_ST0206_sub.pivotSheetInfo.headerX.depth.length;
+			if(pivotoffset_month == 0){
+				document.getElementById('mf_tac_layout_contents_MN00100507_body_pivot_ST0206_sub_col2').style.width = '1253px';
+			}
+			else{
+				var pivotscroll_month = pivot_ST0206_sub.pivotSheetInfo.headerX.depth[0].valueArr.length;
+				var colgroup_month = ['col2', 'col3', 'col4', 'col5', 'col6', 'col7', 'col8', 'col9', 'col10', 'col11', 'col12', 'col13', 'col14'];
+				var widthgroup_month = ['586px', '390px', '293px', '234px', '195px', '167px', '146px', '130px', '117px', '106px', '97px', '90px'];
+				
+				if(pivotscroll_month < 13){
+					for(var j = 0; j <= pivotscroll_month; j++){
+						document.getElementById('mf_tac_layout_contents_MN00100507_body_pivot_ST0206_sub_'+ colgroup_month[j]).style.width = widthgroup_month[pivotscroll_month-1];
+					}
+				}
+			}
+		};
+	};]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
@@ -829,9 +873,8 @@
 					<xf:group id="ST0206T0" class="" style="position: relative;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_ROUT_STTN_STOP_STAT" vals="AVRG_STOP_TIME"
 							rows="OPER_DT,NODE_NM" cols="STAT_H" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0206" renderMode="compact"
-							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Average" allTotalName="평균정차시간"
-							digitsAfterDecimal="1" useNumberFormat="true" autoFitMinWidth="1300" autoPopupInvalidMessage="" headerTextAlign="center"
-							noResultMessage="">
+							grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Average" allTotalName="평균정차시간"
+							digitsAfterDecimal="1" useNumberFormat="true" autoPopupInvalidMessage="" headerTextAlign="center" noResultMessage="" ev:onrefresh="scwin.ST0206T0_onrefresh">
 							<w2:fieldInfo>
 								<w2:field id="OPER_DT" name="운행일"></w2:field>
 								<w2:field id="REP_ROUT_ID" name="대표노선ID"></w2:field>
@@ -848,9 +891,9 @@
 					<xf:group id="ST0206T1" class="" style="position: relative; display: none;visibility:hidden;">
 						<w2:pivot style="position: absolute;height:100%;width:100%;" dataList="dlt_BRT_ROUT_STTN_STOP_STAT" vals="AVRG_STOP_TIME"
 							rows="NODE_NM" cols="OPER_DT" defaultAggregator="Sum" valuesAxis="col" id="pivot_ST0206_sub" renderMode="compact"
-							autoFit="allColumn" grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Average" allTotalName="평균정차시간"
-							digitsAfterDecimal="1" useNumberFormat="true" autoFitMinWidth="1300" autoPopupInvalidMessage="" headerTextAlign="center"
-							noResultMessage="">
+							grandTotalDisplayType="both" showZero="true" showGrandTotal="true" aggregatorName="Average" allTotalName="평균정차시간"
+							digitsAfterDecimal="1" useNumberFormat="true" autoPopupInvalidMessage="" headerTextAlign="center"
+							noResultMessage="" ev:onrefresh="scwin.ST0206T1_onrefresh">
 							<w2:fieldInfo>
 								<w2:field id="OPER_DT" name="운행일"></w2:field>
 								<w2:field id="REP_ROUT_ID" name="대표노선ID"></w2:field>

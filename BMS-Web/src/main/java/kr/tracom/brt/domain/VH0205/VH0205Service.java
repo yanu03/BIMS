@@ -24,6 +24,7 @@ public class VH0205Service extends ServiceSupport{
 	}
 	
 	public List<Map> selectParamItem() throws Exception{
-		return vh0205Mapper.selectParamItem();
+		Map param = getSimpleDataMap("dma_sub_search");
+		return vh0205Mapper.selectParamItem(param);
 	}
 }

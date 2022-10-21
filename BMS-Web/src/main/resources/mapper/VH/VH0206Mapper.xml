@@ -45,7 +45,7 @@
 	ORDER BY
 		SEND_DTM DESC
 	LIMIT 
-		10000
+		200000
 </select>
 
 <select id="selectDvcItem" parameterType="Map" resultType="Map">

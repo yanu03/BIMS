@@ -36,6 +36,11 @@
 						<w2:key id="L_DATE_VH0205" name="name6" dataType="date"></w2:key>
 					</w2:keyInfo>
 				</w2:dataMap>
+				<w2:dataMap baseNode="list" repeatNode="map" id="dma_sub_search" saveRemovedData="true">
+					<w2:keyInfo>
+						<w2:key id="FCLT_KIND" name="장치" dataType="text"></w2:key>
+					</w2:keyInfo>
+				</w2:dataMap>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_BMS_NODE_MST" saveRemovedData="true">
 					<w2:columnInfo>
 						<w2:column id="NODE_ID" name="노드ID" dataType="text"></w2:column>
@@ -44,14 +49,12 @@
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_FcltItem" saveRemovedData="true">
 					<w2:columnInfo>
-						<w2:column id="DL_CD" name="상세코드" dataType="text"></w2:column>
-						<w2:column id="DL_CD_NM" name="상세코드명" dataType="text"></w2:column>
+						<w2:column id="FCLT_KIND" name="상세코드" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 				<w2:dataList baseNode="list" repeatNode="map" id="dlt_ParamItem" saveRemovedData="true">
 					<w2:columnInfo>
-						<w2:column id="DL_CD" name="상세코드" dataType="text"></w2:column>
-						<w2:column id="DL_CD_NM" name="상세코드명" dataType="text"></w2:column>
+						<w2:column id="PARAM_KIND" name="상세코드" dataType="text"></w2:column>
 					</w2:columnInfo>
 				</w2:dataList>
 			</w2:dataCollection>
@@ -69,7 +72,7 @@
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
-			<xf:submission id="sub_selectParamItem" ref="" target="data:json,dlt_ParamItem" action="/vh/selectParamItem" method="post" mediatype="application/json" encoding="UTF-8"
+			<xf:submission id="sub_selectParamItem" ref="data:json,dma_sub_search" target="data:json,dlt_ParamItem" action="/vh/selectParamItem" method="post" mediatype="application/json" encoding="UTF-8"
 				instance="" replace="" errorHandler="" customHandler="" mode="asynchronous" processMsg="" ev:submit="" ev:submitdone=""
 				ev:submiterror="" abortTrigger="">
 			</xf:submission>
@@ -88,8 +91,8 @@
 					SEARCH: {}
 				}
 				 
-				var codeOptions = [ {code : "FCLT_KIND", compID : "VH0205G0:FCLT_KIND" }
-					,{code : "PARAM_KIND", compID : "VH0205G0:PARAM_KIND" }
+				var codeOptions = [ {code : "FCLT_KIND", compID : "VH0205G0:FCLT_KIND, FCLT_KIND" }
+					,{code : "PARAM_KIND", compID : "VH0205G0:PARAM_KIND, PARAM_KIND" }
 					,{code : "PARAM_DIV", compID : "VH0205G0:PARAM_DIV" }
 				 ];			
 				 
@@ -221,37 +224,51 @@
 				var count02 = 0;
 				var count03 = 0; 
 				var total = dlt_BMS_FCLT_COND_PARAM_INFO_HIS.getRowCount();
-				var statusItem = dlt_BMS_FCLT_COND_PARAM_INFO_HIS.getMatchedJSON("PARAM_KIND", "PK030");
 				var result = "";
-				var serachItem = serachFcltItem.getValue();
+				var serachItem = FCLT_KIND.getValue();
 				var oncount = 0;
 				var offcount = 0;
 				
 				if(data.length == 0){
 					result = "총 : "+ total + "건 ";
 					
-					if(serachItem == "FK006"){
-						for(var i = 0; i < statusItem.length; i++){
-							if(statusItem[i].DATA_VAL == "꺼짐(Off)"){
+					if(serachItem == "FK005"){
+						var statusAircon = dlt_BMS_FCLT_COND_PARAM_INFO_HIS.getMatchedJSON("PARAM_KIND", "PK002");
+						for(var i = 0; i < statusAircon.length; i++){
+							if(statusAircon[i].DATA_VAL == "꺼짐(Off)"){
 								offcount++;
 							}
-							else if (statusItem[i].DATA_VAL == "켜짐(On)"){
+							else if (statusAircon[i].DATA_VAL == "켜짐(On)"){
 								oncount++;
 							}
 						}
-						result += " | 승객감지장치 상태 총 : "+ statusItem.length + "건 | 켜짐(On) : " + oncount + "건 | 꺼짐(Off) : " + offcount + "건"; 
+						result += " | 에어컨 상태 총 : "+ statusAircon.length + "건 | 켜짐(On) : " + oncount + "건 | 꺼짐(Off) : " + offcount + "건"; 
+					}
+					
+					else if(serachItem == "FK006"){
+						var statusDetection = dlt_BMS_FCLT_COND_PARAM_INFO_HIS.getMatchedJSON("PARAM_KIND", "PK030");
+						for(var j = 0; j < statusDetection.length; j++){
+							if(statusDetection[j].DATA_VAL == "꺼짐(Off)"){
+								offcount++;
+							}
+							else if (statusDetection[j].DATA_VAL == "켜짐(On)"){
+								oncount++;
+							}
+						}
+						result += " | 승객감지장치 상태 총 : "+ statusDetection.length + "건 | 켜짐(On) : " + oncount + "건 | 꺼짐(Off) : " + offcount + "건";
 					}
 					
 					else if(serachItem == "FK007"){
-						for(var i = 0; i < statusItem.length; i++){
-							if(statusItem[i].DATA_VAL == "꺼짐(Off)"){
+						var statusDoor = dlt_BMS_FCLT_COND_PARAM_INFO_HIS.getMatchedJSON("PARAM_KIND", "PK025");
+						for(var k = 0; k < statusDoor.length; k++){
+							if(statusDoor[k].DATA_VAL == "닫힘"){
 								offcount++;
 							}
-							else if (statusItem[i].DATA_VAL == "켜짐(On)"){
+							else if (statusDoor[k].DATA_VAL == "열림"){
 								oncount++;
 							}
 						}
-						result += " | 스크린도어 상태 총 : "+ statusItem.length + "건 | 켜짐(On) : " + oncount + "건 | 꺼짐(Off) : " + offcount + "건";
+						result += " | 스크린도어 상태 총 : "+ statusDoor.length + "건 | 열림 : " + oncount + "건 | 닫힘 : " + offcount + "건";
 					}
 					
 					return result;					
@@ -270,7 +287,15 @@
 					return data;
 				}
 			}
-		]]></script>
+		
+	scwin.FCLT_KIND_onviewchange = function(info) {
+		dma_sub_search.set("FCLT_KIND", info.newValue);
+		
+		
+		com.executeSubmission(sub_selectParamItem);
+		//com.searchGrid(VH0205G0, sub_VH0205G0R0);	
+	};
+	]]></script>
 	</head>
 	<body ev:onpageload="scwin.onpageload" ev:onpageunload="scwin.onpageunload">
 		<xf:group id="pgm_container" class="pgm_container grdr_60_a" style="">
@@ -323,13 +348,13 @@
 									<w2:span class="" id="" label="장치종류" style=""></w2:span>
 								</xf:group>
 								<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="" id="serachFcltItem"
+									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="scwin.FCLT_KIND_onviewchange" id="FCLT_KIND"
 									optionOrder="false" ref="data:dma_search.FCLT_KIND" class="search_type_100" style="" submenuSize="auto" textAlign="center"
 									chooseOptionLabel="-전체-">
 									<xf:choices>
 										<xf:itemset nodeset="data:dlt_FcltItem">
-											<xf:label ref="DL_CD_NM"></xf:label>
-											<xf:value ref="DL_CD"></xf:value>
+											<xf:label ref="FCLT_KIND" inputType="select"></xf:label>
+											<xf:value ref="FCLT_KIND"></xf:value>
 										</xf:itemset>
 									</xf:choices>
 								</xf:select1>
@@ -359,13 +384,13 @@
 									<w2:span class="" id="" label="매개변수종류" style=""></w2:span>
 								</xf:group>
 								<xf:select1 allOption="" appearance="minimal" chooseOption="true" direction="auto" disabled="false"
-									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="" id=""
+									disabledClass="w2selectbox_disabled" displayMode="label" ev:onviewchange="" id="PARAM_KIND"
 									optionOrder="false" ref="data:dma_search.PARAM_KIND" class="search_type_100" style="" submenuSize="auto" textAlign="center"
 									chooseOptionLabel="-전체-">
 									<xf:choices>
 										<xf:itemset nodeset="data:dlt_ParamItem">
-											<xf:label ref="DL_CD_NM"></xf:label>
-											<xf:value ref="DL_CD"></xf:value>
+											<xf:label ref="PARAM_KIND" inputType="select"></xf:label>
+											<xf:value ref="PARAM_KIND"></xf:value>
 										</xf:itemset>
 									</xf:choices>
 								</xf:select1>

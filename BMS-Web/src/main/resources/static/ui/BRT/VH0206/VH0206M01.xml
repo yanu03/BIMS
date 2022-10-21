@@ -223,14 +223,14 @@
 				var total = dlt_BMS_DVC_COND_PARAM_INFO_HIS.getRowCount();
 				var result = "";
 				
-				//추후 카운트 할 것 추가
-				if (data.length > 0) {
-					result = "총 : "+ total + "건";
-					return result;
-				}
-				else if(data.length == 0){
-				
-					result = "총 : "+ total + "건";
+				if(data.length == 0){
+					result = "총 : "+ total + "건 | ";
+					var gpscount = dlt_BMS_DVC_COND_PARAM_INFO_HIS.getMatchedJSON("PARAM_KIND", "PK015").length;
+					var batterycount = dlt_BMS_DVC_COND_PARAM_INFO_HIS.getMatchedJSON("PARAM_KIND", "PK018").length;
+					var resetcount = dlt_BMS_DVC_COND_PARAM_INFO_HIS.getMatchedJSON("PARAM_KIND", "PK001").length;
+					
+					result += " GPS : " + gpscount + "건 | " + " 배터리 : " + batterycount + "건 | " + " 리셋 : " + resetcount + "건";
+					
 					return result;
 				}
 				

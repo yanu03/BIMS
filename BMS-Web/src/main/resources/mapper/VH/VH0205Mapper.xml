@@ -15,6 +15,10 @@
 		,CASE
 			WHEN A.PARAM_KIND = 'PK030' AND A.DATA_VAL = '0' THEN '꺼짐(Off)'
 			WHEN A.PARAM_KIND = 'PK030' AND A.DATA_VAL = '1' THEN '켜짐(On)'
+			WHEN A.PARAM_KIND = 'PK002' AND A.DATA_VAL = '0' THEN '꺼짐(Off)'
+			WHEN A.PARAM_KIND = 'PK002' AND A.DATA_VAL = '1' THEN '켜짐(On)'
+			WHEN A.PARAM_KIND = 'PK025' AND A.DATA_VAL = '0' THEN '닫힘'
+			WHEN A.PARAM_KIND = 'PK025' AND A.DATA_VAL = '1' THEN '열림'
 			ELSE A.DATA_VAL
 		END AS DATA_VAL
 		]]>
@@ -51,42 +55,32 @@
 	ORDER BY
 		SEND_DTM DESC
 	LIMIT 
-		10000
+		100000
 </select>
 
 <select id="selectFcltItem" parameterType="Map" resultType="Map">
-	SELECT 
-		DL_CD
-		,DL_CD_NM
-
-	FROM 
-		BMS_DL_CD_INFO
-	
-	WHERE 
-		CO_CD = 'FCLT_KIND'
-		
-	AND	
-		USE_YN = 'Y'
-		
+	SELECT DISTINCT
+		FCLT_KIND
+	FROM 		
+		BMS_FCLT_COND_PARAM_INFO_HIS
 	ORDER BY
-	 	SORT
+		FCLT_KIND
 </select>
 
 <select id="selectParamItem" parameterType="Map" resultType="Map">
-	SELECT 
-		DL_CD
-		,DL_CD_NM
+	SELECT DISTINCT
+		PARAM_KIND
 
-	FROM 
-		BMS_DL_CD_INFO
-	
-	WHERE 
-		CO_CD = 'PARAM_KIND'
-	AND	
-		USE_YN = 'Y'
+	FROM 		
+		BMS_FCLT_COND_PARAM_INFO_HIS
 		
+	<where>
+		<if test= "FCLT_KIND != null and FCLT_KIND != ''">
+			FCLT_KIND = #{FCLT_KIND}
+		</if>
+	</where>
 	ORDER BY
-	 	SORT
+		PARAM_KIND
 </select>
 	
 </mapper>
